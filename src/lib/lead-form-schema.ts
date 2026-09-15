@@ -28,6 +28,7 @@ export const leadFormSchema = z.object({
   source: z.string().optional(),
   lang: z.string().optional(),
   packageSummary: z.string().optional(),
+  serviceKeys: z.array(z.string()).max(20).optional(),
   totalPrice: z.number().optional(),
   eventId: z.string().optional(),
   gaClientId: z.string().optional(),

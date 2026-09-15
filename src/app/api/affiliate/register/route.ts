@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
   const parsed = affiliateRegisterSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ ok: false, error: 'invalid', details: parsed.error.format() }, { status: 400 });
+    return NextResponse.json({ ok: false, error: 'invalid' }, { status: 400 });
   }
 
   const { fullName, phone, telegramUsername } = parsed.data;
@@ -52,11 +52,14 @@ export async function POST(request: Request) {
   try {
     const existing = await findAffiliateByPhone(phone);
     if (existing) {
-      return NextResponse.json({
-        ok: true,
-        promoCode: existing.promoCode,
-        accessUrl: `/hamkor/${existing.accessToken}`,
-      });
+      // Do NOT return promoCode/accessUrl here: anyone who knows a partner's
+      // phone number could otherwise submit it to this public endpoint and
+      // receive that partner's private dashboard token. Notify the existing
+      // owner out-of-band instead, and tell the caller they're already registered.
+      await notifyAdmin(
+        `<b>Hamkor qayta ro'yxatdan o'tishga urindi</b>\nPromokod: <code>${existing.promoCode}</code>\nTelefon: ${phone}\nHavolani hamkorga admin panel orqali yuboring.`,
+      );
+      return NextResponse.json({ ok: true, alreadyRegistered: true });
     }
 
     const promoCode = await generatePromoCode(fullName, isPromoCodeTaken);
@@ -64,6 +67,11 @@ export async function POST(request: Request) {
 
     const created = await createAffiliate({ fullName, phone, telegramUsername, promoCode, accessToken });
     if (!created) {
+      // A concurrent request may have just inserted this phone (unique constraint) — check before failing.
+      const concurrent = await findAffiliateByPhone(phone);
+      if (concurrent) {
+        return NextResponse.json({ ok: true, alreadyRegistered: true });
+      }
       return NextResponse.json({ ok: false, error: 'unavailable' }, { status: 503 });
     }
 

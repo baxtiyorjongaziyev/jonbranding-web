@@ -1,4 +1,6 @@
+import 'server-only';
 import { getServiceClient } from '@/lib/supabase/service';
+import { logger } from '@/lib/logger';
 import { payoutAmount, type PayoutService } from '@/lib/affiliate/payouts';
 
 export type Affiliate = {
@@ -42,7 +44,15 @@ export type DashboardStats = {
   pendingBonus: number;
 };
 
-export type AffiliateWithStats = Affiliate & {
+export type AffiliateSafe = {
+  id: string;
+  fullName: string;
+  phone: string;
+  promoCode: string;
+  createdAt: string;
+};
+
+export type AffiliateWithStats = AffiliateSafe & {
   referralCount: number;
   totalBonus: number;
 };
@@ -61,6 +71,16 @@ function mapAffiliate(r: any): Affiliate {
     telegramUsername: r.telegram_username ?? null,
     promoCode: r.promo_code,
     accessToken: r.access_token,
+    createdAt: r.created_at,
+  };
+}
+
+function mapAffiliateSafe(r: any): AffiliateSafe {
+  return {
+    id: r.id,
+    fullName: r.full_name,
+    phone: r.phone,
+    promoCode: r.promo_code,
     createdAt: r.created_at,
   };
 }
@@ -151,7 +171,13 @@ export async function createAffiliate(input: {
     })
     .select('*')
     .single();
-  if (error || !data) return null;
+  if (error) {
+    if (error.code !== '23505') {
+      logger.error('Affiliate insert failed', { code: error.code, message: error.message });
+    }
+    return null;
+  }
+  if (!data) return null;
   return mapAffiliate(data);
 }
 
@@ -226,6 +252,13 @@ export async function createPayoutIfAbsent(input: {
     .single();
   if (error) {
     // 23505 = unique_violation → payout allaqachon mavjud, bu normal (idempotentlik).
+    if (error.code !== '23505') {
+      logger.error('Payout insert failed', {
+        referralId: input.referralId,
+        code: error.code,
+        message: error.message,
+      });
+    }
     return null;
   }
   return data ? mapPayout(data) : null;
@@ -265,11 +298,14 @@ export async function listAffiliatesWithStats(): Promise<AffiliateWithStats[]> {
   const db = getServiceClient();
   if (!db) return [];
   const [affRes, refRes, payRes] = await Promise.all([
-    db.from('affiliates').select('*').order('created_at', { ascending: false }),
+    db
+      .from('affiliates')
+      .select('id, full_name, phone, promo_code, created_at')
+      .order('created_at', { ascending: false }),
     db.from('referrals').select('affiliate_id'),
     db.from('payouts').select('affiliate_id, amount'),
   ]);
-  const affiliates = (affRes.data ?? []).map(mapAffiliate);
+  const affiliates = (affRes.data ?? []).map(mapAffiliateSafe);
   const refCounts = new Map<string, number>();
   for (const r of refRes.data ?? []) refCounts.set(r.affiliate_id, (refCounts.get(r.affiliate_id) ?? 0) + 1);
   const bonusSums = new Map<string, number>();
@@ -286,7 +322,9 @@ export async function listPayouts(filter: 'all' | 'unpaid' | 'paid'): Promise<Pa
   if (!db) return [];
   let query = db
     .from('payouts')
-    .select('*, affiliates(promo_code, full_name), referrals(lead_name)')
+    .select(
+      'id, referral_id, affiliate_id, service, amount, paid, paid_at, created_at, affiliates(promo_code, full_name), referrals(lead_name)',
+    )
     .order('created_at', { ascending: false });
   if (filter === 'unpaid') query = query.eq('paid', false);
   if (filter === 'paid') query = query.eq('paid', true);

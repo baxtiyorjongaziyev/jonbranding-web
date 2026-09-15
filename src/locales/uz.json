@@ -2583,7 +2583,9 @@
       "bonusLogo": "Logo — 500 000 so'm",
       "bonusPatent": "Patent — 500 000 so'm",
       "bonusPackaging": "Qadoq dizayn — 800 000 so'm",
-      "bonusFull": "Full Branding — 1 200 000 so'm"
+      "bonusFull": "Full Branding — 1 200 000 so'm",
+      "alreadyRegisteredTitle": "Siz allaqachon roʻyxatdan oʻtgansiz",
+      "alreadyRegisteredHint": "Bu telefon raqami bilan hamkor allaqachon mavjud. Shaxsiy kabinet havolangizni bilmasangiz, biz bilan bogʻlaning."
     },
     "dashboard": {
       "greeting": "Salom",

@@ -114,4 +114,23 @@ describe('calculatePackagePrice promo code validation', () => {
             expect(result.final).toBeLessThan(result.base);
         }
     );
+
+    it('accepts a dynamically-generated affiliate code via extraValidCodes', () => {
+        const result = calculatePackagePrice(
+            { ...baseSelections, promoCode: 'sherbek' },
+            'uz',
+            ['SHERBEK'],
+        );
+        expect(result.isPromoApplied).toBe(true);
+        expect(result.final).toBeLessThan(result.base);
+    });
+
+    it('still rejects an unrecognized code even with extraValidCodes present', () => {
+        const result = calculatePackagePrice(
+            { ...baseSelections, promoCode: 'NOTREAL' },
+            'uz',
+            ['SHERBEK'],
+        );
+        expect(result.isPromoApplied).toBe(false);
+    });
 });

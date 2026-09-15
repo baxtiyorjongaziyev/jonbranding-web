@@ -354,8 +354,35 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     const [currency] = useLocalStorage<'uzs' | 'usd'>('currency', 'usd');
     const [isClient, setIsClient] = useState(false);
     const [hasCelebrated, setHasCelebrated] = useState(false);
+    const [validatedAffiliateCode, setValidatedAffiliateCode] = useState<string | null>(null);
 
     useEffect(() => { setIsClient(true); }, []);
+
+    // Recognize dynamically-generated affiliate promo codes (e.g. "SHERBEK")
+    // in addition to the static VALID_PROMO_CODES list. Debounced so we only
+    // call the server once the user stops typing, and only for codes that
+    // don't already match the static list (avoids an extra request for the
+    // common case).
+    useEffect(() => {
+        const code = promoCode.trim().toUpperCase();
+        if (!code) {
+            setValidatedAffiliateCode(null);
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            fetch('/api/affiliate/validate-code', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code }),
+            })
+                .then((res) => res.json())
+                .then((json) => setValidatedAffiliateCode(json?.valid ? code : null))
+                .catch(() => setValidatedAffiliateCode(null));
+        }, 400);
+
+        return () => clearTimeout(timer);
+    }, [promoCode]);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -369,7 +396,14 @@ const PackageBuilder: FC<PackageBuilderProps> = ({ onOrderNow, lang, dictionary 
     
     const translations = dictionary;
     const serviceDetails = getServiceDetails(lang as any) as any;
-    const total = useMemo(() => calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any), [selectedServices, discountType, promoCode, lang]);
+    const extraValidCodes = useMemo(
+        () => (validatedAffiliateCode ? [validatedAffiliateCode] : []),
+        [validatedAffiliateCode],
+    );
+    const total = useMemo(
+        () => calculatePackagePrice({ selectedServices, discountType, promoCode }, lang as any, extraValidCodes),
+        [selectedServices, discountType, promoCode, lang, extraValidCodes],
+    );
 
     useEffect(() => {
         if (total.isPromoApplied && !hasCelebrated) {

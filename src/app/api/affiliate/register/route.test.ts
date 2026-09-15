@@ -54,7 +54,7 @@ describe('POST /api/affiliate/register', () => {
     expect(storeMocks.createAffiliate).toHaveBeenCalledOnce();
   });
 
-  it('returns the existing affiliate on duplicate phone (no new row)', async () => {
+  it('does not leak the existing affiliate promo code or access token on duplicate phone', async () => {
     storeMocks.findAffiliateByPhone.mockResolvedValue({
       id: 'a0',
       fullName: 'Sherbek',
@@ -67,8 +67,31 @@ describe('POST /api/affiliate/register', () => {
     const res = await callRegister({ fullName: 'Sherbek', phone: '901234567' });
     expect(res.status).toBe(200);
     const json = await res.json();
-    expect(json).toEqual({ ok: true, promoCode: 'SHERBEKOLD', accessUrl: '/hamkor/tok_old' });
+    expect(json).toEqual({ ok: true, alreadyRegistered: true });
+    expect(json).not.toHaveProperty('promoCode');
+    expect(json).not.toHaveProperty('accessUrl');
     expect(storeMocks.createAffiliate).not.toHaveBeenCalled();
+  });
+
+  it('does not leak the concurrently-created affiliate token on a unique-constraint race', async () => {
+    storeMocks.findAffiliateByPhone
+      .mockResolvedValueOnce(null) // first lookup: nothing yet
+      .mockResolvedValueOnce({
+        id: 'a0',
+        fullName: 'Sherbek',
+        phone: '+998901234567',
+        telegramUsername: null,
+        promoCode: 'SHERBEKOLD',
+        accessToken: 'tok_old',
+        createdAt: '2026-01-01T00:00:00Z',
+      });
+    storeMocks.createAffiliate.mockResolvedValue(null); // lost the race
+    const res = await callRegister({ fullName: 'Sherbek', phone: '901234567' });
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json).toEqual({ ok: true, alreadyRegistered: true });
+    expect(json).not.toHaveProperty('promoCode');
+    expect(json).not.toHaveProperty('accessUrl');
   });
 
   it('rejects invalid input', async () => {

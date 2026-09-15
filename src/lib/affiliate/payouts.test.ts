@@ -57,4 +57,11 @@ describe('serviceFromHint', () => {
     expect(serviceFromHint('urgency')).toBeNull();
     expect(serviceFromHint(['nda', 'urgency'])).toBeNull();
   });
+
+  it('returns null (not a guess) for non-Latin localized text', () => {
+    // Callers must treat null as "unknown — do not default to the most
+    // expensive tier" (see amocrm-webhook/route.ts).
+    expect(serviceFromHint('Қадоқ дизайни')).toBeNull();
+    expect(serviceFromHint('苏姆')).toBeNull();
+  });
 });

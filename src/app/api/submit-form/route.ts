@@ -465,14 +465,22 @@ export async function POST(request: Request) {
       if (promoRaw) {
         const affiliate = await findAffiliateByPromoCode(promoRaw.toUpperCase());
         if (affiliate) {
+          // Prefer stable, locale-independent calculator IDs (serviceKeys, e.g.
+          // "logoPremium") over localized display text (packageSummary), which
+          // may not tokenize to a known service in every language/script.
           const serviceHintSource =
-            (leadData as any).packageSummary ||
-            (typeof (leadData as any).selectedServices === 'object'
-              ? Object.keys((leadData as any).selectedServices || {}).join(',')
+            (Array.isArray((leadData as any).serviceKeys) && (leadData as any).serviceKeys.length
+              ? (leadData as any).serviceKeys.join(',')
               : '') ||
+            (leadData as any).packageSummary ||
             (leadData as any).role ||
             '';
           const hint = serviceFromHint(serviceHintSource);
+          if (!amoCrmResult?.leadId) {
+            logger.warn('Affiliate referral created without amoCRM lead id — will not auto-match on webhook', {
+              promoCode: affiliate.promoCode,
+            });
+          }
           await createReferral({
             affiliateId: affiliate.id,
             amocrmLeadId: amoCrmResult?.leadId ?? null,

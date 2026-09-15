@@ -11,7 +11,7 @@ create table if not exists public.affiliates (
 );
 create index if not exists affiliates_promo_code_idx on public.affiliates (promo_code);
 create index if not exists affiliates_access_token_idx on public.affiliates (access_token);
-create index if not exists affiliates_phone_idx on public.affiliates (phone);
+create unique index if not exists affiliates_phone_key on public.affiliates (phone);
 
 create table if not exists public.referrals (
   id uuid primary key default gen_random_uuid(),

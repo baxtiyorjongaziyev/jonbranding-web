@@ -35,10 +35,18 @@ async function processAffiliatePayouts(body: any) {
   const lostIds = parseStatusIds(process.env.AMOCRM_LOST_STATUS_ID);
   if (wonIds.size === 0 && lostIds.size === 0) return;
 
-  const leadEvents = [
+  const allLeadEvents = [
     ...(Array.isArray(body?.leads?.status) ? body.leads.status : []),
     ...(Array.isArray(body?.leads?.update) ? body.leads.update : []),
   ];
+  const MAX_LEAD_EVENTS = 50;
+  if (allLeadEvents.length > MAX_LEAD_EVENTS) {
+    logger.warn('amoCRM webhook lead batch exceeds cap, truncating', {
+      total: allLeadEvents.length,
+      cap: MAX_LEAD_EVENTS,
+    });
+  }
+  const leadEvents = allLeadEvents.slice(0, MAX_LEAD_EVENTS);
 
   for (const lead of leadEvents) {
     const leadId = Number(lead?.id);
@@ -60,14 +68,32 @@ async function processAffiliatePayouts(body: any) {
     // isWon
     if (referral.status === 'won') continue; // idempotent
 
-    await markReferralWon(referral.id);
+    const service = serviceFromHint(referral.serviceHint) as PayoutService | null;
 
-    const service = (serviceFromHint(referral.serviceHint) ?? 'full_branding') as PayoutService;
+    if (!service) {
+      // Unknown/unmapped service hint (e.g. localized package text that
+      // doesn't tokenize to a known calculator ID) — do NOT guess the
+      // most expensive tier. Mark won so the deal isn't lost, but skip
+      // automatic payout creation and flag it for a human to resolve.
+      await markReferralWon(referral.id);
+      logger.warn('Affiliate referral won with unmapped service hint — no automatic payout', {
+        referralId: referral.id,
+        serviceHint: referral.serviceHint,
+      });
+      await notifyAffiliateBonus(
+        `<b>⚠️ Hamkor bonusi — qo'lda tekshirish kerak</b>\nReferral: ${referral.leadName}\nXizmat aniqlanmadi: ${referral.serviceHint || '(bo\'sh)'}\nBonusni admin panelda qo'lda hisoblang.`,
+      );
+      continue;
+    }
+
     const payout = await createPayoutIfAbsent({
       referralId: referral.id,
       affiliateId: referral.affiliateId,
       service,
     });
+
+    await markReferralWon(referral.id);
+
     if (payout) {
       await notifyAffiliateBonus(
         `<b>💰 Hamkor bonusi</b>\nReferral: ${referral.leadName}\nXizmat: ${service}\nSumma: ${payout.amount.toLocaleString('fr-FR')} so'm\nHolat: to'lanmagan`,
@@ -75,9 +101,6 @@ async function processAffiliatePayouts(body: any) {
     }
   }
 }
-
-const botToken = process.env.TELEGRAM_BOT_TOKEN;
-const chatId = process.env.TELEGRAM_CHAT_ID;
 
 const ALLOWED_ORIGINS = new Set([
   'https://www.jonbranding.uz',
@@ -119,6 +142,8 @@ export async function OPTIONS(request: Request) {
 export async function POST(request: Request) {
     const corsHeaders = getCorsHeaders(request);
     const ip = getClientIp(request);
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!(await rateLimit(`amocrm:${ip}`, 20, 60_000))) {
         return NextResponse.json(
@@ -134,18 +159,6 @@ export async function POST(request: Request) {
         );
     }
 
-    if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing in the environment variables for amoCRM webhook.");
-        // Even on server error, return a CORS-friendly response
-        return NextResponse.json(
-            { ok: false, error: "Serverda Telegram sozlamalari mavjud emas." },
-            { 
-                status: 500,
-                headers: corsHeaders,
-            }
-        );
-    }
-
     try {
         const body = await request.json();
 
@@ -156,8 +169,18 @@ export async function POST(request: Request) {
             reason: error instanceof Error ? error.message : String(error),
           });
         }
-        
-        // Extract relevant data from the webhook payload. 
+
+        if (!botToken || !chatId) {
+            logger.error('amoCRM webhook: Telegram bot token or chat ID is missing in environment variables. Affiliate processing still ran; notification skipped.');
+            // Per the global constraint, this webhook must always return 200 to amoCRM —
+            // affiliate payout processing above must not be blocked by a broken notification channel.
+            return NextResponse.json(
+                { ok: true, message: "Webhook processed, but Telegram sozlamalari mavjud emas." },
+                { headers: corsHeaders }
+            );
+        }
+
+        // Extract relevant data from the webhook payload.
         // AmoCRM's payload structure can be complex, so we'll look for the newest lead.
         const lead = body?.leads?.add?.[0] || body?.leads?.status?.[0];
 

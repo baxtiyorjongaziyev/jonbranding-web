@@ -2569,7 +2569,9 @@
       "bonusLogo": "Logo — 500,000 UZS",
       "bonusPatent": "Patent — 500,000 UZS",
       "bonusPackaging": "Packaging design — 800,000 UZS",
-      "bonusFull": "Full Branding — 1,200,000 UZS"
+      "bonusFull": "Full Branding — 1,200,000 UZS",
+      "alreadyRegisteredTitle": "You are already registered",
+      "alreadyRegisteredHint": "A partner with this phone number already exists. If you do not have your dashboard link, please contact us."
     },
     "dashboard": {
       "greeting": "Hello",
