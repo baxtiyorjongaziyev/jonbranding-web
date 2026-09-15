@@ -8,7 +8,7 @@ const RegisterForm: FC<{ lang: string; dict: Dict }> = ({ lang, dict }) => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [telegramUsername, setTelegram] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error' | 'already_registered'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [result, setResult] = useState<{ promoCode: string; accessUrl: string } | null>(null);
   const [copied, setCopied] = useState<'code' | 'link' | null>(null);
@@ -29,6 +29,10 @@ const RegisterForm: FC<{ lang: string; dict: Dict }> = ({ lang, dict }) => {
         setErrorMsg(res.status === 400 ? dict.errorValidation : dict.errorGeneric);
         return;
       }
+      if (json.alreadyRegistered) {
+        setStatus('already_registered');
+        return;
+      }
       setResult({ promoCode: json.promoCode, accessUrl: `/${lang}${json.accessUrl}` });
       setStatus('idle');
     } catch {
@@ -46,6 +50,15 @@ const RegisterForm: FC<{ lang: string; dict: Dict }> = ({ lang, dict }) => {
       /* ignore */
     }
   };
+
+  if (status === 'already_registered') {
+    return (
+      <div className="rounded-2xl border bg-slate-50 p-6">
+        <p className="text-lg font-black">{dict.alreadyRegisteredTitle}</p>
+        <p className="mt-2 text-sm text-slate-600">{dict.alreadyRegisteredHint}</p>
+      </div>
+    );
+  }
 
   if (result) {
     const fullLink = typeof window !== 'undefined' ? `${window.location.origin}${result.accessUrl}` : result.accessUrl;

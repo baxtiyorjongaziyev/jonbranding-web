@@ -2569,7 +2569,9 @@
       "bonusLogo": "Логотип — 500 000 сум",
       "bonusPatent": "Патент — 500 000 сум",
       "bonusPackaging": "Дизайн упаковки — 800 000 сум",
-      "bonusFull": "Full Branding — 1 200 000 сум"
+      "bonusFull": "Full Branding — 1 200 000 сум",
+      "alreadyRegisteredTitle": "Вы уже зарегистрированы",
+      "alreadyRegisteredHint": "Партнёр с этим номером телефона уже существует. Если вы не знаете ссылку на личный кабинет, свяжитесь с нами."
     },
     "dashboard": {
       "greeting": "Здравствуйте",

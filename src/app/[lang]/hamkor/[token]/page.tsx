@@ -13,8 +13,15 @@ function shortenName(name: string): string {
   return `${parts[0]} ${parts[1][0].toUpperCase()}.`;
 }
 
-function fmtSom(n: number): string {
-  return `${n.toLocaleString('fr-FR')} so'm`;
+const CURRENCY_LABEL: Record<Locale, string> = {
+  uz: "so'm",
+  ru: 'сум',
+  en: 'sum',
+  zh: '苏姆',
+};
+
+function fmtSom(n: number, lang: Locale): string {
+  return `${n.toLocaleString('fr-FR')} ${CURRENCY_LABEL[lang] ?? CURRENCY_LABEL.uz}`;
 }
 
 export default async function AffiliateDashboardPage({
@@ -50,9 +57,9 @@ export default async function AffiliateDashboardPage({
         {[
           [d.statTotal, String(stats.totalReferrals)],
           [d.statWon, String(stats.wonReferrals)],
-          [d.statBonus, fmtSom(stats.totalBonus)],
-          [d.statPaid, fmtSom(stats.paidBonus)],
-          [d.statPending, fmtSom(stats.pendingBonus)],
+          [d.statBonus, fmtSom(stats.totalBonus, lang)],
+          [d.statPaid, fmtSom(stats.paidBonus, lang)],
+          [d.statPending, fmtSom(stats.pendingBonus, lang)],
         ].map(([label, value]) => (
           <div key={label} className="rounded-2xl border bg-slate-50 p-4 text-center">
             <p className="text-[11px] font-bold uppercase tracking-widest text-slate-500">{label}</p>
@@ -86,7 +93,7 @@ export default async function AffiliateDashboardPage({
                     <td className="py-2 pr-3 text-slate-500">{new Date(r.createdAt).toLocaleDateString('uz-UZ')}</td>
                     <td className="py-2 pr-3">{svc ?? '—'}</td>
                     <td className="py-2 pr-3">{statusLabel(r.status)}</td>
-                    <td className="py-2 pr-3">{payout ? fmtSom(payout.amount) : '—'}</td>
+                    <td className="py-2 pr-3">{payout ? fmtSom(payout.amount, lang) : '—'}</td>
                     <td className="py-2 pr-3">
                       {payout ? (payout.paid ? d.payoutPaid : d.payoutPending) : '—'}
                     </td>

@@ -4,6 +4,29 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-15 | Hamkorlar (Affiliate) tizimi — toʻliq implementatsiya (PR #321)
+
+**Nima qilindi:**
+- **Maqsad:** ochiq roʻyxatdan oʻtadigan hamkorlar (affiliate) tizimi — promokod orqali attribution, amoCRM webhook orqali avtomat bonus, hamkor kabineti (login yoʻq, maxfiy token havola), admin toʻlov paneli.
+- **Supabase**: 3 jadval (`affiliates`, `referrals`, `payouts`), RLS toʻliq deny (faqat service-role). Migratsiya: `supabase/migrations/20260904120000_affiliates.sql`.
+- **Bonus jadvali**: `src/lib/affiliate/payouts.ts` — naming/logo/patent 500,000 soʻm, packaging 800,000, full_branding 1,200,000.
+- **Sahifalar**: `/[lang]/hamkor/qoshilish` (roʻyxat), `/[lang]/hamkor/[token]` (hamkor kabineti), `/admin/hamkorlar` (`ADMIN_SECRET`, HMAC cookie).
+- **Jarayon**: brainstorm → spec (`docs/superpowers/specs/2026-09-04-affiliate-system-design.md`) → 14-task implementatsiya rejasi (`docs/superpowers/plans/2026-09-04-affiliate-system.md`) → subagent-driven ijro → final whole-branch review (3 Critical + 9 Important) → fix wave → scoped re-review (12/12 tuzatilgan).
+- **PR #321 ustidagi qoʻshimcha tuzatishlar** (Codex review, P1):
+  - Register endpoint endi dublikat telefon holatida boshqa hamkorning maxfiy `accessToken`ini qaytarmaydi (xavfsizlik — telefon raqami maʼlum boʻlsa boshqa hamkor kabinetiga kirish mumkin edi).
+  - amoCRM webhook notoʻgʻri/mahalliylashtirilgan xizmat nomi (masalan "Қадоқ дизайни") uchun eng qimmat bonus (full_branding) tikmasdan, qoʻlda tekshirishga yoʻnaltiradi.
+  - Kalkulyatorning barqaror ingliz xizmat kalitlari (`serviceKeys`) endi `packageSummary` bilan birga yuboriladi va attribution ular orqali ustuvor aniqlanadi.
+  - Hamkor kabineti valyuta yorligʻi (`so'm`/`сум`/`sum`/`苏姆`) endi `lang` boʻyicha toʻgʻri koʻrsatiladi (avval har doim `so'm`).
+  - `test/setup.ts`даgi jest-dom import vitest tipiga moslashtirildi (`@testing-library/jest-dom/vitest`) — CI'даgi "Typecheck, lint, test, build" talab qilingan tekshiruv iyuldan beri shu sabab qulab kelgan edi.
+
+**Tekshiruv:**
+- `npx vitest run` — 234/234 (1 ta notinch, aloqasiz `blog-agent` testi izolyatsiyada oʻtdi).
+- `npx tsc --noEmit -p tsconfig.typecheck.json` — toza.
+- `npm run lint` — toza.
+- CI: barcha talab qilingan tekshiruvlar oʻtdi.
+
+---
+
 ## 2026-08-31 | BHM 412,000 → 440,000 so'm yangilanishi (PR #316)
 
 **Nima qilindi:**
