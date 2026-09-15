@@ -4,6 +4,32 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-15 | Dependabot zaifliklarini 100% bartaraf etish (13 ta alert to'liq yopildi)
+
+**Nima qilindi:**
+- **Maqsad:** GitHub Security Overview panelidagi barcha 13 ta ochiq Dependabot ogohlantirishlarini bartaraf etish va Security holatini 100% yashil holatga keltirish.
+- **Root qaramliklar:**
+  - `package.json`: `@next/third-parties` va `eslint-config-next` `^16.3.5` ga ko'tarildi (Next.js 16.3.5 bilan sinxronlandi).
+  - `overrides`: `adm-zip` (`^0.6.1`), `smol-toml` (`^1.8.0`), `browserslist` (`^4.28.9`), `qs` (`^6.16.0`), `js-yaml` (`$js-yaml`) xavfsiz versiyalarga o'tkazildi.
+  - `package.json`ga `pnpm.overrides` qo'shildi (`adm-zip`, `js-yaml`, `smol-toml`, `qs`, `browserslist`, `undici`, `uuid`).
+  - `package-lock.json` va `pnpm-lock.yaml` to'liq yangilandi.
+- **Sub-loyihalar:**
+  - `services/portfolio-bot`: `package.json` overrides ga `qs: ^6.16.0` qo'shildi, `package-lock.json` yangilandi.
+  - `mcp-server`: `package.json` overrides ga `qs: ^6.16.0` qo'shildi, `package-lock.json` yangilandi.
+- **Git hygiene:**
+  - `.gitignore`: `node_modules/` va `/.vitest/` qo'shildi.
+  - Redundant PR #323 yopildi (`test/setup.ts` allaqachon #321 orqali main da mavjud).
+
+**Tekshiruv natijalari:**
+- `npm audit` (root) — 0 vulnerabilities (toza).
+- `pnpm audit` (root) — No known vulnerabilities found (toza).
+- `npm audit` (`services/portfolio-bot`) — 0 vulnerabilities (toza).
+- `npm audit` (`mcp-server`) — 0 vulnerabilities (toza).
+- `npm run typecheck` — toza (0 xato).
+- `npm run test` (Vitest) — 36 fayl, 242/242 test o'tdi (100% pass).
+
+---
+
 ## 2026-09-15 | Hamkorlar (Affiliate) tizimi — toʻliq implementatsiya (PR #321)
 
 **Nima qilindi:**
