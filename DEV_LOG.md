@@ -4,6 +4,24 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-19 | uuid override tuzatildi — /api/submit-form ERR_REQUIRE_ESM crash (PR #325 → #326)
+
+**Muammo:** patent kalkulyatori (`/xizmatlar/patent-kalkulyatori`) formasi yuborilganda production'da 500 xato, frontendda "Unexpected end of JSON input". Vercel runtime loglari sabab ko'rsatdi: `Error: require() of ES Module uuid@14.0.1 ... from gaxios@6.7.1 not supported` (`ERR_REQUIRE_ESM`).
+
+**Ildiz sabab:** `package.json`dagi `pnpm.overrides.uuid` `"uuid@<11.1.1": ">=11.1.1"` shaklida yozilgan edi — bu faqat 11.1.1'dan **past** versiyalarni ko'taradi, `uuid@13`/`14` (ESM-only) kabi yuqori versiyalarni cheklamaydi. `gaxios` (firebase-admin/googleapis zanjiri) transitiv `uuid`ni `require()` bilan chaqirganda ESM versiyaga tegib crash bo'lgan.
+
+**Birinchi urinish (PR #325):** root darajadagi `"overrides": {"uuid": "^11.1.1"}`ni qat'iy `"11.1.1"`ga o'zgartirdim — bu yetarli emas edi, chunki muammo aynan `pnpm.overrides` blokidagi range-conditional sintaksisda edi. Merge qilingach ham xato davom etdi (Vercel runtime logs orqali tasdiqlandi).
+
+**Haqiqiy tuzatish (PR #326):** `pnpm.overrides.uuid`ni `"uuid@<11.1.1": ">=11.1.1"` dan oddiy `"uuid": "11.1.1"`ga o'zgartirdim — bu pnpm'da butun dependency grafida shartsiz qo'llanadi.
+
+**Tekshiruv:**
+- Toza `rm -rf node_modules && pnpm install --frozen-lockfile` — `node_modules/.pnpm`da faqat `uuid@11.1.1` qoldi (Sanity/uuidv7'ning alohida paketlaridan tashqari).
+- `readlink -f node_modules/.pnpm/gaxios@6.7.1/node_modules/uuid` → `uuid@11.1.1`ga ishora qildi (to'g'ri).
+- `npx vitest run` — 36 fayl, 242/242 o'tdi.
+- `npm run build` — muvaffaqiyatli.
+
+---
+
 ## 2026-09-15 | Dependabot zaifliklarini 100% bartaraf etish (13 ta alert to'liq yopildi)
 
 **Nima qilindi:**
