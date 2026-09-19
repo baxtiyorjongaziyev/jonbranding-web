@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,6 +10,7 @@
 
 # testing
 /coverage
+/.vitest/
 
 # next.js
 /.next/
@@ -95,6 +96,9 @@ workflow-state.json
 /.agents/
 /.claude/skills/
 skills-lock.json
+
+# Local video drafts (mebel reels etc.)
+*.mp4
 
 # Playwright
 node_modules/

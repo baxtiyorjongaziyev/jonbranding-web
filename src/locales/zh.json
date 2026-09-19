@@ -2586,7 +2586,9 @@
       "bonusLogo": "标志设计 — 500,000 苏姆",
       "bonusPatent": "专利 — 500,000 苏姆",
       "bonusPackaging": "包装设计 — 800,000 苏姆",
-      "bonusFull": "全套品牌 — 1,200,000 苏姆"
+      "bonusFull": "全套品牌 — 1,200,000 苏姆",
+      "alreadyRegisteredTitle": "您已经注册过了",
+      "alreadyRegisteredHint": "该手机号码的合作伙伴已存在。如果您没有专属面板链接，请联系我们。"
     },
     "dashboard": {
       "greeting": "您好",

@@ -301,7 +301,15 @@ export function formatPrice(priceInUSD: number, lang: string = 'uz', currency: '
     return `${price.toLocaleString('fr-FR')} ${currencyString}`;
 }
 
-export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any => {
+export const calculatePackagePrice = (
+    selections: any,
+    lang: string = 'uz',
+    // Affiliate promo codes confirmed valid out-of-band (e.g. by the
+    // client after checking /api/affiliate/validate-code), merged with
+    // the static VALID_PROMO_CODES list below. Optional — omitting it
+    // preserves the previous static-only behavior.
+    extraValidCodes: readonly string[] = [],
+): any => {
     const isUz = lang === 'uz';
     const { selectedServices, discountType = 'none', promoCode = '' } = selections;
     const sd = getServiceDetails(lang) as any;
@@ -344,7 +352,9 @@ export const calculatePackagePrice = (selections: any, lang: string = 'uz'): any
     const discountsApplied = [];
 
     const normalizedPromo = (promoCode || '').trim().toUpperCase();
-    const isPromoApplied = VALID_PROMO_CODES.includes(normalizedPromo);
+    const isPromoApplied =
+        VALID_PROMO_CODES.includes(normalizedPromo) ||
+        extraValidCodes.includes(normalizedPromo);
 
     // Faza 1: Paketli chegirma (Faqat 2 yoki undan ortiq xizmat tanlanganda va to'lov turi tanlanganda)
     if (mainServicesCount >= 2 && (discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
