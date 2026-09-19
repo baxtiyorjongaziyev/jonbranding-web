@@ -142,7 +142,13 @@ const DynamicToggle = ({ id, options, selected, onSelect }: {
     );
 };
 
-export default function TrademarkCalculator({ translations }: { translations: any }) {
+export default function TrademarkCalculator({
+  translations,
+  alwaysUnlocked = false,
+}: {
+  translations: any;
+  alwaysUnlocked?: boolean;
+}) {
   const { toast } = useToast();
 
   const formSchema = z.object({
@@ -181,6 +187,8 @@ export default function TrademarkCalculator({ translations }: { translations: an
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [honeypot, setHoneypot] = useState('');
+
+  const isUnlocked = alwaysUnlocked || success;
 
   const watchFields = useWatch({ control: form.control });
   const fees = useMemo(
@@ -375,7 +383,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
         <Card className="relative overflow-hidden p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
           <div className="text-sm leading-5 opacity-90">{translations?.totalCostTitle}</div>
-          <div className={cn("mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline", !success && "blur-md select-none")}>
+          <div className={cn("mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline", !isUnlocked && "blur-md select-none")}>
             {formatPrice(fees?.total ?? 0, translations?.currency ?? 'UZS')}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -395,7 +403,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
             )}
           </div>
           <div className="mt-1 text-xs leading-5 opacity-90">{translations?.totalCostNote}</div>
-          {!success && (
+          {!isUnlocked && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/40 backdrop-blur-[1px] text-center px-6">
               <Lock className="h-6 w-6" />
               <p className="text-sm font-semibold">{translations?.gateTitle ?? "Aniq narxni ko'rish uchun formani to'ldiring"}</p>
@@ -405,7 +413,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
         <Card className="relative overflow-hidden p-5">
           <h3 className="font-bold text-foreground mb-3">{translations?.summaryTitle}</h3>
-          <div className={cn("space-y-4", !success && "blur-md select-none pointer-events-none")}>
+          <div className={cn("space-y-4", !isUnlocked && "blur-md select-none pointer-events-none")}>
             {watchFields.hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
                 <div className="font-semibold text-purple-700">{translations?.step0Title ?? '0-bosqich (Ekspertiza)'}</div>
@@ -469,7 +477,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
               <p>{translations?.importantNoteBHM?.replace("{bhm}", BHM.toLocaleString('fr-FR'))}</p>
             </div>
           </div>
-          {!success && (
+          {!isUnlocked && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60 backdrop-blur-[1px] text-center px-6">
               <Lock className="h-6 w-6 text-primary" />
               <p className="text-sm font-semibold text-foreground">{translations?.gateSubtitle ?? "Tafsilotlar forma to'ldirilgach ochiladi"}</p>

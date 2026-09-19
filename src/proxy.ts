@@ -17,6 +17,15 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
+  const host = (request.nextUrl.hostname || request.headers.get('host') || '').toLowerCase();
+  if (host.startsWith('patent.')) {
+    const locale = getLocale(request);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}/patent-menejer`;
+    url.searchParams.set('__rewrite', '1');
+    return NextResponse.rewrite(url);
+  }
+
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
     // nextUrl.clone() query stringni saqlaydi. `new URL(path, base)` esa uni
     // tashlab yuborardi va /uz/... havolalaridagi ?source= va UTM parametrlari
