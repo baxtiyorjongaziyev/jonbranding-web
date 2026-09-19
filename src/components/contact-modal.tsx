@@ -195,8 +195,8 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         }),
       });
 
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Server error');
+      const result = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(result?.error || 'Server error');
       
       setSubmitted(true);
       confetti({ 

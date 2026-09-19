@@ -223,9 +223,10 @@ export default function TrademarkCalculator({ translations }: { translations: an
         }),
       });
 
+      const result = await response.json().catch(() => null);
+
       if (!response.ok) {
-          const result = await response.json();
-          throw new Error(result.error || translations?.error_server);
+          throw new Error(result?.error || translations?.error_server || "Serverda xatolik yuz berdi");
       }
 
       gtagEvent('form_submit', {

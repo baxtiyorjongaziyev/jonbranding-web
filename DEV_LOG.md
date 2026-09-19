@@ -4,6 +4,26 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-19 | Patent Kalkulyatori: "Unexpected end of JSON input" va /api/submit-form 500 xatosi to'liq tuzatildi
+
+**Muammo:** Patent kalkulyatori sahifasida (`/xizmatlar/patent-kalkulyatori`) foydalanuvchi ma'lumotlarni to'ldirib yuborganda:
+1. Frontendda qizil bannerda xatolik: `Failed to execute 'json' on 'Response': Unexpected end of JSON input`.
+2. Backendda `/api/submit-form` va boshqa `firebase-admin` ishlatuvchi routelar 500 (Content-Length: 0) bilan crash bo'layotgan edi.
+
+**Ildiz sabablari:**
+1. **Frontend:** `trademark-calculator.tsx` va `contact-modal.tsx` ichida `fetch('/api/submit-form')` chaqirilgach, `if (!response.ok)` blokida `await response.json()` hech qanday xato ushlagichsiz (`.catch()`) chaqirilgan. Agar server 500/502/504 yoki bo'sh body qaytarsa, brauzer `Unexpected end of JSON input` deb crash bo'lgan.
+2. **Backend:** `package.json`dagi `uuid: 11.1.1` override sababli CommonJS muhitidagi `gaxios` (Google Cloud / Firebase Admin ichki HTTP mijozi) `require('uuid')` chaqirganda `ERR_REQUIRE_ESM` bilan yiqilgan (chunki `uuid` 10+ versiyalari ESM hisoblanadi). Natijada route moduli yuklanish paytida crash bo'lib, unhandled 500 (bo'sh body) qaytargan.
+3. **API Route:** `src/app/api/submit-form/route.ts` ichida `try/catch` bloki `getClientIp()` va `rateLimit()` dan keyin boshlangan edi, shuning uchun ulardagi har qanday xatolik butun routeni unhandled 500 ga olib kelardi.
+
+**Nima qilindi:**
+- `package.json` va `pnpm-lock.yaml` dan `uuid` override'lari butunlay olib tashlandi. `gaxios` o'zining tabiiy `uuid@9.0.1` (CommonJS) versiyasini ishlatadigan bo'ldi.
+- `src/components/sections/trademark-calculator.tsx` va `src/components/contact-modal.tsx` da `await response.json().catch(() => null)` qo'shildi, natijada har qanday server xatoligida foydalanuvchiga tushunarli xabar ko'rsatiladi.
+- `src/app/api/submit-form/route.ts` dagi butun `POST` funksiyasi `try/catch` ichiga olindi.
+- `npx vitest run`: 36 ta test fayli, 242/242 test muvaffaqiyatli o'tdi.
+- `npm run build`: muvaffaqiyatli yakunlandi (165/165 static sahifa).
+
+---
+
 ## 2026-09-19 | uuid override tuzatildi — /api/submit-form ERR_REQUIRE_ESM crash (PR #325 → #326)
 
 **Muammo:** patent kalkulyatori (`/xizmatlar/patent-kalkulyatori`) formasi yuborilganda production'da 500 xato, frontendda "Unexpected end of JSON input". Vercel runtime loglari sabab ko'rsatdi: `Error: require() of ES Module uuid@14.0.1 ... from gaxios@6.7.1 not supported` (`ERR_REQUIRE_ESM`).

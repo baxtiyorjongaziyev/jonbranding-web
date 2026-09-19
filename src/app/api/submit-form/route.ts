@@ -352,18 +352,18 @@ ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('f
 }
 
 export async function POST(request: Request) {
-  const ip = getClientIp(request);
-  if (!(await rateLimit(`submit-form:${ip}`, 5, 60_000))) {
-    return NextResponse.json(
-      { ok: false, error: 'Too many requests. Please try again later.' },
-      { status: 429 }
-    );
-  }
-
-  const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
-  const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
-
   try {
+    const ip = getClientIp(request);
+    if (!(await rateLimit(`submit-form:${ip}`, 5, 60_000))) {
+      return NextResponse.json(
+        { ok: false, error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
+    const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
+
     const body = await request.json();
 
     const guard = await guardLeadRequest(request, body, ip, 'submit-form');
