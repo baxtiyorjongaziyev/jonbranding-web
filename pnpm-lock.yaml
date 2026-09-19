@@ -11,7 +11,7 @@ overrides:
   qs@<6.16.0: '>=6.16.0'
   browserslist@<=4.28.6: '>=4.28.7'
   undici@<7.29.0: '>=7.29.0'
-  uuid@<11.1.1: '>=11.1.1'
+  uuid: 11.1.1
 
 importers:
 
@@ -9322,12 +9322,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  uuid@13.0.2:
-    resolution: {integrity: sha512-vzi9uRZ926x4XV73S/4qQaTwPXM2JBj6/6lI/byHH1jOpCzb0zDbfytgA9LcN/hzb2l7WQSQnxITOVx5un/wGw==}
-    hasBin: true
-
-  uuid@14.0.1:
-    resolution: {integrity: sha512-6ZxzVpzDXDa3bJWaHilVayA+BH/1zmxCJoVgvmqJnid/gPoKHxUrS/aC/T6LGQtNHT+XHG9fXPJB4d+IrU30Ew==}
+  uuid@11.1.1:
+    resolution: {integrity: sha512-vIYxrBCC/N/K+Js3qSN88go7kIfNPssr/hHCesKCQNAjmgvYS2oqr69kIufEG+O4+PfezOH4EbIeHCfFov8ZgQ==}
     hasBin: true
 
   uuidv7@0.4.4:
@@ -13996,7 +13992,7 @@ snapshots:
   '@sanity/comlink@4.0.1':
     dependencies:
       rxjs: 7.8.2
-      uuid: 13.0.2
+      uuid: 11.1.1
       xstate: 5.32.4
 
   '@sanity/descriptors@1.3.0':
@@ -14315,11 +14311,11 @@ snapshots:
   '@sanity/uuid@3.0.2':
     dependencies:
       '@types/uuid': 8.3.4
-      uuid: 14.0.1
+      uuid: 11.1.1
 
   '@sanity/uuid@3.0.3':
     dependencies:
-      uuid: 14.0.1
+      uuid: 11.1.1
 
   '@sanity/vision@6.4.0(122ac2b00278c6914ee00cf9983f4d1f)':
     dependencies:
@@ -16968,7 +16964,7 @@ snapshots:
       https-proxy-agent: 7.0.6
       is-stream: 2.0.1
       node-fetch: 2.7.0
-      uuid: 14.0.1
+      uuid: 11.1.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -17176,7 +17172,7 @@ snapshots:
       proto3-json-serializer: 2.0.2
       protobufjs: 7.6.6
       retry-request: 7.0.2
-      uuid: 14.0.1
+      uuid: 11.1.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -19313,7 +19309,7 @@ snapshots:
       use-device-pixel-ratio: 1.1.2(react@19.2.7)
       use-hot-module-reload: 2.0.0(react@19.2.7)
       use-sync-external-store: 1.6.0(react@19.2.7)
-      uuid: 14.0.1
+      uuid: 11.1.1
       web-vitals: 5.3.0
       xstate: 5.32.4
     transitivePeerDependencies:
@@ -19832,7 +19828,7 @@ snapshots:
       https-proxy-agent: 5.0.1
       node-fetch: 2.7.0
       stream-events: 1.0.5
-      uuid: 14.0.1
+      uuid: 11.1.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -20062,7 +20058,7 @@ snapshots:
 
   typeid-js@1.2.0:
     dependencies:
-      uuid: 14.0.1
+      uuid: 11.1.1
 
   typescript-eslint@8.61.1(eslint@9.39.4(jiti@2.7.0))(typescript@5.9.3):
     dependencies:
@@ -20218,9 +20214,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  uuid@13.0.2: {}
-
-  uuid@14.0.1: {}
+  uuid@11.1.1: {}
 
   uuidv7@0.4.4: {}
 
