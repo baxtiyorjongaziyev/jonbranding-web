@@ -1182,6 +1182,13 @@
     },
     "title": "Trademark Registration Calculator",
     "subtitle": "Naming is creative, patenting is legal. Calculate estimated registration costs here.",
+    "landing": {
+      "title": "Find Your Trademark Cost in 30 Seconds",
+      "subtitle": "Protect your brand from competitors. Exact state fee and service calculation — no hidden charges.",
+      "trustSpeed": "Results in 30 seconds",
+      "trustAccuracy": "Accurate state fee calculation",
+      "trustExperts": "With trademark specialists"
+    },
     "trademarkCalculator": {
       "formTitle": "Enter Data",
       "brandNameLabel": "Brand Name",
@@ -1236,6 +1243,8 @@
       "submittingButton": "Sending...",
       "successMessage": "✅ Order Accepted!",
       "tryAgainButton": "Calculate Again",
+      "gateTitle": "Fill in the form to see the exact price",
+      "gateSubtitle": "Details unlock after you submit the form",
       "summaryTitle": "Cost Breakdown",
       "totalCostTitle": "Estimated Total Patent Cost for 10 Years",
       "currency": "UZS",

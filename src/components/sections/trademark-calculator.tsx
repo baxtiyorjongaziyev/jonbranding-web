@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Loader2, Minus, Plus } from 'lucide-react';
+import { Loader2, Lock, Minus, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/analytics/gtag';
 import { motion } from 'framer-motion';
@@ -372,21 +372,21 @@ export default function TrademarkCalculator({ translations }: { translations: an
       </Card>
 
       <aside className="lg:sticky lg:top-24 h-fit space-y-4">
-        <Card className="p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
+        <Card className="relative overflow-hidden p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
           <div className="text-sm leading-5 opacity-90">{translations?.totalCostTitle}</div>
-          <div className="mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline">
+          <div className={cn("mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline", !success && "blur-md select-none")}>
             {formatPrice(fees?.total ?? 0, translations?.currency ?? 'UZS')}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees?.classCount ?? 1} {translations?.classLabel}</Pill>
             <Pill>
-                {watchFields.isYuridik 
-                    ? ((translations?.personTypeOptions && translations.personTypeOptions[1]?.label) || 'Yuridik') 
+                {watchFields.isYuridik
+                    ? ((translations?.personTypeOptions && translations.personTypeOptions[1]?.label) || 'Yuridik')
                     : ((translations?.personTypeOptions && translations.personTypeOptions[0]?.label) || 'Jismoniy')}
             </Pill>
             <Pill>
-                {watchFields.speed === 'tez' 
-                    ? ((translations?.speedOptions && translations.speedOptions[1]?.labelShort) || 'Tez') 
+                {watchFields.speed === 'tez'
+                    ? ((translations?.speedOptions && translations.speedOptions[1]?.labelShort) || 'Tez')
                     : ((translations?.speedOptions && translations.speedOptions[0]?.labelShort) || 'Oddiy')}
             </Pill>
             {watchFields.hasEkspert && (
@@ -394,11 +394,17 @@ export default function TrademarkCalculator({ translations }: { translations: an
             )}
           </div>
           <div className="mt-1 text-xs leading-5 opacity-90">{translations?.totalCostNote}</div>
+          {!success && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/40 backdrop-blur-[1px] text-center px-6">
+              <Lock className="h-6 w-6" />
+              <p className="text-sm font-semibold">{translations?.gateTitle ?? "Aniq narxni ko'rish uchun formani to'ldiring"}</p>
+            </div>
+          )}
         </Card>
 
-        <Card className="p-5">
+        <Card className="relative overflow-hidden p-5">
           <h3 className="font-bold text-foreground mb-3">{translations?.summaryTitle}</h3>
-          <div className="space-y-4">
+          <div className={cn("space-y-4", !success && "blur-md select-none pointer-events-none")}>
             {watchFields.hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
                 <div className="font-semibold text-purple-700">{translations?.step0Title ?? '0-bosqich (Ekspertiza)'}</div>
@@ -413,13 +419,13 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
               <div className="font-semibold text-primary">{translations?.step1Title ?? '1-bosqich'}</div>
-              <Row 
-                label={translations?.ourServiceFee ?? 'Agentlik xizmati'} 
-                value={fees?.agentTotal ?? 0} currency={translations?.currency ?? 'UZS'} 
+              <Row
+                label={translations?.ourServiceFee ?? 'Agentlik xizmati'}
+                value={fees?.agentTotal ?? 0} currency={translations?.currency ?? 'UZS'}
               />
-              <Row 
-                label={translations?.applicationFee ?? 'Davlat boji (Ariza)'} 
-                value={fees?.step1StateTotal ?? 0} currency={translations?.currency ?? 'UZS'} 
+              <Row
+                label={translations?.applicationFee ?? 'Davlat boji (Ariza)'}
+                value={fees?.step1StateTotal ?? 0} currency={translations?.currency ?? 'UZS'}
               />
               <Divider />
               <Row label={translations?.step1Total ?? '1-bosqich jami'} value={(fees?.agentTotal ?? 0) + (fees?.step1StateTotal ?? 0)} bold currency={translations?.currency ?? 'UZS'} />
@@ -430,7 +436,7 @@ export default function TrademarkCalculator({ translations }: { translations: an
                 <div className="font-semibold text-amber-700">{translations?.expediteTitle ?? 'Tezlashtirilgan ko\'rib chiqish'}</div>
                 <Row label={translations?.expediteBaseFee ?? 'Tezlashtirish boji'} value={fees?.expediteBase ?? 0} currency={translations?.currency ?? 'UZS'} />
                 {fees.expediteExtra > 0 && (
-                   <Row 
+                   <Row
                     label={`${translations?.extraClassesFeeLabel ?? 'Qo\'shimcha klasslar'} (${fees.classCount - 1} ta)`}
                     value={fees.expediteExtra} currency={translations?.currency ?? 'UZS'}
                   />
@@ -442,14 +448,14 @@ export default function TrademarkCalculator({ translations }: { translations: an
 
             <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-4">
               <div className="font-semibold text-green-700">{translations?.step2Title ?? '2-bosqich (Guvohnoma olish)'}</div>
-              <Row 
-                label={`${translations?.stateFeeBase ?? 'Davlat boji (Guvohnoma)'}`} 
-                value={fees?.step2Base ?? 0} currency={translations?.currency ?? 'UZS'} 
+              <Row
+                label={`${translations?.stateFeeBase ?? 'Davlat boji (Guvohnoma)'}`}
+                value={fees?.step2Base ?? 0} currency={translations?.currency ?? 'UZS'}
               />
               {fees?.step2Extra > 0 && (
-                <Row 
+                <Row
                   label={`${translations?.extraClassesFeeLabel ?? 'Qo\'shimcha klasslar'} (${fees.classCount - 1} ta)`}
-                  value={fees?.step2Extra ?? 0} currency={translations?.currency ?? 'UZS'} 
+                  value={fees?.step2Extra ?? 0} currency={translations?.currency ?? 'UZS'}
                 />
               )}
               <Divider />
@@ -462,6 +468,12 @@ export default function TrademarkCalculator({ translations }: { translations: an
               <p>{translations?.importantNoteBHM?.replace("{bhm}", BHM.toLocaleString('fr-FR'))}</p>
             </div>
           </div>
+          {!success && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/60 backdrop-blur-[1px] text-center px-6">
+              <Lock className="h-6 w-6 text-primary" />
+              <p className="text-sm font-semibold text-foreground">{translations?.gateSubtitle ?? "Tafsilotlar forma to'ldirilgach ochiladi"}</p>
+            </div>
+          )}
         </Card>
       </aside>
     </div>

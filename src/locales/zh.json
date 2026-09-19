@@ -1190,6 +1190,13 @@
     },
     "title": "商标注册计算器",
     "subtitle": "命名（取名字） — 一个创造性的过程，而专利申请 — 一个法律过程. 在我们团队的专利代理人的帮助下，在这里计算商标注册的概算成本（国家规费和服务费）。",
+    "landing": {
+      "title": "30秒了解商标注册费用",
+      "subtitle": "保护您的品牌免受竞争对手侵害。精确计算国家规费和服务费—无隐藏收费。",
+      "trustSpeed": "30秒出结果",
+      "trustAccuracy": "国家规费精确计算",
+      "trustExperts": "专利专家协助"
+    },
     "trademarkCalculator": {
       "formTitle": "输入数据",
       "brandNameLabel": "品牌名称",
@@ -1244,6 +1251,8 @@
       "submittingButton": "正在发送...",
       "successMessage": "✅ 订单已被接受！",
       "tryAgainButton": "重新计算",
+      "gateTitle": "填写表单以查看准确价格",
+      "gateSubtitle": "提交表单后即可查看详情",
       "summaryTitle": "费用详情",
       "totalCostTitle": "10年专利预估总费用",
       "currency": "苏姆",
