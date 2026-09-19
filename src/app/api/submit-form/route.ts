@@ -513,6 +513,11 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.error('Submit form error:', error);
-    return NextResponse.json({ ok: false, error: 'Internal server error' }, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    const stack = error instanceof Error ? error.stack : undefined;
+    return NextResponse.json(
+      { ok: false, error: 'Internal server error', message, stack },
+      { status: 500 }
+    );
   }
 }
