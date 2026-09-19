@@ -4,6 +4,19 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-19 | Sotuv menejerlari uchun ochiq Patent kalkulyatori va patent.jonbranding.uz subdomeni
+
+**Vazifa:** Mijozlar uchun kalkulyator gated (lead capture) holatda qolsin, lekin sotuv menejerlarimiz uchun doimiy ochiq (unlocked) versiyasi alohida `patent.jonbranding.uz` subdomenida bo'lsin.
+
+**Nima qilindi:**
+1. **Komponent moslashuvchanligi:** `src/components/sections/trademark-calculator.tsx` ga `alwaysUnlocked?: boolean` prop qo'shildi. `alwaysUnlocked={true}` bo'lganda lead gate va blur bekor qilinib, kalkulyator to'liq ochiq holatda ishlaydi.
+2. **Yangi ichki sahifa:** `src/app/[lang]/patent-menejer/` yaratildi:
+   - `layout.tsx`: Qidiruv tizimlari indekslamasligi uchun `robots: { index: false, follow: false }` qo'yildi.
+   - `page.tsx`: `TrademarkCalculator`ni `alwaysUnlocked={true}` bilan chaqiradi va sotuv menejerlari uchun JonBranding kaskad narxlash algoritmi (10% Istisno, 10% Salom, 10% Promokod, $50 Arboun) cheat-sheetini taqdim etadi.
+3. **Subdomen routing (Middleware/Proxy):** `src/proxy.ts` ga `host.startsWith('patent.')` tekshiruvi qo'shildi. `patent.jonbranding.uz` orqali kelgan barcha so'rovlar avtomatik ravishda `/${locale}/patent-menejer` sahifasiga rewrite qilinadi.
+4. **Test:** `src/proxy.test.ts` ga subdomen routing bo'yicha unit test qo'shildi va 5/5 test muvaffaqiyatli o'tdi.
+5. **Mijozlar sahifasi saqlandi:** `/xizmatlar/patent-kalkulyatori` va `/patent-narxi-hisoblagich` sahifalari o'zgarishsiz, lead magnit (gated) sifatida qoldi.
+
 ## 2026-09-19 | Patent Kalkulyatori: "Unexpected end of JSON input" va /api/submit-form 500 xatosi to'liq tuzatildi
 
 **Muammo:** Patent kalkulyatori sahifasida (`/xizmatlar/patent-kalkulyatori`) foydalanuvchi ma'lumotlarni to'ldirib yuborganda:

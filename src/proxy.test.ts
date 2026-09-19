@@ -41,4 +41,9 @@ describe('proxy locale redirect', () => {
     const response = proxy(requestFor('https://jonbranding.uz/ru/diagnostika?source=telegram'));
     expect(response.headers.get('location')).toBeNull();
   });
+
+  it('rewrites patent subdomain to patent-menejer', () => {
+    const response = proxy(requestFor('https://patent.jonbranding.uz/'));
+    expect(response.headers.get('x-middleware-rewrite')).toContain('/uz/patent-menejer');
+  });
 });
