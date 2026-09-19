@@ -27,12 +27,13 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   packageSummary?: string;
+  serviceKeys?: string[];
   totalPrice?: number;
   onFormSubmitSuccess?: () => void;
   lang: string;
 }
 
-const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, totalPrice, onFormSubmitSuccess, lang }) => {
+const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, serviceKeys, totalPrice, onFormSubmitSuccess, lang }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
@@ -180,6 +181,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           ...data,
           turnstileToken,
           packageSummary,
+          serviceKeys,
           totalPrice,
           source: 'brand_audit_offer',
           lang,
@@ -187,6 +189,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
           gaClientId,
           pageLocation,
           ctaSource,
+          promoCode: typeof window !== 'undefined'
+            ? (localStorage.getItem('promoCode') || '').replace(/"/g, '')
+            : undefined,
         }),
       });
 

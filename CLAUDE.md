@@ -57,6 +57,7 @@ Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 - **Portfolio-bot** (`services/portfolio-bot/`): Telegram kanaldan keys nomini olib Gdrive'dan qidiradi (link kerak emas), Gemini cover tanlaydi, Sanity'ga SEO bilan yozadi. Ishga tushirish: `deploy/README.md` (Telegram sessiya + kalitlar hali sozlanmagan).
 - **framer-motion 12**: `Variants` obyektlariga aniq `: Variants` tipi shart (`type: 'spring'` literal xatosi).
 - **vitest**: `tests/` katalogi exclude qilingan (Playwright testlari), faqat `src/**/*.test.ts`.
+- **Affiliate tizimi**: `src/lib/affiliate/*` + Supabase 3 jadval (`affiliates`/`referrals`/`payouts`, RLS to'liq deny, faqat service-role). Ro'yxat: `/[lang]/hamkor/qoshilish`. Hamkor kabineti: `/[lang]/hamkor/[token]` (login yo'q, maxfiy token). Admin: `/admin/hamkorlar` (`ADMIN_SECRET`, HMAC cookie). Attribution — `submit-form` promokod bo'yicha; bonus — `amocrm-webhook` `AMOCRM_WON_STATUS_ID` bo'yicha, idempotent. Bonuslar konstanta: `src/lib/affiliate/payouts.ts`.
 - **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; Vercel/Netlify preview. pnpm lockfile bilan sinxron bo'lishi shart.
 - **Sandbox cheklovlari**: jonbranding.uz, cdn.sanity.io, instagram tarmoqdan bloklangan — lokal testda Sanity rasm xatolari soxta signal. Dev server tez-tez o'chadi, birinchi kompilyatsiya 1-3 daqiqa.
 

@@ -12,6 +12,8 @@ import {
   normalizeTelegramUsername,
   runLeadDeliveries,
 } from '@/lib/lead-contact';
+import { findAffiliateByPromoCode, createReferral } from '@/lib/affiliate/store';
+import { serviceFromHint } from '@/lib/affiliate/payouts';
 
 const AMOCRM_FAILED_LEADS_COLLECTION = 'amocrm_failed_leads';
 
@@ -456,6 +458,46 @@ export async function POST(request: Request) {
           durationMs: delivery.durationMs,
         });
       }
+    }
+
+    try {
+      const promoRaw = String((leadData as any).promoCode || '').trim();
+      if (promoRaw) {
+        const affiliate = await findAffiliateByPromoCode(promoRaw.toUpperCase());
+        if (affiliate) {
+          // Prefer stable, locale-independent calculator IDs (serviceKeys, e.g.
+          // "logoPremium") over localized display text (packageSummary), which
+          // may not tokenize to a known service in every language/script.
+          const serviceHintSource =
+            (Array.isArray((leadData as any).serviceKeys) && (leadData as any).serviceKeys.length
+              ? (leadData as any).serviceKeys.join(',')
+              : '') ||
+            (leadData as any).packageSummary ||
+            (leadData as any).role ||
+            '';
+          const hint = serviceFromHint(serviceHintSource);
+          if (!amoCrmResult?.leadId) {
+            logger.warn('Affiliate referral created without amoCRM lead id — will not auto-match on webhook', {
+              promoCode: affiliate.promoCode,
+            });
+          }
+          await createReferral({
+            affiliateId: affiliate.id,
+            amocrmLeadId: amoCrmResult?.leadId ?? null,
+            leadName: String(fullName || 'Mijoz'),
+            leadPhone: normalizePhone((leadData as any).phone) || '',
+            serviceHint: hint ?? (serviceHintSource || null),
+          });
+          logger.info('Affiliate referral recorded', {
+            promoCode: affiliate.promoCode,
+            leadId: amoCrmResult?.leadId ?? null,
+          });
+        }
+      }
+    } catch (error) {
+      logger.error('Affiliate attribution failed', {
+        reason: error instanceof Error ? error.message : String(error),
+      });
     }
 
     return NextResponse.json({

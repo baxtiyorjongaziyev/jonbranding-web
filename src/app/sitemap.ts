@@ -37,6 +37,7 @@ const staticRoutes = [
   '/xizmatlar/posm-materiallar',
   '/xizmatlar/brandbook',
   '/xizmatlar/patent-kalkulyatori',
+  '/patent-narxi-hisoblagich',
 ] as const;
 
 function localizedUrl(lang: Locale, route: string) {

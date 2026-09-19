@@ -28,6 +28,7 @@ export const leadFormSchema = z.object({
   source: z.string().optional(),
   lang: z.string().optional(),
   packageSummary: z.string().optional(),
+  serviceKeys: z.array(z.string()).max(20).optional(),
   totalPrice: z.number().optional(),
   eventId: z.string().optional(),
   gaClientId: z.string().optional(),
@@ -36,6 +37,7 @@ export const leadFormSchema = z.object({
   // Bot himoyasi. Ikkalasi ham CRMga yuborilmaydi, faqat tekshiruv uchun.
   companyWebsite: z.string().optional(),
   turnstileToken: z.string().optional(),
+  promoCode: z.string().max(40).optional(),
 }).superRefine((data, context) => {
   if (!data.phone && !data.telegram) {
     context.addIssue({
