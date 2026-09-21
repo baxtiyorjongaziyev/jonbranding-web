@@ -13,9 +13,174 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
+type Service = {
+  name: string;
+  price: string;
+  duration: string;
+  lead: string;
+  deliverables: string[];
+  audience: string;
+  note?: string;
+  addon?: { label: string; price: string };
+};
+
+type ServiceGroup = {
+  title: string;
+  intro: string;
+  items: Service[];
+};
+
+const SERVICE_GROUPS: ServiceGroup[] = [
+  {
+    title: 'Brend yaratish',
+    intro: 'Nomdan to‘liq vizual tizimgacha. Har birini alohida ham olsangiz bo‘ladi.',
+    items: [
+      {
+        name: 'Naming',
+        price: '10 000 000',
+        duration: '10 kun',
+        lead: 'Brendingizga nom topaman — aytishga oson, esda qoladigan va patentga o‘tadigan.',
+        deliverables: [
+          '30 dan ortiq variant ishlanadi, 3 tasi finalga chiqadi',
+          'Har bir nomning ma’nosi va legendasi yozib beriladi',
+          'Domen va ijtimoiy tarmoqlarda bandligi tekshiriladi',
+          'Patent bazasidan dastlabki tekshiruv o‘tkaziladi',
+          'Boshqa tillarda salbiy ma’no bermasligi tekshiriladi',
+        ],
+        audience: 'Yangi biznes ochayotgan yoki hozirgi nomi ishlamayotganlar uchun',
+        note: 'Nom noto‘g‘ri tanlansa, keyin patent, domen va reklama uch barobar qimmatga tushadi.',
+      },
+      {
+        name: 'Logo',
+        price: '8 000 000',
+        duration: '7 kun',
+        lead: 'Kichkina ekranda ham, katta bannerda ham bir xil ishlaydigan belgi.',
+        deliverables: [
+          '3 ta konsepsiya, tanlanganini oxirigacha sayqallayman',
+          'Barcha formatlar: AI, EPS, SVG, PDF, PNG',
+          'Rangli, oq-qora va bitta rangdagi versiyalar',
+          'Gorizontal, vertikal va ixcham (ikonka) variantlari',
+          'Minimal o‘lcham va bo‘sh joy qoidalari',
+        ],
+        audience: 'Logosi yo‘q yoki eskirgan, zamonaviy ko‘rinmayotgan biznes uchun',
+      },
+      {
+        name: 'Visual identity',
+        price: '18 000 000',
+        duration: '10 kun',
+        lead: 'Logo — bu bitta belgi. Visual identity — brendingiz hamma joyda tanilishi.',
+        deliverables: [
+          'Rang palitrasi (Pantone, CMYK, RGB, HEX)',
+          'Shrift tizimi: sarlavha, matn, urg‘u',
+          'Grafik elementlar va patternlar',
+          'Foto va rasm uslubi',
+          '10 dan ortiq tashuvchi maketi: vizitka, blank, konvert, forma, banner, ijtimoiy tarmoq shablonlari',
+        ],
+        audience: 'Logosi bor, lekin har joyda har xil ko‘rinayotgan biznes uchun',
+      },
+      {
+        name: 'Brandbook',
+        price: '24 000 000',
+        duration: '7 kun',
+        lead: 'Brendingiz qoidalari bitta hujjatda. Yangi dizayner kelsa ham tizim buzilmaydi.',
+        deliverables: [
+          '60 dan ortiq sahifali PDF qo‘llanma',
+          'Logoni ishlatish va ishlatmaslik qoidalari (xato misollari bilan)',
+          'Ranglar va tipografika to‘liq spetsifikatsiyasi',
+          'Barcha tashuvchilar bo‘yicha tayyor maketlar',
+          'Brend tili va murojaat uslubi (tone of voice)',
+        ],
+        audience: 'Jamoasi o‘sayotgan, bir nechta dizayner va tipografiya bilan ishlaydiganlar uchun',
+        note: 'Visual identity bilan birga olinsa, ikkalasi bitta tizim sifatida ishlanadi.',
+      },
+    ],
+  },
+  {
+    title: 'Qadoq',
+    intro: 'Do‘kon javonida mahsulotingizni qo‘lga oldiradigan qadoq.',
+    items: [
+      {
+        name: 'Packaging (1 SKU)',
+        price: '12 000 000',
+        duration: '7 kun',
+        lead: 'Bitta mahsulot uchun to‘liq qadoq dizayni — tipografiyaga tayyor holda.',
+        deliverables: [
+          'Qadoq dizayni va javondagi ko‘rinishi hisobga olinadi',
+          'Dieline — texnik chizma bilan birga',
+          '3D vizualizatsiya (taqdimot va marketplace uchun)',
+          'Shtrix-kod, tarkib, muddat va belgilarning to‘g‘ri joylashuvi',
+          'Tipografiyaga topshirishga tayyor fayllar',
+        ],
+        audience: 'Do‘kon, marketplace yoki tarmoqqa chiqayotgan ishlab chiqaruvchilar uchun',
+      },
+      {
+        name: 'Har qo‘shimcha SKU',
+        price: '4 000 000 dan',
+        duration: '+3 kun',
+        lead: 'Birinchi qadoq tayyor bo‘lgach, qolgan mahsulotlar arzonroq.',
+        deliverables: [
+          'Bir xil tizimda, lekin har mahsulotga moslashtirilgan',
+          'Ta’m, hajm va turlarni ajratib turadigan yechim',
+          'Tayyor dieline va tipografiya fayllari',
+        ],
+        audience: 'Bir nechta mahsulot turi bor ishlab chiqaruvchilar uchun',
+        note: 'Aniq narx qadoq turining murakkabligiga qarab belgilanadi.',
+      },
+    ],
+  },
+  {
+    title: 'Huquqiy himoya',
+    intro: 'Nom sizniki bo‘lishi uchun uni ro‘yxatdan o‘tkazish kerak. Shu ishni ham men qilaman.',
+    items: [
+      {
+        name: 'Patent tekshiruvi',
+        price: '880 000',
+        duration: '2 kun',
+        lead: 'Nomingiz band emasligini oldindan bilib oling — bu eng arzon xavfsizlik choralari.',
+        deliverables: [
+          'Rasmiy bazadan to‘liq tekshiruv',
+          'O‘xshash belgilar ro‘yxati va xavf darajasi',
+          'Ro‘yxatdan o‘tish ehtimoli bo‘yicha xulosa',
+          'Sizga qaysi sinflar kerakligini o‘zim aniqlab beraman',
+        ],
+        audience: 'Nomni tanlagan, lekin hali ro‘yxatdan o‘tkazmaganlar uchun',
+        note: 'Narx bitta sinf uchun. Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
+        addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
+      },
+      {
+        name: 'Patent (oddiy)',
+        price: '5 000 000',
+        duration: '30 kun',
+        lead: 'Tovar belgisini ro‘yxatdan o‘tkazish — odatdagi tartibda.',
+        deliverables: [
+          'Hujjatlar to‘liq tayyorlanadi va topshiriladi',
+          'Sinflar to‘g‘ri tanlanadi',
+          'Jarayon oxirigacha kuzatib boriladi',
+          'Guvohnoma qo‘lingizga topshiriladi',
+        ],
+        audience: 'Shoshilmayotgan, lekin nomini himoyalamoqchi bo‘lganlar uchun',
+      },
+      {
+        name: 'Patent (tezkor)',
+        price: '7 000 000',
+        duration: '7 kun',
+        lead: 'Xuddi shu ish, lekin tezlashtirilgan tartibda.',
+        deliverables: [
+          'Oddiy patentdagi barcha ishlar',
+          'Tezlashtirilgan ekspertiza',
+          'Muddat 30 kundan 7 kunga qisqaradi',
+        ],
+        audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
+      },
+    ],
+  },
+];
+
 type Package = {
   name: string;
   price: string;
+  separate: string;
+  saving: string;
   audience: string;
   features: string[];
   duration: string;
@@ -27,6 +192,8 @@ const PACKAGES: Package[] = [
   {
     name: 'VIP',
     price: '70 000 000',
+    separate: '85 000 000',
+    saving: '15 000 000',
     audience: 'Eksportga chiqayotgan, marketplace yoki tarmoq do‘konga kirayotgan ishlab chiqaruvchilar uchun',
     features: ['Naming', 'Logo', 'Visual identity', 'Brandbook', 'Patent', 'Packaging (3 SKU)'],
     duration: '35–45 kun',
@@ -34,6 +201,8 @@ const PACKAGES: Package[] = [
   {
     name: 'PREMIUM',
     price: '55 000 000',
+    separate: '65 000 000',
+    saving: '10 000 000',
     audience: 'Brendini to‘liq tartibga solmoqchi bo‘lgan, o‘sayotgan biznes uchun',
     features: ['Naming', 'Logo', 'Visual identity', 'Brandbook', 'Patent'],
     duration: '30–35 kun',
@@ -43,23 +212,12 @@ const PACKAGES: Package[] = [
   {
     name: 'STANDART',
     price: '20 000 000',
+    separate: '23 000 000',
+    saving: '3 000 000',
     audience: 'Endi boshlayotgan yoki brendi hali yo‘q biznes uchun',
     features: ['Naming', 'Logo', 'Patent'],
     duration: '20–25 kun',
   },
-];
-
-const SERVICES_TABLE = [
-  { name: 'Brandbook', price: '24 000 000', duration: '7 kun' },
-  { name: 'Visual identity', price: '18 000 000', duration: '10 kun' },
-  { name: 'Packaging (1 SKU)', price: '12 000 000', duration: '7 kun' },
-  { name: 'Har qo‘shimcha SKU', price: '4 000 000 dan', duration: '+3 kun' },
-  { name: 'Naming', price: '10 000 000', duration: '10 kun' },
-  { name: 'Logo', price: '8 000 000', duration: '7 kun' },
-  { name: 'Patent (tezkor)', price: '7 000 000', duration: '7 kun' },
-  { name: 'Patent (oddiy)', price: '5 000 000', duration: '30 kun' },
-  { name: 'Patent tekshiruvi', price: '880 000', duration: '2 kun' },
-  { name: 'Har qo‘shimcha klass', price: '440 000', duration: '—' },
 ];
 
 const PROCESS_STEPS = [
@@ -169,6 +327,8 @@ function LeadModal({ open, onClose, presetService }: { open: boolean; onClose: (
     setDone(true);
   };
 
+  const allServices = SERVICE_GROUPS.flatMap((group) => group.items.map((item) => item.name));
+
   return (
     <Dialog.Root open={open} onOpenChange={(next) => { if (!next) onClose(); }}>
       <Dialog.Portal>
@@ -227,10 +387,12 @@ function LeadModal({ open, onClose, presetService }: { open: boolean; onClose: (
                   onChange={(e) => setService(e.target.value)}
                   className="rounded-xl border border-neutral-200 px-3 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                 >
-                  <option>VIP</option>
-                  <option>PREMIUM</option>
-                  <option>STANDART</option>
-                  <option>Bittalab xizmat</option>
+                  {allServices.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                  <option>VIP paket</option>
+                  <option>PREMIUM paket</option>
+                  <option>STANDART paket</option>
                   <option>Aniq emas — maslahat kerak</option>
                 </select>
               </div>
@@ -287,119 +449,94 @@ export default function TariflarClient() {
         </motion.p>
       </section>
 
-      {/* PAKETLAR */}
-      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-6 items-stretch">
-          {PACKAGES.map((pkg) => (
-            <motion.div
-              key={pkg.name}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className={`relative flex flex-col rounded-2xl p-8 ${pkg.featured ? 'bg-black text-white md:-translate-y-3 md:shadow-2xl' : 'bg-white text-black border border-neutral-200'}`}
-            >
-              {pkg.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white text-black text-xs font-semibold px-4 py-1 border border-neutral-200">
-                  {pkg.badge}
-                </span>
-              )}
-              <h2 className="text-sm font-semibold tracking-[0.08em] uppercase mb-3" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>
-                {pkg.name}
-              </h2>
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="font-bold" style={{ fontSize: 'clamp(28px, 3vw, 36px)', letterSpacing: '-0.02em' }}>
-                  {pkg.price}
-                </span>
-                <span className="text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>so‘m</span>
-              </div>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: pkg.featured ? 'rgba(255,255,255,.75)' : '#525252' }}>
-                {pkg.audience}
-              </p>
-              <ul className="flex flex-col gap-2.5 mb-8 flex-grow">
-                {pkg.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm">
-                    <span className="mt-0.5 shrink-0" style={{ color: pkg.featured ? '#fff' : '#000' }}>✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs mb-5" style={{ color: pkg.featured ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}>
-                Muddat: {pkg.duration}
-              </p>
-              <button
-                onClick={() => openModal(pkg.name)}
-                className={`w-full rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
-              >
-                Ariza qoldirish
-              </button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* ALOHIDA XIZMATLAR */}
-      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-4xl mx-auto">
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="font-bold tracking-tight mb-8 text-center"
-          style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}
-        >
-          Bittalab olish
-        </motion.h2>
-
-        {/* Desktop table */}
+      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-5xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="hidden sm:block overflow-hidden rounded-2xl border border-neutral-200"
+          className="text-center max-w-2xl mx-auto mb-12"
         >
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-neutral-200 bg-neutral-50 text-left">
-                <th className="py-3 px-5 font-semibold">Xizmat</th>
-                <th className="py-3 px-5 font-semibold">Narx (so‘m)</th>
-                <th className="py-3 px-5 font-semibold">Muddat</th>
-              </tr>
-            </thead>
-            <tbody>
-              {SERVICES_TABLE.map((row, i) => (
-                <tr key={row.name} className={i !== SERVICES_TABLE.length - 1 ? 'border-b border-neutral-100' : ''}>
-                  <td className="py-3.5 px-5">{row.name}</td>
-                  <td className="py-3.5 px-5 font-medium">{row.price}</td>
-                  <td className="py-3.5 px-5 text-neutral-500">{row.duration}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h2 className="font-bold tracking-tight" style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}>
+            Bittalab olish
+          </h2>
+          <p className="mt-4 text-neutral-600 leading-relaxed">
+            Hammasi birdan kerak emas. Hozir nima kerak bo‘lsa, shuni olasiz — har bir xizmat o‘zicha to‘liq ish
+            va oxirida sizga tayyor fayllar topshiriladi.
+          </p>
         </motion.div>
 
-        {/* Mobile cards */}
-        <div className="sm:hidden flex flex-col gap-3">
-          {SERVICES_TABLE.map((row) => (
+        {SERVICE_GROUPS.map((group) => (
+          <div key={group.title} className="mb-14 last:mb-0">
             <motion.div
-              key={row.name}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="rounded-xl border border-neutral-200 p-4 flex items-center justify-between gap-3"
+              className="mb-6 border-b border-neutral-200 pb-4"
             >
-              <div>
-                <p className="font-medium text-sm">{row.name}</p>
-                <p className="text-xs text-neutral-500 mt-0.5">{row.duration}</p>
-              </div>
-              <p className="font-semibold text-sm whitespace-nowrap">{row.price} so‘m</p>
+              <h3 className="text-xl font-semibold tracking-tight">{group.title}</h3>
+              <p className="text-sm text-neutral-500 mt-1">{group.intro}</p>
             </motion.div>
-          ))}
-        </div>
 
-        <p className="text-xs text-neutral-400 text-center mt-6">
+            <div className="grid md:grid-cols-2 gap-5">
+              {group.items.map((service) => (
+                <motion.article
+                  key={service.name}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="flex flex-col rounded-2xl border border-neutral-200 p-6 sm:p-7 transition-colors hover:border-neutral-400"
+                >
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <h4 className="text-lg font-semibold tracking-tight">{service.name}</h4>
+                    <div className="text-right shrink-0">
+                      <p className="font-bold whitespace-nowrap">{service.price}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">so‘m · {service.duration}</p>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-neutral-700 leading-relaxed mb-5">{service.lead}</p>
+
+                  <p className="text-xs font-semibold tracking-[0.08em] uppercase text-neutral-400 mb-3">Nima olasiz</p>
+                  <ul className="flex flex-col gap-2 mb-5 flex-grow">
+                    {service.deliverables.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm text-neutral-700 leading-relaxed">
+                        <span className="mt-1 shrink-0 text-black">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="text-sm text-neutral-500 leading-relaxed mb-2">
+                    <span className="font-medium text-neutral-700">Kimga: </span>
+                    {service.audience}
+                  </p>
+                  {service.note && (
+                    <p className="text-xs text-neutral-400 leading-relaxed mb-4">{service.note}</p>
+                  )}
+                  {service.addon && (
+                    <p className="flex items-center justify-between gap-3 border-t border-neutral-200 pt-3 mb-5 text-sm">
+                      <span className="text-neutral-600">{service.addon.label}</span>
+                      <span className="font-medium whitespace-nowrap">{service.addon.price}</span>
+                    </p>
+                  )}
+
+                  <button
+                    onClick={() => openModal(service.name)}
+                    className="mt-auto w-full rounded-full border border-black bg-white py-3.5 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white"
+                  >
+                    Ariza qoldirish
+                  </button>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <p className="text-xs text-neutral-400 text-center mt-10">
           Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.
         </p>
       </section>
@@ -488,6 +625,76 @@ export default function TariflarClient() {
             </li>
           ))}
         </motion.ul>
+      </section>
+
+      {/* PAKETLAR */}
+      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-6xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="text-center max-w-2xl mx-auto mb-12"
+        >
+          <h2 className="font-bold tracking-tight" style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}>
+            Bir nechtasi kerakmi? Paket arzonroq
+          </h2>
+          <p className="mt-4 text-neutral-600 leading-relaxed">
+            Xizmatlarni alohida-alohida olgandan ko‘ra paket bilan olsangiz, ham arzonroq chiqadi,
+            ham hamma narsa bitta tizimda ishlanadi.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
+          {PACKAGES.map((pkg) => (
+            <motion.div
+              key={pkg.name}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className={`relative flex flex-col rounded-2xl p-8 ${pkg.featured ? 'bg-black text-white md:-translate-y-3 md:shadow-2xl' : 'bg-white text-black border border-neutral-200'}`}
+            >
+              {pkg.badge && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white text-black text-xs font-semibold px-4 py-1 border border-neutral-200">
+                  {pkg.badge}
+                </span>
+              )}
+              <h3 className="text-sm font-semibold tracking-[0.08em] uppercase mb-3" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>
+                {pkg.name}
+              </h3>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="font-bold" style={{ fontSize: 'clamp(28px, 3vw, 36px)', letterSpacing: '-0.02em' }}>
+                  {pkg.price}
+                </span>
+                <span className="text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>so‘m</span>
+              </div>
+              <p className="text-xs mb-4" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#a3a3a3' }}>
+                Alohida olinsa {pkg.separate} so‘m — {pkg.saving} so‘m tejaysiz
+              </p>
+              <p className="text-sm leading-relaxed mb-6" style={{ color: pkg.featured ? 'rgba(255,255,255,.75)' : '#525252' }}>
+                {pkg.audience}
+              </p>
+              <ul className="flex flex-col gap-2.5 mb-8 flex-grow">
+                {pkg.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm">
+                    <span className="mt-0.5 shrink-0" style={{ color: pkg.featured ? '#fff' : '#000' }}>✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs mb-5" style={{ color: pkg.featured ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}>
+                Muddat: {pkg.duration}
+              </p>
+              <button
+                onClick={() => openModal(`${pkg.name} paket`)}
+                className={`w-full rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
+              >
+                Ariza qoldirish
+              </button>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* CTA BLOK */}
