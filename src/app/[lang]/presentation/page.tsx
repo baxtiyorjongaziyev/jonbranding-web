@@ -1,25 +1,18 @@
-import { client } from '@/sanity/lib/client';
-import PresentationClient from './presentation-client';
+import { redirect } from 'next/navigation';
+import { Locale } from '@/lib/dictionaries';
 
-export const revalidate = 60; // revalidate every minute
+const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
-export default async function PresentationPage({ params }: { params: { lang: string } }) {
-  const lang = (['uz', 'ru', 'en', 'zh'].includes(params.lang) ? params.lang : 'uz');
+/**
+ * Eski slaydli taqdimot `/credentials` bilan almashtirildi.
+ * Undagi raqamlar eskirgan edi ("50+ loyiha"), yangi sahifa esa
+ * ma'lumotni Sanity'dan va `src/lib/sales-content.ts` dan oladi.
+ * Link tarqatilgan bo'lishi mumkin, shuning uchun o'chirilmay yo'naltiriladi.
+ */
+const PresentationPage = async (props: { params: Promise<{ lang: Locale }> }) => {
+  const { lang } = await props.params;
+  const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
+  redirect(safeLang === 'uz' ? '/credentials' : `/${safeLang}/credentials`);
+};
 
-  // Fetch top 3 portfolio cases
-  const query = `*[_type == "portfolio"] | order(order asc)[0...4] {
-    title,
-    slug,
-    mainImage,
-    category
-  }`;
-  
-  let portfolioCases = [];
-  try {
-    portfolioCases = await client.fetch(query);
-  } catch (err) {
-    console.error("Failed to fetch portfolio cases for presentation:", err);
-  }
-
-  return <PresentationClient lang={lang} portfolioCases={portfolioCases} />;
-}
+export default PresentationPage;

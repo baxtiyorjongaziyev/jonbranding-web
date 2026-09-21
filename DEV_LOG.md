@@ -4,6 +4,29 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/credentials` qaytadan qurildi — slaydli taqdimot, `/presentation` yopildi
+
+**Sabab:** Egasi ikkala taqdimotni ham rad etdi ("ikkalasi ham", "hammasi"). Birinchi `/credentials` versiyasi uzun scroll sahifa edi — oldingi "gazeta bo'lib qolyapti" e'tiroziga qaytib tushgan. Eski `/presentation` esa eskirgan raqamlar bilan turardi ("50+ loyiha", holbuki 1000+).
+
+**Yangi format — slayd deki:**
+1. `credentials-client.tsx` to'liq qayta yozildi. Scroll o'rniga ekranma-ekran slaydlar: klaviatura (←/→/Space/Home/End), svayp, tugmalar, yuqorida progress chizig'i, pastda `01 / 18 — Nomi` hisoblagichi.
+2. **Tipografika** — sarlavhalar `--font-serif` (Instrument Serif), eyebrow va raqamlar `--font-mono`. Ilgari hamma joyda sans edi, shuning uchun zaif ko'rinardi.
+3. **Keys slaydlari** — rasm butun ekranga (`fill`, gradient overlay), matn pastda. Matn devoridan qutulish uchun asosiy o'zgarish shu.
+4. Slaydlar: muqova → mijozlar → muammo → yechim → har keys alohida → har xizmat guruhi alohida → paketlar → jarayon → kafolatlar → har sharh alohida → CTA.
+5. **PDF** — `@media print` da barcha slaydlar ketma-ket chiqadi (`cred-print-all`), har biri alohida sahifa (`break-after: page`).
+
+**Sayt chrome'i yopildi:** taqdimotda header, footer, sticky CTA, Oisha widget, cookie banner, lead-magnet popup va mobil nav slaydlar ustiga tushib, ekran ulashuvda ko'rinib qolardi. `header.tsx` va `footer.tsx` da mavjud `/pro-preview` shartiga `/credentials` qo'shildi; `client-enhancements.tsx` da `isDeck` bayrog'i olti komponentni o'chiradi.
+
+**`/presentation`:** `presentation-client.tsx` o'chirildi, `page.tsx` `/credentials` ga `redirect` qiladi. Sahifa butunlay o'chirilmadi — link tarqatilgan bo'lishi mumkin. Koddan hech narsa unga link bermas edi.
+
+**Vizual tekshiruv:** Playwright bilan 1440×900 va 390×844 da muqova, muammo, xizmatlar va paketlar slaydlari suratga olindi va ko'rildi. Chap pastdagi "N" doira — Next.js dev indikatori, productionda yo'q.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249), `npm run build` — hammasi toza.
+
+**Ochiq:** i18n hali yo'q — matn komponent ichida, `/ru` `/en` `/zh` da o'zbekcha ko'rinadi.
+
+---
+
 ## 2026-09-21 | Telegram → Sanity: dublikatga qarshi himoya (ikkala tizim birga ishlay oladi)
 
 **Muammo:** Bir Telegram postini ikkita mustaqil tizim o'qiydi — `src/app/api/portfolio-telegram` (Vercel webhook) va `services/portfolio-bot` (userbot). Ikkalasi ham Sanity'ga `client.create()` bilan yozardi, ya'ni bir postdan ikkita portfolio hujjati chiqishi mumkin edi. Mavjud slug tekshiruvi buni ushlamaydi: slug Gemini bergan sarlavhadan yasaladi, ikkala tizim esa har xil sarlavha olishi mumkin.
