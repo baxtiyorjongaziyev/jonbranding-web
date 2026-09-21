@@ -10,24 +10,25 @@ import axios from 'axios';
 export type { AIEnrichedData };
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 async function callGeminiWithRetry(
   url: string,
   data: any,
   options: { timeout?: number },
-  maxRetries = 3
+  maxRetries = 4
 ): Promise<any> {
-  let delay = 1500;
+  let delay = 2000;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await axios.post(url, data, options);
     } catch (err: any) {
       const status = err.response?.status;
       if ((status === 429 || status === 503 || status === 500) && attempt < maxRetries) {
-        console.warn(`[ai-processor] Gemini API error ${status}, retrying in ${delay}ms (attempt ${attempt}/${maxRetries})...`);
-        await new Promise((r) => setTimeout(r, delay));
+        const waitTime = status === 429 ? 21000 : delay;
+        console.warn(`[ai-processor] Gemini API error ${status}, waiting ${waitTime / 1000}s (attempt ${attempt}/${maxRetries})...`);
+        await new Promise((r) => setTimeout(r, waitTime));
         delay *= 2;
         continue;
       }
@@ -169,9 +170,7 @@ function generateBodyContent(data: AIEnrichedData): Array<{ style: string; child
 }
 
 const SEARCH_TERMS_PROMPT = (text: string) => `
-Quyidagi Telegram postidan FAQAT ikkita narsani ajratib ol — loyiha nomi va mijoz nomi.
-Bular Google Drive'da rasm papkasini nom bo'yicha qidirish uchun ishlatiladi, shuning
-uchun qisqa va aniq bo'lsin (papka nomlariga o'xshash kalit so'zlar).
+Quyidagi Telegram postidan loyiha nomi va mijoz nomini ajratib ol va bu post haqiqiy portfolio keysi ekanligini aniqla.
 
 POST MATNI:
 """
@@ -180,9 +179,15 @@ ${text}
 
 FAQAT JSON qaytar, boshqa hech narsa yozma:
 {
+  "isPortfolioCase": true,
   "title": "loyiha/brend nomi (2-4 so'z)",
   "client": "mijoz kompaniya yoki shaxs nomi"
 }
+
+QOIDALAR:
+- "isPortfolioCase":
+  - Agar bu matn aniq bir mijoz/brendga qilingan ish (logotip, brending, qadoq, neyming, firma uslubi) keysi bo'lsa -> true.
+  - Agar bu matn umumiy fikr, maslahat, motivatsiya, falsafa, lead-magnit yoki reklama bo'lsa (masalan "Shaxsiyga POYDEVOR deb yozing", "10 yil oldin bitta do'kon bilan boshlagansiz...", "EVOS ham bitta filialdan boshlagan...") -> isPortfolioCase: false bo'lishi SHART!
 `;
 
 /**
@@ -208,7 +213,11 @@ export async function extractSearchTerms(postText: string): Promise<SearchTerms>
   if (!jsonMatch) throw new Error(`Gemini qidiruv atamalarini qaytarmadi: ${reply.slice(0, 200)}`);
 
   const parsed = JSON.parse(jsonMatch[0]) as SearchTerms;
-  return { title: parsed.title || '', client: parsed.client || '' };
+  return {
+    title: parsed.title || '',
+    client: parsed.client || '',
+    isPortfolioCase: parsed.isPortfolioCase !== false,
+  };
 }
 
 const FULL_CASE_PROMPT = (postText: string, folderName: string, imageCount: number) => `
@@ -265,7 +274,7 @@ export async function parseFullCase(
   // Gemini so'rov hajmi/vaqt tugashi xavfini kamaytirish uchun tahlilga
   // faqat dastlabki rasmlarni yuboramiz — Sanity'ga esa barchasi yuklanadi
   // (createPortfolioDocument to'liq imageFiles bilan chaqiriladi).
-  const MAX_IMAGES_FOR_AI = 10;
+  const MAX_IMAGES_FOR_AI = 2;
   const limitedImages = imageFiles.slice(0, MAX_IMAGES_FOR_AI);
 
   for (const img of limitedImages) {

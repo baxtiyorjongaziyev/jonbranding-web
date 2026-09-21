@@ -37,6 +37,7 @@ export interface AIEnrichedData {
 export interface SearchTerms {
   title: string;
   client: string;
+  isPortfolioCase?: boolean;
 }
 
 export interface SanityImageAsset {

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { extractSearchTerms, parseFullCase } from './ai-processor.js';
 import { downloadToTemp, findFolderByName, listImagesInFolder } from './drive-finder.js';
-import { createPortfolioDocument, findExistingPortfolio, findPortfolioById, portfolioDocId } from './sanity.js';
+import { createPortfolioDocument, enrichPortfolioDocument, findExistingPortfolio, findPortfolioById, portfolioDocId, } from './sanity.js';
 import { slugify } from './slug.js';
 /**
  * Telegram/Instagram post matnidan boshlab, Google Drive'da nom bo'yicha
@@ -14,7 +14,15 @@ export async function processPost(messageText, channelId, localImages) {
     try {
         console.log('[pipeline] Step 1/6: Qidiruv atamalarini ajratish...');
         const searchTerms = await extractSearchTerms(messageText);
-        console.log(`[pipeline] Qidirilmoqda: title="${searchTerms.title}" client="${searchTerms.client}"`);
+        console.log(`[pipeline] Qidirilmoqda: title="${searchTerms.title}" client="${searchTerms.client}" isPortfolioCase=${searchTerms.isPortfolioCase}`);
+        if (searchTerms.isPortfolioCase === false) {
+            console.log(`[pipeline] ⚠️ Post portfolio keysi emas (kontent/maslahat/reklama posti), o'tkazib yuborildi.`);
+            return {
+                success: false,
+                error: "Post portfolio keysi emas (kontent/maslahat/reklama posti)",
+                title: searchTerms.title,
+            };
+        }
         let imageFiles = [];
         let folderName = searchTerms.title || 'Loyiha';
         let folderId;
@@ -53,40 +61,39 @@ export async function processPost(messageText, channelId, localImages) {
                 title: searchTerms.title,
             };
         }
-        // Duplikatni erta tekshirish (Gemini chaqiruvlarini tejash uchun)
+        // Mavjud portfolio bor-yo'qligini tekshirish
         const roughSlug = slugify(searchTerms.title, folderId);
         const earlyId = await findExistingPortfolio(roughSlug);
         if (earlyId) {
-            console.log(`[pipeline] ⚠️ Allaqachon mavjud (taxminiy slug): ${earlyId}`);
-            return {
-                success: true,
-                sanityId: earlyId,
-                title: searchTerms.title,
-                bodyTitle: '⚠️ Duplicate — already exists in Sanity',
-            };
+            console.log(`[pipeline] ℹ️ Mavjud portfolio topildi (${earlyId}), boyitish rejimi yoqildi...`);
         }
         console.log('[pipeline] Step 5/6: Matn + rasmlar asosida to\'liq AI tahlili (SEO bilan)...');
         const aiData = await parseFullCase(messageText, folderName, imageFiles);
         console.log(`[pipeline] Tahlil qilindi → "${aiData.title}" (${aiData.category}), cover=${aiData.coverImageIndex}`);
-        // Yakuniy slug AI aniqlagan sarlavha bo'yicha — qayta tekshirish
+        // Yakuniy slug AI aniqlagan sarlavha bo'yicha
         const finalSlug = slugify(aiData.title, folderId);
-        // Avval post matnidan hisoblangan ID bo'yicha — webhook joylab
-        // ulgurgan bo'lsa shu yerda to'xtaymiz, keyin eski slug tekshiruvi.
+        const finalExistingId = await findExistingPortfolio(finalSlug);
+        // Post matnidan hisoblangan ID — webhook (`/api/portfolio-telegram`) shu
+        // postni allaqachon joylagan bo'lsa, uni slugdan oldin topamiz, chunki
+        // slug Gemini sarlavhasidan yasaladi va ikki tizimda har xil chiqishi mumkin.
         const dedupId = portfolioDocId(messageText);
-        const existingId = (dedupId ? await findPortfolioById(dedupId) : null) ?? (await findExistingPortfolio(finalSlug));
-        if (existingId) {
-            console.log(`[pipeline] ⚠️ Duplicate found: ${existingId}`);
+        const dedupExistingId = dedupId ? await findPortfolioById(dedupId) : null;
+        const targetExistingId = dedupExistingId || finalExistingId || earlyId;
+        if (targetExistingId) {
+            console.log(`[pipeline] Step 6/6: Mavjud portfolio boyitilmoqda (${targetExistingId})...`);
+            await enrichPortfolioDocument(targetExistingId, aiData, imageFiles);
+            console.log(`[pipeline] 🔄 Portfolio boyitildi va yangilandi: ${targetExistingId}`);
             return {
                 success: true,
-                sanityId: existingId,
+                sanityId: targetExistingId,
                 title: aiData.title,
                 imageCount: imageFiles.length,
-                bodyTitle: '⚠️ Duplicate — already exists in Sanity',
+                bodyTitle: '🔄 Yangilandi va boyitildi (Enriched)',
             };
         }
-        console.log('[pipeline] Step 6/6: Sanity\'ga yuklanmoqda...');
+        console.log('[pipeline] Step 6/6: Sanity\'ga yangi keys sifatida yuklanmoqda...');
         const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body, messageText);
-        console.log(`[pipeline] ✅ Portfolio created: ${sanityId}`);
+        console.log(`[pipeline] ✅ Yangi portfolio yaratildi: ${sanityId}`);
         return {
             success: true,
             sanityId,

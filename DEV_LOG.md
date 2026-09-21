@@ -106,22 +106,73 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
-## 2026-09-21 | Telegram Portfoliolarini Sanity CMS'ga Muvaffaqiyatli Yuklash (3 ta yangi keys jonli)
+## 2026-09-21 | Portfolio Enrichment Mode: Mavjud Keyslarni Boyitish va Yangilash
 
-**Muammo:** Saytda oxirgi loyiha 2026-06-26 dagi "Geonest" bo'lib, Telegram/Instagram'ga joylangan yangi loyihalar saytga chiqmay qolgan edi.
-**Sabablar:**
-1. `services/portfolio-bot/.env` da `TG_SESSION` bo'sh bo'lgan, userbot ulanolmas edi.
-2. `REQUIRE_DRIVE_LINK=true` tufayli Drive havolasi bo'lmagan postlar tashlab yuborilgan.
-3. `services/portfolio-bot/src/ai-processor.ts` da Gemini 2.0 Flash o'rniga 2026 yilda ishlaydigan `gemini-2.5-flash` modeliga o'tildi va `thinkingConfig: { thinkingBudget: 0 }` bilan `maxOutputTokens` oshirildi (chunki Gemini 2.5 thinking tokenlari ajratilgan limitni yeb qo'yib, JSONni kesib qo'ygan edi).
-4. `services/portfolio-bot/src/userbot.ts` da faqat kelajakdagi yangi xabarlarni eshitish emas, balki boshlanganda oxirgi postlarni skan qilib Sanity'ga yuklovchi `syncTelegramChannel` funksiyasi va `src/sync.ts` CLI skripti qo'shildi.
+**Vazifa:** Agar portfolio keysi avvaldan mavjud bo'lsa, uni o'tkazib yubormasdan (skip qilmasdan), yangi rasmlar, boy tavsif, natijalar, teglar va SEO ma'lumotlari bilan boyitish (enrich qilish), agar mavjud bo'lmasa, yangi keys sifatida joylash.
 
-**Natija:**
-Telegram `@JonBranding` kanalidagi oxirgi postlar to'liq tahlil qilinib, rasmlari bilan Sanity CMS'ga muvaffaqiyatli yuklandi:
+**Nima qilindi:**
+1. **Sanity Enrichment funksiyasi (`services/portfolio-bot/src/sanity.ts`):**
+   - `enrichPortfolioDocument(documentId, parsed, imageFiles)` funksiyasi yaratildi.
+   - Mavjud rasmlar saqlangan holda yangi rasmlar `galleryImages` massiviga qo'shiladi (asset ref tekshiruvi orqali dublikatlarsiz).
+   - `tags`, `results` (yangi metrikalar), `description`, `body`, `seoKeywords`, `metaTitle`, `metaDescription` aqlli tarzda birlashtiriladi (merge qilinadi).
+2. **Pipeline yangilandi (`services/portfolio-bot/src/pipeline.ts`):**
+   - Agar slug bo'yicha Sanity'da mavjud hujjat topilsa, u to'xtab qolmaydi, balki `enrichPortfolioDocument` orqali yangilanadi va natijada `🔄 Yangilandi va boyitildi (Enriched)` statusi beriladi.
+3. **Webhook Route yangilandi (`src/app/api/portfolio-telegram/route.ts`):**
+   - `/api/portfolio-telegram` orqali Telegram'dan kelgan xabar avvalgi keysga tegishli bo'lsa (masalan, qo'shimcha rasmlar yoki yangilangan matn), Sanity'dagi mavjud hujjatga yangi rasmlar va ma'lumotlar qo'shilib boyitiladi.
+4. **Tekshiruv:**
+   - `npm run build` (`services/portfolio-bot`) va `npm run typecheck` muvaffaqiyatli o'tdi.
+   - Test orqali mavjud `R Studio` keysi yangi teglar va natijalar bilan muvaffaqiyatli boyitildi.
+
+---
+
+## 2026-09-21 | Barcha Telegram va Instagram Portfoliolari Sanity CMS'ga To'liq Yuklandi (Jami 21 ta Keys)
+
+**Vazifa:** Telegram (`@JonBranding`) va Instagram (`@jon.branding`) sahifalaridagi barcha haqiqiy mijoz portfoliolari Sanity CMS orqali veb-saytga to'liq kiritildi.
+
+**Natija — Jami 21 ta Jonli Portfolio Keyslari:**
+1. **Perfona Logotip va Brending** (`perfona-logotip-va-brending`) — Logo dizayn (9 ta rasm)
+2. **PETRON POLYMER brendini yaratish** (`petron-polymer-brendini-yaratish`) — Firma uslubi (10 ta rasm)
+3. **R Studio brend logotipi** (`r-studio-brend-logotipi`) — Logo dizayn (10 ta rasm)
+4. **Yasira: Go'zallik va Tozalik** (`yasira-gozallik-va-tozalik`) — Firma uslubi (Instagram dan, 10 ta rasm)
+5. **FIDDA by Sevara: Kumush brendi** (`fidda-by-sevara-kumush-brendi`) — Brend strategiya (10 ta rasm)
+6. **Velzo: Brend Tizimi** (`velzo-brend-tizimi`) — Brendbuk (10 ta rasm)
+7. **Den Aroma: Brend Transformatsiyasi** (`den-aroma-brend-transformatsiyasi`) — Brend strategiya (10 ta rasm)
+8. **Sarmilk: Brend Identikasini Yaratish** (`sarmilk-brend-identikasini-yaratish`) — Firma uslubi (10 ta rasm)
+9. **Jafiko Light Brend Identifikatsiyasi** (`jafiko-light-brend-identifikatsiyasi`) — Firma uslubi (10 ta rasm)
+10. **Boyarin brendini yoshartirish** (`boyarin-brendini-yoshartirish`) — Firma uslubi (10 ta rasm)
+11. **Prime Fit: Brend Identikasi** (`prime-fit-brend-identikasi`) — Brendbuk (10 ta rasm)
+12. **Bodomchi: Brend Aydentikasi** (`bodomchi-brend-aydentikasi`) — Brendbuk (10 ta rasm)
+13. **Rutera: Brending va Patent** (`rutera-brending-va-patent`) — Brend strategiya (10 ta rasm)
+14. **Sofmir: Mebel Aksessuarlari Brendingi** (`sofmir-mebel-aksessuarlari-brendingi`) — Logo dizayn (10 ta rasm)
+15. **Feel it: SAT uchun logo** (`feel-it-sat-uchun-logo`) — Logo dizayn (10 ta rasm)
+16. **Bekmarket Zayyan Naming & Branding** (`bekmarket-zayyan-naming-branding`) — Neyming (10 ta rasm)
+17. **Geonest** (`geonest`) — Neyming
+18. **Enros** (`enros`) — Neyming
+19. **Revo** (`revo`) — Brendbuk
+20. **ARFADEL** (`arfadel`) — Brendbuk
+21. **SAVOD rebrending keys** (`savod-rebrending-keys`) — Firma uslubi
+
+**Texnik optimallashlar:**
+- `gemini-2.5-flash-lite` modeliga o'tildi (Gemini 2.5 Flash free tier 20 RPD chegarasini yengish uchun).
+- Rasm yuklashda video yoki noto'g'ri fayl turlarini (magic bytes tekshiruvi orqali) Sanity'ga yubormaslik filtri qo'shildi.
+- AI tahlilida multimodal rasm soni 2 taga cheklandi (token bo'g'ilishini oldini olish uchun), Sanity'ga esa barcha rasmlar to'liq yuklandi.
+- Kategoriya nomlari Sanity schemadagi qat'iy ro'yxat (`logo-design`, `naming`, `brandbook`, `corporate-style`, `packaging`, `brand-strategy`) bilan sinxronlashtirildi.
+
+---
+
+## 2026-09-21 | Telegram Portfoliolarini Sanity CMS'ga Yuklash va No-Portfolio Filtrlash
+
+**Tuzatish (No-Portfolio Guard):**
+- Telegram kanalidagi "Kichik boshlash — normal holat..." (Poydevor) posti aslida portfolio keys emas, balki kontent/lead-magnit posti bo'lgani sababli, Sanity'dan (`V2a6kRsf39b2Ai1A2vNgG6`, `biznesingiz-uchun-mustahkam-poydevor`) butunlay **o'chirildi**.
+- Ham `services/portfolio-bot` (userbot), ham `/api/portfolio-telegram` (webhook) pipeline'lariga qat'iy **`isPortfolioCase: boolean`** AI filtri qo'shildi:
+  - Faqat aniq mijoz/brendga qilingan ishlar (logotip, qadoq, brending, neyming) `true` oladi va Sanity'ga chiqadi.
+  - Umumiy maslahat, maqola, reklama yoki CTA postlar avtomatik `false` olinadi va o'tkazib yuboriladi.
+
+**Haqiqiy Jonli Keyslar (Sanity CMS):**
 1. **Bekmarket Zayyan Naming & Branding** (Sanity ID: `2aWf3QCMOiMohdaXTan22p`, slug: `bekmarket-zayyan-naming-branding`, 10 ta rasm)
 2. **Feel it: SAT uchun logo** (Sanity ID: `V2a6kRsf39b2Ai1A2vNenW`, slug: `feel-it-sat-uchun-logo`, 10 ta rasm)
-3. **Biznesingiz uchun mustahkam poydevor** (Sanity ID: `V2a6kRsf39b2Ai1A2vNgG6`, slug: `biznesingiz-uchun-mustahkam-poydevor`)
 
-Sanity'dagi jami portfolio loyihalar soni: 5 tadan **8 taga** oshdi va saytda (`/portfolio`) jonli ko'rinmoqda.
+Sanity'dagi haqiqiy portfolio loyihalar soni: **7 ta** (barchasi haqiqiy mijoz keyslari).
 
 ---
 
