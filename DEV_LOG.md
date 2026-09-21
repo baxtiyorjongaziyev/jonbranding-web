@@ -4,6 +4,27 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/tariflar` va `/presentation` — haqiqiy 308 redirect
+
+**Muammo:** Sahifalar o'rin almashgach, `/tariflar` da eski (superseded) narxlar sahifasi qolgan edi. Egasi butun sessiya davomida `/tariflar` ga kirib kelgan va u yerda boshqa sahifani ko'rib "ishlamayapti" dedi. Xato emas edi — noto'g'ri qaror edi: eskirgan sahifani jonli URL'da qoldirish.
+
+**Aniqlangan qo'shimcha fakt:** eski narxlar sahifasi `XizmatlarClient` ni render qilardi — ya'ni `/xizmatlar` bilan aynan bir xil, faqat metadata boshqa. Yo'qotadigan o'ziga xos kontent yo'q.
+
+**Yechim:** ikkala eski manzil ham `next.config.js` dagi `redirects()` ga ko'chirildi:
+- `/tariflar` → `/narxlar`
+- `/presentation` → `/credentials`
+- Har biri uchun `/:lang(ru|en|zh)/...` varianti ham.
+
+`src/app/[lang]/tariflar/` va `src/app/[lang]/presentation/` kataloglari o'chirildi.
+
+**Nega sahifa ichidagi `redirect()` emas:** u `200` qaytarardi va `<meta http-equiv="refresh" content="1;url=...">` bilan 1 soniya kechikib yo'naltirardi, chunki sahifa avval render bo'lib, keyin client tomonda ko'chardi. Qidiruv tizimlari buni doimiy yo'naltirish deb hisoblamaydi. `next.config` dagi variant chekkada, render'gacha ishlaydi va toza `308` beradi.
+
+**Natija:** `noindex` hiylasi endi kerak emas — ikkita raqobatlashuvchi narxlar sahifasi umuman qolmadi.
+
+**Tekshirildi:** `/tariflar` → 308 → `/narxlar`, `/ru/tariflar` → 308 → `/ru/narxlar`, `/presentation` → 308 → `/credentials`; `/narxlar` va `/credentials` → 200. `typecheck`, `lint`, `vitest` (249/249), `build` — toza.
+
+---
+
 ## 2026-09-21 | Netlify qoldiqlari: `public/_headers` o'chirildi + o'chirish xavfsizligi tekshiruvi
 
 **Savol:** Netlify butunlay o'chirilsa saytga zarar bormi?
