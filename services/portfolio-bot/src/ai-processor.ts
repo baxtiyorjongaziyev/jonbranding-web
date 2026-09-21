@@ -10,24 +10,25 @@ import axios from 'axios';
 export type { AIEnrichedData };
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 async function callGeminiWithRetry(
   url: string,
   data: any,
   options: { timeout?: number },
-  maxRetries = 3
+  maxRetries = 4
 ): Promise<any> {
-  let delay = 1500;
+  let delay = 2000;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await axios.post(url, data, options);
     } catch (err: any) {
       const status = err.response?.status;
       if ((status === 429 || status === 503 || status === 500) && attempt < maxRetries) {
-        console.warn(`[ai-processor] Gemini API error ${status}, retrying in ${delay}ms (attempt ${attempt}/${maxRetries})...`);
-        await new Promise((r) => setTimeout(r, delay));
+        const waitTime = status === 429 ? 21000 : delay;
+        console.warn(`[ai-processor] Gemini API error ${status}, waiting ${waitTime / 1000}s (attempt ${attempt}/${maxRetries})...`);
+        await new Promise((r) => setTimeout(r, waitTime));
         delay *= 2;
         continue;
       }
@@ -273,7 +274,7 @@ export async function parseFullCase(
   // Gemini so'rov hajmi/vaqt tugashi xavfini kamaytirish uchun tahlilga
   // faqat dastlabki rasmlarni yuboramiz — Sanity'ga esa barchasi yuklanadi
   // (createPortfolioDocument to'liq imageFiles bilan chaqiriladi).
-  const MAX_IMAGES_FOR_AI = 10;
+  const MAX_IMAGES_FOR_AI = 2;
   const limitedImages = imageFiles.slice(0, MAX_IMAGES_FOR_AI);
 
   for (const img of limitedImages) {
