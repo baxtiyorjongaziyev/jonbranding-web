@@ -65,9 +65,8 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
 
   const logos: ServiceLogo[] = brands
-    .filter((brand) => brand.logo)
-    .slice(0, 16)
-    .map((brand) => ({ name: brand.name, logo: brand.logo }));
+    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []))
+    .slice(0, 16);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
