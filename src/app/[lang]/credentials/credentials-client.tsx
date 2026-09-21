@@ -65,11 +65,7 @@ function Display({
   return (
     <motion.h2
       variants={rise}
-      className={
-        size === 'xl'
-          ? 'text-[2.7rem] leading-[0.95] sm:text-[4.5rem] lg:text-[5.75rem]'
-          : 'text-[2.1rem] leading-[1.02] sm:text-[3.25rem] lg:text-[4rem]'
-      }
+      className={size === 'xl' ? 'cred-display-xl leading-[0.95]' : 'cred-display-lg leading-[1.02]'}
       style={{ ...serif, letterSpacing: '-0.025em', color: light ? '#fff' : INK, fontWeight: 400 }}
     >
       {children}
@@ -88,14 +84,25 @@ function Slide({
   pad?: boolean;
 }) {
   return (
-    <div className="cred-slide h-full w-full overflow-y-auto" style={{ background: bg }}>
+    <div
+      className={`cred-slide h-full w-full overflow-y-auto${bg === INK ? ' cred-dark' : ''}`}
+      style={{ background: bg }}
+    >
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="visible"
-        className={`mx-auto flex min-h-full w-full max-w-6xl flex-col justify-center ${
-          pad ? 'px-6 py-16 sm:px-12 sm:py-20' : ''
-        }`}
+        className="mx-auto flex min-h-full w-full max-w-6xl flex-col justify-center"
+        style={
+          pad
+            ? {
+                paddingLeft: 'var(--cred-px)',
+                paddingRight: 'var(--cred-px)',
+                paddingTop: 'var(--cred-pt)',
+                paddingBottom: 'var(--cred-pb)',
+              }
+            : undefined
+        }
       >
         {children}
       </motion.div>
@@ -171,6 +178,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
                   alt={brand.name}
                   width={140}
                   height={56}
+                  loading="eager"
                   className="max-h-10 w-auto object-contain opacity-45 mix-blend-multiply grayscale"
                 />
               </div>
@@ -226,13 +234,16 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
       id: `keys-${item.slug}`,
       label: item.title,
       render: () => (
-        <div className="cred-slide relative h-full w-full overflow-hidden" style={{ background: INK }}>
+        <div className="cred-slide cred-dark cred-case relative h-full w-full overflow-hidden" style={{ background: INK }}>
           <Image
             src={item.coverImage}
             alt={item.title}
             fill
             sizes="100vw"
             priority={index === 0}
+            // Chop etish nusxasi ekrandan tashqarida turadi, lazy rasm esa
+            // u yerda hech qachon yuklanmaydi va PDF qop-qora chiqadi.
+            loading="eager"
             className="object-cover"
             style={{ opacity: 0.55 }}
           />
@@ -244,7 +255,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end px-6 py-16 sm:px-12 sm:py-20"
+            className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end"
+            style={{
+              paddingLeft: 'var(--cred-px)',
+              paddingRight: 'var(--cred-px)',
+              paddingTop: 'var(--cred-pt)',
+              paddingBottom: 'var(--cred-pb)',
+            }}
           >
             <Eyebrow light>{item.categoryLabel}</Eyebrow>
             <Display light>{item.title}</Display>
@@ -278,7 +295,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             {group.items.map((item, index) => (
               <div
                 key={item.name}
-                className="flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
+                className="cred-row flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
                 style={{ borderTop: index === 0 ? 'none' : '1px solid rgba(11,11,12,.1)' }}
               >
                 <div className="min-w-0 sm:flex-1">
@@ -517,6 +534,48 @@ function Deck({
   const total = slides.length;
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
+  /**
+   * Chop etish nusxasi faqat PDF so'ralganda DOM'ga qo'yiladi.
+   *
+   * Ilgari u doim `display:none` konteynerda turardi va `next/image` undagi
+   * rasmlarni hech qachon yuklamas edi (lazy + ko'rinmaydigan ota-element),
+   * shuning uchun PDF'dagi keys sahifalari qop-qora chiqardi. Endi nusxa
+   * so'ralganda yaratiladi, rasmlar yuklanishi kutiladi, keyin oyna ochiladi.
+   */
+  const [printing, setPrinting] = useState(false);
+
+  useEffect(() => {
+    if (!printing) return;
+    let cancelled = false;
+
+    const run = async () => {
+      // Brauzerga nusxani chizishga ulgurish uchun bitta kadr beramiz.
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+      const images = Array.from(document.querySelectorAll<HTMLImageElement>('.cred-print-all img'));
+      await Promise.all(
+        images.map((img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((resolve) => {
+                const done = () => resolve(null);
+                img.addEventListener('load', done, { once: true });
+                img.addEventListener('error', done, { once: true });
+                // Rasm qotib qolsa ham chop etishni to'xtatib qo'ymaymiz.
+                window.setTimeout(done, 8000);
+              })
+        )
+      );
+      if (cancelled) return;
+      window.print();
+      setPrinting(false);
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [printing]);
+
   const go = useCallback(
     (next: number) => setIndex((current) => Math.min(total - 1, Math.max(0, next === -1 ? current : next))),
     [total]
@@ -561,18 +620,100 @@ function Deck({
   const current = slides[index];
 
   return (
-    <div className="cred-root relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
+    <div
+      className={`cred-root relative h-[100svh] w-full overflow-hidden${printing ? ' cred-printing' : ''}`}
+      style={{ background: INK }}
+    >
       <style>{`
+        /* Slayd ichki bo'shliqlari ekran o'lchamiga ergashadi. Pastdagi
+           qiymat boshqaruv paneli balandligini ham qo'shadi, aks holda
+           oxirgi qator panel ostida qolib ketadi. */
+        .cred-slide {
+          --cred-px: clamp(1.25rem, 4vw, 3rem);
+          --cred-pt: clamp(1.75rem, 7vh, 5rem);
+          --cred-pb: calc(clamp(1.75rem, 7vh, 5rem) + 3.5rem);
+        }
+        /* Telefon landshafti va past oynalar: bo'sh joy keskin qisqaradi. */
+        @media (max-height: 560px) {
+          .cred-slide { --cred-pt: 0.875rem; --cred-pb: 3.25rem; }
+        }
+
+        .cred-display-lg { font-size: clamp(1.75rem, 4.2vw + 0.4rem, 4rem); }
+        .cred-display-xl { font-size: clamp(2rem, 5.6vw + 0.5rem, 5.75rem); }
+        @media (max-height: 560px) {
+          .cred-display-lg { font-size: clamp(1.35rem, 3.6vh + 0.5rem, 2.35rem); }
+          .cred-display-xl { font-size: clamp(1.5rem, 4.6vh + 0.5rem, 3rem); }
+        }
+
+        /* Uzun ro'yxatli slaydlar kichik ekranda zichroq bo'ladi. */
+        @media (max-width: 640px), (max-height: 560px) {
+          .cred-row { padding-top: 0.7rem; padding-bottom: 0.7rem; }
+        }
+
+        /* Mono yorliqlar telefonda 10px da juda mayda — biroz kattalashtiramiz. */
+        @media (max-width: 480px) {
+          .cred-slide [class*="text-[10px]"] { font-size: 11px; }
+        }
+
+        /* Nusxa ekranda ko'rinmaydi, lekin joylashuvi hisoblanadi —
+           shunda rasmlar yuklanadi. */
+        .cred-print-all {
+          position: fixed;
+          left: -200vw;
+          top: 0;
+          width: 100vw;
+          pointer-events: none;
+        }
+
         @media print {
-          .cred-chrome { display: none !important; }
-          .cred-no-print { display: none !important; }
-          /* Tashqi o'ram ham ochilishi shart, aks holda chop etishda faqat
-             birinchi ekran chiqib, qolgan slaydlar kesilib qoladi. */
-          .cred-root { height: auto !important; overflow: visible !important; }
-          .cred-deck { height: auto !important; overflow: visible !important; }
-          .cred-print-all { display: block !important; }
-          .cred-live { display: none !important; }
-          .cred-slide { height: auto !important; min-height: 0 !important; break-after: page; page-break-after: always; }
+          .cred-print-all { position: static !important; left: auto !important; width: auto !important; }
+          /* Sahifa o'lchami slayd nisbatiga moslashtiriladi, hoshiyasiz —
+             aks holda har slayd tasodifiy joyda kesiladi. */
+          @page { size: A4 landscape; margin: 0; }
+
+          .cred-chrome, .cred-no-print { display: none !important; }
+          /* Nusxa mavjud bo'lgandagina jonli deki yashiriladi. Aks holda
+             Ctrl/Cmd+P bosilganda sahifa umuman bo'sh chiqardi. */
+          .cred-printing .cred-live { display: none !important; }
+          .cred-printing .cred-print-all { display: block !important; }
+
+          .cred-root {
+            height: auto !important;
+            overflow: visible !important;
+            background: #fff !important;
+          }
+
+          /* Har bir slayd — aniq bitta sahifa. Balandlik belgilanishi shart:
+             height:auto bo'lsa keys slaydidagi to'liq ekranli rasm (fill)
+             o'lchamsiz ota-element ichida yig'ilib, matn ustiga chiqib ketadi. */
+          .cred-slide {
+            height: 209mm !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+            break-after: page;
+            page-break-after: always;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          .cred-print-all > div:last-child .cred-slide {
+            break-after: auto;
+            page-break-after: auto;
+          }
+
+          /* Qorong'i slaydlar fonini saqlab qolamiz. Busiz brauzer "Background
+             graphics" belgilanmagan holda fonni tashlab, oq ustiga oq matn
+             chiqaradi yoki ranglarni o'zicha o'zgartiradi. */
+          .cred-root, .cred-slide, .cred-dark, .cred-dark * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          /* Faqat animatsiya siljishini bekor qilamiz. Shaffoflikka tegilmaydi:
+             keys rasmidagi 0.55, logotiplardagi 45% va so'ngan matnlar
+             dizaynning bir qismi, ularsiz PDF'da ierarxiya yo'qoladi. */
+          .cred-print-all * {
+            transform: none !important;
+          }
         }
       `}</style>
 
@@ -601,13 +742,21 @@ function Deck({
       </div>
 
       {/* Chop etishda barcha slaydlar ketma-ket chiqadi */}
-      <div className="cred-print-all hidden">
-        {slides.map((slide) => (
-          <div key={slide.id}>{slide.render()}</div>
-        ))}
-      </div>
+      {printing ? (
+        <div className="cred-print-all">
+          {slides.map((slide) => (
+            <div key={slide.id}>{slide.render()}</div>
+          ))}
+        </div>
+      ) : null}
 
       {/* Boshqaruv paneli */}
+      {/* Panel ortidagi xiralik: slayd uzun bo'lib scroll qilinganda matn
+          panel ostidan o'tib ketishi kerak, kesilgandek ko'rinmasligi uchun. */}
+      <div
+        className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24"
+        style={{ backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', maskImage: 'linear-gradient(to top, #000 55%, transparent)', WebkitMaskImage: 'linear-gradient(to top, #000 55%, transparent)' }}
+      />
       <div className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-30 px-5 pb-5 sm:px-8 sm:pb-6">
         <div className="pointer-events-auto mx-auto flex max-w-6xl items-center justify-between gap-4">
           <span
@@ -620,11 +769,12 @@ function Deck({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => window.print()}
+              onClick={() => setPrinting(true)}
+              disabled={printing}
               className="rounded-full px-3.5 py-2 text-[10px] uppercase backdrop-blur-sm transition-opacity hover:opacity-75"
               style={{ ...mono, letterSpacing: '0.12em', background: 'rgba(11,11,12,.55)', color: 'rgba(255,255,255,.75)' }}
             >
-              PDF
+              PDF{printing ? ' ···' : ''}
             </button>
             <button
               type="button"
