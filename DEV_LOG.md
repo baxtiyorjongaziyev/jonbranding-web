@@ -4,6 +4,14 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Patent Menejer sahifasi: Ortiqcha matnlar va kaskad kartochkalari olib tashlandi
+
+**Vazifa:** `patent.jonbranding.uz` / `/[lang]/patent-menejer` sahifasidan "Doimiy Ochiq Versiya (Menejer Rejimi)", "Sotuv Menejeri — Patent Kalkulyatori", "1. Istisno Chegirmasi", "2. Salom Chegirmasi", "3. Promokod", "4. Arboun" kabi barcha ortiqcha matnlar olib tashlandi.
+
+**Natija:**
+- Sahifa to'liq toza, standart mijozlar sahifasi kabi professional ko'rinishga keltirildi.
+- Kalkulyator funksionalligi `alwaysUnlocked={true}` holatida saqlanib qoldi (hech qanday telefon/ism so'ralmaydi, hisob-kitoblar darhol ochiq).
+
 ## 2026-09-21 | Do/Posle (Before/After) Bloki To'liq Qayta Dizayn Qilindi ("Sales Machine" Standarti)
 
 **Vazifa:** Foydalanuvchining "Do posle blokni qayta dizayn qilib ber" talabiga asosan bosh sahifadagi Before/After bo'limi jahon darajasidagi premium agentlik ("Sales Machine") standartida to'liq qayta loyihalandi.
