@@ -4,6 +4,22 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/credentials` — global ContactModal taqdimot ustiga chiqib qolardi
+
+**Topilish yo'li:** egasi "ko'zing bilan ko'r, odam uchun mantiqlimi" dedi. 18 slaydning hammasi suratga olinib ko'rildi — 17-slaydda ekran o'rtasida **"Free Brand Audit"** oynasi ochilib turgan edi. Ingliz tilida, ko'k rangda, deki dizayniga umuman yopishmaydi. Avvalgi o'lchovlar (toshish, sahifa soni) buni ko'rsatmagan edi, chunki ular faqat slayd ichini o'lchardi.
+
+**Sabab:** `client-enhancements.tsx` da sticky CTA, Oisha widget, cookie banner, lead-magnet va mobil nav `isDeck` bilan yopilgan edi, lekin **`ContactModal` yopilmagan**. Sahifa ochilgandan ~15 soniya keyin o'zi ochilardi.
+
+**Tuzatish — ikki qatlam:**
+1. `handleOpenModal` boshida `/credentials` uchun ham darhol qaytiladi (bosh sahifa uchun shunday qilinganidek). Kim chaqirishidan qat'i nazar modal ochilmaydi.
+2. Render shartiga `!isDeck` qo'shildi — agar holat baribir o'rnatilsa ham, ekranga chiqmaydi.
+
+**Tekshirildi:** sahifa 25 soniya ochiq turdi — `[role="dialog"]` yo'q, "Free Brand Audit" matni yo'q. `typecheck`, `lint`, `vitest` (273/273), `build` — toza.
+
+**Nega muhim:** bu sotuvchi mijoz bilan ekran ulashib turgan paytda chiqadigan xato edi. Taqdimotning o'z ariza formasi bor, global modal u yerda umuman kerak emas.
+
+---
+
 ## 2026-09-21 | `docs/NARXLAR.md` — barcha AI agentlar uchun narxlar ma'lumotnomasi
 
 **Talab:** narxlar sahifasining hozirgi holati bilan barcha AI agentlar (ChatGPT, Claude, Claude Code, Gemini, Codex, Antigravity) tanishib chiqsin.
