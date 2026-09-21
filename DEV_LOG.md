@@ -4,6 +4,28 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Yangi `/tariflar` sahifasi — JTBD, FAB va har xizmatga alohida ekran (PR #327 → #328 → #329)
+
+**Vazifa:** Mavjud `/narxlar` (aslida `XizmatlarClient`ni ko'rsatadi) sahifasidan alohida, narxlari ochiq, o'zi sotadigan narxlar sahifasi.
+
+**Nima qilindi:**
+1. **Yangi route** `src/app/[lang]/tariflar/` — `page.tsx` (metadata, breadcrumb JSON-LD) + `tariflar-client.tsx`. `/narxlar` va `/pricing` tegilmadi.
+2. **Struktura:** hero → JTBD bloki → xizmatlar → jarayon va to'lov → narx omillari → paketlar (oxirida) → CTA. Paketlar ataylab oxirida: mijoz avval alohida narxlarni ko'radi, keyin paket arzonroq ekanini biladi (VIP 15 mln, PREMIUM 10 mln, STANDART 3 mln tejash ko'rsatiladi).
+3. **FAB:** har bir xizmatda `deliverables` (funksiya) dan tashqari `benefit` qatori — mijoz oladigan foyda.
+4. **JTBD bloki:** 4 ta "Hozir → Biz bilan" juftligi.
+5. **Har xizmat alohida to'liq ekran** (`min-h-[100svh]`): chapda nom/narx/muddat/CTA (sticky), o'ngda deliverables + foyda + isbot.
+6. **Naming bo'limi** rasmiy taqdimot PDF asosida aniqlashtirildi (3 ta bepul tahrir, domen/Telegram/Instagram tekshiruvi) + 19 ta ishlangan nom isbot sifatida qo'shildi.
+7. **Tipografika:** JetBrains Mono eyebrow/yorliqlar, Instrument Serif kursiv urg'ular, tabular raqamlar.
+8. **Matn:** birinchi shaxs ko'plik ("Narxlarimiz ochiq"), "yaratish" so'zi ishlatilmaydi ("Brend qurish").
+9. **Patent muddatlari to'g'irlandi:** oddiy 7 oy, tezkor 20–40 kun. Paket muddatlari faqat dizayn ishlari uchun ekani izohlandi.
+10. **Netlify o'chirildi:** `netlify.toml` va `build:netlify` skripti olib tashlandi (deploy Vercel orqali). Netlify checklari shundan keyin har PR'da qizil — Netlify loyihasini repodan uzish kerak (panel ishi).
+
+**Ochiq qolgan ishlar:**
+- **i18n:** sahifa matnlari hozircha komponent ichida, `uz.json`da emas. `/ru`, `/en`, `/zh` da o'zbekcha ko'rinadi. Uzbek-first qoidasiga ko'ra matn qotgach lug'atlarga ko'chirilishi kerak.
+- Sotuvni kuchaytirish uchun: portfolio rasmlari, mijoz otzivlari, FAQ/e'tirozlar bloki, kafolat.
+
+---
+
 ## 2026-09-19 | Sotuv menejerlari uchun ochiq Patent kalkulyatori va patent.jonbranding.uz subdomeni
 
 **Vazifa:** Mijozlar uchun kalkulyator gated (lead capture) holatda qolsin, lekin sotuv menejerlarimiz uchun doimiy ochiq (unlocked) versiyasi alohida `patent.jonbranding.uz` subdomenida bo'lsin.

@@ -39,6 +39,7 @@ type Service = {
   audience: string;
   note?: string;
   addon?: { label: string; price: string };
+  proof?: { label: string; items: string[] };
 };
 
 type ServiceGroup = {
@@ -56,17 +57,25 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         name: 'Naming',
         price: '10 000 000',
         duration: '10 kun',
-        lead: 'Brendingizga nom topamiz — aytishga oson, esda qoladigan va patentga o‘tadigan.',
+        lead: 'Yaxshi nom — biznesingizning birinchi taassuroti. Bir marta ishlab chiqiladi, butun umr foyda keltiradi.',
         deliverables: [
-          '30 dan ortiq variant ishlanadi, 3 tasi finalga chiqadi',
-          'Har bir nom nimani anglatishi va uni mijozga qanday tushuntirish yozib beriladi',
-          'Domen va ijtimoiy tarmoqlarda bandligi tekshiriladi',
-          'Patent bazasidan dastlabki tekshiruv o‘tkaziladi',
-          'Boshqa tillarda salbiy ma’no bermasligi tekshiriladi',
+          'Biznesingizga mos professional nom',
+          'Nomning strategik izohi — nega aynan shu nom',
+          'Raqobatchilar tahlili va ular nomlari bilan o‘xshashlik tekshiruvi',
+          '.uz va .com domen, Telegram va Instagram username tekshiruvi',
+          'O‘zbekiston bo‘yicha patent/trademark tekshiruvi',
+          '3 ta bepul tahrir',
         ],
         benefit: 'Nomingizni tanitishga sarflagan har bir so‘m o‘zingizda qoladi — besh yildan keyin “bu nom bizniki” degan xat kelmaydi.',
         audience: 'Yangi biznes ochayotgan yoki hozirgi nomi ishlamayotganlar uchun',
         note: 'Nom noto‘g‘ri tanlansa, keyin patent, domen va reklama uch barobar qimmatga tushadi.',
+        proof: {
+          label: 'Biz ishlab chiqqan nomlar',
+          items: [
+            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Naf', 'Revo', 'Petron', 'Estem',
+            'Zayyan', 'Mercato', 'Geonest', 'Rutera', 'Sofmir', 'Arfadel', 'Melamus', 'Polentra', 'Viton',
+          ],
+        },
       },
       {
         name: 'Logo',
@@ -714,6 +723,27 @@ export default function TariflarClient() {
               </p>
               {service.note && (
                 <p className="mt-3 text-xs text-neutral-400" style={{ lineHeight: 1.6 }}>{service.note}</p>
+              )}
+
+              {service.proof && (
+                <div className="mt-8 border-t border-neutral-200 pt-6">
+                  <p
+                    className="mb-4 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    {service.proof.label}
+                  </p>
+                  <ul className="flex flex-wrap gap-x-2 gap-y-2">
+                    {service.proof.items.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-neutral-200 px-3 py-1.5 text-sm text-neutral-700"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
           </div>
