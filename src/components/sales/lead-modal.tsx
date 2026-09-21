@@ -35,9 +35,9 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
       setSubmitErr('');
       setSending(false);
       setDone(false);
-      trackEvent({ action: 'modal_open', category: 'Lead Form', label: 'Tariflar', source: 'tariflar_modal' });
+      trackEvent({ action: 'modal_open', category: 'Lead Form', label: source, source: `${source}_modal` });
     }
-  }, [open, presetService]);
+  }, [open, presetService, source]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +58,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     trackEvent({
       action: 'lead_form_submitted',
       category: 'Lead Form',
-      label: 'Tariflar',
+      label: source,
       event_id: eventId,
       form_name: `${source}_page`,
       cta_source: `${source}_modal`,
@@ -74,12 +74,12 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
           fullName: name || 'Mijoz',
           phone: normalizedPhone,
           role: service,
-          source: 'tariflar_modal',
+          source: `${source}_modal`,
           lang: 'uz',
           eventId,
           gaClientId,
           pageLocation,
-          ctaSource: 'tariflar_modal',
+          ctaSource: `${source}_modal`,
           companyWebsite: honeypot,
         }),
       });
@@ -96,7 +96,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     }
 
     trackLead({
-      source: 'tariflar_modal',
+      source: `${source}_modal`,
       eventId: result.eventId || eventId,
       serverTracked: true,
       gaClientId,

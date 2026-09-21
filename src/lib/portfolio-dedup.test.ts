@@ -18,6 +18,13 @@ describe('portfolio-dedup', () => {
     expect(portfolioDocId(a)).toBe(portfolioDocId(b));
   });
 
+  it('gives different ids to posts that share a long identical opening', () => {
+    const prefix = 'Jon Branding '.repeat(60);
+    expect(portfolioDocId(prefix + 'Bekmarket Zayyan')).not.toBe(
+      portfolioDocId(prefix + 'Feel it SAT')
+    );
+  });
+
   it('gives different ids to different posts', () => {
     const a = 'Bekmarket Zayyan — Naming va Branding loyihasi, 2026-yil';
     const b = 'Feel it: SAT uchun logo va aydentika loyihasi, 2026-yil';

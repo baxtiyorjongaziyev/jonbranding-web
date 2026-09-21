@@ -29,8 +29,7 @@ export function portfolioDocId(caption) {
     const normalized = caption
         .toLowerCase()
         .replace(/[^a-z0-9\u00C0-\u024F\u0400-\u04FF]+/g, ' ')
-        .trim()
-        .slice(0, 500);
+        .trim();
     if (normalized.length < 20)
         return null;
     const hash = createHash('sha1').update(normalized).digest('hex').slice(0, 32);

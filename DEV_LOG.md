@@ -4,6 +4,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Codex review topilmalari tuzatildi (PR #332)
+
+**P1 — PDF faqat birinchi ekranni chop etardi.** `@media print` da `.cred-deck` ochilardi, lekin u ichki div; tashqi o'ramda `h-[100svh] overflow-hidden` qolib ketgan edi, shuning uchun qolgan slaydlar kesilardi. Tashqi o'ramga `.cred-root` klassi qo'shilib, print'da `height: auto; overflow: visible` qilindi.
+
+**P2 — arizalar noto'g'ri manbaga yozilardi.** `LeadModal` da `source` propi qo'shilganda faqat `form_name` va `cta_source` yangilangan edi; server payload'dagi `source`/`ctaSource`, `trackLead.source` va `modal_open` hodisasi hali `'tariflar_modal'` deb qattiq yozilgan edi. Ya'ni `/credentials` dan kelgan arizalar AmoCRM va server analitikasida narxlar sahifasi leadi sifatida ko'rinardi. Barcha to'rtta joy `source` propidan hisoblanadigan qilindi. `useEffect` bog'liqliklari ham yangilandi.
+
+**P2 — hash 500 belgida kesilardi.** Birinchi 500 normallashtirilgan belgisi bir xil bo'lgan ikkita haqiqiy post bir xil Sanity ID olardi va ikkinchisi "mavjud" deb jim o'tkazib yuborilardi. `slice(0, 500)` olib tashlandi — endi to'liq normallashtirilgan matn hashlanadi. Golden qiymat o'zgarmadi (sinov matni 500 belgidan qisqa). Uzun umumiy prefiksli ikkita post uchun alohida sinov qo'shildi.
+
+**P1 — i18n (bajarilmadi).** `/ru`, `/en`, `/zh` da narxlar sahifasi va taqdimot o'zbekcha chiqadi. Bu haqiqiy AGENTS.md buzilishi, lekin tuzatish uchun narx, kafolat va sotuv matnlarining rasmiy tarjimasi kerak — ularni o'ylab topib bo'lmaydi. Egasidan tarjima kelgach `src/locales/*.json` ga ko'chiriladi.
+
+**Tekshirildi:** `typecheck`, `lint` (0 xato, 0 ogohlantirish), `vitest` (250/250, 1 tasi yangi), `build`, bot uchun `tsc` — hammasi toza.
+
+---
+
 ## 2026-09-21 | `/tariflar` va `/presentation` — haqiqiy 308 redirect
 
 **Muammo:** Sahifalar o'rin almashgach, `/tariflar` da eski (superseded) narxlar sahifasi qolgan edi. Egasi butun sessiya davomida `/tariflar` ga kirib kelgan va u yerda boshqa sahifani ko'rib "ishlamayapti" dedi. Xato emas edi — noto'g'ri qaror edi: eskirgan sahifani jonli URL'da qoldirish.

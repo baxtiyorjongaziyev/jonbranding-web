@@ -561,11 +561,14 @@ function Deck({
   const current = slides[index];
 
   return (
-    <div className="relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
+    <div className="cred-root relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
       <style>{`
         @media print {
           .cred-chrome { display: none !important; }
           .cred-no-print { display: none !important; }
+          /* Tashqi o'ram ham ochilishi shart, aks holda chop etishda faqat
+             birinchi ekran chiqib, qolgan slaydlar kesilib qoladi. */
+          .cred-root { height: auto !important; overflow: visible !important; }
           .cred-deck { height: auto !important; overflow: visible !important; }
           .cred-print-all { display: block !important; }
           .cred-live { display: none !important; }
