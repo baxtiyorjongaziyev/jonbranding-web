@@ -77,7 +77,7 @@ export const trackEvent = ({ action, category, label, value, ...rest }: Analytic
   }
 
   try {
-    if (typeof window.fbq === 'function') {
+    if (typeof window.fbq === 'function' && action !== 'generate_lead' && action !== 'lead_confirmed') {
       window.fbq('trackCustom', action, {
         content_category: category,
         content_name: label,
@@ -137,6 +137,20 @@ export const trackLead = (data: {
         event_id: leadEventId,
         ...extraData,
       });
+    }
+
+    if (typeof window.fbq === 'function') {
+      window.fbq(
+        'track',
+        'Lead',
+        {
+          content_name: source,
+          currency: 'USD',
+          value: value ? Number((value / 12700).toFixed(2)) : 0,
+          ...extraData,
+        },
+        { eventID: leadEventId }
+      );
     }
 
     trackAmplitudeEvent('Lead Generated', {

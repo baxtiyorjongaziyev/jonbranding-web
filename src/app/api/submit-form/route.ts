@@ -398,9 +398,20 @@ export async function POST(request: Request) {
     const { companyWebsite: _honeypot, turnstileToken: _turnstile, ...cleanData } =
       validatedData.data;
 
+    const cookieHeader = request.headers.get('cookie') || '';
+    const userAgent = request.headers.get('user-agent') || '';
+    const fbpMatch = cookieHeader.match(/(?:^|;\s*)_fbp=([^;]*)/);
+    const fbcMatch = cookieHeader.match(/(?:^|;\s*)_fbc=([^;]*)/);
+    const fbp = (body as any)?.fbp || (fbpMatch ? decodeURIComponent(fbpMatch[1]) : undefined);
+    const fbc = (body as any)?.fbc || (fbcMatch ? decodeURIComponent(fbcMatch[1]) : undefined);
+
     const leadData = {
       ...cleanData,
       eventId: cleanData.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+      clientIp: ip,
+      userAgent,
+      fbp,
+      fbc,
     };
 
     const { fullName, phone } = leadData;

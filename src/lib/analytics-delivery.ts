@@ -83,7 +83,7 @@ export async function runAnalyticsDeliveries(
   const env = options.env ?? process.env;
   const fetcher = options.fetcher ?? fetch;
 
-  const metaAccessToken = cleanSecret(env.META_API_ACCESS_TOKEN);
+  const metaAccessToken = cleanSecret(env.META_CAPI_ACCESS_TOKEN || env.META_API_ACCESS_TOKEN);
   const metaPixelId = cleanSecret(env.META_PIXEL_ID) || DEFAULT_META_PIXEL_ID;
   const gaApiSecret = cleanSecret(env.GA_API_SECRET);
   const gaMeasurementId = cleanSecret(env.NEXT_PUBLIC_GA_ID) || DEFAULT_GA_MEASUREMENT_ID;
@@ -106,6 +106,10 @@ export async function runAnalyticsDeliveries(
             user_data: {
               ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
               fn: data.fullName ? [sha256(data.fullName)] : [],
+              client_ip_address: data.clientIp || undefined,
+              client_user_agent: data.userAgent || undefined,
+              fbp: data.fbp || undefined,
+              fbc: data.fbc || undefined,
             },
             custom_data: {
               value: valueInUsd,
