@@ -27,6 +27,8 @@ interface PortfolioListClientProps {
     all: string;
     brandStrategy?: string;
     logoDesign: string;
+    brandbook?: string;
+    corporateStyle?: string;
     packaging: string;
     naming: string;
     viewCase: string;
@@ -75,12 +77,28 @@ function SpotlightCard({ children, className = '', ...props }: any) {
 export default function PortfolioListClient({ projects, lang, dictionary }: PortfolioListClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'brand-strategy': return dictionary.brandStrategy || 'Brend-strategiya';
+      case 'logo-design': return dictionary.logoDesign || 'Logotip dizayni';
+      case 'corporate-style': return dictionary.corporateStyle || 'Firma uslubi';
+      case 'brandbook': return dictionary.brandbook || 'Brendbuk';
+      case 'packaging': return dictionary.packaging || 'Qadoq dizayni';
+      case 'naming': return dictionary.naming || 'Neyming';
+      default: return category;
+    }
+  };
+
   const filterOptions = [
     { value: 'all', label: dictionary.all },
+    { value: 'brand-strategy', label: dictionary.brandStrategy || 'Brend-strategiya' },
     { value: 'logo-design', label: dictionary.logoDesign },
+    { value: 'corporate-style', label: dictionary.corporateStyle || 'Firma uslubi' },
+    { value: 'brandbook', label: dictionary.brandbook || 'Brendbuk' },
     { value: 'packaging', label: dictionary.packaging },
     { value: 'naming', label: dictionary.naming },
   ];
+
 
   const filteredProjects = selectedCategory === 'all'
     ? projects
@@ -138,7 +156,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                         />
                         <div className="absolute top-6 left-6 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-bold text-blue-400">
                           <Sparkles className="w-4 h-4" />
-                          <span>{filteredProjects[0].categoryLabel || filteredProjects[0].category}</span>
+                          <span>{filteredProjects[0].categoryLabel || getCategoryLabel(filteredProjects[0].category)}</span>
                         </div>
                       </div>
                       <div className="p-8 sm:p-12 lg:col-span-5 flex flex-col justify-between space-y-8">
@@ -207,7 +225,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d]/80 via-transparent to-transparent" />
                           <div className="absolute bottom-3 left-4 inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-bold text-blue-400">
                             <Star className="w-3 h-3" />
-                            <span>{project.categoryLabel || project.category}</span>
+                            <span>{project.categoryLabel || getCategoryLabel(project.category)}</span>
                           </div>
                         </div>
                         <div className="p-6 flex flex-col flex-grow justify-between space-y-4">

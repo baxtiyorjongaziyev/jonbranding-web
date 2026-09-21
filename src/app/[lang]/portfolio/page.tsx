@@ -104,6 +104,8 @@ export default async function PortfolioPage(props: Props) {
             all: safeLang === 'uz' ? 'Barchasi' : safeLang === 'ru' ? 'Все' : safeLang === 'zh' ? '全部' : 'All',
             brandStrategy: safeLang === 'uz' ? 'Brend-strategiya' : safeLang === 'ru' ? 'Бренд-стратегия' : safeLang === 'zh' ? '品牌战略' : 'Brand Strategy',
             logoDesign: safeLang === 'uz' ? 'Logotip dizayni' : safeLang === 'ru' ? 'Дизайн логотипа' : safeLang === 'zh' ? '标志设计' : 'Logo Design',
+            brandbook: safeLang === 'uz' ? 'Brendbuk' : safeLang === 'ru' ? 'Брендбук' : safeLang === 'zh' ? '品牌手册' : 'Brandbook',
+            corporateStyle: safeLang === 'uz' ? 'Firma uslubi' : safeLang === 'ru' ? 'Фирменный стиль' : safeLang === 'zh' ? '企业视觉' : 'Corporate Style',
             packaging: safeLang === 'uz' ? 'Qadoq dizayni' : safeLang === 'ru' ? 'Дизайн упаковки' : safeLang === 'zh' ? '包装设计' : 'Packaging Design',
             naming: safeLang === 'uz' ? 'Neyming' : safeLang === 'ru' ? 'Нейминг' : safeLang === 'zh' ? '命名' : 'Naming',
             viewCase: safeLang === 'uz' ? 'Keysni ko\'rish' : safeLang === 'ru' ? 'Смотреть кейс' : safeLang === 'zh' ? '查看案例' : 'View Case Study',

@@ -4,6 +4,28 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Portfolio UI va Render Tizimi Audit Qilindi va To'liq Tuzatildi
+
+**Vazifa:** Foydalanuvchi ko'zi bilan qaralganda aniqlangan barcha kamchiliklar (saralash, filtrlar, case study matnlari va rasmlar) to'liq tuzatildi va jonli sahifalarda tekshirildi.
+
+**Aniqlangan va Tuzatilgan Kamchiliklar:**
+1. **Yangi keyslarning eng pastga tushib ketishi (Sort Order):**
+   - `services/portfolio-bot` yangi loyihalarga `order: Math.floor(Date.now() / 1000)` (1.78 milliard) qo'ygan, saytda esa `order(order asc)` saralash bo'lgani sababli barcha yangi keyslar eng oxiriga tushib ketgan edi.
+   - `src/lib/data/portfolio.ts` da saralash `order(publishedAt desc, _createdAt desc)` qilib o'zgartirildi. Endi eng yangi loyihalar eng yuqorida (Hero card va grid boshida) chiqadi.
+2. **Kategoriya filtrlari (Tabs) to'liq emasligi:**
+   - Saytda faqat 4 ta filtr bo'lgan, ammo eng ko'p loyihalarimiz `Firma uslubi` (7 ta), `Brendbuk` (5 ta) va `Brend-strategiya` (3 ta) da edi.
+   - `portfolio-list-client.tsx` va `portfolio/page.tsx` ga barcha 6 ta kategoriya filtrlari qo'shildi, badgelar esa kebab-case (`corporate-style`) o'rniga chiroyli o'zbekcha/ruscha nomlar bilan chiqadigan qilindi.
+3. **Case study matnlari (Body) ko'rinmasligi:**
+   - Sanity'da 19 ta loyihada `body: null` bo'lib qolgan edi (avvalgi yuklash skriptida `coverImageIndex` adashib 3-argument qilib uzatilgan).
+   - Sanity'dagi barcha 19 ta loyiha uchun to'liq case study bloklari (Loyiha maqsadi, Strategik yechim, Natijalar, Bozor ta'siri) Sanity'ga yuklandi.
+   - `portfolio-detail-client.tsx` da Portable Text bloklarini chiroyli render qiluvchi dinamik parser qo'shildi.
+4. **Before/After slayderi:**
+   - Har bir keysda hardcoded "Den Aroma" o'rniga dinamik brend nomi chiqadigan qilindi.
+5. **Tekshirildi:**
+   - Dev serverda `/portfolio` (status 200) va `/portfolio/perfona-logotip-va-brending` (status 200) sahifalari to'liq render bo'lib, matnlar va rasmlar chiqayotgani tasdiqlandi.
+
+---
+
 ## 2026-09-21 | Codex review topilmalari tuzatildi (PR #332)
 
 **P1 — PDF faqat birinchi ekranni chop etardi.** `@media print` da `.cred-deck` ochilardi, lekin u ichki div; tashqi o'ramda `h-[100svh] overflow-hidden` qolib ketgan edi, shuning uchun qolgan slaydlar kesilardi. Tashqi o'ramga `.cred-root` klassi qo'shilib, print'da `height: auto; overflow: visible` qilindi.
