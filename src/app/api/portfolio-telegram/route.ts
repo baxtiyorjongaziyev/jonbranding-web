@@ -5,10 +5,15 @@ import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
 import { getDb } from '@/lib/firebase-admin';
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 
-const OFFSET_DOC = 'telegram_sync/portfolio';
+const QUEUE = 'telegram_portfolio_queue';
 const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+
+/** Albomning qolgan rasmlari yetib kelishi uchun kutiladigan vaqt. */
+const ALBUM_SETTLE_MS = 7000;
+/** Ishlov berish yarimda uzilib qolsa, shu vaqtdan keyin qayta urinish mumkin. */
+const CLAIM_TTL_MS = 5 * 60 * 1000;
 
 const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'h6ymmj0v',
@@ -24,10 +29,16 @@ type ChannelPost = {
   caption?: string;
   text?: string;
   chat: { id: number; username?: string };
-  photo?: { file_id: string; file_size?: number; width: number }[];
+  photo?: { file_id: string; width: number }[];
 };
 
-type PostGroup = { caption: string; photos: string[] };
+type QueuedGroup = {
+  caption: string;
+  photos: string[];
+  updatedAt: number;
+  processed?: boolean;
+  claimedAt?: number | null;
+};
 
 function slugify(value: string) {
   return value
@@ -43,22 +54,7 @@ function normalizeForMatch(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9а-яёўқғҳ]+/gi, '');
 }
 
-async function readOffset(): Promise<number> {
-  try {
-    const snapshot = await getDb().doc(OFFSET_DOC).get();
-    return snapshot.exists ? Number(snapshot.data()?.offset) || 0 : 0;
-  } catch {
-    return 0;
-  }
-}
-
-async function writeOffset(offset: number): Promise<void> {
-  try {
-    await getDb().doc(OFFSET_DOC).set({ offset, updatedAt: new Date().toISOString() });
-  } catch (error) {
-    console.error('[portfolio-telegram] Offset saqlanmadi:', error);
-  }
-}
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function telegramApi<T>(method: string, params: Record<string, string>): Promise<T | null> {
   try {
@@ -77,31 +73,6 @@ async function downloadTelegramPhoto(fileId: string): Promise<Buffer | null> {
   const res = await fetch(`https://api.telegram.org/file/bot${TG_BOT_TOKEN}/${file.file_path}`);
   if (!res.ok) return null;
   return Buffer.from(await res.arrayBuffer());
-}
-
-/**
- * Albom (media group) bir nechta update bo'lib keladi: matn faqat bittasida,
- * rasmlar boshqalarida. Shuning uchun media_group_id bo'yicha birlashtiramiz.
- */
-function groupPosts(posts: ChannelPost[]): PostGroup[] {
-  const groups = new Map<string, PostGroup>();
-
-  for (const post of posts) {
-    const key = post.media_group_id ?? `single_${post.message_id}`;
-    const group = groups.get(key) ?? { caption: '', photos: [] };
-
-    const caption = post.caption ?? post.text ?? '';
-    if (caption.length > group.caption.length) group.caption = caption;
-
-    if (post.photo?.length) {
-      const largest = post.photo.reduce((a, b) => (a.width > b.width ? a : b));
-      group.photos.push(largest.file_id);
-    }
-
-    groups.set(key, group);
-  }
-
-  return Array.from(groups.values()).filter((group) => group.caption.trim().length > 20);
 }
 
 async function imagesFromDrive(title: string, client: string) {
@@ -145,127 +116,202 @@ async function imagesFromTelegram(fileIds: string[]) {
   return results;
 }
 
-export async function GET(request: NextRequest) {
-  return handleSync(request);
+/**
+ * Bir nechta webhook chaqiruvi bitta albomni baravar ko'rishi mumkin — faqat
+ * bittasi ishlov berishi uchun tranzaksiya bilan "band qilamiz".
+ */
+async function claimGroup(key: string): Promise<QueuedGroup | null> {
+  const ref = getDb().collection(QUEUE).doc(key);
+
+  return getDb().runTransaction(async (tx) => {
+    const snapshot = await tx.get(ref);
+    if (!snapshot.exists) return null;
+
+    const data = snapshot.data() as QueuedGroup;
+    if (data.processed) return null;
+    if (data.claimedAt && Date.now() - data.claimedAt < CLAIM_TTL_MS) return null;
+    if (Date.now() - data.updatedAt < ALBUM_SETTLE_MS - 1000) return null;
+
+    tx.update(ref, { claimedAt: Date.now() });
+    return data;
+  });
 }
 
-export async function POST(request: NextRequest) {
-  return handleSync(request);
+async function publishGroup(key: string, group: QueuedGroup) {
+  const ref = getDb().collection(QUEUE).doc(key);
+
+  try {
+    const meta = await parsePortfolioMetadata(group.caption);
+    const slug = slugify(meta.title);
+
+    const existing = await sanity.fetch<string | null>(
+      '*[_type == "portfolio" && slug.current == $slug][0]._id',
+      { slug }
+    );
+    if (existing) {
+      await ref.update({ processed: true, skippedReason: 'slug allaqachon mavjud' });
+      return { title: meta.title, status: 'skipped' };
+    }
+
+    let images = await imagesFromDrive(meta.title, meta.client);
+    const source = images.length > 0 ? 'drive' : 'telegram';
+    if (images.length === 0) images = await imagesFromTelegram(group.photos);
+
+    if (images.length === 0) {
+      await ref.update({ processed: true, skippedReason: 'rasm topilmadi' });
+      return { title: meta.title, status: 'failed', reason: 'Na Drive papkasi, na postda rasm topilmadi' };
+    }
+
+    const assets = [];
+    for (const image of images) {
+      const asset = await sanity.assets.upload('image', image.buffer, {
+        filename: image.filename,
+        contentType: image.contentType,
+      });
+      assets.push(asset._id);
+    }
+
+    const created = await sanity.create({
+      _type: 'portfolio',
+      title: meta.title,
+      slug: { _type: 'slug', current: slug },
+      client: meta.client,
+      category: meta.category,
+      tags: meta.tags,
+      description: meta.description,
+      coverImage: { _type: 'image', asset: { _type: 'reference', _ref: assets[0] } },
+      galleryImages: assets.slice(1).map((id, i) => ({
+        _type: 'image',
+        _key: `gallery_${i}`,
+        asset: { _type: 'reference', _ref: id },
+      })),
+      results: meta.results.map((item, i) => ({ _key: `result_${i}`, metric: item.metric, value: item.value })),
+      featured: false,
+      publishedAt: new Date().toISOString(),
+    });
+
+    await ref.update({ processed: true, sanityId: created._id });
+    return { title: meta.title, status: `created (${source})`, imageCount: images.length };
+  } catch (error) {
+    // Band qilishni bo'shatamiz — keyingi urinish (yoki cron) qayta ko'radi.
+    await ref.update({ claimedAt: null, lastError: error instanceof Error ? error.message : String(error) });
+    return { title: group.caption.slice(0, 60), status: 'failed', reason: error instanceof Error ? error.message : String(error) };
+  }
 }
 
-async function handleSync(request: NextRequest) {
+/** Telegram webhook: post kelganda darhol chaqiriladi. */
+async function handleWebhook(request: NextRequest) {
+  const update = await request.json().catch(() => null);
+  const post: ChannelPost | undefined = update?.channel_post;
+  if (!post) return NextResponse.json({ ok: true });
+
+  const channel = (process.env.TG_PORTFOLIO_CHANNEL || 'JonBranding').replace(/^@/, '').toLowerCase();
+  if ((post.chat.username ?? '').toLowerCase() !== channel) return NextResponse.json({ ok: true });
+
+  const key = post.media_group_id ?? `msg_${post.chat.id}_${post.message_id}`;
+  const ref = getDb().collection(QUEUE).doc(key);
+  const caption = post.caption ?? post.text ?? '';
+  const largest = post.photo?.length ? post.photo.reduce((a, b) => (a.width > b.width ? a : b)) : null;
+
+  await getDb().runTransaction(async (tx) => {
+    const snapshot = await tx.get(ref);
+    const existing = snapshot.exists ? (snapshot.data() as QueuedGroup) : null;
+
+    const photos = existing?.photos ?? [];
+    if (largest && !photos.includes(largest.file_id)) photos.push(largest.file_id);
+
+    tx.set(
+      ref,
+      {
+        caption: caption.length > (existing?.caption.length ?? 0) ? caption : existing?.caption ?? '',
+        photos,
+        updatedAt: Date.now(),
+        processed: existing?.processed ?? false,
+        claimedAt: existing?.claimedAt ?? null,
+      },
+      { merge: true }
+    );
+  });
+
+  // Albomning qolgan rasmlarini kutamiz, keyin bandlab ishlov beramiz.
+  await sleep(ALBUM_SETTLE_MS);
+
+  const group = await claimGroup(key);
+  if (!group) return NextResponse.json({ ok: true });
+  if (group.caption.trim().length < 20) {
+    await ref.update({ processed: true, skippedReason: 'matn juda qisqa' });
+    return NextResponse.json({ ok: true });
+  }
+
+  const result = await publishGroup(key, group);
+  return NextResponse.json({ ok: true, result });
+}
+
+/** Zaxira: webhook o'tkazib yuborgan yozuvlarni kunlik cron yoki qo'lda tozalaydi. */
+async function handleSweep() {
+  const cutoff = Date.now() - 2 * 60 * 1000;
+  const snapshot = await getDb()
+    .collection(QUEUE)
+    .where('processed', '==', false)
+    .limit(5)
+    .get();
+
+  const results = [];
+  for (const doc of snapshot.docs) {
+    const data = doc.data() as QueuedGroup;
+    if (data.updatedAt > cutoff) continue;
+    if (data.caption.trim().length < 20) {
+      await doc.ref.update({ processed: true, skippedReason: 'matn juda qisqa' });
+      continue;
+    }
+    const group = await claimGroup(doc.id);
+    if (group) results.push(await publishGroup(doc.id, group));
+  }
+
+  return NextResponse.json({ success: true, swept: results.length, results });
+}
+
+function isAuthorizedSweep(request: NextRequest) {
   const querySecret = request.nextUrl.searchParams.get('secret');
   const authHeader = request.headers.get('authorization');
   const bearerSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : null;
   const configured = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(Boolean) as string[];
   const provided = [querySecret, bearerSecret].filter(Boolean) as string[];
 
-  if (configured.length === 0) {
-    return NextResponse.json({ success: false, error: 'No auth configured' }, { status: 500 });
-  }
-  if (!provided.some((value) => configured.some((secret) => safeCompare(value, secret)))) {
-    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
-  }
+  if (configured.length === 0) return false;
+  return provided.some((value) => configured.some((secret) => safeCompare(value, secret)));
+}
 
-  const missing = ['TELEGRAM_BOT_TOKEN', 'SANITY_TOKEN', 'GEMINI_API_KEY'].filter((key) => !process.env[key]);
+function missingConfig() {
+  return ['TELEGRAM_BOT_TOKEN', 'SANITY_TOKEN', 'GEMINI_API_KEY'].filter((key) => !process.env[key]);
+}
+
+export async function POST(request: NextRequest) {
+  const missing = missingConfig();
   if (missing.length > 0) {
     return NextResponse.json({ success: false, error: `Sozlanmagan: ${missing.join(', ')}` }, { status: 500 });
   }
 
-  const channel = (process.env.TG_PORTFOLIO_CHANNEL || 'JonBranding').replace(/^@/, '').toLowerCase();
+  const webhookSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
+  const headerSecret = request.headers.get('x-telegram-bot-api-secret-token');
 
-  try {
-    const offset = await readOffset();
-    const updates = await telegramApi<{ update_id: number; channel_post?: ChannelPost }[]>('getUpdates', {
-      offset: String(offset),
-      limit: '100',
-      timeout: '0',
-      allowed_updates: JSON.stringify(['channel_post']),
-    });
-
-    if (!updates) {
-      return NextResponse.json({ success: false, error: 'Telegram getUpdates javob bermadi' }, { status: 502 });
-    }
-
-    const maxUpdateId = updates.reduce((max, update) => Math.max(max, update.update_id), offset);
-    const posts = updates
-      .map((update) => update.channel_post)
-      .filter((post): post is ChannelPost => Boolean(post))
-      .filter((post) => (post.chat.username ?? '').toLowerCase() === channel);
-
-    const results: { title: string; status: string; reason?: string; imageCount?: number }[] = [];
-
-    for (const group of groupPosts(posts)) {
-      let title = group.caption.slice(0, 60);
-      try {
-        const meta = await parsePortfolioMetadata(group.caption);
-        title = meta.title;
-        const slug = slugify(meta.title);
-
-        const existing = await sanity.fetch<string | null>(
-          '*[_type == "portfolio" && slug.current == $slug][0]._id',
-          { slug }
-        );
-        if (existing) {
-          results.push({ title, status: 'skipped', reason: 'Bunday slug bilan case allaqachon bor' });
-          continue;
-        }
-
-        let images = await imagesFromDrive(meta.title, meta.client);
-        const source = images.length > 0 ? 'drive' : 'telegram';
-        if (images.length === 0) images = await imagesFromTelegram(group.photos);
-
-        if (images.length === 0) {
-          results.push({ title, status: 'failed', reason: 'Na Drive papkasi, na postda rasm topilmadi' });
-          continue;
-        }
-
-        const assets = [];
-        for (const image of images) {
-          const asset = await sanity.assets.upload('image', image.buffer, {
-            filename: image.filename,
-            contentType: image.contentType,
-          });
-          assets.push(asset._id);
-        }
-
-        await sanity.create({
-          _type: 'portfolio',
-          title: meta.title,
-          slug: { _type: 'slug', current: slug },
-          client: meta.client,
-          category: meta.category,
-          tags: meta.tags,
-          description: meta.description,
-          coverImage: { _type: 'image', asset: { _type: 'reference', _ref: assets[0] } },
-          galleryImages: assets.slice(1).map((id, i) => ({
-            _type: 'image',
-            _key: `gallery_${i}`,
-            asset: { _type: 'reference', _ref: id },
-          })),
-          results: meta.results.map((item, i) => ({ _key: `result_${i}`, metric: item.metric, value: item.value })),
-          featured: false,
-          publishedAt: new Date().toISOString(),
-        });
-
-        results.push({ title: meta.title, status: `created (${source})`, imageCount: images.length });
-      } catch (error) {
-        results.push({
-          title,
-          status: 'failed',
-          reason: error instanceof Error ? error.message : String(error),
-        });
-      }
-    }
-
-    if (maxUpdateId > offset) await writeOffset(maxUpdateId + 1);
-
-    return NextResponse.json({ success: true, channel, checked: posts.length, results });
-  } catch (error) {
-    console.error('[portfolio-telegram] Sync xatosi:', error);
-    return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : String(error) },
-      { status: 500 }
-    );
+  if (webhookSecret && headerSecret && safeCompare(headerSecret, webhookSecret)) {
+    return handleWebhook(request);
   }
+
+  if (!isAuthorizedSweep(request)) {
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+  }
+  return handleSweep();
+}
+
+export async function GET(request: NextRequest) {
+  const missing = missingConfig();
+  if (missing.length > 0) {
+    return NextResponse.json({ success: false, error: `Sozlanmagan: ${missing.join(', ')}` }, { status: 500 });
+  }
+  if (!isAuthorizedSweep(request)) {
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+  }
+  return handleSweep();
 }

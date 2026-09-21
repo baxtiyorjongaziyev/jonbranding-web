@@ -4,6 +4,35 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Portfolio ingestion: VM'siz webhook yo'li (`/api/portfolio-telegram`)
+
+**Vazifa:** Telegram kanalga tashlangan keyslar saytga avtomatik chiqsin — server (VM) talab qilmasdan.
+
+**Nega alohida yo'l:** `services/portfolio-bot` shu ishni GramJS userbot orqali qiladi, lekin doimiy VM va interaktiv Telegram sessiyasi talab qiladi — shu sabab u hech qachon yoqilmagan. Bu route o'sha to'siqni olib tashlaydi.
+
+**Qanday ishlaydi:**
+1. Telegram webhook `POST /api/portfolio-telegram` ga postni **darhol** yuboradi. Tekshiruv: `X-Telegram-Bot-Api-Secret-Token` header (`TELEGRAM_WEBHOOK_SECRET`).
+2. Post Firestore navbatiga (`telegram_portfolio_queue`) yoziladi, kaliti `media_group_id` — albomdagi 5-10 rasm bitta yozuvga yig'iladi.
+3. 7 soniya kutiladi (albomning qolgan rasmlari uchun), so'ng tranzaksiya bilan "band qilinadi" — bir nechta webhook chaqiruvi baravar ishlov bermasligi uchun.
+4. Gemini matndan metadata ajratadi → rasmlar avval Drive papkasidan (nom bo'yicha fuzzy qidiruv), topilmasa postning o'z rasmlaridan → Sanity'ga portfolio hujjati yoziladi.
+5. Slug allaqachon mavjud bo'lsa, o'tkazib yuboriladi (dublikat bo'lmaydi).
+
+**Zaxira:** kunlik cron (`0 9 * * *`) va qo'lda `GET ?secret=...` — webhook o'tkazib yuborgan yozuvlarni tozalaydi.
+
+**Muhim:** Vercel **Hobby** rejasida cron kuniga faqat bir marta ishlaydi — `*/30 * * * *` deploy'ni butunlay buzadi. Shuning uchun asosiy mexanizm cron emas, webhook.
+
+**Sozlash:**
+```bash
+curl "https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://jonbranding.uz/api/portfolio-telegram&secret_token=<TELEGRAM_WEBHOOK_SECRET>&allowed_updates=[\"channel_post\"]"
+```
+Bot kanalga **admin** qilib qo'shilishi shart. Kerakli env: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET`, `GEMINI_API_KEY`, `SANITY_TOKEN`, ixtiyoriy `DRIVE_PARENT_FOLDER_ID`, `TG_PORTFOLIO_CHANNEL`.
+
+**Ogohlantirish:** bu route va `services/portfolio-bot` bir vaqtda ishlamasin — ikkalasi bir postdan ikkita Sanity hujjati yaratadi.
+
+**Tekshiruv:** typecheck, lint, 243/243 test, `npm run build` — hammasi o'tdi.
+
+---
+
 ## 2026-09-21 | Telegram va Instagram Portfoliolarini Saytga Avtomatik Joylash Tizimi
 
 **Vazifa:** Telegram (@JonBranding) va Instagram (@jon.branding) kanallariga joylangan keyslar/portfoliolar avtomatik ravishda web saytning Portfolio bo'limiga (Sanity CMS orqali) joylansin.
