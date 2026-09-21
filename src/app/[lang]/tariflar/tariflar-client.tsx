@@ -21,6 +21,7 @@ type Service = {
   deliverables: string[];
   audience: string;
   note?: string;
+  addon?: { label: string; price: string };
 };
 
 type ServiceGroup = {
@@ -140,9 +141,11 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Rasmiy bazadan to‘liq tekshiruv',
           'O‘xshash belgilar ro‘yxati va xavf darajasi',
           'Ro‘yxatdan o‘tish ehtimoli bo‘yicha xulosa',
+          'Sizga qaysi sinflar kerakligini o‘zim aniqlab beraman',
         ],
         audience: 'Nomni tanlagan, lekin hali ro‘yxatdan o‘tkazmaganlar uchun',
-        note: 'Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
+        note: 'Narx bitta sinf uchun. Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
+        addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
       },
       {
         name: 'Patent (oddiy)',
@@ -168,17 +171,6 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Muddat 30 kundan 7 kunga qisqaradi',
         ],
         audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
-      },
-      {
-        name: 'Har qo‘shimcha klass',
-        price: '440 000',
-        duration: '—',
-        lead: 'Bir nechta yo‘nalishda ishlasangiz, har biri alohida sinfda himoyalanadi.',
-        deliverables: [
-          'Qaysi sinflar kerakligini o‘zim aniqlab beraman',
-          'Har bir qo‘shimcha sinf arizaga kiritiladi',
-        ],
-        audience: 'Bir nechta mahsulot yoki xizmat toifasi bor bizneslar uchun',
       },
     ],
   },
@@ -523,7 +515,13 @@ export default function TariflarClient() {
                     {service.audience}
                   </p>
                   {service.note && (
-                    <p className="text-xs text-neutral-400 leading-relaxed mb-5">{service.note}</p>
+                    <p className="text-xs text-neutral-400 leading-relaxed mb-4">{service.note}</p>
+                  )}
+                  {service.addon && (
+                    <p className="flex items-center justify-between gap-3 border-t border-neutral-200 pt-3 mb-5 text-sm">
+                      <span className="text-neutral-600">{service.addon.label}</span>
+                      <span className="font-medium whitespace-nowrap">{service.addon.price}</span>
+                    </p>
                   )}
 
                   <button
