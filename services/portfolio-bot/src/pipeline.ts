@@ -30,7 +30,16 @@ export async function processPost(
   try {
     console.log('[pipeline] Step 1/6: Qidiruv atamalarini ajratish...');
     const searchTerms = await extractSearchTerms(messageText);
-    console.log(`[pipeline] Qidirilmoqda: title="${searchTerms.title}" client="${searchTerms.client}"`);
+    console.log(`[pipeline] Qidirilmoqda: title="${searchTerms.title}" client="${searchTerms.client}" isPortfolioCase=${searchTerms.isPortfolioCase}`);
+
+    if (searchTerms.isPortfolioCase === false) {
+      console.log(`[pipeline] ⚠️ Post portfolio keysi emas (kontent/maslahat/reklama posti), o'tkazib yuborildi.`);
+      return {
+        success: false,
+        error: "Post portfolio keysi emas (kontent/maslahat/reklama posti)",
+        title: searchTerms.title,
+      };
+    }
 
     let imageFiles: Array<{ path: string; mime: string }> = [];
     let folderName = searchTerms.title || 'Loyiha';

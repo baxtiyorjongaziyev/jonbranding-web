@@ -137,9 +137,7 @@ function generateBodyContent(data) {
     return blocks;
 }
 const SEARCH_TERMS_PROMPT = (text) => `
-Quyidagi Telegram postidan FAQAT ikkita narsani ajratib ol — loyiha nomi va mijoz nomi.
-Bular Google Drive'da rasm papkasini nom bo'yicha qidirish uchun ishlatiladi, shuning
-uchun qisqa va aniq bo'lsin (papka nomlariga o'xshash kalit so'zlar).
+Quyidagi Telegram postidan loyiha nomi va mijoz nomini ajratib ol va bu post haqiqiy portfolio keysi ekanligini aniqla.
 
 POST MATNI:
 """
@@ -148,9 +146,15 @@ ${text}
 
 FAQAT JSON qaytar, boshqa hech narsa yozma:
 {
+  "isPortfolioCase": true,
   "title": "loyiha/brend nomi (2-4 so'z)",
   "client": "mijoz kompaniya yoki shaxs nomi"
 }
+
+QOIDALAR:
+- "isPortfolioCase":
+  - Agar bu matn aniq bir mijoz/brendga qilingan ish (logotip, brending, qadoq, neyming, firma uslubi) keysi bo'lsa -> true.
+  - Agar bu matn umumiy fikr, maslahat, motivatsiya, falsafa, lead-magnit yoki reklama bo'lsa (masalan "Shaxsiyga POYDEVOR deb yozing", "10 yil oldin bitta do'kon bilan boshlagansiz...", "EVOS ham bitta filialdan boshlagan...") -> isPortfolioCase: false bo'lishi SHART!
 `;
 /**
  * Postdan tezkor ravishda faqat qidiruv uchun kerakli nom va mijozni oladi
@@ -170,7 +174,11 @@ export async function extractSearchTerms(postText) {
     if (!jsonMatch)
         throw new Error(`Gemini qidiruv atamalarini qaytarmadi: ${reply.slice(0, 200)}`);
     const parsed = JSON.parse(jsonMatch[0]);
-    return { title: parsed.title || '', client: parsed.client || '' };
+    return {
+        title: parsed.title || '',
+        client: parsed.client || '',
+        isPortfolioCase: parsed.isPortfolioCase !== false,
+    };
 }
 const FULL_CASE_PROMPT = (postText, folderName, imageCount) => `
 Siz Jon Branding premium brend-agentligining portfolio muharririsiz. Quyidagi Telegram

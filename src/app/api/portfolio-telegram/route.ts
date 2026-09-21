@@ -142,6 +142,11 @@ async function publishGroup(key: string, group: QueuedGroup) {
 
   try {
     const meta = await parsePortfolioMetadata(group.caption);
+    if (!meta.isPortfolioCase) {
+      await ref.update({ processed: true, skippedReason: 'portfolio keys emas (kontent/reklama/maslahat posti)' });
+      return { title: meta.title, status: 'skipped', reason: 'Not a portfolio case' };
+    }
+
     const slug = slugify(meta.title);
 
     const existing = await sanity.fetch<string | null>(
