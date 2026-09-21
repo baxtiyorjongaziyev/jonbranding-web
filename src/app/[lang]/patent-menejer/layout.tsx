@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Patent Kalkulyatori (Sotuv Menejeri) | Jon.Branding',
-  description: 'Jon.Branding sotuv menejerlari uchun patent xarajatlarini real-vaqt rejimida hisoblash va kaskad chegirmalarni taqdim etish paneli.',
+  title: "Tovar belgisini ro'yxatdan o'tkazish narxini hisoblang | Jon.Branding",
+  description: "O'zbekistonda tovar belgisini (brend, logo) ro'yxatdan o'tkazish bo'yicha davlat bojlari va patent xarajatlarini hisoblang.",
   robots: { index: false, follow: false },
 };
 
