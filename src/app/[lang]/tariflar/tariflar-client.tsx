@@ -27,7 +27,53 @@ export type ServiceCase = {
 export type ServiceQuote = { name: string; company: string; quote: string };
 export type ServiceLogo = { name: string; logo: string };
 
-type Props = { cases: ServiceCase[]; quotes: ServiceQuote[]; logos: ServiceLogo[] };
+type Props = {
+  cases: ServiceCase[];
+  quotes: ServiceQuote[];
+  logos: ServiceLogo[];
+  showcase: string[];
+};
+
+function ShowcaseReel({ images }: { images: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % images.length);
+    }, 1400);
+    return () => window.clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-neutral-100">
+        {images.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 45vw"
+            priority={i === 0}
+            className="object-cover transition-opacity duration-500 motion-reduce:transition-none"
+            style={{ opacity: i === index ? 1 : 0 }}
+          />
+        ))}
+      </div>
+      <div className="mt-3 flex gap-1.5" aria-hidden="true">
+        {images.map((src, i) => (
+          <span
+            key={src}
+            className="h-0.5 flex-1 rounded-full transition-colors duration-300 motion-reduce:transition-none"
+            style={{ background: i === index ? '#000' : '#e5e5e5' }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace' } as const;
 const numerals = { fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' } as const;
@@ -546,7 +592,7 @@ function LeadModal({ open, onClose, presetService }: { open: boolean; onClose: (
   );
 }
 
-export default function TariflarClient({ cases, quotes, logos }: Props) {
+export default function TariflarClient({ cases, quotes, logos, showcase }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [presetService, setPresetService] = useState('Aniq emas — maslahat kerak');
 
@@ -705,7 +751,19 @@ export default function TariflarClient({ cases, quotes, logos }: Props) {
           className="flex min-h-[100svh] items-center border-t border-neutral-200 px-5 py-20 sm:px-8"
         >
           <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-2 md:gap-16">
-            {casesFor(service.name).length > 0 && (
+            {service.name === 'Brandbook' && showcase.length > 0 && (
+              <div className="order-first md:col-span-2">
+                <p
+                  className="mb-4 text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Brendbuklarimizdan lavhalar
+                </p>
+                <ShowcaseReel images={showcase} />
+              </div>
+            )}
+
+            {service.name !== 'Brandbook' && casesFor(service.name).length > 0 && (
               <div className="order-first md:col-span-2">
                 <p
                   className="mb-4 text-[10px] uppercase text-neutral-400"

@@ -20,6 +20,14 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 9. **Patent muddatlari to'g'irlandi:** oddiy 7 oy, tezkor 20–40 kun. Paket muddatlari faqat dizayn ishlari uchun ekani izohlandi.
 10. **Netlify o'chirildi:** `netlify.toml` va `build:netlify` skripti olib tashlandi (deploy Vercel orqali). Netlify checklari shundan keyin har PR'da qizil — Netlify loyihasini repodan uzish kerak (panel ishi).
 
+11. **Sotuvni kuchaytirish (isbot va e'tirozlar):**
+   - Har bir xizmat ekranida shu kategoriyadagi 2 tagacha real keys (muqova, mijoz, natija raqami), `fetchPortfolioList` orqali.
+   - Brandbook ekranida keys kartasi o'rniga tez almashinadigan galereya (`ShowcaseReel`, 1.4s, `prefers-reduced-motion` hurmat qilinadi). Shu sabab `LIST_QUERY` ga `galleryImages` qo'shildi.
+   - Ijtimoiy isbot bo'limi: 16 ta mijoz logotipi (`fetchBrands`) + 3 ta real otziv (`fetchTestimonials`).
+   - "Nega arzon dizayner emas" bloki va "Xavfingizni kamaytirish uchun" ro'yxati (faqat haqiqatan mavjud shartlar — pul qaytarish kafolati EGASI tasdig'ini kutmoqda).
+   - FAQ bloki CTA'dan oldin: narx e'tirozi, "yoqmasa nima bo'ladi", mijozdan nima talab qilinadi, bo'lib to'lash, patent chiqmasligi.
+12. **Tuzatish:** `globals.css` barcha sarlavhalarga `color: hsl(var(--foreground))` beradi — qora fonli CTA sarlavhasi ko'rinmay qolgan edi, aniq oq rang qo'yildi.
+
 **Ochiq qolgan ishlar:**
 - **i18n:** sahifa matnlari hozircha komponent ichida, `uz.json`da emas. `/ru`, `/en`, `/zh` da o'zbekcha ko'rinadi. Uzbek-first qoidasiga ko'ra matn qotgach lug'atlarga ko'chirilishi kerak.
 - Sotuvni kuchaytirish uchun: portfolio rasmlari, mijoz otzivlari, FAQ/e'tirozlar bloki, kafolat.

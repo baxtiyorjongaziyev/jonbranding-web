@@ -14,6 +14,7 @@ const LIST_QUERY = `
     "coverImage": coverImage.asset->url + "?w=800&q=80&auto=format",
     "beforeImage": beforeImage.asset->url + "?w=1200&q=85&auto=format",
     "afterImage": afterImage.asset->url + "?w=1200&q=85&auto=format",
+    "galleryImages": galleryImages[].asset->url + "?w=1200&q=80&auto=format",
     description,
     metaTitle,
     metaDescription,

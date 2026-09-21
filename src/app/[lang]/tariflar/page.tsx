@@ -59,6 +59,16 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
       result: project.results?.[0],
     }));
 
+  const showcaseCategories = ['brandbook', 'brand-strategy', 'corporate-style'];
+  const showcase: string[] = Array.from(
+    new Set(
+      projects
+        .filter((project) => showcaseCategories.includes(project.category))
+        .flatMap((project) => [...(project.galleryImages ?? []), project.afterImage, project.coverImage])
+        .filter((src): src is string => Boolean(src))
+    )
+  ).slice(0, 8);
+
   const quotes: ServiceQuote[] = testimonials
     .filter((item) => item.quote && item.quote.length > 60)
     .slice(0, 3)
@@ -84,7 +94,7 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <TariflarClient cases={cases} quotes={quotes} logos={logos} />
+      <TariflarClient cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
     </div>
   );
 };
