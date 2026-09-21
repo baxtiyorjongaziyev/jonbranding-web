@@ -12,7 +12,7 @@
     },
     {
       "path": "/api/portfolio-telegram",
-      "schedule": "*/30 * * * *"
+      "schedule": "0 9 * * *"
     }
   ]
 }
