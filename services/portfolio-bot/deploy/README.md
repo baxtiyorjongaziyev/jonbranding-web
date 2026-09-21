@@ -32,7 +32,7 @@ nano ~/jonbranding-web/services/portfolio-bot/.env
 | `SANITY_PROJECT_ID` | `h6ymmj0v` (loyihada allaqachon shu) |
 | `SANITY_DATASET` | `production` |
 | `SANITY_TOKEN` | sanity.io/manage → loyiha → API → Tokens → Add API token → **Editor** huquqi |
-| `APIFY_API_KEY` | (ixtiyoriy, Instagram uchun) https://console.apify.com — bo'sh qoldirsa mock data ishlatiladi |
+| `APIFY_API_KEY` | Instagram uchun majburiy: https://console.apify.com — bo'sh bo'lsa Instagram sync aniq xato beradi, mock portfolio yaratmaydi |
 | `DRIVE_PARENT_FOLDER_ID` | **Majburiy.** Har bir loyiha uchun rasm subfolder'lari shu papka ichida bo'lishi kerak. Telegram postidan olingan loyiha/mijoz nomi shu subfolder'lar nomi bilan solishtirilib qidiriladi (link shart emas) — subfolder nomini loyiha nomiga imkon qadar yaqin qiling |
 | `TG_NOTIFY_CHAT_ID` | Natija xabarlari yuboriladigan Telegram chat ID (o'zingizga yozib qo'yish uchun) |
 
@@ -88,6 +88,10 @@ saqlanib qoladi.
 - **Instagram / Google Drive** — har soatda (`INTERVAL_MINUTES=60`, `.env`da
   o'zgartirish mumkin) tekshiriladi, xuddi shu tarzda cover/tartib va SEO
   meta-data bilan.
+- Instagram postida Drive papka topilmasa, `REQUIRE_DRIVE_LINK=false` bo'lganda
+  postdagi rasmlar bevosita yuklab olinadi va caption asosida Sanity portfolio
+  yaratiladi. `REQUIRE_DRIVE_LINK=true` bo'lsa faqat Drive'da mos papkasi bor
+  postlar chiqadi.
 - Har ikkala holatda ham natija Sanity'ga case sifatida **to'g'ridan-to'g'ri
   publish** qilinadi (qo'lda tasdiqlash shart emas) → saytda 60 soniya
   ichida chiqadi.

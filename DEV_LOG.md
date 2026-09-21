@@ -4,6 +4,30 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Telegram va Instagram Portfoliolarini Saytga Avtomatik Joylash Tizimi
+
+**Vazifa:** Telegram (@JonBranding) va Instagram (@jon.branding) kanallariga joylangan keyslar/portfoliolar avtomatik ravishda web saytning Portfolio bo'limiga (Sanity CMS orqali) joylansin.
+
+**Nima qilindi:**
+1. **Telegram Media & Album Support (`services/portfolio-bot/src/userbot.ts`):**
+   - GramJS da Telegram kanallaridan keladigan xabarlardagi rasm va fayllarni to'g'ridan-to'g'ri yuklab olish (`downloadMedia`) qo'shildi.
+   - Albomlar (`groupedId`) uchun 2.5 soniyalik debounce buferi yaratildi: bitta postdagi 5-10 ta rasm alohida xabar sifatida kelganda barchasi bitta keysga to'planadi.
+2. **Drive Fallback & Direct Media Pipeline (`services/portfolio-bot/src/pipeline.ts`):**
+   - `processPost` funksiyasi `localImages` qabul qiladigan qilindi.
+   - Agar Google Drive'da loyiha papkasi topilsa, original sifatli rasmlar olinadi; agar Drive papkasi bo'lmasa, to'g'ridan-to'g'ri Telegram/Instagram'dan olingan rasmlar bilan Sanity'ga to'liq portfolio hujjati yaratiladi.
+3. **Instagram Graph API Integratsiyasi (`services/portfolio-bot/src/instagram.ts`):**
+   - Faqat pullik Apify'ga bog'langanlik olib tashlandi: `INSTAGRAM_ACCESS_TOKEN` orqali to'g'ridan-to'g'ri Instagram Graph API orqali postlar, karusellar (`children.data`) va rasmlarni yuklab olish qo'shildi (Apify faqat ikkinchi zaxira sifatida qoldirildi).
+4. **Workflow Yangilanishi (`services/portfolio-bot/src/workflow.ts`):**
+   - `requireDriveLink: false` qilindi — endi postlar Drive'siz ham to'liq mustaqil Sanity portfolio loyihasiga aylanadi.
+5. **Gemini 2.0 Flash & Retry Logic (`services/portfolio-bot/src/ai-processor.ts`, `src/lib/integrations/gemini.ts`):**
+   - Noto'g'ri `gemini-2.5-flash` chaqiruvlari barqaror `gemini-2.0-flash` ga o'tkazildi.
+   - 429/503 xatolarida eksponentsial kechikishli `callGeminiWithRetry` (3 ta urinish) qo'shildi.
+
+**Tekshiruv:**
+- `services/portfolio-bot`: `npm run build` muvaffaqiyatli (tsc 0 errors).
+
+---
+
 ## 2026-09-21 | Yangi `/tariflar` sahifasi — JTBD, FAB va har xizmatga alohida ekran (PR #327 → #328 → #329)
 
 **Vazifa:** Mavjud `/narxlar` (aslida `XizmatlarClient`ni ko'rsatadi) sahifasidan alohida, narxlari ochiq, o'zi sotadigan narxlar sahifasi.
@@ -34,6 +58,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | /tariflar preview manbasi tekshirildi
+
+**Vazifa:** `jonbranding-web-git-claude-pricing-ab630a-baxtiyorjons-projects.vercel.app/tariflar` sahifasi kodlari qayerdan turibdi va Claude qo'shganmi, aniqlash.
+
+**Nima tekshirildi:**
+- Lokal `main` branchda `/tariflar` route topilmadi; hozirgi narx sahifasi `src/app/[lang]/narxlar/page.tsx` orqali ishlaydi.
+- `src/app/[lang]/pricing/page.tsx` esa `/narxlar` ga redirect qiladi.
+- Lokal branchlar ichida `claude/*` branchlar ko'p, lekin aynan `claude/pricing-ab630a` branchi topilmadi.
+- Vercel preview URL nomidagi `git-claude-pricing-ab630a` branch nomiga o'xshaydi, shu sabab sahifa katta ehtimol bilan Claude yaratgan preview branchdan kelgan.
+- GitHub remote branchlarini live tekshirishga urinishda `github.com` ulanishi proxy sabab muvaffaqiyatsiz bo'ldi; shu sabab remote branch mavjudligi lokal muhitdan yakuniy tasdiqlanmadi.
+
+**Holat:** Qisman tasdiqlandi — URL nomi Claude branch preview ekanini ko'rsatadi, lekin lokal checkoutda bu branch yo'q va remote tekshiruv tarmoq sabab yakunlanmadi.
+
+>>>>>>> Stashed changes
 ## 2026-09-19 | Sotuv menejerlari uchun ochiq Patent kalkulyatori va patent.jonbranding.uz subdomeni
 
 **Vazifa:** Mijozlar uchun kalkulyator gated (lead capture) holatda qolsin, lekin sotuv menejerlarimiz uchun doimiy ochiq (unlocked) versiyasi alohida `patent.jonbranding.uz` subdomenida bo'lsin.

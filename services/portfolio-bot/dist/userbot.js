@@ -1,13 +1,19 @@
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 import { TelegramClient } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
 import { NewMessage } from 'telegram/events/index.js';
 import { processPost } from './pipeline.js';
+import { slugify } from './slug.js';
 const API_ID = parseInt(process.env.TG_API_ID, 10);
 const API_HASH = process.env.TG_API_HASH;
 const SESSION = process.env.TG_SESSION ?? '';
 const CHANNEL_IDS = (process.env.TG_CHANNEL_IDS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
 const NOTIFY_CHAT_ID = process.env.TG_NOTIFY_CHAT_ID ?? '';
 export let telegramClient = null;
+// Albomlar uchun buffer (groupedId -> { messages, timeout, chatId })
+const albumBuffers = new Map();
 export async function sendTelegramMessage(messageText, chatId) {
     const target = chatId ?? NOTIFY_CHAT_ID;
     if (!target) {
@@ -24,6 +30,59 @@ export async function sendTelegramMessage(messageText, chatId) {
     }
     catch (err) {
         console.error(`[userbot] Failed to send message to ${target}:`, err);
+    }
+}
+async function handleCompletePost(messages, chatId, client) {
+    let tmpDir;
+    try {
+        // Post matnini aniqlash (birinchi matnli xabardan)
+        const primaryMsg = messages.find((m) => Boolean(m.text || m.message)) || messages[0];
+        const postText = primaryMsg.text || primaryMsg.message || '';
+        if (!postText.trim() && messages.every((m) => !m.media)) {
+            console.log('[userbot] Bo\'sh post (matn va rasm yo\'q), o\'tkazib yuborildi.');
+            return;
+        }
+        const downloadedImages = [];
+        // Rasmlarni yuklab olish
+        for (let i = 0; i < messages.length; i++) {
+            const msg = messages[i];
+            if (msg.media) {
+                try {
+                    if (!tmpDir) {
+                        tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tg-portfolio-'));
+                    }
+                    const buffer = await client.downloadMedia(msg, {});
+                    if (buffer && Buffer.isBuffer(buffer)) {
+                        const filePath = path.join(tmpDir, `image_${i + 1}.jpg`);
+                        fs.writeFileSync(filePath, buffer);
+                        downloadedImages.push({ path: filePath, mime: 'image/jpeg' });
+                    }
+                }
+                catch (mediaErr) {
+                    console.warn(`[userbot] Rasm yuklab olishda xatolik (xabar #${msg.id}):`, mediaErr);
+                }
+            }
+        }
+        console.log(`[userbot] Post qayta ishlanmoqda: "${postText.slice(0, 60)}..." (${downloadedImages.length} ta rasm)`);
+        const result = await processPost(postText, chatId, downloadedImages);
+        if (NOTIFY_CHAT_ID) {
+            const slug = slugify(result.title || 'loyiha');
+            const notifyText = result.success
+                ? `🤖 *Oisha:* Telegramdan yangi portfolio yaratildi!\n\n📁 *${result.title}*\n🆔 Sanity ID: \`${result.sanityId}\`\n🖼 Rasmlar: ${result.imageCount || downloadedImages.length} ta\n🌐 Saytda: https://jonbranding.uz/uz/portfolio/${slug}`
+                : `⚠️ *Oisha:* Telegram postini portfolioga aylantirishda xatolik: ${result.error}`;
+            await client.sendMessage(NOTIFY_CHAT_ID, { message: notifyText, parseMode: 'markdown' });
+        }
+    }
+    catch (err) {
+        console.error('[userbot] handleCompletePost error:', err);
+    }
+    finally {
+        if (tmpDir && fs.existsSync(tmpDir)) {
+            try {
+                fs.rmSync(tmpDir, { recursive: true, force: true });
+            }
+            catch { }
+        }
     }
 }
 export async function startUserbot() {
@@ -60,7 +119,7 @@ export async function startUserbot() {
     client.addEventHandler(async (event) => {
         try {
             const message = event.message;
-            if (!message?.text)
+            if (!message)
                 return;
             const peerId = message.peerId;
             const chatId = String('channelId' in peerId ? peerId.channelId :
@@ -68,13 +127,34 @@ export async function startUserbot() {
                     'userId' in peerId ? peerId.userId : '');
             if (!resolvedIds.has(chatId))
                 return;
-            console.log(`[userbot] New post from ${chatId}: ${message.text.slice(0, 80)}...`);
-            const result = await processPost(message.text, chatId);
-            if (NOTIFY_CHAT_ID) {
-                const notifyText = result.success
-                    ? `✅ Portfolio yaratildi: *${result.title}*\nSanity ID: \`${result.sanityId}\``
-                    : `❌ Xato: ${result.error}`;
-                await client.sendMessage(NOTIFY_CHAT_ID, { message: notifyText, parseMode: 'markdown' });
+            const groupedId = message.groupedId ? String(message.groupedId) : null;
+            if (groupedId) {
+                // Albomning bir qismi — 2.5 soniya buffer bilan to'plash
+                const existing = albumBuffers.get(groupedId);
+                if (existing) {
+                    clearTimeout(existing.timeout);
+                    existing.messages.push(message);
+                    existing.timeout = setTimeout(() => {
+                        albumBuffers.delete(groupedId);
+                        handleCompletePost(existing.messages, chatId, client);
+                    }, 2500);
+                }
+                else {
+                    const entry = {
+                        messages: [message],
+                        chatId,
+                        timeout: setTimeout(() => {
+                            albumBuffers.delete(groupedId);
+                            handleCompletePost(entry.messages, chatId, client);
+                        }, 2500),
+                    };
+                    albumBuffers.set(groupedId, entry);
+                }
+            }
+            else {
+                // Yagona xabar (matn yoki bitta rasm)
+                console.log(`[userbot] New post from ${chatId}: ${(message.text || message.message || '').slice(0, 80)}...`);
+                await handleCompletePost([message], chatId, client);
             }
         }
         catch (err) {
