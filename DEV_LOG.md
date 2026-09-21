@@ -4,6 +4,28 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/credentials` PDF eksporti tuzatildi
+
+**Shikoyat:** "jonbranding.uz/credentials pdf juda yomon holatda."
+
+**Tekshiruv:** Playwright bilan `emulateMedia({ media: 'print' })` qilib haqiqiy PDF chiqarildi va sahifalar ko'rildi. Uchta alohida nuqson topildi.
+
+**1. Keys sahifalari qop-qora chiqardi (asosiy sabab).** Chop etish nusxasi (`.cred-print-all`) doim `display:none` konteynerda turardi. `next/image` lazy rasmni ko'rinmaydigan ota-element ichida hech qachon yuklamaydi, shuning uchun PDF'ga bo'sh fon tushardi. O'lchandi: print paytida 24 ta rasmdan atigi 1 tasi yuklangan edi.
+- Nusxa endi faqat PDF so'ralganda DOM'ga qo'yiladi (`printing` holati), ekrandan tashqarida (`left: -200vw`) joylashuvi hisoblanadi, rasmlar `loading="eager"` bilan yuklanadi, va `window.print()` faqat barcha rasmlar tayyor bo'lgach chaqiriladi (8 soniya zaxira vaqt bilan).
+- Natija: 24/24 rasm yuklangan.
+
+**2. Slaydlar sahifaga to'g'ri kelmasdi.** `height: auto` tufayli har slayd o'z kontenti bo'yicha cho'zilardi, sahifa chegaralari tasodifiy joyga tushardi, keys slaydidagi `Image fill` esa o'lchamsiz ota-element ichida yig'ilib matn ustiga chiqib ketardi.
+- `@page { size: A4 landscape; margin: 0 }` va `.cred-slide { height: 209mm }` qo'yildi. Endi 18 slayd = 18 sahifa, MediaBox 842×595 pt.
+
+**3. Qorong'i slaydlar fonini yo'qotardi.** Brauzer "Background graphics" belgilanmagan holda fonni tashlab, ranglarni o'zicha o'zgartirardi — natijada dizayn buzilardi.
+- `.cred-dark` klassi qo'shilib, `print-color-adjust: exact` bilan fon majburan saqlanadi.
+
+**Tekshirildi:** 18 sahifalik PDF chiqarildi, muqova, keys, paketlar va CTA sahifalari ko'z bilan ko'rildi. `typecheck`, `lint`, `vitest` (250/250), `build` — toza.
+
+**Eslatma:** ba'zi keyslarda `categoryLabel` bo'sh, shuning uchun sarlavha ustidagi kichik yozuv ko'rinmaydi. Bu Sanity ma'lumoti, kod emas.
+
+---
+
 ## 2026-09-21 | Portfolio UI va Render Tizimi Audit Qilindi va To'liq Tuzatildi
 
 **Vazifa:** Foydalanuvchi ko'zi bilan qaralganda aniqlangan barcha kamchiliklar (saralash, filtrlar, case study matnlari va rasmlar) to'liq tuzatildi va jonli sahifalarda tekshirildi.

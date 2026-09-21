@@ -88,7 +88,10 @@ function Slide({
   pad?: boolean;
 }) {
   return (
-    <div className="cred-slide h-full w-full overflow-y-auto" style={{ background: bg }}>
+    <div
+      className={`cred-slide h-full w-full overflow-y-auto${bg === INK ? ' cred-dark' : ''}`}
+      style={{ background: bg }}
+    >
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -171,6 +174,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
                   alt={brand.name}
                   width={140}
                   height={56}
+                  loading="eager"
                   className="max-h-10 w-auto object-contain opacity-45 mix-blend-multiply grayscale"
                 />
               </div>
@@ -226,13 +230,16 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
       id: `keys-${item.slug}`,
       label: item.title,
       render: () => (
-        <div className="cred-slide relative h-full w-full overflow-hidden" style={{ background: INK }}>
+        <div className="cred-slide cred-dark cred-case relative h-full w-full overflow-hidden" style={{ background: INK }}>
           <Image
             src={item.coverImage}
             alt={item.title}
             fill
             sizes="100vw"
             priority={index === 0}
+            // Chop etish nusxasi ekrandan tashqarida turadi, lazy rasm esa
+            // u yerda hech qachon yuklanmaydi va PDF qop-qora chiqadi.
+            loading="eager"
             className="object-cover"
             style={{ opacity: 0.55 }}
           />
@@ -517,6 +524,48 @@ function Deck({
   const total = slides.length;
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
+  /**
+   * Chop etish nusxasi faqat PDF so'ralganda DOM'ga qo'yiladi.
+   *
+   * Ilgari u doim `display:none` konteynerda turardi va `next/image` undagi
+   * rasmlarni hech qachon yuklamas edi (lazy + ko'rinmaydigan ota-element),
+   * shuning uchun PDF'dagi keys sahifalari qop-qora chiqardi. Endi nusxa
+   * so'ralganda yaratiladi, rasmlar yuklanishi kutiladi, keyin oyna ochiladi.
+   */
+  const [printing, setPrinting] = useState(false);
+
+  useEffect(() => {
+    if (!printing) return;
+    let cancelled = false;
+
+    const run = async () => {
+      // Brauzerga nusxani chizishga ulgurish uchun bitta kadr beramiz.
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+      const images = Array.from(document.querySelectorAll<HTMLImageElement>('.cred-print-all img'));
+      await Promise.all(
+        images.map((img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((resolve) => {
+                const done = () => resolve(null);
+                img.addEventListener('load', done, { once: true });
+                img.addEventListener('error', done, { once: true });
+                // Rasm qotib qolsa ham chop etishni to'xtatib qo'ymaymiz.
+                window.setTimeout(done, 8000);
+              })
+        )
+      );
+      if (cancelled) return;
+      window.print();
+      setPrinting(false);
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [printing]);
+
   const go = useCallback(
     (next: number) => setIndex((current) => Math.min(total - 1, Math.max(0, next === -1 ? current : next))),
     [total]
@@ -563,16 +612,63 @@ function Deck({
   return (
     <div className="cred-root relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
       <style>{`
+        /* Nusxa ekranda ko'rinmaydi, lekin joylashuvi hisoblanadi —
+           shunda rasmlar yuklanadi. */
+        .cred-print-all {
+          position: fixed;
+          left: -200vw;
+          top: 0;
+          width: 100vw;
+          pointer-events: none;
+        }
+
         @media print {
-          .cred-chrome { display: none !important; }
-          .cred-no-print { display: none !important; }
-          /* Tashqi o'ram ham ochilishi shart, aks holda chop etishda faqat
-             birinchi ekran chiqib, qolgan slaydlar kesilib qoladi. */
-          .cred-root { height: auto !important; overflow: visible !important; }
-          .cred-deck { height: auto !important; overflow: visible !important; }
-          .cred-print-all { display: block !important; }
+          .cred-print-all { position: static !important; left: auto !important; width: auto !important; }
+          /* Sahifa o'lchami slayd nisbatiga moslashtiriladi, hoshiyasiz —
+             aks holda har slayd tasodifiy joyda kesiladi. */
+          @page { size: A4 landscape; margin: 0; }
+
+          .cred-chrome, .cred-no-print { display: none !important; }
           .cred-live { display: none !important; }
-          .cred-slide { height: auto !important; min-height: 0 !important; break-after: page; page-break-after: always; }
+          .cred-print-all { display: block !important; }
+
+          .cred-root {
+            height: auto !important;
+            overflow: visible !important;
+            background: #fff !important;
+          }
+
+          /* Har bir slayd — aniq bitta sahifa. Balandlik belgilanishi shart:
+             height:auto bo'lsa keys slaydidagi to'liq ekranli rasm (fill)
+             o'lchamsiz ota-element ichida yig'ilib, matn ustiga chiqib ketadi. */
+          .cred-slide {
+            height: 209mm !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+            break-after: page;
+            page-break-after: always;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          .cred-print-all > div:last-child .cred-slide {
+            break-after: auto;
+            page-break-after: auto;
+          }
+
+          /* Qorong'i slaydlar fonini saqlab qolamiz. Busiz brauzer "Background
+             graphics" belgilanmagan holda fonni tashlab, oq ustiga oq matn
+             chiqaradi yoki ranglarni o'zicha o'zgartiradi. */
+          .cred-root, .cred-slide, .cred-dark, .cred-dark * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          /* Ekranda animatsiya uchun qo'yilgan holat chop etishda qolib
+             ketmasligi kerak. */
+          .cred-print-all * {
+            opacity: 1 !important;
+            transform: none !important;
+          }
         }
       `}</style>
 
@@ -601,11 +697,13 @@ function Deck({
       </div>
 
       {/* Chop etishda barcha slaydlar ketma-ket chiqadi */}
-      <div className="cred-print-all hidden">
-        {slides.map((slide) => (
-          <div key={slide.id}>{slide.render()}</div>
-        ))}
-      </div>
+      {printing ? (
+        <div className="cred-print-all">
+          {slides.map((slide) => (
+            <div key={slide.id}>{slide.render()}</div>
+          ))}
+        </div>
+      ) : null}
 
       {/* Boshqaruv paneli */}
       <div className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-30 px-5 pb-5 sm:px-8 sm:pb-6">
@@ -620,11 +718,12 @@ function Deck({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => window.print()}
+              onClick={() => setPrinting(true)}
+              disabled={printing}
               className="rounded-full px-3.5 py-2 text-[10px] uppercase backdrop-blur-sm transition-opacity hover:opacity-75"
               style={{ ...mono, letterSpacing: '0.12em', background: 'rgba(11,11,12,.55)', color: 'rgba(255,255,255,.75)' }}
             >
-              PDF
+              {printing ? 'Tayyorlanmoqda…' : 'PDF'}
             </button>
             <button
               type="button"
