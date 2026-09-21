@@ -35,6 +35,7 @@ type Service = {
   duration: string;
   lead: string;
   deliverables: string[];
+  benefit: string;
   audience: string;
   note?: string;
   addon?: { label: string; price: string };
@@ -48,7 +49,7 @@ type ServiceGroup = {
 
 const SERVICE_GROUPS: ServiceGroup[] = [
   {
-    title: 'Brend yaratish',
+    title: 'Brend qurish',
     intro: 'Nomdan to‘liq vizual tizimgacha. Har birini alohida ham olsangiz bo‘ladi.',
     items: [
       {
@@ -63,6 +64,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Patent bazasidan dastlabki tekshiruv o‘tkaziladi',
           'Boshqa tillarda salbiy ma’no bermasligi tekshiriladi',
         ],
+        benefit: 'Nomingizni tanitishga sarflagan har bir so‘m o‘zingizda qoladi — besh yildan keyin “bu nom bizniki” degan xat kelmaydi.',
         audience: 'Yangi biznes ochayotgan yoki hozirgi nomi ishlamayotganlar uchun',
         note: 'Nom noto‘g‘ri tanlansa, keyin patent, domen va reklama uch barobar qimmatga tushadi.',
       },
@@ -78,6 +80,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Gorizontal, vertikal va ixcham (ikonka) variantlari',
           'Minimal o‘lcham va bo‘sh joy qoidalari',
         ],
+        benefit: 'Vizitkadan bannergacha, avatardan qadoqqacha — har safar dizaynerga “moslashtirib bering” deb pul to‘lamaysiz.',
         audience: 'Logosi yo‘q yoki eskirgan, zamonaviy ko‘rinmayotgan biznes uchun',
       },
       {
@@ -92,6 +95,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Foto va rasm uslubi',
           '10 dan ortiq tashuvchi maketi: vizitka, blank, konvert, forma, banner, ijtimoiy tarmoq shablonlari',
         ],
+        benefit: 'Reklamangiz har oy noldan tanishtirmaydi — har bir ko‘rish oldingisining ustiga qo‘shiladi. Byudjet yig‘iladi, teshik chelakka quyilmaydi.',
         audience: 'Logosi bor, lekin har joyda har xil ko‘rinayotgan biznes uchun',
       },
       {
@@ -106,6 +110,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Barcha tashuvchilar bo‘yicha tayyor maketlar',
           'Brend tili va murojaat uslubi (tone of voice)',
         ],
+        benefit: 'Brendingiz odamga emas, qoidaga bog‘lanadi. Dizayner ketsa ham, yangi xodim kelsa ham brend o‘sha-o‘sha qoladi.',
         audience: 'Jamoasi o‘sayotgan, bir nechta dizayner va tipografiya bilan ishlaydiganlar uchun',
         note: 'Visual identity bilan birga olinsa, ikkalasi bitta tizim sifatida ishlanadi.',
       },
@@ -127,6 +132,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Shtrix-kod, tarkib, muddat va belgilarning to‘g‘ri joylashuvi',
           'Tipografiyaga topshirishga tayyor fayllar',
         ],
+        benefit: 'Mahsulot javonda o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi. Va narxni ko‘tarishga asos paydo bo‘ladi.',
         audience: 'Do‘kon, marketplace yoki tarmoqqa chiqayotgan ishlab chiqaruvchilar uchun',
       },
       {
@@ -139,6 +145,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Ta’m, hajm va turlarni ajratib turadigan yechim',
           'Tayyor dieline va tipografiya fayllari',
         ],
+        benefit: 'Butun liniyangiz javonda bitta oila bo‘lib turadi — bittasini olgan xaridor qolganini ham taniydi.',
         audience: 'Bir nechta mahsulot turi bor ishlab chiqaruvchilar uchun',
         note: 'Aniq narx qadoq turining murakkabligiga qarab belgilanadi.',
       },
@@ -159,6 +166,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Ro‘yxatdan o‘tish ehtimoli bo‘yicha xulosa',
           'Sizga qaysi sinflar kerakligini o‘zimiz aniqlab beramiz',
         ],
+        benefit: 'Bir kunlik tekshiruv sizni yillab tanitgan nomdan ayrilishdan saqlaydi. Eng arzon sug‘urta.',
         audience: 'Nomni tanlagan, lekin hali ro‘yxatdan o‘tkazmaganlar uchun',
         note: 'Narx bitta sinf uchun. Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
         addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
@@ -174,6 +182,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Jarayon oxirigacha kuzatib boriladi',
           'Guvohnoma qo‘lingizga topshiriladi',
         ],
+        benefit: 'Nom qonuniy sizniki bo‘ladi — franshiza sotish, eksportga chiqish va tenderga kirish yo‘li ochiladi. Brend aktivga aylanadi.',
         audience: 'Shoshilmayotgan, lekin nomini himoyalamoqchi bo‘lganlar uchun',
       },
       {
@@ -186,6 +195,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Tezlashtirilgan ekspertiza',
           'Muddat 30 kundan 7 kunga qisqaradi',
         ],
+        benefit: 'Muddat sizni kutib turmaydigan joyda — bir oy o‘rniga bir hafta. Shartnomani boy bermaysiz.',
         audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
       },
     ],
@@ -233,6 +243,25 @@ const PACKAGES: Package[] = [
     audience: 'Endi boshlayotgan yoki brendi hali yo‘q biznes uchun',
     features: ['Naming', 'Logo', 'Patent'],
     duration: '20–25 kun',
+  },
+];
+
+const JOBS = [
+  {
+    pain: 'Mahsulotingiz raqobatchinikidan yaxshi, lekin xaridor javondan chiroyliroq qadoqni oladi.',
+    gain: 'Mahsulot o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi.',
+  },
+  {
+    pain: '“Sifatimiz yuqori” deysiz, lekin ko‘rinishi arzon. Shuning uchun arzon narxga rozi bo‘lasiz.',
+    gain: 'Ko‘rinish narxni oqlaydi — narxni ko‘tarasiz va mijoz savol bermaydi.',
+  },
+  {
+    pain: 'Har safar boshqa dizayner, har safar boshqa rang. Odam o‘n marta ko‘rsa ham esda qolmaydi.',
+    gain: 'Har bir ko‘rish oldingisining ustiga qo‘shiladi — reklama byudjeti yig‘iladi.',
+  },
+  {
+    pain: 'Nomingiz ro‘yxatdan o‘tmagan. Bir kun kelib “bu nom bizniki” degan xat kelishi mumkin.',
+    gain: 'Nom qonuniy sizniki — franshiza, eksport va tender yo‘li ochiladi.',
   },
 ];
 
@@ -493,6 +522,53 @@ export default function TariflarClient() {
         </motion.dl>
       </section>
 
+      {/* JTBD — BIZ NIMANI HAL QILAMIZ */}
+      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mx-auto mb-12 max-w-2xl text-center"
+        >
+          <Eyebrow index="§ 02" label="Vazifa" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Biz aslida nimani <span className="serif-highlight">hal qilamiz</span>
+          </h2>
+          <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
+            Mijoz bizga logo uchun kelmaydi. Mijoz bozorda jiddiy qabul qilinishi va narxini oqlay olishi uchun keladi.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {JOBS.map((job) => (
+            <motion.div
+              key={job.pain}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="rounded-2xl border border-neutral-200 p-6 sm:p-7"
+            >
+              <p
+                className="mb-2 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Hozir
+              </p>
+              <p className="mb-5 text-[15px] text-neutral-500" style={{ lineHeight: 1.6 }}>{job.pain}</p>
+              <p
+                className="mb-2 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Biz bilan
+              </p>
+              <p className="text-[15px] font-medium text-neutral-900" style={{ lineHeight: 1.6 }}>{job.gain}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* ALOHIDA XIZMATLAR */}
       <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-5xl mx-auto">
         <motion.div
@@ -502,7 +578,7 @@ export default function TariflarClient() {
           variants={fadeUp}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <Eyebrow index="§ 02" label="Xizmatlar" />
+          <Eyebrow index="§ 03" label="Xizmatlar" />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
             Bittalab <span className="serif-highlight">olish</span>
           </h2>
@@ -567,6 +643,16 @@ export default function TariflarClient() {
                     ))}
                   </ul>
 
+                  <div className="mb-4 rounded-xl bg-neutral-50 px-4 py-3.5">
+                    <p
+                      className="mb-1.5 text-[10px] uppercase text-neutral-400"
+                      style={{ ...mono, letterSpacing: '0.12em' }}
+                    >
+                      Bu sizga nima beradi
+                    </p>
+                    <p className="text-sm text-neutral-800" style={{ lineHeight: 1.55 }}>{service.benefit}</p>
+                  </div>
+
                   <p className="mb-2 text-sm text-neutral-500" style={{ lineHeight: 1.55 }}>
                     <span
                       className="text-[10px] uppercase text-neutral-400"
@@ -615,7 +701,7 @@ export default function TariflarClient() {
           variants={fadeUp}
           className="mb-12 text-center"
         >
-          <Eyebrow index="§ 03" label="Jarayon" />
+          <Eyebrow index="§ 04" label="Jarayon" />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
             Qanday <span className="serif-highlight">ishlaymiz</span>
           </h2>
@@ -681,7 +767,7 @@ export default function TariflarClient() {
           variants={fadeUp}
           className="mb-8 text-center"
         >
-          <Eyebrow index="§ 04" label="Omillar" />
+          <Eyebrow index="§ 05" label="Omillar" />
           <h2 className="font-bold" style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
             Narxga nima <span className="serif-highlight">ta’sir qiladi</span>
           </h2>
@@ -711,7 +797,7 @@ export default function TariflarClient() {
           variants={fadeUp}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <Eyebrow index="§ 05" label="Paketlar" />
+          <Eyebrow index="§ 06" label="Paketlar" />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
             Bir nechtasi kerakmi? Paket <span className="serif-highlight">arzonroq</span>
           </h2>
@@ -782,7 +868,7 @@ export default function TariflarClient() {
       {/* CTA BLOK */}
       <section className="px-5 sm:px-8 py-20 md:py-28 bg-black text-white text-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <Eyebrow index="§ 06" label="Suhbat" muted />
+          <Eyebrow index="§ 07" label="Suhbat" muted />
         </motion.div>
         <motion.h2
           initial="hidden"
