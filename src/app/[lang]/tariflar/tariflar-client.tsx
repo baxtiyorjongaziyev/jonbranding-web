@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -13,15 +14,94 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
+export type ServiceCase = {
+  slug: string;
+  title: string;
+  client: string;
+  category: string;
+  categoryLabel: string;
+  coverImage: string;
+  result?: { metric: string; value: string };
+};
+
+export type ServiceQuote = { name: string; company: string; quote: string };
+export type ServiceLogo = { name: string; logo: string };
+
+type Props = {
+  cases: ServiceCase[];
+  quotes: ServiceQuote[];
+  logos: ServiceLogo[];
+  showcase: string[];
+};
+
+function ShowcaseReel({ images }: { images: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % images.length);
+    }, 1400);
+    return () => window.clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-neutral-100">
+        {images.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 45vw"
+            priority={i === 0}
+            className="object-cover transition-opacity duration-500 motion-reduce:transition-none"
+            style={{ opacity: i === index ? 1 : 0 }}
+          />
+        ))}
+      </div>
+      <div className="mt-3 flex gap-1.5" aria-hidden="true">
+        {images.map((src, i) => (
+          <span
+            key={src}
+            className="h-0.5 flex-1 rounded-full transition-colors duration-300 motion-reduce:transition-none"
+            style={{ background: i === index ? '#000' : '#e5e5e5' }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace' } as const;
+const numerals = { fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' } as const;
+
+function Eyebrow({ index, label, muted }: { index: string; label: string; muted?: boolean }) {
+  return (
+    <p
+      className="mb-5 flex items-center justify-center gap-2.5 text-[11px] font-medium uppercase"
+      style={{ ...mono, letterSpacing: '0.1em', color: muted ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}
+    >
+      <span style={{ color: muted ? 'rgba(255,255,255,.85)' : '#000' }}>{index}</span>
+      <span aria-hidden="true" className="inline-block h-px w-5" style={{ background: 'currentColor' }} />
+      {label}
+    </p>
+  );
+}
+
 type Service = {
   name: string;
   price: string;
   duration: string;
   lead: string;
   deliverables: string[];
+  benefit: string;
   audience: string;
   note?: string;
   addon?: { label: string; price: string };
+  proof?: { label: string; items: string[] };
 };
 
 type ServiceGroup = {
@@ -32,23 +112,32 @@ type ServiceGroup = {
 
 const SERVICE_GROUPS: ServiceGroup[] = [
   {
-    title: 'Brend yaratish',
+    title: 'Brend qurish',
     intro: 'Nomdan to‘liq vizual tizimgacha. Har birini alohida ham olsangiz bo‘ladi.',
     items: [
       {
         name: 'Naming',
         price: '10 000 000',
         duration: '10 kun',
-        lead: 'Brendingizga nom topaman — aytishga oson, esda qoladigan va patentga o‘tadigan.',
+        lead: 'Yaxshi nom — biznesingizning birinchi taassuroti. Bir marta ishlab chiqiladi, butun umr foyda keltiradi.',
         deliverables: [
-          '30 dan ortiq variant ishlanadi, 3 tasi finalga chiqadi',
-          'Har bir nomning ma’nosi va legendasi yozib beriladi',
-          'Domen va ijtimoiy tarmoqlarda bandligi tekshiriladi',
-          'Patent bazasidan dastlabki tekshiruv o‘tkaziladi',
-          'Boshqa tillarda salbiy ma’no bermasligi tekshiriladi',
+          'Biznesingizga mos professional nom',
+          'Nomning strategik izohi — nega aynan shu nom',
+          'Raqobatchilar tahlili va ular nomlari bilan o‘xshashlik tekshiruvi',
+          '.uz va .com domen, Telegram va Instagram username tekshiruvi',
+          'O‘zbekiston bo‘yicha patent/trademark tekshiruvi',
+          '3 ta bepul tahrir',
         ],
+        benefit: 'Nomingizni tanitishga sarflagan har bir so‘m o‘zingizda qoladi — besh yildan keyin “bu nom bizniki” degan xat kelmaydi.',
         audience: 'Yangi biznes ochayotgan yoki hozirgi nomi ishlamayotganlar uchun',
         note: 'Nom noto‘g‘ri tanlansa, keyin patent, domen va reklama uch barobar qimmatga tushadi.',
+        proof: {
+          label: 'Biz ishlab chiqqan nomlar',
+          items: [
+            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Naf', 'Revo', 'Petron', 'Estem',
+            'Zayyan', 'Mercato', 'Geonest', 'Rutera', 'Sofmir', 'Arfadel', 'Melamus', 'Polentra', 'Viton',
+          ],
+        },
       },
       {
         name: 'Logo',
@@ -56,12 +145,13 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         duration: '7 kun',
         lead: 'Kichkina ekranda ham, katta bannerda ham bir xil ishlaydigan belgi.',
         deliverables: [
-          '3 ta konsepsiya, tanlanganini oxirigacha sayqallayman',
+          '3 ta konsepsiya, tanlanganini oxirigacha sayqallaymiz',
           'Barcha formatlar: AI, EPS, SVG, PDF, PNG',
           'Rangli, oq-qora va bitta rangdagi versiyalar',
           'Gorizontal, vertikal va ixcham (ikonka) variantlari',
           'Minimal o‘lcham va bo‘sh joy qoidalari',
         ],
+        benefit: 'Vizitkadan bannergacha, avatardan qadoqqacha — har safar dizaynerga “moslashtirib bering” deb pul to‘lamaysiz.',
         audience: 'Logosi yo‘q yoki eskirgan, zamonaviy ko‘rinmayotgan biznes uchun',
       },
       {
@@ -76,6 +166,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Foto va rasm uslubi',
           '10 dan ortiq tashuvchi maketi: vizitka, blank, konvert, forma, banner, ijtimoiy tarmoq shablonlari',
         ],
+        benefit: 'Reklamangiz har oy noldan tanishtirmaydi — har bir ko‘rish oldingisining ustiga qo‘shiladi. Byudjet yig‘iladi, teshik chelakka quyilmaydi.',
         audience: 'Logosi bor, lekin har joyda har xil ko‘rinayotgan biznes uchun',
       },
       {
@@ -90,6 +181,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Barcha tashuvchilar bo‘yicha tayyor maketlar',
           'Brend tili va murojaat uslubi (tone of voice)',
         ],
+        benefit: 'Brendingiz odamga emas, qoidaga bog‘lanadi. Dizayner ketsa ham, yangi xodim kelsa ham brend o‘sha-o‘sha qoladi.',
         audience: 'Jamoasi o‘sayotgan, bir nechta dizayner va tipografiya bilan ishlaydiganlar uchun',
         note: 'Visual identity bilan birga olinsa, ikkalasi bitta tizim sifatida ishlanadi.',
       },
@@ -111,6 +203,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Shtrix-kod, tarkib, muddat va belgilarning to‘g‘ri joylashuvi',
           'Tipografiyaga topshirishga tayyor fayllar',
         ],
+        benefit: 'Mahsulot javonda o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi. Va narxni ko‘tarishga asos paydo bo‘ladi.',
         audience: 'Do‘kon, marketplace yoki tarmoqqa chiqayotgan ishlab chiqaruvchilar uchun',
       },
       {
@@ -123,6 +216,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Ta’m, hajm va turlarni ajratib turadigan yechim',
           'Tayyor dieline va tipografiya fayllari',
         ],
+        benefit: 'Butun liniyangiz javonda bitta oila bo‘lib turadi — bittasini olgan xaridor qolganini ham taniydi.',
         audience: 'Bir nechta mahsulot turi bor ishlab chiqaruvchilar uchun',
         note: 'Aniq narx qadoq turining murakkabligiga qarab belgilanadi.',
       },
@@ -130,7 +224,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     title: 'Huquqiy himoya',
-    intro: 'Nom sizniki bo‘lishi uchun uni ro‘yxatdan o‘tkazish kerak. Shu ishni ham men qilaman.',
+    intro: 'Nom sizniki bo‘lishi uchun uni ro‘yxatdan o‘tkazish kerak. Shu ishni ham biz qilamiz.',
     items: [
       {
         name: 'Patent tekshiruvi',
@@ -141,8 +235,9 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Rasmiy bazadan to‘liq tekshiruv',
           'O‘xshash belgilar ro‘yxati va xavf darajasi',
           'Ro‘yxatdan o‘tish ehtimoli bo‘yicha xulosa',
-          'Sizga qaysi sinflar kerakligini o‘zim aniqlab beraman',
+          'Sizga qaysi sinflar kerakligini o‘zimiz aniqlab beramiz',
         ],
+        benefit: 'Bir kunlik tekshiruv sizni yillab tanitgan nomdan ayrilishdan saqlaydi. Eng arzon sug‘urta.',
         audience: 'Nomni tanlagan, lekin hali ro‘yxatdan o‘tkazmaganlar uchun',
         note: 'Narx bitta sinf uchun. Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
         addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
@@ -150,7 +245,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       {
         name: 'Patent (oddiy)',
         price: '5 000 000',
-        duration: '30 kun',
+        duration: '7 oy',
         lead: 'Tovar belgisini ro‘yxatdan o‘tkazish — odatdagi tartibda.',
         deliverables: [
           'Hujjatlar to‘liq tayyorlanadi va topshiriladi',
@@ -158,18 +253,20 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Jarayon oxirigacha kuzatib boriladi',
           'Guvohnoma qo‘lingizga topshiriladi',
         ],
+        benefit: 'Nom qonuniy sizniki bo‘ladi — franshiza sotish, eksportga chiqish va tenderga kirish yo‘li ochiladi. Brend aktivga aylanadi.',
         audience: 'Shoshilmayotgan, lekin nomini himoyalamoqchi bo‘lganlar uchun',
       },
       {
         name: 'Patent (tezkor)',
         price: '7 000 000',
-        duration: '7 kun',
+        duration: '20–40 kun',
         lead: 'Xuddi shu ish, lekin tezlashtirilgan tartibda.',
         deliverables: [
           'Oddiy patentdagi barcha ishlar',
           'Tezlashtirilgan ekspertiza',
-          'Muddat 30 kundan 7 kunga qisqaradi',
+          'Muddat 7 oydan 20–40 kunga qisqaradi',
         ],
+        benefit: 'Muddat sizni kutib turmaydigan joyda — yetti oy o‘rniga bir oycha. Shartnomani boy bermaysiz.',
         audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
       },
     ],
@@ -220,9 +317,91 @@ const PACKAGES: Package[] = [
   },
 ];
 
+const SERVICE_CATEGORIES: Record<string, string[]> = {
+  Naming: ['naming', 'brand-strategy'],
+  Logo: ['logo-design'],
+  'Visual identity': ['corporate-style'],
+  Brandbook: ['brandbook', 'brand-strategy'],
+  'Packaging (1 SKU)': ['packaging'],
+  'Har qo‘shimcha SKU': ['packaging'],
+};
+
+const ALL_SERVICES = SERVICE_GROUPS.flatMap((group) =>
+  group.items.map((item) => ({ ...item, group: group.title }))
+);
+
+const FAQS = [
+  {
+    q: 'Nega 8 mln, Instagramda 500 mingga logo qilishadi-ku?',
+    a: '500 minglik logo — bu bitta rasm. Siz undan keyin har bir banner, qadoq va vizitka uchun yana to‘laysiz, chunki fayllar to‘liq emas, qoida yo‘q, har safar yangidan chiziladi. Bizda logo barcha formatlarda, barcha versiyalarda va ishlatish qoidalari bilan keladi. Ustiga patent tekshiruvi — nomingiz birovniki chiqib qolmasligi uchun. Farq narxda emas, keyin qancha to‘lashingizda.',
+  },
+  {
+    q: 'Yoqmasa nima bo‘ladi?',
+    a: 'Birdan tayyor ishni ko‘rmaysiz. Avval 3 ta yo‘nalish ko‘rsatamiz, bittasini siz tanlaysiz — shundan keyingina sayqallashga o‘tamiz. Siz tasdiqlamaguningizcha keyingi bosqich boshlanmaydi. Tanlangan yo‘nalish bo‘yicha tahrirlar ham kiritiladi.',
+  },
+  {
+    q: 'Mendan nima talab qilinadi, qancha vaqtimni oladi?',
+    a: 'Boshida bir marta brif — 40–60 daqiqa suhbat yoki savollarga javob. Keyin har bosqichda taqdimotni ko‘rib, fikr bildirasiz: odatda 2–3 marta, har biri yarim soatdan oshmaydi. Qolgan ishni biz qilamiz.',
+  },
+  {
+    q: 'To‘lovni bo‘lib to‘lasam bo‘ladimi?',
+    a: 'Ha, to‘lov uch bosqichda: 50% shartnoma imzolanganda, 30% konsepsiya tasdiqlanganda, 20% fayllar topshirilganda. Ya‘ni siz natijani ko‘rib borib to‘laysiz, hammasini oldindan emas.',
+  },
+  {
+    q: 'Patent chiqmay qolsa-chi?',
+    a: 'Shuning uchun ariza topshirishdan oldin rasmiy bazadan tekshiruv o‘tkazamiz va xavf darajasini aytamiz. Xavf yuqori bo‘lsa, ochig‘ini aytamiz va nomni o‘zgartirishni taklif qilamiz — pulingizni bilib turib xavfga tikmaymiz.',
+  },
+];
+
+const WHY_US = [
+  {
+    title: 'Shartnoma va rasmiy to‘lov',
+    desc: 'Ish shartnoma asosida boshlanadi: muddat, hajm va topshiriladigan fayllar yozib qo‘yiladi. Yo‘qolib qoladigan odam emassiz — yuridik shaxs bilan ishlaysiz.',
+  },
+  {
+    title: 'Patent ham biz tomondan',
+    desc: 'Dizayner logo chizadi va ketadi. Biz nomni tekshiramiz, ro‘yxatdan o‘tkazamiz va guvohnomani qo‘lingizga beramiz — brend huquqan sizniki bo‘ladi.',
+  },
+  {
+    title: '9 yil va 1000 dan ortiq loyiha',
+    desc: 'Bu ish bizda tajriba bo‘yicha qilinadi, urinib ko‘rish bo‘yicha emas. Qaysi yechim bozorda ishlashini oldindan bilamiz.',
+  },
+  {
+    title: 'Fayllar sizda qoladi',
+    desc: 'Barcha manba fayllar va qoidalar sizga topshiriladi. Bizdan ketsangiz ham brendingiz ishlayveradi — hech kimga bog‘lanib qolmaysiz.',
+  },
+];
+
+const GUARANTEES = [
+  'Shartnoma: muddat, hajm va topshiriladigan fayllar oldindan yoziladi',
+  'Siz tasdiqlamaguningizcha keyingi bosqichga o‘tmaymiz',
+  'Konsepsiya bittada emas — 3 ta yo‘nalishdan tanlaysiz',
+  'Naming bo‘yicha 3 ta bepul tahrir kiritiladi',
+  'To‘lov bosqichma-bosqich: natijani ko‘rib borib to‘laysiz',
+];
+
+const JOBS = [
+  {
+    pain: 'Mahsulotingiz raqobatchinikidan yaxshi, lekin xaridor javondan chiroyliroq qadoqni oladi.',
+    gain: 'Mahsulot o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi.',
+  },
+  {
+    pain: '“Sifatimiz yuqori” deysiz, lekin ko‘rinishi arzon. Shuning uchun arzon narxga rozi bo‘lasiz.',
+    gain: 'Ko‘rinish narxni oqlaydi — narxni ko‘tarasiz va mijoz savol bermaydi.',
+  },
+  {
+    pain: 'Har safar boshqa dizayner, har safar boshqa rang. Odam o‘n marta ko‘rsa ham esda qolmaydi.',
+    gain: 'Har bir ko‘rish oldingisining ustiga qo‘shiladi — reklama byudjeti yig‘iladi.',
+  },
+  {
+    pain: 'Nomingiz ro‘yxatdan o‘tmagan. Bir kun kelib “bu nom bizniki” degan xat kelishi mumkin.',
+    gain: 'Nom qonuniy sizniki — franshiza, eksport va tender yo‘li ochiladi.',
+  },
+];
+
 const PROCESS_STEPS = [
-  { title: 'Brif va tahlil', desc: 'Biznesingizni, raqobatchilaringizni, auditoriyangizni o‘rganaman' },
-  { title: 'Konsepsiya', desc: '3 ta yo‘nalish taqdim etaman, bittasini tanlaysiz' },
+  { title: 'Brif va tahlil', desc: 'Biznesingizni, raqobatchilaringizni, auditoriyangizni o‘rganamiz' },
+  { title: 'Konsepsiya', desc: '3 ta yo‘nalish taqdim etamiz, bittasini tanlaysiz' },
   { title: 'Ishlab chiqish', desc: 'Tanlangan yo‘nalish sayqallanadi' },
   { title: 'Topshirish', desc: 'Barcha fayllar va hujjatlar qo‘lingizda' },
 ];
@@ -337,11 +516,11 @@ function LeadModal({ open, onClose, presetService }: { open: boolean; onClose: (
           className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
           onOpenAutoFocus={(e) => { e.preventDefault(); phoneRef.current?.focus(); }}
         >
-          <Dialog.Title className="text-2xl font-bold tracking-tight text-black mb-1">
+          <Dialog.Title className="mb-1.5 text-2xl font-bold text-black" style={{ letterSpacing: '-0.03em' }}>
             {done ? 'Rahmat!' : 'Ariza qoldirish'}
           </Dialog.Title>
-          <Dialog.Description className="text-sm text-neutral-500 mb-6">
-            {done ? 'Tez orada siz bilan bog‘lanaman.' : 'Ism va telefon raqamingizni qoldiring, o‘zim aloqaga chiqaman.'}
+          <Dialog.Description className="mb-6 text-sm text-neutral-500" style={{ lineHeight: 1.6 }}>
+            {done ? 'Tez orada siz bilan bog‘lanamiz.' : 'Ism va telefon raqamingizni qoldiring, o‘zimiz aloqaga chiqamiz.'}
           </Dialog.Description>
           <Dialog.Close asChild>
             <button aria-label="Yopish" className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center border border-neutral-200 text-neutral-500 hover:bg-neutral-50">✕</button>
@@ -413,7 +592,7 @@ function LeadModal({ open, onClose, presetService }: { open: boolean; onClose: (
   );
 }
 
-export default function TariflarClient() {
+export default function TariflarClient({ cases, quotes, logos, showcase }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [presetService, setPresetService] = useState('Aniq emas — maslahat kerak');
 
@@ -422,31 +601,116 @@ export default function TariflarClient() {
     setModalOpen(true);
   };
 
+  const casesFor = (serviceName: string) => {
+    const categories = SERVICE_CATEGORIES[serviceName];
+    if (!categories) return [];
+    const seen = new Set<string>();
+    return categories
+      .flatMap((category) => cases.filter((item) => item.category === category))
+      .filter((item) => (seen.has(item.slug) ? false : seen.add(item.slug)))
+      .slice(0, 2);
+  };
+
   return (
     <div className="bg-white text-black">
       {/* HERO */}
-      <section className="px-5 sm:px-8 pt-20 pb-14 md:pt-28 md:pb-20 max-w-3xl mx-auto text-center">
+      <section className="px-5 sm:px-8 pt-20 pb-16 md:pt-28 md:pb-24 max-w-3xl mx-auto text-center">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          <Eyebrow index="§ 01" label="Narxlar" />
+        </motion.div>
         <motion.h1
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="font-bold tracking-tight leading-[1.05]"
-          style={{ fontSize: 'clamp(36px, 6vw, 64px)', letterSpacing: '-0.03em' }}
+          className="font-bold leading-[1.02]"
+          style={{ fontSize: 'clamp(40px, 6.6vw, 72px)', letterSpacing: '-0.035em' }}
         >
-          Narxlarim ochiq
+          Narxlarimiz <span className="serif-highlight">ochiq</span>
         </motion.h1>
         <motion.p
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-5 text-neutral-600 text-base sm:text-lg leading-relaxed"
+          className="mx-auto mt-6 text-neutral-600"
+          style={{ fontSize: 'clamp(16px, 1.5vw, 19px)', lineHeight: 1.65, maxWidth: '38ch' }}
         >
-          9 yil, 500 dan ortiq mijoz, 1000 dan ortiq loyiha.
-          <br />
-          Narxni yashirmayman — ishni ham.
+          Hamma uchun birdek — shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.
         </motion.p>
+        <motion.dl
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mx-auto mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-neutral-200 pt-6"
+        >
+          {[
+            { value: '9', label: 'yil tajriba' },
+            { value: '500+', label: 'mijoz' },
+            { value: '1000+', label: 'loyiha' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <dt className="sr-only">{stat.label}</dt>
+              <dd>
+                <span className="block text-2xl font-bold sm:text-3xl" style={numerals}>{stat.value}</span>
+                <span
+                  className="mt-1 block text-[11px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.08em' }}
+                >
+                  {stat.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
+      </section>
+
+      {/* JTBD — BIZ NIMANI HAL QILAMIZ */}
+      <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mx-auto mb-12 max-w-2xl text-center"
+        >
+          <Eyebrow index="§ 02" label="Vazifa" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Biz aslida nimani <span className="serif-highlight">hal qilamiz</span>
+          </h2>
+          <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
+            Mijoz bizga logo uchun kelmaydi. Mijoz bozorda jiddiy qabul qilinishi va narxini oqlay olishi uchun keladi.
+          </p>
+        </motion.div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {JOBS.map((job) => (
+            <motion.div
+              key={job.pain}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="rounded-2xl border border-neutral-200 p-6 sm:p-7"
+            >
+              <p
+                className="mb-2 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Hozir
+              </p>
+              <p className="mb-5 text-[15px] text-neutral-500" style={{ lineHeight: 1.6 }}>{job.pain}</p>
+              <p
+                className="mb-2 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Biz bilan
+              </p>
+              <p className="text-[15px] font-medium text-neutral-900" style={{ lineHeight: 1.6 }}>{job.gain}</p>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* ALOHIDA XIZMATLAR */}
@@ -456,103 +720,234 @@ export default function TariflarClient() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <h2 className="font-bold tracking-tight" style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}>
-            Bittalab olish
+          <Eyebrow index="§ 03" label="Xizmatlar" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Bittalab <span className="serif-highlight">olish</span>
           </h2>
-          <p className="mt-4 text-neutral-600 leading-relaxed">
+          <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
             Hammasi birdan kerak emas. Hozir nima kerak bo‘lsa, shuni olasiz — har bir xizmat o‘zicha to‘liq ish
             va oxirida sizga tayyor fayllar topshiriladi.
           </p>
         </motion.div>
 
-        {SERVICE_GROUPS.map((group) => (
-          <div key={group.title} className="mb-14 last:mb-0">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="mb-6 border-b border-neutral-200 pb-4"
-            >
-              <h3 className="text-xl font-semibold tracking-tight">{group.title}</h3>
-              <p className="text-sm text-neutral-500 mt-1">{group.intro}</p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-5">
-              {group.items.map((service) => (
-                <motion.article
-                  key={service.name}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="flex flex-col rounded-2xl border border-neutral-200 p-6 sm:p-7 transition-colors hover:border-neutral-400"
-                >
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <h4 className="text-lg font-semibold tracking-tight">{service.name}</h4>
-                    <div className="text-right shrink-0">
-                      <p className="font-bold whitespace-nowrap">{service.price}</p>
-                      <p className="text-xs text-neutral-400 mt-0.5">so‘m · {service.duration}</p>
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-neutral-700 leading-relaxed mb-5">{service.lead}</p>
-
-                  <p className="text-xs font-semibold tracking-[0.08em] uppercase text-neutral-400 mb-3">Nima olasiz</p>
-                  <ul className="flex flex-col gap-2 mb-5 flex-grow">
-                    {service.deliverables.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-neutral-700 leading-relaxed">
-                        <span className="mt-1 shrink-0 text-black">✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <p className="text-sm text-neutral-500 leading-relaxed mb-2">
-                    <span className="font-medium text-neutral-700">Kimga: </span>
-                    {service.audience}
-                  </p>
-                  {service.note && (
-                    <p className="text-xs text-neutral-400 leading-relaxed mb-4">{service.note}</p>
-                  )}
-                  {service.addon && (
-                    <p className="flex items-center justify-between gap-3 border-t border-neutral-200 pt-3 mb-5 text-sm">
-                      <span className="text-neutral-600">{service.addon.label}</span>
-                      <span className="font-medium whitespace-nowrap">{service.addon.price}</span>
-                    </p>
-                  )}
-
-                  <button
-                    onClick={() => openModal(service.name)}
-                    className="mt-auto w-full rounded-full border border-black bg-white py-3.5 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white"
-                  >
-                    Ariza qoldirish
-                  </button>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        <p className="text-xs text-neutral-400 text-center mt-10">
+        <p
+          className="mt-12 text-center text-[11px] uppercase text-neutral-400"
+          style={{ ...mono, letterSpacing: '0.06em' }}
+        >
           Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.
         </p>
       </section>
 
+      {/* HAR BIR XIZMAT — ALOHIDA EKRAN */}
+      {ALL_SERVICES.map((service, i) => (
+        <motion.section
+          key={service.name}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUp}
+          className="flex min-h-[100svh] items-center border-t border-neutral-200 px-5 py-20 sm:px-8"
+        >
+          <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-2 md:gap-16">
+            {service.name === 'Brandbook' && showcase.length > 0 && (
+              <div className="order-first md:col-span-2">
+                <p
+                  className="mb-4 text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Brendbuklarimizdan lavhalar
+                </p>
+                <ShowcaseReel images={showcase} />
+              </div>
+            )}
+
+            {service.name !== 'Brandbook' && casesFor(service.name).length > 0 && (
+              <div className="order-first md:col-span-2">
+                <p
+                  className="mb-4 text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Shu xizmat bo‘yicha ishlarimiz
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {casesFor(service.name).map((item) => (
+                    <a
+                      key={item.slug}
+                      href={`/portfolio/${item.slug}`}
+                      className="group block overflow-hidden rounded-2xl border border-neutral-200 transition-colors hover:border-neutral-400"
+                    >
+                      <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
+                        <Image
+                          src={item.coverImage}
+                          alt={`${item.client} — ${item.categoryLabel}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 45vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between gap-4 px-4 py-3.5">
+                        <div>
+                          <p className="text-sm font-medium">{item.client}</p>
+                          <p className="text-xs text-neutral-400">{item.categoryLabel}</p>
+                        </div>
+                        {item.result && (
+                          <p className="shrink-0 text-right">
+                            <span className="block text-sm font-bold" style={numerals}>{item.result.value}</span>
+                            <span className="block text-[10px] text-neutral-400">{item.result.metric}</span>
+                          </p>
+                        )}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="md:sticky md:top-24 md:self-start">
+              <p
+                className="mb-6 flex items-center gap-2.5 text-[11px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.1em' }}
+              >
+                <span className="text-black">{String(i + 1).padStart(2, '0')}</span>
+                <span aria-hidden="true" className="inline-block h-px w-5 bg-neutral-300" />
+                {service.group}
+              </p>
+
+              <h3
+                className="font-bold"
+                style={{ fontSize: 'clamp(30px, 4.4vw, 52px)', letterSpacing: '-0.035em', lineHeight: 1.05 }}
+              >
+                {service.name}
+              </h3>
+
+              <p className="mt-5 text-neutral-700" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)', lineHeight: 1.6, maxWidth: '34ch' }}>
+                {service.lead}
+              </p>
+
+              <div className="mt-8 flex items-end gap-6 border-t border-neutral-200 pt-6">
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    Narx
+                  </p>
+                  <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
+                    {service.price}
+                  </p>
+                  <p className="mt-0.5 text-xs text-neutral-400">so‘m</p>
+                </div>
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    Muddat
+                  </p>
+                  <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
+                    {service.duration}
+                  </p>
+                </div>
+              </div>
+
+              {service.addon && (
+                <p className="mt-5 flex items-center justify-between gap-3 border-t border-neutral-200 pt-4 text-sm">
+                  <span className="text-neutral-600">{service.addon.label}</span>
+                  <span className="whitespace-nowrap font-medium" style={numerals}>{service.addon.price}</span>
+                </p>
+              )}
+
+              <button
+                onClick={() => openModal(service.name)}
+                className="mt-8 w-full rounded-full bg-black py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 md:w-auto md:px-10"
+              >
+                Ariza qoldirish
+              </button>
+            </div>
+
+            <div>
+              <p
+                className="mb-4 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Nima olasiz
+              </p>
+              <ul className="mb-8 flex flex-col gap-3.5">
+                {service.deliverables.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-b border-neutral-100 pb-3.5 text-[15px] text-neutral-700 last:border-b-0"
+                    style={{ lineHeight: 1.55 }}
+                  >
+                    <span className="mt-[3px] shrink-0 text-xs text-neutral-900">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="rounded-2xl bg-neutral-50 p-5 sm:p-6">
+                <p
+                  className="mb-2 text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Bu sizga nima beradi
+                </p>
+                <p className="text-[15px] text-neutral-900" style={{ lineHeight: 1.6 }}>{service.benefit}</p>
+              </div>
+
+              <p className="mt-6 text-sm text-neutral-500" style={{ lineHeight: 1.55 }}>
+                <span
+                  className="text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Kimga{' '}
+                </span>
+                {service.audience}
+              </p>
+              {service.note && (
+                <p className="mt-3 text-xs text-neutral-400" style={{ lineHeight: 1.6 }}>{service.note}</p>
+              )}
+
+              {service.proof && (
+                <div className="mt-8 border-t border-neutral-200 pt-6">
+                  <p
+                    className="mb-4 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    {service.proof.label}
+                  </p>
+                  <ul className="flex flex-wrap gap-x-2 gap-y-2">
+                    {service.proof.items.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-neutral-200 px-3 py-1.5 text-sm text-neutral-700"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.section>
+      ))}
+
       {/* ISHLASH TARTIBI */}
       <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-4xl mx-auto">
-        <motion.h2
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="font-bold tracking-tight mb-10 text-center"
-          style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}
+          className="mb-12 text-center"
         >
-          Qanday ishlayman
-        </motion.h2>
+          <Eyebrow index="§ 04" label="Jarayon" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Qanday <span className="serif-highlight">ishlaymiz</span>
+          </h2>
+        </motion.div>
         <div className="grid sm:grid-cols-2 gap-6 mb-12">
           {PROCESS_STEPS.map((step, i) => (
             <motion.div
@@ -563,12 +958,15 @@ export default function TariflarClient() {
               variants={fadeUp}
               className="flex gap-4"
             >
-              <span className="shrink-0 w-9 h-9 rounded-full bg-black text-white grid place-items-center text-sm font-semibold">
-                {i + 1}
+              <span
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-black text-[13px] font-medium text-white"
+                style={mono}
+              >
+                {String(i + 1).padStart(2, '0')}
               </span>
               <div>
-                <h3 className="font-semibold mb-1">{step.title}</h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">{step.desc}</p>
+                <h3 className="mb-1 font-semibold" style={{ letterSpacing: '-0.015em' }}>{step.title}</h3>
+                <p className="text-sm text-neutral-600" style={{ lineHeight: 1.6 }}>{step.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -581,36 +979,41 @@ export default function TariflarClient() {
           variants={fadeUp}
           className="rounded-2xl border border-neutral-200 p-6 sm:p-8"
         >
-          <h3 className="text-sm font-semibold tracking-[0.08em] uppercase text-neutral-500 mb-5">To‘lov bosqichlari</h3>
-          <div className="grid sm:grid-cols-3 gap-6">
-            <div>
-              <p className="text-3xl font-bold">50%</p>
-              <p className="text-sm text-neutral-600 mt-1">Shartnoma imzolanganda</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold">30%</p>
-              <p className="text-sm text-neutral-600 mt-1">Konsepsiya tasdiqlanganda</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold">20%</p>
-              <p className="text-sm text-neutral-600 mt-1">Fayllar topshirilganda</p>
-            </div>
+          <h3
+            className="mb-6 text-[10px] uppercase text-neutral-400"
+            style={{ ...mono, letterSpacing: '0.14em' }}
+          >
+            To‘lov bosqichlari
+          </h3>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {[
+              { value: '50%', label: 'Shartnoma imzolanganda' },
+              { value: '30%', label: 'Konsepsiya tasdiqlanganda' },
+              { value: '20%', label: 'Fayllar topshirilganda' },
+            ].map((stage) => (
+              <div key={stage.value}>
+                <p className="text-3xl font-bold" style={{ ...numerals, letterSpacing: '-0.035em' }}>{stage.value}</p>
+                <p className="mt-1.5 text-sm text-neutral-600" style={{ lineHeight: 1.5 }}>{stage.label}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </section>
 
       {/* NARXGA TA'SIR QILUVCHI OMILLAR */}
       <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-3xl mx-auto">
-        <motion.h2
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="font-bold tracking-tight mb-6 text-center"
-          style={{ fontSize: 'clamp(24px, 3vw, 34px)', letterSpacing: '-0.02em' }}
+          className="mb-8 text-center"
         >
-          Narxga nima ta’sir qiladi
-        </motion.h2>
+          <Eyebrow index="§ 05" label="Omillar" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+            Narxga nima <span className="serif-highlight">ta’sir qiladi</span>
+          </h2>
+        </motion.div>
         <motion.ul
           initial="hidden"
           whileInView="visible"
@@ -634,12 +1037,13 @@ export default function TariflarClient() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <h2 className="font-bold tracking-tight" style={{ fontSize: 'clamp(26px, 3.4vw, 40px)', letterSpacing: '-0.025em' }}>
-            Bir nechtasi kerakmi? Paket arzonroq
+          <Eyebrow index="§ 06" label="Paketlar" />
+          <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+            Bir nechtasi kerakmi? Paket <span className="serif-highlight">arzonroq</span>
           </h2>
-          <p className="mt-4 text-neutral-600 leading-relaxed">
+          <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
             Xizmatlarni alohida-alohida olgandan ko‘ra paket bilan olsangiz, ham arzonroq chiqadi,
             ham hamma narsa bitta tizimda ishlanadi.
           </p>
@@ -660,19 +1064,22 @@ export default function TariflarClient() {
                   {pkg.badge}
                 </span>
               )}
-              <h3 className="text-sm font-semibold tracking-[0.08em] uppercase mb-3" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>
+              <h3
+                className="mb-4 text-xs uppercase"
+                style={{ ...mono, letterSpacing: '0.14em', color: pkg.featured ? 'rgba(255,255,255,.65)' : '#737373' }}
+              >
                 {pkg.name}
               </h3>
-              <div className="flex items-baseline gap-2 mb-1">
-                <span className="font-bold" style={{ fontSize: 'clamp(28px, 3vw, 36px)', letterSpacing: '-0.02em' }}>
+              <div className="mb-1.5 flex items-baseline gap-2">
+                <span className="font-bold" style={{ fontSize: 'clamp(30px, 3.2vw, 38px)', ...numerals, letterSpacing: '-0.035em' }}>
                   {pkg.price}
                 </span>
                 <span className="text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>so‘m</span>
               </div>
-              <p className="text-xs mb-4" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#a3a3a3' }}>
-                Alohida olinsa {pkg.separate} so‘m — {pkg.saving} so‘m tejaysiz
+              <p className="mb-5 text-xs" style={{ lineHeight: 1.5, color: pkg.featured ? 'rgba(255,255,255,.6)' : '#a3a3a3' }}>
+                Alohida olinsa <span style={numerals}>{pkg.separate}</span> so‘m — <span style={numerals}>{pkg.saving}</span> so‘m tejaysiz
               </p>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: pkg.featured ? 'rgba(255,255,255,.75)' : '#525252' }}>
+              <p className="mb-7 text-[15px]" style={{ lineHeight: 1.6, color: pkg.featured ? 'rgba(255,255,255,.75)' : '#525252' }}>
                 {pkg.audience}
               </p>
               <ul className="flex flex-col gap-2.5 mb-8 flex-grow">
@@ -683,7 +1090,10 @@ export default function TariflarClient() {
                   </li>
                 ))}
               </ul>
-              <p className="text-xs mb-5" style={{ color: pkg.featured ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}>
+              <p
+                className="mb-5 text-[11px] uppercase"
+                style={{ ...mono, letterSpacing: '0.08em', color: pkg.featured ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}
+              >
                 Muddat: {pkg.duration}
               </p>
               <button
@@ -695,28 +1105,206 @@ export default function TariflarClient() {
             </motion.div>
           ))}
         </div>
+
+        <p
+          className="mt-10 text-center text-[11px] uppercase text-neutral-400"
+          style={{ ...mono, letterSpacing: '0.06em', lineHeight: 1.7 }}
+        >
+          Muddat dizayn ishlari uchun. Patent guvohnomasi rasmiy tartibda alohida muddatda chiqadi.
+        </p>
+      </section>
+
+      {/* IJTIMOIY ISBOT */}
+      {(logos.length > 0 || quotes.length > 0) && (
+        <section className="border-t border-neutral-200 px-5 py-20 sm:px-8 md:py-28">
+          <div className="mx-auto max-w-5xl">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mx-auto mb-12 max-w-2xl text-center"
+            >
+              <Eyebrow index="§ 07" label="Ishonch" />
+              <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+                Biz bilan <span className="serif-highlight">ishlaganlar</span>
+              </h2>
+            </motion.div>
+
+            {logos.length > 0 && (
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="mb-14 grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6"
+              >
+                {logos.map((brand) => (
+                  <div key={brand.name} className="relative h-10 opacity-60 transition-opacity hover:opacity-100">
+                    <Image
+                      src={brand.logo}
+                      alt={brand.name}
+                      fill
+                      sizes="120px"
+                      className="object-contain"
+                      style={{ filter: 'grayscale(1)' }}
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {quotes.length > 0 && (
+              <div className="grid gap-5 md:grid-cols-3">
+                {quotes.map((item) => (
+                  <motion.figure
+                    key={item.name}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    className="flex flex-col rounded-2xl border border-neutral-200 p-6"
+                  >
+                    <blockquote className="mb-5 flex-grow text-[15px] text-neutral-700" style={{ lineHeight: 1.6 }}>
+                      “{item.quote}”
+                    </blockquote>
+                    <figcaption className="border-t border-neutral-100 pt-4">
+                      <p className="text-sm font-medium">{item.name}</p>
+                      <p className="text-xs text-neutral-400">{item.company}</p>
+                    </figcaption>
+                  </motion.figure>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* NEGA AYNAN BIZ */}
+      <section className="border-t border-neutral-200 px-5 py-20 sm:px-8 md:py-28">
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mx-auto mb-12 max-w-2xl text-center"
+          >
+            <Eyebrow index="§ 08" label="Farq" />
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+              Nega arzon dizayner <span className="serif-highlight">emas</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {WHY_US.map((item) => (
+              <motion.div
+                key={item.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="rounded-2xl border border-neutral-200 p-6 sm:p-7"
+              >
+                <h3 className="mb-2 text-lg font-semibold" style={{ letterSpacing: '-0.02em' }}>{item.title}</h3>
+                <p className="text-[15px] text-neutral-600" style={{ lineHeight: 1.6 }}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mt-6 rounded-2xl bg-neutral-50 p-6 sm:p-8"
+          >
+            <p
+              className="mb-5 text-[10px] uppercase text-neutral-400"
+              style={{ ...mono, letterSpacing: '0.14em' }}
+            >
+              Xavfingizni kamaytirish uchun
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {GUARANTEES.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700" style={{ lineHeight: 1.55 }}>
+                  <span className="mt-[3px] shrink-0 text-xs text-neutral-900">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-neutral-200 px-5 py-20 sm:px-8 md:py-28">
+        <div className="mx-auto max-w-3xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mb-12 text-center"
+          >
+            <Eyebrow index="§ 09" label="Savollar" />
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
+              Ko‘p so‘raladigan <span className="serif-highlight">savollar</span>
+            </h2>
+          </motion.div>
+
+          <div className="flex flex-col">
+            {FAQS.map((faq) => (
+              <motion.details
+                key={faq.q}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="group border-b border-neutral-200 py-5"
+              >
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[17px] font-medium marker:hidden">
+                  {faq.q}
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 shrink-0 text-neutral-400 transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-[15px] text-neutral-600" style={{ lineHeight: 1.65, maxWidth: '60ch' }}>
+                  {faq.a}
+                </p>
+              </motion.details>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA BLOK */}
       <section className="px-5 sm:px-8 py-20 md:py-28 bg-black text-white text-center">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          <Eyebrow index="§ 10" label="Suhbat" muted />
+        </motion.div>
         <motion.h2
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="font-bold tracking-tight max-w-2xl mx-auto"
-          style={{ fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.025em' }}
+          className="mx-auto max-w-2xl font-bold"
+          style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.03em', lineHeight: 1.08, color: '#fff' }}
         >
-          Qaysi paket sizga to‘g‘ri kelishini bilmayapsizmi?
+          Qaysi paket sizga to‘g‘ri kelishini <span className="serif-highlight">bilmayapsizmi?</span>
         </motion.h2>
         <motion.p
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-4 text-neutral-300 max-w-xl mx-auto"
+          className="mx-auto mt-5 text-neutral-300"
+          style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '42ch' }}
         >
-          20 daqiqalik bepul suhbatda aytaman. Sotmayman — maslahat beraman.
+          20 daqiqalik bepul suhbatda aytamiz. Sotmaymiz — maslahat beramiz.
         </motion.p>
         <motion.button
           initial="hidden"
@@ -731,7 +1319,10 @@ export default function TariflarClient() {
       </section>
 
       {/* FOOTER ABOVE */}
-      <p className="text-center text-xs text-neutral-400 px-5 py-8">
+      <p
+        className="px-5 py-10 text-center text-[11px] uppercase text-neutral-400"
+        style={{ ...mono, letterSpacing: '0.06em', lineHeight: 1.7 }}
+      >
         Narxlar 2026 yil sentyabr holatiga. Yakuniy narx loyiha hajmiga qarab aniqlanadi.
       </p>
 

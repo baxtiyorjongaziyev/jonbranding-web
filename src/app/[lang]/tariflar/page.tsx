@@ -3,7 +3,11 @@ import Script from 'next/script';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
+import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { fetchTestimonials } from '@/lib/data/testimonials';
+import { fetchBrands } from '@/lib/data/brands';
 import TariflarClient from './tariflar-client';
+import type { ServiceCase, ServiceLogo, ServiceQuote } from './tariflar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -37,6 +41,43 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await props.params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
 
+  const [projects, testimonials, brands] = await Promise.all([
+    fetchPortfolioList(safeLang),
+    fetchTestimonials(safeLang),
+    fetchBrands(),
+  ]);
+
+  const cases: ServiceCase[] = projects
+    .filter((project) => project.coverImage)
+    .map((project) => ({
+      slug: project.slug,
+      title: project.title,
+      client: project.client,
+      category: project.category,
+      categoryLabel: project.categoryLabel,
+      coverImage: project.coverImage,
+      result: project.results?.[0],
+    }));
+
+  const showcaseCategories = ['brandbook', 'brand-strategy', 'corporate-style'];
+  const showcase: string[] = Array.from(
+    new Set(
+      projects
+        .filter((project) => showcaseCategories.includes(project.category))
+        .flatMap((project) => [...(project.galleryImages ?? []), project.afterImage, project.coverImage])
+        .filter((src): src is string => Boolean(src))
+    )
+  ).slice(0, 8);
+
+  const quotes: ServiceQuote[] = testimonials
+    .filter((item) => item.quote && item.quote.length > 60)
+    .slice(0, 3)
+    .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
+
+  const logos: ServiceLogo[] = brands
+    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []))
+    .slice(0, 16);
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -53,7 +94,7 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <TariflarClient />
+      <TariflarClient cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
     </div>
   );
 };
