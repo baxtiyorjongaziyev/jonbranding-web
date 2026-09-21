@@ -619,22 +619,42 @@
     "solutionButton": "查看所有问题的解决方案"
   },
   "beforeAfter": {
-    "eyebrow": "案例证明",
+    "eyebrow": "案例证明与蜕变",
     "title": "品牌塑造在销售对话之前就证明了价值。",
-    "subtitle": "审计回答一个实际问题：买家是否理解、信任您，并有理由选择您？",
+    "subtitle": "我们不仅做美观的设计，更打造能在第一秒建立深度信任并带动业绩规模增长的高端品牌体系。",
     "ctaTitle": "准备好为您的品牌正名了吗？",
     "ctaDesc": "我们从品牌审计开始，找出影响最大的变化。",
     "ctaButton": "获取免费品牌审计",
     "cta": "获取免费品牌审计",
     "caseLabel": "改造前 / 改造后",
+    "sliderHint": "拖动滑块或点击按钮进行对比",
+    "beforeLabel": "改造前",
+    "afterLabel": "改造后",
+    "viewCase": "查看完整案例",
+    "problemTitle": "痛点（改造前）",
+    "solutionTitle": "战略解决方案（改造后）",
+    "resultTitle": "商业成果",
+    "compare50": "50 / 50 对比",
+    "compareBefore": "仅看改造前",
+    "compareAfter": "仅看改造后",
+    "allTransformations": "所有蜕变案例",
+    "allTransformationsSub": "针对每个品牌的定制战略路径与可量化的市场成效",
     "proofCards": [
       {
-        "value": "真实",
-        "label": "客户作品"
+        "value": "+178%",
+        "label": "平均销售额增长"
       },
       {
-        "value": "审计",
-        "label": "先诊断后设计"
+        "value": "3.2倍",
+        "label": "品牌资产估值提升"
+      },
+      {
+        "value": "120+页",
+        "label": "系统化品牌规范手册"
+      },
+      {
+        "value": "前3名",
+        "label": "细分市场主导地位"
       }
     ]
   },

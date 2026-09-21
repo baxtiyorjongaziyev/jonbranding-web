@@ -90,6 +90,18 @@ export interface BeforeAfterDictionary {
   cta?: string;
   caseLabel?: string;
   proofCards?: Array<{ value: string; label: string }>;
+  sliderHint?: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  viewCase?: string;
+  problemTitle?: string;
+  solutionTitle?: string;
+  resultTitle?: string;
+  compare50?: string;
+  compareBefore?: string;
+  compareAfter?: string;
+  allTransformations?: string;
+  allTransformationsSub?: string;
 }
 
 export interface BlogPreviewDictionary {

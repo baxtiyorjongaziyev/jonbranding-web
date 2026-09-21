@@ -613,22 +613,42 @@
     "solutionButton": "Bepul auditga yozilish"
   },
   "beforeAfter": {
-    "eyebrow": "Isbot",
+    "eyebrow": "Isbot & Transformatsiya",
     "title": "Brend **qimmatroq** ko'rinishni isbotlaydi.",
-    "subtitle": "Auditda aynan shunday savolga javob beramiz: mijoz sizni ko'rganda ishonadimi, tushunadimi va tanlashga sabab topadimi?",
+    "subtitle": "Biz shunchaki chiroyli dizayn chizmaymiz. Biz mijozda birinchi soniyadayoq yuksak ishonch uyg'otadigan va savdoni oshiradigan premium brend tizimini quramiz.",
     "ctaTitle": "Brendingiz o'zgarishga tayyormi?",
     "ctaDesc": "Avval brend auditdan boshlaymiz va qaysi o'zgarish eng katta ta'sir berishini aniqlaymiz.",
     "ctaButton": "Bepul Brand Audit olish",
     "cta": "Bepul Brand Audit olish",
     "caseLabel": "Oldin / Keyin",
+    "sliderHint": "Surgichni suring yoki taqqoslash uchun tugmalardan foydalaning",
+    "beforeLabel": "AVVAL",
+    "afterLabel": "KEYIN",
+    "viewCase": "Keysni to'liq ko'rish",
+    "problemTitle": "Muammo (Avval)",
+    "solutionTitle": "Strategik yechim (Keyin)",
+    "resultTitle": "Biznes natijasi",
+    "compare50": "50 / 50 Taqqoslash",
+    "compareBefore": "Faqat Avval",
+    "compareAfter": "Faqat Keyin",
+    "allTransformations": "Barcha transformatsiyalar",
+    "allTransformationsSub": "Har bir brend uchun alohida strategik yondashuv va o'lchanadigan natijalar",
     "proofCards": [
       {
-        "value": "5 signal",
-        "label": "ishonch diagnostikasi"
+        "value": "+178%",
+        "label": "o'rtacha savdo o'sishi"
       },
       {
-        "value": "1 reja",
-        "label": "sotuvga yaqin tuzatish"
+        "value": "3.2x",
+        "label": "brend qiymati oshishi"
+      },
+      {
+        "value": "120+",
+        "label": "varaqli tizimli brendbuk"
+      },
+      {
+        "value": "Top-3",
+        "label": "bozor mavqei"
       }
     ]
   },
