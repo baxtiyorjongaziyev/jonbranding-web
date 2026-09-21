@@ -1,7 +1,7 @@
 import fs from 'fs';
 import axios from 'axios';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 async function callGeminiWithRetry(url, data, options, maxRetries = 3) {
     let delay = 1500;
@@ -59,7 +59,11 @@ QATTIQ QOIDALAR:
 export async function parseWithAI(messageText) {
     const res = await callGeminiWithRetry(GEMINI_URL, {
         contents: [{ parts: [{ text: FULL_PROMPT(messageText) }] }],
-        generationConfig: { temperature: 0.1, maxOutputTokens: 2048 },
+        generationConfig: {
+            temperature: 0.1,
+            maxOutputTokens: 4096,
+            thinkingConfig: { thinkingBudget: 0 },
+        },
     }, { timeout: 30_000 });
     const reply = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
     const jsonMatch = reply.match(/\{[\s\S]*\}/);
@@ -155,7 +159,11 @@ FAQAT JSON qaytar, boshqa hech narsa yozma:
 export async function extractSearchTerms(postText) {
     const res = await callGeminiWithRetry(GEMINI_URL, {
         contents: [{ parts: [{ text: SEARCH_TERMS_PROMPT(postText) }] }],
-        generationConfig: { temperature: 0.1, maxOutputTokens: 256 },
+        generationConfig: {
+            temperature: 0.1,
+            maxOutputTokens: 2048,
+            thinkingConfig: { thinkingBudget: 0 },
+        },
     }, { timeout: 20_000 });
     const reply = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
     const jsonMatch = reply.match(/\{[\s\S]*\}/);
@@ -223,7 +231,11 @@ export async function parseFullCase(postText, folderName, imageFiles) {
     parts.push({ text: FULL_CASE_PROMPT(postText, folderName, limitedImages.length) });
     const res = await callGeminiWithRetry(GEMINI_URL, {
         contents: [{ parts }],
-        generationConfig: { temperature: 0.2, maxOutputTokens: 3072 },
+        generationConfig: {
+            temperature: 0.2,
+            maxOutputTokens: 4096,
+            thinkingConfig: { thinkingBudget: 0 },
+        },
     }, { timeout: 90_000 });
     const reply = res.data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
     const jsonMatch = reply.match(/\{[\s\S]*\}/);
