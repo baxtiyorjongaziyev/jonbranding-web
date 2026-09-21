@@ -71,7 +71,10 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 **Holat:** Qisman tasdiqlandi — URL nomi Claude branch preview ekanini ko'rsatadi, lekin lokal checkoutda bu branch yo'q va remote tekshiruv tarmoq sabab yakunlanmadi.
 
->>>>>>> Stashed changes
+**Keyingi aniqlik (2026-09-21):** `/tariflar` sahifasi PR #327 → #328 → #329 orqali `main`ga qo'shildi — `src/app/[lang]/tariflar/`.
+
+---
+
 ## 2026-09-19 | Sotuv menejerlari uchun ochiq Patent kalkulyatori va patent.jonbranding.uz subdomeni
 
 **Vazifa:** Mijozlar uchun kalkulyator gated (lead capture) holatda qolsin, lekin sotuv menejerlarimiz uchun doimiy ochiq (unlocked) versiyasi alohida `patent.jonbranding.uz` subdomenida bo'lsin.
