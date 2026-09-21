@@ -4,6 +4,25 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Portfolio Enrichment Mode: Mavjud Keyslarni Boyitish va Yangilash
+
+**Vazifa:** Agar portfolio keysi avvaldan mavjud bo'lsa, uni o'tkazib yubormasdan (skip qilmasdan), yangi rasmlar, boy tavsif, natijalar, teglar va SEO ma'lumotlari bilan boyitish (enrich qilish), agar mavjud bo'lmasa, yangi keys sifatida joylash.
+
+**Nima qilindi:**
+1. **Sanity Enrichment funksiyasi (`services/portfolio-bot/src/sanity.ts`):**
+   - `enrichPortfolioDocument(documentId, parsed, imageFiles)` funksiyasi yaratildi.
+   - Mavjud rasmlar saqlangan holda yangi rasmlar `galleryImages` massiviga qo'shiladi (asset ref tekshiruvi orqali dublikatlarsiz).
+   - `tags`, `results` (yangi metrikalar), `description`, `body`, `seoKeywords`, `metaTitle`, `metaDescription` aqlli tarzda birlashtiriladi (merge qilinadi).
+2. **Pipeline yangilandi (`services/portfolio-bot/src/pipeline.ts`):**
+   - Agar slug bo'yicha Sanity'da mavjud hujjat topilsa, u to'xtab qolmaydi, balki `enrichPortfolioDocument` orqali yangilanadi va natijada `🔄 Yangilandi va boyitildi (Enriched)` statusi beriladi.
+3. **Webhook Route yangilandi (`src/app/api/portfolio-telegram/route.ts`):**
+   - `/api/portfolio-telegram` orqali Telegram'dan kelgan xabar avvalgi keysga tegishli bo'lsa (masalan, qo'shimcha rasmlar yoki yangilangan matn), Sanity'dagi mavjud hujjatga yangi rasmlar va ma'lumotlar qo'shilib boyitiladi.
+4. **Tekshiruv:**
+   - `npm run build` (`services/portfolio-bot`) va `npm run typecheck` muvaffaqiyatli o'tdi.
+   - Test orqali mavjud `R Studio` keysi yangi teglar va natijalar bilan muvaffaqiyatli boyitildi.
+
+---
+
 ## 2026-09-21 | Barcha Telegram va Instagram Portfoliolari Sanity CMS'ga To'liq Yuklandi (Jami 21 ta Keys)
 
 **Vazifa:** Telegram (`@JonBranding`) va Instagram (`@jon.branding`) sahifalaridagi barcha haqiqiy mijoz portfoliolari Sanity CMS orqali veb-saytga to'liq kiritildi.
