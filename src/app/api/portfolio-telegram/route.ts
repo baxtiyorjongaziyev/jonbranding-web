@@ -149,31 +149,103 @@ async function publishGroup(key: string, group: QueuedGroup) {
 
     const slug = slugify(meta.title);
 
-    const existing = await sanity.fetch<string | null>(
-      '*[_type == "portfolio" && slug.current == $slug][0]._id',
+    const existing = await sanity.fetch<{
+      _id: string;
+      tags?: string[];
+      results?: Array<{ _key: string; metric: string; value: string }>;
+      description?: string;
+      coverImage?: { asset?: { _ref?: string } };
+      galleryImages?: Array<{ _key?: string; asset?: { _ref?: string } }>;
+    } | null>(
+      '*[_type == "portfolio" && slug.current == $slug][0] { _id, tags, results, description, coverImage, galleryImages }',
       { slug }
     );
-    if (existing) {
-      await ref.update({ processed: true, skippedReason: 'slug allaqachon mavjud' });
-      return { title: meta.title, status: 'skipped' };
-    }
 
     let images = await imagesFromDrive(meta.title, meta.client);
     const source = images.length > 0 ? 'drive' : 'telegram';
     if (images.length === 0) images = await imagesFromTelegram(group.photos);
 
-    if (images.length === 0) {
+    if (images.length === 0 && !existing) {
       await ref.update({ processed: true, skippedReason: 'rasm topilmadi' });
       return { title: meta.title, status: 'failed', reason: 'Na Drive papkasi, na postda rasm topilmadi' };
     }
 
-    const assets = [];
+    const assets: string[] = [];
     for (const image of images) {
-      const asset = await sanity.assets.upload('image', image.buffer, {
-        filename: image.filename,
-        contentType: image.contentType,
-      });
-      assets.push(asset._id);
+      try {
+        const asset = await sanity.assets.upload('image', image.buffer, {
+          filename: image.filename,
+          contentType: image.contentType,
+        });
+        assets.push(asset._id);
+      } catch (uploadErr) {
+        console.warn('[portfolio-telegram] Rasm yuklashda xatolik:', uploadErr);
+      }
+    }
+
+    if (existing) {
+      // Mavjud portfolio boyitiladi (enrich)
+      const patchData: Record<string, any> = {};
+
+      if (assets.length > 0) {
+        const existingRefs = new Set<string>();
+        if (existing.coverImage?.asset?._ref) existingRefs.add(existing.coverImage.asset._ref);
+        if (existing.galleryImages) {
+          existing.galleryImages.forEach((img) => {
+            if (img.asset?._ref) existingRefs.add(img.asset._ref);
+          });
+        }
+
+        const newAssets = assets.filter((id) => !existingRefs.has(id));
+        if (newAssets.length > 0) {
+          const currentGallery = existing.galleryImages || [];
+          patchData.galleryImages = [
+            ...currentGallery,
+            ...newAssets.map((id, i) => ({
+              _type: 'image',
+              _key: `gallery_enriched_${Date.now()}_${i}`,
+              asset: { _type: 'reference', _ref: id },
+            })),
+          ];
+
+          if (!existing.coverImage?.asset?._ref) {
+            patchData.coverImage = { _type: 'image', asset: { _type: 'reference', _ref: newAssets[0] } };
+          }
+        }
+      }
+
+      // Teglar
+      const mergedTags = Array.from(new Set([...(existing.tags || []), ...(meta.tags || [])])).filter(Boolean);
+      if (mergedTags.length > 0 && mergedTags.length !== (existing.tags || []).length) {
+        patchData.tags = mergedTags;
+      }
+
+      // Natijalar
+      const currentResults = existing.results || [];
+      const existingMetrics = new Set(currentResults.map((r) => r.metric.toLowerCase().trim()));
+      const newResults = (meta.results || []).filter((r) => !existingMetrics.has(r.metric.toLowerCase().trim()));
+      if (newResults.length > 0) {
+        patchData.results = [
+          ...currentResults,
+          ...newResults.map((r, i) => ({
+            _key: `result_enriched_${Date.now()}_${i}`,
+            metric: r.metric,
+            value: r.value,
+          })),
+        ];
+      }
+
+      // Tavsif
+      if (!existing.description || (meta.description && meta.description.length > existing.description.length)) {
+        patchData.description = meta.description;
+      }
+
+      if (Object.keys(patchData).length > 0) {
+        await sanity.patch(existing._id).set(patchData).commit();
+      }
+
+      await ref.update({ processed: true, sanityId: existing._id, action: 'enriched' });
+      return { title: meta.title, status: `enriched (${source})`, imageCount: images.length };
     }
 
     const created = await sanity.create({

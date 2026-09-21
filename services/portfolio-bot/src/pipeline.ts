@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { extractSearchTerms, parseFullCase } from './ai-processor.js';
 import { downloadToTemp, findFolderByName, listImagesInFolder } from './drive-finder.js';
-import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
+import { createPortfolioDocument, enrichPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { slugify } from './slug.js';
 
 export interface PipelineResult {
@@ -83,40 +83,39 @@ export async function processPost(
       };
     }
 
-    // Duplikatni erta tekshirish (Gemini chaqiruvlarini tejash uchun)
+    // Mavjud portfolio bor-yo'qligini tekshirish
     const roughSlug = slugify(searchTerms.title, folderId);
     const earlyId = await findExistingPortfolio(roughSlug);
     if (earlyId) {
-      console.log(`[pipeline] ⚠️ Allaqachon mavjud (taxminiy slug): ${earlyId}`);
-      return {
-        success: true,
-        sanityId: earlyId,
-        title: searchTerms.title,
-        bodyTitle: '⚠️ Duplicate — already exists in Sanity',
-      };
+      console.log(`[pipeline] ℹ️ Mavjud portfolio topildi (${earlyId}), boyitish rejimi yoqildi...`);
     }
 
     console.log('[pipeline] Step 5/6: Matn + rasmlar asosida to\'liq AI tahlili (SEO bilan)...');
     const aiData = await parseFullCase(messageText, folderName, imageFiles);
     console.log(`[pipeline] Tahlil qilindi → "${aiData.title}" (${aiData.category}), cover=${aiData.coverImageIndex}`);
 
-    // Yakuniy slug AI aniqlagan sarlavha bo'yicha — qayta tekshirish
+    // Yakuniy slug AI aniqlagan sarlavha bo'yicha
     const finalSlug = slugify(aiData.title, folderId);
-    const existingId = await findExistingPortfolio(finalSlug);
-    if (existingId) {
-      console.log(`[pipeline] ⚠️ Duplicate found: ${existingId}`);
+    const finalExistingId = await findExistingPortfolio(finalSlug);
+    const targetExistingId = finalExistingId || earlyId;
+
+    if (targetExistingId) {
+      console.log(`[pipeline] Step 6/6: Mavjud portfolio boyitilmoqda (${targetExistingId})...`);
+      await enrichPortfolioDocument(targetExistingId, aiData, imageFiles);
+      console.log(`[pipeline] 🔄 Portfolio boyitildi va yangilandi: ${targetExistingId}`);
+
       return {
         success: true,
-        sanityId: existingId,
+        sanityId: targetExistingId,
         title: aiData.title,
         imageCount: imageFiles.length,
-        bodyTitle: '⚠️ Duplicate — already exists in Sanity',
+        bodyTitle: '🔄 Yangilandi va boyitildi (Enriched)',
       };
     }
 
-    console.log('[pipeline] Step 6/6: Sanity\'ga yuklanmoqda...');
+    console.log('[pipeline] Step 6/6: Sanity\'ga yangi keys sifatida yuklanmoqda...');
     const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body);
-    console.log(`[pipeline] ✅ Portfolio created: ${sanityId}`);
+    console.log(`[pipeline] ✅ Yangi portfolio yaratildi: ${sanityId}`);
 
     return {
       success: true,
