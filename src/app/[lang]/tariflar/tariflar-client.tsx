@@ -59,7 +59,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         lead: 'Brendingizga nom topamiz — aytishga oson, esda qoladigan va patentga o‘tadigan.',
         deliverables: [
           '30 dan ortiq variant ishlanadi, 3 tasi finalga chiqadi',
-          'Har bir nomning ma’nosi va legendasi yozib beriladi',
+          'Har bir nom nimani anglatishi va uni mijozga qanday tushuntirish yozib beriladi',
           'Domen va ijtimoiy tarmoqlarda bandligi tekshiriladi',
           'Patent bazasidan dastlabki tekshiruv o‘tkaziladi',
           'Boshqa tillarda salbiy ma’no bermasligi tekshiriladi',
@@ -245,6 +245,10 @@ const PACKAGES: Package[] = [
     duration: '20–25 kun',
   },
 ];
+
+const ALL_SERVICES = SERVICE_GROUPS.flatMap((group) =>
+  group.items.map((item) => ({ ...item, group: group.title }))
+);
 
 const JOBS = [
   {
@@ -588,102 +592,6 @@ export default function TariflarClient() {
           </p>
         </motion.div>
 
-        {SERVICE_GROUPS.map((group) => (
-          <div key={group.title} className="mb-14 last:mb-0">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="mb-6 flex flex-col gap-1 border-b border-neutral-200 pb-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
-            >
-              <h3 className="text-xl font-semibold" style={{ letterSpacing: '-0.02em' }}>{group.title}</h3>
-              <p className="text-sm text-neutral-500 sm:text-right" style={{ maxWidth: '42ch', lineHeight: 1.55 }}>
-                {group.intro}
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-5">
-              {group.items.map((service) => (
-                <motion.article
-                  key={service.name}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="flex flex-col rounded-2xl border border-neutral-200 p-6 sm:p-7 transition-colors hover:border-neutral-400"
-                >
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <h4 className="text-lg font-semibold" style={{ letterSpacing: '-0.02em' }}>{service.name}</h4>
-                    <div className="shrink-0 text-right">
-                      <p className="whitespace-nowrap text-lg font-bold" style={numerals}>{service.price}</p>
-                      <p
-                        className="mt-1 text-[11px] uppercase text-neutral-400"
-                        style={{ ...mono, letterSpacing: '0.06em' }}
-                      >
-                        so‘m · {service.duration}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="mb-6 text-[15px] text-neutral-700" style={{ lineHeight: 1.6 }}>{service.lead}</p>
-
-                  <p
-                    className="mb-3 text-[10px] uppercase text-neutral-400"
-                    style={{ ...mono, letterSpacing: '0.12em' }}
-                  >
-                    Nima olasiz
-                  </p>
-                  <ul className="mb-6 flex flex-grow flex-col gap-2.5">
-                    {service.deliverables.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-700" style={{ lineHeight: 1.55 }}>
-                        <span className="mt-[3px] shrink-0 text-[11px] text-neutral-900">✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mb-4 rounded-xl bg-neutral-50 px-4 py-3.5">
-                    <p
-                      className="mb-1.5 text-[10px] uppercase text-neutral-400"
-                      style={{ ...mono, letterSpacing: '0.12em' }}
-                    >
-                      Bu sizga nima beradi
-                    </p>
-                    <p className="text-sm text-neutral-800" style={{ lineHeight: 1.55 }}>{service.benefit}</p>
-                  </div>
-
-                  <p className="mb-2 text-sm text-neutral-500" style={{ lineHeight: 1.55 }}>
-                    <span
-                      className="text-[10px] uppercase text-neutral-400"
-                      style={{ ...mono, letterSpacing: '0.12em' }}
-                    >
-                      Kimga{' '}
-                    </span>
-                    {service.audience}
-                  </p>
-                  {service.note && (
-                    <p className="text-xs text-neutral-400 leading-relaxed mb-4">{service.note}</p>
-                  )}
-                  {service.addon && (
-                    <p className="flex items-center justify-between gap-3 border-t border-neutral-200 pt-3 mb-5 text-sm">
-                      <span className="text-neutral-600">{service.addon.label}</span>
-                      <span className="whitespace-nowrap font-medium" style={numerals}>{service.addon.price}</span>
-                    </p>
-                  )}
-
-                  <button
-                    onClick={() => openModal(service.name)}
-                    className="mt-auto w-full rounded-full border border-black bg-white py-3.5 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white"
-                  >
-                    Ariza qoldirish
-                  </button>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        ))}
-
         <p
           className="mt-12 text-center text-[11px] uppercase text-neutral-400"
           style={{ ...mono, letterSpacing: '0.06em' }}
@@ -691,6 +599,126 @@ export default function TariflarClient() {
           Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.
         </p>
       </section>
+
+      {/* HAR BIR XIZMAT — ALOHIDA EKRAN */}
+      {ALL_SERVICES.map((service, i) => (
+        <motion.section
+          key={service.name}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUp}
+          className="flex min-h-[100svh] items-center border-t border-neutral-200 px-5 py-20 sm:px-8"
+        >
+          <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-2 md:gap-16">
+            <div className="md:sticky md:top-24 md:self-start">
+              <p
+                className="mb-6 flex items-center gap-2.5 text-[11px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.1em' }}
+              >
+                <span className="text-black">{String(i + 1).padStart(2, '0')}</span>
+                <span aria-hidden="true" className="inline-block h-px w-5 bg-neutral-300" />
+                {service.group}
+              </p>
+
+              <h3
+                className="font-bold"
+                style={{ fontSize: 'clamp(30px, 4.4vw, 52px)', letterSpacing: '-0.035em', lineHeight: 1.05 }}
+              >
+                {service.name}
+              </h3>
+
+              <p className="mt-5 text-neutral-700" style={{ fontSize: 'clamp(16px, 1.5vw, 19px)', lineHeight: 1.6, maxWidth: '34ch' }}>
+                {service.lead}
+              </p>
+
+              <div className="mt-8 flex items-end gap-6 border-t border-neutral-200 pt-6">
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    Narx
+                  </p>
+                  <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
+                    {service.price}
+                  </p>
+                  <p className="mt-0.5 text-xs text-neutral-400">so‘m</p>
+                </div>
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] uppercase text-neutral-400"
+                    style={{ ...mono, letterSpacing: '0.12em' }}
+                  >
+                    Muddat
+                  </p>
+                  <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
+                    {service.duration}
+                  </p>
+                </div>
+              </div>
+
+              {service.addon && (
+                <p className="mt-5 flex items-center justify-between gap-3 border-t border-neutral-200 pt-4 text-sm">
+                  <span className="text-neutral-600">{service.addon.label}</span>
+                  <span className="whitespace-nowrap font-medium" style={numerals}>{service.addon.price}</span>
+                </p>
+              )}
+
+              <button
+                onClick={() => openModal(service.name)}
+                className="mt-8 w-full rounded-full bg-black py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 md:w-auto md:px-10"
+              >
+                Ariza qoldirish
+              </button>
+            </div>
+
+            <div>
+              <p
+                className="mb-4 text-[10px] uppercase text-neutral-400"
+                style={{ ...mono, letterSpacing: '0.12em' }}
+              >
+                Nima olasiz
+              </p>
+              <ul className="mb-8 flex flex-col gap-3.5">
+                {service.deliverables.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-b border-neutral-100 pb-3.5 text-[15px] text-neutral-700 last:border-b-0"
+                    style={{ lineHeight: 1.55 }}
+                  >
+                    <span className="mt-[3px] shrink-0 text-xs text-neutral-900">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="rounded-2xl bg-neutral-50 p-5 sm:p-6">
+                <p
+                  className="mb-2 text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Bu sizga nima beradi
+                </p>
+                <p className="text-[15px] text-neutral-900" style={{ lineHeight: 1.6 }}>{service.benefit}</p>
+              </div>
+
+              <p className="mt-6 text-sm text-neutral-500" style={{ lineHeight: 1.55 }}>
+                <span
+                  className="text-[10px] uppercase text-neutral-400"
+                  style={{ ...mono, letterSpacing: '0.12em' }}
+                >
+                  Kimga{' '}
+                </span>
+                {service.audience}
+              </p>
+              {service.note && (
+                <p className="mt-3 text-xs text-neutral-400" style={{ lineHeight: 1.6 }}>{service.note}</p>
+              )}
+            </div>
+          </div>
+        </motion.section>
+      ))}
 
       {/* ISHLASH TARTIBI */}
       <section className="px-5 sm:px-8 pb-20 md:pb-28 max-w-4xl mx-auto">
