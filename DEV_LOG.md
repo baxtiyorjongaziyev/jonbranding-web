@@ -4,6 +4,27 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/credentials` — sotuvchi uchun taqdimot sahifasi
+
+**Muammo:** Sotuvchi qo'ng'iroq paytida narxlar, keyslar, jarayon va kafolatlarni bir nechta sahifadan yig'ib ko'rsatishga majbur edi.
+
+**Qilingan ish:**
+1. **Kontent ajratildi** — `/tariflar` ichidagi barcha matn konstantalari yangi `src/lib/sales-content.ts` fayliga ko'chirildi va eksport qilindi: `SERVICE_GROUPS`, `PACKAGES`, `SERVICE_CATEGORIES`, `ALL_SERVICES`, `FAQS`, `WHY_US`, `GUARANTEES`, `JOBS`, `PROCESS_STEPS`, `PRICE_FACTORS`. Endi matn bitta joyda tahrirlanadi, ikkala sahifa ham o'zgaradi.
+2. **`LeadModal` umumiy komponentga chiqarildi** — `src/components/sales/lead-modal.tsx`. Yangi `source` prop analitikada arizani qaysi sahifa keltirganini ajratadi (`tariflar_page` / `credentials_page`).
+3. **Yangi sahifa** — `src/app/[lang]/credentials/` (`page.tsx` + `credentials-client.tsx`). Bitta scroll sahifa, 9 ta raqamlangan bo'lim: muqova (9 yil / 500+ / 1000+), mijozlar logotiplari, 6 ta keys, JTBD, xizmatlar va narxlar, paketlar, jarayon + to'lov 50/30/20, nega biz + kafolatlar, mijozlar fikri, CTA.
+4. **PDF eksport** — muqovadagi tugma `window.print()` chaqiradi. `@media print` qoidalari tugmalarni yashiradi va bo'limlarni sahifa bo'linishidan saqlaydi.
+5. **Indekslanmaydi** — sahifa metadata'sida `robots: { index: false, follow: false }`, qo'shimcha `src/app/robots.ts` dagi `protectedPaths` ro'yxatiga `/credentials` qo'shildi. Narxlar ochiq turgani uchun sahifa faqat suhbat davomida link orqali beriladi.
+
+**Ma'lumot manbalari:** `fetchPortfolioList`, `fetchTestimonials`, `fetchBrands` — `/tariflar` bilan bir xil.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (243/243) — hammasi toza. Kontent ko'chirish xatti-harakatni o'zgartirmaydi.
+
+**Ochiq qolgan ishlar:**
+- i18n: `/credentials` matni ham `/tariflar` kabi komponent ichida qattiq yozilgan. `ru`/`en`/`zh` da o'zbekcha ko'rinadi. Matn barqarorlashgach `src/locales/*.json` ga ko'chirilishi kerak (AGENTS.md 1/2/9-qoidalar).
+- `window.print()` — brauzerning o'z PDF eksporti. Agar brendlangan PDF kerak bo'lsa, alohida server-side generatsiya kerak.
+
+---
+
 ## 2026-09-21 | Telegram Portfoliolarini Sanity CMS'ga Muvaffaqiyatli Yuklash (3 ta yangi keys jonli)
 
 **Muammo:** Saytda oxirgi loyiha 2026-06-26 dagi "Geonest" bo'lib, Telegram/Instagram'ga joylangan yangi loyihalar saytga chiqmay qolgan edi.

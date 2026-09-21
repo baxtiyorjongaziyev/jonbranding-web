@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 const SITE_URL = 'https://www.jonbranding.uz';
 
 export default function robots(): MetadataRoute.Robots {
-  const protectedPaths = ['/admin/', '/studio/', '/api/'];
+  const protectedPaths = ['/admin/', '/studio/', '/api/', '/credentials'];
   const searchableBots = [
     'OAI-SearchBot',
     'ChatGPT-User',
