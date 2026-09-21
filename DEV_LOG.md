@@ -4,6 +4,23 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Netlify qoldiqlari: `public/_headers` o'chirildi + o'chirish xavfsizligi tekshiruvi
+
+**Savol:** Netlify butunlay o'chirilsa saytga zarar bormi?
+
+**Tekshiruv natijasi — yo'q:**
+- `jonbranding.uz` nameserverlari: `karl.ns.cloudflare.com`, `katja.ns.cloudflare.com` → DNS **Cloudflare**da, Netlify'da emas.
+- A yozuvi: `76.76.21.21` → Vercel anycast IP.
+- Vercel'da domen `verified: true`, `configVerifiedAt` o'rnatilgan, `serviceType: external`, `zone: false`.
+- Netlify loyihasi (`brilliant-gumdrop-13991e`, id `fc716cd5-7945-4242-9f61-a74a83e69e01`) hali `https://jonbranding.uz` ni primary URL deb ko'rsatadi — bu eskirgan sozlama, DNS u yerga ishora qilmagani uchun hech qanday trafik olmaydi.
+- Netlify Forms yoqilgan, lekin `get-forms-for-project` bo'sh massiv qaytardi — yo'qoladigan ma'lumot yo'q.
+
+**Repo tomoni:** `netlify.toml` avval o'chirilgan. Qolgan yagona fayl — `public/_headers`, u faqat `/_next/static/*` uchun `Cache-Control: immutable` belgilardi. Vercel buni Next.js uchun o'zi qo'yadi, shuning uchun fayl o'chirildi. Xavfsizlik sarlavhalari (`Strict-Transport-Security`, `X-Frame-Options` va boshqalar) `next.config` dagi `headers()` da — ular Vercel'da ishlaydi, Netlify bilan bog'liq emas.
+
+**Qo'lda qilinadigan ish (Netlify MCP'da o'chirish operatsiyasi yo'q):** dashboardda avval `jonbranding.uz` domenini loyihadan olib tashlash, keyin loyihani o'chirish, so'ngra repodan Netlify GitHub App'ni uzish. Shundan keyin PR'lardagi qizil Netlify tekshiruvlari yo'qoladi.
+
+---
+
 ## 2026-09-21 | `/narxlar` va `/tariflar` o'rin almashdi
 
 **Muammo:** Yangi narxlar sahifasi `/tariflar` da turardi va unga saytdan birorta ham link yo'q edi — ya'ni hech kim topa olmasdi. Header, footer, `pricing` redirecti va sitemap — hammasi eski sahifaga (`/narxlar`) ishora qilardi.
