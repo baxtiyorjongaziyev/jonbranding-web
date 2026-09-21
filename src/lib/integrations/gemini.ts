@@ -150,6 +150,7 @@ export interface ParsedPortfolioProject {
   description: string;
   tags: string[];
   results: Array<{ metric: string; value: string }>;
+  isPortfolioCase: boolean;
 }
 
 export async function parsePortfolioMetadata(
@@ -160,13 +161,14 @@ export async function parsePortfolioMetadata(
     throw new Error('GEMINI_API_KEY is not configured in environment variables');
   }
 
-  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `Siz Jon Branding premium brend-agentligining yordamchisisiz.
 Quyidagi matndan portfolio loyihasi uchun ma'lumotlarni ajratib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):
 
 {
+  "isPortfolioCase": true,
   "title": "loyiha nomi (qisqa, 2-5 so'z)",
   "client": "mijoz kompaniya/ism nomi",
   "category": "Quyidagilardan faqat bittasi: logo-design | naming | brandbook | corporate-style | packaging | brand-strategy",
@@ -184,9 +186,12 @@ Kategoriyalar tavsifi:
 - "brand-strategy": brend strategiyasi, tadqiqotlar
 
 Juda MUHIM qoidalar:
-1. Loyiha nomi, mijoz, sanoat va faktlarni FAQAT berilgan matndan oling.
-2. O'zingizdan aslo hech narsa to'qib yozmang (gallyutsinatsiya qilmang). Agar mijoz haqida yozilmagan bo'lsa, "Noma'lum" deb bering.
-3. Loyiha faoliyatini yoki natijalarni bo'rttirmang. Faqat hujjatda bor faktlarni yozing.
+1. "isPortfolioCase":
+   - Agar bu matn haqiqiy mijoz uchun bajarilgan aniq loyiha keysi bo'lsa (masalan: "Zayyan uchun logotip va firma uslubi qilindi", "Feel it uchun logo yaratildi") -> true.
+   - Agar bu matn umumiy maslahat, post, blog, falsafa, reklama yoki lead-magnit bo'lsa (masalan: "Kichik boshlash normal holat", "Shaxsiyga POYDEVOR deb yozing", savol-javob, chaqiriq) -> isPortfolioCase: false bo'lishi SHART!
+2. Loyiha nomi, mijoz, sanoat va faktlarni FAQAT berilgan matndan oling.
+3. O'zingizdan aslo hech narsa to'qib yozmang (gallyutsinatsiya qilmang). Agar mijoz haqida yozilmagan bo'lsa, "Noma'lum" deb bering.
+4. Loyiha faoliyatini yoki natijalarni bo'rttirmang. Faqat matnda bor faktlarni yozing.
 
 MATN:
 """
