@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client';
+import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import type { AIEnrichedData, PortfolioPayload, SanityImageAsset } from './types.js';
@@ -11,6 +12,37 @@ const client = createClient({
   apiVersion: '2024-01-01',
   useCdn: false,
 });
+
+/**
+ * Telegram postidan barqaror Sanity `_id`.
+ *
+ * Bu funksiya `src/lib/portfolio-dedup.ts` dagi `portfolioDocId` ning aynan
+ * nusxasi. Nusxa kerak, chunki bu alohida TypeScript loyihasi (`rootDir: src`)
+ * va asosiy ilovadan import qila olmaydi.
+ *
+ * Maqsad: webhook (`/api/portfolio-telegram`) va bu bot bir postni ko'rsa ham
+ * Sanity'da bitta hujjat qolishi. Ikkalasi postni har xil kalit bilan
+ * belgilaydi, shuning uchun ID post matnidan hisoblanadi.
+ *
+ * DIQQAT: algoritm o'zgarsa, ikkala faylda ham bir xil o'zgarishi shart.
+ * Asosiy ilovadagi `portfolio-dedup.test.ts` golden qiymatni ushlab turadi:
+ * "Bekmarket Zayyan Naming va Branding loyihasi" -> tg-bef7595f22b63cb44d469111d37ed19e
+ */
+export function portfolioDocId(caption: string): string | null {
+  const normalized = caption
+    .toLowerCase()
+    .replace(/[^a-z0-9\u00C0-\u024F\u0400-\u04FF]+/g, ' ')
+    .trim();
+  if (normalized.length < 20) return null;
+  const hash = createHash('sha1').update(normalized).digest('hex').slice(0, 32);
+  return `tg-${hash}`;
+}
+
+/** Berilgan ID bilan hujjat bormi — rasmlarni bekorga yuklamaslik uchun. */
+export async function findPortfolioById(id: string): Promise<string | null> {
+  const result = await client.fetch<string | null>(`*[_id == $id][0]._id`, { id });
+  return result ?? null;
+}
 
 async function uploadImageFile(filePath: string, mime: string): Promise<SanityImageAsset> {
   const buffer = fs.readFileSync(filePath);
@@ -60,7 +92,9 @@ function applyCoverAndOrder(
 export async function createPortfolioDocument(
   parsed: AIEnrichedData,
   imageFiles: { path: string; mime: string }[],
-  bodyBlocks?: Array<{ style: string; children: Array<{ text: string }> }>
+  bodyBlocks?: Array<{ style: string; children: Array<{ text: string }> }>,
+  /** Postning asl matni — dublikatga qarshi barqaror ID shundan hisoblanadi. */
+  sourceCaption?: string
 ): Promise<string> {
   if (imageFiles.length === 0) {
     throw new Error('No images provided for portfolio document');
@@ -103,6 +137,16 @@ export async function createPortfolioDocument(
     metaDescription: parsed.metaDescription,
     seoKeywords: parsed.seoKeywords,
   };
+
+  // Manba matni bo'lsa, hujjat ID'si o'shandan hisoblanadi va
+  // `createIfNotExists` ishlatiladi: webhook allaqachon yozib ulgurgan
+  // bo'lsa, yangi hujjat yaratilmaydi. Matnsiz (masalan Drive papkasidan
+  // kelgan) hollarda oldingi xatti-harakat saqlanadi.
+  const docId = sourceCaption ? portfolioDocId(sourceCaption) : null;
+  if (docId) {
+    const existingDoc = await client.createIfNotExists({ ...payload, _id: docId });
+    return existingDoc._id;
+  }
 
   const doc = await client.create(payload);
   return doc._id;
@@ -286,4 +330,4 @@ export async function getAllPortfolioSlugsAndTitles(): Promise<{ slug: string; t
     return [];
   }
 }
-
+

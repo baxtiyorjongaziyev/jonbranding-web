@@ -4,10 +4,10 @@ export const Logo = ({ isWhite = false, className }: { isWhite?: boolean, classN
     <div className={cn("flex items-center", className)} suppressHydrationWarning>
         <img 
             src={isWhite ? "/assets/logos/logo-white.svg" : "/assets/logos/logo-black.svg"}
-            alt="Jon Branding Agency"
-            width={144}
-            height={32}
-            className="h-8 w-auto object-contain"
+            alt="Jon Branding"
+            width={88}
+            height={40}
+            className="h-10 w-auto object-contain"
         />
     </div>
 );

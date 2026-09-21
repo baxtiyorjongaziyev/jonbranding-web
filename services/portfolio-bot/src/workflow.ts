@@ -11,7 +11,13 @@ import {
   findFolderByName,
   listSubfolders,
 } from './drive-finder.js';
-import { createPortfolioDocument, findExistingPortfolio, getAllPortfolioSlugsAndTitles } from './sanity.js';
+import {
+  createPortfolioDocument,
+  findExistingPortfolio,
+  findPortfolioById,
+  getAllPortfolioSlugsAndTitles,
+  portfolioDocId,
+} from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
 import { slugify } from './slug.js';
 import { sendTelegramMessage } from './userbot.js';
@@ -109,6 +115,17 @@ async function downloadRemoteImages(
 }
 
 /**
+ * Post matnidan hisoblangan ID bo'yicha hujjat bor-yo'qligini tekshiradi.
+ * Webhook (`/api/portfolio-telegram`) shu postni allaqachon joylagan bo'lsa,
+ * bot uni qayta yaratmaydi.
+ */
+async function findByPostText(text: string): Promise<string | null> {
+  const docId = portfolioDocId(text);
+  if (!docId) return null;
+  return findPortfolioById(docId);
+}
+
+/**
  * Bir postni to'liq qayta ishlash
  */
 async function processSinglePost(
@@ -194,7 +211,7 @@ async function processSinglePost(
         // Duplikatni tekshirish
         const slug = slugify(aiData.title, aiData.driveFolderId ?? undefined);
 
-        const existingId = await findExistingPortfolio(slug);
+        const existingId = (await findByPostText(text)) ?? (await findExistingPortfolio(slug));
         if (existingId) {
           log(`[${source}:${sourceId}] Portfolio already exists: ${existingId}`);
           result.sanityId = existingId;
@@ -206,7 +223,8 @@ async function processSinglePost(
         const sanityId = await createPortfolioDocument(
           aiData,
           imageFiles,
-          aiData.body
+          aiData.body,
+          text
         );
         result.sanityId = sanityId;
         result.status = 'uploaded';
@@ -236,7 +254,7 @@ async function processSinglePost(
 
       if (config.autoUpload) {
         const slug = slugify(enrichedAiData.title);
-        const existingId = await findExistingPortfolio(slug);
+        const existingId = (await findByPostText(text)) ?? (await findExistingPortfolio(slug));
         if (existingId) {
           log(`[${source}:${sourceId}] Portfolio already exists: ${existingId}`);
           result.sanityId = existingId;
@@ -245,7 +263,7 @@ async function processSinglePost(
         }
 
         log(`[${source}:${sourceId}] Uploading images to Sanity...`);
-        const sanityId = await createPortfolioDocument(enrichedAiData, imageFiles, enrichedAiData.body);
+        const sanityId = await createPortfolioDocument(enrichedAiData, imageFiles, enrichedAiData.body, text);
         result.sanityId = sanityId;
         result.status = 'uploaded';
         log(`[${source}:${sourceId}] ✅ Uploaded to Sanity: ${sanityId}`);

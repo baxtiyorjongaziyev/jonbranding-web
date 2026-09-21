@@ -4,6 +4,143 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Codex review topilmalari tuzatildi (PR #332)
+
+**P1 — PDF faqat birinchi ekranni chop etardi.** `@media print` da `.cred-deck` ochilardi, lekin u ichki div; tashqi o'ramda `h-[100svh] overflow-hidden` qolib ketgan edi, shuning uchun qolgan slaydlar kesilardi. Tashqi o'ramga `.cred-root` klassi qo'shilib, print'da `height: auto; overflow: visible` qilindi.
+
+**P2 — arizalar noto'g'ri manbaga yozilardi.** `LeadModal` da `source` propi qo'shilganda faqat `form_name` va `cta_source` yangilangan edi; server payload'dagi `source`/`ctaSource`, `trackLead.source` va `modal_open` hodisasi hali `'tariflar_modal'` deb qattiq yozilgan edi. Ya'ni `/credentials` dan kelgan arizalar AmoCRM va server analitikasida narxlar sahifasi leadi sifatida ko'rinardi. Barcha to'rtta joy `source` propidan hisoblanadigan qilindi. `useEffect` bog'liqliklari ham yangilandi.
+
+**P2 — hash 500 belgida kesilardi.** Birinchi 500 normallashtirilgan belgisi bir xil bo'lgan ikkita haqiqiy post bir xil Sanity ID olardi va ikkinchisi "mavjud" deb jim o'tkazib yuborilardi. `slice(0, 500)` olib tashlandi — endi to'liq normallashtirilgan matn hashlanadi. Golden qiymat o'zgarmadi (sinov matni 500 belgidan qisqa). Uzun umumiy prefiksli ikkita post uchun alohida sinov qo'shildi.
+
+**P1 — i18n (bajarilmadi).** `/ru`, `/en`, `/zh` da narxlar sahifasi va taqdimot o'zbekcha chiqadi. Bu haqiqiy AGENTS.md buzilishi, lekin tuzatish uchun narx, kafolat va sotuv matnlarining rasmiy tarjimasi kerak — ularni o'ylab topib bo'lmaydi. Egasidan tarjima kelgach `src/locales/*.json` ga ko'chiriladi.
+
+**Tekshirildi:** `typecheck`, `lint` (0 xato, 0 ogohlantirish), `vitest` (250/250, 1 tasi yangi), `build`, bot uchun `tsc` — hammasi toza.
+
+---
+
+## 2026-09-21 | `/tariflar` va `/presentation` — haqiqiy 308 redirect
+
+**Muammo:** Sahifalar o'rin almashgach, `/tariflar` da eski (superseded) narxlar sahifasi qolgan edi. Egasi butun sessiya davomida `/tariflar` ga kirib kelgan va u yerda boshqa sahifani ko'rib "ishlamayapti" dedi. Xato emas edi — noto'g'ri qaror edi: eskirgan sahifani jonli URL'da qoldirish.
+
+**Aniqlangan qo'shimcha fakt:** eski narxlar sahifasi `XizmatlarClient` ni render qilardi — ya'ni `/xizmatlar` bilan aynan bir xil, faqat metadata boshqa. Yo'qotadigan o'ziga xos kontent yo'q.
+
+**Yechim:** ikkala eski manzil ham `next.config.js` dagi `redirects()` ga ko'chirildi:
+- `/tariflar` → `/narxlar`
+- `/presentation` → `/credentials`
+- Har biri uchun `/:lang(ru|en|zh)/...` varianti ham.
+
+`src/app/[lang]/tariflar/` va `src/app/[lang]/presentation/` kataloglari o'chirildi.
+
+**Nega sahifa ichidagi `redirect()` emas:** u `200` qaytarardi va `<meta http-equiv="refresh" content="1;url=...">` bilan 1 soniya kechikib yo'naltirardi, chunki sahifa avval render bo'lib, keyin client tomonda ko'chardi. Qidiruv tizimlari buni doimiy yo'naltirish deb hisoblamaydi. `next.config` dagi variant chekkada, render'gacha ishlaydi va toza `308` beradi.
+
+**Natija:** `noindex` hiylasi endi kerak emas — ikkita raqobatlashuvchi narxlar sahifasi umuman qolmadi.
+
+**Tekshirildi:** `/tariflar` → 308 → `/narxlar`, `/ru/tariflar` → 308 → `/ru/narxlar`, `/presentation` → 308 → `/credentials`; `/narxlar` va `/credentials` → 200. `typecheck`, `lint`, `vitest` (249/249), `build` — toza.
+
+---
+
+## 2026-09-21 | Netlify qoldiqlari: `public/_headers` o'chirildi + o'chirish xavfsizligi tekshiruvi
+
+**Savol:** Netlify butunlay o'chirilsa saytga zarar bormi?
+
+**Tekshiruv natijasi — yo'q:**
+- `jonbranding.uz` nameserverlari: `karl.ns.cloudflare.com`, `katja.ns.cloudflare.com` → DNS **Cloudflare**da, Netlify'da emas.
+- A yozuvi: `76.76.21.21` → Vercel anycast IP.
+- Vercel'da domen `verified: true`, `configVerifiedAt` o'rnatilgan, `serviceType: external`, `zone: false`.
+- Netlify loyihasi (`brilliant-gumdrop-13991e`, id `fc716cd5-7945-4242-9f61-a74a83e69e01`) hali `https://jonbranding.uz` ni primary URL deb ko'rsatadi — bu eskirgan sozlama, DNS u yerga ishora qilmagani uchun hech qanday trafik olmaydi.
+- Netlify Forms yoqilgan, lekin `get-forms-for-project` bo'sh massiv qaytardi — yo'qoladigan ma'lumot yo'q.
+
+**Repo tomoni:** `netlify.toml` avval o'chirilgan. Qolgan yagona fayl — `public/_headers`, u faqat `/_next/static/*` uchun `Cache-Control: immutable` belgilardi. Vercel buni Next.js uchun o'zi qo'yadi, shuning uchun fayl o'chirildi. Xavfsizlik sarlavhalari (`Strict-Transport-Security`, `X-Frame-Options` va boshqalar) `next.config` dagi `headers()` da — ular Vercel'da ishlaydi, Netlify bilan bog'liq emas.
+
+**Qo'lda qilinadigan ish (Netlify MCP'da o'chirish operatsiyasi yo'q):** dashboardda avval `jonbranding.uz` domenini loyihadan olib tashlash, keyin loyihani o'chirish, so'ngra repodan Netlify GitHub App'ni uzish. Shundan keyin PR'lardagi qizil Netlify tekshiruvlari yo'qoladi.
+
+---
+
+## 2026-09-21 | `/narxlar` va `/tariflar` o'rin almashdi
+
+**Muammo:** Yangi narxlar sahifasi `/tariflar` da turardi va unga saytdan birorta ham link yo'q edi — ya'ni hech kim topa olmasdi. Header, footer, `pricing` redirecti va sitemap — hammasi eski sahifaga (`/narxlar`) ishora qilardi.
+
+**Qilingan ish:** link o'zgartirilmadi, **sahifalar o'rin almashdi**:
+- Yangi sahifa endi `/narxlar` da (`page.tsx` + `narxlar-client.tsx`, eski nomi `tariflar-client.tsx`).
+- Eski sahifa `/tariflar` ga ko'chdi.
+- Ikkalasining `canonical`, `alternates`, OG url va breadcrumb JSON-LD yo'llari o'zgartirildi.
+
+**Nega link emas, sahifa ko'chirildi:** `/narxlar` — SEO tarixi bor, tabiiy o'zbekcha manzil. Yangi sahifa o'shani olishi kerak. Linklarni `/tariflar` ga burish esa yaxshi sahifani begona manzilda qoldirardi.
+
+**Eski sahifa `noindex`:** ikkita narxlar sahifasi qidiruvda bir-biri bilan raqobatlashmasligi uchun `/tariflar` ga `robots: { index: false, follow: true }` qo'yildi. Sitemapda faqat `/narxlar` bor.
+
+**Analitika:** `LeadModal` ning `source` standart qiymati `tariflar` dan `narxlar` ga o'zgardi, `/narxlar` sahifasi uni aniq uzatadi (`narxlar_page` / `narxlar_modal`).
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249), `npm run build` — ikkala route ham qurildi.
+
+---
+
+## 2026-09-21 | `/credentials` qaytadan qurildi — slaydli taqdimot, `/presentation` yopildi
+
+**Sabab:** Egasi ikkala taqdimotni ham rad etdi ("ikkalasi ham", "hammasi"). Birinchi `/credentials` versiyasi uzun scroll sahifa edi — oldingi "gazeta bo'lib qolyapti" e'tiroziga qaytib tushgan. Eski `/presentation` esa eskirgan raqamlar bilan turardi ("50+ loyiha", holbuki 1000+).
+
+**Yangi format — slayd deki:**
+1. `credentials-client.tsx` to'liq qayta yozildi. Scroll o'rniga ekranma-ekran slaydlar: klaviatura (←/→/Space/Home/End), svayp, tugmalar, yuqorida progress chizig'i, pastda `01 / 18 — Nomi` hisoblagichi.
+2. **Tipografika** — sarlavhalar `--font-serif` (Instrument Serif), eyebrow va raqamlar `--font-mono`. Ilgari hamma joyda sans edi, shuning uchun zaif ko'rinardi.
+3. **Keys slaydlari** — rasm butun ekranga (`fill`, gradient overlay), matn pastda. Matn devoridan qutulish uchun asosiy o'zgarish shu.
+4. Slaydlar: muqova → mijozlar → muammo → yechim → har keys alohida → har xizmat guruhi alohida → paketlar → jarayon → kafolatlar → har sharh alohida → CTA.
+5. **PDF** — `@media print` da barcha slaydlar ketma-ket chiqadi (`cred-print-all`), har biri alohida sahifa (`break-after: page`).
+
+**Sayt chrome'i yopildi:** taqdimotda header, footer, sticky CTA, Oisha widget, cookie banner, lead-magnet popup va mobil nav slaydlar ustiga tushib, ekran ulashuvda ko'rinib qolardi. `header.tsx` va `footer.tsx` da mavjud `/pro-preview` shartiga `/credentials` qo'shildi; `client-enhancements.tsx` da `isDeck` bayrog'i olti komponentni o'chiradi.
+
+**`/presentation`:** `presentation-client.tsx` o'chirildi, `page.tsx` `/credentials` ga `redirect` qiladi. Sahifa butunlay o'chirilmadi — link tarqatilgan bo'lishi mumkin. Koddan hech narsa unga link bermas edi.
+
+**Vizual tekshiruv:** Playwright bilan 1440×900 va 390×844 da muqova, muammo, xizmatlar va paketlar slaydlari suratga olindi va ko'rildi. Chap pastdagi "N" doira — Next.js dev indikatori, productionda yo'q.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249), `npm run build` — hammasi toza.
+
+**Ochiq:** i18n hali yo'q — matn komponent ichida, `/ru` `/en` `/zh` da o'zbekcha ko'rinadi.
+
+---
+
+## 2026-09-21 | Telegram → Sanity: dublikatga qarshi himoya (ikkala tizim birga ishlay oladi)
+
+**Muammo:** Bir Telegram postini ikkita mustaqil tizim o'qiydi — `src/app/api/portfolio-telegram` (Vercel webhook) va `services/portfolio-bot` (userbot). Ikkalasi ham Sanity'ga `client.create()` bilan yozardi, ya'ni bir postdan ikkita portfolio hujjati chiqishi mumkin edi. Mavjud slug tekshiruvi buni ushlamaydi: slug Gemini bergan sarlavhadan yasaladi, ikkala tizim esa har xil sarlavha olishi mumkin.
+
+**Yechim — post matnidan barqaror hujjat ID'si:**
+1. `src/lib/portfolio-dedup.ts` — `normalizeCaption()` (kichik harf, faqat lotin/kirill harf va raqamlar, ortiqcha bo'shliqlar olib tashlanadi, 500 belgigacha) va `portfolioDocId()` (sha1, `tg-<32 hex>`). Matn 20 belgidan qisqa bo'lsa `null`.
+2. Ikkala yozuvchi ham shu ID bilan `createIfNotExists` ishlatadi. Kim birinchi ulgursa o'sha yozadi, ikkinchisi mavjud hujjatni qaytaradi — poyga holatida ham dublikat chiqmaydi.
+3. Rasmlarni yuklashdan **oldin** ID bo'yicha tekshiriladi, shunda bekorga Sanity asset upload qilinmaydi.
+4. Eski slug tekshiruvi saqlandi — ikkinchi qatlam sifatida.
+
+**Nusxa haqida:** `services/portfolio-bot` alohida TypeScript loyihasi (`rootDir: src`), asosiy ilovadan import qila olmaydi. Shuning uchun `portfolioDocId` nusxasi `services/portfolio-bot/src/sanity.ts` da ham bor. Algoritm ikkala joyda bir xil bo'lishi SHART. `src/lib/portfolio-dedup.test.ts` dagi golden test shuni ushlab turadi: `"Bekmarket Zayyan Naming va Branding loyihasi"` → `tg-bef7595f22b63cb44d469111d37ed19e`. Nusxani o'zgartirsangiz testni ham yangilang.
+
+**Eslatma:** `\p{L}` unicode property escape ishlatilmadi — `tsconfig.typecheck.json` eski ES maqsadida TS1501 beradi. O'rniga aniq diapazonlar: `a-z0-9`, `\u00C0-\u024F` (kengaytirilgan lotin), `\u0400-\u04FF` (kirill).
+
+**Natija:** Endi webhook va portfolio-bot bir vaqtda ishlasa ham xavfsiz. Bittasini o'chirish shart emas.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249, 6 tasi yangi), `npm run build`, `services/portfolio-bot` uchun `tsc` va `dist` qayta yig'ildi.
+
+**Cheklov:** Post matni ikki tizim o'qishi orasida tahrirlansa, hash o'zgaradi va himoya ishlamaydi. Bunday holatda slug tekshiruvi ikkinchi qatlam bo'lib qoladi.
+
+---
+
+## 2026-09-21 | `/credentials` — sotuvchi uchun taqdimot sahifasi
+
+**Muammo:** Sotuvchi qo'ng'iroq paytida narxlar, keyslar, jarayon va kafolatlarni bir nechta sahifadan yig'ib ko'rsatishga majbur edi.
+
+**Qilingan ish:**
+1. **Kontent ajratildi** — `/tariflar` ichidagi barcha matn konstantalari yangi `src/lib/sales-content.ts` fayliga ko'chirildi va eksport qilindi: `SERVICE_GROUPS`, `PACKAGES`, `SERVICE_CATEGORIES`, `ALL_SERVICES`, `FAQS`, `WHY_US`, `GUARANTEES`, `JOBS`, `PROCESS_STEPS`, `PRICE_FACTORS`. Endi matn bitta joyda tahrirlanadi, ikkala sahifa ham o'zgaradi.
+2. **`LeadModal` umumiy komponentga chiqarildi** — `src/components/sales/lead-modal.tsx`. Yangi `source` prop analitikada arizani qaysi sahifa keltirganini ajratadi (`tariflar_page` / `credentials_page`).
+3. **Yangi sahifa** — `src/app/[lang]/credentials/` (`page.tsx` + `credentials-client.tsx`). Bitta scroll sahifa, 9 ta raqamlangan bo'lim: muqova (9 yil / 500+ / 1000+), mijozlar logotiplari, 6 ta keys, JTBD, xizmatlar va narxlar, paketlar, jarayon + to'lov 50/30/20, nega biz + kafolatlar, mijozlar fikri, CTA.
+4. **PDF eksport** — muqovadagi tugma `window.print()` chaqiradi. `@media print` qoidalari tugmalarni yashiradi va bo'limlarni sahifa bo'linishidan saqlaydi.
+5. **Indekslanmaydi** — sahifa metadata'sida `robots: { index: false, follow: false }`, qo'shimcha `src/app/robots.ts` dagi `protectedPaths` ro'yxatiga `/credentials` qo'shildi. Narxlar ochiq turgani uchun sahifa faqat suhbat davomida link orqali beriladi.
+
+**Ma'lumot manbalari:** `fetchPortfolioList`, `fetchTestimonials`, `fetchBrands` — `/tariflar` bilan bir xil.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (243/243) — hammasi toza. Kontent ko'chirish xatti-harakatni o'zgartirmaydi.
+
+**Ochiq qolgan ishlar:**
+- i18n: `/credentials` matni ham `/tariflar` kabi komponent ichida qattiq yozilgan. `ru`/`en`/`zh` da o'zbekcha ko'rinadi. Matn barqarorlashgach `src/locales/*.json` ga ko'chirilishi kerak (AGENTS.md 1/2/9-qoidalar).
+- `window.print()` — brauzerning o'z PDF eksporti. Agar brendlangan PDF kerak bo'lsa, alohida server-side generatsiya kerak.
+
+---
+
 ## 2026-09-21 | Portfolio Enrichment Mode: Mavjud Keyslarni Boyitish va Yangilash
 
 **Vazifa:** Agar portfolio keysi avvaldan mavjud bo'lsa, uni o'tkazib yubormasdan (skip qilmasdan), yangi rasmlar, boy tavsif, natijalar, teglar va SEO ma'lumotlari bilan boyitish (enrich qilish), agar mavjud bo'lmasa, yangi keys sifatida joylash.
