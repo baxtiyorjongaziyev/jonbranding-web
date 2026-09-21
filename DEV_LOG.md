@@ -75,6 +75,46 @@ Planshetdan boshlab hamma slayd to'liq sig'adi. Telefonda kontenti ko'p slaydlar
 
 ---
 
+## 2026-09-21 | Patent Menejer sahifasi: Ortiqcha matnlar va kaskad kartochkalari olib tashlandi
+
+**Vazifa:** `patent.jonbranding.uz` / `/[lang]/patent-menejer` sahifasidan "Doimiy Ochiq Versiya (Menejer Rejimi)", "Sotuv Menejeri — Patent Kalkulyatori", "1. Istisno Chegirmasi", "2. Salom Chegirmasi", "3. Promokod", "4. Arboun" kabi barcha ortiqcha matnlar olib tashlandi.
+
+**Natija:**
+- Sahifa to'liq toza, standart mijozlar sahifasi kabi professional ko'rinishga keltirildi.
+- Kalkulyator funksionalligi `alwaysUnlocked={true}` holatida saqlanib qoldi (hech qanday telefon/ism so'ralmaydi, hisob-kitoblar darhol ochiq).
+
+## 2026-09-21 | Do/Posle (Before/After) Bloki To'liq Qayta Dizayn Qilindi ("Sales Machine" Standarti)
+
+**Vazifa:** Foydalanuvchining "Do posle blokni qayta dizayn qilib ber" talabiga asosan bosh sahifadagi Before/After bo'limi jahon darajasidagi premium agentlik ("Sales Machine") standartida to'liq qayta loyihalandi.
+
+**Bajarilgan Asosiy O'zgarishlar:**
+1. **Interactive Brand Selector (Interaktiv brendlar navigatsiyasi):**
+   - 4 ta asosiy keys (Den Aroma, Savod, Fidda by Sevara, Boyarin) bo'yicha silliq tablar joriy qilindi.
+   - Har bir tabda brend nomi, sohasi va eng asosiy natija ko'rsatkichi (`+178%`, `Top-3`, `+40%`, `+85%`) aks etadi.
+   - Framer Motion `layoutId="activeBrandPill"` orqali silliq o'tish animatsiyasi yaratildi.
+2. **Cinematic Split-Comparison Stage (Katta ekranli interaktiv taqqoslash sahnasi):**
+   - `ImageComparisonSlider` da avvalgi `clipPath` va yorliqlar teskari joylashgan xatolik to'liq tuzatildi:
+     - Chap tomonda: **AVVAL** (Eski ko'rinish / 3 Atirchi va boshqalar) + qizg'ish neytral ishonchsizlik belgisi.
+     - O'ng tomonda: **KEYIN** (JonBranding premium aydentikasi) + moviy-zumrad jilosidagi premium belgi.
+     - O'rtada: Lazer nurli bo'lgich chiziq va pulsatsiyali qulay tutqich.
+   - Klaviatura bilan boshqarish (`ArrowLeft`, `ArrowRight`, `Home`, `End`) va qulay sensorli drag/pan physics qo'shildi.
+   - Tezkor boshqaruv tugmalari: `[ Faqat Avval ]`, `[ 50 / 50 Taqqoslash ]`, `[ Faqat Keyin ]`.
+3. **Strategic Case Dossier (Strategik tahlil va biznes natijasi paneli):**
+   - Har bir brend uchun alohida chuqur tahlil kartochkasi:
+     - **Muammo (Avval):** Eski dizayn nima uchun sotuvni pasaytirayotgan edi va mijozlar qanday e'tiroz bildirar edi?
+     - **Strategik Yechim (Keyin):** JonBranding qanday nom, aydentika va brendbuk tizimini ishlab chiqdi?
+     - **Biznes Natijasi:** 3 ta aniq raqamli ko'rsatkich (masalan: `+178% Savdo o'sishi`, `3.2x Brend qiymati`, `Top-3 Bozor ulushi`).
+     - **Harakatga chaqiruv (CTA):** Har bir keys uchun to'g'ridan-to'g'ri `/[lang]/portfolio/[slug]` ga o'tish tugmasi va "Bepul Brand Audit olish" modalini ochuvchi tugma.
+4. **Bottom Multi-Card Gallery (Barcha transformatsiyalar galereyasi):**
+   - Sahna ostida barcha 4 ta transformatsiyaning vizual miniatyurasi va ko'rsatkichlari joylashtirildi. Foydalanuvchi istalgan kartani bosib asosiy sahnani shu keysga almashtirishi mumkin.
+5. **i18n & Uzbek-First:**
+   - O'zbek tili (`uz.json`) birinchi bo'lib to'liq yozildi, so'ngra `ru.json`, `en.json`, `zh.json` ga tarjima qilindi.
+6. **Tekshirildi:**
+   - `npm run typecheck` — 0 ta xato bilan o'tdi.
+   - `npm run build` — 166 ta sahifaning barchasi 100% muvaffaqiyatli statik/dinamik yig'ildi.
+
+---
+
 ## 2026-09-21 | Portfolio UI va Render Tizimi Audit Qilindi va To'liq Tuzatildi
 
 **Vazifa:** Foydalanuvchi ko'zi bilan qaralganda aniqlangan barcha kamchiliklar (saralash, filtrlar, case study matnlari va rasmlar) to'liq tuzatildi va jonli sahifalarda tekshirildi.
