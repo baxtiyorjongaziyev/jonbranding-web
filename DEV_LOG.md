@@ -4,6 +4,20 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Codex review (PR #333) — to'rtta topilma tuzatildi
+
+**1. Native print bo'sh sahifa berardi (P2, haqiqiy).** `printing` false bo'lganda nusxa DOM'da yo'q edi, lekin print CSS `.cred-live` ni yashirardi — Ctrl/Cmd+P bosgan odam bo'sh PDF olardi. Endi yashirish `.cred-printing` klassi ostida: nusxa bo'lmasa jonli slayd chop etiladi. O'lchandi: native print matn uzunligi 0 emas, 272 belgi.
+
+**2. Ataylab qo'yilgan shaffoflik yo'qolardi (P2, haqiqiy).** `.cred-print-all * { opacity: 1 !important }` keys rasmining `0.55`, logotiplarning 45% va so'ngan matnlarni ham to'liq ochib yuborardi — PDF'da ierarxiya yo'qolardi. Endi faqat `transform` bekor qilinadi. O'lchandi: keys rasmi PDF'da `opacity: 0.55`.
+
+**3. Tugmada qattiq yozilgan o'zbekcha matn (P1).** `Tayyorlanmoqda…` `/ru`, `/en`, `/zh` da ham chiqardi. Tarjima qo'shish o'rniga yozuv tilga bog'liq bo'lmagan holga keltirildi: `PDF` → `PDF ···`. Sahifaning qolgan matni hali o'zbekcha bo'lgani uchun bitta satrni lug'atga ko'chirish nomuvofiqlik bo'lardi.
+
+**4. Sinov qator bo'yicha tekshirmasdi (P2, haqiqiy).** `expect(doc).toContain(price)` butun hujjat bo'yicha qidirardi: Naming narxini Logo narxiga almashtirsak, ikkala raqam ham hujjatda boshqa joyda uchragani uchun sinov o'tib ketardi. Endi markdown jadvalidan xizmat nomi turgan qator topiladi va narx/muddat aynan o'sha qatorda tekshiriladi. Paketlar ham shunday.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (266/266), `build`, hamda Playwright bilan native print va PDF tugmasi alohida tekshirildi.
+
+---
+
 ## 2026-09-21 | `/credentials` — global ContactModal taqdimot ustiga chiqib qolardi
 
 **Topilish yo'li:** egasi "ko'zing bilan ko'r, odam uchun mantiqlimi" dedi. 18 slaydning hammasi suratga olinib ko'rildi — 17-slaydda ekran o'rtasida **"Free Brand Audit"** oynasi ochilib turgan edi. Ingliz tilida, ko'k rangda, deki dizayniga umuman yopishmaydi. Avvalgi o'lchovlar (toshish, sahifa soni) buni ko'rsatmagan edi, chunki ular faqat slayd ichini o'lchardi.

@@ -620,7 +620,10 @@ function Deck({
   const current = slides[index];
 
   return (
-    <div className="cred-root relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
+    <div
+      className={`cred-root relative h-[100svh] w-full overflow-hidden${printing ? ' cred-printing' : ''}`}
+      style={{ background: INK }}
+    >
       <style>{`
         /* Slayd ichki bo'shliqlari ekran o'lchamiga ergashadi. Pastdagi
            qiymat boshqaruv paneli balandligini ham qo'shadi, aks holda
@@ -669,8 +672,10 @@ function Deck({
           @page { size: A4 landscape; margin: 0; }
 
           .cred-chrome, .cred-no-print { display: none !important; }
-          .cred-live { display: none !important; }
-          .cred-print-all { display: block !important; }
+          /* Nusxa mavjud bo'lgandagina jonli deki yashiriladi. Aks holda
+             Ctrl/Cmd+P bosilganda sahifa umuman bo'sh chiqardi. */
+          .cred-printing .cred-live { display: none !important; }
+          .cred-printing .cred-print-all { display: block !important; }
 
           .cred-root {
             height: auto !important;
@@ -703,10 +708,10 @@ function Deck({
             print-color-adjust: exact !important;
           }
 
-          /* Ekranda animatsiya uchun qo'yilgan holat chop etishda qolib
-             ketmasligi kerak. */
+          /* Faqat animatsiya siljishini bekor qilamiz. Shaffoflikka tegilmaydi:
+             keys rasmidagi 0.55, logotiplardagi 45% va so'ngan matnlar
+             dizaynning bir qismi, ularsiz PDF'da ierarxiya yo'qoladi. */
           .cred-print-all * {
-            opacity: 1 !important;
             transform: none !important;
           }
         }
@@ -769,7 +774,7 @@ function Deck({
               className="rounded-full px-3.5 py-2 text-[10px] uppercase backdrop-blur-sm transition-opacity hover:opacity-75"
               style={{ ...mono, letterSpacing: '0.12em', background: 'rgba(11,11,12,.55)', color: 'rgba(255,255,255,.75)' }}
             >
-              {printing ? 'Tayyorlanmoqda…' : 'PDF'}
+              PDF{printing ? ' ···' : ''}
             </button>
             <button
               type="button"
