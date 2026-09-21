@@ -4,6 +4,24 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `docs/NARXLAR.md` — barcha AI agentlar uchun narxlar ma'lumotnomasi
+
+**Talab:** narxlar sahifasining hozirgi holati bilan barcha AI agentlar (ChatGPT, Claude, Claude Code, Gemini, Codex, Antigravity) tanishib chiqsin.
+
+**Qilingan ish:**
+1. **`docs/NARXLAR.md`** — yagona ma'lumotnoma: qayerda joylashgani, 9 ta alohida xizmat narxi va muddati, 3 ta paket (tarkibi, tejaladigan summa), ish jarayoni va 50/30/20 to'lov, kafolatlar ro'yxati, sahifa tuzilishi (§01–§10), egasining uslub talablari (ko'plik shakl, "yaratish" so'zi ishlatilmasligi, FAB yondashuv), ochiq qolgan ishlar va narxni o'zgartirish tartibi.
+2. **`AGENTS.md`** — sahifalar jadvali yangilandi (`/narxlar` va `/credentials` qo'shildi, ular eskirgan edi), Qoidalar bo'limiga 0-qoida sifatida majburiy o'qish qo'yildi.
+3. **`CLAUDE.md`** — "Narxlar sahifasi" bo'limi qo'shildi.
+4. **`src/lib/sales-content.test.ts`** — hujjat koddan ajralib ketmasligi uchun 23 ta sinov. Har bir xizmat narxi/muddati, har bir paket raqami va tarkibi hujjatda borligini tekshiradi.
+
+**Nega sinov kerak:** noto'g'ri narx yozilgan hujjat hujjatsizlikdan battar — agent unga ishonib mijozga xato raqam aytadi. Sinov birinchi ishga tushirilishidayoq nomuvofiqlikni topdi (hujjatda `Har qo'shimcha SKU` to'g'ri apostrof bilan emas, oddiy apostrof bilan yozilgan edi).
+
+**Muhim fakt hujjatga yozildi:** paket muddatlari (20–45 kun) faqat dizayn ishlariga tegishli, patent alohida chiqadi (oddiy 7 oy, tezkor 20–40 kun). Bu ziddiyatga o'xshaydi va agentlar uni "xato" deb tuzatib yuborishi mumkin edi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (273/273, 23 tasi yangi), `build` — toza.
+
+---
+
 ## 2026-09-21 | `/credentials` — qurilmaga moslik
 
 **Talab:** "Mijoz qanday device dan kirsa shunga mos bo'lsin."
