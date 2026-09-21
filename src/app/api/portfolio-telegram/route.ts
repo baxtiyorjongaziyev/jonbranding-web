@@ -4,6 +4,7 @@ import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-driv
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
 import { getDb } from '@/lib/firebase-admin';
+import { portfolioDocId } from '@/lib/portfolio-dedup';
 
 export const maxDuration = 60;
 
@@ -141,6 +142,21 @@ async function publishGroup(key: string, group: QueuedGroup) {
   const ref = getDb().collection(QUEUE).doc(key);
 
   try {
+    // Post matnidan barqaror ID — portfolio-bot ham aynan shu ID'ni hisoblaydi,
+    // shuning uchun ikkala tizim bir postni ko'rsa ham bitta hujjat qoladi.
+    const docId = portfolioDocId(group.caption);
+    if (!docId) {
+      await ref.update({ processed: true, skippedReason: 'matn juda qisqa' });
+      return { title: group.caption.slice(0, 60), status: 'skipped' };
+    }
+
+    // Rasmlarni yuklashdan oldin tekshiramiz — bekorga upload qilmaslik uchun.
+    const already = await sanity.fetch<string | null>('*[_id == $id][0]._id', { id: docId });
+    if (already) {
+      await ref.update({ processed: true, skippedReason: 'bu post allaqachon joylangan' });
+      return { title: group.caption.slice(0, 60), status: 'skipped' };
+    }
+
     const meta = await parsePortfolioMetadata(group.caption);
     const slug = slugify(meta.title);
 
@@ -171,7 +187,10 @@ async function publishGroup(key: string, group: QueuedGroup) {
       assets.push(asset._id);
     }
 
-    const created = await sanity.create({
+    // `createIfNotExists` — ikkala tizim baravar ishga tushsa ham ikkinchisi
+    // mavjud hujjatni qaytaradi, yangisini yaratmaydi.
+    const created = await sanity.createIfNotExists({
+      _id: docId,
       _type: 'portfolio',
       title: meta.title,
       slug: { _type: 'slug', current: slug },

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { extractSearchTerms, parseFullCase } from './ai-processor.js';
 import { downloadToTemp, findFolderByName, listImagesInFolder } from './drive-finder.js';
-import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
+import { createPortfolioDocument, findExistingPortfolio, findPortfolioById, portfolioDocId } from './sanity.js';
 import { slugify } from './slug.js';
 /**
  * Telegram/Instagram post matnidan boshlab, Google Drive'da nom bo'yicha
@@ -70,7 +70,10 @@ export async function processPost(messageText, channelId, localImages) {
         console.log(`[pipeline] Tahlil qilindi → "${aiData.title}" (${aiData.category}), cover=${aiData.coverImageIndex}`);
         // Yakuniy slug AI aniqlagan sarlavha bo'yicha — qayta tekshirish
         const finalSlug = slugify(aiData.title, folderId);
-        const existingId = await findExistingPortfolio(finalSlug);
+        // Avval post matnidan hisoblangan ID bo'yicha — webhook joylab
+        // ulgurgan bo'lsa shu yerda to'xtaymiz, keyin eski slug tekshiruvi.
+        const dedupId = portfolioDocId(messageText);
+        const existingId = (dedupId ? await findPortfolioById(dedupId) : null) ?? (await findExistingPortfolio(finalSlug));
         if (existingId) {
             console.log(`[pipeline] ⚠️ Duplicate found: ${existingId}`);
             return {
@@ -82,7 +85,7 @@ export async function processPost(messageText, channelId, localImages) {
             };
         }
         console.log('[pipeline] Step 6/6: Sanity\'ga yuklanmoqda...');
-        const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body);
+        const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body, messageText);
         console.log(`[pipeline] ✅ Portfolio created: ${sanityId}`);
         return {
             success: true,

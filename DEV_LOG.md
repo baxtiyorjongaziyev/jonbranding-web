@@ -4,6 +4,28 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Telegram → Sanity: dublikatga qarshi himoya (ikkala tizim birga ishlay oladi)
+
+**Muammo:** Bir Telegram postini ikkita mustaqil tizim o'qiydi — `src/app/api/portfolio-telegram` (Vercel webhook) va `services/portfolio-bot` (userbot). Ikkalasi ham Sanity'ga `client.create()` bilan yozardi, ya'ni bir postdan ikkita portfolio hujjati chiqishi mumkin edi. Mavjud slug tekshiruvi buni ushlamaydi: slug Gemini bergan sarlavhadan yasaladi, ikkala tizim esa har xil sarlavha olishi mumkin.
+
+**Yechim — post matnidan barqaror hujjat ID'si:**
+1. `src/lib/portfolio-dedup.ts` — `normalizeCaption()` (kichik harf, faqat lotin/kirill harf va raqamlar, ortiqcha bo'shliqlar olib tashlanadi, 500 belgigacha) va `portfolioDocId()` (sha1, `tg-<32 hex>`). Matn 20 belgidan qisqa bo'lsa `null`.
+2. Ikkala yozuvchi ham shu ID bilan `createIfNotExists` ishlatadi. Kim birinchi ulgursa o'sha yozadi, ikkinchisi mavjud hujjatni qaytaradi — poyga holatida ham dublikat chiqmaydi.
+3. Rasmlarni yuklashdan **oldin** ID bo'yicha tekshiriladi, shunda bekorga Sanity asset upload qilinmaydi.
+4. Eski slug tekshiruvi saqlandi — ikkinchi qatlam sifatida.
+
+**Nusxa haqida:** `services/portfolio-bot` alohida TypeScript loyihasi (`rootDir: src`), asosiy ilovadan import qila olmaydi. Shuning uchun `portfolioDocId` nusxasi `services/portfolio-bot/src/sanity.ts` da ham bor. Algoritm ikkala joyda bir xil bo'lishi SHART. `src/lib/portfolio-dedup.test.ts` dagi golden test shuni ushlab turadi: `"Bekmarket Zayyan Naming va Branding loyihasi"` → `tg-bef7595f22b63cb44d469111d37ed19e`. Nusxani o'zgartirsangiz testni ham yangilang.
+
+**Eslatma:** `\p{L}` unicode property escape ishlatilmadi — `tsconfig.typecheck.json` eski ES maqsadida TS1501 beradi. O'rniga aniq diapazonlar: `a-z0-9`, `\u00C0-\u024F` (kengaytirilgan lotin), `\u0400-\u04FF` (kirill).
+
+**Natija:** Endi webhook va portfolio-bot bir vaqtda ishlasa ham xavfsiz. Bittasini o'chirish shart emas.
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249, 6 tasi yangi), `npm run build`, `services/portfolio-bot` uchun `tsc` va `dist` qayta yig'ildi.
+
+**Cheklov:** Post matni ikki tizim o'qishi orasida tahrirlansa, hash o'zgaradi va himoya ishlamaydi. Bunday holatda slug tekshiruvi ikkinchi qatlam bo'lib qoladi.
+
+---
+
 ## 2026-09-21 | `/credentials` — sotuvchi uchun taqdimot sahifasi
 
 **Muammo:** Sotuvchi qo'ng'iroq paytida narxlar, keyslar, jarayon va kafolatlarni bir nechta sahifadan yig'ib ko'rsatishga majbur edi.
