@@ -129,7 +129,11 @@ export async function createPortfolioDocument(
     galleryImages: galleryAssets.map((a) => ({ _type: 'image', asset: a })),
     afterImage: afterAsset ? { _type: 'image', asset: afterAsset } : undefined,
     results: parsed.results.map((r, i) => ({ _key: `result_${i}`, metric: r.metric, value: r.value })),
-    body: bodyBlocks && bodyBlocks.length > 0 ? bodyBlocks : undefined,
+    body: (bodyBlocks && Array.isArray(bodyBlocks) && bodyBlocks.length > 0)
+      ? bodyBlocks
+      : (parsed.body && Array.isArray(parsed.body) && parsed.body.length > 0)
+        ? parsed.body
+        : undefined,
     featured: false,
     publishedAt: new Date().toISOString(),
     order: Math.floor(Date.now() / 1000),
@@ -330,4 +334,3 @@ export async function getAllPortfolioSlugsAndTitles(): Promise<{ slug: string; t
     return [];
   }
 }
-

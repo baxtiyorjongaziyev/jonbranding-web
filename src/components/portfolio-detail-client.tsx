@@ -246,7 +246,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   draggable={false}
                 />
                 <div className="absolute bottom-6 right-6 px-5 py-2.5 rounded-full bg-blue-600/85 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/20 z-25 shadow-lg">
-                  {project.newHint || 'Den Aroma (Yangi)'}
+                  {project.newHint || `${project.client || project.title} (${lang === 'uz' ? 'Yangi' : lang === 'ru' ? 'Новый' : 'New'})`}
                 </div>
               </div>
 
@@ -269,7 +269,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   />
                 </div>
                 <div className="absolute bottom-6 left-6 px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/10 z-25 shadow-lg whitespace-nowrap">
-                  {project.oldHint || 'Avvalgi'}
+                  {project.oldHint || (lang === 'uz' ? 'Avvalgi' : lang === 'ru' ? 'Ранее' : 'Before')}
                 </div>
               </div>
 
@@ -288,33 +288,77 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         )}
 
         {/* Narrative / Content Case Study */}
-        {project.body && Array.isArray(project.body) && (
+        {project.body && Array.isArray(project.body) && project.body.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pt-6">
             <div className="md:col-span-4 space-y-4">
               <span className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
                 <Shield className="w-3.5 h-3.5 text-blue-500" />
-                Loyiha yondashuvi
+                {lang === 'uz' ? 'Loyiha yondashuvi' : lang === 'ru' ? 'Подход к проекту' : lang === 'zh' ? '项目方法' : 'Project Approach'}
               </span>
               <h3 className="text-3xl font-black leading-tight text-white">
-                Premium Rebrending Sirlari
+                {lang === 'uz' ? 'Loyiha Tafsilotlari va Yechim' : lang === 'ru' ? 'Детали и Решение Проекта' : lang === 'zh' ? '项目细节与解决方案' : 'Project Details & Solution'}
               </h3>
               <div className="h-1.5 w-16 bg-blue-600 rounded-full"></div>
             </div>
             
-            <div className="md:col-span-8 space-y-8">
-              {project.body.map((item: any, i: number) => (
-                <div key={i} className="border-l-2 border-blue-600 pl-6 sm:pl-8 space-y-3">
-                  <h4 className="text-xl font-bold text-white tracking-tight">
-                    {item.heading}
-                  </h4>
-                  <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed">
-                    {item.paragraph}
-                  </p>
-                </div>
-              ))}
+            <div className="md:col-span-8 space-y-6">
+              {(() => {
+                // Fallback format: { heading, paragraph }
+                const isFallback = project.body.some((item: any) => item.heading || item.paragraph);
+                if (isFallback) {
+                  return project.body.map((item: any, i: number) => (
+                    <div key={i} className="border-l-2 border-blue-600 pl-6 sm:pl-8 space-y-3">
+                      {item.heading && (
+                        <h4 className="text-xl font-bold text-white tracking-tight">
+                          {item.heading}
+                        </h4>
+                      )}
+                      {item.paragraph && (
+                        <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed">
+                          {item.paragraph}
+                        </p>
+                      )}
+                    </div>
+                  ));
+                }
+
+                // Sanity Portable Text block format
+                return project.body.map((block: any, i: number) => {
+                  const text = block.children?.map((c: any) => c.text).join('') || '';
+                  if (!text.trim()) return null;
+
+                  if (block.style === 'h2' || block.style === 'h3') {
+                    return (
+                      <div key={i} className="pt-3 first:pt-0">
+                        <h4 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
+                          {text}
+                        </h4>
+                      </div>
+                    );
+                  }
+
+                  if (block.style === 'blockquote') {
+                    return (
+                      <blockquote key={i} className="border-l-4 border-blue-500 bg-blue-950/20 rounded-r-2xl p-4 italic text-gray-200 text-sm sm:text-base">
+                        "{text}"
+                      </blockquote>
+                    );
+                  }
+
+                  return (
+                    <div key={i} className="border-l-2 border-blue-600/40 pl-6 space-y-2">
+                      <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed">
+                        {text}
+                      </p>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           </div>
         )}
+
 
         {/* Gallery Section */}
         {project.galleryImages && project.galleryImages.length > 0 && (
