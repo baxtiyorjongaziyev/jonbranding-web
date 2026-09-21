@@ -15,7 +15,7 @@ type LeadModalProps = {
   source?: string;
 };
 
-export default function LeadModal({ open, onClose, presetService, source = 'tariflar' }: LeadModalProps) {
+export default function LeadModal({ open, onClose, presetService, source = 'narxlar' }: LeadModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [service, setService] = useState(presetService);

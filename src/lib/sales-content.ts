@@ -1,7 +1,7 @@
 /**
  * Sotuv kontenti — bitta manba.
  *
- * `/tariflar` (narxlar sahifasi) va `/credentials` (sotuvchi taqdimoti)
+  * `/narxlar` (narxlar sahifasi) va `/credentials` (sotuvchi taqdimoti)
  * shu yerdan o'qiydi, shuning uchun matnni bir joyda tahrirlash kifoya.
  * O'zbek tili asosiy — boshqa tillarga tarjima keyin qo'shiladi.
  */

@@ -105,7 +105,7 @@ function Eyebrow({ index, label, muted }: { index: string; label: string; muted?
 }
 
 
-export default function TariflarClient({ cases, quotes, logos, showcase }: Props) {
+export default function NarxlarClient({ cases, quotes, logos, showcase }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [presetService, setPresetService] = useState('Aniq emas — maslahat kerak');
 
@@ -839,7 +839,7 @@ export default function TariflarClient({ cases, quotes, logos, showcase }: Props
         Narxlar 2026 yil sentyabr holatiga. Yakuniy narx loyiha hajmiga qarab aniqlanadi.
       </p>
 
-      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} />
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} source="narxlar" />
     </div>
   );
 }

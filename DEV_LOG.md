@@ -4,6 +4,25 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/narxlar` va `/tariflar` o'rin almashdi
+
+**Muammo:** Yangi narxlar sahifasi `/tariflar` da turardi va unga saytdan birorta ham link yo'q edi — ya'ni hech kim topa olmasdi. Header, footer, `pricing` redirecti va sitemap — hammasi eski sahifaga (`/narxlar`) ishora qilardi.
+
+**Qilingan ish:** link o'zgartirilmadi, **sahifalar o'rin almashdi**:
+- Yangi sahifa endi `/narxlar` da (`page.tsx` + `narxlar-client.tsx`, eski nomi `tariflar-client.tsx`).
+- Eski sahifa `/tariflar` ga ko'chdi.
+- Ikkalasining `canonical`, `alternates`, OG url va breadcrumb JSON-LD yo'llari o'zgartirildi.
+
+**Nega link emas, sahifa ko'chirildi:** `/narxlar` — SEO tarixi bor, tabiiy o'zbekcha manzil. Yangi sahifa o'shani olishi kerak. Linklarni `/tariflar` ga burish esa yaxshi sahifani begona manzilda qoldirardi.
+
+**Eski sahifa `noindex`:** ikkita narxlar sahifasi qidiruvda bir-biri bilan raqobatlashmasligi uchun `/tariflar` ga `robots: { index: false, follow: true }` qo'yildi. Sitemapda faqat `/narxlar` bor.
+
+**Analitika:** `LeadModal` ning `source` standart qiymati `tariflar` dan `narxlar` ga o'zgardi, `/narxlar` sahifasi uni aniq uzatadi (`narxlar_page` / `narxlar_modal`).
+
+**Tekshirildi:** `npm run typecheck`, `npm run lint`, `npx vitest run` (249/249), `npm run build` — ikkala route ham qurildi.
+
+---
+
 ## 2026-09-21 | `/credentials` qaytadan qurildi — slaydli taqdimot, `/presentation` yopildi
 
 **Sabab:** Egasi ikkala taqdimotni ham rad etdi ("ikkalasi ham", "hammasi"). Birinchi `/credentials` versiyasi uzun scroll sahifa edi — oldingi "gazeta bo'lib qolyapti" e'tiroziga qaytib tushgan. Eski `/presentation` esa eskirgan raqamlar bilan turardi ("50+ loyiha", holbuki 1000+).
