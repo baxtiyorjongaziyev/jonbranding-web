@@ -10,7 +10,31 @@ import axios from 'axios';
 export type { AIEnrichedData };
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+
+async function callGeminiWithRetry(
+  url: string,
+  data: any,
+  options: { timeout?: number },
+  maxRetries = 3
+): Promise<any> {
+  let delay = 1500;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await axios.post(url, data, options);
+    } catch (err: any) {
+      const status = err.response?.status;
+      if ((status === 429 || status === 503 || status === 500) && attempt < maxRetries) {
+        console.warn(`[ai-processor] Gemini API error ${status}, retrying in ${delay}ms (attempt ${attempt}/${maxRetries})...`);
+        await new Promise((r) => setTimeout(r, delay));
+        delay *= 2;
+        continue;
+      }
+      throw err;
+    }
+  }
+}
 
 const FULL_PROMPT = (text: string) => `
 Quyidagi postdan loyiha ma'lumotlarini ajratib, FAQAT JSON formatda qaytar (boshqa hech narsa yozma):
@@ -49,7 +73,7 @@ QATTIQ QOIDALAR:
  * Postdan AI orqali to'liq portfolio ma'lumotlarini ajratib olish
  */
 export async function parseWithAI(messageText: string): Promise<AIEnrichedData> {
-  const res = await axios.post(
+  const res = await callGeminiWithRetry(
     GEMINI_URL,
     {
       contents: [{ parts: [{ text: FULL_PROMPT(messageText) }] }],
@@ -162,7 +186,7 @@ FAQAT JSON qaytar, boshqa hech narsa yozma:
  * (Google Drive'da papka qidirishdan OLDIN chaqiriladi, arzon va tez chaqiruv).
  */
 export async function extractSearchTerms(postText: string): Promise<SearchTerms> {
-  const res = await axios.post(
+  const res = await callGeminiWithRetry(
     GEMINI_URL,
     {
       contents: [{ parts: [{ text: SEARCH_TERMS_PROMPT(postText) }] }],
@@ -244,7 +268,7 @@ export async function parseFullCase(
 
   parts.push({ text: FULL_CASE_PROMPT(postText, folderName, limitedImages.length) });
 
-  const res = await axios.post(
+  const res = await callGeminiWithRetry(
     GEMINI_URL,
     {
       contents: [{ parts }],

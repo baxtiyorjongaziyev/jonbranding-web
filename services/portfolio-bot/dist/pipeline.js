@@ -4,32 +4,57 @@ import { downloadToTemp, findFolderByName, listImagesInFolder } from './drive-fi
 import { createPortfolioDocument, findExistingPortfolio } from './sanity.js';
 import { slugify } from './slug.js';
 /**
- * Telegram post matnidan boshlab, Google Drive'da nom bo'yicha (link kerak
- * emas) rasm papkasini qidirib, to'liq SEO-boy portfolio case yaratadi.
+ * Telegram/Instagram post matnidan boshlab, Google Drive'da nom bo'yicha
+ * rasm papkasini qidiradi yoki bevosita postga ilova qilingan rasmlardan
+ * foydalanib, to'liq SEO-boy portfolio case yaratadi.
  */
-export async function processPost(messageText, channelId) {
+export async function processPost(messageText, channelId, localImages) {
     let tmpDir;
     const driveParentId = process.env.DRIVE_PARENT_FOLDER_ID;
     try {
-        if (!driveParentId) {
-            return { success: false, error: 'DRIVE_PARENT_FOLDER_ID sozlanmagan' };
-        }
         console.log('[pipeline] Step 1/6: Qidiruv atamalarini ajratish...');
         const searchTerms = await extractSearchTerms(messageText);
         console.log(`[pipeline] Qidirilmoqda: title="${searchTerms.title}" client="${searchTerms.client}"`);
-        console.log('[pipeline] Step 2/6: Google Drive\'da nom bo\'yicha papka qidirilmoqda...');
-        const folder = await findFolderByName(driveParentId, [searchTerms.title, searchTerms.client]);
-        if (!folder) {
+        let imageFiles = [];
+        let folderName = searchTerms.title || 'Loyiha';
+        let folderId;
+        // 1. Avval Google Drive'dan original yuqori sifatli rasmlarni qidirib ko'ramiz
+        if (driveParentId) {
+            console.log('[pipeline] Step 2/6: Google Drive\'da nom bo\'yicha papka qidirilmoqda...');
+            try {
+                const folder = await findFolderByName(driveParentId, [searchTerms.title, searchTerms.client]);
+                if (folder) {
+                    folderName = folder.name;
+                    folderId = folder.id;
+                    console.log(`[pipeline] Drive'da mos papka topildi: "${folder.name}" (${folder.id})`);
+                    const images = await listImagesInFolder(folder.id);
+                    if (images.length > 0) {
+                        console.log(`[pipeline] Drive'dan ${images.length} ta rasm yuklab olinmoqda...`);
+                        imageFiles = await downloadToTemp(folder.id);
+                        tmpDir = imageFiles[0]?.path ? imageFiles[0].path.replace(/\/[^\/]+$/, '') : undefined;
+                    }
+                }
+            }
+            catch (driveErr) {
+                console.warn('[pipeline] Drive qidirishda xatolik (davom etiladi):', driveErr);
+            }
+        }
+        // 2. Agar Drive'da papka topilmasa, lekin postga rasm(lar) ilova qilingan bo'lsa
+        if (imageFiles.length === 0 && localImages && localImages.length > 0) {
+            console.log(`[pipeline] Drive'dan rasm topilmadi. Postga ilova qilingan ${localImages.length} ta rasmdan foydalaniladi.`);
+            imageFiles = localImages;
+        }
+        // 3. Agar umuman rasm bo'lmasa — xato qaytaramiz
+        if (imageFiles.length === 0) {
             return {
                 success: false,
-                error: `Drive'da mos papka topilmadi (qidirildi: "${searchTerms.title}" / "${searchTerms.client}")`,
-                hasDriveLink: false,
+                error: `Drive'da ham, postning o'zida ham rasm topilmadi (qidirildi: "${searchTerms.title}" / "${searchTerms.client}")`,
+                hasDriveLink: Boolean(folderId),
                 title: searchTerms.title,
             };
         }
-        console.log(`[pipeline] Topildi: "${folder.name}" (${folder.id})`);
         // Duplikatni erta tekshirish (Gemini chaqiruvlarini tejash uchun)
-        const roughSlug = slugify(searchTerms.title, folder.id);
+        const roughSlug = slugify(searchTerms.title, folderId);
         const earlyId = await findExistingPortfolio(roughSlug);
         if (earlyId) {
             console.log(`[pipeline] ⚠️ Allaqachon mavjud (taxminiy slug): ${earlyId}`);
@@ -40,22 +65,11 @@ export async function processPost(messageText, channelId) {
                 bodyTitle: '⚠️ Duplicate — already exists in Sanity',
             };
         }
-        console.log('[pipeline] Step 3/6: Papkadagi rasmlar ro\'yxati...');
-        const images = await listImagesInFolder(folder.id);
-        if (images.length === 0) {
-            return { success: false, error: `Drive papkasida rasm topilmadi: "${folder.name}"`, title: searchTerms.title, hasDriveLink: true };
-        }
-        console.log(`[pipeline] Step 4/6: ${images.length} ta rasm yuklab olinmoqda...`);
-        const imageFiles = await downloadToTemp(folder.id);
-        if (imageFiles.length === 0) {
-            return { success: false, error: 'Rasmlarni yuklab olib bo\'lmadi', title: searchTerms.title, imageCount: 0, hasDriveLink: true };
-        }
-        tmpDir = imageFiles[0]?.path ? imageFiles[0].path.replace(/\/[^\/]+$/, '') : undefined;
         console.log('[pipeline] Step 5/6: Matn + rasmlar asosida to\'liq AI tahlili (SEO bilan)...');
-        const aiData = await parseFullCase(messageText, folder.name, imageFiles);
+        const aiData = await parseFullCase(messageText, folderName, imageFiles);
         console.log(`[pipeline] Tahlil qilindi → "${aiData.title}" (${aiData.category}), cover=${aiData.coverImageIndex}`);
         // Yakuniy slug AI aniqlagan sarlavha bo'yicha — qayta tekshirish
-        const finalSlug = slugify(aiData.title, folder.id);
+        const finalSlug = slugify(aiData.title, folderId);
         const existingId = await findExistingPortfolio(finalSlug);
         if (existingId) {
             console.log(`[pipeline] ⚠️ Duplicate found: ${existingId}`);

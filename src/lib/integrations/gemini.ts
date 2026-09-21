@@ -22,7 +22,8 @@ export async function analyzeCallAudio(
 
   const base64Audio = audioBuffer.toString('base64');
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `Siz Jon Branding premium brend-agentligining aqlli yordamchisisiz.
 Ushbu audio yozuvni diqqat bilan eshitib chiqib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):
@@ -159,7 +160,8 @@ export async function parsePortfolioMetadata(
     throw new Error('GEMINI_API_KEY is not configured in environment variables');
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `Siz Jon Branding premium brend-agentligining yordamchisisiz.
 Quyidagi matndan portfolio loyihasi uchun ma'lumotlarni ajratib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):
@@ -279,7 +281,8 @@ export async function parseReviewMetadata(
     throw new Error('GEMINI_API_KEY is not configured in environment variables');
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
   const prompt = `Siz Jon Branding premium brend-agentligining yordamchisisiz.
 Quyidagi mijoz sharhi matnini tahlil qiling. Undan mijozning ismi, kompaniya nomini ajrating va sharh matnini 4 ta tilga (o'zbek, rus, ingliz, xitoy) mukammal professional darajada tarjima qilib, FAQAT quyidagi JSON formatida javob bering (boshqa hech narsa yozmang):

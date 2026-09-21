@@ -1,12 +1,21 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import type { WorkflowConfig, ProcessedPost } from './types.js';
-import { parseWithAI } from './ai-processor.js';
-import { downloadToTemp, getFolderInfo, listImagesInFolder, findFolderByName } from './drive-finder.js';
+import { parseWithAI, parseFullCase } from './ai-processor.js';
+import {
+  downloadToTemp,
+  getFolderInfo,
+  getTextFileContent,
+  listImagesInFolder,
+  findFolderByName,
+  listSubfolders,
+} from './drive-finder.js';
 import { createPortfolioDocument, findExistingPortfolio, getAllPortfolioSlugsAndTitles } from './sanity.js';
 import { fetchInstagramPosts } from './instagram.js';
 import { slugify } from './slug.js';
 import { sendTelegramMessage } from './userbot.js';
+import { parseDriveFolderWithOisha } from './oisha.js';
 
 /**
  * Workflow log fayli
@@ -28,7 +37,7 @@ export const DEFAULT_CONFIG: WorkflowConfig = {
   instagramHashtags: process.env.INSTAGRAM_HASHTAGS ? process.env.INSTAGRAM_HASHTAGS.split(',') : ['#jonbranding', '#brandinguz', '#logodesignuz'],
   googleDriveParentId: process.env.DRIVE_PARENT_FOLDER_ID,
   postsPerSource: process.env.POSTS_PER_SOURCE ? parseInt(process.env.POSTS_PER_SOURCE, 10) : 10,
-  requireDriveLink: process.env.REQUIRE_DRIVE_LINK !== 'false',
+  requireDriveLink: process.env.REQUIRE_DRIVE_LINK === 'true',
   autoUpload: process.env.AUTO_UPLOAD !== 'false',
   intervalMinutes: process.env.INTERVAL_MINUTES ? parseInt(process.env.INTERVAL_MINUTES, 10) : 60,
 };
@@ -55,6 +64,50 @@ function getProcessedIds(state: Record<string, ProcessedPost>): Set<string> {
   return new Set(Object.keys(state));
 }
 
+function extensionFromContentType(contentType: string): string {
+  if (contentType.includes('png')) return 'png';
+  if (contentType.includes('webp')) return 'webp';
+  if (contentType.includes('gif')) return 'gif';
+  return 'jpg';
+}
+
+async function downloadRemoteImages(
+  urls: string[],
+  source: string
+): Promise<Array<{ path: string; mime: string }>> {
+  const uniqueUrls = [...new Set(urls.filter(Boolean))];
+  if (uniqueUrls.length === 0) return [];
+
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portfolio-social-'));
+  const files: Array<{ path: string; mime: string }> = [];
+
+  try {
+    for (let index = 0; index < uniqueUrls.length; index++) {
+      const url = uniqueUrls[index];
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Image download failed (${response.status}) for ${url}`);
+      }
+
+      const mime = response.headers.get('content-type')?.split(';')[0] || 'image/jpeg';
+      if (!mime.startsWith('image/')) {
+        throw new Error(`Unsupported media type for portfolio image: ${mime}`);
+      }
+
+      const buffer = Buffer.from(await response.arrayBuffer());
+      const filename = `${source}-${index + 1}.${extensionFromContentType(mime)}`;
+      const filePath = path.join(tmpDir, filename);
+      fs.writeFileSync(filePath, buffer);
+      files.push({ path: filePath, mime });
+    }
+
+    return files;
+  } catch (err) {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+    throw err;
+  }
+}
+
 /**
  * Bir postni to'liq qayta ishlash
  */
@@ -62,7 +115,8 @@ async function processSinglePost(
   source: 'telegram' | 'instagram',
   sourceId: string,
   text: string,
-  config: WorkflowConfig
+  config: WorkflowConfig,
+  mediaUrls: string[] = []
 ): Promise<ProcessedPost> {
   const result: ProcessedPost = {
     source,
@@ -94,11 +148,19 @@ async function processSinglePost(
       }
     }
 
-    // 2. Agar drive linki kerak bo'lsa va yo'q bo'lsa — skip
+    // 2. Agar drive linki talab qilingan bo'lsa va yo'q bo'lsa — skip
     if (config.requireDriveLink && !aiData.driveFolderId) {
       result.status = 'failed';
       result.error = 'No Google Drive folder link or matching folder name found';
-      log(`[${source}:${sourceId}] Skipped — no Drive link or matching folder`);
+      log(`[${source}:${sourceId}] Skipped — requireDriveLink is true and no Drive link`);
+      return result;
+    }
+
+    // Agar Drive topilmasa va postning o'zida ham rasm bo'lmasa — skip
+    if (!aiData.driveFolderId && mediaUrls.length === 0) {
+      result.status = 'failed';
+      result.error = 'No Google Drive folder and no attached images found';
+      log(`[${source}:${sourceId}] Skipped — no Drive folder and no attached images`);
       return result;
     }
 
@@ -149,6 +211,54 @@ async function processSinglePost(
         result.sanityId = sanityId;
         result.status = 'uploaded';
         log(`[${source}:${sourceId}] ✅ Uploaded to Sanity: ${sanityId}`);
+
+        // Oisha Telegram orqali xabar beradi
+        await sendTelegramMessage(
+          `🤖 *Oisha:* Yangi portfolio yaratildi (Google Drive orqali)!\n\n` +
+          `📁 *${aiData.title}*\n` +
+          `🏷 Kategoriya: \`${aiData.category}\`\n` +
+          `🆔 Sanity ID: \`${sanityId}\`\n` +
+          `🖼 Rasmlar: ${imageFiles.length} ta\n` +
+          `🌐 Saytda: https://jonbranding.uz/uz/portfolio/${slug}`
+        );
+      }
+    } else if (mediaUrls.length > 0) {
+      log(`[${source}:${sourceId}] No Drive folder. Downloading ${mediaUrls.length} image(s) from ${source}...`);
+      const imageFiles = await downloadRemoteImages(mediaUrls, `${source}-${sourceId.replace(/[^a-z0-9_-]/gi, '-')}`);
+      tmpDir = imageFiles[0]?.path ? path.dirname(imageFiles[0].path) : undefined;
+      result.imageCount = imageFiles.length;
+      result.status = 'downloaded';
+
+      // Oisha multimodal tahlili (matn + yuklab olingan rasmlar)
+      log(`[${source}:${sourceId}] Oisha multimodal AI tahlili...`);
+      const enrichedAiData = await parseFullCase(text, `${source} post: ${aiData.title}`, imageFiles);
+      result.aiData = enrichedAiData;
+
+      if (config.autoUpload) {
+        const slug = slugify(enrichedAiData.title);
+        const existingId = await findExistingPortfolio(slug);
+        if (existingId) {
+          log(`[${source}:${sourceId}] Portfolio already exists: ${existingId}`);
+          result.sanityId = existingId;
+          result.status = 'uploaded';
+          return result;
+        }
+
+        log(`[${source}:${sourceId}] Uploading images to Sanity...`);
+        const sanityId = await createPortfolioDocument(enrichedAiData, imageFiles, enrichedAiData.body);
+        result.sanityId = sanityId;
+        result.status = 'uploaded';
+        log(`[${source}:${sourceId}] ✅ Uploaded to Sanity: ${sanityId}`);
+
+        // Oisha Telegram orqali xabar beradi
+        await sendTelegramMessage(
+          `🤖 *Oisha:* ${source === 'instagram' ? 'Instagram' : 'Telegram'}dan yangi portfolio yaratildi!\n\n` +
+          `📁 *${enrichedAiData.title}*\n` +
+          `🏷 Kategoriya: \`${enrichedAiData.category}\`\n` +
+          `🆔 Sanity ID: \`${sanityId}\`\n` +
+          `🖼 Rasmlar: ${imageFiles.length} ta\n` +
+          `🌐 Saytda: https://jonbranding.uz/uz/portfolio/${slug}`
+        );
       }
     }
   } catch (err) {
@@ -180,7 +290,7 @@ async function processInstagram(config: WorkflowConfig, state: Record<string, Pr
         if (processed.has(`ig:${post.id}`)) continue;
         log(`[instagram] New post: ${post.id} — ${post.caption.slice(0, 60)}...`);
 
-        const result = await processSinglePost('instagram', post.id, post.caption, config);
+        const result = await processSinglePost('instagram', post.id, post.caption, config, post.mediaUrls);
         state[`ig:${post.id}`] = result;
         saveState(state);
       }
@@ -200,7 +310,7 @@ async function processInstagram(config: WorkflowConfig, state: Record<string, Pr
         if (processed.has(key)) continue;
         log(`[instagram] New hashtag post: ${post.id}`);
 
-        const result = await processSinglePost('instagram', key, post.caption, config);
+        const result = await processSinglePost('instagram', key, post.caption, config, post.mediaUrls);
         state[key] = result;
         saveState(state);
       }
@@ -209,9 +319,6 @@ async function processInstagram(config: WorkflowConfig, state: Record<string, Pr
     }
   }
 }
-
-import { parseDriveFolderWithOisha } from './oisha.js';
-import { listSubfolders, getTextFileContent } from './drive-finder.js';
 
 /**
  * Google Drive'dagi to'g'ridan-to'g'ri papkalarni tekshirish va yuklash
@@ -249,9 +356,6 @@ async function processGoogleDrive(config: WorkflowConfig, state: Record<string, 
       try {
         const textContent = await getTextFileContent(folder.id) || '';
 
-        // Check early if already exists in Sanity to save Gemini API calls
-        // We'll do a quick rough slugification of folder name if we don't have aiData yet
-        // However, it's safer to use the exact AI title. But to save API we can guess from folder name
         const roughSlug = slugify(folder.name, folder.id);
         const earlyId = await findExistingPortfolio(roughSlug);
         if (earlyId) {
@@ -295,9 +399,6 @@ async function processGoogleDrive(config: WorkflowConfig, state: Record<string, 
               result.status = 'uploaded';
             } else {
               log(`[drive:${folder.id}] Uploading to Sanity...`);
-
-              // Cover/tartib tanlash createPortfolioDocument ichida
-              // (aiData.coverImageIndex / aiData.imageOrder orqali) markazlashtirilgan.
               const sanityId = await createPortfolioDocument(aiData, downloadedFiles);
               result.sanityId = sanityId;
               result.status = 'uploaded';
@@ -360,7 +461,7 @@ export async function runWorkflow(config: WorkflowConfig = DEFAULT_CONFIG): Prom
     }
   }
 
-  // 5. Google Drive vs Sanity taqqoslash (chiqmagan ishlarni aniqlash va Telegramga jo'natish)
+  // 5. Google Drive vs Sanity taqqoslash
   if (config.googleDriveParentId) {
     try {
       log('[drive-sync] Checking for unpublished works in Google Drive...');
