@@ -38,6 +38,8 @@ Animations: Framer Motion
 |---|---|---|
 | `/[lang]/` | `src/app/[lang]/page.tsx` | Bosh sahifa |
 | `/[lang]/xizmatlar/` | xizmatlar | 6 ta xizmat |
+| `/[lang]/narxlar/` | `src/app/[lang]/narxlar/` | **Narxlar sahifasi** — matni `src/lib/sales-content.ts` da. Tegishdan oldin [`docs/NARXLAR.md`](docs/NARXLAR.md) ni o'qing |
+| `/[lang]/credentials/` | `src/app/[lang]/credentials/` | Sotuvchi taqdimoti (slaydlar + PDF). Xuddi shu `sales-content.ts` dan o'qiydi |
 | `/[lang]/blog/` | Markdown blog (`src/posts`); Sanity post schema migration uchun tayyor | |
 | `/[lang]/quiz/` | Brending testi | |
 | `/[lang]/pricing/sotuvchi-kartochka/` | Narxlar | |
@@ -69,6 +71,13 @@ src/sanity/schemaTypes/
 ```
 
 ## Qoidalar
+
+0. **Narx yoki sotuv matniga tegishdan oldin [`docs/NARXLAR.md`](docs/NARXLAR.md) ni o'qing.**
+   U `/narxlar` sahifasining hozirgi holatini, barcha narxlarni, paket tarkibini,
+   kafolatlarni va egasining uslub talablarini bir joyda saqlaydi. Narxlar JSX'da
+   emas, `src/lib/sales-content.ts` da — `/narxlar` va `/credentials` ikkalasi
+   shu bitta fayldan o'qiydi.
+
 
 1. **Tillar** — barcha matnlar `src/locales/uz.json` (va boshqa til fayllar) da. To'g'ridan-to'g'ri string yozma.
 2. **i18n pattern** — `dictionary.section_name.key`
@@ -133,12 +142,3 @@ Bu loyiha konteksti Obsidian vault'da: **`10-Projects/JonBranding.md`** (agentli
 Repo — kod uchun haqiqat manbai. Vault — biznes va qaror konteksti uchun.
 <!-- BRAIN-CAPTURE -->
 
-<!-- BEGIN:nextjs-agent-rules -->
-
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
