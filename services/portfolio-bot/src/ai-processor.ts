@@ -10,7 +10,7 @@ import axios from 'axios';
 export type { AIEnrichedData };
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 async function callGeminiWithRetry(
@@ -77,7 +77,11 @@ export async function parseWithAI(messageText: string): Promise<AIEnrichedData> 
     GEMINI_URL,
     {
       contents: [{ parts: [{ text: FULL_PROMPT(messageText) }] }],
-      generationConfig: { temperature: 0.1, maxOutputTokens: 2048 },
+      generationConfig: {
+        temperature: 0.1,
+        maxOutputTokens: 4096,
+        thinkingConfig: { thinkingBudget: 0 },
+      },
     },
     { timeout: 30_000 }
   );
@@ -190,7 +194,11 @@ export async function extractSearchTerms(postText: string): Promise<SearchTerms>
     GEMINI_URL,
     {
       contents: [{ parts: [{ text: SEARCH_TERMS_PROMPT(postText) }] }],
-      generationConfig: { temperature: 0.1, maxOutputTokens: 256 },
+      generationConfig: {
+        temperature: 0.1,
+        maxOutputTokens: 2048,
+        thinkingConfig: { thinkingBudget: 0 },
+      },
     },
     { timeout: 20_000 }
   );
@@ -272,7 +280,11 @@ export async function parseFullCase(
     GEMINI_URL,
     {
       contents: [{ parts }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 3072 },
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 4096,
+        thinkingConfig: { thinkingBudget: 0 },
+      },
     },
     { timeout: 90_000 }
   );

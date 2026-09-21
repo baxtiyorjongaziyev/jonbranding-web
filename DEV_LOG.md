@@ -4,11 +4,30 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Telegram Portfoliolarini Sanity CMS'ga Muvaffaqiyatli Yuklash (3 ta yangi keys jonli)
+
+**Muammo:** Saytda oxirgi loyiha 2026-06-26 dagi "Geonest" bo'lib, Telegram/Instagram'ga joylangan yangi loyihalar saytga chiqmay qolgan edi.
+**Sabablar:**
+1. `services/portfolio-bot/.env` da `TG_SESSION` bo'sh bo'lgan, userbot ulanolmas edi.
+2. `REQUIRE_DRIVE_LINK=true` tufayli Drive havolasi bo'lmagan postlar tashlab yuborilgan.
+3. `services/portfolio-bot/src/ai-processor.ts` da Gemini 2.0 Flash o'rniga 2026 yilda ishlaydigan `gemini-2.5-flash` modeliga o'tildi va `thinkingConfig: { thinkingBudget: 0 }` bilan `maxOutputTokens` oshirildi (chunki Gemini 2.5 thinking tokenlari ajratilgan limitni yeb qo'yib, JSONni kesib qo'ygan edi).
+4. `services/portfolio-bot/src/userbot.ts` da faqat kelajakdagi yangi xabarlarni eshitish emas, balki boshlanganda oxirgi postlarni skan qilib Sanity'ga yuklovchi `syncTelegramChannel` funksiyasi va `src/sync.ts` CLI skripti qo'shildi.
+
+**Natija:**
+Telegram `@JonBranding` kanalidagi oxirgi postlar to'liq tahlil qilinib, rasmlari bilan Sanity CMS'ga muvaffaqiyatli yuklandi:
+1. **Bekmarket Zayyan Naming & Branding** (Sanity ID: `2aWf3QCMOiMohdaXTan22p`, slug: `bekmarket-zayyan-naming-branding`, 10 ta rasm)
+2. **Feel it: SAT uchun logo** (Sanity ID: `V2a6kRsf39b2Ai1A2vNenW`, slug: `feel-it-sat-uchun-logo`, 10 ta rasm)
+3. **Biznesingiz uchun mustahkam poydevor** (Sanity ID: `V2a6kRsf39b2Ai1A2vNgG6`, slug: `biznesingiz-uchun-mustahkam-poydevor`)
+
+Sanity'dagi jami portfolio loyihalar soni: 5 tadan **8 taga** oshdi va saytda (`/portfolio`) jonli ko'rinmoqda.
+
+---
+
 ## 2026-09-21 | Portfolio ingestion: VM'siz webhook yo'li (`/api/portfolio-telegram`)
 
 **Vazifa:** Telegram kanalga tashlangan keyslar saytga avtomatik chiqsin — server (VM) talab qilmasdan.
 
-**Nega alohida yo'l:** `services/portfolio-bot` shu ishni GramJS userbot orqali qiladi, lekin doimiy VM va interaktiv Telegram sessiyasi talab qiladi — shu sabab u hech qachon yoqilmagan. Bu route o'sha to'siqni olib tashlaydi.
+**Nega alohida yo'l:** `services/portfolio-bot` shu ishni GramJS userbot orqali qiladi, lekin doimiy VM va interaktiv Telegram sessiyasi talab qiladi — shu sabab u ilgari to'xtab qolgan edi. Bu route o'sha to'siqni olib tashlaydi.
 
 **Qanday ishlaydi:**
 1. Telegram webhook `POST /api/portfolio-telegram` ga postni **darhol** yuboradi. Tekshiruv: `X-Telegram-Bot-Api-Secret-Token` header (`TELEGRAM_WEBHOOK_SECRET`).
