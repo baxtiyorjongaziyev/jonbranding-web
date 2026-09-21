@@ -16,6 +16,13 @@ const nextConfig = {
   allowedDevOrigins: ['127.0.0.1'],
   async redirects() {
     return [
+      // Narxlar sahifasi `/narxlar` da. `/tariflar` bir muddat uni ko'rsatgan,
+      // shuning uchun eski manzil haqiqiy sahifaga yo'naltiriladi.
+      { source: '/tariflar', destination: '/narxlar', permanent: true },
+      { source: '/:lang(ru|en|zh)/tariflar', destination: '/:lang/narxlar', permanent: true },
+      // Eski slaydli taqdimot `/credentials` bilan almashtirildi.
+      { source: '/presentation', destination: '/credentials', permanent: true },
+      { source: '/:lang(ru|en|zh)/presentation', destination: '/:lang/credentials', permanent: true },
       {
         source: '/xizmatlar/brand-strategy',
         destination: '/uz/xizmatlar/brand-strategiyasi',

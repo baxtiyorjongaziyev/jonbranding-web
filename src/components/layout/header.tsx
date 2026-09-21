@@ -95,7 +95,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (!dictionary) return null;
 
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
-  if (pathnameWithoutLocale === '/pro-preview') return null;
+  // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
+  if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
 
   const isHomepage = pathnameWithoutLocale === '/';
   const isAvansPage = pathnameWithoutLocale === '/avans';

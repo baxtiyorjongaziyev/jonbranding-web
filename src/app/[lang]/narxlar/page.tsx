@@ -1,78 +1,89 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import { Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
+import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { fetchTestimonials } from '@/lib/data/testimonials';
-import XizmatlarClient from '../xizmatlar/xizmatlar-client';
+import { fetchBrands } from '@/lib/data/brands';
+import NarxlarClient from './narxlar-client';
+import type { ServiceCase, ServiceLogo, ServiceQuote } from './narxlar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
-const metaByLang: Record<Locale, { title: string; description: string; keywords: string }> = {
-  uz: {
-    title: 'Narxlar | Jon.Branding',
-    description: 'Jon.Branding narxlari va brending paketlari: xizmatlar, tariflar, kalkulyator va natijaga yo‘naltirilgan yechimlar.',
-    keywords: 'narxlar, tariflar, brending paketlari, kalkulyator, Jon Branding',
-  },
-  ru: {
-    title: 'Цены | Jon.Branding',
-    description: 'Цены Jon.Branding и пакеты брендинга: услуги, тарифы, калькулятор и решения, ориентированные на результат.',
-    keywords: 'цены, тарифы, брендинг пакеты, калькулятор, Jon Branding',
-  },
-  en: {
-    title: 'Pricing | Jon.Branding',
-    description: 'Jon.Branding pricing and branding packages: services, tiers, calculator and result-driven solutions.',
-    keywords: 'pricing, tiers, branding packages, calculator, Jon Branding',
-  },
-  zh: {
-    title: '价格 | Jon.Branding',
-    description: 'Jon.Branding 价格与品牌套餐：服务、档位、计算器和以结果为导向的解决方案。',
-    keywords: '价格, 套餐, 品牌套餐, 计算器, Jon Branding',
-  },
-};
-
-const breadcrumbLabels: Record<Locale, { home: string; prices: string }> = {
-  uz: { home: 'Bosh sahifa', prices: 'Narxlar' },
-  ru: { home: 'Главная', prices: 'Цены' },
-  en: { home: 'Home', prices: 'Pricing' },
-  zh: { home: '首页', prices: '价格' },
-};
+const TITLE = 'Narxlar — Baxtiyor Gaziyev';
+const DESCRIPTION =
+  'Branding xizmatlari narxlari: naming, logo, visual identity, brandbook, packaging, patent. Paketlar 20 mln so‘mdan.';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
-  const m = metaByLang[safeLang];
   return {
-    title: m.title,
-    description: m.description,
-    keywords: m.keywords,
+    title: TITLE,
+    description: DESCRIPTION,
     alternates: {
       canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar'),
       languages: getLocaleAlternates(BASE_URL, '/narxlar'),
     },
     openGraph: {
-      title: m.title,
-      description: m.description,
+      title: TITLE,
+      description: DESCRIPTION,
       url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar'),
       siteName: 'Jon.Branding',
     },
   };
 }
 
-const NarxlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
+const breadcrumbLabels = { home: 'Bosh sahifa', prices: 'Narxlar' };
+
+const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await props.params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
-  const dictionary = await getDictionary(safeLang);
-  const testimonials = await fetchTestimonials(safeLang);
-  const bl = breadcrumbLabels[safeLang] ?? breadcrumbLabels.uz;
+
+  const [projects, testimonials, brands] = await Promise.all([
+    fetchPortfolioList(safeLang),
+    fetchTestimonials(safeLang),
+    fetchBrands(),
+  ]);
+
+  const cases: ServiceCase[] = projects
+    .filter((project) => project.coverImage)
+    .map((project) => ({
+      slug: project.slug,
+      title: project.title,
+      client: project.client,
+      category: project.category,
+      categoryLabel: project.categoryLabel,
+      coverImage: project.coverImage,
+      result: project.results?.[0],
+    }));
+
+  const showcaseCategories = ['brandbook', 'brand-strategy', 'corporate-style'];
+  const showcase: string[] = Array.from(
+    new Set(
+      projects
+        .filter((project) => showcaseCategories.includes(project.category))
+        .flatMap((project) => [...(project.galleryImages ?? []), project.afterImage, project.coverImage])
+        .filter((src): src is string => Boolean(src))
+    )
+  ).slice(0, 8);
+
+  const quotes: ServiceQuote[] = testimonials
+    .filter((item) => item.quote && item.quote.length > 60)
+    .slice(0, 3)
+    .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
+
+  const logos: ServiceLogo[] = brands
+    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []))
+    .slice(0, 16);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: bl.home, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang) },
-      { '@type': 'ListItem', position: 2, name: bl.prices, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar') },
+      { '@type': 'ListItem', position: 1, name: breadcrumbLabels.home, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang) },
+      { '@type': 'ListItem', position: 2, name: breadcrumbLabels.prices, item: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar') },
     ],
   };
 
@@ -83,9 +94,9 @@ const NarxlarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <XizmatlarClient lang={safeLang} dictionary={dictionary} testimonials={testimonials} />
+      <NarxlarClient cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
     </div>
   );
 };
 
-export default NarxlarPage;
+export default TariflarPage;

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { extractSearchTerms, parseFullCase } from './ai-processor.js';
 import { downloadToTemp, findFolderByName, listImagesInFolder } from './drive-finder.js';
-import { createPortfolioDocument, enrichPortfolioDocument, findExistingPortfolio } from './sanity.js';
+import { createPortfolioDocument, enrichPortfolioDocument, findExistingPortfolio, findPortfolioById, portfolioDocId, } from './sanity.js';
 import { slugify } from './slug.js';
 /**
  * Telegram/Instagram post matnidan boshlab, Google Drive'da nom bo'yicha
@@ -73,7 +73,12 @@ export async function processPost(messageText, channelId, localImages) {
         // Yakuniy slug AI aniqlagan sarlavha bo'yicha
         const finalSlug = slugify(aiData.title, folderId);
         const finalExistingId = await findExistingPortfolio(finalSlug);
-        const targetExistingId = finalExistingId || earlyId;
+        // Post matnidan hisoblangan ID — webhook (`/api/portfolio-telegram`) shu
+        // postni allaqachon joylagan bo'lsa, uni slugdan oldin topamiz, chunki
+        // slug Gemini sarlavhasidan yasaladi va ikki tizimda har xil chiqishi mumkin.
+        const dedupId = portfolioDocId(messageText);
+        const dedupExistingId = dedupId ? await findPortfolioById(dedupId) : null;
+        const targetExistingId = dedupExistingId || finalExistingId || earlyId;
         if (targetExistingId) {
             console.log(`[pipeline] Step 6/6: Mavjud portfolio boyitilmoqda (${targetExistingId})...`);
             await enrichPortfolioDocument(targetExistingId, aiData, imageFiles);
@@ -87,7 +92,7 @@ export async function processPost(messageText, channelId, localImages) {
             };
         }
         console.log('[pipeline] Step 6/6: Sanity\'ga yangi keys sifatida yuklanmoqda...');
-        const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body);
+        const sanityId = await createPortfolioDocument(aiData, imageFiles, aiData.body, messageText);
         console.log(`[pipeline] ✅ Yangi portfolio yaratildi: ${sanityId}`);
         return {
             success: true,

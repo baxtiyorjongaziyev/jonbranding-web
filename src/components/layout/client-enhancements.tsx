@@ -107,6 +107,9 @@ export default function ClientEnhancements({
   // global dublikatlarni (sticky CTA, scroll-popup, ko'k ContactModal) o'chiramiz
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   const isHome = pathnameWithoutLocale === '/';
+  // Taqdimot sahifasi: sticky CTA, chat widget, popup va mobil nav slaydlar
+  // ustiga tushib, ekran ulashuvda ko'rinib qoladi.
+  const isDeck = pathnameWithoutLocale === '/credentials';
 
   const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
     if (typeof window === 'undefined') return;
@@ -240,12 +243,12 @@ export default function ClientEnhancements({
         />
       )}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
-      {quickActionsReady && !isHome && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
-      {quickActionsReady && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
-      {enhancementsReady && <CookieConsentBanner />}
-      {enhancementsReady && <OishaWidget lang={lang} />}
-      {enhancementsReady && <ProactiveTrigger lang={lang} />}
-      {enhancementsReady && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
+      {quickActionsReady && !isHome && !isDeck && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
+      {quickActionsReady && !isDeck && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
+      {enhancementsReady && !isDeck && <CookieConsentBanner />}
+      {enhancementsReady && !isDeck && <OishaWidget lang={lang} />}
+      {enhancementsReady && !isDeck && <ProactiveTrigger lang={lang} />}
+      {enhancementsReady && !isDeck && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>
   );
