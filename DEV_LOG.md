@@ -4,6 +4,41 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | Barcha Telegram va Instagram Portfoliolari Sanity CMS'ga To'liq Yuklandi (Jami 21 ta Keys)
+
+**Vazifa:** Telegram (`@JonBranding`) va Instagram (`@jon.branding`) sahifalaridagi barcha haqiqiy mijoz portfoliolari Sanity CMS orqali veb-saytga to'liq kiritildi.
+
+**Natija — Jami 21 ta Jonli Portfolio Keyslari:**
+1. **Perfona Logotip va Brending** (`perfona-logotip-va-brending`) — Logo dizayn (9 ta rasm)
+2. **PETRON POLYMER brendini yaratish** (`petron-polymer-brendini-yaratish`) — Firma uslubi (10 ta rasm)
+3. **R Studio brend logotipi** (`r-studio-brend-logotipi`) — Logo dizayn (10 ta rasm)
+4. **Yasira: Go'zallik va Tozalik** (`yasira-gozallik-va-tozalik`) — Firma uslubi (Instagram dan, 10 ta rasm)
+5. **FIDDA by Sevara: Kumush brendi** (`fidda-by-sevara-kumush-brendi`) — Brend strategiya (10 ta rasm)
+6. **Velzo: Brend Tizimi** (`velzo-brend-tizimi`) — Brendbuk (10 ta rasm)
+7. **Den Aroma: Brend Transformatsiyasi** (`den-aroma-brend-transformatsiyasi`) — Brend strategiya (10 ta rasm)
+8. **Sarmilk: Brend Identikasini Yaratish** (`sarmilk-brend-identikasini-yaratish`) — Firma uslubi (10 ta rasm)
+9. **Jafiko Light Brend Identifikatsiyasi** (`jafiko-light-brend-identifikatsiyasi`) — Firma uslubi (10 ta rasm)
+10. **Boyarin brendini yoshartirish** (`boyarin-brendini-yoshartirish`) — Firma uslubi (10 ta rasm)
+11. **Prime Fit: Brend Identikasi** (`prime-fit-brend-identikasi`) — Brendbuk (10 ta rasm)
+12. **Bodomchi: Brend Aydentikasi** (`bodomchi-brend-aydentikasi`) — Brendbuk (10 ta rasm)
+13. **Rutera: Brending va Patent** (`rutera-brending-va-patent`) — Brend strategiya (10 ta rasm)
+14. **Sofmir: Mebel Aksessuarlari Brendingi** (`sofmir-mebel-aksessuarlari-brendingi`) — Logo dizayn (10 ta rasm)
+15. **Feel it: SAT uchun logo** (`feel-it-sat-uchun-logo`) — Logo dizayn (10 ta rasm)
+16. **Bekmarket Zayyan Naming & Branding** (`bekmarket-zayyan-naming-branding`) — Neyming (10 ta rasm)
+17. **Geonest** (`geonest`) — Neyming
+18. **Enros** (`enros`) — Neyming
+19. **Revo** (`revo`) — Brendbuk
+20. **ARFADEL** (`arfadel`) — Brendbuk
+21. **SAVOD rebrending keys** (`savod-rebrending-keys`) — Firma uslubi
+
+**Texnik optimallashlar:**
+- `gemini-2.5-flash-lite` modeliga o'tildi (Gemini 2.5 Flash free tier 20 RPD chegarasini yengish uchun).
+- Rasm yuklashda video yoki noto'g'ri fayl turlarini (magic bytes tekshiruvi orqali) Sanity'ga yubormaslik filtri qo'shildi.
+- AI tahlilida multimodal rasm soni 2 taga cheklandi (token bo'g'ilishini oldini olish uchun), Sanity'ga esa barcha rasmlar to'liq yuklandi.
+- Kategoriya nomlari Sanity schemadagi qat'iy ro'yxat (`logo-design`, `naming`, `brandbook`, `corporate-style`, `packaging`, `brand-strategy`) bilan sinxronlashtirildi.
+
+---
+
 ## 2026-09-21 | Telegram Portfoliolarini Sanity CMS'ga Yuklash va No-Portfolio Filtrlash
 
 **Tuzatish (No-Portfolio Guard):**
