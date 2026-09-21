@@ -174,7 +174,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       {
         name: 'Patent (oddiy)',
         price: '5 000 000',
-        duration: '30 kun',
+        duration: '7 oy',
         lead: 'Tovar belgisini ro‘yxatdan o‘tkazish — odatdagi tartibda.',
         deliverables: [
           'Hujjatlar to‘liq tayyorlanadi va topshiriladi',
@@ -188,14 +188,14 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       {
         name: 'Patent (tezkor)',
         price: '7 000 000',
-        duration: '7 kun',
+        duration: '20–40 kun',
         lead: 'Xuddi shu ish, lekin tezlashtirilgan tartibda.',
         deliverables: [
           'Oddiy patentdagi barcha ishlar',
           'Tezlashtirilgan ekspertiza',
-          'Muddat 30 kundan 7 kunga qisqaradi',
+          'Muddat 7 oydan 20–40 kunga qisqaradi',
         ],
-        benefit: 'Muddat sizni kutib turmaydigan joyda — bir oy o‘rniga bir hafta. Shartnomani boy bermaysiz.',
+        benefit: 'Muddat sizni kutib turmaydigan joyda — yetti oy o‘rniga bir oycha. Shartnomani boy bermaysiz.',
         audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
       },
     ],
@@ -863,6 +863,13 @@ export default function TariflarClient() {
             </motion.div>
           ))}
         </div>
+
+        <p
+          className="mt-10 text-center text-[11px] uppercase text-neutral-400"
+          style={{ ...mono, letterSpacing: '0.06em', lineHeight: 1.7 }}
+        >
+          Muddat dizayn ishlari uchun. Patent guvohnomasi rasmiy tartibda alohida muddatda chiqadi.
+        </p>
       </section>
 
       {/* CTA BLOK */}
