@@ -85,6 +85,55 @@ async function handleCompletePost(messages, chatId, client) {
         }
     }
 }
+export async function syncTelegramChannel(channelUsernameOrId = '@JonBranding', limit = 30, clientOverride) {
+    const client = clientOverride || telegramClient;
+    if (!client) {
+        console.warn('[userbot] Cannot sync: client not initialized');
+        return;
+    }
+    console.log(`[userbot] Syncing last ${limit} messages from ${channelUsernameOrId}...`);
+    try {
+        const entity = await client.getEntity(channelUsernameOrId);
+        const chatId = String(entity.id);
+        const rawMessages = await client.getMessages(entity, { limit });
+        // Guruhlarga ajratish (albumlar groupedId bo'yicha, qolgani yakka)
+        // Eng eskilaridan boshlab tartiblaymiz
+        const messages = [...rawMessages].reverse();
+        const groupedMap = new Map();
+        const standalone = [];
+        for (const msg of messages) {
+            if (msg.groupedId) {
+                const gid = String(msg.groupedId);
+                if (!groupedMap.has(gid)) {
+                    groupedMap.set(gid, []);
+                }
+                groupedMap.get(gid).push(msg);
+            }
+            else if (msg.text || msg.message || msg.media) {
+                standalone.push([msg]);
+            }
+        }
+        const postGroups = [...groupedMap.values(), ...standalone];
+        for (const group of postGroups) {
+            const primaryMsg = group.find((m) => Boolean(m.text || m.message));
+            const text = primaryMsg ? (primaryMsg.text || primaryMsg.message || '') : '';
+            const hasMedia = group.some((m) => Boolean(m.media));
+            if (!text.trim() || !hasMedia) {
+                continue;
+            }
+            // Agar matn juda qisqa bo'lsa (masalan shunchaki havola yoki 25 ta harfdan kam), o'tkazib yuboramiz
+            if (text.trim().length < 25) {
+                continue;
+            }
+            console.log(`[userbot] Tekshirilmoqda: "${text.slice(0, 50)}..." (${group.length} ta xabar)`);
+            await handleCompletePost(group, chatId, client);
+        }
+        console.log('[userbot] Sync complete.');
+    }
+    catch (err) {
+        console.error(`[userbot] Failed to sync ${channelUsernameOrId}:`, err);
+    }
+}
 export async function startUserbot() {
     if (!API_ID || !API_HASH)
         throw new Error('TG_API_ID and TG_API_HASH required');
@@ -116,6 +165,10 @@ export async function startUserbot() {
         }
     }
     console.log('[userbot] Watching channel IDs:', [...resolvedIds]);
+    // Avval mavjud oxirgi postlarni sinxronizatsiya qilamiz
+    for (const id of CHANNEL_IDS) {
+        await syncTelegramChannel(id, 30, client);
+    }
     client.addEventHandler(async (event) => {
         try {
             const message = event.message;
