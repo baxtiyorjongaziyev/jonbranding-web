@@ -4,6 +4,37 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-21 | `/credentials` — qurilmaga moslik
+
+**Talab:** "Mijoz qanday device dan kirsa shunga mos bo'lsin."
+
+**O'lchov (Playwright, 7 xil ekran).** Boshlang'ich holatda gorizontal toshish hech qayerda yo'q edi, lekin telefonda va telefon landshaftida kontent pastdagi boshqaruv paneli ostida qolib ketardi, landshaftda esa yuqoridagi bo'sh joy ekranning yarmini yeb qo'yardi.
+
+**Qilingan ish:**
+1. **Moslashuvchan bo'shliqlar.** `.cred-slide` da `--cred-px` / `--cred-pt` / `--cred-pb` CSS o'zgaruvchilari. Pastki qiymat panel balandligini ham o'z ichiga oladi, shuning uchun oxirgi qator endi panel ostida yashirinmaydi. `max-height: 560px` da (telefon landshafti) bo'shliqlar keskin qisqaradi.
+2. **Moslashuvchan tipografika.** Sarlavhalar qat'iy Tailwind o'lchamlari o'rniga `clamp()` bilan (`.cred-display-lg` / `.cred-display-xl`). Past oynalarda `vh` asosida kichrayadi. Desktop qiymatlari o'zgarmadi.
+3. **Panel ortida xiralik.** Uzun slayd scroll qilinganda matn kesilgandek emas, panel ostiga yumshoq so'nib kiradi (`backdrop-filter` + `mask-image`).
+4. **Zich ro'yxatlar.** Xizmat qatorlari (`.cred-row`) kichik ekranda ixchamroq.
+5. **Mayda yorliqlar.** 480px dan tor ekranda 10px mono yozuvlar 11px ga ko'tarildi.
+
+**Yakuniy holat:**
+
+| Ekran | Scroll kerak | Gorizontal toshish |
+|---|---|---|
+| 390x844 telefon | 4/18 | 0 |
+| 320x568 kichik telefon | 8/18 | 0 |
+| 844x390 telefon landshaft | 6/18 | 0 |
+| 768x1024 planshet | 0/18 | 0 |
+| 1024x768 planshet landshaft | 0/18 | 0 |
+| 1440x900 noutbuk | 0/18 | 0 |
+| 1920x1080 keng | 0/18 | 0 |
+
+Planshetdan boshlab hamma slayd to'liq sig'adi. Telefonda kontenti ko'p slaydlar (xizmatlar ro'yxati, paketlar, jarayon, kafolatlar) vertikal scroll qiladi — bu kutilgan holat, matnni o'qib bo'lmaydigan darajada kichraytirmaslik uchun ataylab shunday qoldirildi. Gorizontal svayp slayd almashtirishda davom etadi, chunki svayp faqat aniq gorizontal harakatga javob beradi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (250/250), `build` — toza.
+
+---
+
 ## 2026-09-21 | `/credentials` PDF eksporti tuzatildi
 
 **Shikoyat:** "jonbranding.uz/credentials pdf juda yomon holatda."

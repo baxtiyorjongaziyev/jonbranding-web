@@ -65,11 +65,7 @@ function Display({
   return (
     <motion.h2
       variants={rise}
-      className={
-        size === 'xl'
-          ? 'text-[2.7rem] leading-[0.95] sm:text-[4.5rem] lg:text-[5.75rem]'
-          : 'text-[2.1rem] leading-[1.02] sm:text-[3.25rem] lg:text-[4rem]'
-      }
+      className={size === 'xl' ? 'cred-display-xl leading-[0.95]' : 'cred-display-lg leading-[1.02]'}
       style={{ ...serif, letterSpacing: '-0.025em', color: light ? '#fff' : INK, fontWeight: 400 }}
     >
       {children}
@@ -96,9 +92,17 @@ function Slide({
         variants={stagger}
         initial="hidden"
         animate="visible"
-        className={`mx-auto flex min-h-full w-full max-w-6xl flex-col justify-center ${
-          pad ? 'px-6 py-16 sm:px-12 sm:py-20' : ''
-        }`}
+        className="mx-auto flex min-h-full w-full max-w-6xl flex-col justify-center"
+        style={
+          pad
+            ? {
+                paddingLeft: 'var(--cred-px)',
+                paddingRight: 'var(--cred-px)',
+                paddingTop: 'var(--cred-pt)',
+                paddingBottom: 'var(--cred-pb)',
+              }
+            : undefined
+        }
       >
         {children}
       </motion.div>
@@ -251,7 +255,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end px-6 py-16 sm:px-12 sm:py-20"
+            className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end"
+            style={{
+              paddingLeft: 'var(--cred-px)',
+              paddingRight: 'var(--cred-px)',
+              paddingTop: 'var(--cred-pt)',
+              paddingBottom: 'var(--cred-pb)',
+            }}
           >
             <Eyebrow light>{item.categoryLabel}</Eyebrow>
             <Display light>{item.title}</Display>
@@ -285,7 +295,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             {group.items.map((item, index) => (
               <div
                 key={item.name}
-                className="flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
+                className="cred-row flex flex-col gap-1.5 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
                 style={{ borderTop: index === 0 ? 'none' : '1px solid rgba(11,11,12,.1)' }}
               >
                 <div className="min-w-0 sm:flex-1">
@@ -612,6 +622,36 @@ function Deck({
   return (
     <div className="cred-root relative h-[100svh] w-full overflow-hidden" style={{ background: INK }}>
       <style>{`
+        /* Slayd ichki bo'shliqlari ekran o'lchamiga ergashadi. Pastdagi
+           qiymat boshqaruv paneli balandligini ham qo'shadi, aks holda
+           oxirgi qator panel ostida qolib ketadi. */
+        .cred-slide {
+          --cred-px: clamp(1.25rem, 4vw, 3rem);
+          --cred-pt: clamp(1.75rem, 7vh, 5rem);
+          --cred-pb: calc(clamp(1.75rem, 7vh, 5rem) + 3.5rem);
+        }
+        /* Telefon landshafti va past oynalar: bo'sh joy keskin qisqaradi. */
+        @media (max-height: 560px) {
+          .cred-slide { --cred-pt: 0.875rem; --cred-pb: 3.25rem; }
+        }
+
+        .cred-display-lg { font-size: clamp(1.75rem, 4.2vw + 0.4rem, 4rem); }
+        .cred-display-xl { font-size: clamp(2rem, 5.6vw + 0.5rem, 5.75rem); }
+        @media (max-height: 560px) {
+          .cred-display-lg { font-size: clamp(1.35rem, 3.6vh + 0.5rem, 2.35rem); }
+          .cred-display-xl { font-size: clamp(1.5rem, 4.6vh + 0.5rem, 3rem); }
+        }
+
+        /* Uzun ro'yxatli slaydlar kichik ekranda zichroq bo'ladi. */
+        @media (max-width: 640px), (max-height: 560px) {
+          .cred-row { padding-top: 0.7rem; padding-bottom: 0.7rem; }
+        }
+
+        /* Mono yorliqlar telefonda 10px da juda mayda — biroz kattalashtiramiz. */
+        @media (max-width: 480px) {
+          .cred-slide [class*="text-[10px]"] { font-size: 11px; }
+        }
+
         /* Nusxa ekranda ko'rinmaydi, lekin joylashuvi hisoblanadi —
            shunda rasmlar yuklanadi. */
         .cred-print-all {
@@ -706,6 +746,12 @@ function Deck({
       ) : null}
 
       {/* Boshqaruv paneli */}
+      {/* Panel ortidagi xiralik: slayd uzun bo'lib scroll qilinganda matn
+          panel ostidan o'tib ketishi kerak, kesilgandek ko'rinmasligi uchun. */}
+      <div
+        className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24"
+        style={{ backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', maskImage: 'linear-gradient(to top, #000 55%, transparent)', WebkitMaskImage: 'linear-gradient(to top, #000 55%, transparent)' }}
+      />
       <div className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-30 px-5 pb-5 sm:px-8 sm:pb-6">
         <div className="pointer-events-auto mx-auto flex max-w-6xl items-center justify-between gap-4">
           <span
