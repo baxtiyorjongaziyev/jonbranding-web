@@ -87,6 +87,13 @@ describe('TrademarkCalculator form submission', () => {
     vi.mocked(global.fetch).mockClear();
   });
 
+  it('enables expert check by default', () => {
+    render(<TrademarkCalculator translations={mockTranslations} />);
+
+    expect(screen.getByRole('button', { name: /Yoqilgan/i })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText(/Ekspert\+/i)).toBeInTheDocument();
+  });
+
   it('allows form submission when all required fields including brand name are filled', async () => {
     render(<TrademarkCalculator translations={mockTranslations} />);
 
