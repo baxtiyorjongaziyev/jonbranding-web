@@ -4,6 +4,18 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-22 | Ommaviy repodan jonli Telegram kalitlari olib tashlandi
+
+**Muammo.** `services/portfolio-bot/.env.example` da namuna emas, **haqiqiy** qiymatlar turgan edi: `TG_API_ID`, `TG_API_HASH`, `TG_NOTIFY_CHAT_ID`. Repo bo'ylab qidirilganda aynan o'sha juftlik `.codex/config.toml:57` da ham takrorlangani topildi. Repo ommaviy — ya'ni bu kalitlarni istagan odam o'qiy olardi.
+
+**Tuzatish.** Ikkala fayldagi qiymatlar bo'shatildi; `.codex/config.toml` da endi muhit o'zgaruvchisi ishlatiladi (`${TELEGRAM_API_ID}`). Har ikkalasiga izoh qo'shildi: bu fayllarga haqiqiy kalit yozilmaydi, qiymatlar git'ga kirmaydigan `.env` da turadi.
+
+**Tekshirildi.** Repo bo'ylab (node_modules va .git dan tashqari) ikkala sir satri bo'yicha grep — natija bo'sh.
+
+**Egasi uchun qoladi:** `TG_API_HASH` ni my.telegram.org da **almashtirish** shart. Kod tarixda qolgani uchun eski qiymat hamon ochiq hisoblanadi.
+
+---
+
 ## 2026-09-22 | Patent kalkulyatori: ekspert tekshiruvi default yoqildi
 
 **Vazifa:** Patent kalkulyatoriga kirgan mijozda "Qo'shimcha ekspert tekshiruvi" default holatda yoqilgan tursin.

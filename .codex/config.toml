@@ -54,4 +54,6 @@ args = ["C:\\Users\\baxti\\projects\\jonbranding-web\\mcp-server\\build\\index.j
 [mcp_servers.telegram]
 command = "npx"
 args = ["-y", "telegram-mcp"]
-env = { TELEGRAM_API_ID = "30643078", TELEGRAM_API_HASH = "e5850001c1d86ac0fb439fbd8319cb7f" }
+# Qiymatlar muhitdan olinadi — bu fayl ommaviy repoda turadi,
+# shuning uchun bu yerga haqiqiy kalit yozilmaydi.
+env = { TELEGRAM_API_ID = "${TELEGRAM_API_ID}", TELEGRAM_API_HASH = "${TELEGRAM_API_HASH}" }
