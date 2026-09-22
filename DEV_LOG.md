@@ -4,6 +4,14 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-22 | Patent kalkulyatori: ekspert tekshiruvi default yoqildi
+
+**Vazifa:** Patent kalkulyatoriga kirgan mijozda "Qo'shimcha ekspert tekshiruvi" default holatda yoqilgan tursin.
+
+**Qilingan ish:** `trademark-calculator.tsx` ichida `hasEkspert` default qiymati `true` qilindi. Test toggle yoqilganini va `Ekspert+` summaryda ko'rinishini tekshiradi.
+
+---
+
 ## 2026-09-21 | Codex review (PR #333) — to'rtta topilma tuzatildi
 
 **1. Native print bo'sh sahifa berardi (P2, haqiqiy).** `printing` false bo'lganda nusxa DOM'da yo'q edi, lekin print CSS `.cred-live` ni yashirardi — Ctrl/Cmd+P bosgan odam bo'sh PDF olardi. Endi yashirish `.cred-printing` klassi ostida: nusxa bo'lmasa jonli slayd chop etiladi. O'lchandi: native print matn uzunligi 0 emas, 272 belgi.
