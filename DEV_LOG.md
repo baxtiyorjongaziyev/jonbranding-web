@@ -4,6 +4,155 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-22 | Patent kalkulyatori: ekspert tekshiruvi default yoqildi
+
+**Vazifa:** Patent kalkulyatoriga kirgan mijozda "Qo'shimcha ekspert tekshiruvi" default holatda yoqilgan tursin.
+
+**Qilingan ish:** `trademark-calculator.tsx` ichida `hasEkspert` default qiymati `true` qilindi. Test toggle yoqilganini va `Ekspert+` summaryda ko'rinishini tekshiradi.
+
+---
+
+## 2026-09-21 | Codex review (PR #333) — to'rtta topilma tuzatildi
+
+**1. Native print bo'sh sahifa berardi (P2, haqiqiy).** `printing` false bo'lganda nusxa DOM'da yo'q edi, lekin print CSS `.cred-live` ni yashirardi — Ctrl/Cmd+P bosgan odam bo'sh PDF olardi. Endi yashirish `.cred-printing` klassi ostida: nusxa bo'lmasa jonli slayd chop etiladi. O'lchandi: native print matn uzunligi 0 emas, 272 belgi.
+
+**2. Ataylab qo'yilgan shaffoflik yo'qolardi (P2, haqiqiy).** `.cred-print-all * { opacity: 1 !important }` keys rasmining `0.55`, logotiplarning 45% va so'ngan matnlarni ham to'liq ochib yuborardi — PDF'da ierarxiya yo'qolardi. Endi faqat `transform` bekor qilinadi. O'lchandi: keys rasmi PDF'da `opacity: 0.55`.
+
+**3. Tugmada qattiq yozilgan o'zbekcha matn (P1).** `Tayyorlanmoqda…` `/ru`, `/en`, `/zh` da ham chiqardi. Tarjima qo'shish o'rniga yozuv tilga bog'liq bo'lmagan holga keltirildi: `PDF` → `PDF ···`. Sahifaning qolgan matni hali o'zbekcha bo'lgani uchun bitta satrni lug'atga ko'chirish nomuvofiqlik bo'lardi.
+
+**4. Sinov qator bo'yicha tekshirmasdi (P2, haqiqiy).** `expect(doc).toContain(price)` butun hujjat bo'yicha qidirardi: Naming narxini Logo narxiga almashtirsak, ikkala raqam ham hujjatda boshqa joyda uchragani uchun sinov o'tib ketardi. Endi markdown jadvalidan xizmat nomi turgan qator topiladi va narx/muddat aynan o'sha qatorda tekshiriladi. Paketlar ham shunday.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (266/266), `build`, hamda Playwright bilan native print va PDF tugmasi alohida tekshirildi.
+
+---
+
+## 2026-09-21 | `/credentials` — global ContactModal taqdimot ustiga chiqib qolardi
+
+**Topilish yo'li:** egasi "ko'zing bilan ko'r, odam uchun mantiqlimi" dedi. 18 slaydning hammasi suratga olinib ko'rildi — 17-slaydda ekran o'rtasida **"Free Brand Audit"** oynasi ochilib turgan edi. Ingliz tilida, ko'k rangda, deki dizayniga umuman yopishmaydi. Avvalgi o'lchovlar (toshish, sahifa soni) buni ko'rsatmagan edi, chunki ular faqat slayd ichini o'lchardi.
+
+**Sabab:** `client-enhancements.tsx` da sticky CTA, Oisha widget, cookie banner, lead-magnet va mobil nav `isDeck` bilan yopilgan edi, lekin **`ContactModal` yopilmagan**. Sahifa ochilgandan ~15 soniya keyin o'zi ochilardi.
+
+**Tuzatish — ikki qatlam:**
+1. `handleOpenModal` boshida `/credentials` uchun ham darhol qaytiladi (bosh sahifa uchun shunday qilinganidek). Kim chaqirishidan qat'i nazar modal ochilmaydi.
+2. Render shartiga `!isDeck` qo'shildi — agar holat baribir o'rnatilsa ham, ekranga chiqmaydi.
+
+**Tekshirildi:** sahifa 25 soniya ochiq turdi — `[role="dialog"]` yo'q, "Free Brand Audit" matni yo'q. `typecheck`, `lint`, `vitest` (273/273), `build` — toza.
+
+**Nega muhim:** bu sotuvchi mijoz bilan ekran ulashib turgan paytda chiqadigan xato edi. Taqdimotning o'z ariza formasi bor, global modal u yerda umuman kerak emas.
+
+---
+
+## 2026-09-21 | `docs/NARXLAR.md` — barcha AI agentlar uchun narxlar ma'lumotnomasi
+
+**Talab:** narxlar sahifasining hozirgi holati bilan barcha AI agentlar (ChatGPT, Claude, Claude Code, Gemini, Codex, Antigravity) tanishib chiqsin.
+
+**Qilingan ish:**
+1. **`docs/NARXLAR.md`** — yagona ma'lumotnoma: qayerda joylashgani, 9 ta alohida xizmat narxi va muddati, 3 ta paket (tarkibi, tejaladigan summa), ish jarayoni va 50/30/20 to'lov, kafolatlar ro'yxati, sahifa tuzilishi (§01–§10), egasining uslub talablari (ko'plik shakl, "yaratish" so'zi ishlatilmasligi, FAB yondashuv), ochiq qolgan ishlar va narxni o'zgartirish tartibi.
+2. **`AGENTS.md`** — sahifalar jadvali yangilandi (`/narxlar` va `/credentials` qo'shildi, ular eskirgan edi), Qoidalar bo'limiga 0-qoida sifatida majburiy o'qish qo'yildi.
+3. **`CLAUDE.md`** — "Narxlar sahifasi" bo'limi qo'shildi.
+4. **`src/lib/sales-content.test.ts`** — hujjat koddan ajralib ketmasligi uchun 23 ta sinov. Har bir xizmat narxi/muddati, har bir paket raqami va tarkibi hujjatda borligini tekshiradi.
+
+**Nega sinov kerak:** noto'g'ri narx yozilgan hujjat hujjatsizlikdan battar — agent unga ishonib mijozga xato raqam aytadi. Sinov birinchi ishga tushirilishidayoq nomuvofiqlikni topdi (hujjatda `Har qo'shimcha SKU` to'g'ri apostrof bilan emas, oddiy apostrof bilan yozilgan edi).
+
+**Muhim fakt hujjatga yozildi:** paket muddatlari (20–45 kun) faqat dizayn ishlariga tegishli, patent alohida chiqadi (oddiy 7 oy, tezkor 20–40 kun). Bu ziddiyatga o'xshaydi va agentlar uni "xato" deb tuzatib yuborishi mumkin edi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (273/273, 23 tasi yangi), `build` — toza.
+
+---
+
+## 2026-09-21 | `/credentials` — qurilmaga moslik
+
+**Talab:** "Mijoz qanday device dan kirsa shunga mos bo'lsin."
+
+**O'lchov (Playwright, 7 xil ekran).** Boshlang'ich holatda gorizontal toshish hech qayerda yo'q edi, lekin telefonda va telefon landshaftida kontent pastdagi boshqaruv paneli ostida qolib ketardi, landshaftda esa yuqoridagi bo'sh joy ekranning yarmini yeb qo'yardi.
+
+**Qilingan ish:**
+1. **Moslashuvchan bo'shliqlar.** `.cred-slide` da `--cred-px` / `--cred-pt` / `--cred-pb` CSS o'zgaruvchilari. Pastki qiymat panel balandligini ham o'z ichiga oladi, shuning uchun oxirgi qator endi panel ostida yashirinmaydi. `max-height: 560px` da (telefon landshafti) bo'shliqlar keskin qisqaradi.
+2. **Moslashuvchan tipografika.** Sarlavhalar qat'iy Tailwind o'lchamlari o'rniga `clamp()` bilan (`.cred-display-lg` / `.cred-display-xl`). Past oynalarda `vh` asosida kichrayadi. Desktop qiymatlari o'zgarmadi.
+3. **Panel ortida xiralik.** Uzun slayd scroll qilinganda matn kesilgandek emas, panel ostiga yumshoq so'nib kiradi (`backdrop-filter` + `mask-image`).
+4. **Zich ro'yxatlar.** Xizmat qatorlari (`.cred-row`) kichik ekranda ixchamroq.
+5. **Mayda yorliqlar.** 480px dan tor ekranda 10px mono yozuvlar 11px ga ko'tarildi.
+
+**Yakuniy holat:**
+
+| Ekran | Scroll kerak | Gorizontal toshish |
+|---|---|---|
+| 390x844 telefon | 4/18 | 0 |
+| 320x568 kichik telefon | 8/18 | 0 |
+| 844x390 telefon landshaft | 6/18 | 0 |
+| 768x1024 planshet | 0/18 | 0 |
+| 1024x768 planshet landshaft | 0/18 | 0 |
+| 1440x900 noutbuk | 0/18 | 0 |
+| 1920x1080 keng | 0/18 | 0 |
+
+Planshetdan boshlab hamma slayd to'liq sig'adi. Telefonda kontenti ko'p slaydlar (xizmatlar ro'yxati, paketlar, jarayon, kafolatlar) vertikal scroll qiladi — bu kutilgan holat, matnni o'qib bo'lmaydigan darajada kichraytirmaslik uchun ataylab shunday qoldirildi. Gorizontal svayp slayd almashtirishda davom etadi, chunki svayp faqat aniq gorizontal harakatga javob beradi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (250/250), `build` — toza.
+
+---
+
+## 2026-09-21 | `/credentials` PDF eksporti tuzatildi
+
+**Shikoyat:** "jonbranding.uz/credentials pdf juda yomon holatda."
+
+**Tekshiruv:** Playwright bilan `emulateMedia({ media: 'print' })` qilib haqiqiy PDF chiqarildi va sahifalar ko'rildi. Uchta alohida nuqson topildi.
+
+**1. Keys sahifalari qop-qora chiqardi (asosiy sabab).** Chop etish nusxasi (`.cred-print-all`) doim `display:none` konteynerda turardi. `next/image` lazy rasmni ko'rinmaydigan ota-element ichida hech qachon yuklamaydi, shuning uchun PDF'ga bo'sh fon tushardi. O'lchandi: print paytida 24 ta rasmdan atigi 1 tasi yuklangan edi.
+- Nusxa endi faqat PDF so'ralganda DOM'ga qo'yiladi (`printing` holati), ekrandan tashqarida (`left: -200vw`) joylashuvi hisoblanadi, rasmlar `loading="eager"` bilan yuklanadi, va `window.print()` faqat barcha rasmlar tayyor bo'lgach chaqiriladi (8 soniya zaxira vaqt bilan).
+- Natija: 24/24 rasm yuklangan.
+
+**2. Slaydlar sahifaga to'g'ri kelmasdi.** `height: auto` tufayli har slayd o'z kontenti bo'yicha cho'zilardi, sahifa chegaralari tasodifiy joyga tushardi, keys slaydidagi `Image fill` esa o'lchamsiz ota-element ichida yig'ilib matn ustiga chiqib ketardi.
+- `@page { size: A4 landscape; margin: 0 }` va `.cred-slide { height: 209mm }` qo'yildi. Endi 18 slayd = 18 sahifa, MediaBox 842×595 pt.
+
+**3. Qorong'i slaydlar fonini yo'qotardi.** Brauzer "Background graphics" belgilanmagan holda fonni tashlab, ranglarni o'zicha o'zgartirardi — natijada dizayn buzilardi.
+- `.cred-dark` klassi qo'shilib, `print-color-adjust: exact` bilan fon majburan saqlanadi.
+
+**Tekshirildi:** 18 sahifalik PDF chiqarildi, muqova, keys, paketlar va CTA sahifalari ko'z bilan ko'rildi. `typecheck`, `lint`, `vitest` (250/250), `build` — toza.
+
+**Eslatma:** ba'zi keyslarda `categoryLabel` bo'sh, shuning uchun sarlavha ustidagi kichik yozuv ko'rinmaydi. Bu Sanity ma'lumoti, kod emas.
+
+---
+
+## 2026-09-21 | Patent Menejer sahifasi: Ortiqcha matnlar va kaskad kartochkalari olib tashlandi
+
+**Vazifa:** `patent.jonbranding.uz` / `/[lang]/patent-menejer` sahifasidan "Doimiy Ochiq Versiya (Menejer Rejimi)", "Sotuv Menejeri — Patent Kalkulyatori", "1. Istisno Chegirmasi", "2. Salom Chegirmasi", "3. Promokod", "4. Arboun" kabi barcha ortiqcha matnlar olib tashlandi.
+
+**Natija:**
+- Sahifa to'liq toza, standart mijozlar sahifasi kabi professional ko'rinishga keltirildi.
+- Kalkulyator funksionalligi `alwaysUnlocked={true}` holatida saqlanib qoldi (hech qanday telefon/ism so'ralmaydi, hisob-kitoblar darhol ochiq).
+
+## 2026-09-21 | Do/Posle (Before/After) Bloki To'liq Qayta Dizayn Qilindi ("Sales Machine" Standarti)
+
+**Vazifa:** Foydalanuvchining "Do posle blokni qayta dizayn qilib ber" talabiga asosan bosh sahifadagi Before/After bo'limi jahon darajasidagi premium agentlik ("Sales Machine") standartida to'liq qayta loyihalandi.
+
+**Bajarilgan Asosiy O'zgarishlar:**
+1. **Interactive Brand Selector (Interaktiv brendlar navigatsiyasi):**
+   - 4 ta asosiy keys (Den Aroma, Savod, Fidda by Sevara, Boyarin) bo'yicha silliq tablar joriy qilindi.
+   - Har bir tabda brend nomi, sohasi va eng asosiy natija ko'rsatkichi (`+178%`, `Top-3`, `+40%`, `+85%`) aks etadi.
+   - Framer Motion `layoutId="activeBrandPill"` orqali silliq o'tish animatsiyasi yaratildi.
+2. **Cinematic Split-Comparison Stage (Katta ekranli interaktiv taqqoslash sahnasi):**
+   - `ImageComparisonSlider` da avvalgi `clipPath` va yorliqlar teskari joylashgan xatolik to'liq tuzatildi:
+     - Chap tomonda: **AVVAL** (Eski ko'rinish / 3 Atirchi va boshqalar) + qizg'ish neytral ishonchsizlik belgisi.
+     - O'ng tomonda: **KEYIN** (JonBranding premium aydentikasi) + moviy-zumrad jilosidagi premium belgi.
+     - O'rtada: Lazer nurli bo'lgich chiziq va pulsatsiyali qulay tutqich.
+   - Klaviatura bilan boshqarish (`ArrowLeft`, `ArrowRight`, `Home`, `End`) va qulay sensorli drag/pan physics qo'shildi.
+   - Tezkor boshqaruv tugmalari: `[ Faqat Avval ]`, `[ 50 / 50 Taqqoslash ]`, `[ Faqat Keyin ]`.
+3. **Strategic Case Dossier (Strategik tahlil va biznes natijasi paneli):**
+   - Har bir brend uchun alohida chuqur tahlil kartochkasi:
+     - **Muammo (Avval):** Eski dizayn nima uchun sotuvni pasaytirayotgan edi va mijozlar qanday e'tiroz bildirar edi?
+     - **Strategik Yechim (Keyin):** JonBranding qanday nom, aydentika va brendbuk tizimini ishlab chiqdi?
+     - **Biznes Natijasi:** 3 ta aniq raqamli ko'rsatkich (masalan: `+178% Savdo o'sishi`, `3.2x Brend qiymati`, `Top-3 Bozor ulushi`).
+     - **Harakatga chaqiruv (CTA):** Har bir keys uchun to'g'ridan-to'g'ri `/[lang]/portfolio/[slug]` ga o'tish tugmasi va "Bepul Brand Audit olish" modalini ochuvchi tugma.
+4. **Bottom Multi-Card Gallery (Barcha transformatsiyalar galereyasi):**
+   - Sahna ostida barcha 4 ta transformatsiyaning vizual miniatyurasi va ko'rsatkichlari joylashtirildi. Foydalanuvchi istalgan kartani bosib asosiy sahnani shu keysga almashtirishi mumkin.
+5. **i18n & Uzbek-First:**
+   - O'zbek tili (`uz.json`) birinchi bo'lib to'liq yozildi, so'ngra `ru.json`, `en.json`, `zh.json` ga tarjima qilindi.
+6. **Tekshirildi:**
+   - `npm run typecheck` — 0 ta xato bilan o'tdi.
+   - `npm run build` — 166 ta sahifaning barchasi 100% muvaffaqiyatli statik/dinamik yig'ildi.
+
+---
+
 ## 2026-09-21 | Portfolio UI va Render Tizimi Audit Qilindi va To'liq Tuzatildi
 
 **Vazifa:** Foydalanuvchi ko'zi bilan qaralganda aniqlangan barcha kamchiliklar (saralash, filtrlar, case study matnlari va rasmlar) to'liq tuzatildi va jonli sahifalarda tekshirildi.

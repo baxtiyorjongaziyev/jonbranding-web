@@ -115,6 +115,9 @@ export default function ClientEnhancements({
     if (typeof window === 'undefined') return;
     const pathWithoutLocale = window.location.pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
     if (pathWithoutLocale === '/') return;
+    // Taqdimot sahifasining o'z ariza formasi bor. Global ko'k modal slaydlar
+    // ustiga chiqsa, ekran ulashuvdagi uchrashuvni buzadi.
+    if (pathWithoutLocale === '/credentials') return;
 
     let summary = '';
     let finalPrice = 0;
@@ -231,7 +234,7 @@ export default function ClientEnhancements({
         />
       )}
       <Toaster />
-      {isModalOpen && !isHome && (
+      {isModalOpen && !isHome && !isDeck && (
         <ContactModal
           isOpen={isModalOpen}
           onClose={handleCloseModal}

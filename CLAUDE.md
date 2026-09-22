@@ -46,6 +46,15 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=h6ymmj0v
 NEXT_PUBLIC_SANITY_DATASET=production
 ```
 
+## Narxlar sahifasi
+
+`/narxlar` — narxlar sahifasi, `/credentials` — sotuvchi taqdimoti. Ikkalasining
+matni va narxlari `src/lib/sales-content.ts` da (JSX'da qattiq yozilgan narx yo'q).
+Eski manzillar `/tariflar` va `/presentation` 308 bilan yo'naltiriladi.
+
+**Tegishdan oldin `docs/NARXLAR.md` ni o'qing** — barcha narxlar, paket tarkibi,
+kafolatlar va egasining uslub talablari o'sha yerda.
+
 ## Arxitektura qarorlari (sessiya xotirasi)
 Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 
