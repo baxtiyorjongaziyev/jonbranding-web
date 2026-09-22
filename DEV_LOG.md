@@ -16,6 +16,34 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-22 | Patent kalkulyatori: ekspert tekshiruvi default yoqildi
+
+**Vazifa:** Patent kalkulyatoriga kirgan mijozda "Qo'shimcha ekspert tekshiruvi" default holatda yoqilgan tursin.
+
+**Qilingan ish:**
+1. `src/components/sections/trademark-calculator.tsx` ichida `hasEkspert` default qiymati `true` qilindi.
+2. `src/components/sections/trademark-calculator.test.tsx` ga default holat regressiya testi qo'shildi: "Yoqilgan" toggle `aria-pressed=true`, summaryda `Ekspert+` ko'rinadi.
+
+---
+
+## 2026-09-21 | Meta CAPI va Meta Pixel Deduplication & EMQ Tizimi To'liq Yangilandi
+
+**Vazifa:** Meta Ads tracking fundamentini to'g'rilash: Meta Pixel va Meta Conversions API (CAPI) o'rtasidagi deduplication hamda Event Match Quality (EMQ) parametrlarini joriy qilish.
+
+**Bajarilgan O'zgarishlar:**
+1. **Meta Pixel Client-Side Deduplication (`src/lib/analytics/index.ts`):**
+   - `trackLead` funksiyasida Meta Pixel uchun standart `Lead` hodisasi `{ eventID: leadEventId }` parametri bilan uzatildi.
+   - `trackEvent` ichida `generate_lead` va `lead_confirmed` hodisalarida takroriy `trackCustom` yuborilishi cheklandi.
+2. **Meta CAPI Server-Side EMQ Kuchaytirildi (`src/lib/analytics-delivery.ts`):**
+   - `META_CAPI_ACCESS_TOKEN` va `META_API_ACCESS_TOKEN` ikkala muhit o'zgaruvchisini ham qo'llab-quvvatlash qo'shildi.
+   - `user_data` ga `client_ip_address`, `client_user_agent`, `fbp` va `fbc` parametrlari qo'shildi (Event Match Quality ko'rsatkichini 8.5–9/10 ga yetkazish uchun).
+3. **Form Route Cookie va Header Extraction (`src/app/api/submit-form/route.ts`):**
+   - So'rovdan `clientIp`, `user-agent`, `_fbp` va `_fbc` cookie-lari olinib, `leadData` orqali CAPI ga uzatiladigan qilindi.
+4. **Test:**
+   - `src/lib/analytics-delivery.test.ts` vitest testi 100% muvaffaqiyatli o'tdi.
+
+---
+
 ## 2026-09-21 | Codex review (PR #333) — to'rtta topilma tuzatildi
 
 **1. Native print bo'sh sahifa berardi (P2, haqiqiy).** `printing` false bo'lganda nusxa DOM'da yo'q edi, lekin print CSS `.cred-live` ni yashirardi — Ctrl/Cmd+P bosgan odam bo'sh PDF olardi. Endi yashirish `.cred-printing` klassi ostida: nusxa bo'lmasa jonli slayd chop etiladi. O'lchandi: native print matn uzunligi 0 emas, 272 belgi.
