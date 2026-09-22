@@ -179,7 +179,7 @@ export default function TrademarkCalculator({
         classCount: 1,
         isYuridik: false,
         speed: 'oddiy',
-        hasEkspert: false,
+        hasEkspert: true,
         privacyPolicy: false
     }
   });
