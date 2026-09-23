@@ -208,21 +208,23 @@ function SectionTitle({
   eyebrow,
   title,
   description,
+  dark = false,
 }: {
   index: string;
   eyebrow: string;
   title: string;
   description?: string;
+  dark?: boolean;
 }) {
   return (
-    <div className="mb-8 border-b border-slate-200 pb-6">
+    <div className={`mb-8 border-b pb-6 ${dark ? 'border-white/10' : 'border-slate-200'}`}>
       <div className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
         <span>{index}</span>
         <span className="h-px w-8 bg-blue-600" />
         <span>{eyebrow}</span>
       </div>
-      <h2 className="max-w-4xl text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">{title}</h2>
-      {description ? <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">{description}</p> : null}
+      <h2 className={`max-w-4xl text-3xl font-bold tracking-tight sm:text-4xl ${dark ? 'text-white' : 'text-slate-950'}`}>{title}</h2>
+      {description ? <p className={`mt-3 max-w-3xl text-base leading-7 ${dark ? 'text-slate-300' : 'text-slate-600'}`}>{description}</p> : null}
     </div>
   );
 }
@@ -461,6 +463,7 @@ export default function SalesTechniquesPage() {
             eyebrow="Qualification"
             title="Texnika ≠ kvalifikatsiya. EVQN doim qoladi."
             description="SPIN, FAB yoki LAER suhbatni boshqaradi. EVQN esa lead uchrashuvga tayyormi — shuni tekshiradi."
+            dark
           />
           <div className="grid gap-4 md:grid-cols-4">
             {[
