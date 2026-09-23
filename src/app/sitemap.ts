@@ -27,6 +27,7 @@ const staticRoutes = [
   '/online-brief/wizard',
   '/pricing/sotuvchi-kartochka',
   '/narxlar',
+  '/expert-tekshiruv',
   '/xizmatlar',
   '/xizmatlar/neyming',
   '/xizmatlar/logo-dizayni',
