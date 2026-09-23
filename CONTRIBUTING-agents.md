@@ -68,10 +68,8 @@ Quyidagi fayllarga tegsangiz, PR izohida **ochiq ayting**:
 ## 6. CI / Deploy va mahalliy tekshiruvlar
 
 - **Mahalliy tekshiruvlar** — push qilishdan oldin har doim `npm run lint`, `npm run typecheck` va `npm run test` ni ishga tushiring. Loyihada `ignoreBuildErrors: true` yoqilgan bo'lsa ham, kod sifati va tiplar to'g'riligini saqlash shart.
-- **Vercel** — asosiy deploy. Yashil bo'lishi shart.
-- **Netlify** — hozircha e'tiborsiz (loyiha Vercel'da).
+- **Vercel** — asosiy va yagona deploy hosting. Yashil bo'lishi shart.
 - **CodeRabbit / Gemini** — review beradi; "high priority" topilmalarni tuzating.
-- Netlify build xatosi PR'ni bloklamaydi.
 
 ---
 
