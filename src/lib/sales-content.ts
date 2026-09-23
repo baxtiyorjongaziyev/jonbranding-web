@@ -265,7 +265,7 @@ export const FAQS = [
   },
   {
     q: 'To‘lovni bo‘lib to‘lasam bo‘ladimi?',
-    a: 'Ha, to‘lov uch bosqichda: 50% shartnoma imzolanganda, 30% konsepsiya tasdiqlanganda, 20% fayllar topshirilganda. Ya‘ni siz natijani ko‘rib borib to‘laysiz, hammasini oldindan emas.',
+    a: 'Ha, to‘lov ikki bosqichda: 50% shartnoma imzolanganda, 50% loyiha topshirilganda. Ya‘ni yarmini oldindan, yarmini natijani ko‘rgach to‘laysiz.',
   },
   {
     q: 'Patent chiqmay qolsa-chi?',
