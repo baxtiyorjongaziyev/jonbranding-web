@@ -175,7 +175,7 @@ const PricingCard = ({
       <TierTable data={tier.discounts} isRecommended={tier.isRecommended} />
     </div>
     <div className="mt-8">
-      <a href="https://t.me/baxtiyorjon_gaziyev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] bg-gradient-to-br from-dark-blue to-primary text-primary-foreground shadow-lg btn-animated-border hover:from-primary hover:to-dark-blue h-10 px-4 py-2 w-full">
+      <a href="https://t.me/baxtiyorjongaziyev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] bg-gradient-to-br from-dark-blue to-primary text-primary-foreground shadow-lg btn-animated-border hover:from-primary hover:to-dark-blue h-10 px-4 py-2 w-full">
         Buyurtma berish <Send className="w-4 h-4 ml-2" />
       </a>
     </div>
