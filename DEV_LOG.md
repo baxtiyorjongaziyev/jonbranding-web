@@ -4,6 +4,23 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Ekspert tekshiruv — public landing page
+
+**Vazifa:** 880 000 so‘mlik patent tekshiruvini "bazadan qidirish" emas, "patentga topshirishdan oldingi risk tahlili va yozma ekspert xulosa" sifatida tushuntiradigan alohida sahifa.
+
+**Qilingan ish:**
+1. Yangi public route: `/[lang]/expert-tekshiruv` (`page.tsx` — metadata, canonical, OG, `index: true`, Breadcrumb JSON-LD; `expert-check-client.tsx` — 13 bo‘lim).
+2. Bo‘limlar: hero + Expert Report mockup, muammo flow, umumiy vs ekspert, UZUM misoli, 8 mezon kartasi (real brend + MISOL label + disclaimer), xulosa tuzilmasi va risk statuslari, "pulim kuyadimi?", nega pullik, JTBD, 4 bosqich, kimlar uchun, FAQ (`<details>` accordion), final CTA + forma.
+3. Narx/muddat/qo‘shimcha klass `EXPERT_CHECK_SERVICE` orqali `src/lib/sales-content.ts` dan olinadi (JSX'da narx hardcode yo‘q).
+4. Forma `/api/submit-form` ga yuboradi: `source`/`form_name` = `expert_check_page`, qo‘shimcha maydonlar (brend, faoliyat, nima sotadi, xizmat, yo‘nalishlar soni, oldin tekshirilganmi, tekshiruv turi) `packageSummary` ichida — API sxemasi o‘zgarmadi.
+5. Sitemap'ga `/expert-tekshiruv` qo‘shildi.
+
+**Diqqat — narx manbasidagi o‘zgarish:** `sales-content.ts` va `docs/NARXLAR.md` da "Patent tekshiruvi" muddati `2 kun` → `1 ish kuni` qilindi (egasi promptda 1 ish kuni deb ko‘rsatgan). Bu `/narxlar` va `/credentials` sahifalariga ham ta’sir qiladi.
+
+**Tekshiruv:** typecheck ✓, lint ✓, vitest 267/267 ✓, build ✓. 375/768/1440px da gorizontal scroll yo‘q.
+
+---
+
 ## 2026-09-23 | Sotuv texnikalari — ichki Sales Playbook sahifasi
 
 **Vazifa:** UTC/Jon Branding menejerlari mijoz savollariga oddiy operator javobi bermasdan, konsultativ sotuv texnikalari bilan ishlashi uchun bitta amaliy sahifa kerak edi.

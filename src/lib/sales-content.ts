@@ -144,7 +144,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       {
         name: 'Patent tekshiruvi',
         price: '880 000',
-        duration: '2 kun',
+        duration: '1 ish kuni',
         lead: 'Nomingiz band emasligini oldindan bilib oling — bu eng arzon xavfsizlik choralari.',
         deliverables: [
           'Rasmiy bazadan to‘liq tekshiruv',
@@ -187,6 +187,11 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     ],
   },
 ];
+
+/** Ekspert tekshiruv (`/expert-tekshiruv`) — narx va muddat shu yozuvdan olinadi. */
+export const EXPERT_CHECK_SERVICE: Service = SERVICE_GROUPS
+  .flatMap((group) => group.items)
+  .find((item) => item.name === 'Patent tekshiruvi')!;
 
 export type Package = {
   name: string;

@@ -50,7 +50,7 @@ Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
 
 | Xizmat | Narx (so'm) | Muddat |
 |---|---|---|
-| Patent tekshiruvi | 880 000 | 2 kun |
+| Patent tekshiruvi | 880 000 | 1 ish kuni |
 | Patent (oddiy) | 5 000 000 | **7 oy** |
 | Patent (tezkor) | 7 000 000 | **20–40 kun** |
 
