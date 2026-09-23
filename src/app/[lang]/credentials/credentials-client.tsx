@@ -411,7 +411,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
           <p className="text-[10px] uppercase" style={{ ...mono, letterSpacing: '0.16em', color: 'rgba(11,11,12,.45)' }}>
             To‘lov bosqichma-bosqich
           </p>
-          {[['50%', 'shartnoma'], ['30%', 'konsepsiya'], ['20%', 'topshirish']].map(([pct, when]) => (
+          {[['50%', 'shartnoma'], ['50%', 'topshirish']].map(([pct, when]) => (
             <p key={when} className="text-sm" style={{ color: INK }}>
               <span className="text-xl" style={{ ...serif, ...nums }}>{pct}</span>{' '}
               <span style={{ color: 'rgba(11,11,12,.5)' }}>{when}</span>
