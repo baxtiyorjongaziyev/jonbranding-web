@@ -498,13 +498,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           >
             To‘lov bosqichlari
           </h3>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2">
             {[
               { value: '50%', label: 'Shartnoma imzolanganda' },
-              { value: '30%', label: 'Konsepsiya tasdiqlanganda' },
-              { value: '20%', label: 'Fayllar topshirilganda' },
+              { value: '50%', label: 'Loyiha topshirilganda' },
             ].map((stage) => (
-              <div key={stage.value}>
+              <div key={stage.label}>
                 <p className="text-3xl font-bold" style={{ ...numerals, letterSpacing: '-0.035em' }}>{stage.value}</p>
                 <p className="mt-1.5 text-sm text-neutral-600" style={{ lineHeight: 1.5 }}>{stage.label}</p>
               </div>

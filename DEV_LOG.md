@@ -16,6 +16,22 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Ijodiy ishlar to'lov shartlari: 50/30/20 → 50/50
+
+**Vazifa:** Egasining ko'rsatmasi — ijodiy ishlar (naming/logo/brandbook) uchun uch bosqichli to'lov (50% shartnoma / 30% konsepsiya / 20% topshirish) ikki bosqichga soddalashtirilsin: 50% shartnoma, 50% topshirish.
+
+**O'zgargan joylar (bitta manba bo'lishi kerak edi, lekin uchta joyda takrorlangan ekan):**
+1. `src/lib/sales-content.ts` — FAQ javobi (`To‘lovni bo‘lib to‘lasam bo‘ladimi?`).
+2. `src/app/[lang]/narxlar/narxlar-client.tsx` — "To'lov bosqichlari" statistika bloki (3 ustundan 2 ustunga).
+3. `src/app/[lang]/credentials/credentials-client.tsx` — sotuvchi taqdimotidagi to'lov qatori.
+4. `docs/NARXLAR.md` — ma'lumotnoma.
+
+**Nega uchtasi alohida edi:** `sales-content.ts` boshida "bitta manba" deb yozilgan bo'lsa-da, to'lov foizlari FAQ matni sifatida emas, har uch joyda qattiq yozilgan (`hardcoded`) raqam sifatida takrorlangan edi. Kelajakda shunga o'xshash umumiy shartlar (to'lov, kafolat, muddat) uchun konstanta chiqarib, uch joydan import qilish nomuvofiqlikni oldini oladi.
+
+**Tekshirildi:** `typecheck` toza.
+
+---
+
 ## 2026-09-23 | Ekspert tekshiruv — public landing page
 
 **Vazifa:** 880 000 so‘mlik patent tekshiruvini "bazadan qidirish" emas, "patentga topshirishdan oldingi risk tahlili va yozma ekspert xulosa" sifatida tushuntiradigan alohida sahifa.
