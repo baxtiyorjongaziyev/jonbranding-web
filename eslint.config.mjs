@@ -36,6 +36,7 @@ const config = [
   {
     ignores: [
       ".next/**",
+      "archive/**",
       ".netlify/**",
       ".open-next/**",
       ".wrangler/**",

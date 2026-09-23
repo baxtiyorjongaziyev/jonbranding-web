@@ -25,6 +25,59 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Favicon tuzatildi va ishlatilmaydigan kod arxivga olindi
+
+### 1. Favicon buzuq ekan (o'ylaganimdan yomonroq)
+
+Egasiga "favicon eski" degandim. Tekshirganda ma'lum bo'ldiki, u **umuman buzuq**:
+`public/favicon.ico` ichida ICO emas, **base64 matn** turgan (kimdir dekod
+qilmasdan saqlab qo'ygan). `file` buyrug'i uni "ASCII text" deb ko'rsatardi.
+Brauzer o'qiy olmagani uchun `icon.svg` zaxirasiga o'tardi — shuning uchun
+muammo ko'zga tashlanmagan. Lekin `.ico` ni birinchi so'raydigan brauzerlarda
+yorliq bo'sh chiqardi.
+
+**Tuzatish.** Yangi logodan haqiqiy ICO yasaldi:
+- Logoning "JON" qismi piksel tahlili bilan ajratildi (eng katta bo'sh ustun
+  oralig'i topildi — "JON" bilan "BRANDING AGENCY" orasidagi joy), bbox
+  `x 90.2..632.0, y 271.0..420.1`
+- `public/icon.svg` shu uchta path'dan kvadrat viewBox bilan qayta yig'ildi
+  (har tomondan 8% bo'sh joy). Avvalgi icon.svg **eski** logoning shakli edi.
+- 16/32/48px PNG render qilinib, ular bitta ICO konteynerga yig'ildi
+
+**Tekshirildi:** `file` endi "MS Windows icon resource - 3 icons" deydi;
+brauzerda uchala o'lchamda ham "JON" o'qiladi.
+
+**Ochiq savol egasiga:** 16px da harflar ingichka. Agar yorliqda aniqroq
+ko'rinishi kerak bo'lsa, faqat "J" monogrammasi variantini yasash mumkin —
+bu brend qarori, shuning uchun o'zim hal qilmadim.
+
+### 2. Ishlatilmaydigan kod `archive/` ga ko'chirildi
+
+Egasi "arxivga olib qo'y, hozircha ishlatmaymiz" dedi.
+
+Avval chegarasi aniqlandi: `/xizmatlar/page.tsx` `xizmatlar-interactive` ni
+ishlatadi, `xizmatlar-client` ning **uchala nusxasini** esa hech kim import
+qilmaydi. Har bir bola komponent alohida tekshirildi — faqat shu mijozlardan
+chaqiriladiganlari ko'chirildi:
+
+- **Ko'chirildi (9 ta):** `package-builder`, `comparison`, `queue-status`,
+  `urgency-block`, `personal-offer-block`, `services-hero` va uchta
+  `xizmatlar-client` nusxasi
+- **Tegilmadi (jonli):** `service-sections` (6 ta xizmat sahifasida),
+  `testimonials` va `trusted-by` (bosh sahifada), `why-us` (brand-strategiyasi)
+
+`archive/.../README.md` da nima uchun ko'chirilgani, ichida nima borligi va
+qaytarish tartibi yozildi. Muhim ogohlantirish yozib qo'yildi: `package-builder`
+narxni `pricing.ts` dan **dollarda** oladi (×12 700), saytdagi haqiqiy narxlar
+esa `sales-content.ts` da so'mda — Logo VIP kalkulyatorda 37,5 mln, haqiqatda
+8 mln. Shuning uchun uni shundayligicha qaytarib bo'lmaydi.
+
+`archive/` `tsconfig.typecheck.json` va `eslint.config.mjs` dan chetlatildi.
+
+**Tekshirildi:** `typecheck` toza, `vitest` 267/267.
+
+---
+
 ## 2026-09-23 | Headerda logo juda katta chiqardi
 
 **Muammo.** Egasi: "headerda logo juda katta bo'lib ketgan".
