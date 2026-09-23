@@ -27,7 +27,6 @@ const staticRoutes = [
   '/online-brief/wizard',
   '/pricing/sotuvchi-kartochka',
   '/narxlar',
-  '/expert-tekshiruv',
   '/xizmatlar',
   '/xizmatlar/neyming',
   '/xizmatlar/logo-dizayni',
@@ -173,6 +172,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
+  // Faqat o'zbekcha tarjimasi bor sahifalar.
+  const uzOnlyPages = ['/expert-tekshiruv'].map((route) => ({
+    url: localizedUrl('uz', route),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+    alternates: getAlternates(route, ['uz']),
+  }));
+
   const blogEntries = [
     ...getMarkdownBlogEntries(),
     ...(await getSanityBlogEntries()),
@@ -181,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     new Map(blogEntries.map((entry) => [entry.url, entry])).values(),
   );
 
-  return [...staticPages, ...uniqueBlogEntries, ...(await getPortfolioEntries())];
+  return [...staticPages, ...uzOnlyPages, ...uniqueBlogEntries, ...(await getPortfolioEntries())];
 }
 
 export const revalidate = 300;

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Locale } from '@/lib/dictionaries';
-import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
+import { getLocalizedAbsoluteUrl } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
 import { EXPERT_CHECK_SERVICE } from '@/lib/sales-content';
 import ExpertCheckClient from './expert-check-client';
@@ -15,16 +15,14 @@ const DESCRIPTION = `Brend nomini patentga topshirishdan oldin professional risk
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
-  const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
-  const url = getLocalizedAbsoluteUrl(BASE_URL, safeLang, ROUTE);
+  // Sahifa hozircha faqat o'zbekcha: boshqa tillar uz versiyaga canonical va noindex.
+  const isUz = lang === 'uz';
+  const url = getLocalizedAbsoluteUrl(BASE_URL, 'uz', ROUTE);
   return {
     title: TITLE,
     description: DESCRIPTION,
-    robots: { index: true, follow: true },
-    alternates: {
-      canonical: url,
-      languages: getLocaleAlternates(BASE_URL, ROUTE),
-    },
+    robots: { index: isUz, follow: true },
+    alternates: { canonical: url },
     openGraph: {
       title: TITLE,
       description: DESCRIPTION,

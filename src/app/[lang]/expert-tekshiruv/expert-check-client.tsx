@@ -11,6 +11,7 @@ const SOURCE = 'expert_check_page';
 const PRICE = `${EXPERT_CHECK_SERVICE.price} so‘m`;
 const DURATION = EXPERT_CHECK_SERVICE.duration;
 const ADDON = EXPERT_CHECK_SERVICE.addon;
+const PRICE_VALUE = Number(EXPERT_CHECK_SERVICE.price.replace(/\D/g, ''));
 
 const h2Style = { fontSize: 'clamp(26px, 3.6vw, 42px)', letterSpacing: '-0.03em', lineHeight: 1.1 } as const;
 const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace', letterSpacing: '0.12em' } as const;
@@ -386,6 +387,7 @@ const ExpertForm: FC<{ type: CheckType; setType: (t: CheckType) => void; phoneRe
     setSending(true);
 
     const service = type === 'expert' ? EXPERT_CHECK_SERVICE.name : 'Bepul umumiy tekshiruv';
+    const totalPrice = type === 'expert' ? PRICE_VALUE : 0;
     const summary = [
       `Tur: ${type === 'expert' ? `Ekspert tekshiruv (${PRICE})` : 'Bepul umumiy tekshiruv'}`,
       f.brand && `Brend: ${f.brand}`,
@@ -421,6 +423,7 @@ const ExpertForm: FC<{ type: CheckType; setType: (t: CheckType) => void; phoneRe
           phone: normalizedPhone,
           role: service,
           packageSummary: summary.slice(0, 900),
+          totalPrice,
           source: SOURCE,
           lang: 'uz',
           eventId,
@@ -440,6 +443,7 @@ const ExpertForm: FC<{ type: CheckType; setType: (t: CheckType) => void; phoneRe
 
     trackLead({
       source: SOURCE,
+      value: totalPrice,
       eventId: result.eventId || eventId,
       serverTracked: true,
       gaClientId,
