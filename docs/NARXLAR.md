@@ -80,7 +80,7 @@ tezkorda 20–40 kun. Sahifada shu izoh bor, uni olib tashlamang.
 3. **Ishlab chiqish** — tanlangan yo'nalish sayqallanadi
 4. **Topshirish** — barcha fayllar va hujjatlar mijozda
 
-To'lov uch bosqichda: **50%** shartnoma, **30%** konsepsiya, **20%** topshirish.
+To'lov ikki bosqichda: **50%** shartnoma imzolanganda, **50%** loyiha topshirilganda.
 
 ---
 
