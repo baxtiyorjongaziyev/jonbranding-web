@@ -44,6 +44,7 @@
     "node_modules",
     "services",
     "src/scripts",
-    "mcp-server"
+    "mcp-server",
+    "archive"
   ]
 }

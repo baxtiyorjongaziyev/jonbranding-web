@@ -25,6 +25,62 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Narxlar sahifasi rus, ingliz va xitoy tillariga tarjima qilindi
+
+**Muammo.** `/ru/narxlar`, `/en/narxlar`, `/zh/narxlar` ochilardi, lekin matn
+to'liq o'zbekcha edi. Rus yoki chet ellik mijoz sahifani tushunmasdi.
+
+### Tuzilma
+
+`src/lib/sales-content.ts` (bitta fayl) → `src/lib/sales-content/` katalogiga
+bo'lindi:
+
+| Fayl | Nima |
+|---|---|
+| `types.ts` | Umumiy tiplar — barcha tillar shu shaklga bo'ysunadi |
+| `uz.ts` | O'zbekcha (asosiy til) |
+| `ru.ts`, `en.ts`, `zh.ts` | Tarjimalar |
+| `index.ts` | `getSalesContent(lang)` + eski nomlar (orqaga moslik) |
+
+Eski `SERVICE_GROUPS`, `PACKAGES` va boshqa nomlar `index.ts` da saqlanib
+qoldi (o'zbekchaga ishora qiladi), shuning uchun `/credentials` va mavjud
+sinovlar o'zgarishsiz ishlayveradi.
+
+**Narxlar barcha tillarda bir xil** — raqamlar so'mda, faqat valyuta yozuvi
+tarjima qilinadi (so'm / сум / UZS / 苏姆).
+
+### Sahifadagi matnlar
+
+`narxlar-client.tsx` da 50 dan ortiq qattiq yozilgan o'zbekcha satr bor edi:
+bo'lim sarlavhalari, eyebrow yorliqlari, tugmalar, izohlar. Hammasi `ui`
+obyektiga ko'chirildi. Ikki qismli sarlavhalar (`Narxlarimiz *ochiq*` — ikkinchi
+qismi serif bilan ajratiladi) `SplitHeading` tipi bilan ifodalandi, shuning
+uchun tarjimada ham dizayn saqlanadi.
+
+Sahifa endi `lang` propini oladi, `page.tsx` `safeLang` ni uzatadi.
+
+### Ariza oynasi
+
+`lead-modal.tsx` xizmatlar ro'yxatini o'zbekchada ko'rsatardi. Endi u ham
+`lang` oladi. Muhim yon ta'sir: CRM ga yuboriladigan `lang` maydoni
+qattiq `'uz'` edi — endi haqiqiy til yuboriladi, ya'ni rus mijozdan kelgan
+ariza CRM da "ru" deb belgilanadi.
+
+### Tekshirildi
+
+- `typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa) — toza
+- Brauzerda uchala til ochilib, matn dasturiy tekshirildi: o'zbekcha qoldiq
+  **yo'q** (`so'm`, `Narxlarimiz`, `Ariza qoldirish` va h.k. izlandi — topilmadi)
+- Skrinshot: serif urg'u va joylashuv uchala tilda ham buzilmagan
+
+**Eslatma egasiga:** tarjimalar tijorat matni — narx va kafolat shartlari
+bo'yicha yakuniy so'z egasida. Ko'rib chiqib, kerak bo'lsa tahrirlash lozim.
+
+`/credentials` (sotuvchi taqdimoti) hali faqat o'zbekcha — u ichki vosita,
+egasi so'ramadi.
+
+---
+
 ## 2026-09-23 | Favicon tuzatildi va ishlatilmaydigan kod arxivga olindi
 
 ### 1. Favicon buzuq ekan (o'ylaganimdan yomonroq)

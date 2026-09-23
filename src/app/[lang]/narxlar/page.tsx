@@ -94,7 +94,7 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <NarxlarClient cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
+      <NarxlarClient lang={safeLang} cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
     </div>
   );
 };
