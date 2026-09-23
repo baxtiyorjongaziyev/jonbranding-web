@@ -4,6 +4,22 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Headerda logo juda katta chiqardi
+
+**Muammo.** Egasi: "headerda logo juda katta bo'lib ketgan".
+
+**Sabab.** PR #334 da logo fayli almashtirildi, lekin `Logo` komponentidagi o'lchov eskisicha qoldi. Eski SVG `viewBox` nisbati **2.19:1** edi, yangisi — **6.2:1** (gorizontal lockup). `h-10` (40px) balandlikda yangi nisbat logoni **248px enga** cho'zib yuborardi, ya'ni pill header'ning deyarli yarmini egallardi. Ustiga `width={88} height={40}` intrinsic o'lchovlari ham eskisicha qolgani uchun rasm yuklanguncha layout sakrardi.
+
+**Tuzatish.** `src/components/icons/logo.tsx`: balandlik `h-6 sm:h-7` (mobil 24px, desktop 28px), intrinsic o'lchovlar yangi nisbatga moslandi (`149×24`).
+
+**O'lchandi (brauzerda, taxmin emas):**
+- Desktop 1440px — logo `174×28`, header balandligi 64px
+- Mobil 390px — logo `149×24`, til tanlagich va burger bilan bemalol sig'adi
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa) — hammasi toza.
+
+---
+
 ## 2026-09-22 | Ommaviy repodan jonli Telegram kalitlari olib tashlandi
 
 **Muammo.** `services/portfolio-bot/.env.example` da namuna emas, **haqiqiy** qiymatlar turgan edi: `TG_API_ID`, `TG_API_HASH`, `TG_NOTIFY_CHAT_ID`. Repo bo'ylab qidirilganda aynan o'sha juftlik `.codex/config.toml:57` da ham takrorlangani topildi. Repo ommaviy — ya'ni bu kalitlarni istagan odam o'qiy olardi.
