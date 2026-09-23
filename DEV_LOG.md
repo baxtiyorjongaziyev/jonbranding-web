@@ -4,6 +4,26 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Eskirgan Netlify integratsiyasi butunlay olib tashlandi
+
+**Vazifa:** jonbranding-web reposidan va Netlify tizimidan eskirgan Netlify integratsiyasini tozalash (har PR'da 4 ta qizil check xatosi chiqishini bartaraf qilish).
+
+**Bajarilgan ishlar:**
+1. **Netlify loyihasi tozalash va o'chirish (Browser subagent orqali):**
+   - Netlify dashboardida `brilliant-gumdrop-13991e` (id `fc716cd5-7945-4242-9f61-a74a83e69e01`) ochildi.
+   - Domain management'dan `jonbranding.uz` (Primary) va `www.jonbranding.uz` (Redirect) to'liq olib tashlandi.
+   - Forms (bo'sh) va Functions (bo'sh) tekshirildi.
+   - Project configuration → Configuration → Danger zone → **Delete project** orqali `brilliant-gumdrop-13991e` loyihasi butunlay o'chirildi.
+2. **Repo & Webhooks holati:**
+   - `gh api repos/baxtiyorjongaziyev/jonbranding-web/hooks` tekshirildi: repoda hech qanday Netlify webhook yo'qligi tasdiqlandi.
+   - `CLAUDE.md` va `CONTRIBUTING-agents.md` fayllaridagi eskirgan Netlify eslatmalari olib tashlandi.
+3. **Tekshiruv natijalari:**
+   - Yangi test PR (#340) ochib tekshirildi: har doim qizil chiqadigan 4 ta Netlify check'i (`Header rules`, `Pages changed`, `Redirect rules`, `netlify/deploy-preview`) butunlay yo'qoldi! Faqat Vercel va CI testlari ishlamoqda.
+   - Test PR va uning branchi tozalandi.
+   - Jonli sayt `https://jonbranding.uz` (307 redirect) va `https://www.jonbranding.uz` (200 OK) Vercel'da bekamu-ko'st ishlayotgani tasdiqlandi (`Server: Vercel`, `X-Vercel-Id` mavjud).
+
+---
+
 ## 2026-09-23 | Ijodiy ishlar to'lov shartlari: 50/30/20 → 50/50
 
 **Vazifa:** Egasining ko'rsatmasi — ijodiy ishlar (naming/logo/brandbook) uchun uch bosqichli to'lov (50% shartnoma / 30% konsepsiya / 20% topshirish) ikki bosqichga soddalashtirilsin: 50% shartnoma, 50% topshirish.
