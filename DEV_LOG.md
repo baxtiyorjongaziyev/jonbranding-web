@@ -4,6 +4,27 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Sotuv texnikalari — ichki Sales Playbook sahifasi
+
+**Vazifa:** UTC/Jon Branding menejerlari mijoz savollariga oddiy operator javobi bermasdan, konsultativ sotuv texnikalari bilan ishlashi uchun bitta amaliy sahifa kerak edi.
+
+**Qilingan ish:**
+1. Yangi ichki route: `/[lang]/sotuv-texnikalari`.
+2. 8 ta texnika qo‘shildi: **SPIN, Clarify → Reframe → Question, FAB, JTBD, LAER, Contrast, Conditional Close, Micro-commitment**.
+3. Har bir texnikada: maqsad, qachon ishlatilishi, formula, noto‘g‘ri javob, kuchli javob va keyingi savol bor.
+4. Real Jon Branding e’tirozlari qo‘shildi: **“880 ming qimmat”, “band bo‘lsa pulim kuyadimi?”, “boshqa joy bepul tekshiradi”, “avval ko‘ringlar, band bo‘lmasa keyin to‘laymiz”, “patent qancha turadi?”, “o‘ylab ko‘raman”**.
+5. Universal 7 bosqichli formula, EVQN kvalifikatsiya bloki va “Qizil zona” qoidalari qo‘shildi.
+6. Sahifa ichki o‘quv material bo‘lgani uchun `robots: index=false, follow=false, nocache=true` qo‘yildi.
+7. Desktop va mobil uchun responsive grid, sticky ichki navigatsiya va native `details` accordion ishlatildi.
+
+**Fayllar:**
+- `src/app/[lang]/sotuv-texnikalari/page.tsx`
+- `src/app/[lang]/sotuv-texnikalari/layout.tsx`
+
+**Eslatma:** Bu o‘zgarish connector orqali kiritildi; lokal `typecheck/lint/vitest/build` shu sessiyada ishga tushirilmadi.
+
+---
+
 ## 2026-09-23 | Headerda logo juda katta chiqardi
 
 **Muammo.** Egasi: "headerda logo juda katta bo'lib ketgan".
