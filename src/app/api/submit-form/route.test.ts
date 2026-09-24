@@ -9,6 +9,14 @@ vi.mock('@/lib/firebase-admin', () => ({
   getDb: vi.fn(),
 }));
 
+vi.mock('@/lib/rate-limit', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/rate-limit')>();
+  return {
+    ...actual,
+    rateLimit: vi.fn().mockResolvedValue(true),
+  };
+});
+
 import { POST } from './route';
 
 function apiResponse(body: unknown, status = 200) {
@@ -281,5 +289,98 @@ describe('POST /api/submit-form', () => {
     expect(response.status).toBe(200);
     const result = await response.json();
     expect(result.ok).toBe(true);
+  });
+
+  it('returns 200 on valid body and starts delivery', async () => {
+    const fetchMock = vi.fn((input: string | URL | Request) => {
+      const url = String(input);
+      if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
+      if (url.endsWith('/api/v4/leads/complex')) {
+        return Promise.resolve(apiResponse([{ id: 101, contact_id: 202, merged: false }]));
+      }
+      return Promise.resolve(apiResponse({ ok: true }));
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Aziz Rahimov',
+        phone: '+998901234567',
+        telegram: '@aziz_dev',
+        source: 'contact_form',
+        lang: 'uz',
+      }),
+    }));
+
+    expect(response.status).toBe(200);
+    const result = await response.json();
+    expect(result.ok).toBe(true);
+    expect(result.integrations.telegram).toBe(true);
+  });
+
+  it('returns 400 when body is empty or missing required fields', async () => {
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+    }));
+
+    expect(response.status).toBe(400);
+    const result = await response.json();
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe('Invalid input data');
+    expect(result.details).toBeDefined();
+  });
+
+  it('returns 400 on invalid phone format', async () => {
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Test User',
+        phone: 'not-a-phone-number',
+      }),
+    }));
+
+    expect(response.status).toBe(400);
+    const result = await response.json();
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe('Invalid input data');
+  });
+
+  it('drops submission silently when honeypot field is filled by bot', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: 'Spam Bot',
+        phone: '+998901234567',
+        companyWebsite: 'https://spamsite.example.com',
+      }),
+    }));
+
+    expect(response.status).toBe(200);
+    const result = await response.json();
+    expect(result.ok).toBe(true);
+    expect(result.integrations.telegram).toBe(true);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when request body is malformed JSON', async () => {
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: 'invalid-json{',
+    }));
+
+    expect(response.status).toBe(400);
+    const result = await response.json();
+    expect(result.ok).toBe(false);
+    expect(result.error).toBe('Invalid JSON request');
   });
 });

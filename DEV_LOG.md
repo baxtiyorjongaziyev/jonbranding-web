@@ -2,6 +2,28 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | `submit-form` API validatsiyasi (Zod schema & no-any refaktor)
+
+**Qilingan ish:**
+1. **Zod validatsiya schema:**
+   - `src/lib/validation/submit-form.ts` yaratildi: barcha frontend va bot maydonlari (`fullName`, `phone`, `telegram`, `companyWebsite` honeypot, `turnstileToken`, `promoCode`, `fbp`, `fbc`, `serviceKeys`, `totalPrice` va boshqalar) qat'iy tekshiruvdan o'tadi.
+   - `phone` yoki `telegram` majburiy (superRefine), `at_modal` uchun telefon majburiy.
+   - `src/lib/lead-form-schema.ts`: orqaga moslik uchun yangi schema'ni re-export qiladi.
+2. **`src/app/api/submit-form/route.ts` to'liq tiplashdi:**
+   - Barcha 18 ta `any` turi yo'qotildi (`z.infer<typeof submitFormSchema>`, `ProcessedLeadData`, `AmoCrmResult`, `TelegramResponse`).
+   - JSON parsing xatosi (malformed JSON) 500 o'rniga aniq 400 qaytaradi.
+   - Xato matnlari va validatsiya xatoliklari tushunarli formatda (`details`) qaytariladi.
+   - Mavjud funksionallik (rate limit, Turnstile, honeypot drop, affiliate attribution, amoCRM va Telegram) 100% saqlandi.
+3. **Unit testlar:**
+   - `src/app/api/submit-form/route.test.ts` da 5 ta yangi test qo'shildi: to'g'ri body, bo'sh body (400), noto'g'ri telefon (400), bot honeypot (silent drop), noto'g'ri JSON (400).
+   - Testlar 10/10 muvaffaqiyatli o'tdi.
+4. **QA:**
+   - `npx vitest run src/app/api/submit-form/route.test.ts` (10/10 passed)
+   - `npm run typecheck` (tsc clean)
+   - `npx eslint` (clean)
+
+---
+
 ## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
 
 **Qilingan ish:**
@@ -1432,3 +1454,12 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `services/portfolio-bot` lock manifest bilan sinxronlandi va `brace-expansion` 2.1.4 ga yangilandi.
 - Nested sanitizer va cryptographic ID uchun regressiya testlari qo‘shildi.
 - Production merge gate: root hamda ikkala subproject audit/build/test tekshiruvlari va GitHub security rescan.
+# 2026-09-25 | Oq-qora-ko'k redesign yakuni va fresh audit P0-P2 pass
+
+- Bosh sahifaning mavjud to'liq Atelier layouti saqlandi, lekin warm cream/yashil/terracotta tokenlari bitta oq (`#FFFFFF`), qora (`#050505`) va cobalt (`#2457FF`) brend tizimiga birlashtirildi. Dark mode ham shu tizimga moslandi.
+- Hero portfolio linkining accessible name'i ko'rinadigan nom, badge va yil bilan tenglashtirildi; o'zbekcha xizmat tavsiflaridagi production copy xatolari tuzatildi.
+- `/diagnostika` ichidagi ortiqcha `main` landmarklar olib tashlandi; layoutdagi yagona `main#main-content` saqlandi.
+- Honeypot maydoni `aria-hidden` ichidagi focusable input bo'lishdan chiqarilib, `inert` + `tabIndex=-1` bilan semantik xavfsiz qilindi.
+- Sotuvchi kartochkasidagi mavjud bo'lmagan `pricing-title` bog'lanishi real sr-only `h2` bilan yopildi.
+- `/narxlar` va `/expert-tekshiruv` Open Graph metadata'lariga 1200x630 rasm qo'shildi.
+- Fresh production Squirrel surface audit boshlang'ich natijasi: 100 sahifa, 64/D (avvalgi saqlangan audit 61/D). O'zgarishlardan keyingi local typecheck/lint/test/build va browser/mobile QA alohida qayta bajariladi.
