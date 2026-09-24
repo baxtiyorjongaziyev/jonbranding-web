@@ -2,6 +2,20 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | `atelier-sections.tsx` monolitini modullarga bo'lish (26 ta komponent)
+
+**Qilingan ish:**
+1. **Modullashtirish (2916 qatordan 28 ta ixcham faylga):**
+   - `src/components/atelier/types.ts`: Barcha umumiy interfeyslar (`SectionProps`, `ATNavProps`, `ATFeaturedProps`, `ATShowcaseProps`, `ATGalleryProject`, `ATGalleryProps`, `ATLossCalcProps`, `ATQuotesProps`, `ATTweaksProps`) ajratildi.
+   - `src/components/atelier/utils.ts`: `TILE_CLASSES`, `CATEGORY_LABELS`, `getCategoryLabel`, `getFirstResult`, `getYear` helperlari alohida modulga ko'chirildi.
+   - 26 ta AT* komponentlari o'z fayllariga ajratildi (`at-masthead.tsx`, `at-nav.tsx`, `at-hero.tsx`, `at-marquee.tsx`, `at-manifesto.tsx`, `at-ledger.tsx`, `at-stats.tsx`, `at-diagnosis.tsx`, `at-services.tsx`, `at-featured.tsx`, `at-showcase.tsx`, `at-brand-system.tsx`, `at-gallery.tsx`, `at-audit.tsx`, `at-sample-report.tsx`, `at-mini-quotes.tsx`, `at-loss-calc.tsx`, `at-index.tsx`, `at-process.tsx`, `at-pricing.tsx`, `at-quotes.tsx`, `at-faq.tsx`, `at-final.tsx`, `at-footer.tsx`, `at-sticky-cta.tsx`, `at-tweaks.tsx`).
+   - `src/components/atelier/atelier-sections.tsx`: Barcha yangi modullarni re-export qiluvchi barrel faylga aylantirildi.
+2. **QA & Tekshiruvlar:**
+   - `npm run typecheck` (`tsc --noEmit -p tsconfig.typecheck.json`) ✓ clean (0 errors)
+   - `npx vitest run` ✓ (38 test files, 269 passed)
+
+---
+
 ## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
 
 **Qilingan ish:**
