@@ -100,7 +100,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           >
             {/* Phone */}
             <a
-              href="tel:+998336450097"
+              href="tel:+998792000097"
               aria-label={labels.call}
               onClick={() => trackContactClick('phone', 'mobile_nav_bar')}
               className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-400 transition-colors duration-150 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"

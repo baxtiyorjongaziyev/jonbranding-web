@@ -142,14 +142,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
                 <a 
-                  href="tel:+998336450097"
+                  href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'footer')}
                   className="inline-flex items-center justify-center px-6 py-3 border border-white/20 rounded-full text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  +998 33 645 00 97
+                  +998 79 200 00 97
                 </a>
                 <a 
-                  href="https://t.me/baxtiyorjon_gaziyev"
+                  href="https://t.me/baxtiyorjongaziyev"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackContactClick('telegram', 'footer')}

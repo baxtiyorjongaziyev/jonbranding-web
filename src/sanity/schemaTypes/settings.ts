@@ -5,8 +5,8 @@ export const settings = defineType({
   title: 'Sayt Sozlamalari',
   type: 'document',
   fields: [
-    defineField({ name: 'phone', title: 'Telefon raqami', type: 'string', initialValue: '+998336450097' }),
-    defineField({ name: 'telegramPersonal', title: 'Telegram (shaxsiy)', type: 'url', initialValue: 'https://t.me/baxtiyorjon_gaziyev' }),
+    defineField({ name: 'phone', title: 'Telefon raqami', type: 'string', initialValue: '+998792000097' }),
+    defineField({ name: 'telegramPersonal', title: 'Telegram (shaxsiy)', type: 'url', initialValue: 'https://t.me/baxtiyorjongaziyev' }),
     defineField({ name: 'telegramChannel', title: 'Telegram kanal', type: 'url', initialValue: 'https://t.me/JonBranding' }),
     defineField({ name: 'instagram', title: 'Instagram', type: 'url', initialValue: 'https://www.instagram.com/jon.branding/' }),
     defineField({ name: 'linkedin', title: 'LinkedIn', type: 'url' }),

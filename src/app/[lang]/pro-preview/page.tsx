@@ -159,7 +159,7 @@ export default async function ProPreviewPage({ params }: Props) {
             {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
             <a
               className={styles.topCta}
-              href="https://t.me/baxtiyorjon_gaziyev"
+              href="https://t.me/baxtiyorjongaziyev"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -182,7 +182,7 @@ export default async function ProPreviewPage({ params }: Props) {
                 {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
                 <a
                   className={styles.primaryButton}
-                  href="https://t.me/baxtiyorjon_gaziyev"
+                  href="https://t.me/baxtiyorjongaziyev"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -348,7 +348,7 @@ export default async function ProPreviewPage({ params }: Props) {
                 </ul>
                 {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
                 <a
-                  href="https://t.me/baxtiyorjon_gaziyev"
+                  href="https://t.me/baxtiyorjongaziyev"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -404,7 +404,7 @@ export default async function ProPreviewPage({ params }: Props) {
             {/* Security: Used rel="noopener noreferrer" instead of only noreferrer to prevent reverse tabnabbing */}
             <a
               className={styles.primaryButton}
-              href="https://t.me/baxtiyorjon_gaziyev"
+              href="https://t.me/baxtiyorjongaziyev"
               target="_blank"
               rel="noopener noreferrer"
             >

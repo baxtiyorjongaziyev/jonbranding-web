@@ -153,7 +153,7 @@ export function MobileMenu({
                   Aloqa
                 </div>
                 <a
-                  href="tel:+998336450097"
+                  href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
                   className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
                 >
@@ -161,12 +161,12 @@ export function MobileMenu({
                     <Phone className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-white">+998 33 645 00 97</div>
+                    <div className="text-[13px] font-bold text-white">+998 79 200 00 97</div>
                     <div className="text-[11px] text-white/40">Qo'ng'iroq qiling</div>
                   </div>
                 </a>
                 <a
-                  href="https://t.me/baxtiyorjon_gaziyev"
+                  href="https://t.me/baxtiyorjongaziyev"
                   onClick={() => trackContactClick('telegram', 'mobile_menu')}
                   target="_blank"
                   rel="noopener noreferrer"

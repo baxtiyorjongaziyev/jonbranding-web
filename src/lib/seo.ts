@@ -53,7 +53,7 @@ export function getSiteEntityGraph(locale: Locale) {
         url: SITE_URL,
         logo: `${SITE_URL}/icon.svg`,
         image: `${SITE_URL}/images/cms/og-image.jpeg`,
-        telephone: '+998336450097',
+        telephone: '+998792000097',
         email: 'salom@jonbranding.uz',
         priceRange: '$$$',
         address: {

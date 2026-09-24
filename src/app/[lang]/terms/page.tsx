@@ -54,7 +54,7 @@ const TermsPage = async ({ params }: TermsPageProps) => {
         },
         {
           title: "5. Aloqa ma'lumotlari",
-          text: "Savol yoki e'tirozlar bo'lsa, biz bilan +998336450097 yoki Telegram @jonbranding orqali bog'lanishingiz mumkin."
+          text: "Savol yoki e'tirozlar bo'lsa, biz bilan +998792000097 yoki Telegram @jonbranding orqali bog'lanishingiz mumkin."
         }
       ]
     },
@@ -65,7 +65,7 @@ const TermsPage = async ({ params }: TermsPageProps) => {
         { title: "2. Интеллектуальная собственность", text: "Все созданные материалы передаются клиенту после полной оплаты. Агентство сохраняет право демонстрировать работы в портфолио." },
         { title: "3. Ответственность клиента", text: "Клиент несет ответственность за достоверность и законность предоставленной информации." },
         { title: "4. Изменение условий", text: "Агентство имеет право изменять условия в любое время. Изменения вступают в силу с момента публикации." },
-        { title: "5. Контакты", text: "По вопросам обращайтесь: +998336450097 или Telegram @jonbranding." }
+        { title: "5. Контакты", text: "По вопросам обращайтесь: +998792000097 или Telegram @jonbranding." }
       ]
     },
     en: {
@@ -75,7 +75,7 @@ const TermsPage = async ({ params }: TermsPageProps) => {
         { title: "2. Intellectual Property", text: "All created materials are transferred to the client after full payment. The agency retains the right to display work in its portfolio." },
         { title: "3. Client Responsibility", text: "The client is responsible for the accuracy and legality of all provided information." },
         { title: "4. Terms Changes", text: "The agency reserves the right to change these terms at any time. Changes take effect upon publication." },
-        { title: "5. Contact", text: "For questions: +998336450097 or Telegram @jonbranding." }
+        { title: "5. Contact", text: "For questions: +998792000097 or Telegram @jonbranding." }
       ]
     },
     zh: {
@@ -85,7 +85,7 @@ const TermsPage = async ({ params }: TermsPageProps) => {
         { title: "2. 知识产权", text: "所有创作材料在全额付款后移交给客户。机构保留在作品集中展示作品的权利。" },
         { title: "3. 客户责任", text: "客户对所提供信息的准确性和合法性负责。" },
         { title: "4. 条款变更", text: "本机构有权随时修改这些条款。修改自发布之日起生效。" },
-        { title: "5. 联系方式", text: "如有疑问，请联系：+998336450097 或 Telegram @jonbranding。" }
+        { title: "5. 联系方式", text: "如有疑问，请联系：+998792000097 或 Telegram @jonbranding。" }
       ]
     }
   };
