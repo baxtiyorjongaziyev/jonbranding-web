@@ -14,9 +14,19 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     en: 'Patent Calculator | Jon.Branding',
     zh: '专利计算器 | Jon.Branding',
   };
+  const title = titles[safeLang] || titles.uz;
+  const alternates = getPageAlternates(safeLang, '/xizmatlar/patent-kalkulyatori');
   return {
-    title: titles[safeLang] || titles.uz,
-    alternates: getPageAlternates(safeLang, '/xizmatlar/patent-kalkulyatori'),
+    title,
+    alternates,
+    // Ota /xizmatlar layout'ining openGraph'i (url va sarlavha) meros o'tmasligi uchun.
+    openGraph: {
+      title,
+      url: alternates.canonical,
+      siteName: 'Jon.Branding',
+      images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
+      type: 'website',
+    },
   };
 }
 
