@@ -18,10 +18,10 @@ const titles = {
 };
 
 const descriptions = {
-  uz: "Jon Branding brend-agentligi mijozlarining ovozli va video fikrlari. Qumri Coffee, Oltin Bulut va boshqa hamkorlarimiz erishgan real natijalar.",
-  ru: "Голосовые и видеоотзывы клиентов бренд-агентства Jon Branding. Реальные результаты Qumri Coffee, Oltin Bulut и других партнеров.",
-  en: "Voice and video testimonials from clients of Jon Branding agency. Real results achieved by Qumri Coffee, Oltin Bulut, and other partners.",
-  zh: "Jon Branding品牌代理机构客户的语音和视频评价。Qumri Coffee、Oltin Bulut及其他合作伙伴取得的真实成效。"
+  uz: "Jon Branding brend-agentligi mijozlarining ovozli va video fikrlari: Den Aroma, FIDDA by Sevara, Perfona va boshqa hamkorlarimiz o'z tajribasi haqida.",
+  ru: "Голосовые и видеоотзывы клиентов бренд-агентства Jon Branding: Den Aroma, FIDDA by Sevara, Perfona и другие партнёры о своём опыте.",
+  en: "Voice and video testimonials from clients of Jon Branding agency: Den Aroma, FIDDA by Sevara, Perfona and other partners share their experience.",
+  zh: "Jon Branding品牌代理机构客户的语音和视频评价：Den Aroma、FIDDA by Sevara、Perfona 等合作伙伴分享他们的合作体验。"
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
