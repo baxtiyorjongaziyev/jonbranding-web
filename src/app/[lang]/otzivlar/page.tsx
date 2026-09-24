@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import ReviewsClient from './reviews-client';
+import { getPageAlternates } from '@/lib/seo';
 
 export const revalidate = 60; // Revalidate reviews cache every 60 seconds
 
@@ -27,13 +28,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang: rawLang } = await props.params;
   const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
 
+  const alternates = getPageAlternates(lang, '/otzivlar');
+
   return {
     title: titles[lang] || titles.uz,
     description: descriptions[lang] || descriptions.uz,
+    alternates,
     openGraph: {
       title: titles[lang] || titles.uz,
       description: descriptions[lang] || descriptions.uz,
       type: 'website',
+      url: alternates.canonical,
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
     },
     twitter: {

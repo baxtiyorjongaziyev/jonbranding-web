@@ -203,8 +203,8 @@ Bu brendlar Sanity portfolio'sida (21 keys) va haqiqiy sharhlarda (6 ta) yo'q. A
 ## 7. Tuzatish rejasi
 
 ### 1-hafta — pulni qaytarish (P0)
-1. Canonical: layout'dan olib tashlash, har sahifaga o'z canonical'i + test (P0-1)
-2. CSP'ga Google Ads va Clarity domenlari (P0-2)
+1. ✅ Canonical: layout'dan olib tashlash, har sahifaga o'z canonical'i + test (P0-1) — shu PR'da tuzatildi; `/online-brief/wizard` sitemap'dan chiqarildi (canonical'i `/online-brief`ga qaraydi)
+2. ✅ CSP'ga Google Ads, Clarity, GA4 regional, Hotjar, Yandex va Amplitude domenlari (P0-2) — shu PR'da tuzatildi + test
 3. Oisha vidjetini yashirish yoki Telegram fallback (P0-5)
 4. `ATQuotes` client override'ni o'chirish + zh/en sharhlarni tiklash (P0-4)
 5. Tasdiqlanmagan natijalarni haqiqiy keyslar bilan almashtirish (P0-6) — **egasining qarori kerak**

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { FC } from 'react';
+import type { Locale } from '@/lib/i18n/locale';
+import { getPageAlternates } from '@/lib/seo';
 
 interface UmarinPrivacyPageProps {
   params: Promise<{ lang: string }>;
@@ -7,7 +9,7 @@ interface UmarinPrivacyPageProps {
 
 export async function generateMetadata(props: UmarinPrivacyPageProps): Promise<Metadata> {
   const { lang } = await props.params;
-  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz');
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const titles: Record<string, string> = {
     uz: 'Maxfiylik Siyosati | Umarin',
     ru: 'Политика Конфиденциальности | Umarin',
@@ -23,6 +25,7 @@ export async function generateMetadata(props: UmarinPrivacyPageProps): Promise<M
   return {
     title: titles[safeLang] || titles.uz,
     description: descs[safeLang] || descs.uz,
+    alternates: getPageAlternates(safeLang, '/umarin-privacy-policy'),
   };
 }
 
