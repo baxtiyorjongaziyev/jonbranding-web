@@ -2,6 +2,22 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | O'lik kodni tozalash (27 ta ishlatilmayotgan section fayli)
+
+**Qilingan ish:**
+1. **Tekshiruv:**
+   - `src/components/sections/` dagi 27 ta shubhali fayl grep, relative import va dynamic importlar bo'yicha to'liq tahlil qilindi.
+   - Barchasi (27 ta fayl) loyihaning hech bir joyida import qilinmagani va ishlatilmasligi 100% tasdiqlandi.
+2. **O'chirilgan fayllar (27 ta):**
+   - `at-audit.tsx`, `at-awards.tsx`, `at-diagnosis.tsx`, `at-featured.tsx`, `at-ledger.tsx`, `at-loss-calc.tsx`, `at-mini-quotes.tsx`, `at-quotes.tsx`, `at-sample-report.tsx`, `at-showcase.tsx`, `at-stats.tsx`, `at-video.tsx`, `at-work-index.tsx`, `bento-results-stats.tsx`, `brand-clarity.tsx`, `dashboard-hero.tsx`, `featured-case-study.tsx`, `gallery.tsx`, `guarantee.tsx`, `hero.tsx`, `instagram-feed.tsx`, `lead-magnet.tsx`, `popular-packages.tsx`, `results-grid.tsx`, `stats.tsx`, `target-audience.tsx`, `video.tsx`.
+3. **Hujjatlar:**
+   - `CLAUDE.md`: `at-quotes.tsx` va o'lik sectionlar tozalangani qayd etildi.
+4. **QA:**
+   - `npm run typecheck` ✓
+   - `npx vitest run` ✓
+
+---
+
 ## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
 
 **Qilingan ish:**

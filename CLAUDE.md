@@ -60,7 +60,7 @@ Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 
 - **Dizayn tizimi**: Bosh sahifa "Atelier" tizimida — `src/components/atelier/atelier-sections.tsx` (AT* komponentlar), CSS tokenlar `src/app/atelier.css`da `.atelier-theme` klassi ichida scoped (`--bg`, `--paper`, `--ink`, `--accent`...). Global `--at-*` tokenlar `globals.css`da. AT* komponent ishlatish uchun `.atelier-theme` o'rami SHART.
 - **Body fon qoidasi**: `body:has(.atelier-home)` — faqat bosh sahifa uchun (home-component.tsx'da `atelier-theme atelier-home`). Boshqa sahifalarda `.atelier-theme` o'rami body'ga ta'sir qilmaydi.
-- **Testimonials birlashtirilgan**: bosh sahifa va narxlar sahifasi bitta `ATQuotes` (atelier-sections.tsx) ishlatadi. `src/components/sections/at-quotes.tsx` — O'LIK fayl, ishlatilmaydi. `sections/testimonials.tsx` (oq karusel) endi faqat zaxira.
+- **Testimonials birlashtirilgan**: bosh sahifa va narxlar sahifasi bitta `ATQuotes` (atelier-sections.tsx) ishlatadi. `sections/testimonials.tsx` (oq karusel) zaxira sifatida saqlangan. Eski dublikat `src/components/sections/at-quotes.tsx` va 26 ta o'lik section fayllari tozalangan.
 - **Promokodlar**: faqat `VALID_PROMO_CODES` ro'yxati (`src/lib/pricing.ts`): RAMAZON, PCG, TEZNATIJA, KURSDOSH, SALOM, ISTISNO.
 - **Fallback tizimlar**: comparisons (`comparison-fallbacks.ts`) va testimonials (`static-data.ts`) — Sanity bo'sh bo'lsa ishlaydi. CMS'dan rasmsiz yozuvlar `fetchComparisons`da filtrlash bilan tozalanadi (fallback merge'dan OLDIN).
 - **Portfolio-bot** (`services/portfolio-bot/`): Telegram kanaldan keys nomini olib Gdrive'dan qidiradi (link kerak emas), Gemini cover tanlaydi, Sanity'ga SEO bilan yozadi. Ishga tushirish: `deploy/README.md` (Telegram sessiya + kalitlar hali sozlanmagan).
