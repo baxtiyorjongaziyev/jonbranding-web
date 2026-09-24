@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 // NOTE: superseded by services/portfolio-bot (Railway) — real-time Telegram
 // userbot + Instagram/Drive polling with richer multimodal AI parsing.
 // No longer cron-triggered (removed from vercel.json); kept for manual/backup use.
@@ -68,9 +69,9 @@ async function handleSync(request: NextRequest) {
       );
     }
 
-    console.log(`[portfolio-sync] Scanning Google Drive queue folder: ${queueFolderId}`);
+    logger.info(`[portfolio-sync] Scanning Google Drive queue folder: ${queueFolderId}`);
     const folders = await listSubfolders(queueFolderId);
-    console.log(`[portfolio-sync] Found ${folders.length} subfolders`);
+    logger.info(`[portfolio-sync] Found ${folders.length} subfolders`);
 
     const results = [];
 
@@ -84,7 +85,7 @@ async function handleSync(request: NextRequest) {
 
     // Batch delete if force update is on
     if (forceUpdate && existingDocs.length > 0) {
-      console.log(
+      logger.info(
         `[portfolio-sync] Force update: Batch deleting ${existingDocs.length} existing documents`
       );
       const tx = sanityWriteClient.transaction();
@@ -113,7 +114,7 @@ async function handleSync(request: NextRequest) {
           }
         }
 
-        console.log(`[portfolio-sync] Syncing folder: "${folder.name}" (${folder.id})`);
+        logger.info(`[portfolio-sync] Syncing folder: "${folder.name}" (${folder.id})`);
 
         // 3. List files inside folder
         const files = await listFiles(folder.id);
@@ -139,25 +140,25 @@ async function handleSync(request: NextRequest) {
           const textFile = textFiles[0];
           const textBuffer = await downloadFileBuffer(textFile.id);
           textContent = textBuffer.toString('utf8');
-          console.log(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
+          logger.info(`[portfolio-sync] Read metadata text from file: ${textFile.name}`);
         } else {
-          console.log(
+          logger.info(
             `[portfolio-sync] No text metadata file found, searching Instagram for project name`
           );
           let postText = await scrapeInstagramPosts(folder.name);
           if (postText) {
             textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Instagramdan olindi):\n${postText}`;
-            console.log(`[portfolio-sync] Successfully fetched case study from Instagram!`);
+            logger.info(`[portfolio-sync] Successfully fetched case study from Instagram!`);
           } else {
-            console.log(
+            logger.info(
               `[portfolio-sync] No post found on Instagram, searching Telegram @jonbranding`
             );
             const tgText = await scrapeTelegramPosts('jonbranding', folder.name);
             if (tgText) {
               textContent = `Loyiha nomi: ${folder.name}\n\nLoyiha haqida to'liq ma'lumot (Telegramdan olindi):\n${tgText}`;
-              console.log(`[portfolio-sync] Successfully fetched case study from Telegram!`);
+              logger.info(`[portfolio-sync] Successfully fetched case study from Telegram!`);
             } else {
-              console.log(
+              logger.info(
                 `[portfolio-sync] No post found on Telegram either, falling back to basic folder name`
               );
             }
@@ -165,9 +166,9 @@ async function handleSync(request: NextRequest) {
         }
 
         // 5. Parse metadata using Gemini
-        console.log(`[portfolio-sync] Sending metadata text to Gemini 2.5 Flash for parsing...`);
+        logger.info(`[portfolio-sync] Sending metadata text to Gemini 2.5 Flash for parsing...`);
         const parsedMeta = await parsePortfolioMetadata(textContent);
-        console.log(`[portfolio-sync] Successfully parsed metadata: "${parsedMeta.title}"`);
+        logger.info(`[portfolio-sync] Successfully parsed metadata: "${parsedMeta.title}"`);
 
         // 6. Upload images to Sanity
         let coverImage = imageFiles.find((img) => img.name.toLowerCase().includes('cover'));
@@ -178,7 +179,7 @@ async function handleSync(request: NextRequest) {
           galleryImages = imageFiles.slice(1);
         }
 
-        console.log(`[portfolio-sync] Uploading cover image: ${coverImage.name}`);
+        logger.info(`[portfolio-sync] Uploading cover image: ${coverImage.name}`);
         const coverBuffer = await downloadFileBuffer(coverImage.id);
         const coverAsset = await sanityWriteClient.assets.upload('image', coverBuffer, {
           filename: coverImage.name,
@@ -187,7 +188,7 @@ async function handleSync(request: NextRequest) {
 
         const galleryAssets = [];
         for (const img of galleryImages) {
-          console.log(`[portfolio-sync] Uploading gallery image: ${img.name}`);
+          logger.info(`[portfolio-sync] Uploading gallery image: ${img.name}`);
           const imgBuffer = await downloadFileBuffer(img.id);
           const imgAsset = await sanityWriteClient.assets.upload('image', imgBuffer, {
             filename: img.name,
@@ -231,9 +232,9 @@ async function handleSync(request: NextRequest) {
           publishedAt: new Date().toISOString(),
         };
 
-        console.log(`[portfolio-sync] Saving portfolio document to Sanity...`);
+        logger.info(`[portfolio-sync] Saving portfolio document to Sanity...`);
         const createdDoc = await sanityWriteClient.create(portfolioPayload);
-        console.log(`[portfolio-sync] Created Sanity Document: ${createdDoc._id}`);
+        logger.info(`[portfolio-sync] Created Sanity Document: ${createdDoc._id}`);
 
         results.push({
           folderName: folder.name,
