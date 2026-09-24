@@ -4,6 +4,57 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-24 | Brand Strategy xizmati uchun alohida public landing page ishlab chiqildi
+
+**Vazifa:** Brand Strategy xizmatini “30–40 betlik prezentatsiya” sifatida emas, balki “biznes bozorda kim bo‘lishi, kim uchun ishlashi, nimasi bilan farqlanishi va nima deyishi kerakligini aniqlab beradigan strategik tizim” sifatida tushuntiruvchi premium B2B public landing page yaratish. Narx: 48 000 000 so‘m.
+
+**1. Yangi route & arxitektura:**
+- `/[lang]/brand-strategy` (`src/app/[lang]/brand-strategy/page.tsx` va `brand-strategy-client.tsx`).
+- Public va SEO indexable: `robots: { index: isUz, follow: true }`, OpenGraph, BreadcrumbList JSON-LD (`Bosh sahifa → Xizmatlar → Brand Strategy`) va Service Schema JSON-LD.
+- `src/app/sitemap.ts` dagi `uzOnlyPages` ro'yxatiga `'/brand-strategy'` qo'shildi.
+
+**2. Yangi canonical service:**
+- `src/lib/sales-content` ga `Brand Strategy` xizmati narxi bilan (`48 000 000`) "Brend qurish" guruhining birinchi elementi sifatida joylashtirildi.
+- `BRAND_STRATEGY_SERVICE` va `SERVICE_CATEGORIES['Brand Strategy']` eksport qilindi.
+- `docs/NARXLAR.md` ma'lumotnomasiga `Brand Strategy` xizmati va uning sahifa yo'li qo'shildi.
+- Narx hardcode qilinmadi, bevosita canonical source'dan olinadi. Muddat qat'iy user tasdig'i bo'lmagani sababli hardcode qilinmadi.
+
+**3. Sahifa sectionlari (17 asosiy bo'lim + forma):**
+- **01. Hero:** Eyebrow, H1, Subtitle, Narx (`48 000 000 so‘m`), Primary CTA ("Brand Strategy bo‘yicha uchrashuv"), Secondary CTA ("Xizmat tarkibini ko‘rish"), editorial Brand Strategy Map diagrammasi.
+- **02. Muammo:** "Brend strategiyasiz biznesda nima sodir bo‘ladi?" visual flow (Rahbar, Marketing, Sotuvchi, Dizayn vs Mijoz), highlight: "Muammo logoda emas. Muammo — brendning bozordagi o‘rni aniqlanmaganida."
+- **03. Eng muhim savol:** Qora fonli minimal section: "Nega mijoz bozordagi boshqa variantlar ichidan aynan sizni tanlashi kerak?", raqobatchilar aytadigan umumiy gaplar tahlili.
+- **04. Brand Strategy nima?:** "Biznesning bozor uchun strategik kompasidir" (Kim uchun?, Qanday muammoni hal qilamiz?, Nimasi bilan farqlanamiz?, Bozorda kim bo‘lamiz?).
+- **05. Xizmat tarkibi:** 12 ta strategik modul (Biznes diagnostikasi, Bozor tahlili, Raqobatchilar tahlili, Auditoriya/JTBD, Category, Positioning formulasi, Value Proposition 3 qatlami, Differentiation, Reason to Believe, Brand Essence, Brand Personality chegaralari, Messaging Pillars).
+- **06. Brand Architecture:** Optional modul (Master Brand ↓ Sub-brand ↓ Product/Service Lines).
+- **07. Mijoz 48 mln so‘mga nima oladi?:** 3 ta deliverable (Brand Strategy Deck ~30–40+ bet, Brand Strategy Map 1 sahifada, Creative Brief keyingi ijodiy ishlar uchun).
+- **08. Oldin / Keyin:** Ikki tomonli taqqoslash kartalari.
+- **09. Brand Strategy nima emas?:** 4 ta taqqoslash kartasi (Marketing Strategy, Business Strategy, Visual Identity, Brandbook emasligi; Strategy → Direction, Identity → Expression, Brandbook → Rules).
+- **10. Jon Branding tizimida qayerda?:** 7 ta xizmat ketma-ketligi va mavjud brendlar uchun Brand Audit yo'li.
+- **11. Ish jarayoni:** 7 ta bosqich (Founder intervyusi, Diagnostika, Bozor/raqobatchilar, Auditoriya, Gipotezalar, Taqdimot, Final).
+- **12. Kimlar uchun?:** 6 ta aniq biznes toifasi (Yangi brend, Rebranding, O‘sayotgan biznes, Yangi bozor, Bir nechta yo‘nalish, Premium segment).
+- **13. Kimga hozir kerak emas?:** Mikro-loyiha, model aniqlanmagan, rahbar qatnashmaydigan, faqat reklama istaganlar uchun emasligi.
+- **14. 48 million nimaga?:** Biznes qiymati va objection handling, Value Stack, "Narx sahifalar soniga emas, biznes uchun qabul qilinadigan strategik qarorlar hajmiga bog‘liq".
+- **15. JTBD section:** Qora fonda mijozning ichki maqsadi, "chiroyli brend emas, aniq brend qurish".
+- **16. FAQ:** 7 ta savol-javobli interaktiv accordion.
+- **17. Final CTA & 2-bosqichli lead forma:** 1-bosqich (Ism, Telefon, Kompaniya), 2-bosqich (Faoliyat, Sayt/Insta, Muammo, Maqsad, Qaror qiluvchi). Bot himoyasi (honeypot), validatsiya, `/api/submit-form` integratsiyasi.
+
+**4. Analytics & Event Tracking:**
+- `brand_strategy_page_view` (mount paytida)
+- `brand_strategy_cta_click` (barcha tugmalar uchun tegishli label bilan)
+- `brand_strategy_form_start` (birinchi input kiritilganda)
+- `brand_strategy_form_submit`
+- `brand_strategy_meeting_request` (high-ticket konversiya qiymati bilan)
+- `trackLead` integratsiyasi
+
+**5. Test va tekshiruv natijalari:**
+- `npm run typecheck` ✓ (0 xato)
+- `npm run lint` ✓ (0 xato)
+- `npx vitest run src/lib/sales-content.test.ts` ✓ (17/17 test o'tdi)
+- `npm run build` ✓ (Muvaffaqiyatli build, `/[lang]/brand-strategy` dinamik sahifasi generatsiya qilindi)
+- 390px, 768px, 1440px da to'liq responsive, to'g'ri H1/H2/H3 iyerarxiyasi, semantic HTML va accessible klaviatura navigatsiyasi.
+
+---
+
 ## 2026-09-23 | Kontakt ma'lumotlari yangilandi
 
 **Qilingan ish:**

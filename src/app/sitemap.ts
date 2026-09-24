@@ -173,7 +173,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Faqat o'zbekcha tarjimasi bor sahifalar.
-  const uzOnlyPages = ['/expert-tekshiruv'].map((route) => ({
+  const uzOnlyPages = ['/expert-tekshiruv', '/brand-strategy'].map((route) => ({
     url: localizedUrl('uz', route),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
