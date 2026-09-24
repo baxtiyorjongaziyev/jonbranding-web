@@ -2,6 +2,29 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | 'use client' direktivalari qisqartirildi va Server Componentlarga o'tkazildi (Task 6)
+
+**Qilingan ish:**
+1. **use client tahlili va tozalash:**
+   - Hech qanday React hook (`useState`, `useEffect`, `useRef`), event handler (`onClick`, `onSubmit`) yoki brauzer API ishlatmaydigan quyidagi 8 ta fayldan ortiqcha `'use client'` olib tashlandi:
+     - `src/lib/pricing.ts` (narx kalkulyatori va yordamchi funksiyalar kutubxonasi)
+     - `src/components/atelier/atelier-mocks.tsx` (sof vizual SVG maketlar)
+     - `src/app/[lang]/haqimizda/haqimizda-client.tsx` (Haqimizda sahifasining statik taqdimoti)
+     - `src/app/[lang]/aloqa/aloqa-client.tsx` (Aloqa sahifasining statik kontakt kartalari)
+     - `src/app/[lang]/xizmatlar/neyming/naming-client.tsx` (Neyming xizmati taqdimoti)
+     - `src/app/[lang]/xizmatlar/qadoq-dizayni/packaging-client.tsx` (Qadoq dizayni xizmati taqdimoti)
+     - `src/components/ui/GuaranteeBlock.tsx` (Statik 100% kafolat muhri)
+     - `src/components/ui/button.tsx` (Radix Slot button — server va clientda universal ishlaydi)
+2. **Natijalar:**
+   - `/haqimizda`, `/aloqa`, `/xizmatlar/neyming` va `/xizmatlar/qadoq-dizayni` sahifalari endi to'g'ridan-to'g'ri serverda render qilinadi.
+   - Client reference manifestlarida ushbu komponentlar to'liq o'chirildi, klient yuklaydigan JS bundle hajmi kamaydi va sahifalar hydration tezligi oshdi.
+3. **Tekshiruv & Sinovlar:**
+   - `npm run typecheck` ✓ (0 xatolik).
+   - `npx vitest run` ✓ (38 ta test fayl, 269 ta test o'tdi).
+   - `npm run build` ✓ (166 ta sahifa muvaffaqiyatli generatsiya qilindi).
+
+---
+
 ## 2026-09-25 | Brand Strategy sahifasiga fotorealistik B2B vizuallar va rasmlar integratsiya qilindi
 
 **Qilingan ish:**

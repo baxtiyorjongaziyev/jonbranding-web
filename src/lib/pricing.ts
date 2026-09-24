@@ -1,5 +1,3 @@
-'use client';
-
 const USD_TO_UZS_RATE = 12700;
 
 export const VALID_PROMO_CODES: readonly string[] = ['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'];
