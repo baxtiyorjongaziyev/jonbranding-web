@@ -5,7 +5,7 @@
 export type Service = {
   name: string;
   price: string;
-  duration: string;
+  duration?: string;
   lead: string;
   deliverables: string[];
   benefit: string;

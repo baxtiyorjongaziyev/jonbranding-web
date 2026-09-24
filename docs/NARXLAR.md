@@ -17,6 +17,7 @@
 | **Matn va narxlar** | **`src/lib/sales-content.ts`** |
 | Ariza formasi | `src/components/sales/lead-modal.tsx` |
 | Sotuvchi taqdimoti | `src/app/[lang]/credentials/` |
+| Brand Strategy sahifasi | `src/app/[lang]/brand-strategy/` |
 
 **Eng muhim qoida:** narx, xizmat tarkibi, kafolat, FAQ — hammasi
 `src/lib/sales-content.ts` da. JSX ichida qattiq yozilgan narx **yo'q** va
@@ -34,6 +35,7 @@ Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
 
 | Xizmat | Narx (so'm) | Muddat |
 |---|---|---|
+| Brand Strategy | 48 000 000 | — |
 | Naming | 10 000 000 | 10 kun |
 | Logo | 8 000 000 | 7 kun |
 | Visual identity | 18 000 000 | 10 kun |

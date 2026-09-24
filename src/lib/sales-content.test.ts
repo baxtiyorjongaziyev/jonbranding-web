@@ -37,7 +37,9 @@ describe('docs/NARXLAR.md kod bilan mos', () => {
       const row = tableRow(name);
       expect(row, `"${name}" uchun jadval qatori topilmadi`).not.toBeNull();
       expect(row).toContain(price);
-      expect(row).toContain(duration);
+      if (duration) {
+        expect(row).toContain(duration);
+      }
     }
   );
 
