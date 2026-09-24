@@ -2,6 +2,20 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
+
+**Qilingan ish:**
+1. **Redirect & Canonical konsolidatsiyasi:**
+   - `next.config.js`: `/xizmatlar/brand-strategiyasi`, `/:lang/xizmatlar/brand-strategiyasi`, `/xizmatlar/brand-strategy` va `/:lang/xizmatlar/brand-strategy` yo'nalishlari 308 permanent redirect orqali to'g'ridan-to'g'ri `/brand-strategy` ga yo'naltirildi.
+   - `src/app/[lang]/xizmatlar/brand-strategiyasi/page.tsx`: Server-side `permanentRedirect('/brand-strategy')` bilan almashtirildi.
+   - `src/app/[lang]/xizmatlar/brand-strategiyasi/layout.tsx`: `canonical: 'https://www.jonbranding.uz/brand-strategy'` va `robots: { index: false, follow: true }` ga o'zgartirildi.
+2. **Sitemap va Ichki havolalar:**
+   - `src/app/[lang]/sitemap/page.tsx`: Brend strategiyasi havolasi `/brand-strategy` ga o'zgartirildi.
+   - `src/app/sitemap.ts`: Dublikat `'/xizmatlar/brand-strategiyasi'` staticRoutes ro'yxatidan olib tashlandi (`/brand-strategy` allaqachon mavjud).
+3. **Roadmap & QA:**
+   - `ROAD_MAP.md` dagi dublikat route vazifasi bajarilgan deb belgilandi.
+   - `npm run typecheck` ✓, `npm run lint` ✓, `npm run build` ✓ muvaffaqiyatli yakunlandi.
+
 ---
 
 ## 2026-09-25 | Server loglari logger'ga o'tkazildi, hujjatlar yangilandi
