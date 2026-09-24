@@ -30,7 +30,6 @@ const staticRoutes = [
   '/xizmatlar',
   '/xizmatlar/neyming',
   '/xizmatlar/logo-dizayni',
-  '/xizmatlar/brand-strategiyasi',
   '/xizmatlar/firmenniy-stil',
   '/xizmatlar/qadoq-dizayni',
   '/xizmatlar/car-wrap-design',

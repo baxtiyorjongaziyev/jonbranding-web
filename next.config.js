@@ -23,29 +23,25 @@ const nextConfig = {
       // Eski slaydli taqdimot `/credentials` bilan almashtirildi.
       { source: '/presentation', destination: '/credentials', permanent: true },
       { source: '/:lang(ru|en|zh)/presentation', destination: '/:lang/credentials', permanent: true },
+      // Brand Strategy xizmati `/brand-strategy` ga birlashtirildi
+      {
+        source: '/xizmatlar/brand-strategiyasi',
+        destination: '/brand-strategy',
+        permanent: true,
+      },
+      {
+        source: '/:lang(uz|ru|en|zh)/xizmatlar/brand-strategiyasi',
+        destination: '/brand-strategy',
+        permanent: true,
+      },
       {
         source: '/xizmatlar/brand-strategy',
-        destination: '/uz/xizmatlar/brand-strategiyasi',
+        destination: '/brand-strategy',
         permanent: true,
       },
       {
-        source: '/uz/xizmatlar/brand-strategy',
-        destination: '/uz/xizmatlar/brand-strategiyasi',
-        permanent: true,
-      },
-      {
-        source: '/ru/xizmatlar/brand-strategy',
-        destination: '/ru/xizmatlar/brand-strategiyasi',
-        permanent: true,
-      },
-      {
-        source: '/en/xizmatlar/brand-strategy',
-        destination: '/en/xizmatlar/brand-strategiyasi',
-        permanent: true,
-      },
-      {
-        source: '/zh/xizmatlar/brand-strategy',
-        destination: '/zh/xizmatlar/brand-strategiyasi',
+        source: '/:lang(uz|ru|en|zh)/xizmatlar/brand-strategy',
+        destination: '/brand-strategy',
         permanent: true,
       },
     ];
