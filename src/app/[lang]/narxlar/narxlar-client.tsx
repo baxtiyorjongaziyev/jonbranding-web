@@ -488,13 +488,12 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
           >
             {ui.process.paymentTitle}
           </h3>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2">
             {[
               { value: '50%', label: ui.payment.contract },
-              { value: '30%', label: ui.payment.concept },
-              { value: '20%', label: ui.payment.delivery },
+              { value: '50%', label: ui.payment.delivery },
             ].map((stage) => (
-              <div key={stage.value}>
+              <div key={stage.label}>
                 <p className="text-3xl font-bold" style={{ ...numerals, letterSpacing: '-0.035em' }}>{stage.value}</p>
                 <p className="mt-1.5 text-sm text-neutral-600" style={{ lineHeight: 1.5 }}>{stage.label}</p>
               </div>

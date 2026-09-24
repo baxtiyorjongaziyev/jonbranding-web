@@ -50,7 +50,7 @@ Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
 
 | Xizmat | Narx (so'm) | Muddat |
 |---|---|---|
-| Patent tekshiruvi | 880 000 | 2 kun |
+| Patent tekshiruvi | 880 000 | 1 ish kuni |
 | Patent (oddiy) | 5 000 000 | **7 oy** |
 | Patent (tezkor) | 7 000 000 | **20–40 kun** |
 
@@ -80,7 +80,7 @@ tezkorda 20–40 kun. Sahifada shu izoh bor, uni olib tashlamang.
 3. **Ishlab chiqish** — tanlangan yo'nalish sayqallanadi
 4. **Topshirish** — barcha fayllar va hujjatlar mijozda
 
-To'lov uch bosqichda: **50%** shartnoma, **30%** konsepsiya, **20%** topshirish.
+To'lov ikki bosqichda: **50%** shartnoma imzolanganda, **50%** loyiha topshirilganda.
 
 ---
 

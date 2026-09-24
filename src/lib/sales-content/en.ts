@@ -220,7 +220,7 @@ export const en: SalesContent = {
     },
     {
       q: 'Can I pay in instalments?',
-      a: 'Yes, in three stages: 50% on signing the contract, 30% when the concept is approved, 20% on delivery of the files. You pay as you see the result, not all of it upfront.',
+      a: 'Yes, in two stages: 50% on signing the contract, 50% on delivery of the project. Half upfront, half once you have seen the result.',
     },
     {
       q: 'What if the trademark is refused?',
@@ -287,8 +287,7 @@ export const en: SalesContent = {
     stats: { experience: 'years of experience', clients: 'clients', projects: 'projects' },
     payment: {
       contract: 'On signing the contract',
-      concept: 'On approval of the concept',
-      delivery: 'On delivery of the files',
+      delivery: 'On delivery of the project',
     },
     notSure: 'Not sure — I need advice',
     eyebrows: {

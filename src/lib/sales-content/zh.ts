@@ -220,7 +220,7 @@ export const zh: SalesContent = {
     },
     {
       q: '可以分期付款吗？',
-      a: '可以，分三期：签订合同时付 50%，方案确认时付 30%，交付文件时付 20%。也就是说，您是看到成果后再付款，而不是全额预付。',
+      a: '可以，分两期：签订合同时付 50%，项目交付时付 50%。即一半预付，一半在看到成果后支付。',
     },
     {
       q: '如果商标没通过呢？',
@@ -287,8 +287,7 @@ export const zh: SalesContent = {
     stats: { experience: '年经验', clients: '位客户', projects: '个项目' },
     payment: {
       contract: '签订合同时',
-      concept: '方案确认时',
-      delivery: '交付文件时',
+      delivery: '项目交付时',
     },
     notSure: '还不确定——需要咨询',
     eyebrows: {

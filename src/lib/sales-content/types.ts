@@ -45,7 +45,7 @@ export type SplitHeading = { pre: string; hi: string };
 export type SalesUi = {
   currency: string;
   stats: { experience: string; clients: string; projects: string };
-  payment: { contract: string; concept: string; delivery: string };
+  payment: { contract: string; delivery: string };
   notSure: string;
   eyebrows: {
     prices: string;

@@ -4,6 +4,59 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Eskirgan Netlify integratsiyasi butunlay olib tashlandi
+
+**Vazifa:** jonbranding-web reposidan va Netlify tizimidan eskirgan Netlify integratsiyasini tozalash (har PR'da 4 ta qizil check xatosi chiqishini bartaraf qilish).
+
+**Bajarilgan ishlar:**
+1. **Netlify loyihasi tozalash va o'chirish (Browser subagent orqali):**
+   - Netlify dashboardida `brilliant-gumdrop-13991e` (id `fc716cd5-7945-4242-9f61-a74a83e69e01`) ochildi.
+   - Domain management'dan `jonbranding.uz` (Primary) va `www.jonbranding.uz` (Redirect) to'liq olib tashlandi.
+   - Forms (bo'sh) va Functions (bo'sh) tekshirildi.
+   - Project configuration → Configuration → Danger zone → **Delete project** orqali `brilliant-gumdrop-13991e` loyihasi butunlay o'chirildi.
+2. **Repo & Webhooks holati:**
+   - `gh api repos/baxtiyorjongaziyev/jonbranding-web/hooks` tekshirildi: repoda hech qanday Netlify webhook yo'qligi tasdiqlandi.
+   - `CLAUDE.md` va `CONTRIBUTING-agents.md` fayllaridagi eskirgan Netlify eslatmalari olib tashlandi.
+3. **Tekshiruv natijalari:**
+   - Yangi test PR (#340) ochib tekshirildi: har doim qizil chiqadigan 4 ta Netlify check'i (`Header rules`, `Pages changed`, `Redirect rules`, `netlify/deploy-preview`) butunlay yo'qoldi! Faqat Vercel va CI testlari ishlamoqda.
+   - Test PR va uning branchi tozalandi.
+   - Jonli sayt `https://jonbranding.uz` (307 redirect) va `https://www.jonbranding.uz` (200 OK) Vercel'da bekamu-ko'st ishlayotgani tasdiqlandi (`Server: Vercel`, `X-Vercel-Id` mavjud).
+
+---
+
+## 2026-09-23 | Ijodiy ishlar to'lov shartlari: 50/30/20 → 50/50
+
+**Vazifa:** Egasining ko'rsatmasi — ijodiy ishlar (naming/logo/brandbook) uchun uch bosqichli to'lov (50% shartnoma / 30% konsepsiya / 20% topshirish) ikki bosqichga soddalashtirilsin: 50% shartnoma, 50% topshirish.
+
+**O'zgargan joylar (bitta manba bo'lishi kerak edi, lekin uchta joyda takrorlangan ekan):**
+1. `src/lib/sales-content.ts` — FAQ javobi (`To‘lovni bo‘lib to‘lasam bo‘ladimi?`).
+2. `src/app/[lang]/narxlar/narxlar-client.tsx` — "To'lov bosqichlari" statistika bloki (3 ustundan 2 ustunga).
+3. `src/app/[lang]/credentials/credentials-client.tsx` — sotuvchi taqdimotidagi to'lov qatori.
+4. `docs/NARXLAR.md` — ma'lumotnoma.
+
+**Nega uchtasi alohida edi:** `sales-content.ts` boshida "bitta manba" deb yozilgan bo'lsa-da, to'lov foizlari FAQ matni sifatida emas, har uch joyda qattiq yozilgan (`hardcoded`) raqam sifatida takrorlangan edi. Kelajakda shunga o'xshash umumiy shartlar (to'lov, kafolat, muddat) uchun konstanta chiqarib, uch joydan import qilish nomuvofiqlikni oldini oladi.
+
+**Tekshirildi:** `typecheck` toza.
+
+---
+
+## 2026-09-23 | Ekspert tekshiruv — public landing page
+
+**Vazifa:** 880 000 so‘mlik patent tekshiruvini "bazadan qidirish" emas, "patentga topshirishdan oldingi risk tahlili va yozma ekspert xulosa" sifatida tushuntiradigan alohida sahifa.
+
+**Qilingan ish:**
+1. Yangi public route: `/[lang]/expert-tekshiruv` (`page.tsx` — metadata, canonical, OG, `index: true`, Breadcrumb JSON-LD; `expert-check-client.tsx` — 13 bo‘lim).
+2. Bo‘limlar: hero + Expert Report mockup, muammo flow, umumiy vs ekspert, UZUM misoli, 8 mezon kartasi (real brend + MISOL label + disclaimer), xulosa tuzilmasi va risk statuslari, "pulim kuyadimi?", nega pullik, JTBD, 4 bosqich, kimlar uchun, FAQ (`<details>` accordion), final CTA + forma.
+3. Narx/muddat/qo‘shimcha klass `EXPERT_CHECK_SERVICE` orqali `src/lib/sales-content.ts` dan olinadi (JSX'da narx hardcode yo‘q).
+4. Forma `/api/submit-form` ga yuboradi: `source`/`form_name` = `expert_check_page`, qo‘shimcha maydonlar (brend, faoliyat, nima sotadi, xizmat, yo‘nalishlar soni, oldin tekshirilganmi, tekshiruv turi) `packageSummary` ichida — API sxemasi o‘zgarmadi.
+5. Sitemap'ga `/expert-tekshiruv` qo‘shildi.
+
+**Diqqat — narx manbasidagi o‘zgarish:** `sales-content.ts` va `docs/NARXLAR.md` da "Patent tekshiruvi" muddati `2 kun` → `1 ish kuni` qilindi (egasi promptda 1 ish kuni deb ko‘rsatgan). Bu `/narxlar` va `/credentials` sahifalariga ham ta’sir qiladi.
+
+**Tekshiruv:** typecheck ✓, lint ✓, vitest 267/267 ✓, build ✓. 375/768/1440px da gorizontal scroll yo‘q.
+
+---
+
 ## 2026-09-23 | Sotuv texnikalari — ichki Sales Playbook sahifasi
 
 **Vazifa:** UTC/Jon Branding menejerlari mijoz savollariga oddiy operator javobi bermasdan, konsultativ sotuv texnikalari bilan ishlashi uchun bitta amaliy sahifa kerak edi.
@@ -22,6 +75,46 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - `src/app/[lang]/sotuv-texnikalari/layout.tsx`
 
 **Eslatma:** Bu o‘zgarish connector orqali kiritildi; lokal `typecheck/lint/vitest/build` shu sessiyada ishga tushirilmadi.
+
+---
+
+## 2026-09-24 | PWA ikonkalari, loading ekrani va 50/50 to'lov shartlari
+
+### 1. main bilan birlashtirish — to'lov shartlari o'zgargan
+
+`main` da to'lov 50/30/20 dan **50/50** ga o'tkazilgan edi (PR #339).
+Birlashtirishda bu o'zgarish saqlandi va **to'rt tilga ham tarqatildi**:
+`ui.payment` dan `concept` bosqichi olib tashlandi, ru/en/zh dagi FAQ matni
+ham yangilandi (ular eski 50/30/20 ni yozardi — tarjima qilinganda o'sha
+holat bor edi).
+
+`main` dan kelgan `EXPERT_CHECK_SERVICE` yangi tuzilmaga moslandi:
+`uz.ts` da qoladi, `index.ts` orqali qayta eksport qilinadi.
+
+### 2. PWA ikonkalari — uchta muammo tuzatildi
+
+Egasi so'radi: "PWA app icon ham yangilandimi?". Manifest `/icon.svg` ga
+ishora qilgani uchun ikonka yangilangan edi, lekin tekshirganda uchta
+kamchilik chiqdi:
+
+| Muammo | Tuzatish |
+|---|---|
+| `purpose: "any maskable"` — logo 86% enni egallardi, Android doiraga kesganda "JON" qirqilardi | Alohida `icon-maskable.svg` yasaldi, logo kvadratning **62%** ini egallaydi. Brauzerda doiraga kesib tekshirildi — butun qoladi |
+| Faqat SVG bor edi — iOS "Bosh ekranga qo'shish" da SVG'ni qabul qilmaydi | `icon-192/512.png`, `icon-maskable-192/512.png`, `apple-touch-icon.png` (180px) render qilindi; layout'dagi `apple` endi PNG ga ishora qiladi |
+| `background_color`/`theme_color` = `#070b12` (to'q ko'k), sayt foni esa `#F2EFE6` — splash chaqnardi | Ikkalasi `#F2EFE6` ga o'zgartirildi |
+
+### 3. Loading ekrani brendga moslandi
+
+Avvalgisi: ko'k aylanuvchi doira + inglizcha "Loading...". Na logo, na brend,
+na o'zbek tili — Atelier palitrasiga umuman yopishmasdi.
+
+Endi: qog'oz fonida (`#F2EFE6`) logo asta-sekin ko'rinadi, ostida ingichka
+siyoh rangli chiziq yuradi. Matn yo'q — bu ekran til tanlanishidan oldin
+ishga tushadi, shuning uchun matnsiz yechim to'g'riroq.
+`prefers-reduced-motion` hisobga olindi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa).
+Loading ekrani va uchala ikonka brauzerda render qilib ko'rildi.
 
 ---
 
