@@ -17,7 +17,7 @@ export async function getInstagramToken(): Promise<string | null> {
     const docSnap = await docRef.get();
 
     if (!docSnap.exists) {
-      console.log('[Instagram API] No token stored in Firestore');
+      logger.info('[Instagram API] No token stored in Firestore');
       return null;
     }
 
@@ -27,7 +27,7 @@ export async function getInstagramToken(): Promise<string | null> {
     // Agar token muddati tugashiga 15 kundan kam qolgan bo'lsa, avtomatik yangilaymiz (15 kun = 15 * 24 * 60 * 60 * 1000 ms)
     const fifteenDaysInMs = 15 * 24 * 60 * 60 * 1000;
     if (data.expiresAt - now < fifteenDaysInMs) {
-      console.log('[Instagram API] Token expires soon, attempting auto-refresh');
+      logger.info('[Instagram API] Token expires soon, attempting auto-refresh');
       const newTokenData = await refreshLongLivedToken(data.accessToken);
       if (newTokenData) {
         const expiresAtVal = Date.now() + (newTokenData.expiresInSeconds * 1000);
@@ -76,7 +76,7 @@ async function refreshLongLivedToken(accessToken: string): Promise<{ accessToken
 export async function scrapeInstagramPosts(keyword: string): Promise<string | null> {
   const token = await getInstagramToken();
   if (!token) {
-    console.log('[Instagram API] Cannot search Instagram posts, no access token available');
+    logger.info('[Instagram API] Cannot search Instagram posts, no access token available');
     return null;
   }
 
@@ -94,12 +94,12 @@ export async function scrapeInstagramPosts(keyword: string): Promise<string | nu
 
     for (const post of media) {
       if (post.caption && post.caption.toLowerCase().includes(lowerKeyword)) {
-        console.log(`[Instagram API] Found matching Instagram post for: ${keyword}`);
+        logger.info(`[Instagram API] Found matching Instagram post for: ${keyword}`);
         return post.caption;
       }
     }
 
-    console.log(`[Instagram API] No matching Instagram post found for: ${keyword}`);
+    logger.info(`[Instagram API] No matching Instagram post found for: ${keyword}`);
     return null;
   } catch (error) {
     console.error('[Instagram API] Error fetching Instagram posts:', error);
