@@ -32,7 +32,7 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
 2. Rasmlar — `next/image`, CDN: `cdn.sanity.io` yoki `public/`
 3. Animatsiyalar — `framer-motion` (`motion.div`, `whileInView`)
 4. Yangi section — `src/components/sections/` + `export default FC<Props>`
-5. TypeScript: `FC<Props>` pattern, `ignoreBuildErrors: true`
+5. TypeScript: `FC<Props>` pattern, `ignoreBuildErrors: false` (tip xatosi build'ni to'xtatadi). Server log uchun `console.log` emas, `logger` (`src/lib/logger.ts`)
 6. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili. Har qanday matn yoki o'zgarish birinchi navbatda o'zbek tilida (uz.json da) amalga oshiriladi, so'ngra boshqa 3 ta tilga tarjima qilinadi.
 
 ## Muhim ogohlantirishlar
@@ -67,7 +67,7 @@ Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 - **framer-motion 12**: `Variants` obyektlariga aniq `: Variants` tipi shart (`type: 'spring'` literal xatosi).
 - **vitest**: `tests/` katalogi exclude qilingan (Playwright testlari), faqat `src/**/*.test.ts`.
 - **Affiliate tizimi**: `src/lib/affiliate/*` + Supabase 3 jadval (`affiliates`/`referrals`/`payouts`, RLS to'liq deny, faqat service-role). Ro'yxat: `/[lang]/hamkor/qoshilish`. Hamkor kabineti: `/[lang]/hamkor/[token]` (login yo'q, maxfiy token). Admin: `/admin/hamkorlar` (`ADMIN_SECRET`, HMAC cookie). Attribution — `submit-form` promokod bo'yicha; bonus — `amocrm-webhook` `AMOCRM_WON_STATUS_ID` bo'yicha, idempotent. Bonuslar konstanta: `src/lib/affiliate/payouts.ts`.
-- **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; Vercel preview. pnpm lockfile bilan sinxron bo'lishi shart.
+- **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; Vercel preview. CI `npm ci` ishlatadi — `package-lock.json` asosiy lockfile.
 - **Sandbox cheklovlari**: jonbranding.uz, cdn.sanity.io, instagram tarmoqdan bloklangan — lokal testda Sanity rasm xatolari soxta signal. Dev server tez-tez o'chadi, birinchi kompilyatsiya 1-3 daqiqa.
 
 <!-- BRAIN-CAPTURE -->

@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import { NextResponse } from 'next/server';
 import { getValidAccessToken } from '@/lib/amocrm-token';
 import { analyzeCallAudio } from '@/lib/gemini';
@@ -29,7 +30,7 @@ async function handleCallProcessing(request: Request) {
       return NextResponse.json({ error: 'Unauthorized secret key' }, { status: 401 });
     }
 
-    console.log('--- Calls Analysis Pipeline Triggered ---');
+    logger.info('--- Calls Analysis Pipeline Triggered ---');
 
     // 2. Fetch valid AmoCRM token
     let accessToken: string;
@@ -58,7 +59,7 @@ async function handleCallProcessing(request: Request) {
     const leads = leadsData._embedded?.leads || [];
     const processedLeads: any[] = [];
 
-    console.log(`Analyzing ${leads.length} latest leads for call recordings...`);
+    logger.info(`Analyzing ${leads.length} latest leads for call recordings...`);
 
     for (const lead of leads) {
       const contacts = lead._embedded?.contacts || [];
@@ -81,7 +82,7 @@ async function handleCallProcessing(request: Request) {
       }
 
       if (hasSummaryAlready) {
-        console.log(`Lead ID ${lead.id} already has a call summary. Skipping...`);
+        logger.info(`Lead ID ${lead.id} already has a call summary. Skipping...`);
         continue;
       }
 
@@ -111,7 +112,7 @@ async function handleCallProcessing(request: Request) {
         continue;
       }
 
-      console.log(`Lead ID ${lead.id} ("${lead.name}") has ${callNotes.length} call recording(s). Processing...`);
+      logger.info(`Lead ID ${lead.id} ("${lead.name}") has ${callNotes.length} call recording(s). Processing...`);
 
       const latestCall = callNotes[callNotes.length - 1];
 
@@ -124,10 +125,10 @@ async function handleCallProcessing(request: Request) {
 
         const audioBuffer = Buffer.from(await audioRes.arrayBuffer());
 
-        console.log(`Sending call recording to Gemini 1.5 Flash for Lead ID ${lead.id}...`);
+        logger.info(`Sending call recording to Gemini 1.5 Flash for Lead ID ${lead.id}...`);
         const analysis = await analyzeCallAudio(audioBuffer, 'audio/mp3');
 
-        console.log(`Gemini analysis completed for Lead ID ${lead.id}. Category: ${analysis.category}`);
+        logger.info(`Gemini analysis completed for Lead ID ${lead.id}. Category: ${analysis.category}`);
 
         const noteText = `📞 MUHOKAMA XULOSASI (${analysis.category}):\n\n${analysis.summary}\n\n📝 TO'LIQ TRANSKRIPT:\n"""\n${analysis.transcript}\n"""\n\n📌 Tahlil qilingan sana: ${new Date().toLocaleString('uz-UZ')}`;
 
@@ -169,7 +170,7 @@ async function handleCallProcessing(request: Request) {
           tagStatus: tagUpdateRes.status
         });
 
-        console.log(`✅ Lead ID ${lead.id} processed successfully!`);
+        logger.info(`✅ Lead ID ${lead.id} processed successfully!`);
 
       } catch (processingError: any) {
         console.error(`Error processing call for Lead ID ${lead.id}:`, processingError.message);

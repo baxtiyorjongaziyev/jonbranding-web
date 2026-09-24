@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/integrations/firebase';
 import {
@@ -113,7 +114,7 @@ export async function GET(request: NextRequest) {
       { merge: true },
     );
 
-    console.log('[Instagram Callback] Long-lived token saved successfully.');
+    logger.info('[Instagram Callback] Long-lived token saved successfully.');
 
     const html = `
       <!DOCTYPE html>

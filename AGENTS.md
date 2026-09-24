@@ -84,7 +84,7 @@ src/sanity/schemaTypes/
 3. **Rasmlar** — `next/image`, CDN: `cdn.sanity.io` yoki `public/`
 4. **Animatsiyalar** — `framer-motion`, `motion.div` bilan
 5. **Responsive** — Mobile-first, Tailwind: `sm:`, `md:`, `lg:`
-6. **TypeScript** — `ignoreBuildErrors: true` (build'da xato o'tadi, lekin yaxshi yoz)
+6. **TypeScript** — `ignoreBuildErrors: false` (tip xatosi build'ni to'xtatadi). Server log uchun `console.log` emas, `logger` (`src/lib/logger.ts`)
 7. **Yangi section** — `src/components/sections/` ichiga, `export default FC<Props>`
 8. **Tailwind class birlashtirish** — `cn()` utility
 9. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilda joriy etilishi shart.
