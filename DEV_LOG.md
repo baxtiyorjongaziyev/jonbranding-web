@@ -2,6 +2,22 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | Brand Strategy sahifasiga fotorealistik B2B vizuallar va rasmlar integratsiya qilindi
+
+**Qilingan ish:**
+1. **Generatsiya va Vizual kontent:**
+   - Saytning faqat matndan iborat bo'lib qolmasligi va 48 mln so'mlik high-ticket B2B positioningni vizual tasdiqlash uchun 4 ta yuqori darajadagi fotorealistik vizuallar generatsiya qilindi (`public/images/brand-strategy/`):
+     - `hero.jpg`: B2B konsultatsiya jarayoni, qattiq muqovali Strategy Deck va positioning kartalari bilan executive boardroom.
+     - `deck.jpg`: Ochiq Brand Strategy taqdimot hujjati (Bozor xaritasi, Value Proposition matritsasi, JTBD va auditoriya tahlili).
+     - `deliverables.jpg`: Mijozga topshiriladigan jismoniy va raqamli to'plam (Qattiq muqovali Brand Strategy kitobi, laminatsiyalangan 1-sahifalik Strategy Map va Brand Platform Guide).
+     - `workshop.jpg`: Ta'sischilar va brend-strateglar bilan shisha doska ustida positioning va messaging ustunlarini ishlab chiqish sessiyasi.
+2. **Komponent integratsiyasi:**
+   - `src/app/[lang]/brand-strategy/brand-strategy-client.tsx`: `next/image` yordamida Hero, 5-bo'lim (Xizmat tarkibi), 7-bo'lim (Mijoz nima oladi) va 11-bo'lim (Jarayon / Workshop)ga responsiv, optimallashtirilgan bannerlar va tegishli annotatsiyalar joylashtirildi.
+3. **QA & Build:**
+   - `npm run typecheck` ✓ (0 xatolik).
+
+---
+
 ## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
 
 **Qilingan ish:**
