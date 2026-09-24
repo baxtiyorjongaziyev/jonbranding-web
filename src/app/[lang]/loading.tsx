@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 /**
  * Sahifa yuklanayotgandagi ekran.
  *
@@ -14,11 +16,12 @@ export default function Loading() {
       aria-label="Yuklanmoqda"
     >
       <div className="flex flex-col items-center gap-6">
-        <img
+        <Image
           src="/assets/logos/logo-black.svg"
           alt="Jon Branding"
           width={149}
           height={24}
+          priority
           className="jb-load-logo h-6 w-auto sm:h-7"
         />
         <div className="jb-load-track">

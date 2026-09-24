@@ -2,6 +2,22 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | `<img>` teglarini `next/image` ga almashtirish
+
+**Qilingan ish:**
+1. **`next/image` migratsiyasi:**
+   - `src/components/icons/logo.tsx`: Oddiy `<img>` tegi Next.js `<Image priority ... />` ga almashtirildi (width={149}, height={24}, sm:h-7).
+   - `src/app/[lang]/loading.tsx`: Loading ekranidagi `<img>` tegi `<Image priority ... />` ga almashtirildi.
+   - `src/app/[lang]/layout.tsx` dagi Yandex Metrika `<noscript>` pikselli `<img>` ataylab o'zgartirilmadi (noscript ichida Next.js Image ishlamaydi).
+   - Test fayllaridagi (`at-hero.test.tsx`, `process-video.test.tsx`) vitest mock `<img>` teglari `next/image` simulyatsiyasi bo'lgani sababli saqlandi.
+2. **Lockfile & Vercel tahlili:**
+   - GitHub Actions CI faqat `npm ci` (`package-lock.json`) ishlatadi.
+   - Vercel build loglarini Vercel MCP orqali tekshirish talabi bo'yicha ma'lumot berildi (`pnpm-lock.yaml` xavfsizlik uchun o'chirilmay saqlandi).
+3. **QA:**
+   - `npm run typecheck` ✓ clean
+
+---
+
 ## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
 
 **Qilingan ish:**
