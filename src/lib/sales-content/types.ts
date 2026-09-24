@@ -1,8 +1,21 @@
+export type ServiceId =
+  | 'naming'
+  | 'logo'
+  | 'visual-identity'
+  | 'brandbook'
+  | 'packaging'
+  | 'packaging-extra'
+  | 'trademark-search'
+  | 'trademark-standard'
+  | 'trademark-express';
+
 /**
  * Sotuv kontenti tiplari — barcha tillar shu shaklga bo'ysunadi.
  */
 
 export type Service = {
+  /** Tildan mustaqil barqaror kalit. Kategoriya va shartlarda shu ishlatiladi. */
+  id: ServiceId;
   name: string;
   price: string;
   duration: string;
@@ -85,6 +98,24 @@ export type SalesUi = {
   faq: SplitHeading;
   cta: SplitHeading & { sub: string; button: string };
   footnote: string;
+  /** Ariza oynasi. Paket variantlari `packages` dan + packageSuffix bilan yasaladi. */
+  modal: {
+    title: string;
+    titleDone: string;
+    desc: string;
+    descDone: string;
+    close: string;
+    name: string;
+    namePlaceholder: string;
+    phone: string;
+    phonePlaceholder: string;
+    service: string;
+    submit: string;
+    sending: string;
+    phoneError: string;
+    submitError: string;
+    packageSuffix: string;
+  };
 };
 
 export type SalesContent = {

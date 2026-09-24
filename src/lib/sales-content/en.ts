@@ -13,6 +13,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'From the name to a complete visual system. Each part can be taken on its own.',
     items: [
       {
+        id: 'naming',
         name: 'Naming',
         price: '10 000 000',
         duration: '10 days',
@@ -37,6 +38,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         },
       },
       {
+        id: 'logo',
         name: 'Logo',
         price: '8 000 000',
         duration: '7 days',
@@ -52,6 +54,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'For a business with no logo, or one that looks dated',
       },
       {
+        id: 'visual-identity',
         name: 'Visual identity',
         price: '18 000 000',
         duration: '10 days',
@@ -67,6 +70,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'For a business that has a logo but looks different everywhere it appears',
       },
       {
+        id: 'brandbook',
         name: 'Brandbook',
         price: '24 000 000',
         duration: '7 days',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Packaging that gets your product picked up off the shelf.',
     items: [
       {
+        id: 'packaging',
         name: 'Packaging (1 SKU)',
         price: '12 000 000',
         duration: '7 days',
@@ -104,6 +109,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'For producers moving into shops, marketplaces or retail chains',
       },
       {
+        id: 'packaging-extra',
         name: 'Each additional SKU',
         price: 'from 4 000 000',
         duration: '+3 days',
@@ -124,6 +130,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'For the name to be yours, it has to be registered. We handle that too.',
     items: [
       {
+        id: 'trademark-search',
         name: 'Trademark search',
         price: '880 000',
         duration: '2 days',
@@ -140,6 +147,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         addon: { label: 'Each additional class', price: '+440 000 UZS' },
       },
       {
+        id: 'trademark-standard',
         name: 'Trademark (standard)',
         price: '5 000 000',
         duration: '7 months',
@@ -154,6 +162,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'For those in no hurry who still want the name protected',
       },
       {
+        id: 'trademark-express',
         name: 'Trademark (expedited)',
         price: '7 000 000',
         duration: '20–40 days',
@@ -330,5 +339,22 @@ export const en: SalesContent = {
       button: 'Book a call',
     },
     footnote: 'Prices as of September 2026. The final price depends on the scope of the project.',
+    modal: {
+      title: 'Send a request',
+      titleDone: 'Thank you',
+      desc: 'Leave your name and phone number — we will get in touch.',
+      descDone: 'We will be in touch shortly.',
+      close: 'Close',
+      name: 'Name',
+      namePlaceholder: 'Your name',
+      phone: 'Phone *',
+      phonePlaceholder: '+998 90 123 45 67',
+      service: 'Service',
+      submit: 'Send',
+      sending: 'Sending…',
+      phoneError: 'Please enter a valid phone number',
+      submitError: 'Something went wrong. Please try again.',
+      packageSuffix: 'package',
+    },
   },
 };

@@ -9,7 +9,7 @@ import { uz, EXPERT_CHECK_SERVICE } from './uz';
 import { ru } from './ru';
 import { en } from './en';
 import { zh } from './zh';
-import type { SalesContent } from './types';
+import type { SalesContent, ServiceId } from './types';
 
 export type {
   Faq,
@@ -19,6 +19,7 @@ export type {
   SalesContent,
   SalesUi,
   Service,
+  ServiceId,
   ServiceGroup,
   WhyUsItem,
 } from './types';
@@ -45,13 +46,14 @@ export const JOBS = uz.jobs;
 export const PROCESS_STEPS = uz.processSteps;
 export const PRICE_FACTORS = uz.priceFactors;
 
-export const SERVICE_CATEGORIES: Record<string, string[]> = {
-  Naming: ['naming', 'brand-strategy'],
-  Logo: ['logo-design'],
-  'Visual identity': ['corporate-style'],
-  Brandbook: ['brandbook', 'brand-strategy'],
-  'Packaging (1 SKU)': ['packaging'],
-  'Har qo‘shimcha SKU': ['packaging'],
+/** Kategoriyalar xizmat ID si bo'yicha — tarjima qilinsa ham buzilmaydi. */
+export const SERVICE_CATEGORIES: Partial<Record<ServiceId, string[]>> = {
+  naming: ['naming', 'brand-strategy'],
+  logo: ['logo-design'],
+  'visual-identity': ['corporate-style'],
+  brandbook: ['brandbook', 'brand-strategy'],
+  packaging: ['packaging'],
+  'packaging-extra': ['packaging'],
 };
 
 export const ALL_SERVICES = uz.serviceGroups.flatMap((group) =>

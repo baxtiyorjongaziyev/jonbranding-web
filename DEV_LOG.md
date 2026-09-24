@@ -78,6 +78,62 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-24 | Codex review (PR #341) — uchta topilma tuzatildi
+
+Codex PR #341 ga uchta P2 sharh qoldirdi, lekin men ularni **merge qilgandan
+keyin** o'qidim. Uchalasi ham haqiqiy edi va production'ga chiqib ketgan edi.
+
+### 1. Tarjima qilingan sahifalarda portfolio kartalari yo'qolardi (eng jiddiy)
+
+`SERVICE_CATEGORIES` xizmat **nomi** bo'yicha kalitlangan edi (`Logo`,
+`Brandbook`). Tarjimadan keyin `/ru` da `casesFor('Логотип')` hech narsa
+qaytarmasdi — ya'ni har bir xizmat ostidagi keys kartalari butunlay
+yo'qolardi. `service.name === 'Brandbook'` shartlari ham shunday: brendbuk
+lavhalari faqat o'zbekchada ko'rinardi.
+
+**Tuzatish:** `Service` ga tildan mustaqil `id` qo'shildi (`ServiceId` tipi:
+`naming`, `logo`, `visual-identity`, `brandbook`, ...). Kategoriyalar va
+shartlar endi ID bo'yicha ishlaydi. O'lchandi: `/ru` da keys sarlavhalari
+**0 dan 5 ga** chiqdi.
+
+### 2. Bosh sarlavhada buzilgan belgi
+
+`/uz/narxlar` ning eng ko'zga tashlanadigan matnida tire o'rniga `â`
+chiqardi. Sabab menda: `ui` bloklarini qo'shishda Python'ning
+`.encode().decode('unicode_escape')` ni ishlatganman — bu em dash'ni ikki
+marta kodlab yuborgan (`c3 a2 c2 80 c2 94` o'rniga `e2 80 94`).
+
+Bayt darajasida tuzatildi. Butun `sales-content/` va narxlar sahifasi shu
+turdagi beshta ketma-ketlik bo'yicha skanerlandi — boshqa buzilish yo'q.
+
+### 3. Ariza oynasi yarim tarjima qilingan edi
+
+Faqat xizmatlar ro'yxati tilga bog'langan edi; sarlavha, yorliqlar, xatolik
+matnlari, tugmalar va paket variantlari o'zbekcha qolgan edi. Bundan tashqari
+narxlar sahifasi `${pkg.name} paket` yuborardi — rus tilida bu
+`СТАНДАРТ paket` bo'lib, ro'yxatdagi hech bir variantga **mos kelmasdi**,
+ya'ni tanlagich bo'sh ko'rinardi.
+
+**Tuzatish:** `ui.modal` bo'limi qo'shildi (16 ta satr × 4 til). Paket
+variantlari endi `content.packages` dan `packageSuffix` bilan yasaladi,
+narxlar sahifasi ham o'sha qo'shimchani ishlatadi. O'lchandi: `/ru` da
+tanlangan qiymat `"СТАНДАРТ пакет"` va u ro'yxatda **bor**.
+
+### Tekshirildi
+
+`typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa). Brauzerda uz
+va ru sahifalari: mojibake yo'q, keys kartalari chiqadi, oyna to'liq tarjima
+qilingan, tanlangan paket ro'yxatga mos.
+
+**Eslatma:** honeypot maydonidagi "Kompaniya sayti" yozuvi o'zbekcha qoldi —
+bu ataylab. Maydon `left: -9999px` va `aria-hidden`, mijoz uni ko'rmaydi;
+u faqat botlar uchun tuzoq.
+
+**Xulosa o'zimga:** PR ni merge qilishdan oldin review sharhlarini o'qish
+kerak edi. Uchala xato ham bir necha soat production'da turdi.
+
+---
+
 ## 2026-09-24 | PWA ikonkalari, loading ekrani va 50/50 to'lov shartlari
 
 ### 1. main bilan birlashtirish — to'lov shartlari o'zgargan
