@@ -1,29 +1,11 @@
 /**
- * Sotuv kontenti — bitta manba.
+ * Sotuv kontenti — O'ZBEK (asosiy til).
  *
-  * `/narxlar` (narxlar sahifasi) va `/credentials` (sotuvchi taqdimoti)
- * shu yerdan o'qiydi, shuning uchun matnni bir joyda tahrirlash kifoya.
- * O'zbek tili asosiy — boshqa tillarga tarjima keyin qo'shiladi.
+ * `/narxlar` va `/credentials` shu yerdan o'qiydi.
+ * Uzbek-first: har qanday o'zgarish avval shu faylda, keyin ru/en/zh ga.
  */
 
-export type Service = {
-  name: string;
-  price: string;
-  duration: string;
-  lead: string;
-  deliverables: string[];
-  benefit: string;
-  audience: string;
-  note?: string;
-  addon?: { label: string; price: string };
-  proof?: { label: string; items: string[] };
-};
-
-export type ServiceGroup = {
-  title: string;
-  intro: string;
-  items: Service[];
-};
+import type { Package, SalesContent, Service, ServiceGroup } from './types';
 
 export const SERVICE_GROUPS: ServiceGroup[] = [
   {
@@ -193,18 +175,6 @@ export const EXPERT_CHECK_SERVICE: Service = SERVICE_GROUPS
   .flatMap((group) => group.items)
   .find((item) => item.name === 'Patent tekshiruvi')!;
 
-export type Package = {
-  name: string;
-  price: string;
-  separate: string;
-  saving: string;
-  audience: string;
-  features: string[];
-  duration: string;
-  featured?: boolean;
-  badge?: string;
-};
-
 export const PACKAGES: Package[] = [
   {
     name: 'VIP',
@@ -236,19 +206,6 @@ export const PACKAGES: Package[] = [
     duration: '20–25 kun',
   },
 ];
-
-export const SERVICE_CATEGORIES: Record<string, string[]> = {
-  Naming: ['naming', 'brand-strategy'],
-  Logo: ['logo-design'],
-  'Visual identity': ['corporate-style'],
-  Brandbook: ['brandbook', 'brand-strategy'],
-  'Packaging (1 SKU)': ['packaging'],
-  'Har qo‘shimcha SKU': ['packaging'],
-};
-
-export const ALL_SERVICES = SERVICE_GROUPS.flatMap((group) =>
-  group.items.map((item) => ({ ...item, group: group.title }))
-);
 
 export const FAQS = [
   {
@@ -332,3 +289,63 @@ export const PRICE_FACTORS = [
   'Tashuvchilar soni (vizitka, banner, forma va boshqalar)',
   'Muddat — tezkor bajarish +50%',
 ];
+
+export const uz: SalesContent = {
+  serviceGroups: SERVICE_GROUPS,
+  packages: PACKAGES,
+  faqs: FAQS,
+  whyUs: WHY_US,
+  guarantees: GUARANTEES,
+  jobs: JOBS,
+  processSteps: PROCESS_STEPS,
+  priceFactors: PRICE_FACTORS,
+  ui: {
+    currency: 'so‘m',
+    stats: { experience: 'yil tajriba', clients: 'mijoz', projects: 'loyiha' },
+    payment: {
+      contract: 'Shartnoma imzolanganda',
+      delivery: 'Loyiha topshirilganda',
+    },
+    notSure: 'Aniq emas — maslahat kerak',
+    eyebrows: {
+      prices: 'Narxlar', task: 'Vazifa', services: 'Xizmatlar', process: 'Jarayon',
+      factors: 'Omillar', packages: 'Paketlar', trust: 'Ishonch', difference: 'Farq',
+      faq: 'Savollar', talk: 'Suhbat',
+    },
+    hero: {
+      pre: 'Narxlarimiz', hi: 'ochiq',
+      sub: 'Hamma uchun birdek â shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.',
+    },
+    jobs: {
+      pre: 'Biz aslida nimani', hi: 'hal qilamiz',
+      sub: 'Mijoz bizga logo uchun kelmaydi. Mijoz bozorda jiddiy qabul qilinishi va narxini oqlay olishi uchun keladi.',
+      now: 'Hozir', withUs: 'Biz bilan',
+    },
+    services: {
+      pre: 'Bittalab', hi: 'olish',
+      sub: 'Hammasi birdan kerak emas. Hozir nima kerak bo‘lsa, shuni olasiz — har bir xizmat o‘zicha to‘liq ish va oxirida sizga tayyor fayllar topshiriladi.',
+      note: 'Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.',
+      showcase: 'Brendbuklarimizdan lavhalar', cases: 'Shu xizmat bo‘yicha ishlarimiz',
+      price: 'Narx', duration: 'Muddat', cta: 'Ariza qoldirish',
+      deliverables: 'Nima olasiz', benefit: 'Bu sizga nima beradi',
+    },
+    process: { pre: 'Qanday', hi: 'ishlaymiz', paymentTitle: 'To‘lov bosqichlari' },
+    factors: { pre: 'Narxga nima', hi: 'ta’sir qiladi' },
+    packages: {
+      pre: 'Bir nechtasi kerakmi? Paket', hi: 'arzonroq',
+      sub: 'Xizmatlarni alohida-alohida olgandan ko‘ra paket bilan olsangiz, ham arzonroq chiqadi, ham hammasi bitta tizim bo‘lib ishlanadi.',
+      separate: { pre: 'Alohida olinsa', mid: '—', suf: 'tejaysiz' },
+      cta: 'Ariza qoldirish',
+      note: 'Muddat dizayn ishlari uchun. Patent guvohnomasi rasmiy tartibda alohida muddatda chiqadi.',
+    },
+    trust: { pre: 'Biz bilan', hi: 'ishlaganlar' },
+    difference: { pre: 'Nega arzon dizayner', hi: 'emas', guaranteesTitle: 'Xavfingizni kamaytirish uchun' },
+    faq: { pre: 'Ko‘p so‘raladigan', hi: 'savollar' },
+    cta: {
+      pre: 'Qaysi paket sizga to‘g‘ri kelishini', hi: 'bilmayapsizmi?',
+      sub: '20 daqiqalik bepul suhbatda aytamiz. Sotmaymiz — maslahat beramiz.',
+      button: 'Suhbatga yozilish',
+    },
+    footnote: 'Narxlar 2026 yil sentyabr holatiga. Yakuniy narx loyiha hajmiga qarab aniqlanadi.',
+  },
+};

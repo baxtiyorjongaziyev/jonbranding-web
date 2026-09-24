@@ -5,7 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
-import { SERVICE_GROUPS } from '@/lib/sales-content';
+import { getSalesContent } from '@/lib/sales-content';
 
 type LeadModalProps = {
   open: boolean;
@@ -13,9 +13,11 @@ type LeadModalProps = {
   presetService: string;
   /** Analitikada arizani qaysi sahifa keltirganini ajratish uchun. */
   source?: string;
+  /** Xizmatlar ro'yxati va CRM yozuvi shu tilda bo'ladi. */
+  lang?: string;
 };
 
-export default function LeadModal({ open, onClose, presetService, source = 'narxlar' }: LeadModalProps) {
+export default function LeadModal({ open, onClose, presetService, source = 'narxlar', lang = 'uz' }: LeadModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [service, setService] = useState(presetService);
@@ -75,7 +77,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
           phone: normalizedPhone,
           role: service,
           source: `${source}_modal`,
-          lang: 'uz',
+          lang,
           eventId,
           gaClientId,
           pageLocation,
@@ -108,7 +110,9 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     setDone(true);
   };
 
-  const allServices = SERVICE_GROUPS.flatMap((group) => group.items.map((item) => item.name));
+  const allServices = getSalesContent(lang).serviceGroups.flatMap((group) =>
+    group.items.map((item) => item.name)
+  );
 
   return (
     <Dialog.Root open={open} onOpenChange={(next) => { if (!next) onClose(); }}>

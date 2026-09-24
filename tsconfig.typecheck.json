@@ -16,6 +16,7 @@
     "test-results",
     "services",
     "src/scripts",
-    "mcp-server"
+    "mcp-server",
+    "archive"
   ]
 }
