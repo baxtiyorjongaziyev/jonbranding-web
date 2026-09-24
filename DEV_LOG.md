@@ -4,6 +4,18 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Kontakt ma'lumotlari yangilandi
+
+**Qilingan ish:**
+1. Telegram (shaxsiy): `@baxtiyorjon_gaziyev` → `@baxtiyorjongaziyev` (13 joy, 10 fayl; Den Aroma maqolasidagi matn/havola nomuvofiqligi ham tuzatildi).
+2. Telefon: `+998 33 645 00 97` / `+998336450097` → `+998 79 200 00 97` / `+998792000097` (52 joy + `public/llms.txt`).
+3. Placeholder/test raqamlari (`+998901234567` va h.k.) tegilmadi.
+4. Sanity: `siteSettings` hujjati yo'q — sayt `src/lib/data/settings.ts` fallback'idan oladi; Studio'da yangilash shart emas.
+
+**Tekshiruv:** typecheck ✓, vitest 267/267 ✓ (2 ta timeout qayta ishga tushirilganda o'tdi).
+
+---
+
 ## 2026-09-23 | Eskirgan Netlify integratsiyasi butunlay olib tashlandi
 
 **Vazifa:** jonbranding-web reposidan va Netlify tizimidan eskirgan Netlify integratsiyasini tozalash (har PR'da 4 ta qizil check xatosi chiqishini bartaraf qilish).
@@ -75,6 +87,155 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - `src/app/[lang]/sotuv-texnikalari/layout.tsx`
 
 **Eslatma:** Bu o‘zgarish connector orqali kiritildi; lokal `typecheck/lint/vitest/build` shu sessiyada ishga tushirilmadi.
+
+---
+
+## 2026-09-24 | PWA ikonkalari, loading ekrani va 50/50 to'lov shartlari
+
+### 1. main bilan birlashtirish — to'lov shartlari o'zgargan
+
+`main` da to'lov 50/30/20 dan **50/50** ga o'tkazilgan edi (PR #339).
+Birlashtirishda bu o'zgarish saqlandi va **to'rt tilga ham tarqatildi**:
+`ui.payment` dan `concept` bosqichi olib tashlandi, ru/en/zh dagi FAQ matni
+ham yangilandi (ular eski 50/30/20 ni yozardi — tarjima qilinganda o'sha
+holat bor edi).
+
+`main` dan kelgan `EXPERT_CHECK_SERVICE` yangi tuzilmaga moslandi:
+`uz.ts` da qoladi, `index.ts` orqali qayta eksport qilinadi.
+
+### 2. PWA ikonkalari — uchta muammo tuzatildi
+
+Egasi so'radi: "PWA app icon ham yangilandimi?". Manifest `/icon.svg` ga
+ishora qilgani uchun ikonka yangilangan edi, lekin tekshirganda uchta
+kamchilik chiqdi:
+
+| Muammo | Tuzatish |
+|---|---|
+| `purpose: "any maskable"` — logo 86% enni egallardi, Android doiraga kesganda "JON" qirqilardi | Alohida `icon-maskable.svg` yasaldi, logo kvadratning **62%** ini egallaydi. Brauzerda doiraga kesib tekshirildi — butun qoladi |
+| Faqat SVG bor edi — iOS "Bosh ekranga qo'shish" da SVG'ni qabul qilmaydi | `icon-192/512.png`, `icon-maskable-192/512.png`, `apple-touch-icon.png` (180px) render qilindi; layout'dagi `apple` endi PNG ga ishora qiladi |
+| `background_color`/`theme_color` = `#070b12` (to'q ko'k), sayt foni esa `#F2EFE6` — splash chaqnardi | Ikkalasi `#F2EFE6` ga o'zgartirildi |
+
+### 3. Loading ekrani brendga moslandi
+
+Avvalgisi: ko'k aylanuvchi doira + inglizcha "Loading...". Na logo, na brend,
+na o'zbek tili — Atelier palitrasiga umuman yopishmasdi.
+
+Endi: qog'oz fonida (`#F2EFE6`) logo asta-sekin ko'rinadi, ostida ingichka
+siyoh rangli chiziq yuradi. Matn yo'q — bu ekran til tanlanishidan oldin
+ishga tushadi, shuning uchun matnsiz yechim to'g'riroq.
+`prefers-reduced-motion` hisobga olindi.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa).
+Loading ekrani va uchala ikonka brauzerda render qilib ko'rildi.
+
+---
+
+## 2026-09-23 | Narxlar sahifasi rus, ingliz va xitoy tillariga tarjima qilindi
+
+**Muammo.** `/ru/narxlar`, `/en/narxlar`, `/zh/narxlar` ochilardi, lekin matn
+to'liq o'zbekcha edi. Rus yoki chet ellik mijoz sahifani tushunmasdi.
+
+### Tuzilma
+
+`src/lib/sales-content.ts` (bitta fayl) → `src/lib/sales-content/` katalogiga
+bo'lindi:
+
+| Fayl | Nima |
+|---|---|
+| `types.ts` | Umumiy tiplar — barcha tillar shu shaklga bo'ysunadi |
+| `uz.ts` | O'zbekcha (asosiy til) |
+| `ru.ts`, `en.ts`, `zh.ts` | Tarjimalar |
+| `index.ts` | `getSalesContent(lang)` + eski nomlar (orqaga moslik) |
+
+Eski `SERVICE_GROUPS`, `PACKAGES` va boshqa nomlar `index.ts` da saqlanib
+qoldi (o'zbekchaga ishora qiladi), shuning uchun `/credentials` va mavjud
+sinovlar o'zgarishsiz ishlayveradi.
+
+**Narxlar barcha tillarda bir xil** — raqamlar so'mda, faqat valyuta yozuvi
+tarjima qilinadi (so'm / сум / UZS / 苏姆).
+
+### Sahifadagi matnlar
+
+`narxlar-client.tsx` da 50 dan ortiq qattiq yozilgan o'zbekcha satr bor edi:
+bo'lim sarlavhalari, eyebrow yorliqlari, tugmalar, izohlar. Hammasi `ui`
+obyektiga ko'chirildi. Ikki qismli sarlavhalar (`Narxlarimiz *ochiq*` — ikkinchi
+qismi serif bilan ajratiladi) `SplitHeading` tipi bilan ifodalandi, shuning
+uchun tarjimada ham dizayn saqlanadi.
+
+Sahifa endi `lang` propini oladi, `page.tsx` `safeLang` ni uzatadi.
+
+### Ariza oynasi
+
+`lead-modal.tsx` xizmatlar ro'yxatini o'zbekchada ko'rsatardi. Endi u ham
+`lang` oladi. Muhim yon ta'sir: CRM ga yuboriladigan `lang` maydoni
+qattiq `'uz'` edi — endi haqiqiy til yuboriladi, ya'ni rus mijozdan kelgan
+ariza CRM da "ru" deb belgilanadi.
+
+### Tekshirildi
+
+- `typecheck`, `lint`, `vitest` (267/267), `build` (166 sahifa) — toza
+- Brauzerda uchala til ochilib, matn dasturiy tekshirildi: o'zbekcha qoldiq
+  **yo'q** (`so'm`, `Narxlarimiz`, `Ariza qoldirish` va h.k. izlandi — topilmadi)
+- Skrinshot: serif urg'u va joylashuv uchala tilda ham buzilmagan
+
+**Eslatma egasiga:** tarjimalar tijorat matni — narx va kafolat shartlari
+bo'yicha yakuniy so'z egasida. Ko'rib chiqib, kerak bo'lsa tahrirlash lozim.
+
+`/credentials` (sotuvchi taqdimoti) hali faqat o'zbekcha — u ichki vosita,
+egasi so'ramadi.
+
+---
+
+## 2026-09-23 | Favicon tuzatildi va ishlatilmaydigan kod arxivga olindi
+
+### 1. Favicon buzuq ekan (o'ylaganimdan yomonroq)
+
+Egasiga "favicon eski" degandim. Tekshirganda ma'lum bo'ldiki, u **umuman buzuq**:
+`public/favicon.ico` ichida ICO emas, **base64 matn** turgan (kimdir dekod
+qilmasdan saqlab qo'ygan). `file` buyrug'i uni "ASCII text" deb ko'rsatardi.
+Brauzer o'qiy olmagani uchun `icon.svg` zaxirasiga o'tardi — shuning uchun
+muammo ko'zga tashlanmagan. Lekin `.ico` ni birinchi so'raydigan brauzerlarda
+yorliq bo'sh chiqardi.
+
+**Tuzatish.** Yangi logodan haqiqiy ICO yasaldi:
+- Logoning "JON" qismi piksel tahlili bilan ajratildi (eng katta bo'sh ustun
+  oralig'i topildi — "JON" bilan "BRANDING AGENCY" orasidagi joy), bbox
+  `x 90.2..632.0, y 271.0..420.1`
+- `public/icon.svg` shu uchta path'dan kvadrat viewBox bilan qayta yig'ildi
+  (har tomondan 8% bo'sh joy). Avvalgi icon.svg **eski** logoning shakli edi.
+- 16/32/48px PNG render qilinib, ular bitta ICO konteynerga yig'ildi
+
+**Tekshirildi:** `file` endi "MS Windows icon resource - 3 icons" deydi;
+brauzerda uchala o'lchamda ham "JON" o'qiladi.
+
+**Ochiq savol egasiga:** 16px da harflar ingichka. Agar yorliqda aniqroq
+ko'rinishi kerak bo'lsa, faqat "J" monogrammasi variantini yasash mumkin —
+bu brend qarori, shuning uchun o'zim hal qilmadim.
+
+### 2. Ishlatilmaydigan kod `archive/` ga ko'chirildi
+
+Egasi "arxivga olib qo'y, hozircha ishlatmaymiz" dedi.
+
+Avval chegarasi aniqlandi: `/xizmatlar/page.tsx` `xizmatlar-interactive` ni
+ishlatadi, `xizmatlar-client` ning **uchala nusxasini** esa hech kim import
+qilmaydi. Har bir bola komponent alohida tekshirildi — faqat shu mijozlardan
+chaqiriladiganlari ko'chirildi:
+
+- **Ko'chirildi (9 ta):** `package-builder`, `comparison`, `queue-status`,
+  `urgency-block`, `personal-offer-block`, `services-hero` va uchta
+  `xizmatlar-client` nusxasi
+- **Tegilmadi (jonli):** `service-sections` (6 ta xizmat sahifasida),
+  `testimonials` va `trusted-by` (bosh sahifada), `why-us` (brand-strategiyasi)
+
+`archive/.../README.md` da nima uchun ko'chirilgani, ichida nima borligi va
+qaytarish tartibi yozildi. Muhim ogohlantirish yozib qo'yildi: `package-builder`
+narxni `pricing.ts` dan **dollarda** oladi (×12 700), saytdagi haqiqiy narxlar
+esa `sales-content.ts` da so'mda — Logo VIP kalkulyatorda 37,5 mln, haqiqatda
+8 mln. Shuning uchun uni shundayligicha qaytarib bo'lmaydi.
+
+`archive/` `tsconfig.typecheck.json` va `eslint.config.mjs` dan chetlatildi.
+
+**Tekshirildi:** `typecheck` toza, `vitest` 267/267.
 
 ---
 

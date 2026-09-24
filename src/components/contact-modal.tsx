@@ -370,9 +370,9 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                     </div>
 
                     <div className="mb-5 flex flex-col gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-3">
-                      <a href="tel:+998336450097" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
+                      <a href="tel:+998792000097" className="flex items-center justify-center gap-2 rounded-xl bg-white px-3 py-2 text-xs font-black text-gray-900 shadow-sm transition-colors hover:text-blue-600">
                         <PhoneCall className="h-4 w-4 text-blue-600" />
-                        +998 33 645 00 97
+                        +998 79 200 00 97
                       </a>
                     </div>
 

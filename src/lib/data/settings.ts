@@ -12,8 +12,8 @@ export interface SiteSettings {
 }
 
 const DEFAULTS: SiteSettings = {
-  phone: '+998336450097',
-  telegramPersonal: 'https://t.me/baxtiyorjon_gaziyev',
+  phone: '+998792000097',
+  telegramPersonal: 'https://t.me/baxtiyorjongaziyev',
   telegramChannel: 'https://t.me/JonBranding',
   instagram: 'https://www.instagram.com/jon.branding/',
   linkedin: 'https://www.linkedin.com/in/baxtiyorjongaziyev/',

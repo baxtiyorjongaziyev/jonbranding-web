@@ -8,18 +8,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
-import {
-  ALL_SERVICES,
-  FAQS,
-  GUARANTEES,
-  JOBS,
-  PACKAGES,
-  PRICE_FACTORS,
-  PROCESS_STEPS,
-  SERVICE_CATEGORIES,
-  SERVICE_GROUPS,
-  WHY_US,
-} from '@/lib/sales-content';
+import { getSalesContent, SERVICE_CATEGORIES } from '@/lib/sales-content';
 import LeadModal from '@/components/sales/lead-modal';
 
 const fadeUp: Variants = {
@@ -41,6 +30,7 @@ export type ServiceQuote = { name: string; company: string; quote: string };
 export type ServiceLogo = { name: string; logo: string };
 
 type Props = {
+  lang: string;
   cases: ServiceCase[];
   quotes: ServiceQuote[];
   logos: ServiceLogo[];
@@ -105,9 +95,24 @@ function Eyebrow({ index, label, muted }: { index: string; label: string; muted?
 }
 
 
-export default function NarxlarClient({ cases, quotes, logos, showcase }: Props) {
+export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: Props) {
+  const content = getSalesContent(lang);
+  const {
+    serviceGroups: SERVICE_GROUPS,
+    packages: PACKAGES,
+    faqs: FAQS,
+    whyUs: WHY_US,
+    guarantees: GUARANTEES,
+    jobs: JOBS,
+    processSteps: PROCESS_STEPS,
+    priceFactors: PRICE_FACTORS,
+    ui,
+  } = content;
+  const ALL_SERVICES = SERVICE_GROUPS.flatMap((group) =>
+    group.items.map((item) => ({ ...item, group: group.title }))
+  );
   const [modalOpen, setModalOpen] = useState(false);
-  const [presetService, setPresetService] = useState('Aniq emas — maslahat kerak');
+  const [presetService, setPresetService] = useState(ui.notSure);
 
   const openModal = (service: string) => {
     setPresetService(service);
@@ -129,7 +134,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
       {/* HERO */}
       <section className="px-5 sm:px-8 pt-20 pb-16 md:pt-28 md:pb-24 max-w-3xl mx-auto text-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <Eyebrow index="§ 01" label="Narxlar" />
+          <Eyebrow index="§ 01" label={ui.eyebrows.prices} />
         </motion.div>
         <motion.h1
           initial="hidden"
@@ -139,7 +144,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="font-bold leading-[1.02]"
           style={{ fontSize: 'clamp(40px, 6.6vw, 72px)', letterSpacing: '-0.035em' }}
         >
-          Narxlarimiz <span className="serif-highlight">ochiq</span>
+          {ui.hero.pre} <span className="serif-highlight">{ui.hero.hi}</span>
         </motion.h1>
         <motion.p
           initial="hidden"
@@ -149,7 +154,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mx-auto mt-6 text-neutral-600"
           style={{ fontSize: 'clamp(16px, 1.5vw, 19px)', lineHeight: 1.65, maxWidth: '38ch' }}
         >
-          Hamma uchun birdek, shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.
+          {ui.hero.sub}
         </motion.p>
         <motion.dl
           initial="hidden"
@@ -159,9 +164,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mx-auto mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-neutral-200 pt-6"
         >
           {[
-            { value: '9', label: 'yil tajriba' },
-            { value: '500+', label: 'mijoz' },
-            { value: '1000+', label: 'loyiha' },
+            { value: '9', label: ui.stats.experience },
+            { value: '500+', label: ui.stats.clients },
+            { value: '1000+', label: ui.stats.projects },
           ].map((stat) => (
             <div key={stat.label}>
               <dt className="sr-only">{stat.label}</dt>
@@ -188,12 +193,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           variants={fadeUp}
           className="mx-auto mb-12 max-w-2xl text-center"
         >
-          <Eyebrow index="§ 02" label="Vazifa" />
+          <Eyebrow index="§ 02" label={ui.eyebrows.task} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-            Biz aslida nimani <span className="serif-highlight">hal qilamiz</span>
+            {ui.jobs.pre} <span className="serif-highlight">{ui.jobs.hi}</span>
           </h2>
           <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
-            Mijoz bizga logo uchun kelmaydi. Mijoz bozorda jiddiy qabul qilinishi va narxini oqlay olishi uchun keladi.
+            {ui.jobs.sub}
           </p>
         </motion.div>
 
@@ -210,16 +215,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
               <p
                 className="mb-2 text-[10px] uppercase text-neutral-400"
                 style={{ ...mono, letterSpacing: '0.12em' }}
-              >
-                Hozir
-              </p>
+              >{ui.jobs.now}</p>
               <p className="mb-5 text-[15px] text-neutral-500" style={{ lineHeight: 1.6 }}>{job.pain}</p>
               <p
                 className="mb-2 text-[10px] uppercase text-neutral-400"
                 style={{ ...mono, letterSpacing: '0.12em' }}
-              >
-                Biz bilan
-              </p>
+              >{ui.jobs.withUs}</p>
               <p className="text-[15px] font-medium text-neutral-900" style={{ lineHeight: 1.6 }}>{job.gain}</p>
             </motion.div>
           ))}
@@ -235,13 +236,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           variants={fadeUp}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <Eyebrow index="§ 03" label="Xizmatlar" />
+          <Eyebrow index="§ 03" label={ui.eyebrows.services} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-            Bittalab <span className="serif-highlight">olish</span>
+            {ui.services.pre} <span className="serif-highlight">{ui.services.hi}</span>
           </h2>
           <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
-            Hammasi birdan kerak emas. Hozir nima kerak bo‘lsa, shuni olasiz — har bir xizmat o‘zicha to‘liq ish
-            va oxirida sizga tayyor fayllar topshiriladi.
+            {ui.services.sub}
           </p>
         </motion.div>
 
@@ -249,7 +249,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mt-12 text-center text-[11px] uppercase text-neutral-400"
           style={{ ...mono, letterSpacing: '0.06em' }}
         >
-          Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.
+          {ui.services.note}
         </p>
       </section>
 
@@ -270,7 +270,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
                   className="mb-4 text-[10px] uppercase text-neutral-400"
                   style={{ ...mono, letterSpacing: '0.12em' }}
                 >
-                  Brendbuklarimizdan lavhalar
+                  {ui.services.showcase}
                 </p>
                 <ShowcaseReel images={showcase} />
               </div>
@@ -282,7 +282,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
                   className="mb-4 text-[10px] uppercase text-neutral-400"
                   style={{ ...mono, letterSpacing: '0.12em' }}
                 >
-                  Shu xizmat bo‘yicha ishlarimiz
+                  {ui.services.cases}
                 </p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {casesFor(service.name).map((item) => (
@@ -343,21 +343,17 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
                   <p
                     className="mb-1.5 text-[10px] uppercase text-neutral-400"
                     style={{ ...mono, letterSpacing: '0.12em' }}
-                  >
-                    Narx
-                  </p>
+                  >{ui.services.price}</p>
                   <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
                     {service.price}
                   </p>
-                  <p className="mt-0.5 text-xs text-neutral-400">so‘m</p>
+                  <p className="mt-0.5 text-xs text-neutral-400">{ui.currency}</p>
                 </div>
                 <div>
                   <p
                     className="mb-1.5 text-[10px] uppercase text-neutral-400"
                     style={{ ...mono, letterSpacing: '0.12em' }}
-                  >
-                    Muddat
-                  </p>
+                  >{ui.services.duration}</p>
                   <p className="text-2xl font-bold sm:text-3xl" style={{ ...numerals, letterSpacing: '-0.035em' }}>
                     {service.duration}
                   </p>
@@ -374,18 +370,14 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
               <button
                 onClick={() => openModal(service.name)}
                 className="mt-8 w-full rounded-full bg-black py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 md:w-auto md:px-10"
-              >
-                Ariza qoldirish
-              </button>
+              >{ui.services.cta}</button>
             </div>
 
             <div>
               <p
                 className="mb-4 text-[10px] uppercase text-neutral-400"
                 style={{ ...mono, letterSpacing: '0.12em' }}
-              >
-                Nima olasiz
-              </p>
+              >{ui.services.deliverables}</p>
               <ul className="mb-8 flex flex-col gap-3.5">
                 {service.deliverables.map((item) => (
                   <li
@@ -403,9 +395,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
                 <p
                   className="mb-2 text-[10px] uppercase text-neutral-400"
                   style={{ ...mono, letterSpacing: '0.12em' }}
-                >
-                  Bu sizga nima beradi
-                </p>
+                >{ui.services.benefit}</p>
                 <p className="text-[15px] text-neutral-900" style={{ lineHeight: 1.6 }}>{service.benefit}</p>
               </div>
 
@@ -456,9 +446,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           variants={fadeUp}
           className="mb-12 text-center"
         >
-          <Eyebrow index="§ 04" label="Jarayon" />
+          <Eyebrow index="§ 04" label={ui.eyebrows.process} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-            Qanday <span className="serif-highlight">ishlaymiz</span>
+            {ui.process.pre} <span className="serif-highlight">{ui.process.hi}</span>
           </h2>
         </motion.div>
         <div className="grid sm:grid-cols-2 gap-6 mb-12">
@@ -496,12 +486,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
             className="mb-6 text-[10px] uppercase text-neutral-400"
             style={{ ...mono, letterSpacing: '0.14em' }}
           >
-            To‘lov bosqichlari
+            {ui.process.paymentTitle}
           </h3>
           <div className="grid gap-6 sm:grid-cols-2">
             {[
-              { value: '50%', label: 'Shartnoma imzolanganda' },
-              { value: '50%', label: 'Loyiha topshirilganda' },
+              { value: '50%', label: ui.payment.contract },
+              { value: '50%', label: ui.payment.delivery },
             ].map((stage) => (
               <div key={stage.label}>
                 <p className="text-3xl font-bold" style={{ ...numerals, letterSpacing: '-0.035em' }}>{stage.value}</p>
@@ -521,9 +511,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           variants={fadeUp}
           className="mb-8 text-center"
         >
-          <Eyebrow index="§ 05" label="Omillar" />
+          <Eyebrow index="§ 05" label={ui.eyebrows.factors} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
-            Narxga nima <span className="serif-highlight">ta’sir qiladi</span>
+            {ui.factors.pre} <span className="serif-highlight">{ui.factors.hi}</span>
           </h2>
         </motion.div>
         <motion.ul
@@ -551,13 +541,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           variants={fadeUp}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <Eyebrow index="§ 06" label="Paketlar" />
+          <Eyebrow index="§ 06" label={ui.eyebrows.packages} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-            Bir nechtasi kerakmi? Paket <span className="serif-highlight">arzonroq</span>
+            {ui.packages.pre} <span className="serif-highlight">{ui.packages.hi}</span>
           </h2>
           <p className="mx-auto mt-5 text-neutral-600" style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '46ch' }}>
-            Xizmatlarni alohida-alohida olgandan ko‘ra paket bilan olsangiz, ham arzonroq chiqadi,
-            ham hamma narsa bitta tizimda ishlanadi.
+            {ui.packages.sub}
           </p>
         </motion.div>
 
@@ -586,10 +575,12 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
                 <span className="font-bold" style={{ fontSize: 'clamp(30px, 3.2vw, 38px)', ...numerals, letterSpacing: '-0.035em' }}>
                   {pkg.price}
                 </span>
-                <span className="text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>so‘m</span>
+                <span className="text-sm" style={{ color: pkg.featured ? 'rgba(255,255,255,.6)' : '#737373' }}>{ui.currency}</span>
               </div>
               <p className="mb-5 text-xs" style={{ lineHeight: 1.5, color: pkg.featured ? 'rgba(255,255,255,.6)' : '#a3a3a3' }}>
-                Alohida olinsa <span style={numerals}>{pkg.separate}</span> so‘m — <span style={numerals}>{pkg.saving}</span> so‘m tejaysiz
+                {ui.packages.separate.pre} <span style={numerals}>{pkg.separate}</span> {ui.currency}{' '}
+                {ui.packages.separate.mid} <span style={numerals}>{pkg.saving}</span> {ui.currency}{' '}
+                {ui.packages.separate.suf}
               </p>
               <p className="mb-7 text-[15px]" style={{ lineHeight: 1.6, color: pkg.featured ? 'rgba(255,255,255,.75)' : '#525252' }}>
                 {pkg.audience}
@@ -611,9 +602,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
               <button
                 onClick={() => openModal(`${pkg.name} paket`)}
                 className={`w-full rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
-              >
-                Ariza qoldirish
-              </button>
+              >{ui.services.cta}</button>
             </motion.div>
           ))}
         </div>
@@ -622,7 +611,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mt-10 text-center text-[11px] uppercase text-neutral-400"
           style={{ ...mono, letterSpacing: '0.06em', lineHeight: 1.7 }}
         >
-          Muddat dizayn ishlari uchun. Patent guvohnomasi rasmiy tartibda alohida muddatda chiqadi.
+          {ui.packages.note}
         </p>
       </section>
 
@@ -637,9 +626,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
               variants={fadeUp}
               className="mx-auto mb-12 max-w-2xl text-center"
             >
-              <Eyebrow index="§ 07" label="Ishonch" />
+              <Eyebrow index="§ 07" label={ui.eyebrows.trust} />
               <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-                Biz bilan <span className="serif-highlight">ishlaganlar</span>
+                {ui.trust.pre} <span className="serif-highlight">{ui.trust.hi}</span>
               </h2>
             </motion.div>
 
@@ -702,9 +691,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
             variants={fadeUp}
             className="mx-auto mb-12 max-w-2xl text-center"
           >
-            <Eyebrow index="§ 08" label="Farq" />
+            <Eyebrow index="§ 08" label={ui.eyebrows.difference} />
             <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-              Nega arzon dizayner <span className="serif-highlight">emas</span>
+              {ui.difference.pre} <span className="serif-highlight">{ui.difference.hi}</span>
             </h2>
           </motion.div>
 
@@ -735,7 +724,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
               className="mb-5 text-[10px] uppercase text-neutral-400"
               style={{ ...mono, letterSpacing: '0.14em' }}
             >
-              Xavfingizni kamaytirish uchun
+              {ui.difference.guaranteesTitle}
             </p>
             <ul className="grid gap-3 sm:grid-cols-2">
               {GUARANTEES.map((item) => (
@@ -759,9 +748,9 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
             variants={fadeUp}
             className="mb-12 text-center"
           >
-            <Eyebrow index="§ 09" label="Savollar" />
+            <Eyebrow index="§ 09" label={ui.eyebrows.faq} />
             <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-              Ko‘p so‘raladigan <span className="serif-highlight">savollar</span>
+              {ui.faq.pre} <span className="serif-highlight">{ui.faq.hi}</span>
             </h2>
           </motion.div>
 
@@ -796,7 +785,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
       {/* CTA BLOK */}
       <section className="px-5 sm:px-8 py-20 md:py-28 bg-black text-white text-center">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <Eyebrow index="§ 10" label="Suhbat" muted />
+          <Eyebrow index="§ 10" label={ui.eyebrows.talk} muted />
         </motion.div>
         <motion.h2
           initial="hidden"
@@ -806,7 +795,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mx-auto max-w-2xl font-bold"
           style={{ fontSize: 'clamp(28px, 4vw, 46px)', letterSpacing: '-0.03em', lineHeight: 1.08, color: '#fff' }}
         >
-          Qaysi paket sizga to‘g‘ri kelishini <span className="serif-highlight">bilmayapsizmi?</span>
+          {ui.cta.pre} <span className="serif-highlight">{ui.cta.hi}</span>
         </motion.h2>
         <motion.p
           initial="hidden"
@@ -816,17 +805,17 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mx-auto mt-5 text-neutral-300"
           style={{ fontSize: 17, lineHeight: 1.65, maxWidth: '42ch' }}
         >
-          20 daqiqalik bepul suhbatda aytamiz. Sotmaymiz — maslahat beramiz.
+          {ui.cta.sub}
         </motion.p>
         <motion.button
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          onClick={() => openModal('Aniq emas — maslahat kerak')}
+          onClick={() => openModal(ui.notSure)}
           className="mt-8 rounded-full bg-white text-black font-semibold px-8 py-4 text-sm hover:opacity-90 transition-opacity"
         >
-          Suhbatga yozilish
+          {ui.cta.button}
         </motion.button>
       </section>
 
@@ -835,10 +824,10 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
         className="px-5 py-10 text-center text-[11px] uppercase text-neutral-400"
         style={{ ...mono, letterSpacing: '0.06em', lineHeight: 1.7 }}
       >
-        Narxlar 2026 yil sentyabr holatiga. Yakuniy narx loyiha hajmiga qarab aniqlanadi.
+        {ui.footnote}
       </p>
 
-      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} source="narxlar" />
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} source="narxlar" lang={lang} />
     </div>
   );
 }

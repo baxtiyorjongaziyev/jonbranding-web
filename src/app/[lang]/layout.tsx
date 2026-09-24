@@ -89,7 +89,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         { url: '/icon.svg', type: 'image/svg+xml' },
       ],
       apple: [
-        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
       ],
     },
     openGraph: {
@@ -160,7 +160,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "image": "https://www.jonbranding.uz/icon.svg",
               "logo": "https://www.jonbranding.uz/icon.svg",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": "+998792000097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -314,7 +314,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "LocalBusiness",
               "name": "Jon.Branding",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": "+998792000097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",

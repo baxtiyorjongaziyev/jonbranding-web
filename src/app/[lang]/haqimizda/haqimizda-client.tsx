@@ -43,7 +43,7 @@ const t = {
     ],
     ctaLabel: 'Hamkorlikni boshlash',
     cta: 'Bepul brifing →',
-    footerNote: "Jon.Branding Agency · Toshkent, O'zbekiston · +998 33 645 00 97",
+    footerNote: "Jon.Branding Agency · Toshkent, O'zbekiston · +998 79 200 00 97",
   },
   ru: {
     founderLabel: 'Основатель',
@@ -82,7 +82,7 @@ const t = {
     ],
     ctaLabel: 'Начать сотрудничество',
     cta: 'Бесплатный брифинг →',
-    footerNote: 'Jon.Branding Agency · Ташкент, Узбекистан · +998 33 645 00 97',
+    footerNote: 'Jon.Branding Agency · Ташкент, Узбекистан · +998 79 200 00 97',
   },
   en: {
     founderLabel: 'Founder',
@@ -121,7 +121,7 @@ const t = {
     ],
     ctaLabel: 'Start collaboration',
     cta: 'Free briefing →',
-    footerNote: 'Jon.Branding Agency · Tashkent, Uzbekistan · +998 33 645 00 97',
+    footerNote: 'Jon.Branding Agency · Tashkent, Uzbekistan · +998 79 200 00 97',
   },
   zh: {
     founderLabel: '创始人',
@@ -160,7 +160,7 @@ const t = {
     ],
     ctaLabel: '开始合作',
     cta: '免费简报 →',
-    footerNote: 'Jon.Branding Agency · 塔什干，乌兹别克斯坦 · +998 33 645 00 97',
+    footerNote: 'Jon.Branding Agency · 塔什干，乌兹别克斯坦 · +998 79 200 00 97',
   },
 } as const;
 
