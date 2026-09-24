@@ -1,6 +1,7 @@
 'use client';
 
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   ArrowDown,
   ArrowRight,
@@ -887,6 +888,30 @@ export const BrandStrategyClient: FC = () => {
 
           <HeroStrategyMap />
         </div>
+
+        {/* Hero Visual Banner */}
+        <div className="mx-auto mt-14 max-w-6xl overflow-hidden rounded-3xl border border-neutral-200/80 bg-neutral-900 shadow-xl">
+          <div className="relative aspect-[16/9] w-full sm:aspect-[21/9]">
+            <Image
+              src="/images/brand-strategy/hero.jpg"
+              alt="Jon Branding — Brand Strategy Boardroom & Executive Deliverables"
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 text-white sm:bottom-6 sm:left-6 sm:right-6">
+              <div>
+                <p className="text-[11px] font-mono uppercase tracking-widest text-blue-300">Executive Process</p>
+                <p className="text-sm font-semibold sm:text-base">Kompaniya ta’sischilari va top-menejment bilan strategik konsultatsiya</p>
+              </div>
+              <span className="rounded-full border border-white/20 bg-black/40 px-3.5 py-1 text-[11px] font-mono text-neutral-300 backdrop-blur">
+                Jon Branding · Strategy System
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 2. MUAMMO */}
@@ -1078,6 +1103,23 @@ export const BrandStrategyClient: FC = () => {
           </p>
         </div>
 
+        {/* Strategy Documentation Visual */}
+        <div className="mt-10 overflow-hidden rounded-3xl border border-neutral-200 bg-white p-3 sm:p-4 shadow-sm">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-[21/9]">
+            <Image
+              src="/images/brand-strategy/deck.jpg"
+              alt="Brand Strategy Deck Framework — Positioning, Value Proposition & Target Audience"
+              fill
+              sizes="(max-width: 1200px) 100vw, 1000px"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2 px-3 pt-3 text-xs text-neutral-500">
+            <span className="font-semibold text-neutral-800">Strategik hujjat tarkibi: Bozor xaritasi, Value Proposition va auditoriya segmentatsiyasi</span>
+            <span className="font-mono text-[11px] text-neutral-400">Jon Branding · Strategic Framework</span>
+          </div>
+        </div>
+
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DELIVERABLES.map((d) => (
             <article
@@ -1189,6 +1231,23 @@ export const BrandStrategyClient: FC = () => {
         <p className="mt-4 max-w-2xl text-neutral-300" style={{ fontSize: 17, lineHeight: 1.6 }}>
           Natijada qo‘lingizda keyingi yillarda butun jamoangiz va pudratchilaringiz uchun bosh qo‘llanma bo‘ladigan 3 ta asosiy strategik hujjat topshiriladi.
         </p>
+
+        {/* Deliverables Mockup Showcase */}
+        <div className="mt-10 overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-3 sm:p-4 backdrop-blur">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-900 sm:aspect-[21/9]">
+            <Image
+              src="/images/brand-strategy/deliverables.jpg"
+              alt="Brand Strategy Deliverables Set — Executive Hardcover Book, Strategy Map & Platform Guide"
+              fill
+              sizes="(max-width: 1200px) 100vw, 1000px"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2 px-3 pt-3 text-xs text-neutral-400">
+            <span className="font-semibold text-white">Qo‘lingizga topshiriladigan jismoniy va raqamli boshqaruv to‘plami</span>
+            <span className="font-mono text-[11px] text-blue-300">Executive Deliverables · 2026</span>
+          </div>
+        </div>
 
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           <div className="flex flex-col rounded-3xl border border-white/15 bg-white/5 p-7 backdrop-blur">
@@ -1431,6 +1490,23 @@ export const BrandStrategyClient: FC = () => {
           <p className="mt-4 text-neutral-600" style={{ fontSize: 16, lineHeight: 1.6 }}>
             Strategiya taxminlarga emas, aniq ketma-ketlik va tadqiqotga asoslanadi.
           </p>
+        </div>
+
+        {/* Workshop Collaboration Visual */}
+        <div className="mt-10 overflow-hidden rounded-3xl border border-neutral-200 bg-white p-3 sm:p-4 shadow-sm">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-[21/9]">
+            <Image
+              src="/images/brand-strategy/workshop.jpg"
+              alt="Jon Branding B2B Brand Strategy Workshop with Business Leadership"
+              fill
+              sizes="(max-width: 1200px) 100vw, 1000px"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2 px-3 pt-3 text-xs text-neutral-500">
+            <span className="font-semibold text-neutral-800">Strategik sessiya: Positioning, JTBD va Messaging ustunlari ustida jonli tahlil</span>
+            <span className="font-mono text-[11px] text-neutral-400">Jon Branding · Strategic Workshop</span>
+          </div>
         </div>
 
         <div className="mt-12 space-y-4">
