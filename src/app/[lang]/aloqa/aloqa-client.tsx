@@ -11,7 +11,7 @@ const t = {
     subtext: 'Yangi loyiha, hamkorlik yoki savol — biz 24 soat online.',
     contactsLabel: "Bog'lanish",
     contacts: [
-      { label: 'Telefon', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
+      { label: 'Telefon', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
@@ -33,7 +33,7 @@ const t = {
     subtext: 'Новый проект, сотрудничество или вопрос — мы онлайн 24 часа.',
     contactsLabel: 'Связаться',
     contacts: [
-      { label: 'Телефон', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
+      { label: 'Телефон', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
@@ -55,7 +55,7 @@ const t = {
     subtext: 'New project, collaboration or question — we are online 24/7.',
     contactsLabel: 'Get in touch',
     contacts: [
-      { label: 'Phone', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
+      { label: 'Phone', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
       { label: 'Email', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },
@@ -77,7 +77,7 @@ const t = {
     subtext: '新项目、合作或问题——我们24小时在线。',
     contactsLabel: '联系方式',
     contacts: [
-      { label: '电话', value: '+998 33 645 00 97', href: 'tel:+998336450097' },
+      { label: '电话', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
       { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
       { label: '邮件', value: 'info@jonbranding.uz', href: 'mailto:info@jonbranding.uz' },

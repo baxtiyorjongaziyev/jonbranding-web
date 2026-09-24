@@ -4,6 +4,18 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-23 | Kontakt ma'lumotlari yangilandi
+
+**Qilingan ish:**
+1. Telegram (shaxsiy): `@baxtiyorjon_gaziyev` → `@baxtiyorjongaziyev` (13 joy, 10 fayl; Den Aroma maqolasidagi matn/havola nomuvofiqligi ham tuzatildi).
+2. Telefon: `+998 33 645 00 97` / `+998336450097` → `+998 79 200 00 97` / `+998792000097` (52 joy + `public/llms.txt`).
+3. Placeholder/test raqamlari (`+998901234567` va h.k.) tegilmadi.
+4. Sanity: `siteSettings` hujjati yo'q — sayt `src/lib/data/settings.ts` fallback'idan oladi; Studio'da yangilash shart emas.
+
+**Tekshiruv:** typecheck ✓, vitest 267/267 ✓ (2 ta timeout qayta ishga tushirilganda o'tdi).
+
+---
+
 ## 2026-09-23 | Eskirgan Netlify integratsiyasi butunlay olib tashlandi
 
 **Vazifa:** jonbranding-web reposidan va Netlify tizimidan eskirgan Netlify integratsiyasini tozalash (har PR'da 4 ta qizil check xatosi chiqishini bartaraf qilish).

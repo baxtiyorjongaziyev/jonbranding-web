@@ -2600,7 +2600,7 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
               >
                 {dictionary?.footer_write_tg || "Telegram'da yozish →"}
               </a>
-              <a className="foot-cta-btn" href="tel:+998336450097">
+              <a className="foot-cta-btn" href="tel:+998792000097">
                 {dictionary?.footer_call_phone || "Qo'ng'iroq qilish"}
               </a>
             </div>
@@ -2697,7 +2697,7 @@ export const ATFooter: FC<{ dictionary: any }> = ({ dictionary }) => {
             <h4>{dictionary?.footer_contact_title || 'Aloqa'}</h4>
             <ul>
               <li>
-                <a href="tel:+998336450097">+998 33 645 00 97</a>
+                <a href="tel:+998792000097">+998 79 200 00 97</a>
               </li>
               <li>
                 <a href="mailto:salom@jon.uz">salom@jon.uz</a>

@@ -496,14 +496,14 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             Ariza qoldirish
           </button>
           <a
-            href="tel:+998336450097"
+            href="tel:+998792000097"
             className="rounded-full border px-7 py-3.5 text-sm font-medium transition-colors hover:bg-white"
             style={{ borderColor: 'rgba(255,255,255,.28)', color: '#fff' }}
           >
-            +998 33 645 00 97
+            +998 79 200 00 97
           </a>
           <a
-            href="https://t.me/baxtiyorjon_gaziyev"
+            href="https://t.me/baxtiyorjongaziyev"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border px-7 py-3.5 text-sm font-medium transition-colors hover:bg-white"

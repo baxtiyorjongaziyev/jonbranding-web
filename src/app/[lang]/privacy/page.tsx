@@ -41,7 +41,7 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
         { title: "3. Maxfiylik kafolati", text: "Sizning shaxsiy ma'lumotlaringiz hech qachon uchinchi shaxslarga sotilmaydi, ijaraga berilmaydi yoki topshirilmaydi." },
         { title: "4. Texnik xavfsizlik", text: "Ma'lumotlaringizni himoya qilish uchun zamonaviy texnik va tashkiliy choralarni qo'llaymiz." },
         { title: "5. Cookie fayllari", text: "Veb-saytimiz tashrif statistikasini yig'ish va xizmat sifatini yaxshilash uchun cookie fayllaridan foydalanadi. Boshqa shaxsiy ma'lumotlarni kuzatmaymiz." },
-        { title: "6. Aloqa", text: "Agar maxfiylik siyosatimiz haqida savollaringiz bo'lsa, +998336450097 yoki Telegram @jonbranding orqali bog'lanishingiz mumkin." }
+        { title: "6. Aloqa", text: "Agar maxfiylik siyosatimiz haqida savollaringiz bo'lsa, +998792000097 yoki Telegram @jonbranding orqali bog'lanishingiz mumkin." }
       ]
     },
     ru: {
@@ -52,7 +52,7 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
         { title: "3. Гарантия конфиденциальности", text: "Ваши личные данные никогда не продаются, не передаются и не сдаются в аренду третьим лицам." },
         { title: "4. Техническая безопасность", text: "Мы применяем современные технические и организационные меры для защиты ваших данных." },
         { title: "5. Файлы cookie", text: "Наш сайт использует cookie для сбора статистики посещений и улучшения качества обслуживания." },
-        { title: "6. Контакты", text: "По вопросам политики конфиденциальности: +998336450097 или Telegram @jonbranding." }
+        { title: "6. Контакты", text: "По вопросам политики конфиденциальности: +998792000097 или Telegram @jonbranding." }
       ]
     },
     en: {
@@ -63,7 +63,7 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
         { title: "3. Confidentiality Guarantee", text: "Your personal data is never sold, rented or transferred to third parties." },
         { title: "4. Technical Security", text: "We use modern technical and organisational measures to protect your data." },
         { title: "5. Cookies", text: "Our website uses cookies to collect visit statistics and improve service quality." },
-        { title: "6. Contact", text: "For privacy policy questions: +998336450097 or Telegram @jonbranding." }
+        { title: "6. Contact", text: "For privacy policy questions: +998792000097 or Telegram @jonbranding." }
       ]
     },
     zh: {
@@ -74,7 +74,7 @@ const PrivacyPage = async ({ params }: PrivacyPageProps) => {
         { title: "3. 保密保证", text: "您的个人数据绝不会出售、出租或转让给第三方。" },
         { title: "4. 技术安全", text: "我们采用现代技术和管理措施保护您的数据。" },
         { title: "5. Cookie 文件", text: "我们的网站使用 cookie 收集访问统计信息并改善服务质量。" },
-        { title: "6. 联系方式", text: "如有隐私政策问题：+998336450097 或 Telegram @jonbranding。" }
+        { title: "6. 联系方式", text: "如有隐私政策问题：+998792000097 或 Telegram @jonbranding。" }
       ]
     }
   };

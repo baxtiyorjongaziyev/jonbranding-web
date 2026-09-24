@@ -430,8 +430,8 @@ Sizning navbatingiz.
 Branding mutaxassisi
 Jon Branding asoschisi va art-direktori
 
-Telefon: +998336450097
-Telegram profil: [@baxtiyorjon_gaziyev](https://t.me/baxtiyorjongaziyev)
+Telefon: +998792000097
+Telegram profil: [@baxtiyorjongaziyev](https://t.me/baxtiyorjongaziyev)
 
 Ijtimoiy tarmoqlarda sahifalarim:  
 🔝 [Telegram](http://t.me/baxtiyorjongaziyev) | 🌐 [Instagram](http://instagram.com/baxtiyorjongaziyev) | 🌐 [LinkedIn](https://www.linkedin.com/in/baxtiyorjongaziyev/)
