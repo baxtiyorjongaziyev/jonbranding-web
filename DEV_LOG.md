@@ -12,6 +12,9 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 3. `pnpm-lock.yaml` tegilmadi — Vercel qaysi menejerni ishlatishi tekshirilgach hal qilinadi.
 
 **Qolgan ishlar (audit):** submit-form zod validatsiyasi, Dependabot 2 ta zaiflik, o'lik section'lar, `<img>` → `next/image`, `atelier-sections.tsx` (2916 qator) bo'lish, `'use client'` kamaytirish.
+
+---
+
 ## 2026-09-24 | Brand Strategy xizmati uchun alohida public landing page ishlab chiqildi
 
 **Vazifa:** Brand Strategy xizmatini “30–40 betlik prezentatsiya” sifatida emas, balki “biznes bozorda kim bo‘lishi, kim uchun ishlashi, nimasi bilan farqlanishi va nima deyishi kerakligini aniqlab beradigan strategik tizim” sifatida tushuntiruvchi premium B2B public landing page yaratish. Narx: 48 000 000 so‘m.
