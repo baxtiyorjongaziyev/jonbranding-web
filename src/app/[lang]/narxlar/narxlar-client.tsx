@@ -149,7 +149,7 @@ export default function NarxlarClient({ cases, quotes, logos, showcase }: Props)
           className="mx-auto mt-6 text-neutral-600"
           style={{ fontSize: 'clamp(16px, 1.5vw, 19px)', lineHeight: 1.65, maxWidth: '38ch' }}
         >
-          Hamma uchun birdek — shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.
+          Hamma uchun birdek, shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.
         </motion.p>
         <motion.dl
           initial="hidden"
