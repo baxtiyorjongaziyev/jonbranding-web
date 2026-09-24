@@ -314,7 +314,7 @@ export const uz: SalesContent = {
     },
     hero: {
       pre: 'Narxlarimiz', hi: 'ochiq',
-      sub: 'Hamma uchun birdek â shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.',
+      sub: 'Hamma uchun birdek, shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.',
     },
     jobs: {
       pre: 'Biz aslida nimani', hi: 'hal qilamiz',
