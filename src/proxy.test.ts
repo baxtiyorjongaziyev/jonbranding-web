@@ -9,7 +9,7 @@ function requestFor(url: string) {
 describe('proxy locale redirect', () => {
   it('strips the default locale prefix', () => {
     const response = proxy(requestFor('https://jonbranding.uz/uz/diagnostika'));
-    expect(response.status).toBe(307);
+    expect(response.status).toBe(308);
     expect(new URL(response.headers.get('location')!).pathname).toBe('/diagnostika');
   });
 
@@ -61,5 +61,30 @@ describe('proxy locale redirect', () => {
     const res3 = proxy(requestFor('https://jonbranding.uz/xizmatlar/brand-strategy'));
     expect(res3.status).toBe(308);
     expect(new URL(res3.headers.get('location')!).pathname).toBe('/brand-strategy');
+  });
+
+  it('keeps Uzbek inner pages in Uzbek for other-language browsers and crawlers', () => {
+    const request = new NextRequest(
+      new Request('https://www.jonbranding.uz/narxlar', { headers: { 'accept-language': 'en-US,en;q=0.9' } }),
+    );
+    const response = proxy(request);
+    expect(response.headers.get('location')).toBeNull();
+    expect(response.headers.get('x-middleware-rewrite')).toContain('/uz/narxlar');
+  });
+
+  it('still suggests the browser language on the home page', () => {
+    const request = new NextRequest(
+      new Request('https://www.jonbranding.uz/', { headers: { 'accept-language': 'ru-RU,ru;q=0.9' } }),
+    );
+    expect(new URL(proxy(request).headers.get('location')!).pathname).toBe('/ru');
+  });
+
+  it('follows a language the visitor chose explicitly on any page', () => {
+    const request = new NextRequest(
+      new Request('https://www.jonbranding.uz/narxlar', {
+        headers: { 'accept-language': 'uz', cookie: 'NEXT_LOCALE=en' },
+      }),
+    );
+    expect(new URL(proxy(request).headers.get('location')!).pathname).toBe('/en/narxlar');
   });
 });

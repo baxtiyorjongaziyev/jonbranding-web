@@ -134,4 +134,40 @@ describe('amocrm-webhook affiliate payout', () => {
     // ...but must NOT guess a payout amount (especially not full_branding, the largest).
     expect(storeMock.createPayoutIfAbsent).not.toHaveBeenCalled();
   });
+
+  it('accepts the form-urlencoded format amoCRM sends, with the secret in the URL', async () => {
+    const { POST } = await import('./route');
+    const res = await POST(
+      new Request('http://localhost/api/amocrm-webhook?secret=secret', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'leads[status][0][id]=555&leads[status][0][status_id]=142',
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(storeMock.markReferralWon).toHaveBeenCalledWith('ref-1');
+  });
+
+  it('rejects a wrong secret in the URL', async () => {
+    const { POST } = await import('./route');
+    const res = await POST(
+      new Request('http://localhost/api/amocrm-webhook?secret=wrong', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'leads[status][0][id]=555&leads[status][0][status_id]=142',
+      }),
+    );
+    expect(res.status).toBe(401);
+    expect(storeMock.markReferralWon).not.toHaveBeenCalled();
+  });
+
+  it('sends a valid HTML Telegram message with real emoji and escaped lead name', async () => {
+    await callWebhook({ leads: { add: [{ id: 9, name: 'A <&> B', price: 100 }] } });
+    const calls = (global.fetch as unknown as { mock: { calls: [string, RequestInit][] } }).mock.calls;
+    const payload = JSON.parse(String(calls[calls.length - 1][1].body));
+    expect(payload.parse_mode).toBe('HTML');
+    expect(payload.text).toContain('📢');
+    expect(payload.text).not.toContain('ð');
+    expect(payload.text).toContain('A &lt;&amp;&gt; B');
+  });
 });

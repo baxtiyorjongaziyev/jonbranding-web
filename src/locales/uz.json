@@ -133,7 +133,7 @@
   },
   "brandbookPage": {
     "metadata": {
-      "title": "Brendbuk yaratish | Jon.Branding Agentligi",
+      "title": "Brendbuk yaratish",
       "description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
       "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
     },
@@ -230,7 +230,7 @@
   },
   "termsPage": {
     "metadata": {
-      "title": "Foydalanish shartlari | Jon.Branding",
+      "title": "Foydalanish shartlari",
       "description": "Jon.Branding agentligi xizmatlaridan foydalanish shartlari - shaffof va professional hamkorlik."
     },
     "title": "Foydalanish shartlari",
@@ -426,6 +426,8 @@
     "error": "Ulanishda xatolik yuz berdi.",
     "welcome": "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
     "ack": "Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.",
+    "offlineAskContact": "Rahmat, savolingizni oldik! Mutaxassisimiz javob berishi uchun telefon raqamingiz yoki Telegram'ingizni shu yerga yozib qoldiring.",
+    "offlineThanks": "Rahmat! Kontaktingizni oldik — mutaxassisimiz tez orada siz bilan bog'lanadi.",
     "thinking": "Oisha o'ylamoqda...",
     "openButtonAriaLabel": "Oisha chatini ochish",
     "closeButtonAriaLabel": "Oisha chatini yopish",
@@ -909,7 +911,7 @@
   },
   "quiz": {
     "metadata": {
-      "title": "Mini-test | Jon.Branding",
+      "title": "Mini-test",
       "description": "Tayyorgarlik darajasini aniqlang."
     },
     "exampleTitle": "Misol:",
@@ -1027,7 +1029,7 @@
   },
   "brandStrategyPage": {
     "metadata": {
-      "title": "Brend-strategiya | Jon.Branding",
+      "title": "Brend-strategiya",
       "description": "Kuchli brend — aniq strategiya va maqsadli yondashuv bilan boshlanadi."
     },
     "title": "Brend-strategiya",
@@ -1070,7 +1072,7 @@
   },
   "corporateStylePage": {
     "metadata": {
-      "title": "Firma uslubi | Jon.Branding",
+      "title": "Firma uslubi",
       "description": "Brendingizni barcha platformalarda yagona va professional ko'rsatadigan vizual tizim."
     },
     "title": "Firma uslubi (Korporativ uslub)",
@@ -1107,7 +1109,7 @@
   },
   "logoDesignPage": {
     "metadata": {
-      "title": "Logotip dizayni | Jon.Branding",
+      "title": "Logotip dizayni",
       "description": "Biznesingiz mohiyatini aks ettiruvchi, strategik va esda qolarli logotip."
     },
     "title": "Logotip dizayni",
@@ -1156,7 +1158,7 @@
   },
   "namingPage": {
     "metadata": {
-      "title": "Neyming | Jon.Branding",
+      "title": "Neyming",
       "description": "Brendingiz uchun esda qolarli, kuchli va yuridik toza nom tanlash."
     },
     "title": "Neyming",
@@ -1207,7 +1209,7 @@
   },
   "patentCalculatorPage": {
     "metadata": {
-      "title": "Patent Kalkulyatori | Jon.Branding",
+      "title": "Patent Kalkulyatori",
       "description": "Tovar belgisini ro'yxatdan o'tkazish xarajatlarini hisoblang."
     },
     "title": "Patent Kalkulyatori",
@@ -1315,7 +1317,7 @@
   },
   "carWrapPage": {
     "metadata": {
-      "title": "Creative Car Wrap Design xizmati | Jon Branding",
+      "title": "Creative Car Wrap Design xizmati",
       "description": "Biznes mashinalari uchun professional car wrap design: logo, slogan, kontaktlar va brend uslubiga mos kreativ reklama dizayni.",
       "keywords": [
         "car wrap design",
@@ -1484,7 +1486,7 @@
   },
   "packagingPage": {
     "metadata": {
-      "title": "Qadoq dizayni | Jon.Branding",
+      "title": "Qadoq dizayni",
       "description": "Mahsulotni javonda ajratib turadigan, sotuvchi qadoq dizayni."
     },
     "title": "Qadoq dizayni",
@@ -1517,7 +1519,7 @@
   },
   "servicesPage": {
     "metadata": {
-      "title": "Xizmatlar va narxlar | Jon.Branding",
+      "title": "Xizmatlar va narxlar",
       "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
     },
     "packageBuilder": {
@@ -2174,7 +2176,7 @@
   },
   "onlineBrief": {
     "meta": {
-      "title": "Onlayn Smart Brief - Jon Branding",
+      "title": "Onlayn Smart Brief",
       "description": "Brendingiz uchun aqlli smart briefni to'ldiring va bir zumda loyihani boshlang."
     },
     "welcome": {

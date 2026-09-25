@@ -87,27 +87,38 @@ export function DiagnosticFlow() {
         }
       }
 
-      // Always submit lead to /api/submit-form so Telegram and amoCRM receive it
-      try {
-        await fetch('/api/submit-form', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fullName: contact.fullName,
-            phone: contact.phone,
-            source: 'navigator_diagnostic',
-            role: contact.companyName ? `${contact.companyName} (${contact.industry || ''})` : 'TezNatija',
-            revenue: `Diagnostika ball: ${totalScore}`,
-            pain: selectedPains.join(', '),
-            ambition: selectedResult,
-            lang: 'uz',
-          }),
-        })
-      } catch (submitErr) {
-        console.warn('Submit-form error:', submitErr)
+      // Lead har doim /api/submit-form orqali Telegram va amoCRM'ga boradi.
+      // Javob tekshiriladi: aks holda noto'g'ri raqamdagi lead jimgina yo'qolardi.
+      const painTitles = selectedPains
+        .map((id) => PAIN_POINTS.find((pain) => pain.id === id)?.title || id)
+        .join('; ')
+      const resultTitle = DESIRED_RESULTS.find((result) => result.id === selectedResult)?.title || selectedResult
+      const res = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: contact.fullName,
+          phone: contact.phone,
+          source: 'navigator_diagnostic',
+          role: contact.companyName ? `${contact.companyName} (${contact.industry || ''})` : 'TezNatija',
+          revenue: `Diagnostika ball: ${totalScore}`,
+          pain: painTitles,
+          ambition: resultTitle,
+          lang: 'uz',
+        }),
+      })
+
+      if (!res.ok) {
+        setIsSubmitting(false)
+        alert(
+          res.status === 400
+            ? "Telefon raqamini tekshiring: +998 90 123 45 67 ko'rinishida yozing."
+            : "Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring."
+        )
+        return
       }
 
-      router.push(`/uz/navigator/natija?id=${Date.now()}`)
+      router.push('/navigator/natija')
     } catch (err) {
       console.error(err)
       setIsSubmitting(false)

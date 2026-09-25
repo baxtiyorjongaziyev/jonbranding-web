@@ -9,6 +9,7 @@ import {
   markReferralWon,
 } from '@/lib/affiliate/store';
 import { serviceFromHint, type PayoutService } from '@/lib/affiliate/payouts';
+import { amoCrmLeadUrl, escapeTelegramHtml, readWebhookBody } from '@/lib/amocrm-webhook';
 
 function parseStatusIds(raw: string | undefined): Set<number> {
   return new Set(
@@ -81,7 +82,7 @@ async function processAffiliatePayouts(body: any) {
         serviceHint: referral.serviceHint,
       });
       await notifyAffiliateBonus(
-        `<b>⚠️ Hamkor bonusi — qo'lda tekshirish kerak</b>\nReferral: ${referral.leadName}\nXizmat aniqlanmadi: ${referral.serviceHint || '(bo\'sh)'}\nBonusni admin panelda qo'lda hisoblang.`,
+        `<b>⚠️ Hamkor bonusi — qo'lda tekshirish kerak</b>\nReferral: ${escapeTelegramHtml(referral.leadName)}\nXizmat aniqlanmadi: ${escapeTelegramHtml(referral.serviceHint || '(bo\'sh)')}\nBonusni admin panelda qo'lda hisoblang.`,
       );
       continue;
     }
@@ -96,7 +97,7 @@ async function processAffiliatePayouts(body: any) {
 
     if (payout) {
       await notifyAffiliateBonus(
-        `<b>💰 Hamkor bonusi</b>\nReferral: ${referral.leadName}\nXizmat: ${service}\nSumma: ${payout.amount.toLocaleString('fr-FR')} so'm\nHolat: to'lanmagan`,
+        `<b>💰 Hamkor bonusi</b>\nReferral: ${escapeTelegramHtml(referral.leadName)}\nXizmat: ${service}\nSumma: ${payout.amount.toLocaleString('fr-FR')} so'm\nHolat: to'lanmagan`,
       );
     }
   }
@@ -121,11 +122,15 @@ function getCorsHeaders(request: Request) {
 function isAuthorizedWebhook(request: Request) {
   const expectedSecret = process.env.AMOCRM_WEBHOOK_SECRET?.trim();
   if (!expectedSecret) {
-    console.error("CRITICAL: AMOCRM_WEBHOOK_SECRET is not set. Rejecting webhook for security.");
+    logger.error('AMOCRM_WEBHOOK_SECRET is not set. Rejecting webhook for security.');
     return false;
   }
 
-  const providedSecret = request.headers.get('x-jonbranding-webhook-secret');
+  // amoCRM webhook sozlamasida faqat URL bor, header qo'shib bo'lmaydi —
+  // shuning uchun sir `?secret=` orqali ham qabul qilinadi.
+  const providedSecret =
+    request.headers.get('x-jonbranding-webhook-secret') ||
+    new URL(request.url).searchParams.get('secret');
   if (!providedSecret) return false;
 
   return safeCompare(providedSecret, expectedSecret);
@@ -140,105 +145,97 @@ export async function OPTIONS(request: Request) {
 }
 
 export async function POST(request: Request) {
-    const corsHeaders = getCorsHeaders(request);
-    const ip = getClientIp(request);
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+  const corsHeaders = getCorsHeaders(request);
+  const ip = getClientIp(request);
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
 
-    if (!(await rateLimit(`amocrm:${ip}`, 20, 60_000))) {
-        return NextResponse.json(
-            { ok: false, error: 'Too many requests' },
-            { status: 429, headers: corsHeaders },
-        );
-    }
+  // Sotuv jamoasi bir vaqtda ko'p sdelkani ko'chirsa, amoCRM ketma-ket
+  // yuboradi. Past limit 429 beradi, amoCRM esa xato beruvchi webhook'ni o'chiradi.
+  if (!(await rateLimit(`amocrm:${ip}`, 120, 60_000))) {
+    return NextResponse.json(
+      { ok: false, error: 'Too many requests' },
+      { status: 429, headers: corsHeaders },
+    );
+  }
 
-    if (!isAuthorizedWebhook(request)) {
-        return NextResponse.json(
-            { ok: false, error: 'Unauthorized webhook' },
-            { status: 401, headers: corsHeaders },
-        );
-    }
+  if (!isAuthorizedWebhook(request)) {
+    return NextResponse.json(
+      { ok: false, error: 'Unauthorized webhook' },
+      { status: 401, headers: corsHeaders },
+    );
+  }
 
-    try {
-        const body = await request.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await readWebhookBody(request);
+  } catch (error) {
+    logger.warn('amoCRM webhook body could not be parsed', {
+      reason: error instanceof Error ? error.message : String(error),
+    });
+    return NextResponse.json({ ok: false, error: 'invalid body' }, { status: 400, headers: corsHeaders });
+  }
 
-        try {
-          await processAffiliatePayouts(body);
-        } catch (error) {
-          logger.error('Affiliate payout processing failed', {
-            reason: error instanceof Error ? error.message : String(error),
-          });
-        }
+  try {
+    await processAffiliatePayouts(body);
+  } catch (error) {
+    logger.error('Affiliate payout processing failed', {
+      reason: error instanceof Error ? error.message : String(error),
+    });
+  }
 
-        if (!botToken || !chatId) {
-            logger.error('amoCRM webhook: Telegram bot token or chat ID is missing in environment variables. Affiliate processing still ran; notification skipped.');
-            // Per the global constraint, this webhook must always return 200 to amoCRM —
-            // affiliate payout processing above must not be blocked by a broken notification channel.
-            return NextResponse.json(
-                { ok: true, message: "Webhook processed, but Telegram sozlamalari mavjud emas." },
-                { headers: corsHeaders }
-            );
-        }
+  if (!botToken || !chatId) {
+    logger.error('amoCRM webhook: Telegram bot token or chat ID is missing. Affiliate processing still ran; notification skipped.');
+    // amoCRM'ga doim 2xx qaytariladi — aks holda u webhook'ni o'chirib qo'yadi.
+    return NextResponse.json(
+      { ok: true, message: 'Webhook processed, Telegram is not configured.' },
+      { headers: corsHeaders },
+    );
+  }
 
-        // Extract relevant data from the webhook payload.
-        // AmoCRM's payload structure can be complex, so we'll look for the newest lead.
-        const lead = body?.leads?.add?.[0] || body?.leads?.status?.[0];
+  const leads = (body as { leads?: { add?: unknown[]; status?: unknown[] } }).leads;
+  const lead = (leads?.add?.[0] || leads?.status?.[0]) as
+    | { id?: unknown; name?: unknown; status_id?: unknown; price?: unknown }
+    | undefined;
 
-        if (!lead) {
-            // If no lead data is found, it might be a test or other type of webhook.
-            // We'll just return a success response.
-             return NextResponse.json(
-                { ok: true, message: "Webhook received, but no lead data to process." },
-                { headers: corsHeaders }
-            );
-        }
+  if (!lead) {
+    return NextResponse.json(
+      { ok: true, message: 'Webhook received, but no lead data to process.' },
+      { headers: corsHeaders },
+    );
+  }
 
-        const leadName = lead.name || 'Nomi yo\'q';
-        const leadId = lead.id;
-        const status = lead.status_id ? `Status ID: ${lead.status_id}` : 'Statusi noma\'lum';
-        const price = lead.price ? `${lead.price} so'm` : 'Narxi kiritilmagan';
-        
-        const amocrmSubdomain = process.env.AMOCRM_SUBDOMAIN || 'your-subdomain';
-        const leadUrl = `https://${amocrmSubdomain}.amocrm.ru/leads/detail/${leadId}`;
+  const leadUrl = amoCrmLeadUrl(lead.id, process.env.AMOCRM_SUBDOMAIN || process.env.AMOCRM_DOMAIN);
+  const telegramMessage = [
+    '📢 <b>amoCRM: yangi voqea</b>',
+    '',
+    `<b>Sdelka:</b> ${escapeTelegramHtml(lead.name || "Nomi yo'q")}`,
+    `<b>Status:</b> ${lead.status_id ? `ID ${escapeTelegramHtml(lead.status_id)}` : "noma'lum"}`,
+    `<b>Narxi:</b> ${lead.price ? `${escapeTelegramHtml(lead.price)} so'm` : 'kiritilmagan'}`,
+    ...(leadUrl ? ['', `🔗 <a href="${leadUrl}">Sdelkani ochish</a>`] : []),
+  ].join('\n');
 
+  // Serverless'da javob qaytgach jarayon to'xtatilishi mumkin — shuning uchun kutamiz.
+  try {
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: telegramMessage,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+      }),
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch (error) {
+    logger.error('Telegram API error (amoCRM webhook)', {
+      reason: error instanceof Error ? error.message : String(error),
+    });
+  }
 
-        const telegramMessage = `
-ðŸ“¢ Yangi voqea (AmoCRM Webhook)
-
-Sdelka: "${leadName}"
-Status: ${status}
-Narxi: ${price}
-
-ðŸ”— Sdelkani ko'rish: ${leadUrl}
-        `.trim();
-        
-        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        
-        // Send notification to Telegram but don't wait for the response
-        fetch(telegramUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                chat_id: chatId, 
-                text: telegramMessage,
-                parse_mode: 'Markdown'
-            }),
-        }).catch(e => console.error("Telegram API Error (from amoCRM webhook):", e));
-
-        // IMPORTANT: AmoCRM requires a 2xx response with a valid JSON body.
-        return NextResponse.json(
-            { ok: true, message: "Webhook processed successfully." },
-            { headers: corsHeaders }
-        );
-
-    } catch (error: any) {
-        console.error("Error processing amoCRM webhook:", error);
-        return NextResponse.json(
-            { ok: false, error: "Webhook'ni qayta ishlashda ichki xatolik." }, 
-            { 
-                status: 500,
-                headers: corsHeaders,
-            }
-        );
-    }
+  return NextResponse.json(
+    { ok: true, message: 'Webhook processed successfully.' },
+    { headers: corsHeaders },
+  );
 }

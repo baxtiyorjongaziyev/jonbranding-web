@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { getLocaleAlternates, getLocalizedAbsoluteUrl } from '@/lib/i18n/locale';
+import { pageTitle } from '@/lib/seo';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 
@@ -28,7 +29,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
 
   return {
     metadataBase: new URL(BASE_URL),
-    title: titles[safeLang] || titles.uz,
+    title: pageTitle(titles[safeLang] || titles.uz),
     description: descriptions[safeLang] || descriptions.uz,
     robots: { index: true, follow: true },
     openGraph: {

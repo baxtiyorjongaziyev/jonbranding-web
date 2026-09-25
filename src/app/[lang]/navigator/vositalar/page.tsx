@@ -17,7 +17,7 @@ export default function BusinessToolsPage() {
       <div className="max-w-5xl mx-auto space-y-12">
         
         <div className="space-y-4">
-          <Link href="/uz/navigator" className="inline-flex items-center text-sm text-slate-500 hover:text-slate-900 transition-colors">
+          <Link href="/navigator" className="inline-flex items-center text-sm text-slate-500 hover:text-slate-900 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Navigator bosh sahifasiga qaytish
           </Link>

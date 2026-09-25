@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const dict = await getDictionary(lang as Locale);
   
   const t = dict.servicesPage?.metadata || {
-      title: "Xizmatlar | Jon.Branding",
+      title: "Xizmatlar",
       description: "Biznesingiz uchun professional brending xizmatlari.",
       keywords: "branding services"
   };
@@ -22,7 +22,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL('https://www.jonbranding.uz'),
-    title: t.title,
+    // Ichki sahifalar (logo-dizayni, brandbook...) ham "| Jon.Branding" olishi uchun
+    // shablon shu yerda qayta beriladi — oddiy satr sarlavha uni o'chirib qo'yadi.
+    title: { default: t.title, template: '%s | Jon.Branding' },
     description: t.description,
     keywords: t.keywords,
     openGraph: {

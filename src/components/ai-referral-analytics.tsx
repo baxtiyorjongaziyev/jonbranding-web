@@ -19,8 +19,9 @@ export default function AiReferralAnalytics() {
         return;
       }
 
+      // Analitika cookie roziligidan keyin (birinchi tashrifda ~6 s) yuklanadi.
       attempts += 1;
-      if (attempts < 10) window.setTimeout(report, 500);
+      if (attempts < 30) window.setTimeout(report, 1000);
     };
 
     report();

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
+import { escapeTelegramHtml } from '@/lib/telegram-html';
 
 const bodySchema = z.object({
   message: z.string().max(2000),
@@ -35,33 +36,30 @@ export async function POST(request: Request) {
             return NextResponse.json({ ok: false, error: 'Invalid request' }, { status: 400 });
         }
 
-        const telegramMessage = `
-🆘 Jon.Branding Saytida Xatolik!
-
-Sahifa: ${pathname || 'Noma\'lum'}
-
-Xato:
-\`\`\`
-${message}
-\`\`\`
-
-Stack Trace:
-\`\`\`
-${stack || 'Mavjud emas'}
-\`\`\`
-
-Foydalanuvchi ma'lumoti:
-\`\`\`
-${userInfo || 'Noma\'lum'}
-\`\`\`
-        `.trim();
+        // HTML + escape: Markdown'da stack trace'dagi `_` va `*` xabarni buzardi.
+        // Uzunlik cheklangan — Telegram 4096 belgidan uzun xabarni rad etadi.
+        const block = (value: string, limit: number) =>
+            `<pre>${escapeTelegramHtml(value.length > limit ? `${value.slice(0, limit)}…` : value)}</pre>`;
+        const telegramMessage = [
+            "🆘 <b>Jon.Branding saytida xatolik</b>",
+            '',
+            `<b>Sahifa:</b> ${escapeTelegramHtml(pathname || "Noma'lum")}`,
+            '',
+            '<b>Xato:</b>',
+            block(message, 800),
+            '<b>Stack trace:</b>',
+            block(stack || 'Mavjud emas', 2200),
+            "<b>Foydalanuvchi ma'lumoti:</b>",
+            block(userInfo || "Noma'lum", 400),
+        ].join('\n');
         
         const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
         
         const payload = {
             chat_id: chatId,
             text: telegramMessage,
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
         };
 
         const response = await fetch(url, {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Xavfsiz Avans Kalkulyatori | Jon.Branding',
+  title: 'Xavfsiz Avans Kalkulyatori',
   robots: { index: false, follow: false },
 };
 
