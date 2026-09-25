@@ -10,6 +10,7 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { safeJsonStringify } from '@/lib/security';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
+import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -244,9 +245,11 @@ export default async function LocalizedLayout({ children, params }: Props) {
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
         <Script id="analytics-delayed-load" strategy="lazyOnload">
-          {`
-(function(){const loadAnalytics=()=>{if(window.analyticsLoaded)return;window.analyticsLoaded=!0;const gtm=document.createElement('script');gtm.async=!0;gtm.src='https://www.googletagmanager.com/gtm.js?id=GTM-5GRQBW84';document.head.appendChild(gtm);const gaId='${process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV'}';const ga=document.createElement('script');ga.async=!0;ga.src='https://www.googletagmanager.com/gtag/js?id='+gaId;document.head.appendChild(ga);ga.onload=()=>{window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config',gaId);gtag('config','${process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476'}')};(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w7knsud9mg");(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:6527829,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r)})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1134785364752294');fbq('track','PageView')};window.addEventListener('cookie-consent-accepted',loadAnalytics);document.cookie.includes('cookie_consent_accepted=true')&&loadAnalytics()})();
-          `}
+          {getAnalyticsLoaderScript({
+            gtmId: 'GTM-5GRQBW84',
+            gaId: process.env.NEXT_PUBLIC_GA_ID || 'G-BTSGJQLMMV',
+            adsId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || 'AW-389056476',
+          })}
         </Script>
 
         
