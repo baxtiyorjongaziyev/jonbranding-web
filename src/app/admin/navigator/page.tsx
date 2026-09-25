@@ -1,10 +1,11 @@
 import { Metadata } from 'next'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { ADMIN_COOKIE, verifyAdminSession } from '@/lib/admin/auth'
+import { getServiceClient } from '@/lib/supabase/service'
+import { logger } from '@/lib/logger'
+import LoginForm from '../hamkorlar/login-form'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
@@ -17,10 +18,12 @@ export default async function NavigatorAdminPage() {
   const session = cookieStore.get(ADMIN_COOKIE)?.value
 
   if (!verifyAdminSession(session)) {
-    redirect('/admin')
+    return <LoginForm />
   }
 
-  const supabase = await createClient()
+  // RLS anonim o'qishni rad etadi — sahifa admin sessiyasi orqasida,
+  // shuning uchun service-role klient ishlatiladi.
+  const supabase = getServiceClient()
 
   let leads: any[] = []
   if (supabase) {
@@ -32,7 +35,9 @@ export default async function NavigatorAdminPage() {
         .limit(50)
       leads = data || []
     } catch (err) {
-      console.warn('Failed to fetch navigator leads from Supabase:', err)
+      logger.warn('Failed to fetch navigator leads from Supabase', {
+        reason: err instanceof Error ? err.message : String(err),
+      })
     }
   }
 

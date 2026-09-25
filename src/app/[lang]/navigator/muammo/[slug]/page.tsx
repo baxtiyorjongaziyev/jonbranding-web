@@ -115,7 +115,7 @@ export default async function PainPresentationPage(props: { params: Promise<{ sl
         {/* CTAs */}
         <div className="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <Button asChild size="lg" className="h-16 text-lg bg-blue-900 hover:bg-blue-800">
-            <Link href="/uz/navigator/diagnostika">
+            <Link href="/navigator/diagnostika">
               Diagnostikani to'liq o'tish
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

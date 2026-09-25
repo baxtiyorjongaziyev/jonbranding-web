@@ -135,7 +135,7 @@ export default async function ResultPage(props: { searchParams: Promise<{ id?: s
         </div>
 
         <div className="text-center pt-8">
-          <Link href="/uz/navigator/vositalar" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+          <Link href="/navigator/vositalar" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
             Tavsiya etilgan biznes vositalaridan foydalanish
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>

@@ -29,14 +29,14 @@ export default function NavigatorLandingPage() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <Button asChild size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-blue-900 hover:bg-blue-800">
-            <Link href="/uz/navigator/diagnostika">
+            <Link href="/navigator/diagnostika">
               Diagnostikani boshlash
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8 border-slate-300">
-            <Link href="/uz/navigator/vositalar">
+            <Link href="/navigator/vositalar">
               <Calculator className="mr-2 h-5 w-5" />
               Biznes vositalarini ko‘rish
             </Link>
