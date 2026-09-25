@@ -13,6 +13,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'От названия до полной визуальной системы. Каждую услугу можно взять отдельно.',
     items: [
       {
+        id: 'naming',
         name: 'Нейминг',
         price: '10 000 000',
         duration: '10 дней',
@@ -37,6 +38,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         },
       },
       {
+        id: 'logo',
         name: 'Логотип',
         price: '8 000 000',
         duration: '7 дней',
@@ -52,6 +54,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Для бизнеса без логотипа или с устаревшим, несовременным знаком',
       },
       {
+        id: 'visual-identity',
         name: 'Фирменный стиль',
         price: '18 000 000',
         duration: '10 дней',
@@ -67,6 +70,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Для бизнеса, у которого есть логотип, но везде он выглядит по-разному',
       },
       {
+        id: 'brandbook',
         name: 'Брендбук',
         price: '24 000 000',
         duration: '7 дней',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Упаковка, из-за которой ваш продукт берут с полки.',
     items: [
       {
+        id: 'packaging',
         name: 'Упаковка (1 SKU)',
         price: '12 000 000',
         duration: '7 дней',
@@ -104,6 +109,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Для производителей, выходящих в магазины, на маркетплейсы или в сети',
       },
       {
+        id: 'packaging-extra',
         name: 'Каждый дополнительный SKU',
         price: 'от 4 000 000',
         duration: '+3 дня',
@@ -124,6 +130,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Чтобы имя стало вашим, его нужно зарегистрировать. Это мы тоже берём на себя.',
     items: [
       {
+        id: 'trademark-search',
         name: 'Патентная проверка',
         price: '880 000',
         duration: '2 дня',
@@ -140,6 +147,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         addon: { label: 'Каждый дополнительный класс', price: '+440 000 сум' },
       },
       {
+        id: 'trademark-standard',
         name: 'Патент (обычный)',
         price: '5 000 000',
         duration: '7 месяцев',
@@ -154,6 +162,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Для тех, кто не торопится, но хочет защитить своё имя',
       },
       {
+        id: 'trademark-express',
         name: 'Патент (ускоренный)',
         price: '7 000 000',
         duration: '20–40 дней',
@@ -330,5 +339,22 @@ export const ru: SalesContent = {
       button: 'Записаться на разговор',
     },
     footnote: 'Цены на сентябрь 2026 года. Окончательная цена определяется по объёму проекта.',
+    modal: {
+      title: 'Оставить заявку',
+      titleDone: 'Спасибо!',
+      desc: 'Оставьте имя и номер телефона — мы свяжемся с вами сами.',
+      descDone: 'Скоро свяжемся с вами.',
+      close: 'Закрыть',
+      name: 'Имя',
+      namePlaceholder: 'Ваше имя',
+      phone: 'Телефон *',
+      phonePlaceholder: '+998 90 123 45 67',
+      service: 'Услуга',
+      submit: 'Отправить',
+      sending: 'Отправляется…',
+      phoneError: 'Введите номер телефона правильно',
+      submitError: 'Произошла ошибка. Попробуйте ещё раз.',
+      packageSuffix: 'пакет',
+    },
   },
 };
