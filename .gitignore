@@ -107,3 +107,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Tasodifiy commit qilinmasin
+*.bak-*
+node_modules.zip
+node_modules.tar.gz
+lighthouse-report.json
