@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { slugify } from '@/lib/slug';
 import { client } from '@/sanity/lib/client';
 import { google } from 'googleapis';
 import { safeCompare } from '@/lib/security';
@@ -47,14 +48,6 @@ function verifyAuth(req: NextRequest): boolean {
 }
 
 /* ── Helpers ──────────────────────────────────── */
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 96);
-}
 
 function extractDriveFolderId(text: string): string | null {
   const match = text.match(/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/);
