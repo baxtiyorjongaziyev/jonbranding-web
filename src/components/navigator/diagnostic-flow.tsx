@@ -2,20 +2,18 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { PAIN_POINTS, DESIRED_RESULTS, QUESTIONS, ANSWER_OPTIONS } from '@/lib/navigator-data'
+import { PAIN_POINTS, DESIRED_RESULTS, QUESTIONS, ANSWER_OPTIONS, scoreNavigatorAnswers } from '@/lib/navigator-data'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Progress } from '@/components/ui/progress'
-import { createClient } from '@/lib/supabase/client'
 
 type Step = 'PAIN' | 'RESULT' | 'QUESTIONS' | 'CONTACT'
 
 export function DiagnosticFlow() {
   const router = useRouter()
-  const supabase = createClient()
   
   const [step, setStep] = useState<Step>('PAIN')
   const [selectedPains, setSelectedPains] = useState<string[]>([])
@@ -60,32 +58,7 @@ export function DiagnosticFlow() {
 
     setIsSubmitting(true)
     try {
-      // Calculate basic score
-      let totalScore = 0
-      Object.keys(answers).forEach(qId => {
-        const val = answers[qId]
-        const opt = ANSWER_OPTIONS.find(o => o.value === val)
-        if (opt) totalScore += opt.score
-      })
-
-      if (supabase) {
-        try {
-          await supabase.from('navigator_leads').insert({
-            full_name: contact.fullName,
-            company_name: contact.companyName,
-            industry: contact.industry,
-            contact: contact.phone,
-            consent: contact.consent,
-            selected_pains: selectedPains,
-            desired_results: [selectedResult],
-            diagnostic_answers: answers,
-            total_score: totalScore,
-            source: 'TezNatija_Diagnostic'
-          })
-        } catch (supabaseErr) {
-          console.warn('Supabase insert warning:', supabaseErr)
-        }
-      }
+      const totalScore = scoreNavigatorAnswers(answers)
 
       // Lead har doim /api/submit-form orqali Telegram va amoCRM'ga boradi.
       // Javob tekshiriladi: aks holda noto'g'ri raqamdagi lead jimgina yo'qolardi.
@@ -117,6 +90,24 @@ export function DiagnosticFlow() {
         )
         return
       }
+
+      // To'liq javoblar admin paneli uchun bazaga (service-role, server tomonda).
+      // Lid allaqachon yuborilgan — bu qadam muvaffaqiyatsiz bo'lsa ham to'xtatmaydi.
+      void fetch('/api/navigator-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          fullName: contact.fullName,
+          phone: contact.phone,
+          companyName: contact.companyName || undefined,
+          industry: contact.industry || undefined,
+          consent: true,
+          selectedPains,
+          desiredResult: selectedResult,
+          answers,
+        }),
+      }).catch(() => {})
 
       router.push('/navigator/natija')
     } catch (err) {
