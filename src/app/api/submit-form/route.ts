@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { getValidAccessToken, forceRefresh } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
-import { leadFormSchema } from '@/lib/lead-form-schema';
+import { submitFormSchema, type SubmitFormData } from '@/lib/validation/submit-form';
 import { guardLeadRequest } from '@/lib/lead-guard';
 import { logger } from '@/lib/logger';
 import { runAnalyticsDeliveries } from '@/lib/analytics-delivery';
@@ -24,20 +24,47 @@ function escapeTelegramHtml(value: unknown) {
     .replace(/>/g, '&gt;');
 }
 
+export type CleanLeadData = Omit<SubmitFormData, 'companyWebsite' | 'turnstileToken'>;
+
+export interface LeadData extends CleanLeadData {
+  eventId: string;
+  clientIp: string;
+  userAgent: string;
+  fbp?: string;
+  fbc?: string;
+}
+
+export interface AmoCrmLeadResult {
+  ok: boolean;
+  skipped?: boolean;
+  queued?: boolean;
+  leadId?: number | null;
+  contactId?: number | null;
+  merged?: boolean;
+  error?: string;
+}
+
+interface AmoCrmErrorShape {
+  status?: number;
+  message?: string;
+  detail?: string;
+  type?: string;
+}
+
 function cleanSecret(value: string | undefined) {
   return String(value || '')
     .replace(/^\uFEFF/, '')
     .trim();
 }
 
-function stripUndefined(value: any): any {
-  if (Array.isArray(value)) return value.map(stripUndefined);
+function stripUndefined<T>(value: T): T {
+  if (Array.isArray(value)) return value.map(stripUndefined) as unknown as T;
   if (value && typeof value === 'object') {
     return Object.fromEntries(
-      Object.entries(value)
+      Object.entries(value as Record<string, unknown>)
         .filter(([, item]) => item !== undefined)
         .map(([key, item]) => [key, stripUndefined(item)])
-    );
+    ) as unknown as T;
   }
   return value;
 }
@@ -154,9 +181,10 @@ async function sendTelegramIfConfigured(
   }
 }
 
-function describeAmoCrmError(error: any) {
-  const status = Number(error?.status || 0);
-  const message = String(error?.message || error || 'Unknown error');
+function describeAmoCrmError(error: unknown) {
+  const err = error as AmoCrmErrorShape | undefined;
+  const status = Number(err?.status || 0);
+  const message = String(err?.message || error || 'Unknown error');
 
   if (status === 402 || /payment required/i.test(message)) {
     return "Payment Required: AmoCRM akkaunti yoki API access to'lanmagan";
@@ -165,8 +193,9 @@ function describeAmoCrmError(error: any) {
   return message;
 }
 
-async function queueFailedAmoCrmLead(data: any, error: any) {
+async function queueFailedAmoCrmLead(data: LeadData, error: unknown) {
   try {
+    const err = error as AmoCrmErrorShape | undefined;
     const eventId = String(data.eventId || `lead_${Date.now()}`);
     await getDb()
       .collection(AMOCRM_FAILED_LEADS_COLLECTION)
@@ -177,10 +206,10 @@ async function queueFailedAmoCrmLead(data: any, error: any) {
           status: 'pending',
           integration: 'amocrm',
           error: {
-            message: String(error?.message || error || 'Unknown error'),
-            status: Number(error?.status || 0) || null,
-            detail: error?.detail || null,
-            type: error?.type || null,
+            message: String(err?.message || error || 'Unknown error'),
+            status: Number(err?.status || 0) || null,
+            detail: err?.detail || null,
+            type: err?.type || null,
           },
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
@@ -194,7 +223,7 @@ async function queueFailedAmoCrmLead(data: any, error: any) {
   }
 }
 
-async function sendToAmoCrm(data: any) {
+async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
   let accessToken: string;
   try {
     accessToken = await getValidAccessToken();
@@ -281,22 +310,45 @@ async function sendToAmoCrm(data: any) {
     }
   }
 
-  const createResult: any = await createResponse.json().catch(() => null);
+  interface ComplexItem {
+    id?: number;
+    contact_id?: number;
+    merged?: boolean;
+  }
+  interface ComplexResponse {
+    title?: string;
+    detail?: string;
+    message?: string;
+    type?: string;
+    id?: number;
+    contact_id?: number;
+    merged?: boolean;
+    _embedded?: {
+      items?: ComplexItem[];
+      leads?: ComplexItem[];
+    };
+  }
+
+  const createResult = (await createResponse.json().catch(() => null)) as
+    | ComplexResponse
+    | ComplexItem[]
+    | null;
 
   if (!createResponse.ok) {
+    const single = createResult && !Array.isArray(createResult) ? createResult : null;
     const message =
-      createResult?.title ||
-      createResult?.detail ||
-      createResult?.message ||
+      single?.title ||
+      single?.detail ||
+      single?.message ||
       `AmoCRM HTTP ${createResponse.status}`;
-    const error: any = new Error(message);
+    const error = new Error(message) as Error & AmoCrmErrorShape;
     error.status = createResponse.status;
-    error.detail = createResult?.detail;
-    error.type = createResult?.type;
+    error.detail = single?.detail;
+    error.type = single?.type;
     throw error;
   }
 
-  const createdLead = Array.isArray(createResult)
+  const createdLead: ComplexItem | null | undefined = Array.isArray(createResult)
     ? createResult[0]
     : createResult?._embedded?.items?.[0] || createResult?._embedded?.leads?.[0] || createResult;
   const leadId = createdLead?.id;
@@ -321,7 +373,7 @@ async function sendToAmoCrm(data: any) {
   return { ok: true, leadId, contactId, merged: createdLead?.merged === true };
 }
 
-function buildTelegramMessage(data: any) {
+function buildTelegramMessage(data: LeadData) {
   const fullName = escapeTelegramHtml(data.fullName);
   const phone = data.phone ? escapeTelegramHtml(data.phone) : null;
   const telegram = data.telegram
@@ -387,7 +439,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const validatedData = leadFormSchema.safeParse(body);
+    const validatedData = submitFormSchema.safeParse(body);
     if (!validatedData.success) {
       return NextResponse.json(
         { ok: false, error: 'Invalid input data', details: validatedData.error.format() },
@@ -402,10 +454,10 @@ export async function POST(request: Request) {
     const userAgent = request.headers.get('user-agent') || '';
     const fbpMatch = cookieHeader.match(/(?:^|;\s*)_fbp=([^;]*)/);
     const fbcMatch = cookieHeader.match(/(?:^|;\s*)_fbc=([^;]*)/);
-    const fbp = (body as any)?.fbp || (fbpMatch ? decodeURIComponent(fbpMatch[1]) : undefined);
-    const fbc = (body as any)?.fbc || (fbcMatch ? decodeURIComponent(fbcMatch[1]) : undefined);
+    const fbp = cleanData.fbp || (fbpMatch ? decodeURIComponent(fbpMatch[1]) : undefined);
+    const fbc = cleanData.fbc || (fbcMatch ? decodeURIComponent(fbcMatch[1]) : undefined);
 
-    const leadData = {
+    const leadData: LeadData = {
       ...cleanData,
       eventId: cleanData.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
       clientIp: ip,
@@ -417,7 +469,7 @@ export async function POST(request: Request) {
     const { fullName, phone } = leadData;
     const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
-    const telegramPayload: any = {
+    const telegramPayload: Record<string, unknown> = {
       chat_id: chatId,
       text: buildTelegramMessage(leadData),
       parse_mode: 'HTML',
@@ -425,14 +477,14 @@ export async function POST(request: Request) {
       ...(threadId ? { message_thread_id: Number(threadId) } : {}),
     };
 
-    const [telegramSuccess, amoCrmResult]: [boolean, any] = await runLeadDeliveries(
+    const [telegramSuccess, amoCrmResult]: [boolean, AmoCrmLeadResult] = await runLeadDeliveries(
       () => sendTelegramIfConfigured(
         botToken,
         chatId,
         telegramPayload,
         'lead alert',
       ),
-      () => sendToAmoCrm(leadData).catch(async (error) => {
+      () => sendToAmoCrm(leadData).catch(async (error: unknown) => {
         console.error('AmoCRM lead error:', error);
         const queued = await queueFailedAmoCrmLead(leadData, error);
         const reason = describeAmoCrmError(error);
@@ -454,7 +506,7 @@ export async function POST(request: Request) {
           'AmoCRM failure alert',
         );
 
-        return { ok: false, queued, error: error?.message || String(error) };
+        return { ok: false, queued, error: error instanceof Error ? error.message : String(error) };
       }),
     );
 
@@ -472,7 +524,7 @@ export async function POST(request: Request) {
     }
 
     try {
-      const promoRaw = String((leadData as any).promoCode || '').trim();
+      const promoRaw = String(leadData.promoCode || '').trim();
       if (promoRaw) {
         const affiliate = await findAffiliateByPromoCode(promoRaw.toUpperCase());
         if (affiliate) {
@@ -480,11 +532,11 @@ export async function POST(request: Request) {
           // "logoPremium") over localized display text (packageSummary), which
           // may not tokenize to a known service in every language/script.
           const serviceHintSource =
-            (Array.isArray((leadData as any).serviceKeys) && (leadData as any).serviceKeys.length
-              ? (leadData as any).serviceKeys.join(',')
+            (Array.isArray(leadData.serviceKeys) && leadData.serviceKeys.length
+              ? leadData.serviceKeys.join(',')
               : '') ||
-            (leadData as any).packageSummary ||
-            (leadData as any).role ||
+            leadData.packageSummary ||
+            leadData.role ||
             '';
           const hint = serviceFromHint(serviceHintSource);
           if (!amoCrmResult?.leadId) {
@@ -496,7 +548,7 @@ export async function POST(request: Request) {
             affiliateId: affiliate.id,
             amocrmLeadId: amoCrmResult?.leadId ?? null,
             leadName: String(fullName || 'Mijoz'),
-            leadPhone: normalizePhone((leadData as any).phone) || '',
+            leadPhone: normalizePhone(leadData.phone || '') || '',
             serviceHint: hint ?? (serviceHintSource || null),
           });
           logger.info('Affiliate referral recorded', {
@@ -522,7 +574,7 @@ export async function POST(request: Request) {
         analyticsDelivery,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Submit form error:', error);
     return NextResponse.json(
       { ok: false, error: 'Internal server error' },

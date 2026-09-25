@@ -12,23 +12,35 @@ import type { ServiceCase, ServiceLogo, ServiceQuote } from './narxlar-client';
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
-const TITLE = 'Narxlar — Baxtiyor Gaziyev';
-const DESCRIPTION =
-  'Branding xizmatlari narxlari: naming, logo, visual identity, brandbook, packaging, patent. Paketlar 20 mln so‘mdan.';
+const TITLES: Record<Locale, string> = {
+  uz: 'Narxlar — Baxtiyor Gaziyev',
+  ru: 'Цены на брендинг — Бахтиёр Газиев',
+  en: 'Branding Pricing — Bakhtiyor Gaziyev',
+  zh: '品牌服务价格 — 巴赫蒂约尔·加齐耶夫',
+};
+
+const DESCRIPTIONS: Record<Locale, string> = {
+  uz: 'Branding xizmatlari narxlari: naming, logo, visual identity, brandbook, packaging, patent. Paketlar 20 mln so‘mdan.',
+  ru: 'Цены на услуги брендинга: нейминг, логотип, фирменный стиль, брендбук, упаковка, патент. Пакеты от 20 млн сум.',
+  en: 'Branding service prices: naming, logo design, visual identity, brandbook, packaging, patent. Packages from 20M UZS.',
+  zh: '品牌服务价格：命名、标志设计、视觉识别、品牌手册、包装设计、商标。套餐 2000 万苏姆起。',
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
+  const title = TITLES[safeLang] || TITLES.uz;
+  const description = DESCRIPTIONS[safeLang] || DESCRIPTIONS.uz;
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title,
+    description,
     alternates: {
       canonical: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar'),
       languages: getLocaleAlternates(BASE_URL, '/narxlar'),
     },
     openGraph: {
-      title: TITLE,
-      description: DESCRIPTION,
+      title,
+      description,
       url: getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/narxlar'),
       siteName: 'Jon.Branding',
     },

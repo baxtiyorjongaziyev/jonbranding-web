@@ -2,6 +2,30 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | Code bazani mukammal (ideal) holatga keltirish, Dependabot, CodeQL va SEO to'liq yopildi
+
+**Qilingan ish:**
+1. **Dependabot & Zaifliklar (0 vulnerabilities):**
+   - Alert #82: Ortiqcha va ishlatilmayotgan `pnpm-lock.yaml` fayli repodan o'chirildi (barcha build va CI faqat npm ishlatadi).
+   - Alert #48: `package.json` overrides ga `"uuid": "^11.1.1"` qo'shildi va `package-lock.json` yangilandi. `npm audit` natijasi: **0 vulnerabilities**.
+2. **GitHub CodeQL Scanning tozalash:**
+   - 12-maydan qolib ketgan eskirgan va ogohlantirish berayotgan `/language:python` va `/language:actions` bo'yicha barcha 57 ta tahlillar GitHub API orqali to'liq o'chirildi. CodeQL faqat `javascript-typescript` konfiguratsiyasida to'liq yashil holatga keltirildi.
+3. **Arxitektura va Tozalash (PR #346, #347, #350, #345):**
+   - Ishlatilmayotgan 23 ta eski bo'lim fayllari (`src/components/sections/` dagi `at-*`, `hero.tsx`, `stats.tsx` va h.k.) butunlay o'chirildi.
+   - 7 ta komponent va utilitadan keraksiz `'use client'` olib tashlandi, Server Component'ga o'tkazildi (`src/lib/pricing.ts`, `haqimizda-client.tsx`, `aloqa-client.tsx`, `naming-client.tsx`, `packaging-client.tsx`, `GuaranteeBlock.tsx`, `button.tsx`).
+   - `src/components/icons/logo.tsx` va `src/app/[lang]/loading.tsx` dagi `<img>` teglari `next/image` ga almashtirildi (LCP va CLS optimallashuvi).
+   - `src/lib/validation/submit-form.ts`: Ariza formasi uchun qat'iy Zod validatsiya sxemasi (telefon, telegram, uzunlik chegaralari) yaratildi.
+   - `src/app/api/submit-form/route.ts`: Barcha `any` turlari bartaraf etilib, to'liq `LeadData` va `AmoCrmLeadResult` interfeyslariga o'tkazildi.
+4. **SEO va Ko'p tilli sarlavhalar (P1-7):**
+   - `/portfolio` va `/portfolio/[slug]` sahifalarida brend nomining ikki marta takrorlanishi (`... | Jon.Branding | Jon.Branding`) to'g'rilandi.
+   - `/narxlar` sahifasi metadata sarlavha va tavsiflari barcha 4 tilda (`uz`, `ru`, `en`, `zh`) mahalliylashtirildi.
+5. **QA & Build:**
+   - `npm run typecheck` ✓ (0 errors)
+   - `npx vitest run` ✓ (41 test fayli, barcha 303 test yashil)
+   - `npm run build` ✓ (165 sahifa 100% muvaffaqiyatli build bo'ldi)
+
+---
+
 ## 2026-09-25 | To'liq sayt auditi P0 muammolari to'liq bartaraf etildi
 
 **Qilingan ish:**

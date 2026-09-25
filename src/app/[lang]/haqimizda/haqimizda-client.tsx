@@ -1,4 +1,3 @@
-'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
 import AtRatings from '@/components/sections/at-ratings';

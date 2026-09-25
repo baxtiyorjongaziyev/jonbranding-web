@@ -16,10 +16,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
   const titles = {
-    uz: 'Muvaffaqiyatli Keyslar va Portfolio | Jon.Branding Agentligi',
-    ru: 'Портфолио и Кейсы | Брендинговое Агентство Jon.Branding',
-    en: 'Case Studies and Portfolio | Jon.Branding Agency',
-    zh: '成功案例与作品集 | Jon.Branding 品牌代理机构',
+    uz: 'Muvaffaqiyatli Keyslar va Portfolio',
+    ru: 'Портфолио и Кейсы',
+    en: 'Case Studies and Portfolio',
+    zh: '成功案例与作品集',
   };
 
   const descriptions = {

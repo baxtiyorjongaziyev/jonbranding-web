@@ -34,8 +34,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return { title: 'Keys topilmadi' };
   }
 
+  const cleanMetaTitle = project.metaTitle?.replace(/\s*\|\s*Jon\.Branding.*$/i, '');
+
   return {
-    title: project.metaTitle || `${project.title} | Jon.Branding Portfolio`,
+    title: cleanMetaTitle || `${project.title} — Keys`,
     description: project.metaDescription || project.description,
     keywords: project.seoKeywords?.length
       ? project.seoKeywords.join(', ')
