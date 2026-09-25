@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import NamingClient from './naming-client';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -12,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.namingPage?.metadata;
 
   return {
-    title: metadata?.title || "Neyming Xizmati",
+    title: pageTitle(metadata?.title || "Neyming Xizmati"),
     description: metadata?.description || "Professional brend neyming xizmatlari.",
     keywords: metadata?.keywords || "neyming, naming, brend nomi",
   };

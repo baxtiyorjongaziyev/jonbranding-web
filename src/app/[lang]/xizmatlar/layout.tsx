@@ -22,7 +22,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL('https://www.jonbranding.uz'),
-    title: t.title,
+    // Ichki sahifalar (logo-dizayni, brandbook...) ham "| Jon.Branding" olishi uchun
+    // shablon shu yerda qayta beriladi — oddiy satr sarlavha uni o'chirib qo'yadi.
+    title: { default: t.title, template: '%s | Jon.Branding' },
     description: t.description,
     keywords: t.keywords,
     openGraph: {

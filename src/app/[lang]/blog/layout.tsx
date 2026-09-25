@@ -32,7 +32,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
 
   return {
     metadataBase: new URL('https://www.jonbranding.uz'),
-    title: translations.title,
+    title: { default: translations.title, template: '%s | Jon.Branding' },
     description: translations.description,
     openGraph: {
       title: translations.title,
