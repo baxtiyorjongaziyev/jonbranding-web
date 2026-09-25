@@ -5,13 +5,9 @@ import { defaultLocale, getLocale, locales } from '@/lib/i18n/locale';
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Xavfsizlik header'lari faqat next.config.js'da (bitta manba). Bu yerda
+  // ham turli qiymatlar bilan qo'yilardi va redirect/rewrite javoblarida yo'q edi.
   const response = NextResponse.next();
-  response.headers.set('X-DNS-Prefetch-Control', 'on');
-  response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
 
   if (request.nextUrl.searchParams.get('__rewrite') === '1') {
     return response;
@@ -40,7 +36,8 @@ export function proxy(request: NextRequest) {
     // yo'qolib, reklama atributsiyasi buzilardi.
     const url = request.nextUrl.clone();
     url.pathname = pathname === '/uz' ? '/' : pathname.replace('/uz/', '/');
-    return NextResponse.redirect(url);
+    // Doimiy (308): /uz/... hech qachon kanonik manzil emas.
+    return NextResponse.redirect(url, 308);
   }
 
   const pathnameHasOtherLocale = locales
@@ -51,7 +48,13 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
-  const locale = getLocale(request);
+  // Til bo'yicha avtomatik redirect: foydalanuvchi tilni o'zi tanlagan bo'lsa
+  // (cookie) — har qanday sahifada; brauzer tiliga qarab esa faqat bosh sahifada.
+  // Aks holda o'zbekcha kanonik sahifalar en/ru brauzerli mehmonlar va
+  // crawler'lar uchun boshqa tilga "qochib" ketardi.
+  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  const hasChosenLocale = locales.includes(cookieLocale as (typeof locales)[number]);
+  const locale = hasChosenLocale || pathname === '/' ? getLocale(request) : defaultLocale;
 
   if (locale !== defaultLocale) {
     request.nextUrl.pathname = `/${locale}${pathname === '/' ? '' : pathname}`;

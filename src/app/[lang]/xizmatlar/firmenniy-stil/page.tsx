@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import CorporateClient from './corporate-client';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -13,7 +14,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.corporateStylePage?.metadata;
 
   return {
-    title: metadata?.title || "Firma Uslubi Yaratish | Korporativ Aydentika | Jon.Branding",
+    title: pageTitle(metadata?.title || "Firma Uslubi Yaratish | Korporativ Aydentika"),
     description: metadata?.description || "Brendingizni tanitadigan yaxlit korporativ uslub va vizual tizim yaratamiz.",
     keywords: metadata?.keywords || "firma uslubi, korporativ aydentika, brend uslubi, korporativ dizayn",
   };

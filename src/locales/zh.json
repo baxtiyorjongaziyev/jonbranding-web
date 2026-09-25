@@ -133,7 +133,7 @@
   },
   "brandbookPage": {
     "metadata": {
-      "title": "专业品牌手册开发 | 乌兹别克斯坦品牌设计代理机构 | Jon.Branding",
+      "title": "专业品牌手册开发 | 乌兹别克斯坦品牌设计代理机构",
       "description": "品牌手册是您企业的视觉宪法。我们在塔什干为您创建全面的品牌规范，确保品牌在乌兹别克斯坦市场的一致性并节省营销成本。",
       "keywords": "乌兹别克斯坦品牌手册, 塔什干品牌设计, 企业形象识别系统, 品牌指南开发, 中乌贸易品牌咨询"
     },
@@ -230,7 +230,7 @@
   },
   "termsPage": {
     "metadata": {
-      "title": "服务条款 | Jon.Branding",
+      "title": "服务条款",
       "description": "Jon.Branding 机构服务使用条款 - 透明、专业的合作。"
     },
     "title": "服务条款",
@@ -432,6 +432,8 @@
     "error": "连接错误。",
     "welcome": "您好！我是 Oisha — Jon Branding 的智能助理。今天我能为您做些什么？",
     "ack": "您的消息已发送给我们的策略师。他们将很快在这里回复您。",
+    "offlineAskContact": "谢谢，我们已收到您的问题！请在此留下您的电话号码或 Telegram，以便我们的专家回复您。",
+    "offlineThanks": "谢谢！我们已收到您的联系方式，专家会尽快与您联系。",
     "thinking": "Oisha 正在思考...",
     "openButtonAriaLabel": "打开 Oisha 聊天",
     "closeButtonAriaLabel": "关闭 Oisha 聊天",
@@ -907,7 +909,7 @@
   },
   "quiz": {
     "metadata": {
-      "title": "迷你测试：您的业务准备好进行品牌塑造了吗？ | Jon.Branding",
+      "title": "迷你测试：您的业务准备好进行品牌塑造了吗？",
       "description": "回答几个简单的问题，了解您的业务对品牌塑造的准备程度及其优势和劣势。"
     },
     "exampleTitle": "世界品牌示例：",
@@ -1205,7 +1207,7 @@
   },
   "patentCalculatorPage": {
     "metadata": {
-      "title": "商标注册计算器 | Jon.Branding",
+      "title": "商标注册计算器",
       "description": "计算与乌兹别克斯坦商标注册相关的概算成本（国家规费和服务费）。"
     },
     "title": "商标注册计算器",
@@ -1313,7 +1315,7 @@
   },
   "packagingPage": {
     "metadata": {
-      "title": "乌兹别克斯坦包装设计服务 | Jon.Branding",
+      "title": "乌兹别克斯坦包装设计服务",
       "description": "我们不仅仅是创造漂亮的包装; 我们还创造一个强大的营销工具来销售您的产品. 我们在乌兹别克斯坦的包装设计机构将帮助您的品牌从竞争对手中脱颖而出并赢得买家的喜爱。"
     },
     "title": "包装设计开发",
@@ -1342,7 +1344,7 @@
   },
   "servicesPage": {
     "metadata": {
-      "title": "品牌服务与价格 | 塔什干专业品牌设计机构 | Jon.Branding",
+      "title": "品牌服务与价格 | 塔什干专业品牌设计机构",
       "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
     },
     "packageBuilder": {
@@ -1999,7 +2001,7 @@
   },
   "onlineBrief": {
     "meta": {
-      "title": "在线智能品牌简报 - Jon Branding",
+      "title": "在线智能品牌简报",
       "description": "填写您的品牌智能简报，立即启动项目。"
     },
     "welcome": {
@@ -2092,7 +2094,7 @@
   },
   "carWrapPage": {
     "metadata": {
-      "title": "���意汽车贴膜设计服务 | Jon Branding",
+      "title": "���意汽车贴膜设计服务",
       "description": "商务车辆的专业汽车贴膜设计：徽标、标语、联系方式和符合品牌风格的创意广告设计。",
       "keywords": [
         "汽车贴膜设计",

@@ -30,7 +30,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const safeLang = VALID_LOCALES.includes(lang as Locale) ? (lang as Locale) : 'uz';
   const m = metaByLang[safeLang];
   return {
-    title: m.title,
+    // Sarlavhada brend bor — shablon uni ikkinchi marta qo'shmasin.
+    title: { absolute: m.title },
     description: m.description,
     openGraph: {
       title: m.title,

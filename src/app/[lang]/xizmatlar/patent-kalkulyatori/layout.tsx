@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import type { Locale } from '@/lib/i18n/locale';
-import { getPageAlternates } from '@/lib/seo';
+import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 type Props = { children: ReactNode; params: Promise<{ lang: string }> };
 
@@ -17,7 +17,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   const title = titles[safeLang] || titles.uz;
   const alternates = getPageAlternates(safeLang, '/xizmatlar/patent-kalkulyatori');
   return {
-    title,
+    title: pageTitle(title),
     alternates,
     // Ota /xizmatlar layout'ining openGraph'i (url va sarlavha) meros o'tmasligi uchun.
     openGraph: {

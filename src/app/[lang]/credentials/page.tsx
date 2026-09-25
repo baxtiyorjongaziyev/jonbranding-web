@@ -8,7 +8,7 @@ import type { CredCase, CredLogo, CredQuote } from './credentials-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
-const TITLE = 'Credentials — Jon Branding';
+const TITLE = 'Credentials';
 const DESCRIPTION =
   'Jon Branding agentligi taqdimoti: ishlar, xizmatlar, narxlar va ish jarayoni bitta sahifada.';
 

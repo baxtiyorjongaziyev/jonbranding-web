@@ -1,31 +1,14 @@
-'use client';
-
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { ShieldCheck, Clock, Users } from 'lucide-react';
 import TrademarkCalculator from '@/components/sections/trademark-calculator';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Skeleton } from '@/components/ui/skeleton';
 
-const PatentLandingPage: FC = () => {
-  const params = useParams();
-  const lang = params.lang as string;
-  const [translations, setTranslations] = useState<any>(null);
+type Props = { params: Promise<{ lang: string }> };
 
-  useEffect(() => {
-    if (lang) {
-      getDictionary(lang as Locale).then((dict) => setTranslations(dict.patentCalculatorPage));
-    }
-  }, [lang]);
-
-  if (!translations) {
-    return (
-      <div className="min-h-screen pt-16">
-        <Skeleton className="w-full h-screen" />
-      </div>
-    );
-  }
-
+// Server komponent: h1 va matn server HTML'ida bo'ladi (avval faqat skeleton edi).
+export default async function PatentLandingPage({ params }: Props) {
+  const { lang } = await params;
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const translations = (await getDictionary(safeLang)).patentCalculatorPage;
   const landing = translations.landing || {};
 
   return (
@@ -61,6 +44,4 @@ const PatentLandingPage: FC = () => {
       </section>
     </div>
   );
-};
-
-export default PatentLandingPage;
+}
