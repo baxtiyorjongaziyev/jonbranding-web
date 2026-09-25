@@ -132,6 +132,7 @@ const contentSecurityPolicy = [
 ].join('; ');
 
 const nextConfig = {
+  poweredByHeader: false,
   typescript: {
     ignoreBuildErrors: false,
   },

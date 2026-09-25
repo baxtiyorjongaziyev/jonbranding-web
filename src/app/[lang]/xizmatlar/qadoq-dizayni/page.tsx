@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.packagingPage?.metadata;
 
   return {
-    title: metadata?.title || "Qadoq Dizayni | Professional Mahsulot Dizayni | Jon.Branding",
+    title: metadata?.title || "Qadoq Dizayni | Professional Mahsulot Dizayni",
     description: metadata?.description || "Mahsulotingizni javonda ajratib turadigan professional qadoq dizaynlari yaratamiz.",
     keywords: metadata?.keywords || "qadoq dizayn, qadoqlash, mahsulot dizayni, brending, packaging design",
   };

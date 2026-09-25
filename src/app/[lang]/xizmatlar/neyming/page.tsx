@@ -12,7 +12,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.namingPage?.metadata;
 
   return {
-    title: metadata?.title || "Neyming Xizmati | Jon.Branding",
+    title: metadata?.title || "Neyming Xizmati",
     description: metadata?.description || "Professional brend neyming xizmatlari.",
     keywords: metadata?.keywords || "neyming, naming, brend nomi",
   };

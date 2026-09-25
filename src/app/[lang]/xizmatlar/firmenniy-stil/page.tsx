@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.corporateStylePage?.metadata;
 
   return {
-    title: metadata?.title || "Firma Uslubi Yaratish | Korporativ Aydentika | Jon.Branding",
+    title: metadata?.title || "Firma Uslubi Yaratish | Korporativ Aydentika",
     description: metadata?.description || "Brendingizni tanitadigan yaxlit korporativ uslub va vizual tizim yaratamiz.",
     keywords: metadata?.keywords || "firma uslubi, korporativ aydentika, brend uslubi, korporativ dizayn",
   };

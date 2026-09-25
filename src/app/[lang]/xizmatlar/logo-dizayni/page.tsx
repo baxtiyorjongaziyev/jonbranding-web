@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.logoDesignPage?.metadata;
 
   return {
-    title: metadata?.title || "Logotip Dizayni | Professional Logo Yaratish | Jon.Branding",
+    title: metadata?.title || "Logotip Dizayni | Professional Logo Yaratish",
     description: metadata?.description || "Biznesingiz uchun unikal va natijador logotiplar yaratamiz.",
     keywords: metadata?.keywords || "logo dizayn, logotip yaratish, brending, aydentika",
   };

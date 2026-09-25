@@ -4,6 +4,7 @@ import {
   identifyAiReferrer,
   ORGANIZATION_ID,
   getPageAlternates,
+  stripBrandSuffix,
   getSiteEntityGraph,
 } from './seo';
 
@@ -47,5 +48,22 @@ describe('SEO entity and AI referral helpers', () => {
     expect(founder).toEqual(
       expect.objectContaining({ worksFor: { '@id': ORGANIZATION_ID } }),
     );
+  });
+});
+
+describe('stripBrandSuffix', () => {
+  it.each([
+    ['Revo | Jon.Branding Portfolio', 'Revo'],
+    ['R Studio uchun premium logo dizayni | Jon Branding', 'R Studio uchun premium logo dizayni'],
+    ['Prime Fit Brend Identikasi | Jon Branding tomonidan', 'Prime Fit Brend Identikasi'],
+    ['Brendbuk yaratish | Jon.Branding Agentligi', 'Brendbuk yaratish'],
+    ['Credentials — Jon Branding', 'Credentials'],
+    ['Narxlar — Baxtiyor Gaziyev', 'Narxlar — Baxtiyor Gaziyev'],
+  ])('%s → %s', (input, expected) => {
+    expect(stripBrandSuffix(input)).toBe(expected);
+  });
+
+  it('keeps a title that is only the brand', () => {
+    expect(stripBrandSuffix('Jon.Branding')).toBe('Jon.Branding');
   });
 });

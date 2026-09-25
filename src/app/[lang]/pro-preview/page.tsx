@@ -126,7 +126,7 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Jon Pro Preview | Jon.Branding',
+  title: 'Jon Pro Preview',
   description: 'Jon.Branding uchun premium light/dark redesign preview.',
   robots: {
     index: false,

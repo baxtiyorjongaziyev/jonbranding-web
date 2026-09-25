@@ -13,7 +13,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const dict = await getDictionary(lang as Locale);
   
   const t = dict.servicesPage?.metadata || {
-      title: "Xizmatlar | Jon.Branding",
+      title: "Xizmatlar",
       description: "Biznesingiz uchun professional brending xizmatlari.",
       keywords: "branding services"
   };

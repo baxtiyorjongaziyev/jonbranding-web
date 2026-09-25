@@ -14,6 +14,17 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
  * `[lang]/layout.tsx` canonical bermaydi, shuning uchun indekslanadigan har
  * bir sahifa buni o'zi chaqirishi kerak.
  */
+const BRAND_SUFFIX = /(\s*[|—–-]\s*Jon[ .]?Branding(\s+(Agentligi|Agency|Portfolio|tomonidan))?)+\s*$/i;
+
+/**
+ * `[lang]/layout.tsx` shabloni har sarlavhaga "| Jon.Branding" qo'shadi.
+ * Sarlavhaning o'zida ham brend bo'lsa, u ikki marta chiqardi — shu yerda olib tashlanadi.
+ */
+export function stripBrandSuffix(title: string): string {
+  const stripped = title.replace(BRAND_SUFFIX, '').trim();
+  return stripped || title;
+}
+
 export function getPageAlternates(locale: Locale, path = '') {
   return {
     canonical: getLocalizedAbsoluteUrl(SITE_URL, locale, path),

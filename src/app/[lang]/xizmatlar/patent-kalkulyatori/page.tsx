@@ -1,26 +1,15 @@
-'use client';
-
-import { FC, useEffect, useState } from 'react';
 import { Separator } from '@/components/ui/separator';
 import TrademarkCalculator from '@/components/sections/trademark-calculator';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { useParams } from 'next/navigation';
-import { Skeleton } from '@/components/ui/skeleton';
 
-const PatentCalculatorPage: FC = () => {
-  const params = useParams();
-  const lang = params.lang as string;
-  const [translations, setTranslations] = useState<any>(null);
+type Props = { params: Promise<{ lang: string }> };
 
-  useEffect(() => {
-    if (lang) {
-      getDictionary(lang as Locale).then(dict => setTranslations(dict.patentCalculatorPage));
-    }
-  }, [lang]);
-
-  if (!translations) {
-    return <div className="flex-grow pt-20"><Skeleton className="w-full h-screen" /></div>;
-  }
+// Server komponent: sarlavha va matn HTML'ning o'zida keladi. Avval lug'at
+// useEffect'da yuklanardi va server faqat bo'sh skeleton qaytarardi (h1 yo'q edi).
+export default async function PatentCalculatorPage({ params }: Props) {
+  const { lang } = await params;
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const translations = (await getDictionary(safeLang)).patentCalculatorPage;
 
   return (
     <div className="flex-grow pt-20">
@@ -43,6 +32,4 @@ const PatentCalculatorPage: FC = () => {
       </section>
     </div>
   );
-};
-
-export default PatentCalculatorPage;
+}

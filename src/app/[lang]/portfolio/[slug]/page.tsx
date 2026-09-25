@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { fetchPortfolioBySlug } from '@/lib/data/portfolio';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
-import { getPageAlternates } from '@/lib/seo';
+import { getPageAlternates, stripBrandSuffix } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -34,7 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return { title: 'Keys topilmadi' };
   }
 
-  const cleanMetaTitle = project.metaTitle?.replace(/\s*\|\s*Jon\.Branding.*$/i, '');
+  const cleanMetaTitle = project.metaTitle ? stripBrandSuffix(project.metaTitle) : '';
 
   return {
     title: cleanMetaTitle || `${project.title} — Keys`,
