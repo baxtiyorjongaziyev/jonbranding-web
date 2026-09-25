@@ -26,6 +26,12 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-25 | Ochiq PRlar yakunlandi
+
+**Qilingan ish:** PR #342 yangi `main` bilan birlashtirilib, xizmatlarning tildan mustaqil ID tuzatishlari saqlandi va merge qilindi. PR #348 keyingi auditda o'chirilgan eski Atelier komponentlarini qayta kiritgani uchun eskirgan deb yopildi. PR #352 yangi `main` bilan yangilanib, yakuniy tekshiruvga tayyorlandi.
+
+---
+
 ## 2026-09-25 | PR #342 main konflikti hal qilindi
 
 **Qilingan ish:** i18n xizmat ID tuzatishlari `main`dagi yangi Brand Strategy xizmati bilan birlashtirildi. Brand Strategy uchun `brand-strategy` ID qo'shildi, kategoriya xaritasi ID asosida saqlandi va tasdiqlangan narxlar matni qoldirildi.
