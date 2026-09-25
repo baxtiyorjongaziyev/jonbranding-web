@@ -12,22 +12,22 @@ const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
 const metaByLang: Record<Locale, { title: string; description: string; keywords: string }> = {
   uz: {
-    title: 'Xizmatlar | Jon.Branding',
+    title: 'Xizmatlar',
     description: 'Jon.Branding xizmatlari: neyming, logotip, brend uslubi, brendbook, qadoq va raqamli brend yechimlari.',
     keywords: 'xizmatlar, neyming, logo dizayni, brend uslubi, brendbook, qadoq dizayni, Jon Branding',
   },
   ru: {
-    title: 'Услуги | Jon.Branding',
+    title: 'Услуги',
     description: 'Услуги Jon.Branding: нейминг, логотип, фирменный стиль, брендбук, упаковка и digital branding.',
     keywords: 'услуги, нейминг, логотип, фирменный стиль, брендбук, упаковка, Jon Branding',
   },
   en: {
-    title: 'Services | Jon.Branding',
+    title: 'Services',
     description: 'Jon.Branding services: naming, logo design, brand identity, brandbook, packaging and digital brand systems.',
     keywords: 'services, naming, logo design, brand identity, brandbook, packaging, Jon Branding',
   },
   zh: {
-    title: '服务 | Jon.Branding',
+    title: '服务',
     description: 'Jon.Branding 服务：命名、标志设计、品牌识别、品牌手册、包装与数字品牌系统。',
     keywords: '服务, 命名, 标志设计, 品牌识别, 品牌手册, 包装, Jon Branding',
   },

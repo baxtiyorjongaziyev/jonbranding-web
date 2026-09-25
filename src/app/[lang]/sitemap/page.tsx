@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getPageAlternates } from '@/lib/seo';
+import { getPageAlternates, pageTitle } from '@/lib/seo';
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
@@ -20,7 +20,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     en: 'Sitemap | Jon.Branding',
     zh: '网站地图 | Jon.Branding',
   };
-  return { title: titles[safeLang] || titles.uz, alternates: getPageAlternates(safeLang, '/sitemap') };
+  return { title: pageTitle(titles[safeLang] || titles.uz), alternates: getPageAlternates(safeLang, '/sitemap') };
 }
 
 function getSitemapBlogPosts(lang: string) {

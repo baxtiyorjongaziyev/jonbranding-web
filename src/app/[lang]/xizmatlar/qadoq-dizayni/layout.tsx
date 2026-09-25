@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   children: ReactNode;
@@ -21,7 +22,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL('https://www.jonbranding.uz'),
-    title: t.title,
+    title: pageTitle(t.title),
     description: t.description,
     keywords: t.keywords,
     openGraph: {

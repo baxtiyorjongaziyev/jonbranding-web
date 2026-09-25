@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { slugify } from '@/lib/slug';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
@@ -41,14 +42,6 @@ type QueuedGroup = {
   claimedAt?: number | null;
 };
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 96);
-}
 
 /** Drive papka nomlari post nomiga aniq mos kelmaydi, shuning uchun yumshoq solishtirish. */
 function normalizeForMatch(value: string) {

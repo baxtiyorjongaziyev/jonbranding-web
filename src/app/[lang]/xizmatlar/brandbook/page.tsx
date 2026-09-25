@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import BrandbookClient from './brandbook-client';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -13,7 +14,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.brandbookPage?.metadata;
 
   return {
-    title: metadata?.title || "Brendbuk Yaratish | Professional Brend Qo'llanmasi | Jon.Branding",
+    title: pageTitle(metadata?.title || "Brendbuk Yaratish | Professional Brend Qo'llanmasi"),
     description: metadata?.description || "Brendingiz izchilligini ta'minlovchi professional brendbuklar yaratamiz.",
     keywords: metadata?.keywords || "brandbook, brendbuk, gaydlayn, brend qo'llanmasi, aydentika",
   };

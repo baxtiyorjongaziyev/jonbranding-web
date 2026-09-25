@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import type { Locale } from '@/lib/i18n/locale';
-import { getPageAlternates } from '@/lib/seo';
+import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 type Props = { children: ReactNode; params: Promise<{ lang: string }> };
 
@@ -21,7 +21,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     zh: '品牌核查清单 — 通过12项标准快速诊断您的业务：命名、标志、包装和法律保护。',
   };
   return {
-    title: titles[safeLang] || titles.uz,
+    title: pageTitle(titles[safeLang] || titles.uz),
     description: descriptions[safeLang] || descriptions.uz,
     alternates: getPageAlternates(safeLang, '/checklist'),
   };

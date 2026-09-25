@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import CarWrapDesignClient from './car-wrap-design-client';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       : `https://www.jonbranding.uz/${lang}/xizmatlar/car-wrap-design`;
 
   return {
-    title: metadata.title,
+    title: pageTitle(metadata.title),
     description: metadata.description,
     keywords: metadata.keywords,
     alternates: {

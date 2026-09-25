@@ -9,6 +9,7 @@ import {
   isPromoCodeTaken,
 } from '@/lib/affiliate/store';
 import { logger } from '@/lib/logger';
+import { escapeTelegramHtml } from '@/lib/telegram-html';
 
 function cleanSecret(value: string | undefined) {
   return String(value || '').replace(/^\uFEFF/, '').trim();
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
       // receive that partner's private dashboard token. Notify the existing
       // owner out-of-band instead, and tell the caller they're already registered.
       await notifyAdmin(
-        `<b>Hamkor qayta ro'yxatdan o'tishga urindi</b>\nPromokod: <code>${existing.promoCode}</code>\nTelefon: ${phone}\nHavolani hamkorga admin panel orqali yuboring.`,
+        `<b>Hamkor qayta ro'yxatdan o'tishga urindi</b>\nPromokod: <code>${escapeTelegramHtml(existing.promoCode)}</code>\nTelefon: ${escapeTelegramHtml(phone)}\nHavolani hamkorga admin panel orqali yuboring.`,
       );
       return NextResponse.json({ ok: true, alreadyRegistered: true });
     }
@@ -76,8 +77,8 @@ export async function POST(request: Request) {
     }
 
     await notifyAdmin(
-      `<b>Yangi hamkor</b>\nIsm: ${fullName}\nPromokod: <code>${created.promoCode}</code>\nTelefon: ${phone}${
-        telegramUsername ? `\nTelegram: @${telegramUsername}` : ''
+      `<b>Yangi hamkor</b>\nIsm: ${escapeTelegramHtml(fullName)}\nPromokod: <code>${escapeTelegramHtml(created.promoCode)}</code>\nTelefon: ${escapeTelegramHtml(phone)}${
+        telegramUsername ? `\nTelegram: @${escapeTelegramHtml(telegramUsername)}` : ''
       }`,
     );
 

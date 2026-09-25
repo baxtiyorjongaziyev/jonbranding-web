@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PackagingClient from './packaging-client';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
+import { pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -13,7 +14,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const metadata = dictionary.packagingPage?.metadata;
 
   return {
-    title: metadata?.title || "Qadoq Dizayni | Professional Mahsulot Dizayni | Jon.Branding",
+    title: pageTitle(metadata?.title || "Qadoq Dizayni | Professional Mahsulot Dizayni"),
     description: metadata?.description || "Mahsulotingizni javonda ajratib turadigan professional qadoq dizaynlari yaratamiz.",
     keywords: metadata?.keywords || "qadoq dizayn, qadoqlash, mahsulot dizayni, brending, packaging design",
   };

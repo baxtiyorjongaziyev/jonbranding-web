@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { getPageAlternates } from '@/lib/seo';
+import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 interface PrivacyPageProps {
   params: Promise<{ lang: string }>;
@@ -23,7 +23,7 @@ export async function generateMetadata(props: PrivacyPageProps): Promise<Metadat
   };
   const alternates = getPageAlternates(safeLang, '/privacy');
   return {
-    title: titles[safeLang] || titles.uz,
+    title: pageTitle(titles[safeLang] || titles.uz),
     description: descs[safeLang] || descs.uz,
     alternates,
     openGraph: { title: titles[safeLang], description: descs[safeLang], url: alternates.canonical, images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }] },

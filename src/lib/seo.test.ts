@@ -4,6 +4,8 @@ import {
   identifyAiReferrer,
   ORGANIZATION_ID,
   getPageAlternates,
+  stripBrandSuffix,
+  pageTitle,
   getSiteEntityGraph,
 } from './seo';
 
@@ -47,5 +49,38 @@ describe('SEO entity and AI referral helpers', () => {
     expect(founder).toEqual(
       expect.objectContaining({ worksFor: { '@id': ORGANIZATION_ID } }),
     );
+  });
+});
+
+describe('stripBrandSuffix', () => {
+  it.each([
+    ['Revo | Jon.Branding Portfolio', 'Revo'],
+    ['R Studio uchun premium logo dizayni | Jon Branding', 'R Studio uchun premium logo dizayni'],
+    ['Prime Fit Brend Identikasi | Jon Branding tomonidan', 'Prime Fit Brend Identikasi'],
+    ['Brendbuk yaratish | Jon.Branding Agentligi', 'Brendbuk yaratish'],
+    ['Credentials — Jon Branding', 'Credentials'],
+    ['Narxlar — Baxtiyor Gaziyev', 'Narxlar — Baxtiyor Gaziyev'],
+  ])('%s → %s', (input, expected) => {
+    expect(stripBrandSuffix(input)).toBe(expected);
+  });
+
+  it('keeps a title that is only the brand', () => {
+    expect(stripBrandSuffix('Jon.Branding')).toBe('Jon.Branding');
+  });
+});
+
+describe('pageTitle', () => {
+  it('leaves the brand to the layout template when the title has none', () => {
+    expect(pageTitle('Maxfiylik Siyosati | Jon.Branding')).toBe('Maxfiylik Siyosati');
+    expect(pageTitle('Logotip dizayni')).toBe('Logotip dizayni');
+  });
+
+  it('opts out of the template when the brand sits mid-title', () => {
+    expect(pageTitle('Разработка Брендбука | Агентство Jon.Branding')).toEqual({
+      absolute: 'Разработка Брендбука | Агентство Jon.Branding',
+    });
+    expect(pageTitle('Feel it Logo Dizayni | Jon Branding - SAT Tayyorlovi')).toEqual({
+      absolute: 'Feel it Logo Dizayni | Jon Branding - SAT Tayyorlovi',
+    });
   });
 });

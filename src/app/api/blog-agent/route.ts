@@ -1,7 +1,9 @@
+import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
 import { safeCompare } from '@/lib/security';
 import { logger } from '@/lib/logger';
+import { toSlug } from '@/lib/slug';
 import {
   getSanityWriteDiagnostic,
   getSanityWriteToken,
@@ -29,14 +31,6 @@ function verifyAuth(req: NextRequest): boolean {
   return isValidCronSecret || isValidAmocrmCronSecret;
 }
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 96);
-}
 
 // Generate Blog Post Content with Gemini 2.5 Flash
 async function generateBlogPost(topic: string, language: string) {
@@ -78,11 +72,19 @@ IMPORTANT:
   return JSON.parse(jsonMatch[0]);
 }
 
-// Simple Unsplash fetcher for cover image
-async function fetchUnsplashImage(query: string): Promise<string | null> {
-  // If Unsplash API key exists, use it. Otherwise, return a fallback Unsplash source URL.
-  // This URL automatically redirects to a random image matching the query.
-  return `https://source.unsplash.com/1600x900/?${encodeURIComponent(query)}`;
+
+async function uniquePostSlug(
+  sanityClient: { fetch: <T>(query: string, params: Record<string, unknown>) => Promise<T> },
+  base: string,
+): Promise<string> {
+  for (let attempt = 1; attempt <= 20; attempt += 1) {
+    const candidate = attempt === 1 ? base : `${base}-${attempt}`;
+    const taken = await sanityClient.fetch<number>('count(*[_type == "post" && slug.current == $slug])', {
+      slug: candidate,
+    });
+    if (!taken) return candidate;
+  }
+  return `${base}-${Date.now()}`;
 }
 
 export async function GET(req: NextRequest) {
@@ -125,17 +127,16 @@ export async function GET(req: NextRequest) {
     const languages = ['uz', 'ru', 'en', 'zh'];
     const results = [];
     
-    // Generate a unique slug based on the English version or random string to link them
-    const baseSlug = `blog-${Date.now()}`;
-
-    // Get an image
-    const imageUrl = await fetchUnsplashImage("branding,design");
 
     for (const lang of languages) {
       logger.info(`[blog-agent] Generating article for topic: ${topic} in ${lang}`);
       const generated = await generateBlogPost(topic, lang);
       
-      const slug = lang === 'en' ? slugify(generated.title) : `${slugify(generated.title)}-${lang}`;
+      // Kirill sarlavha lotinga o'giriladi, xitoycha — mavzudan; takror slug'ga raqam qo'shiladi.
+      const slug = await uniquePostSlug(
+        sanityWriteClient,
+        lang === 'en' ? toSlug(generated.title, topic) : `${toSlug(generated.title, topic)}-${lang}`,
+      );
 
       // Convert Markdown to Sanity Portable Text blocks (basic mapping)
       // For a robust solution, use markdown-to-portable-text library. Here we do a basic split by paragraph.
@@ -174,13 +175,14 @@ export async function GET(req: NextRequest) {
       };
 
       logger.info(`[blog-agent] Saving to Sanity: ${slug}`);
-      const doc = await sanityWriteClient.create(payload);
+      // Qoralama sifatida saqlanadi: AI matni odam ko'rib chiqmaguncha saytga chiqmaydi.
+      const doc = await sanityWriteClient.create({ _id: `drafts.${randomUUID()}`, ...payload });
       results.push({ lang, id: doc._id, title: generated.title });
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Successfully generated and published blog posts.',
+      message: "Qoralama maqolalar yaratildi. Sanity Studio'da ko'rib chiqib e'lon qiling.",
       topic,
       results
     });

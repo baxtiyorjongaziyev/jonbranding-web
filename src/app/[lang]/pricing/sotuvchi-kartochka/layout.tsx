@@ -15,22 +15,22 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   let t;
   if (isRu) {
     t = {
-      title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon | Jon Branding',
+      title: 'Продающий дизайн карточек для Uzum, Yandex Market, WB и Ozon',
       description: 'Профессиональный дизайн карточек товаров. Тарифы START, PRO и PREMIUM для маркетплейсов.',
     }
   } else if (isEn) {
     t = {
-      title: 'Sales-Driven Card Design for Uzum, Yandex Market, WB & Ozon | Jon Branding',
+      title: 'Sales-Driven Card Design for Uzum, Yandex Market, WB & Ozon',
       description: 'Professional product card design that increases sales. Explore our START, PRO, and PREMIUM plans.',
     }
   } else if (isZh) {
     t = {
-      title: 'Uzum, Yandex Market, WB 和 Ozon 的销售卡设计 | Jon Branding',
+      title: 'Uzum, Yandex Market, WB 和 Ozon 的销售卡设计',
       description: '提高销量的专业产品卡设计。探索并订购适用于在线市场的 START、PRO 和 PREMIUM 计划。',
     }
   } else {
     t = {
-      title: 'Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni | Jon Branding',
+      title: 'Uzum, Yandex Market, WB va Ozon uchun sotuvchi kartochka dizayni',
       description: 'Sotuvlarni oshiradigan professional mahsulot kartochkasi dizayni.',
     }
   }

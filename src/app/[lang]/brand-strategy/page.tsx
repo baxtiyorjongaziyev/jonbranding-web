@@ -10,7 +10,7 @@ const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 const ROUTE = '/brand-strategy';
 
-const TITLE = 'Brand Strategy xizmati — Jon Branding';
+const TITLE = 'Brand Strategy xizmati';
 const DESCRIPTION =
   'Biznes uchun positioning, auditoriya, value proposition, differentiation va brand platform ishlab chiqish. Jon Branding Brand Strategy xizmati.';
 

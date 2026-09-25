@@ -7,10 +7,6 @@
       "schedule": "0 1 * * *"
     },
     {
-      "path": "/api/blog-agent",
-      "schedule": "0 8 * * *"
-    },
-    {
       "path": "/api/portfolio-telegram",
       "schedule": "0 9 * * *"
     }
