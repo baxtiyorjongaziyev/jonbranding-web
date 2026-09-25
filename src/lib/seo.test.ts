@@ -3,8 +3,30 @@ import {
   FOUNDER_ID,
   identifyAiReferrer,
   ORGANIZATION_ID,
+  getPageAlternates,
   getSiteEntityGraph,
 } from './seo';
+
+describe('getPageAlternates', () => {
+  it('points the canonical at the page itself, without a prefix for Uzbek', () => {
+    expect(getPageAlternates('uz', '/portfolio/revo').canonical).toBe(
+      'https://www.jonbranding.uz/portfolio/revo',
+    );
+    expect(getPageAlternates('ru', '/portfolio/revo').canonical).toBe(
+      'https://www.jonbranding.uz/ru/portfolio/revo',
+    );
+  });
+
+  it('lists every locale plus x-default for hreflang', () => {
+    expect(getPageAlternates('en', '/privacy').languages).toEqual({
+      uz: 'https://www.jonbranding.uz/privacy',
+      ru: 'https://www.jonbranding.uz/ru/privacy',
+      en: 'https://www.jonbranding.uz/en/privacy',
+      zh: 'https://www.jonbranding.uz/zh/privacy',
+      'x-default': 'https://www.jonbranding.uz/privacy',
+    });
+  });
+});
 
 describe('SEO entity and AI referral helpers', () => {
   it('recognizes supported AI search referrals without accepting lookalike domains', () => {

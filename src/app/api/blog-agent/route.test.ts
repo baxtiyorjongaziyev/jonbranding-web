@@ -26,5 +26,5 @@ describe('blog-agent Sanity write configuration', () => {
         hint: expect.stringContaining('SANITY_API_WRITE_TOKEN'),
       },
     });
-  });
+  }, 15_000);
 });

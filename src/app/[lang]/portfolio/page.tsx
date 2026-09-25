@@ -3,6 +3,7 @@ import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PortfolioListClient from '@/components/portfolio-list-client';
+import { getPageAlternates } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -28,13 +29,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     zh: "中亚市场领导者的真实品牌、包装和标志设计案例研究，具有经证实的投资回报率。",
   };
 
+  const alternates = getPageAlternates(safeLang, '/portfolio');
+
   return {
     title: titles[safeLang] || titles.uz,
     description: descriptions[safeLang] || descriptions.uz,
+    alternates,
     openGraph: {
       title: titles[safeLang] || titles.uz,
       description: descriptions[safeLang] || descriptions.uz,
       type: 'website',
+      url: alternates.canonical,
       locale: safeLang === 'uz' ? 'uz_UZ' : safeLang === 'ru' ? 'ru_RU' : safeLang === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'Jon.Branding',
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630, alt: 'Jon Branding Portfolio' }],

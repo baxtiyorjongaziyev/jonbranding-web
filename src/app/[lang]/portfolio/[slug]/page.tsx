@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { fetchPortfolioBySlug } from '@/lib/data/portfolio';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
+import { getPageAlternates } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -39,6 +40,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     keywords: project.seoKeywords?.length
       ? project.seoKeywords.join(', ')
       : `${project.client}, brending, keys, dizayn, case study, premium branding`,
+    alternates: getPageAlternates(safeLang, `/portfolio/${slug}`),
   };
 }
 

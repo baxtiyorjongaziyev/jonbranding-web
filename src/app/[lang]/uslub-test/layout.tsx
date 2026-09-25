@@ -16,6 +16,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     metadataBase: new URL('https://www.jonbranding.uz'),
     title,
     description,
+    robots: { index: false, follow: false },
     openGraph: {
       title,
       description,

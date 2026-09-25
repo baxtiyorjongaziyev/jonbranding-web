@@ -2,11 +2,19 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 export async function createClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+
+  if (!url || !key) {
+    return null;
+  }
+
   const cookieStore = await cookies()
 
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  try {
+    return createServerClient(
+      url,
+      key,
     {
       cookies: {
         getAll() {
@@ -26,4 +34,8 @@ export async function createClient() {
       },
     }
   )
+  } catch (err) {
+    console.warn('Failed to initialize Supabase server client:', err);
+    return null;
+  }
 }

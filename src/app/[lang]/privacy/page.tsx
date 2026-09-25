@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getPageAlternates } from '@/lib/seo';
 
 interface PrivacyPageProps {
   params: Promise<{ lang: string }>;
@@ -20,10 +21,12 @@ export async function generateMetadata(props: PrivacyPageProps): Promise<Metadat
     en: 'Rules for collecting, storing and protecting personal data at Jon.Branding agency.',
     zh: 'Jon.Branding 机构收集、存储和保护个人数据的规则。',
   };
+  const alternates = getPageAlternates(safeLang, '/privacy');
   return {
     title: titles[safeLang] || titles.uz,
     description: descs[safeLang] || descs.uz,
-    openGraph: { title: titles[safeLang], description: descs[safeLang], images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }] },
+    alternates,
+    openGraph: { title: titles[safeLang], description: descs[safeLang], url: alternates.canonical, images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }] },
     twitter: { card: 'summary_large_image', title: titles[safeLang], description: descs[safeLang], images: ['/images/cms/og-image.jpeg'] },
   };
 }

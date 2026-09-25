@@ -68,24 +68,46 @@ export function DiagnosticFlow() {
         if (opt) totalScore += opt.score
       })
 
-      const { data, error } = await supabase.from('navigator_leads').insert({
-        full_name: contact.fullName,
-        company_name: contact.companyName,
-        industry: contact.industry,
-        contact: contact.phone, // mapping phone to contact
-        consent: contact.consent,
-        selected_pains: selectedPains,
-        desired_results: [selectedResult], // Stored as array for future proofing
-        diagnostic_answers: answers,
-        total_score: totalScore,
-        source: 'TezNatija_Diagnostic'
-      }).select().single()
+      if (supabase) {
+        try {
+          await supabase.from('navigator_leads').insert({
+            full_name: contact.fullName,
+            company_name: contact.companyName,
+            industry: contact.industry,
+            contact: contact.phone,
+            consent: contact.consent,
+            selected_pains: selectedPains,
+            desired_results: [selectedResult],
+            diagnostic_answers: answers,
+            total_score: totalScore,
+            source: 'TezNatija_Diagnostic'
+          })
+        } catch (supabaseErr) {
+          console.warn('Supabase insert warning:', supabaseErr)
+        }
+      }
 
-      if (error) throw error
+      // Always submit lead to /api/submit-form so Telegram and amoCRM receive it
+      try {
+        await fetch('/api/submit-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: contact.fullName,
+            phone: contact.phone,
+            source: 'navigator_diagnostic',
+            role: contact.companyName ? `${contact.companyName} (${contact.industry || ''})` : 'TezNatija',
+            revenue: `Diagnostika ball: ${totalScore}`,
+            pain: selectedPains.join(', '),
+            ambition: selectedResult,
+            lang: 'uz',
+          }),
+        })
+      } catch (submitErr) {
+        console.warn('Submit-form error:', submitErr)
+      }
 
-      // Redirect to result page, passing the inserted ID or just using local storage
-      // For MVP, we pass it via query param
-      router.push(`/uz/navigator/natija?id=${data.id}`)
+      router.push(`/uz/navigator/natija?id=${Date.now()}`)
     } catch (err) {
       console.error(err)
       setIsSubmitting(false)

@@ -295,7 +295,7 @@ Quyidagi mijoz sharhi matnini tahlil qiling. Undan mijozning ismi, kompaniya nom
 {
   "name": "Mijoz ismi (masalan: Akmal)",
   "company": {
-    "uz": "Kompaniya nomi (masalan: Qumri Coffee)",
+    "uz": "Kompaniya nomi (masalan: Den Aroma)",
     "ru": "Название компании на русском",
     "en": "Company name in English",
     "zh": "中文公司名称"

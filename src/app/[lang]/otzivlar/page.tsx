@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import ReviewsClient from './reviews-client';
+import { getPageAlternates } from '@/lib/seo';
 
 export const revalidate = 60; // Revalidate reviews cache every 60 seconds
 
@@ -17,23 +18,27 @@ const titles = {
 };
 
 const descriptions = {
-  uz: "Jon Branding brend-agentligi mijozlarining ovozli va video fikrlari. Qumri Coffee, Oltin Bulut va boshqa hamkorlarimiz erishgan real natijalar.",
-  ru: "Голосовые и видеоотзывы клиентов бренд-агентства Jon Branding. Реальные результаты Qumri Coffee, Oltin Bulut и других партнеров.",
-  en: "Voice and video testimonials from clients of Jon Branding agency. Real results achieved by Qumri Coffee, Oltin Bulut, and other partners.",
-  zh: "Jon Branding品牌代理机构客户的语音和视频评价。Qumri Coffee、Oltin Bulut及其他合作伙伴取得的真实成效。"
+  uz: "Jon Branding brend-agentligi mijozlarining ovozli va video fikrlari: Den Aroma, FIDDA by Sevara, Perfona va boshqa hamkorlarimiz o'z tajribasi haqida.",
+  ru: "Голосовые и видеоотзывы клиентов бренд-агентства Jon Branding: Den Aroma, FIDDA by Sevara, Perfona и другие партнёры о своём опыте.",
+  en: "Voice and video testimonials from clients of Jon Branding agency: Den Aroma, FIDDA by Sevara, Perfona and other partners share their experience.",
+  zh: "Jon Branding品牌代理机构客户的语音和视频评价：Den Aroma、FIDDA by Sevara、Perfona 等合作伙伴分享他们的合作体验。"
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang: rawLang } = await props.params;
   const lang = (['uz', 'ru', 'en', 'zh'].includes(rawLang) ? rawLang : 'uz') as Locale;
 
+  const alternates = getPageAlternates(lang, '/otzivlar');
+
   return {
     title: titles[lang] || titles.uz,
     description: descriptions[lang] || descriptions.uz,
+    alternates,
     openGraph: {
       title: titles[lang] || titles.uz,
       description: descriptions[lang] || descriptions.uz,
       type: 'website',
+      url: alternates.canonical,
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
     },
     twitter: {
