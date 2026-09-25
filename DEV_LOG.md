@@ -244,8 +244,8 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ## 2026-09-25 | Birlashtirishdan keyin: Brand Strategy uch tilda yo'q edi
 
-Egasi main'ni PR #342 ga o'zi birlashtirib, konfliktlarni hal qildi
-(`3bc1ff90`). Birlashtirish to'g'ri chiqqan, lekin bitta bo'shliq qoldirgan.
+PR #342 yangi `main` bilan birlashtirilib, konfliktlar `3bc1ff90` commitda
+hal qilindi. Birlashtirish to'g'ri chiqqan, lekin bitta bo'shliq qoldirgan.
 
 **Topilma.** main'da yangi xizmat paydo bo'lgan — **Brand Strategy,
 48 000 000 so'm**. Birlashtirish uni `uz.ts` ga, `ServiceId` tipiga va
