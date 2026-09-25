@@ -74,3 +74,11 @@ export const ANSWER_OPTIONS = [
   { value: 'yoq', label: 'Yo‘q', score: 0 },
   { value: 'bilmayman', label: 'Bilmayman', score: 0 }
 ]
+
+/** Diagnostika balli: faqat ma'lum savol va javob variantlari hisoblanadi. */
+export function scoreNavigatorAnswers(answers: Record<string, string>): number {
+  return QUESTIONS.reduce((total, question) => {
+    const option = ANSWER_OPTIONS.find((o) => o.value === answers[question.id])
+    return total + (option?.score ?? 0)
+  }, 0)
+}
