@@ -3,27 +3,40 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
+import { ADMIN_COOKIE, verifyAdminSession } from '@/lib/admin/auth'
 
+export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Admin - Tez Natija 6 Navigator',
+  robots: { index: false, follow: false },
 }
 
 export default async function NavigatorAdminPage() {
+  const cookieStore = await cookies()
+  const session = cookieStore.get(ADMIN_COOKIE)?.value
+
+  if (!verifyAdminSession(session)) {
+    redirect('/admin')
+  }
+
   const supabase = await createClient()
 
-  // In a real scenario with auth enforced:
-  // const { data: { user }, error: authError } = await supabase.auth.getUser()
-  // if (authError || !user) redirect('/admin/login')
+  let leads: any[] = []
+  if (supabase) {
+    try {
+      const { data } = await supabase
+        .from('navigator_leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(50)
+      leads = data || []
+    } catch (err) {
+      console.warn('Failed to fetch navigator leads from Supabase:', err)
+    }
+  }
 
-  // Fetch leads
-  const { data: leads, error } = await supabase
-    .from('navigator_leads')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(50)
-
-  // Fallback if table doesn't exist yet (for the sake of the MVP without running migrations)
-  const displayLeads = leads || []
+  const displayLeads = leads
 
   return (
     <div className="min-h-screen bg-slate-50 p-8">

@@ -25,6 +25,7 @@ export async function generateMetadata(props: UmarinPrivacyPageProps): Promise<M
   return {
     title: titles[safeLang] || titles.uz,
     description: descs[safeLang] || descs.uz,
+    robots: { index: false, follow: false },
     alternates: getPageAlternates(safeLang, '/umarin-privacy-policy'),
   };
 }

@@ -278,10 +278,10 @@ export const ATQuotes: FC<ATQuotesProps> = ({
   }, [lang]);
 
   const list =
-    apiTestimonials && apiTestimonials.length > 0
-      ? apiTestimonials
-      : testimonialsProp && testimonialsProp.length > 0
-        ? testimonialsProp
+    testimonialsProp && testimonialsProp.length > 0
+      ? testimonialsProp
+      : apiTestimonials && apiTestimonials.length > 0
+        ? apiTestimonials
         : (() => {
             switch (lang) {
               case 'ru':

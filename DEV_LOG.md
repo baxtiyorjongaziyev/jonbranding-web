@@ -2,6 +2,36 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | To'liq sayt auditi P0 muammolari to'liq bartaraf etildi
+
+**Qilingan ish:**
+1. **P0-1 (Canonical & SEO):**
+   - `[lang]/layout.tsx` dan hamma sahifaga meros o'tuvchi noto'g'ri default canonical, hreflang va og:url olib tashlandi.
+   - `src/lib/seo.ts` ga `getPageAlternates(locale, path)` helperi qo'shildi.
+   - Barcha 128 ta sahifa (104 ta portfolio keyslari, `/portfolio`, `/privacy`, `/terms`, `/sitemap`, `/checklist`, `/otzivlar`, `/umarin-privacy-policy`, `/xizmatlar/patent-kalkulyatori`) endi o'zining to'g'ri canonical va hreflang URL'lariga ega.
+   - `src/app/canonical.test.ts` regressiya testlari qo'shildi va to'liq o'tdi.
+2. **P0-2 (CSP analitika va Google Ads):**
+   - `next.config.js` CSP direktivalariga Google Ads (`googleadservices.com`, `doubleclick.net`), Microsoft Clarity (`scripts.clarity.ms`, `h.clarity.ms`), GA4 regional, Hotjar, Yandex Metrika va Amplitude domenlari qo'shildi.
+   - `src/app/content-security-policy.test.ts` orqali tasdiqlandi.
+3. **P0-4 (Xitoycha sharhlar mojibake va ATQuotes override):**
+   - `src/lib/static-data.ts` dagi xitoycha sharhlar (zh) va inglizcha emoji (en:184) buzilgan kodirovkalari toza UTF-8 xitoycha matnlar bilan to'g'rilandi.
+   - `src/components/atelier/atelier-sections.tsx` (`ATQuotes`): serverdan kelgan `testimonialsProp` ga client fetch ustuvorlik qilishi to'xtatildi (layout shift va mojibake oldi olindi).
+4. **P0-5 (Oisha chat widget 503 xatosi):**
+   - `src/app/api/oisha/route.ts`: Oisha AI backend'i sozlanmagan (`OISHA_API_URL` bo'sh) holatda 503 tashlash va xabarlarni yo'qotish o'rniga, kelgan savollarni to'g'ridan-to'g'ri Telegram admin botiga yuboradigan va mijozga xushmuomala javob qaytaradigan fallback tizimi yaratildi.
+5. **P0-3 (Navigator diagnostikasi crash):**
+   - `src/lib/supabase/client.ts` va `server.ts`: Supabase env o'zgaruvchilari yo'q bo'lsa server/brauzerda xatolik tashlab qulashining oldi olindi (`return null`).
+   - `src/components/navigator/diagnostic-flow.tsx`: Diagnostika arizalari har qanday holatda `/api/submit-form` orqali Telegram va amoCRM ga yetkazilishi ta'minlandi.
+   - `src/app/admin/navigator/page.tsx`: Sessiya tekshiruvi (`verifyAdminSession`) bilan himoyalandi va 500 xato o'rniga xavfsiz boshqaruv paneli ko'rinishi ta'minlandi.
+6. **P0-6 & P2-14 (Kontent gigiyenasi & Noindex):**
+   - Atelier shablonidan qolgan soxta nomlar tozalangan holat tasdiqlandi (`content-integrity.test.ts`).
+   - `/avans`, `/navigator`, `/uslub-test`, `/umarin-privacy-policy` yo'nalishlariga qidiruv tizimlari indekslamasligi uchun `robots: { index: false, follow: false }` o'rnatildi.
+7. **QA & Build:**
+   - `npm run typecheck` ✓ (0 xato).
+   - `npx vitest run` ✓ (41 test fayli, 303 testning barchasi yashil).
+   - `npm run build` ✓ (165 ta sahifa 100% muvaffaqiyatli build bo'ldi).
+
+---
+
 ## 2026-09-25 | Brand Strategy sahifasiga fotorealistik B2B vizuallar va rasmlar integratsiya qilindi
 
 **Qilingan ish:**
