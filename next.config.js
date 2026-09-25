@@ -8,6 +8,129 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
+const isDev = process.env.NODE_ENV === 'development';
+
+// Tashqi skriptlar uchun ruxsatlar har bir vositaning rasmiy CSP qo'llanmasidan
+// olingan. Biror domen tushib qolsa, brauzer skriptni jimgina bloklaydi —
+// Google Ads konversiyasi va Clarity aynan shunday o'chib qolgan edi.
+const cspDirectives = {
+  'default-src': ["'self'"],
+  'script-src': [
+    "'self'",
+    "'unsafe-inline'",
+    ...(isDev ? ["'unsafe-eval'"] : []),
+    // GTM, GA4, Google Ads
+    'https://*.googletagmanager.com',
+    'https://www.google-analytics.com',
+    'https://www.googleadservices.com',
+    'https://googleads.g.doubleclick.net',
+    'https://pagead2.googlesyndication.com',
+    'https://www.google.com',
+    // Meta Pixel
+    'https://connect.facebook.net',
+    // Yandex Metrika
+    'https://mc.yandex.ru',
+    'https://yastatic.net',
+    // Hotjar
+    'https://*.hotjar.com',
+    // Microsoft Clarity
+    'https://*.clarity.ms',
+    'https://c.bing.com',
+    // Amplitude
+    'https://cdn.amplitude.com',
+    // Cloudflare Turnstile
+    'https://challenges.cloudflare.com',
+  ],
+  'style-src': [
+    "'self'",
+    "'unsafe-inline'",
+    'https://api.fontshare.com',
+    'https://fonts.googleapis.com',
+    'https://*.hotjar.com',
+  ],
+  'font-src': [
+    "'self'",
+    'data:',
+    'https://api.fontshare.com',
+    'https://fonts.gstatic.com',
+    'https://*.hotjar.com',
+  ],
+  'img-src': [
+    "'self'",
+    'data:',
+    'blob:',
+    'https://cdn.sanity.io',
+    'https://cdn.prod.website-files.com',
+    'https://images.unsplash.com',
+    'https://*.google-analytics.com',
+    'https://*.googletagmanager.com',
+    'https://googleads.g.doubleclick.net',
+    'https://www.googleadservices.com',
+    'https://pagead2.googlesyndication.com',
+    'https://www.google.com',
+    'https://www.google.co.uz',
+    'https://www.facebook.com',
+    'https://mc.yandex.ru',
+    'https://mc.yandex.com',
+    'https://*.hotjar.com',
+    'https://*.clarity.ms',
+    'https://c.bing.com',
+  ],
+  'connect-src': [
+    "'self'",
+    ...(isDev ? ['ws://localhost:*', 'ws://127.0.0.1:*'] : []),
+    'https://cdn.sanity.io',
+    'https://h6ymmj0v.api.sanity.io',
+    'https://*.google-analytics.com',
+    'https://analytics.google.com',
+    'https://*.analytics.google.com',
+    'https://*.googletagmanager.com',
+    'https://googleads.g.doubleclick.net',
+    'https://www.googleadservices.com',
+    'https://pagead2.googlesyndication.com',
+    'https://www.google.com',
+    'https://www.facebook.com',
+    'https://mc.yandex.ru',
+    'https://mc.yandex.com',
+    'https://*.hotjar.com',
+    'https://*.hotjar.io',
+    'wss://*.hotjar.com',
+    'https://*.clarity.ms',
+    'https://c.bing.com',
+    'https://api.amplitude.com',
+    'https://api2.amplitude.com',
+  ],
+  'media-src': [
+    "'self'",
+    'https://cdn.sanity.io',
+    'https://player.vimeo.com',
+    'https://*.vimeocdn.com',
+    'blob:',
+  ],
+  'frame-src': [
+    "'self'",
+    'https://player.vimeo.com',
+    'https://www.google.com',
+    'https://challenges.cloudflare.com',
+    'https://td.doubleclick.net',
+    'https://*.googletagmanager.com',
+    'https://mc.yandex.ru',
+    'https://mc.yandex.com',
+    'https://*.hotjar.com',
+    'blob:',
+  ],
+  'worker-src': ["'self'", 'blob:'],
+  'object-src': ["'none'"],
+  'base-uri': ["'self'"],
+  'form-action': ["'self'"],
+  'frame-ancestors': ["'self'"],
+};
+
+const contentSecurityPolicy = [
+  ...Object.entries(cspDirectives).map(([directive, sources]) => `${directive} ${sources.join(' ')}`),
+  ...(process.env.NODE_ENV === 'production' ? ['upgrade-insecure-requests'] : []),
+].join('; ');
+
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
@@ -114,25 +237,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              process.env.NODE_ENV === 'development'
-                ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com https://challenges.cloudflare.com"
-                : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://static.hotjar.com https://script.hotjar.com https://www.clarity.ms https://cdn.amplitude.com https://challenges.cloudflare.com",
-              "style-src 'self' 'unsafe-inline' https://api.fontshare.com https://fonts.googleapis.com",
-              "font-src 'self' data: https://api.fontshare.com https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://cdn.sanity.io https://cdn.prod.website-files.com https://images.unsplash.com https://www.google-analytics.com https://mc.yandex.ru https://www.googletagmanager.com https://www.clarity.ms https://www.facebook.com",
-              process.env.NODE_ENV === 'development'
-                ? "connect-src 'self' ws://localhost:* ws://127.0.0.1:* https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com"
-                : "connect-src 'self' https://cdn.sanity.io https://h6ymmj0v.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://mc.yandex.ru https://in.hotjar.com https://vc.hotjar.io https://o.clarity.ms https://api.amplitude.com https://region1.google-analytics.com wss://ws.hotjar.com https://www.facebook.com",
-              "media-src 'self' https://cdn.sanity.io https://player.vimeo.com https://*.vimeocdn.com blob:",
-              "frame-src 'self' https://player.vimeo.com https://www.google.com https://challenges.cloudflare.com",
-              "object-src 'none'",
-              "base-uri 'self'",
-              "form-action 'self'",
-              "frame-ancestors 'self'",
-              ...(process.env.NODE_ENV === 'production' ? ["upgrade-insecure-requests"] : []),
-            ].join('; '),
+            value: contentSecurityPolicy,
           },
         ],
       },

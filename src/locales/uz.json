@@ -1787,40 +1787,6 @@
         "time": "4–8 hafta"
       }
     ],
-    "ledger": [
-      {
-        "name": "Qumri",
-        "yr": "25"
-      },
-      {
-        "name": "Teshabay",
-        "yr": "25"
-      },
-      {
-        "name": "Oltin Bulut",
-        "yr": "24"
-      },
-      {
-        "name": "Humo",
-        "yr": "24"
-      },
-      {
-        "name": "Nur Sopol",
-        "yr": "23"
-      },
-      {
-        "name": "Chilla",
-        "yr": "23"
-      },
-      {
-        "name": "Asaka Co.",
-        "yr": "22"
-      },
-      {
-        "name": "Tong Ko'ngil",
-        "yr": "22"
-      }
-    ],
     "stats": [
       {
         "n": "240",
@@ -1937,32 +1903,6 @@
         "note": "Bosqichma-bosqich harakat rejasi"
       }
     ],
-    "marquee": [
-      {
-        "name": "Qumri Coffee",
-        "res": "+41% sotuv"
-      },
-      {
-        "name": "Teshabay osh",
-        "res": "3× takroriy mijoz"
-      },
-      {
-        "name": "Humo Fintech",
-        "res": "180K foydalanuvchi"
-      },
-      {
-        "name": "Oltin Bulut",
-        "res": "+31% qadoqdan keyin"
-      },
-      {
-        "name": "Nur Sopol",
-        "res": "2× ko'rinish javonda"
-      },
-      {
-        "name": "Chilla",
-        "res": "yangi shahar bozori"
-      }
-    ],
     "bad": [
       {
         "ix": "01",
@@ -1997,78 +1937,6 @@
       {
         "ix": "04",
         "t": "Nom, logo, qadoq, sayt — bir uslubda, bir paketda, bir jamoa."
-      }
-    ],
-    "featured": {
-      "name": "Qumri Coffee",
-      "city": "Samarqand",
-      "year": "2025",
-      "cat": "Neyming · Aydentika · Qadoq · Tovar belgisi",
-      "story": "Samarqanddagi mahalliy kofexona. Eski nom shevali va eslab qolinmaydigan edi. Yangi nom — joy va o'zbek qushini birga olib keldi. Qadoq, menyu va interyer bir uslubda yangilandi. 3 oydan keyin doimiy mijozlar 3 barobar ko'paydi, 6 oyda ikkinchi filial ochildi.",
-      "metrics": [
-        {
-          "n": "+41%",
-          "l": "Sotuv 3 oyda"
-        },
-        {
-          "n": "3×",
-          "l": "Takroriy mijozlar"
-        },
-        {
-          "n": "2",
-          "l": "Yangi filial"
-        }
-      ]
-    },
-    "index": [
-      {
-        "yr": "2025",
-        "client": "Qumri Coffee",
-        "sector": "Kofexona · Samarqand",
-        "discipline": "Neyming · Aydentika · Qadoq",
-        "result": "+41% sotuv"
-      },
-      {
-        "yr": "2025",
-        "client": "Teshabay osh",
-        "sector": "Restoran · Toshkent",
-        "discipline": "Rebrending · Menyu",
-        "result": "3× takror"
-      },
-      {
-        "yr": "2024",
-        "client": "Oltin Bulut",
-        "sector": "Sutchilik · Buxoro",
-        "discipline": "Qadoq · 12 SKU",
-        "result": "+31% sotuv"
-      },
-      {
-        "yr": "2024",
-        "client": "Humo",
-        "sector": "Fintech · Toshkent",
-        "discipline": "Brend · Ilova · Sayt",
-        "result": "180K foydalanuvchi"
-      },
-      {
-        "yr": "2023",
-        "client": "Nur Sopol",
-        "sector": "Sopol idishlar · Rishton",
-        "discipline": "Aydentika · Qadoq",
-        "result": "2× ko'rinish"
-      },
-      {
-        "yr": "2023",
-        "client": "Chilla",
-        "sector": "Yozgi kiyim · Toshkent",
-        "discipline": "Neyming · Aydentika",
-        "result": "Yangi bozor"
-      },
-      {
-        "yr": "2022",
-        "client": "Asaka Co.",
-        "sector": "Avtomobil servisi",
-        "discipline": "Rebrending · Sayt",
-        "result": "+22% mijoz"
       }
     ],
     "process": [
@@ -2142,32 +2010,6 @@
         ],
         "featured": false,
         "cta": "Strategiya buyurtma qilish"
-      }
-    ],
-    "quotes": [
-      {
-        "q": "Logotip chizdirdik. 3 oyda sotuv 41% oshdi. Buni kutmagan edim — biz shunchaki ko'rinishni o'zgartirdik.",
-        "who": "Sardor Ro'ziyev",
-        "role": "Qumri Coffee, asoschi",
-        "result": "+41% sotuv"
-      },
-      {
-        "q": "Raqibimiz bizning nomni o'ziga olmoqchi bo'ldi. Jon o'sha paytda saqlab qoldi — aks holda hamma narsani yo'qotardik.",
-        "who": "Malika Karimova",
-        "role": "Oltin Bulut, marketing direktor",
-        "result": "Nom himoyalandi"
-      },
-      {
-        "q": "Supermarket javonida yangi qadoqdan keyin mahsulotimiz 2 barobar ko'proq ko'rindi. Sotuv ham shu bilan oshdi.",
-        "who": "Rustam Xolmatov",
-        "role": "Nur Sopol, asoschi",
-        "result": "2× ko'rinish"
-      },
-      {
-        "q": "6 oy ichida 3 ta raqibimiz yopildi. Biz hali ham ishlaymiz. Farq faqat ko'rinishda edi.",
-        "who": "Bekzod Aliyev",
-        "role": "Humo, rahbar",
-        "result": "Bozorda qoldik"
       }
     ],
     "faq": [

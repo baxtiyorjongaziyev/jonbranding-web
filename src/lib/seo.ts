@@ -1,4 +1,5 @@
 import {
+  getLocaleAlternates,
   getLocalizedAbsoluteUrl,
   type Locale,
 } from '@/lib/i18n/locale';
@@ -7,6 +8,18 @@ export const SITE_URL = 'https://www.jonbranding.uz';
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const FOUNDER_ID = `${SITE_URL}/#baxtiyorjon-gaziyev`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+
+/**
+ * Sahifaning o'z canonical va hreflang manzillari (Next.js `alternates`).
+ * `[lang]/layout.tsx` canonical bermaydi, shuning uchun indekslanadigan har
+ * bir sahifa buni o'zi chaqirishi kerak.
+ */
+export function getPageAlternates(locale: Locale, path = '') {
+  return {
+    canonical: getLocalizedAbsoluteUrl(SITE_URL, locale, path),
+    languages: getLocaleAlternates(SITE_URL, path),
+  };
+}
 
 const AI_REFERRER_HOSTS = {
   'chatgpt.com': 'chatgpt',

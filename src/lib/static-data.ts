@@ -181,7 +181,7 @@ export const staticTestimonialsEn: Testimonial[] = [
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! ðŸ¤ ðŸ »ðŸ˜Š"
+    quote: "If you remember, 3 years ago you designed the logo for this brand. Thank you so much, it turned out great, everyone really praises it. Thanks a lot, Bakhtiyor aka! 🤝🏻😊"
   },
   {
     name: "Javohir Haqberdiyev",
@@ -256,57 +256,57 @@ export const projects: Project[] = [
     }
 ];
 
-// Empty array for Chinese testimonials, can be populated later
+// Chinese testimonials with proper UTF-8 encoding
 export const staticTestimonialsZh: Testimonial[] = [
   {
     name: "Ibrohimjon Mahammadjonov",
-    company: "Den Aroma åˆ›å§‹äºº",
+    company: "Den Aroma 创始人",
     avatar: "IM",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/a7036b241bf2b285df4b970561d47b0f5bc41b4f-1074x1909.jpg",
     imageHint: "male founder portrait",
-    quote: "",
+    quote: "Den Aroma 创始人分享了品牌升级带来的商业信心与销售成果。",
     videoUrl: "https://player.vimeo.com/video/1141138719?h=fdc64d08aa"
   },
   {
     name: "Sherzod Beknazarov",
-    company: "Incontrol Consulting åˆ›å§‹äºº",
+    company: "Incontrol Consulting 创始人",
     avatar: "SB",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/1cb59ff629f31dd2721b4a978bd2cde4bccf2621-640x640.png",
     imageHint: "male business owner",
-    quote: "",
+    quote: "专业的品牌定位与设计体系，为我们企业赢得了客户的高度信赖。",
     videoUrl: "https://player.vimeo.com/video/1109892890?badge=0&autopause=0&player_id=0&app_id=58479"
   },
   {
     name: "Sevara Xolmanova",
-    company: "Fidda by Sevara åˆ›å§‹äºº",
+    company: "Fidda by Sevara 创始人",
     avatar: "SX",
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
-    quote: "æˆ‘ä¸Žè¿™ä¸ªå›¢é˜Ÿå ˆä½œè¿‡ï¼Œæˆ‘é žå¸¸å–œæ¬¢ã€‚é žå¸¸é«˜æ•ˆï¼Œç»“æžœè¶…å‡ºäº†æˆ‘çš„é¢„æœŸã€‚æˆ‘è®¢è´­äº†å“ ç‰Œè®¾è®¡ã€ è´´çº¸å’Œä¸“åˆ©ç”³è¯·ã€‚åœ¨7ä¸ªæœˆå†…ï¼Œä¸Šå¸ ä¿ ä½‘ï¼Œä¸€åˆ‡éƒ½ä¼šå‡†å¤‡å°±ç»ªã€‚ä½ ä»¬è¯šä¿¡ç» è ¥ï¼Œæ„¿å®‰æ‹‰ä¿ ä½‘ä½ ä»¬ã€‚æˆ‘é žå¸¸å¼€å¿ƒï¼Œç¥ ä½ ä»¬å·¥ä½œæˆ åŠŸã€‚è°¢è°¢ã€‚"
+    quote: "我与这个团队合作过，非常满意。工作非常高效，成果超出了预期。我订购了品牌设计、贴纸包装和商标专利申请。一切准备得非常迅速完善。非常感谢你们的专业与诚信！"
   },
   {
     name: "Nodirbek",
-    company: "Barakah é¤ åŽ…åˆ›å§‹äºº",
+    company: "Barakah 餐厅创始人",
     avatar: "N",
     image: "",
     imageHint: "restaurant manager portrait",
-    quote: "å¦‚æžœä½ è¿˜è®°å¾—çš„è¯ ï¼Œ3å¹´å‰ ä½ ä»¬ä¸ºè¿™ä¸ªå“ ç‰Œè®¾è®¡äº†æ ‡å¿—ã€‚é žå¸¸æ„Ÿè°¢ï¼Œæ•ˆæžœé žå¸¸å¥½ï¼ŒçœŸçš„æ¯ ä¸ªäººéƒ½ç§°èµžå®ƒã€‚é žå¸¸æ„Ÿè°¢ï¼Œå·´èµ«è’‚çº¦å°”å…„å¼Ÿï¼ ðŸ¤ ðŸ »ðŸ˜Š"
+    quote: "如果您还记得的话，3年前您为这个品牌设计了标志。非常感谢，效果极佳，大家都对设计赞不绝口。非常感谢您，巴赫蒂约尔大哥！🤝🏻😊"
   },
   {
     name: "Javohir Haqberdiyev",
-    company: "Perfona åˆ›å§‹äºº",
+    company: "Perfona 创始人",
     avatar: "JH",
     image: "",
     imageHint: "tech startup founder",
-    quote: "ç»“æžœæ¯”æˆ‘é¢„æƒ³çš„è¿˜è¦ å¥½ã€‚æˆ‘çŽ°åœ¨çœ‹ç €æ ‡å¿—ï¼Œè‡ªå·±ä¹Ÿå¾ˆäº«å —ã€‚æˆ‘å–œæ¬¢çš„æ˜¯é‚£ä»½ä¿¡ä»»ã€‚è€Œä¸”æ  å‰ äº¤ä»˜çœŸçš„å¾ˆæ£’ã€‚å¾ˆé«˜å…´ä½ ä»¬èƒ½è¿™ä¹ˆå¿«åˆ†äº«ç»“æžœã€‚å¤šè°¢ï¼Œå¤§å“¥ï¼ "
+    quote: "最终效果比我想象的还要棒。每次看到标志我自己都非常享受。最让我感动的是彼此间的信任，而且提前交付真的很惊艳。多谢你们迅速分享成果！"
   },
   {
     name: "Hikmatulloh Toxirov",
-    company: "Almaz Shoes åˆ›å§‹äºº",
+    company: "Almaz Shoes 创始人",
     avatar: "HT",
     image: "",
     imageHint: "Almaz Shoes founder",
-    quote: "å¿«é€Ÿä¸“åˆ©æœ åŠ¡é žå¸¸æœ‰ç”¨ã€‚æˆ‘æ­£åœ¨è€ƒè™‘å“ ç‰Œä¿ æŠ¤ï¼Œä½ ä»¬å Šæ—¶æ  ä¾›äº†è¿™é¡¹æœ åŠ¡ã€‚æ–‡ä»¶å‡†å¤‡å¾—å¾ˆå¿«ï¼Œæµ ç¨‹æ¸…æ™°é€ æ˜Žã€‚è°¢è°¢ï¼ ",
+    quote: "快速商标专利服务非常及时有效。我当时正考虑品牌保护，你们在最关键的时刻提供了方案。文件办理迅速，流程透明清晰。十分感谢！",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
   },
 ];

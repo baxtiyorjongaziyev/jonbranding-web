@@ -16,7 +16,7 @@ const translations = {
     heading: '14 kunda',
     headingEm: 'aniqlik.',
     subtitle: '3 bosqich — barchasi masofadan. Hech qanday ofisga kelish kerak emas.',
-    exampleLabel: 'Haqiqiy misol',
+    exampleLabel: 'Misol',
     steps: [
       {
         n: '01',
@@ -24,7 +24,7 @@ const translations = {
         dur: '1–2 kun',
         summary: 'Siz materiallarni yuboresiz — biz ishga tushamiz.',
         detail: "Siz logotip fayllar, sayt manzili, ijtimoiy tarmoqlar va mavjud brend materiallarini yuborasiz. 1–2 kun ichida brif anketa yuboramiz — 20 daqiqa vaqt oladi. Hech qanday uchrashuv kerak emas.",
-        example: "Qumri Coffee brifi: 3 yillik logotip fayllar, 2 ta sayt versiyasi, Instagram profil + oqim screenshot.",
+        example: "Masalan: logotip fayllari, sayt manzili, Instagram sahifasi va qadoq fotosuratlari.",
       },
       {
         n: '02',
@@ -32,7 +32,7 @@ const translations = {
         dur: '10–12 kun',
         summary: "3 ta mutaxassis har bir mezonni alohida tekshiradi.",
         detail: "Dizayner, strateg va marketolog — har biri o'z sohasida 4 ta mezonni tekshiradi. Ball tizimi: 0–100. Har bir mezon uchun aniq dalil va yo'qotish hisobi. Taqqoslash: sizning natijangiz vs soha o'rtacha.",
-        example: "Qumri Coffee natijasi: Logotip o'qilishi 62/100, Rang konsistentligi 48/100, Raqamli adaptatsiya 31/100.",
+        example: "Masalan: logotip o'qilishi, rang izchilligi, raqamli moslashuv — har biri 0–100 ball va aniq dalil bilan.",
       },
       {
         n: '03',
@@ -40,7 +40,7 @@ const translations = {
         dur: '1 kun',
         summary: 'Onlayn uchrashuv + PDF hisobot + 90 kunlik reja.',
         detail: "45–60 daqiqalik onlayn prezentatsiya (Zoom/Meet). Barcha topilmalar, reyting asoslari va tavsiyalar. 90 kunlik harakat rejasi: kim bajaradi, qancha turadi, qachon natija ko'rinadi. Keyin 2 hafta ichida savol-javob uchun ochiqmiz.",
-        example: "Qumri Coffee: Prezentatsiyadan keyin 3 hafta ichida yangi logotip asosida qadoq qayta ishlanildi — sotuvda +18%.",
+        example: "Masalan: 90 kunlik reja — birinchi navbatda nima o'zgaradi, kim bajaradi va qancha turadi.",
       },
     ],
   },
@@ -49,7 +49,7 @@ const translations = {
     heading: '14 дней —',
     headingEm: 'ясность.',
     subtitle: '3 этапа — всё удалённо. Офис посещать не нужно.',
-    exampleLabel: 'Реальный пример',
+    exampleLabel: 'Пример',
     steps: [
       {
         n: '01',
@@ -57,7 +57,7 @@ const translations = {
         dur: '1–2 дня',
         summary: 'Вы отправляете материалы — мы приступаем.',
         detail: 'Вы присылаете файлы логотипа, адрес сайта, соцсети и имеющиеся брендовые материалы. За 1–2 дня мы пришлём бриф-анкету — займёт 20 минут. Встречи не нужны.',
-        example: 'Бриф Qumri Coffee: файлы логотипа за 3 года, 2 версии сайта, профиль Instagram + скриншоты ленты.',
+        example: 'Например: файлы логотипа, адрес сайта, профиль Instagram и фото упаковки.',
       },
       {
         n: '02',
@@ -65,7 +65,7 @@ const translations = {
         dur: '10–12 дней',
         summary: '3 специалиста проверяют каждый критерий отдельно.',
         detail: 'Дизайнер, стратег и маркетолог — каждый проверяет 4 критерия в своей области. Система баллов: 0–100. Для каждого критерия — конкретные доказательства и расчёт потерь. Сравнение: ваш результат vs среднее по отрасли.',
-        example: 'Результат Qumri Coffee: читаемость логотипа 62/100, консистентность цвета 48/100, цифровая адаптация 31/100.',
+        example: 'Например: читаемость логотипа, единство цвета, цифровая адаптация — каждый критерий от 0 до 100 с конкретными доводами.',
       },
       {
         n: '03',
@@ -73,7 +73,7 @@ const translations = {
         dur: '1 день',
         summary: 'Онлайн-встреча + PDF-отчёт + план на 90 дней.',
         detail: 'Онлайн-презентация 45–60 минут (Zoom/Meet). Все находки, обоснования оценок и рекомендации. План действий на 90 дней: кто делает, сколько стоит, когда будет результат. Затем 2 недели открыты для вопросов.',
-        example: 'Qumri Coffee: через 3 недели после презентации переработана упаковка на основе нового логотипа — продажи +18%.',
+        example: 'Например: план на 90 дней — что меняется в первую очередь, кто делает и сколько это стоит.',
       },
     ],
   },
@@ -82,7 +82,7 @@ const translations = {
     heading: '14 days to',
     headingEm: 'clarity.',
     subtitle: '3 stages — all remote. No office visits needed.',
-    exampleLabel: 'Real example',
+    exampleLabel: 'Example',
     steps: [
       {
         n: '01',
@@ -90,7 +90,7 @@ const translations = {
         dur: '1–2 days',
         summary: 'You send the materials — we get to work.',
         detail: 'You send logo files, website URL, social media links, and existing brand materials. Within 1–2 days we send a brief questionnaire — takes 20 minutes. No meetings required.',
-        example: 'Qumri Coffee brief: 3 years of logo files, 2 website versions, Instagram profile + feed screenshots.',
+        example: 'For example: logo files, website address, Instagram profile and packaging photos.',
       },
       {
         n: '02',
@@ -98,7 +98,7 @@ const translations = {
         dur: '10–12 days',
         summary: '3 specialists evaluate each criterion separately.',
         detail: 'Designer, strategist, and marketer — each reviews 4 criteria in their domain. Scoring system: 0–100. Concrete evidence and loss calculation for each criterion. Comparison: your result vs industry average.',
-        example: 'Qumri Coffee results: logo legibility 62/100, colour consistency 48/100, digital adaptation 31/100.',
+        example: 'For example: logo legibility, colour consistency, digital adaptation — each scored 0–100 with specific evidence.',
       },
       {
         n: '03',
@@ -106,7 +106,7 @@ const translations = {
         dur: '1 day',
         summary: 'Online meeting + PDF report + 90-day action plan.',
         detail: '45–60 minute online presentation (Zoom/Meet). All findings, rating rationale, and recommendations. 90-day action plan: who does what, costs, and when results show. Then open for questions for 2 weeks.',
-        example: 'Qumri Coffee: 3 weeks after the presentation, packaging was redesigned around the new logo — sales +18%.',
+        example: 'For example: a 90-day plan — what changes first, who does it and what it costs.',
       },
     ],
   },
@@ -115,7 +115,7 @@ const translations = {
     heading: '14天内',
     headingEm: '获得清晰度。',
     subtitle: '3个阶段——全程远程。无需到访办公室。',
-    exampleLabel: '真实案例',
+    exampleLabel: '示例',
     steps: [
       {
         n: '01',
@@ -123,7 +123,7 @@ const translations = {
         dur: '1–2天',
         summary: '您发送材料——我们开始工作。',
         detail: '您发送标志文件、网站地址、社交媒体链接和现有品牌材料。1–2天内我们发送简报问卷——需要20分钟。不需要任何会议。',
-        example: 'Qumri Coffee简报：3年的标志文件，2个网站版本，Instagram个人资料+动态截图。',
+        example: '例如：标志文件、网站地址、Instagram 主页和包装照片。',
       },
       {
         n: '02',
@@ -131,7 +131,7 @@ const translations = {
         dur: '10–12天',
         summary: '3位专家分别评估每项标准。',
         detail: '设计师、策略师和营销人员——每人在自己领域审查4项标准。评分系统：0–100。每项标准都有具体证据和损失计算。比较：您的结果与行业平均水平。',
-        example: 'Qumri Coffee结果：标志可读性62/100，色彩一致性48/100，数字适应性31/100。',
+        example: '例如：标志可读性、色彩一致性、数字化适配——每项 0–100 分，并附具体依据。',
       },
       {
         n: '03',
@@ -139,7 +139,7 @@ const translations = {
         dur: '1天',
         summary: '在线会议 + PDF报告 + 90天行动计划。',
         detail: '45–60分钟在线演示（Zoom/Meet）。所有发现、评级依据和建议。90天行动计划：谁来做、费用多少、何时见效。之后2周内随时解答问题。',
-        example: 'Qumri Coffee：演示后3周，基于新标志重新设计了包装——销售额+18%。',
+        example: '例如：90 天计划——先改什么、由谁执行、需要多少费用。',
       },
     ],
   },

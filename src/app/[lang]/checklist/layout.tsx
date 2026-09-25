@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
+import type { Locale } from '@/lib/i18n/locale';
+import { getPageAlternates } from '@/lib/seo';
 
 type Props = { children: ReactNode; params: Promise<{ lang: string }> };
 
 export async function generateMetadata(props: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await props.params;
-  const safeLang = ['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz';
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const titles: Record<string, string> = {
     uz: 'Brending Checklist | Jon.Branding',
     ru: 'Чеклист по Брендингу | Jon.Branding',
@@ -18,7 +20,11 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
     en: 'Branding checklist — a quick 12-criteria diagnostic for your business: naming, logo, packaging, and legal protection.',
     zh: '品牌核查清单 — 通过12项标准快速诊断您的业务：命名、标志、包装和法律保护。',
   };
-  return { title: titles[safeLang] || titles.uz, description: descriptions[safeLang] || descriptions.uz };
+  return {
+    title: titles[safeLang] || titles.uz,
+    description: descriptions[safeLang] || descriptions.uz,
+    alternates: getPageAlternates(safeLang, '/checklist'),
+  };
 }
 
 export default function ChecklistLayout({ children }: Props) {
