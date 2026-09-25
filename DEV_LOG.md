@@ -248,6 +248,36 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 
 ---
 
+## 2026-09-25 | Birlashtirishdan keyin: Brand Strategy uch tilda yo'q edi
+
+PR #342 yangi `main` bilan birlashtirilib, konfliktlar `3bc1ff90` commitda
+hal qilindi. Birlashtirish to'g'ri chiqqan, lekin bitta bo'shliq qoldirgan.
+
+**Topilma.** main'da yangi xizmat paydo bo'lgan — **Brand Strategy,
+48 000 000 so'm**. Birlashtirish uni `uz.ts` ga, `ServiceId` tipiga va
+`SERVICE_CATEGORIES` ga qo'shgan, lekin `ru/en/zh` fayllariga emas.
+
+TypeScript buni ushlamaydi: massivlar uzunligi har xil bo'lishi mumkin.
+Natija — eng qimmat xizmat `/ru`, `/en`, `/zh` da narxlar sahifasida ham,
+ariza oynasining ro'yxatida ham **umuman ko'rinmasdi**.
+
+**Tuzatish.** Xizmat uch tilga tarjima qilinib qo'shildi. Endi to'rt tilda
+ham 10 tadan xizmat.
+
+**O'zim qilgan xato (ikkinchi marta).** Tarjimani qo'shishda yana
+`.encode().decode('unicode_escape')` ishlatdim — rus va xitoy matni butunlay
+buzildi (kirill harflari `ÐÐ¿ÑÐµÐ´ÐµÐ»ÑÐµÐ¼` ko'rinishiga aylandi). Darhol
+tekshirganim uchun commit'gacha ushladim: fayllar qaytarildi va matn heredoc
+orqali to'g'ridan-to'g'ri yozildi.
+
+**Xulosa:** bu katalogga matn qo'shishda Python'ning `unicode_escape` iga
+umuman tegmaslik kerak — faqat heredoc yoki to'g'ridan-to'g'ri yozish.
+
+**Tekshirildi:** `typecheck`, `lint`, `vitest` (303/303), `build` (165 sahifa);
+bayt darajasida ikki marta kodlash skaneri — toza; to'rt tilda id soni teng.
+
+---
+
 ## 2026-09-24 | Codex review (PR #341) — uchta topilma tuzatildi
 
 Codex PR #341 ga uchta P2 sharh qoldirdi, lekin men ularni **merge qilgandan
