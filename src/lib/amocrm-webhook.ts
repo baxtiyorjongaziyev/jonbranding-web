@@ -1,3 +1,7 @@
+import { escapeTelegramHtml } from './telegram-html';
+
+export { escapeTelegramHtml };
+
 const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 const MAX_FIELDS = 2000;
 
@@ -47,12 +51,6 @@ export async function readWebhookBody(request: Request): Promise<Record<string, 
   return parseBracketForm(new URLSearchParams(raw));
 }
 
-export function escapeTelegramHtml(value: unknown): string {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
 
 /** AMOCRM_SUBDOMAIN "jonbranding" yoki "jonbranding.amocrm.ru" bo'lishi mumkin. */
 export function amoCrmLeadUrl(leadId: unknown, rawDomain: string | undefined): string | null {

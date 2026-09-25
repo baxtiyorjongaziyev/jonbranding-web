@@ -196,7 +196,8 @@ function describeAmoCrmError(error: unknown) {
 async function queueFailedAmoCrmLead(data: LeadData, error: unknown) {
   try {
     const err = error as AmoCrmErrorShape | undefined;
-    const eventId = String(data.eventId || `lead_${Date.now()}`);
+    // Firestore hujjat ID'sida '/' bo'lishi mumkin emas — aks holda zaxira navbati ham yiqiladi.
+    const eventId = String(data.eventId || `lead_${Date.now()}`).replace(/[^\w.-]/g, '_').slice(0, 120);
     await getDb()
       .collection(AMOCRM_FAILED_LEADS_COLLECTION)
       .doc(eventId)
