@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import * as cheerio from 'cheerio';
 
 /**
@@ -34,10 +35,10 @@ export async function scrapeTelegramPosts(channel: string, keyword: string): Pro
     });
 
     if (foundText) {
-      console.log(`[Telegram Scraper] Found matching post for keyword: ${keyword}`);
+      logger.info(`[Telegram Scraper] Found matching post for keyword: ${keyword}`);
       return foundText;
     } else {
-      console.log(`[Telegram Scraper] No matching post found for keyword: ${keyword}`);
+      logger.info(`[Telegram Scraper] No matching post found for keyword: ${keyword}`);
       return null;
     }
   } catch (error) {

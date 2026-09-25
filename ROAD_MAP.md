@@ -48,7 +48,7 @@
 - [ ] **Font subsetting** — Faqat ishlatiladigan harflarni yuklash
 
 ### 🔧 Texnik
-- [ ] **Dublikat route hal qilish** — `/xizmatlar/brand-strategiyasi` vs `/brand-strategy`
+- [x] **Dublikat route hal qilish** — `/xizmatlar/brand-strategiyasi` vs `/brand-strategy` (308 redirect + canonical birlashtirildi)
 - [ ] **zh.json to'ldirish** — Xitoy tili tarjimasi tugallanmagan
 - [ ] **Error boundary** — Har bir section uchun fallback UI
 

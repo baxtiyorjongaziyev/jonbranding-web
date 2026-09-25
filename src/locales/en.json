@@ -254,7 +254,7 @@
       },
       {
         "title": "5. Contact information",
-        "text": "For questions or objections, contact us at +998336450097 or on Telegram at @jonbranding."
+        "text": "For questions or objections, contact us at +998792000097 or on Telegram at @jonbranding."
       }
     ]
   },
@@ -1604,40 +1604,6 @@
         "time": "4–8 weeks"
       }
     ],
-    "ledger": [
-      {
-        "name": "Qumri",
-        "yr": "25"
-      },
-      {
-        "name": "Teshabay",
-        "yr": "25"
-      },
-      {
-        "name": "Oltin Bulut",
-        "yr": "24"
-      },
-      {
-        "name": "Humo",
-        "yr": "24"
-      },
-      {
-        "name": "Nur Sopol",
-        "yr": "23"
-      },
-      {
-        "name": "Chilla",
-        "yr": "23"
-      },
-      {
-        "name": "Asaka Co.",
-        "yr": "22"
-      },
-      {
-        "name": "Tong Ko'ngil",
-        "yr": "22"
-      }
-    ],
     "stats": [
       {
         "n": "240",
@@ -1754,32 +1720,6 @@
         "note": "Step-by-step action plan"
       }
     ],
-    "marquee": [
-      {
-        "name": "Qumri Coffee",
-        "res": "+41% sales"
-      },
-      {
-        "name": "Teshabay osh",
-        "res": "3× repeat customers"
-      },
-      {
-        "name": "Humo Fintech",
-        "res": "180K users"
-      },
-      {
-        "name": "Oltin Bulut",
-        "res": "+31% after packaging"
-      },
-      {
-        "name": "Nur Sopol",
-        "res": "2× shelf visibility"
-      },
-      {
-        "name": "Chilla",
-        "res": "new city market"
-      }
-    ],
     "bad": [
       {
         "ix": "01",
@@ -1814,78 +1754,6 @@
       {
         "ix": "04",
         "t": "Name, logo, packaging, website — in one style, one package, one team."
-      }
-    ],
-    "featured": {
-      "name": "Qumri Coffee",
-      "city": "Samarkand",
-      "year": "2025",
-      "cat": "Naming · Identity · Packaging · Trademark",
-      "story": "A local coffee shop in Samarkand. The old name was dialectal and unmemorable. The new name — brought together the location and an Uzbek bird. Packaging, menu, and interior were updated in a unified style. After 3 months, regular customers tripled, and a second branch opened in 6 months.",
-      "metrics": [
-        {
-          "n": "+41%",
-          "l": "Sales in 3 months"
-        },
-        {
-          "n": "3×",
-          "l": "Repeat customers"
-        },
-        {
-          "n": "2",
-          "l": "New branch"
-        }
-      ]
-    },
-    "index": [
-      {
-        "yr": "2025",
-        "client": "Qumri Coffee",
-        "sector": "Coffee Shop · Samarkand",
-        "discipline": "Naming · Identity · Packaging",
-        "result": "+41% sales"
-      },
-      {
-        "yr": "2025",
-        "client": "Teshabay osh",
-        "sector": "Restaurant · Tashkent",
-        "discipline": "Rebranding · Menu",
-        "result": "3× repeat"
-      },
-      {
-        "yr": "2024",
-        "client": "Oltin Bulut",
-        "sector": "Dairy · Bukhara",
-        "discipline": "Packaging · 12 SKUs",
-        "result": "+31% sales"
-      },
-      {
-        "yr": "2024",
-        "client": "Humo",
-        "sector": "Fintech · Tashkent",
-        "discipline": "Brand · Application · Website",
-        "result": "180K users"
-      },
-      {
-        "yr": "2023",
-        "client": "Nur Sopol",
-        "sector": "Ceramicware · Rishtan",
-        "discipline": "Identity · Packaging",
-        "result": "2× visibility"
-      },
-      {
-        "yr": "2023",
-        "client": "Chilla",
-        "sector": "Summer Apparel · Tashkent",
-        "discipline": "Naming · Identity",
-        "result": "New market"
-      },
-      {
-        "yr": "2022",
-        "client": "Asaka Co.",
-        "sector": "Automotive Service",
-        "discipline": "Rebranding · Website",
-        "result": "+22% clients"
       }
     ],
     "process": [
@@ -1959,32 +1827,6 @@
         ],
         "featured": false,
         "cta": "Order Strategy"
-      }
-    ],
-    "quotes": [
-      {
-        "q": "We designed a logo. Sales increased by 41% in 3 months. I hadn't expected this — we simply changed the appearance.",
-        "who": "Sardor Ro'ziyev",
-        "role": "Qumri Coffee, Founder",
-        "result": "+41% sales"
-      },
-      {
-        "q": "Our competitor tried to take our name. Jon saved it at that time — otherwise, we would have lost everything.",
-        "who": "Malika Karimova",
-        "role": "Oltin Bulut, Marketing Director",
-        "result": "Name protected"
-      },
-      {
-        "q": "After the new packaging, our product was 2 times more visible on the supermarket shelf. Sales also increased with it.",
-        "who": "Rustam Xolmatov",
-        "role": "Nur Sopol, Founder",
-        "result": "2× visibility"
-      },
-      {
-        "q": "Within 6 months, 3 of our competitors closed down. We are still operating. The only difference was in appearance.",
-        "who": "Bekzod Aliyev",
-        "role": "Humo, Head",
-        "result": "We remained in the market"
       }
     ],
     "faq": [
@@ -2267,7 +2109,7 @@
       "brand": "Jon.Branding",
       "sloganUz": "Let your brand work on the street",
       "sloganRu": "Р��клама, которую замечают",
-      "phone": "+998 33 645 00 97",
+      "phone": "+998 79 200 00 97",
       "side": "Side part",
       "rear": "Rear part",
       "front": "Front part",

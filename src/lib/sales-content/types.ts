@@ -1,4 +1,5 @@
 export type ServiceId =
+  | 'brand-strategy'
   | 'naming'
   | 'logo'
   | 'visual-identity'
@@ -18,7 +19,7 @@ export type Service = {
   id: ServiceId;
   name: string;
   price: string;
-  duration: string;
+  duration?: string;
   lead: string;
   deliverables: string[];
   benefit: string;

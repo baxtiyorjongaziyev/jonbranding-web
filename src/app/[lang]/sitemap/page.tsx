@@ -2,6 +2,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
+import { getPageAlternates } from '@/lib/seo';
 import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
@@ -19,7 +20,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     en: 'Sitemap | Jon.Branding',
     zh: '网站地图 | Jon.Branding',
   };
-  return { title: titles[safeLang] || titles.uz };
+  return { title: titles[safeLang] || titles.uz, alternates: getPageAlternates(safeLang, '/sitemap') };
 }
 
 function getSitemapBlogPosts(lang: string) {
@@ -89,7 +90,7 @@ const SitemapPage = async (props: Props) => {
         { href: '/xizmatlar/qadoq-dizayni', label: t.links?.packaging_design || 'Qadoq dizayni', icon: Package },
         { href: '/xizmatlar/car-wrap-design', label: t.links?.car_wrap_design || 'Creative Car Wrap Design', icon: Truck },
         { href: '/xizmatlar', label: t.links?.services_prices || 'Xizmatlar va narxlar', icon: List },
-        { href: '/xizmatlar/brand-strategiyasi', label: t.links?.brand_strategy || 'Brend strategiyasi', icon: BrainCircuit },
+        { href: '/brand-strategy', label: t.links?.brand_strategy || 'Brend strategiyasi', icon: BrainCircuit },
         { href: '/xizmatlar/patent-kalkulyatori', label: t.links?.patent_calculator || 'Patent kalkulyatori', icon: PenSquare },
       ],
     },

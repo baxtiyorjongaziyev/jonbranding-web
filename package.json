@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack -p 9002 -H 0.0.0.0",
+    "dev:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 next dev --webpack -p 9002 -H 0.0.0.0",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build --webpack",
     "build:cloudflare": "opennextjs-cloudflare build",
     "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
@@ -12,6 +13,7 @@
     "upload:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "node .next/standalone/server.js",
+    "start:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 node --max-semi-space-size=64 .next/standalone/server.js",
     "lint": "cross-env NODE_OPTIONS=--max-old-space-size=4096 eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "test": "vitest run",
@@ -135,6 +137,7 @@
     ]
   },
   "overrides": {
+    "uuid": "^11.1.1",
     "adm-zip": "^0.6.1",
     "js-yaml": "$js-yaml",
     "@vercel/frameworks": {

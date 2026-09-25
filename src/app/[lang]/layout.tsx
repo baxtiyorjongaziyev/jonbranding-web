@@ -8,12 +8,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { safeJsonStringify } from '@/lib/security';
-import {
-  locales,
-  defaultLocale,
-  getLocalizedAbsoluteUrl,
-  getLocaleAlternates,
-} from '@/lib/i18n/locale';
+import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 
 
@@ -57,13 +52,6 @@ export const viewport: Viewport = {
   themeColor: '#2c2bf5',
 };
 
-const localeUrls = {
-  uz: getLocalizedAbsoluteUrl(BASE_URL, 'uz'),
-  ru: getLocalizedAbsoluteUrl(BASE_URL, 'ru'),
-  en: getLocalizedAbsoluteUrl(BASE_URL, 'en'),
-  zh: getLocalizedAbsoluteUrl(BASE_URL, 'zh'),
-} satisfies Record<Locale, string>;
-
 const ogLocales = {
   uz: 'uz_UZ',
   ru: 'ru_RU',
@@ -95,7 +83,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'website',
       locale: ogLocales[safeLang],
-      url: localeUrls[safeLang],
       siteName: 'Jon.Branding',
       images: [{ url: OG_IMAGE_URL, width: 1200, height: 630, alt: 'Jon Branding Agency' }],
     },
@@ -105,10 +92,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: dictionary.meta?.description || "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding.",
       images: [OG_IMAGE_URL],
     },
-    alternates: {
-      canonical: localeUrls[safeLang],
-      languages: getLocaleAlternates(BASE_URL),
-    },
+    // canonical, hreflang va og:url bu yerda berilmaydi: layout'dagi qiymat
+    // o'zinikini bermagan har bir sahifaga meros o'tib, portfolio va boshqa
+    // sahifalarni Google uchun bosh sahifaning nusxasiga aylantirgan edi.
+    // Har bir sahifa `getPageAlternates` (src/lib/seo.ts) bilan o'zinikini beradi.
   };
 }
 
@@ -160,7 +147,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "image": "https://www.jonbranding.uz/icon.svg",
               "logo": "https://www.jonbranding.uz/icon.svg",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": "+998792000097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",
@@ -314,7 +301,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
               "@type": "LocalBusiness",
               "name": "Jon.Branding",
               "url": "https://www.jonbranding.uz",
-              "telephone": "+998336450097",
+              "telephone": "+998792000097",
               "priceRange": "$$$",
               "address": {
                 "@type": "PostalAddress",

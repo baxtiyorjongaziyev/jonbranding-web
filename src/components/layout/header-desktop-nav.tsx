@@ -180,7 +180,7 @@ export function DesktopNav({
           <LanguageSwitcher lang={lang as any} isInverted={!useDarkHeaderText} />
           <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
             <ExpandingButton
-              href="tel:+998336450097"
+              href="tel:+998792000097"
               ariaLabel={dictionary.contact_by_phone}
               icon={<Phone className="h-4.5 w-4.5" />}
               text={dictionary.contact_by_phone}
@@ -188,7 +188,7 @@ export function DesktopNav({
               onClick={() => trackContactClick('phone', 'header')}
             />
             <ExpandingButton
-              href="https://t.me/baxtiyorjon_gaziyev"
+              href="https://t.me/baxtiyorjongaziyev"
               target="_blank"
               rel="noopener noreferrer"
               ariaLabel={dictionary.contact_by_telegram}

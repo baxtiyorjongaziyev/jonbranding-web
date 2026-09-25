@@ -2,6 +2,170 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-09-25 | Code bazani mukammal (ideal) holatga keltirish, Dependabot, CodeQL va SEO to'liq yopildi
+
+**Qilingan ish:**
+1. **Dependabot & Zaifliklar (0 vulnerabilities):**
+   - Alert #82: Ortiqcha va ishlatilmayotgan `pnpm-lock.yaml` fayli repodan o'chirildi (barcha build va CI faqat npm ishlatadi).
+   - Alert #48: `package.json` overrides ga `"uuid": "^11.1.1"` qo'shildi va `package-lock.json` yangilandi. `npm audit` natijasi: **0 vulnerabilities**.
+2. **GitHub CodeQL Scanning tozalash:**
+   - 12-maydan qolib ketgan eskirgan va ogohlantirish berayotgan `/language:python` va `/language:actions` bo'yicha barcha 57 ta tahlillar GitHub API orqali to'liq o'chirildi. CodeQL faqat `javascript-typescript` konfiguratsiyasida to'liq yashil holatga keltirildi.
+3. **Arxitektura va Tozalash (PR #346, #347, #350, #345):**
+   - Ishlatilmayotgan 23 ta eski bo'lim fayllari (`src/components/sections/` dagi `at-*`, `hero.tsx`, `stats.tsx` va h.k.) butunlay o'chirildi.
+   - 7 ta komponent va utilitadan keraksiz `'use client'` olib tashlandi, Server Component'ga o'tkazildi (`src/lib/pricing.ts`, `haqimizda-client.tsx`, `aloqa-client.tsx`, `naming-client.tsx`, `packaging-client.tsx`, `GuaranteeBlock.tsx`, `button.tsx`).
+   - `src/components/icons/logo.tsx` va `src/app/[lang]/loading.tsx` dagi `<img>` teglari `next/image` ga almashtirildi (LCP va CLS optimallashuvi).
+   - `src/lib/validation/submit-form.ts`: Ariza formasi uchun qat'iy Zod validatsiya sxemasi (telefon, telegram, uzunlik chegaralari) yaratildi.
+   - `src/app/api/submit-form/route.ts`: Barcha `any` turlari bartaraf etilib, to'liq `LeadData` va `AmoCrmLeadResult` interfeyslariga o'tkazildi.
+4. **SEO va Ko'p tilli sarlavhalar (P1-7):**
+   - `/portfolio` va `/portfolio/[slug]` sahifalarida brend nomining ikki marta takrorlanishi (`... | Jon.Branding | Jon.Branding`) to'g'rilandi.
+   - `/narxlar` sahifasi metadata sarlavha va tavsiflari barcha 4 tilda (`uz`, `ru`, `en`, `zh`) mahalliylashtirildi.
+5. **QA & Build:**
+   - `npm run typecheck` ✓ (0 errors)
+   - `npx vitest run` ✓ (41 test fayli, barcha 303 test yashil)
+   - `npm run build` ✓ (165 sahifa 100% muvaffaqiyatli build bo'ldi)
+
+---
+
+## 2026-09-25 | PR #342 main konflikti hal qilindi
+
+**Qilingan ish:** i18n xizmat ID tuzatishlari `main`dagi yangi Brand Strategy xizmati bilan birlashtirildi. Brand Strategy uchun `brand-strategy` ID qo'shildi, kategoriya xaritasi ID asosida saqlandi va tasdiqlangan narxlar matni qoldirildi.
+
+---
+
+## 2026-09-25 | To'liq sayt auditi P0 muammolari to'liq bartaraf etildi
+
+**Qilingan ish:**
+1. **P0-1 (Canonical & SEO):**
+   - `[lang]/layout.tsx` dan hamma sahifaga meros o'tuvchi noto'g'ri default canonical, hreflang va og:url olib tashlandi.
+   - `src/lib/seo.ts` ga `getPageAlternates(locale, path)` helperi qo'shildi.
+   - Barcha 128 ta sahifa (104 ta portfolio keyslari, `/portfolio`, `/privacy`, `/terms`, `/sitemap`, `/checklist`, `/otzivlar`, `/umarin-privacy-policy`, `/xizmatlar/patent-kalkulyatori`) endi o'zining to'g'ri canonical va hreflang URL'lariga ega.
+   - `src/app/canonical.test.ts` regressiya testlari qo'shildi va to'liq o'tdi.
+2. **P0-2 (CSP analitika va Google Ads):**
+   - `next.config.js` CSP direktivalariga Google Ads (`googleadservices.com`, `doubleclick.net`), Microsoft Clarity (`scripts.clarity.ms`, `h.clarity.ms`), GA4 regional, Hotjar, Yandex Metrika va Amplitude domenlari qo'shildi.
+   - `src/app/content-security-policy.test.ts` orqali tasdiqlandi.
+3. **P0-4 (Xitoycha sharhlar mojibake va ATQuotes override):**
+   - `src/lib/static-data.ts` dagi xitoycha sharhlar (zh) va inglizcha emoji (en:184) buzilgan kodirovkalari toza UTF-8 xitoycha matnlar bilan to'g'rilandi.
+   - `src/components/atelier/atelier-sections.tsx` (`ATQuotes`): serverdan kelgan `testimonialsProp` ga client fetch ustuvorlik qilishi to'xtatildi (layout shift va mojibake oldi olindi).
+4. **P0-5 (Oisha chat widget 503 xatosi):**
+   - `src/app/api/oisha/route.ts`: Oisha AI backend'i sozlanmagan (`OISHA_API_URL` bo'sh) holatda 503 tashlash va xabarlarni yo'qotish o'rniga, kelgan savollarni to'g'ridan-to'g'ri Telegram admin botiga yuboradigan va mijozga xushmuomala javob qaytaradigan fallback tizimi yaratildi.
+5. **P0-3 (Navigator diagnostikasi crash):**
+   - `src/lib/supabase/client.ts` va `server.ts`: Supabase env o'zgaruvchilari yo'q bo'lsa server/brauzerda xatolik tashlab qulashining oldi olindi (`return null`).
+   - `src/components/navigator/diagnostic-flow.tsx`: Diagnostika arizalari har qanday holatda `/api/submit-form` orqali Telegram va amoCRM ga yetkazilishi ta'minlandi.
+   - `src/app/admin/navigator/page.tsx`: Sessiya tekshiruvi (`verifyAdminSession`) bilan himoyalandi va 500 xato o'rniga xavfsiz boshqaruv paneli ko'rinishi ta'minlandi.
+6. **P0-6 & P2-14 (Kontent gigiyenasi & Noindex):**
+   - Atelier shablonidan qolgan soxta nomlar tozalangan holat tasdiqlandi (`content-integrity.test.ts`).
+   - `/avans`, `/navigator`, `/uslub-test`, `/umarin-privacy-policy` yo'nalishlariga qidiruv tizimlari indekslamasligi uchun `robots: { index: false, follow: false }` o'rnatildi.
+7. **QA & Build:**
+   - `npm run typecheck` ✓ (0 xato).
+   - `npx vitest run` ✓ (41 test fayli, 303 testning barchasi yashil).
+   - `npm run build` ✓ (165 ta sahifa 100% muvaffaqiyatli build bo'ldi).
+
+---
+
+## 2026-09-25 | Brand Strategy sahifasiga fotorealistik B2B vizuallar va rasmlar integratsiya qilindi
+
+**Qilingan ish:**
+1. **Generatsiya va Vizual kontent:**
+   - Saytning faqat matndan iborat bo'lib qolmasligi va 48 mln so'mlik high-ticket B2B positioningni vizual tasdiqlash uchun 4 ta yuqori darajadagi fotorealistik vizuallar generatsiya qilindi (`public/images/brand-strategy/`):
+     - `hero.jpg`: B2B konsultatsiya jarayoni, qattiq muqovali Strategy Deck va positioning kartalari bilan executive boardroom.
+     - `deck.jpg`: Ochiq Brand Strategy taqdimot hujjati (Bozor xaritasi, Value Proposition matritsasi, JTBD va auditoriya tahlili).
+     - `deliverables.jpg`: Mijozga topshiriladigan jismoniy va raqamli to'plam (Qattiq muqovali Brand Strategy kitobi, laminatsiyalangan 1-sahifalik Strategy Map va Brand Platform Guide).
+     - `workshop.jpg`: Ta'sischilar va brend-strateglar bilan shisha doska ustida positioning va messaging ustunlarini ishlab chiqish sessiyasi.
+2. **Komponent integratsiyasi:**
+   - `src/app/[lang]/brand-strategy/brand-strategy-client.tsx`: `next/image` yordamida Hero, 5-bo'lim (Xizmat tarkibi), 7-bo'lim (Mijoz nima oladi) va 11-bo'lim (Jarayon / Workshop)ga responsiv, optimallashtirilgan bannerlar va tegishli annotatsiyalar joylashtirildi.
+3. **QA & Build:**
+   - `npm run typecheck` ✓ (0 xatolik).
+
+---
+
+## 2026-09-25 | /xizmatlar/brand-strategiyasi va /brand-strategy yo'nalishlari birlashtirildi
+
+**Qilingan ish:**
+1. **Redirect & Canonical konsolidatsiyasi:**
+   - `next.config.js`: `/xizmatlar/brand-strategiyasi`, `/:lang/xizmatlar/brand-strategiyasi`, `/xizmatlar/brand-strategy` va `/:lang/xizmatlar/brand-strategy` yo'nalishlari 308 permanent redirect orqali to'g'ridan-to'g'ri `/brand-strategy` ga yo'naltirildi.
+   - `src/app/[lang]/xizmatlar/brand-strategiyasi/page.tsx`: Server-side `permanentRedirect('/brand-strategy')` bilan almashtirildi.
+   - `src/app/[lang]/xizmatlar/brand-strategiyasi/layout.tsx`: `canonical: 'https://www.jonbranding.uz/brand-strategy'` va `robots: { index: false, follow: true }` ga o'zgartirildi.
+2. **Sitemap va Ichki havolalar:**
+   - `src/app/[lang]/sitemap/page.tsx`: Brend strategiyasi havolasi `/brand-strategy` ga o'zgartirildi.
+   - `src/app/sitemap.ts`: Dublikat `'/xizmatlar/brand-strategiyasi'` staticRoutes ro'yxatidan olib tashlandi (`/brand-strategy` allaqachon mavjud).
+3. **Roadmap & QA:**
+   - `ROAD_MAP.md` dagi dublikat route vazifasi bajarilgan deb belgilandi.
+   - `npm run typecheck` ✓, `npm run lint` ✓, `npm run build` ✓ muvaffaqiyatli yakunlandi.
+
+---
+
+## 2026-09-25 | Server loglari logger'ga o'tkazildi, hujjatlar yangilandi
+
+**Qilingan ish:**
+1. 6 ta server faylida `console.log` → `logger.info` (amocrm-process-calls, portfolio-sync, vimeo-webhook, instagram callback, integrations/instagram, integrations/telegram).
+2. CLAUDE.md va AGENTS.md: `ignoreBuildErrors: false` deb tuzatildi; CI `npm ci` ishlatadi — `package-lock.json` asosiy lockfile.
+3. `pnpm-lock.yaml` tegilmadi — Vercel qaysi menejerni ishlatishi tekshirilgach hal qilinadi.
+
+**Qolgan ishlar (audit):** submit-form zod validatsiyasi, Dependabot 2 ta zaiflik, o'lik section'lar, `<img>` → `next/image`, `atelier-sections.tsx` (2916 qator) bo'lish, `'use client'` kamaytirish.
+
+---
+
+## 2026-09-24 | Brand Strategy xizmati uchun alohida public landing page ishlab chiqildi
+
+**Vazifa:** Brand Strategy xizmatini “30–40 betlik prezentatsiya” sifatida emas, balki “biznes bozorda kim bo‘lishi, kim uchun ishlashi, nimasi bilan farqlanishi va nima deyishi kerakligini aniqlab beradigan strategik tizim” sifatida tushuntiruvchi premium B2B public landing page yaratish. Narx: 48 000 000 so‘m.
+
+**1. Yangi route & arxitektura:**
+- `/[lang]/brand-strategy` (`src/app/[lang]/brand-strategy/page.tsx` va `brand-strategy-client.tsx`).
+- Public va SEO indexable: `robots: { index: isUz, follow: true }`, OpenGraph, BreadcrumbList JSON-LD (`Bosh sahifa → Xizmatlar → Brand Strategy`) va Service Schema JSON-LD.
+- `src/app/sitemap.ts` dagi `uzOnlyPages` ro'yxatiga `'/brand-strategy'` qo'shildi.
+
+**2. Yangi canonical service:**
+- `src/lib/sales-content` ga `Brand Strategy` xizmati narxi bilan (`48 000 000`) "Brend qurish" guruhining birinchi elementi sifatida joylashtirildi.
+- `BRAND_STRATEGY_SERVICE` va `SERVICE_CATEGORIES['Brand Strategy']` eksport qilindi.
+- `docs/NARXLAR.md` ma'lumotnomasiga `Brand Strategy` xizmati va uning sahifa yo'li qo'shildi.
+- Narx hardcode qilinmadi, bevosita canonical source'dan olinadi. Muddat qat'iy user tasdig'i bo'lmagani sababli hardcode qilinmadi.
+
+**3. Sahifa sectionlari (17 asosiy bo'lim + forma):**
+- **01. Hero:** Eyebrow, H1, Subtitle, Narx (`48 000 000 so‘m`), Primary CTA ("Brand Strategy bo‘yicha uchrashuv"), Secondary CTA ("Xizmat tarkibini ko‘rish"), editorial Brand Strategy Map diagrammasi.
+- **02. Muammo:** "Brend strategiyasiz biznesda nima sodir bo‘ladi?" visual flow (Rahbar, Marketing, Sotuvchi, Dizayn vs Mijoz), highlight: "Muammo logoda emas. Muammo — brendning bozordagi o‘rni aniqlanmaganida."
+- **03. Eng muhim savol:** Qora fonli minimal section: "Nega mijoz bozordagi boshqa variantlar ichidan aynan sizni tanlashi kerak?", raqobatchilar aytadigan umumiy gaplar tahlili.
+- **04. Brand Strategy nima?:** "Biznesning bozor uchun strategik kompasidir" (Kim uchun?, Qanday muammoni hal qilamiz?, Nimasi bilan farqlanamiz?, Bozorda kim bo‘lamiz?).
+- **05. Xizmat tarkibi:** 12 ta strategik modul (Biznes diagnostikasi, Bozor tahlili, Raqobatchilar tahlili, Auditoriya/JTBD, Category, Positioning formulasi, Value Proposition 3 qatlami, Differentiation, Reason to Believe, Brand Essence, Brand Personality chegaralari, Messaging Pillars).
+- **06. Brand Architecture:** Optional modul (Master Brand ↓ Sub-brand ↓ Product/Service Lines).
+- **07. Mijoz 48 mln so‘mga nima oladi?:** 3 ta deliverable (Brand Strategy Deck ~30–40+ bet, Brand Strategy Map 1 sahifada, Creative Brief keyingi ijodiy ishlar uchun).
+- **08. Oldin / Keyin:** Ikki tomonli taqqoslash kartalari.
+- **09. Brand Strategy nima emas?:** 4 ta taqqoslash kartasi (Marketing Strategy, Business Strategy, Visual Identity, Brandbook emasligi; Strategy → Direction, Identity → Expression, Brandbook → Rules).
+- **10. Jon Branding tizimida qayerda?:** 7 ta xizmat ketma-ketligi va mavjud brendlar uchun Brand Audit yo'li.
+- **11. Ish jarayoni:** 7 ta bosqich (Founder intervyusi, Diagnostika, Bozor/raqobatchilar, Auditoriya, Gipotezalar, Taqdimot, Final).
+- **12. Kimlar uchun?:** 6 ta aniq biznes toifasi (Yangi brend, Rebranding, O‘sayotgan biznes, Yangi bozor, Bir nechta yo‘nalish, Premium segment).
+- **13. Kimga hozir kerak emas?:** Mikro-loyiha, model aniqlanmagan, rahbar qatnashmaydigan, faqat reklama istaganlar uchun emasligi.
+- **14. 48 million nimaga?:** Biznes qiymati va objection handling, Value Stack, "Narx sahifalar soniga emas, biznes uchun qabul qilinadigan strategik qarorlar hajmiga bog‘liq".
+- **15. JTBD section:** Qora fonda mijozning ichki maqsadi, "chiroyli brend emas, aniq brend qurish".
+- **16. FAQ:** 7 ta savol-javobli interaktiv accordion.
+- **17. Final CTA & 2-bosqichli lead forma:** 1-bosqich (Ism, Telefon, Kompaniya), 2-bosqich (Faoliyat, Sayt/Insta, Muammo, Maqsad, Qaror qiluvchi). Bot himoyasi (honeypot), validatsiya, `/api/submit-form` integratsiyasi.
+
+**4. Analytics & Event Tracking:**
+- `brand_strategy_page_view` (mount paytida)
+- `brand_strategy_cta_click` (barcha tugmalar uchun tegishli label bilan)
+- `brand_strategy_form_start` (birinchi input kiritilganda)
+- `brand_strategy_form_submit`
+- `brand_strategy_meeting_request` (high-ticket konversiya qiymati bilan)
+- `trackLead` integratsiyasi
+
+**5. Test va tekshiruv natijalari:**
+- `npm run typecheck` ✓ (0 xato)
+- `npm run lint` ✓ (0 xato)
+- `npx vitest run src/lib/sales-content.test.ts` ✓ (17/17 test o'tdi)
+- `npm run build` ✓ (Muvaffaqiyatli build, `/[lang]/brand-strategy` dinamik sahifasi generatsiya qilindi)
+- 390px, 768px, 1440px da to'liq responsive, to'g'ri H1/H2/H3 iyerarxiyasi, semantic HTML va accessible klaviatura navigatsiyasi.
+
+---
+
+## 2026-09-23 | Kontakt ma'lumotlari yangilandi
+
+**Qilingan ish:**
+1. Telegram (shaxsiy): `@baxtiyorjon_gaziyev` → `@baxtiyorjongaziyev` (13 joy, 10 fayl; Den Aroma maqolasidagi matn/havola nomuvofiqligi ham tuzatildi).
+2. Telefon: `+998 33 645 00 97` / `+998336450097` → `+998 79 200 00 97` / `+998792000097` (52 joy + `public/llms.txt`).
+3. Placeholder/test raqamlari (`+998901234567` va h.k.) tegilmadi.
+4. Sanity: `siteSettings` hujjati yo'q — sayt `src/lib/data/settings.ts` fallback'idan oladi; Studio'da yangilash shart emas.
+
+**Tekshiruv:** typecheck ✓, vitest 267/267 ✓ (2 ta timeout qayta ishga tushirilganda o'tdi).
+
 ---
 
 ## 2026-09-23 | Eskirgan Netlify integratsiyasi butunlay olib tashlandi

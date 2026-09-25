@@ -5,7 +5,7 @@
  * Narxlar barcha tillarda bir xil (so'mda) — faqat matn tarjima qilinadi.
  */
 
-import { uz, EXPERT_CHECK_SERVICE } from './uz';
+import { uz, EXPERT_CHECK_SERVICE, BRAND_STRATEGY_SERVICE } from './uz';
 import { ru } from './ru';
 import { en } from './en';
 import { zh } from './zh';
@@ -35,7 +35,7 @@ export function getSalesContent(lang?: string): SalesContent {
  * Eski nomlar — o'zbekcha kontentga ishora qiladi.
  * Tilga bog'liq joylarda `getSalesContent(lang)` ishlatilsin.
  */
-export { EXPERT_CHECK_SERVICE };
+export { EXPERT_CHECK_SERVICE, BRAND_STRATEGY_SERVICE };
 
 export const SERVICE_GROUPS = uz.serviceGroups;
 export const PACKAGES = uz.packages;
@@ -48,6 +48,7 @@ export const PRICE_FACTORS = uz.priceFactors;
 
 /** Kategoriyalar xizmat ID si bo'yicha — tarjima qilinsa ham buzilmaydi. */
 export const SERVICE_CATEGORIES: Partial<Record<ServiceId, string[]>> = {
+  'brand-strategy': ['brand-strategy'],
   naming: ['naming', 'brand-strategy'],
   logo: ['logo-design'],
   'visual-identity': ['corporate-style'],

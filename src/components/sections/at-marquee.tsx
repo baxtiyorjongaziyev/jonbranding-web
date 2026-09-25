@@ -4,38 +4,39 @@ import type { FC } from 'react';
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 interface Props { lang?: string; }
 
+// Faqat portfolio'dagi haqiqiy keyslar. Tasdiqlanmagan raqam yoki mijoz qo'shmang.
 const ITEMS: Record<Lang, string[]> = {
   uz: [
-    'Qumri Coffee — +41% sotuv',
-    'Teshabay osh — 3× takroriy mijoz',
-    'Humo Fintech — 180K foydalanuvchi',
-    'Oltin Bulut — +31% qadoqdan keyin',
-    "Nur Sopol — 2× ko'rinish javonda",
-    'Chilla — yangi shahar bozori',
+    'Den Aroma — neyming va rebrending',
+    'Sarmilk — logotip va firma uslubi',
+    'FIDDA by Sevara — rebrending',
+    'Rutera — brending va patent',
+    'Boyarin — qadoq dizayni',
+    'Perfona — logotip va brending',
   ],
   ru: [
-    'Qumri Coffee — продажи +41%',
-    'Teshabay osh — 3× повторных клиентов',
-    'Humo Fintech — 180K пользователей',
-    'Oltin Bulut — +31% после ребрендинга упаковки',
-    'Nur Sopol — 2× видимость на полке',
-    'Chilla — новый городской рынок',
+    'Den Aroma — нейминг и ребрендинг',
+    'Sarmilk — логотип и фирменный стиль',
+    'FIDDA by Sevara — ребрендинг',
+    'Rutera — брендинг и патент',
+    'Boyarin — дизайн упаковки',
+    'Perfona — логотип и брендинг',
   ],
   en: [
-    'Qumri Coffee — +41% sales',
-    'Teshabay osh — 3× repeat clients',
-    'Humo Fintech — 180K users',
-    'Oltin Bulut — +31% after packaging rebrand',
-    'Nur Sopol — 2× shelf visibility',
-    'Chilla — new city market',
+    'Den Aroma — naming & rebrand',
+    'Sarmilk — logo & corporate style',
+    'FIDDA by Sevara — rebrand',
+    'Rutera — branding & trademark',
+    'Boyarin — packaging design',
+    'Perfona — logo & branding',
   ],
   zh: [
-    'Qumri Coffee — 销售额+41%',
-    'Teshabay osh — 3×复购客户',
-    'Humo Fintech — 18万用户',
-    'Oltin Bulut — 重新包装后+31%',
-    'Nur Sopol — 货架可见度2×',
-    'Chilla — 开拓新城市市场',
+    'Den Aroma — 命名与品牌重塑',
+    'Sarmilk — 标志与企业视觉',
+    'FIDDA by Sevara — 品牌重塑',
+    'Rutera — 品牌与商标注册',
+    'Boyarin — 包装设计',
+    'Perfona — 标志与品牌',
   ],
 };
 

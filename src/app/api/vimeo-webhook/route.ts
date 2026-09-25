@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger';
 import { NextRequest, NextResponse } from 'next/server';
 import { createHmac } from 'node:crypto';
 import { client } from '@/sanity/lib/client';
@@ -121,11 +122,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: 'No video link found, skipping.' });
     }
 
-    console.log(`[vimeo-webhook] Processing video: ${name}`);
+    logger.info(`[vimeo-webhook] Processing video: ${name}`);
 
     // Call AI to categorize
     const aiResult = await categorizeVideo(name, description);
-    console.log(`[vimeo-webhook] AI Categorization:`, aiResult);
+    logger.info(`[vimeo-webhook] AI Categorization:`, aiResult);
 
     if (aiResult.category === 'other') {
       return NextResponse.json({ success: true, message: 'Categorized as "other", skipping CMS insertion.' });
@@ -164,7 +165,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Add reference to the video
-    console.log(`[vimeo-webhook] Creating ${doc._type} document in Sanity...`);
+    logger.info(`[vimeo-webhook] Creating ${doc._type} document in Sanity...`);
     const createdDoc = await sanityWriteClient.create(doc);
 
     return NextResponse.json({

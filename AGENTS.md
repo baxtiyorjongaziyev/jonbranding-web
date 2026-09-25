@@ -84,7 +84,7 @@ src/sanity/schemaTypes/
 3. **Rasmlar** — `next/image`, CDN: `cdn.sanity.io` yoki `public/`
 4. **Animatsiyalar** — `framer-motion`, `motion.div` bilan
 5. **Responsive** — Mobile-first, Tailwind: `sm:`, `md:`, `lg:`
-6. **TypeScript** — `ignoreBuildErrors: true` (build'da xato o'tadi, lekin yaxshi yoz)
+6. **TypeScript** — `ignoreBuildErrors: false` (tip xatosi build'ni to'xtatadi). Server log uchun `console.log` emas, `logger` (`src/lib/logger.ts`)
 7. **Yangi section** — `src/components/sections/` ichiga, `export default FC<Props>`
 8. **Tailwind class birlashtirish** — `cn()` utility
 9. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilda joriy etilishi shart.
@@ -142,3 +142,13 @@ Bu loyiha konteksti Obsidian vault'da: **`10-Projects/JonBranding.md`** (agentli
 Repo — kod uchun haqiqat manbai. Vault — biznes va qaror konteksti uchun.
 <!-- BRAIN-CAPTURE -->
 
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

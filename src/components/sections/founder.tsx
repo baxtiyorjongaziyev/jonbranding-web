@@ -193,7 +193,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-3 pt-1">
               <a
-                href="tel:+998336450097"
+                href="tel:+998792000097"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
                 style={{ background: 'var(--at-accent)', color: '#fff' }}
               >
@@ -201,7 +201,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
                 {translations.phoneButton}
               </a>
               <a
-                href="https://t.me/baxtiyorjon_gaziyev"
+                href="https://t.me/baxtiyorjongaziyev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"

@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Search, Palette, Box } from 'lucide-react';

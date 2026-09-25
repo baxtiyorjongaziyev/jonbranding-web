@@ -254,7 +254,7 @@
       },
       {
         "title": "5. 联系信息",
-        "text": "如有问题或异议，请通过 +998336450097 或 Telegram @jonbranding 联系我们。"
+        "text": "如有问题或异议，请通过 +998792000097 或 Telegram @jonbranding 联系我们。"
       }
     ]
   },
@@ -1612,40 +1612,6 @@
         "time": "4–8 周"
       }
     ],
-    "ledger": [
-      {
-        "name": "Qumri",
-        "yr": "25"
-      },
-      {
-        "name": "Teshabay",
-        "yr": "25"
-      },
-      {
-        "name": "Oltin Bulut",
-        "yr": "24"
-      },
-      {
-        "name": "Humo",
-        "yr": "24"
-      },
-      {
-        "name": "Nur Sopol",
-        "yr": "23"
-      },
-      {
-        "name": "Chilla",
-        "yr": "23"
-      },
-      {
-        "name": "Asaka Co.",
-        "yr": "22"
-      },
-      {
-        "name": "Tong Ko'ngil",
-        "yr": "22"
-      }
-    ],
     "stats": [
       {
         "n": "240",
@@ -1762,32 +1728,6 @@
         "note": "分步行动计划"
       }
     ],
-    "marquee": [
-      {
-        "name": "Qumri Coffee",
-        "res": "+41% 销售额"
-      },
-      {
-        "name": "Teshabay osh",
-        "res": "3倍回头客"
-      },
-      {
-        "name": "Humo Fintech",
-        "res": "18万用户"
-      },
-      {
-        "name": "Oltin Bulut",
-        "res": "包装后销售额增长31%"
-      },
-      {
-        "name": "Nur Sopol",
-        "res": "货架可见度提高2倍"
-      },
-      {
-        "name": "Chilla",
-        "res": "新城市市场"
-      }
-    ],
     "bad": [
       {
         "ix": "01",
@@ -1822,78 +1762,6 @@
       {
         "ix": "04",
         "t": "名称、标志、包装、网站 — 风格统一，一站式服务，一个团队。"
-      }
-    ],
-    "featured": {
-      "name": "Qumri Coffee",
-      "city": "撒马尔罕",
-      "year": "2025",
-      "cat": "命名 · 视觉识别 · 包装 · 商标",
-      "story": "撒马尔罕当地的咖啡馆。旧名称带有方言色彩且难以记忆。新名称将地点与乌兹别克鸟类结合。包装、菜单和室内设计以统一风格更新。3个月后，常客数量增加了3倍，6个月内开设了第二家分店。",
-      "metrics": [
-        {
-          "n": "+41%",
-          "l": "3个月内销售额"
-        },
-        {
-          "n": "3×",
-          "l": "回头客"
-        },
-        {
-          "n": "2",
-          "l": "新分店"
-        }
-      ]
-    },
-    "index": [
-      {
-        "yr": "2025",
-        "client": "Qumri Coffee",
-        "sector": "咖啡馆 · 撒马尔罕",
-        "discipline": "命名 · 视觉识别 · 包装",
-        "result": "+41% 销售额"
-      },
-      {
-        "yr": "2025",
-        "client": "Teshabay osh",
-        "sector": "餐厅 · 塔什干",
-        "discipline": "品牌重塑 · 菜单",
-        "result": "3倍回头客"
-      },
-      {
-        "yr": "2024",
-        "client": "Oltin Bulut",
-        "sector": "乳制品 · 布哈拉",
-        "discipline": "包装 · 12个SKU",
-        "result": "+31% 销售额"
-      },
-      {
-        "yr": "2024",
-        "client": "Humo",
-        "sector": "金融科技 · 塔什干",
-        "discipline": "品牌 · 应用程序 · 网站",
-        "result": "18万用户"
-      },
-      {
-        "yr": "2023",
-        "client": "Nur Sopol",
-        "sector": "陶器 · 里什坦",
-        "discipline": "视觉识别 · 包装",
-        "result": "2倍可见度"
-      },
-      {
-        "yr": "2023",
-        "client": "Chilla",
-        "sector": "夏季服装 · 塔什干",
-        "discipline": "命名 · 视觉识别",
-        "result": "新市场"
-      },
-      {
-        "yr": "2022",
-        "client": "Asaka Co.",
-        "sector": "汽车服务",
-        "discipline": "品牌重塑 · 网站",
-        "result": "+22% 客户"
       }
     ],
     "process": [
@@ -1967,32 +1835,6 @@
         ],
         "featured": false,
         "cta": "订购策略"
-      }
-    ],
-    "quotes": [
-      {
-        "q": "我们设计了标志。3个月内销售额增长了41%。我没想到 — 我们只是改变了外观。",
-        "who": "Sardor Ro'ziyev",
-        "role": "Qumri Coffee，创始人",
-        "result": "+41% 销售额"
-      },
-      {
-        "q": "我们的竞争对手试图盗用我们的名称。Jon当时帮助我们保住了它 — 否则我们会失去一切。",
-        "who": "Malika Karimova",
-        "role": "Oltin Bulut，营销总监",
-        "result": "名称受到保护"
-      },
-      {
-        "q": "在超市货架上，新包装后我们的产品可见度提高了2倍。销售额也随之增长。",
-        "who": "Rustam Xolmatov",
-        "role": "Nur Sopol，创始人",
-        "result": "2倍可见度"
-      },
-      {
-        "q": "在6个月内，我们的3个竞争对手倒闭了。我们仍在运营。区别仅仅在于外观。",
-        "who": "Bekzod Aliyev",
-        "role": "Humo，负责人",
-        "result": "我们留在了市场"
       }
     ],
     "faq": [
@@ -2275,7 +2117,7 @@
       "brand": "Jon.Branding",
       "sloganUz": "让您的品牌在街头发挥作用",
       "sloganRu": "引人注目的广告",
-      "phone": "+998 33 645 00 97",
+      "phone": "+998 79 200 00 97",
       "side": "侧面",
       "rear": "后部",
       "front": "前部",

@@ -13,6 +13,24 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Nomdan to‘liq vizual tizimgacha. Har birini alohida ham olsangiz bo‘ladi.',
     items: [
       {
+        id: 'brand-strategy',
+        name: 'Brand Strategy',
+        price: '48 000 000',
+        lead: 'Brendingiz bozorda qaysi joyni egallashi kerakligini aniqlaymiz. Kim uchun ishlaysiz, nimasi bilan farqlanasiz va nima deysiz — bitta strategik tizimga keltiramiz.',
+        deliverables: [
+          'Brand Strategy Deck — 30–40+ sahifali strategik hujjat (biznes, bozor, auditoriya, positioning, messaging)',
+          'Brand Strategy Map — butun strategik tizim bir sahifada',
+          'Creative Brief — keyingi dizayn, marketing va kommunikatsiya qarorlari uchun kompas',
+          'Biznes diagnostikasi va bozor tendensiyalari tahlili',
+          'Raqobatchilar tahlili va bo‘sh strategik pozitsiyalarni aniqlash',
+          'Auditoriya segmentlari va JTBD ehtiyojlar tahlili',
+          'Positioning formulasi, Value Proposition va asoslangan farqlanish',
+          'Brand Essence, Brand Personality va asosiy Messaging ustunlari',
+        ],
+        benefit: 'Marketing, sotuv va dizayn bitta yo‘nalishda ishlaydi. 48 million so‘m taqdimot uchun emas — kompaniyaning keyingi brend qarorlariga asos bo‘ladigan strategik tizim uchun.',
+        audience: 'Kompaniya asoschilari, CEO, marketing rahbarlari, yangi brend yoki rebranding qilayotgan bizneslar',
+      },
+      {
         id: 'naming',
         name: 'Naming',
         price: '10 000 000',
@@ -184,6 +202,11 @@ export const EXPERT_CHECK_SERVICE: Service = SERVICE_GROUPS
   .flatMap((group) => group.items)
   .find((item) => item.name === 'Patent tekshiruvi')!;
 
+/** Brand Strategy (`/brand-strategy`) — narx shu yozuvdan olinadi. */
+export const BRAND_STRATEGY_SERVICE: Service = SERVICE_GROUPS
+  .flatMap((group) => group.items)
+  .find((item) => item.name === 'Brand Strategy')!;
+
 export const PACKAGES: Package[] = [
   {
     name: 'VIP',
@@ -323,7 +346,7 @@ export const uz: SalesContent = {
     },
     hero: {
       pre: 'Narxlarimiz', hi: 'ochiq',
-      sub: 'Hamma uchun birdek — shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.',
+      sub: 'Hamma uchun birdek, shaffof ishlaymiz. Narxni ham yashirmaymiz, ishni ham.',
     },
     jobs: {
       pre: 'Biz aslida nimani', hi: 'hal qilamiz',
