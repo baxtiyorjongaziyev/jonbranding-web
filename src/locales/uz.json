@@ -426,6 +426,8 @@
     "error": "Ulanishda xatolik yuz berdi.",
     "welcome": "Assalomu alaykum! Men Oisha — Jon Branding agentligining intellektual yordamchisiman. Sizga qanday ko'mak bera olaman?",
     "ack": "Xabaringiz strateglarga yuborildi. Ular tez orada shu yerda javob berishadi.",
+    "offlineAskContact": "Rahmat, savolingizni oldik! Mutaxassisimiz javob berishi uchun telefon raqamingiz yoki Telegram'ingizni shu yerga yozib qoldiring.",
+    "offlineThanks": "Rahmat! Kontaktingizni oldik — mutaxassisimiz tez orada siz bilan bog'lanadi.",
     "thinking": "Oisha o'ylamoqda...",
     "openButtonAriaLabel": "Oisha chatini ochish",
     "closeButtonAriaLabel": "Oisha chatini yopish",

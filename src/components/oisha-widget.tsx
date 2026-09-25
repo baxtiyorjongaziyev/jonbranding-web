@@ -50,7 +50,8 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     try {
       const res = await fetch(`${OISHA_PROXY}?user_id=${uid}`);
       const data = await res.json();
-      if (data.history) {
+      // Bo'sh tarix (backend sozlanmagan) mavjud salom xabarini o'chirmasin.
+      if (Array.isArray(data.history) && data.history.length > 0) {
         setMessages(
           data.history.map((message: any, idx: number) => ({
             id: `hist-${idx}`,
@@ -110,47 +111,18 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
     return () => window.removeEventListener('oishaProactive', handler as EventListener);
   }, []);
 
+  // Proaktiv xabar — Oisha'ning o'z savoli. U mehmon nomidan backend'ga
+  // yuborilmaydi: aks holda har bir tashrif lid guruhiga "savol" bo'lib tushadi.
   useEffect(() => {
-    if (proactiveMsg && userId) {
-      const text = proactiveMsg;
-      setProactiveMsg(null);
-      setInputValue(text);
-      const timer = setTimeout(() => {
-        setInputValue('');
-        setMessages((prev) => [
-          ...prev,
-          { id: Date.now().toString(), text, role: 'user', timestamp: new Date().toISOString() },
-        ]);
-        setIsLoading(true);
-        fetch('/api/oisha', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: userId, text }),
-        })
-          .then((r) => (r.ok ? r.json() : Promise.reject()))
-          .then((data) => {
-            if (data?.response) {
-              setMessages((prev) => [
-                ...prev,
-                {
-                  id: `reply-${Date.now()}`,
-                  text: data.response,
-                  role: 'model',
-                  timestamp: new Date().toISOString(),
-                },
-              ]);
-            } else {
-              setTimeout(() => fetchHistory(userId), 2000);
-            }
-          })
-          .catch(() => {
-            toast({ title: translations.error, variant: 'destructive' });
-          })
-          .finally(() => setIsLoading(false));
-      }, 600);
-      return () => clearTimeout(timer);
-    }
-  }, [fetchHistory, proactiveMsg, userId, toast, translations.error]);
+    if (!proactiveMsg) return;
+    const text = proactiveMsg;
+    setProactiveMsg(null);
+    setMessages((prev) =>
+      prev.some((message) => message.role === 'model' && message.text === text)
+        ? prev
+        : [...prev, { id: `proactive-${Date.now()}`, text, role: 'model', timestamp: new Date().toISOString() }],
+    );
+  }, [proactiveMsg]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
@@ -171,7 +143,7 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
       const res = await fetch(OISHA_PROXY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, text: userText }),
+        body: JSON.stringify({ user_id: userId, text: userText, lang: safeLang }),
       });
 
       if (!res.ok) throw new Error('API Error');

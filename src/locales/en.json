@@ -424,6 +424,8 @@
     "error": "Connection error.",
     "welcome": "Welcome! I am Oisha — the intellectual assistant for Jon Branding. How can I help you today?",
     "ack": "Your message has been sent to our strategists. They will respond here shortly.",
+    "offlineAskContact": "Thanks, we got your question! So our specialist can reply, please leave your phone number or Telegram here.",
+    "offlineThanks": "Thanks! We have your contact — our specialist will get in touch shortly.",
     "thinking": "Oisha is thinking...",
     "openButtonAriaLabel": "Open Oisha chat",
     "closeButtonAriaLabel": "Close Oisha chat",

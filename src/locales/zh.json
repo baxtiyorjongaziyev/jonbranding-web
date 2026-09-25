@@ -432,6 +432,8 @@
     "error": "连接错误。",
     "welcome": "您好！我是 Oisha — Jon Branding 的智能助理。今天我能为您做些什么？",
     "ack": "您的消息已发送给我们的策略师。他们将很快在这里回复您。",
+    "offlineAskContact": "谢谢，我们已收到您的问题！请在此留下您的电话号码或 Telegram，以便我们的专家回复您。",
+    "offlineThanks": "谢谢！我们已收到您的联系方式，专家会尽快与您联系。",
     "thinking": "Oisha 正在思考...",
     "openButtonAriaLabel": "打开 Oisha 聊天",
     "closeButtonAriaLabel": "关闭 Oisha 聊天",
