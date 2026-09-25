@@ -4,6 +4,7 @@ import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { getDb } from '@/lib/firebase-admin';
 import { portfolioDocId } from '@/lib/portfolio-dedup';
 
@@ -361,14 +362,7 @@ async function handleSweep() {
 }
 
 function isAuthorizedSweep(request: NextRequest) {
-  const querySecret = request.nextUrl.searchParams.get('secret');
-  const authHeader = request.headers.get('authorization');
-  const bearerSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice('Bearer '.length) : null;
-  const configured = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(Boolean) as string[];
-  const provided = [querySecret, bearerSecret].filter(Boolean) as string[];
-
-  if (configured.length === 0) return false;
-  return provided.some((value) => configured.some((secret) => safeCompare(value, secret)));
+  return isAuthorizedCronRequest(request);
 }
 
 function missingConfig() {
