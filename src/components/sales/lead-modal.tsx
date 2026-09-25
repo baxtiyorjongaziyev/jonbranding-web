@@ -41,10 +41,17 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     }
   }, [open, presetService, source]);
 
+  const content = getSalesContent(lang);
+  const t = content.ui.modal;
+  const allServices = content.serviceGroups.flatMap((group) =>
+    group.items.map((item) => item.name)
+  );
+  const packageOptions = content.packages.map((pkg) => `${pkg.name} ${t.packageSuffix}`);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValidPhone(phone)) {
-      setPhoneErr('Telefon raqamini to‘g‘ri kiriting');
+      setPhoneErr(t.phoneError);
       phoneRef.current?.focus();
       return;
     }
@@ -87,12 +94,12 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
       });
       result = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setSubmitErr('Xatolik yuz berdi. Qayta urinib ko‘ring.');
+        setSubmitErr(t.submitError);
         setSending(false);
         return;
       }
     } catch {
-      setSubmitErr('Xatolik yuz berdi. Qayta urinib ko‘ring.');
+      setSubmitErr(t.submitError);
       setSending(false);
       return;
     }
@@ -110,10 +117,6 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     setDone(true);
   };
 
-  const allServices = getSalesContent(lang).serviceGroups.flatMap((group) =>
-    group.items.map((item) => item.name)
-  );
-
   return (
     <Dialog.Root open={open} onOpenChange={(next) => { if (!next) onClose(); }}>
       <Dialog.Portal>
@@ -123,32 +126,32 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
           onOpenAutoFocus={(e) => { e.preventDefault(); phoneRef.current?.focus(); }}
         >
           <Dialog.Title className="mb-1.5 text-2xl font-bold text-black" style={{ letterSpacing: '-0.03em' }}>
-            {done ? 'Rahmat!' : 'Ariza qoldirish'}
+            {done ? t.titleDone : t.title}
           </Dialog.Title>
           <Dialog.Description className="mb-6 text-sm text-neutral-500" style={{ lineHeight: 1.6 }}>
-            {done ? 'Tez orada siz bilan bog‘lanamiz.' : 'Ism va telefon raqamingizni qoldiring, o‘zimiz aloqaga chiqamiz.'}
+            {done ? t.descDone : t.desc}
           </Dialog.Description>
           <Dialog.Close asChild>
-            <button aria-label="Yopish" className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center border border-neutral-200 text-neutral-500 hover:bg-neutral-50">✕</button>
+            <button aria-label={t.close} className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center border border-neutral-200 text-neutral-500 hover:bg-neutral-50">✕</button>
           </Dialog.Close>
 
           {done ? (
-            <button onClick={onClose} className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm">Yopish</button>
+            <button onClick={onClose} className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm">{t.close}</button>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <HoneypotField value={honeypot} onChange={setHoneypot} />
               <div className="flex flex-col gap-1">
-                <label htmlFor="tariflar-name" className="text-sm font-medium text-neutral-700">Ism</label>
+                <label htmlFor="tariflar-name" className="text-sm font-medium text-neutral-700">{t.name}</label>
                 <input
                   id="tariflar-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ismingiz"
+                  placeholder={t.namePlaceholder}
                   className="rounded-xl border border-neutral-200 px-4 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="tariflar-phone" className="text-sm font-medium text-neutral-700">Telefon *</label>
+                <label htmlFor="tariflar-phone" className="text-sm font-medium text-neutral-700">{t.phone}</label>
                 <input
                   id="tariflar-phone"
                   ref={phoneRef}
@@ -157,7 +160,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                   required
                   value={phone}
                   onChange={(e) => { setPhone(e.target.value); setPhoneErr(''); }}
-                  placeholder="+998 90 123 45 67"
+                  placeholder={t.phonePlaceholder}
                   aria-invalid={Boolean(phoneErr)}
                   className="rounded-xl border px-4 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                   style={{ borderColor: phoneErr ? '#dc2626' : undefined }}
@@ -165,7 +168,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                 {phoneErr && <span role="alert" className="text-xs text-red-600">{phoneErr}</span>}
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="tariflar-service" className="text-sm font-medium text-neutral-700">Xizmat</label>
+                <label htmlFor="tariflar-service" className="text-sm font-medium text-neutral-700">{t.service}</label>
                 <select
                   id="tariflar-service"
                   value={service}
@@ -175,10 +178,10 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                   {allServices.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
-                  <option>VIP paket</option>
-                  <option>PREMIUM paket</option>
-                  <option>STANDART paket</option>
-                  <option>Aniq emas — maslahat kerak</option>
+                  {packageOptions.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                  <option>{content.ui.notSure}</option>
                 </select>
               </div>
               {submitErr && <p role="alert" className="text-xs text-red-600 text-center">{submitErr}</p>}
@@ -188,7 +191,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                 aria-busy={sending}
                 className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm disabled:opacity-60"
               >
-                {sending ? 'Yuborilmoqda…' : 'Yuborish'}
+                {sending ? t.sending : t.submit}
               </button>
             </form>
           )}

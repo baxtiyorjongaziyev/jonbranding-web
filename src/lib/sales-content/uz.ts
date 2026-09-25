@@ -13,6 +13,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Nomdan to‘liq vizual tizimgacha. Har birini alohida ham olsangiz bo‘ladi.',
     items: [
       {
+        id: 'brand-strategy',
         name: 'Brand Strategy',
         price: '48 000 000',
         lead: 'Brendingiz bozorda qaysi joyni egallashi kerakligini aniqlaymiz. Kim uchun ishlaysiz, nimasi bilan farqlanasiz va nima deysiz — bitta strategik tizimga keltiramiz.',
@@ -30,6 +31,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Kompaniya asoschilari, CEO, marketing rahbarlari, yangi brend yoki rebranding qilayotgan bizneslar',
       },
       {
+        id: 'naming',
         name: 'Naming',
         price: '10 000 000',
         duration: '10 kun',
@@ -54,6 +56,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         },
       },
       {
+        id: 'logo',
         name: 'Logo',
         price: '8 000 000',
         duration: '7 kun',
@@ -69,6 +72,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Logosi yo‘q yoki eskirgan, zamonaviy ko‘rinmayotgan biznes uchun',
       },
       {
+        id: 'visual-identity',
         name: 'Visual identity',
         price: '18 000 000',
         duration: '10 kun',
@@ -84,6 +88,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Logosi bor, lekin har joyda har xil ko‘rinayotgan biznes uchun',
       },
       {
+        id: 'brandbook',
         name: 'Brandbook',
         price: '24 000 000',
         duration: '7 kun',
@@ -106,6 +111,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Do‘kon javonida mahsulotingizni qo‘lga oldiradigan qadoq.',
     items: [
       {
+        id: 'packaging',
         name: 'Packaging (1 SKU)',
         price: '12 000 000',
         duration: '7 kun',
@@ -121,6 +127,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Do‘kon, marketplace yoki tarmoqqa chiqayotgan ishlab chiqaruvchilar uchun',
       },
       {
+        id: 'packaging-extra',
         name: 'Har qo‘shimcha SKU',
         price: '4 000 000 dan',
         duration: '+3 kun',
@@ -141,6 +148,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'Nom sizniki bo‘lishi uchun uni ro‘yxatdan o‘tkazish kerak. Shu ishni ham biz qilamiz.',
     items: [
       {
+        id: 'trademark-search',
         name: 'Patent tekshiruvi',
         price: '880 000',
         duration: '1 ish kuni',
@@ -157,6 +165,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
       },
       {
+        id: 'trademark-standard',
         name: 'Patent (oddiy)',
         price: '5 000 000',
         duration: '7 oy',
@@ -171,6 +180,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         audience: 'Shoshilmayotgan, lekin nomini himoyalamoqchi bo‘lganlar uchun',
       },
       {
+        id: 'trademark-express',
         name: 'Patent (tezkor)',
         price: '7 000 000',
         duration: '20–40 kun',
@@ -369,5 +379,22 @@ export const uz: SalesContent = {
       button: 'Suhbatga yozilish',
     },
     footnote: 'Narxlar 2026 yil sentyabr holatiga. Yakuniy narx loyiha hajmiga qarab aniqlanadi.',
+    modal: {
+      title: 'Ariza qoldirish',
+      titleDone: 'Rahmat!',
+      desc: 'Ism va telefon raqamingizni qoldiring, o‘zimiz aloqaga chiqamiz.',
+      descDone: 'Tez orada siz bilan bog‘lanamiz.',
+      close: 'Yopish',
+      name: 'Ism',
+      namePlaceholder: 'Ismingiz',
+      phone: 'Telefon *',
+      phonePlaceholder: '+998 90 123 45 67',
+      service: 'Xizmat',
+      submit: 'Yuborish',
+      sending: 'Yuborilmoqda…',
+      phoneError: 'Telefon raqamini to‘g‘ri kiriting',
+      submitError: 'Xatolik yuz berdi. Qayta urinib ko‘ring.',
+      packageSuffix: 'paket',
+    },
   },
 };

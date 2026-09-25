@@ -13,6 +13,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: '从命名到完整的视觉系统。每项服务都可以单独选择。',
     items: [
       {
+        id: 'naming',
         name: '命名',
         price: '10 000 000',
         duration: '10 天',
@@ -37,6 +38,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         },
       },
       {
+        id: 'logo',
         name: '标志设计',
         price: '8 000 000',
         duration: '7 天',
@@ -52,6 +54,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: '适合没有标志，或标志陈旧、不够现代的企业',
       },
       {
+        id: 'visual-identity',
         name: '视觉识别系统',
         price: '18 000 000',
         duration: '10 天',
@@ -67,6 +70,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: '适合已有标志，但在各处呈现不一致的企业',
       },
       {
+        id: 'brandbook',
         name: '品牌手册',
         price: '24 000 000',
         duration: '7 天',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: '让顾客从货架上把您的产品拿起来的包装。',
     items: [
       {
+        id: 'packaging',
         name: '包装设计（1 个 SKU）',
         price: '12 000 000',
         duration: '7 天',
@@ -104,6 +109,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: '适合进入商超、电商平台或连锁渠道的生产商',
       },
       {
+        id: 'packaging-extra',
         name: '每增加一个 SKU',
         price: '4 000 000 起',
         duration: '+3 天',
@@ -124,6 +130,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: '名字要真正属于您，就必须注册。这件事我们也一并承担。',
     items: [
       {
+        id: 'trademark-search',
         name: '商标检索',
         price: '880 000',
         duration: '2 天',
@@ -140,6 +147,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         addon: { label: '每增加一个类别', price: '+440 000 苏姆' },
       },
       {
+        id: 'trademark-standard',
         name: '商标注册（常规）',
         price: '5 000 000',
         duration: '7 个月',
@@ -154,6 +162,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         audience: '适合不赶时间，但希望保护名称的经营者',
       },
       {
+        id: 'trademark-express',
         name: '商标注册（加急）',
         price: '7 000 000',
         duration: '20–40 天',
@@ -330,5 +339,22 @@ export const zh: SalesContent = {
       button: '预约沟通',
     },
     footnote: '价格截至 2026 年 9 月。最终价格根据项目规模确定。',
+    modal: {
+      title: '提交需求',
+      titleDone: '谢谢',
+      desc: '留下您的姓名和电话，我们会主动联系您。',
+      descDone: '我们会尽快与您联系。',
+      close: '关闭',
+      name: '姓名',
+      namePlaceholder: '您的姓名',
+      phone: '电话 *',
+      phonePlaceholder: '+998 90 123 45 67',
+      service: '服务',
+      submit: '提交',
+      sending: '提交中…',
+      phoneError: '请输入正确的电话号码',
+      submitError: '出现错误，请重试。',
+      packageSuffix: '套餐',
+    },
   },
 };

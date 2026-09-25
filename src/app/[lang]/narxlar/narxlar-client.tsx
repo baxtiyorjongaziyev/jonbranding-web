@@ -9,6 +9,7 @@ import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
 import { getSalesContent, SERVICE_CATEGORIES } from '@/lib/sales-content';
+import type { ServiceId } from '@/lib/sales-content';
 import LeadModal from '@/components/sales/lead-modal';
 
 const fadeUp: Variants = {
@@ -119,8 +120,8 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
     setModalOpen(true);
   };
 
-  const casesFor = (serviceName: string) => {
-    const categories = SERVICE_CATEGORIES[serviceName];
+  const casesFor = (serviceId: ServiceId) => {
+    const categories = SERVICE_CATEGORIES[serviceId];
     if (!categories) return [];
     const seen = new Set<string>();
     return categories
@@ -264,7 +265,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
           className="flex min-h-[100svh] items-center border-t border-neutral-200 px-5 py-20 sm:px-8"
         >
           <div className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-2 md:gap-16">
-            {service.name === 'Brandbook' && showcase.length > 0 && (
+            {service.id === 'brandbook' && showcase.length > 0 && (
               <div className="order-first md:col-span-2">
                 <p
                   className="mb-4 text-[10px] uppercase text-neutral-400"
@@ -276,7 +277,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
               </div>
             )}
 
-            {service.name !== 'Brandbook' && casesFor(service.name).length > 0 && (
+            {service.id !== 'brandbook' && casesFor(service.id).length > 0 && (
               <div className="order-first md:col-span-2">
                 <p
                   className="mb-4 text-[10px] uppercase text-neutral-400"
@@ -285,7 +286,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
                   {ui.services.cases}
                 </p>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {casesFor(service.name).map((item) => (
+                  {casesFor(service.id).map((item) => (
                     <a
                       key={item.slug}
                       href={`/portfolio/${item.slug}`}
@@ -600,7 +601,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
                 Muddat: {pkg.duration}
               </p>
               <button
-                onClick={() => openModal(`${pkg.name} paket`)}
+                onClick={() => openModal(`${pkg.name} ${ui.modal.packageSuffix}`)}
                 className={`w-full rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
               >{ui.services.cta}</button>
             </motion.div>
