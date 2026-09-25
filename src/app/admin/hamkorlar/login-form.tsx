@@ -1,7 +1,13 @@
 'use client';
 import { FC, useState } from 'react';
 
-const LoginForm: FC = () => {
+type Props = {
+  title?: string;
+  /** `team` — sotuv jamoasi paroli ham qabul qilinadi (SALES_TEAM_SECRET). */
+  scope?: 'admin' | 'team';
+};
+
+const LoginForm: FC<Props> = ({ title = 'Admin — Hamkorlar', scope = 'admin' }) => {
   const [secret, setSecret] = useState('');
   const [error, setError] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -13,7 +19,7 @@ const LoginForm: FC = () => {
     const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret }),
+      body: JSON.stringify({ secret, scope }),
     });
     setBusy(false);
     if (res.ok) {
@@ -25,7 +31,7 @@ const LoginForm: FC = () => {
 
   return (
     <main className="mx-auto max-w-sm px-5 py-24">
-      <h1 className="text-xl font-black">Admin — Hamkorlar</h1>
+      <h1 className="text-xl font-black">{title}</h1>
       <form onSubmit={submit} className="mt-6 space-y-4">
         <input
           type="password"

@@ -3,9 +3,8 @@ import {
   syncTelegramTestimonials, readCachedTestimonials, syncAndProcessMedia, processPostMedia
 } from '@/lib/telegram-testimonials';
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
-import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 
-const CRON_SECRET = process.env.CRON_SECRET || process.env.AMOCRM_CRON_SECRET || '';
 
 const FALLBACKS: Record<string, typeof staticTestimonials> = {
   uz: staticTestimonials,
@@ -33,13 +32,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
-  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-  const isAuthorized = Boolean(CRON_SECRET) && Boolean(bearerToken) && safeCompare(bearerToken!, CRON_SECRET);
-  const secret = req.nextUrl.searchParams.get('secret');
-  const isSecretValid = Boolean(CRON_SECRET) && Boolean(secret) && safeCompare(secret!, CRON_SECRET);
-
-  if (!isAuthorized && !isSecretValid) {
+  if (!isAuthorizedCronRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

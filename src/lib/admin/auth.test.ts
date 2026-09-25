@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { ADMIN_COOKIE, createAdminSession, verifyAdminSession } from './auth';
+import {
+  ADMIN_COOKIE,
+  createAdminSession,
+  createTeamSession,
+  verifyAdminSession,
+  verifyTeamSession,
+} from './auth';
 
 const SECRET = 'test-admin-secret-value';
 
@@ -53,5 +59,30 @@ describe('admin session', () => {
     const token = createAdminSession(1_000_000_000_000);
     delete process.env.ADMIN_SECRET;
     expect(verifyAdminSession(token, 1_000_000_000_000)).toBe(false);
+  });
+});
+
+describe('sales team session', () => {
+  afterEach(() => {
+    delete process.env.SALES_TEAM_SECRET;
+  });
+
+  it('round-trips with its own secret', () => {
+    process.env.SALES_TEAM_SECRET = 'team-pass';
+    const now = 1_000_000_000_000;
+    expect(verifyTeamSession(createTeamSession(now), now + 1000)).toBe(true);
+  });
+
+  it('never passes as an admin session, even with an identical secret', () => {
+    process.env.SALES_TEAM_SECRET = SECRET;
+    const now = 1_000_000_000_000;
+    const teamToken = createTeamSession(now);
+    expect(verifyAdminSession(teamToken, now)).toBe(false);
+    expect(verifyTeamSession(createAdminSession(now), now)).toBe(false);
+  });
+
+  it('fails closed when SALES_TEAM_SECRET is unset', () => {
+    expect(verifyTeamSession('123.abc')).toBe(false);
+    expect(() => createTeamSession()).toThrow();
   });
 });

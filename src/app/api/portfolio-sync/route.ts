@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
-import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
 import { scrapeInstagramPosts } from '@/lib/integrations/instagram';
 
@@ -29,26 +29,8 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-    // 1. Authorize the sync request (secret param OR Bearer cron auth)
-    const querySecret = request.nextUrl.searchParams.get('secret');
-    const authHeader = request.headers.get('authorization');
-    const bearerSecret = authHeader?.startsWith('Bearer ')
-      ? authHeader.slice('Bearer '.length)
-      : null;
-    const configuredSecrets = [process.env.CRON_SECRET, process.env.AMOCRM_CRON_SECRET].filter(
-      (value): value is string => Boolean(value)
-    );
-    const providedSecrets = [querySecret, bearerSecret].filter((value): value is string =>
-      Boolean(value)
-    );
-
-    if (configuredSecrets.length === 0) {
-      return NextResponse.json({ success: false, error: 'No auth configured' }, { status: 500 });
-    }
-
-    const isAuthorized = providedSecrets.some((provided) =>
-      configuredSecrets.some((configured) => safeCompare(provided, configured))
-    );
+    // 1. Faqat `Authorization: Bearer` (src/lib/cron-auth.ts)
+    const isAuthorized = isAuthorizedCronRequest(request);
 
     if (!isAuthorized) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });

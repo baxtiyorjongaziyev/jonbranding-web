@@ -22,7 +22,8 @@ const LIST_QUERY = `
     results,
     featured,
     order,
-    publishedAt
+    publishedAt,
+    _updatedAt
   }
 `;
 
@@ -49,21 +50,49 @@ const SLUG_QUERY = `
   }
 `;
 
-export async function fetchPortfolioList(lang: string): Promise<PortfolioProject[]> {
-  let sanity: PortfolioProject[] = [];
+/**
+ * Sanity'dagi keys shablon (fallback) keysning o'rnini egallaganmi: bir xil slug,
+ * uning davomi (`den-aroma` → `den-aroma-brend-transformatsiyasi`) yoki bir xil nom.
+ * Aks holda bitta keys ikki URL'da chiqib, Google'da dublikat bo'lardi.
+ */
+export function supersedesFallback(
+  project: Pick<PortfolioProject, 'slug' | 'title'>,
+  fallback: Pick<PortfolioProject, 'slug' | 'title'>,
+): boolean {
+  if (!project.slug || !fallback.slug) return false;
+  return (
+    project.slug === fallback.slug ||
+    project.slug.startsWith(`${fallback.slug}-`) ||
+    project.title?.toLowerCase() === fallback.title?.toLowerCase()
+  );
+}
+
+async function fetchSanityPortfolioList(): Promise<PortfolioProject[]> {
   try {
-    sanity = await client.fetch(LIST_QUERY);
+    return (await client.fetch(LIST_QUERY)) ?? [];
   } catch (e) {
     console.error('Sanity portfolio fetch failed, using fallback:', e);
+    return [];
   }
+}
+
+/** Fallback slug'i Sanity'dagi keys bilan almashtirilgan bo'lsa, yangi slug. */
+export async function findSupersedingSlug(lang: string, fallbackSlug: string): Promise<string | null> {
+  const fallback = getPortfolioFallback(lang, fallbackSlug) as PortfolioProject | null;
+  if (!fallback) return null;
+  const sanity = await fetchSanityPortfolioList();
+  const match = sanity.find((p) => p.slug !== fallbackSlug && supersedesFallback(p, fallback));
+  return match?.slug ?? null;
+}
+
+export async function fetchPortfolioList(lang: string): Promise<PortfolioProject[]> {
+  const sanity = await fetchSanityPortfolioList();
 
   const fallbacks: PortfolioProject[] = (getPortfolioFallback(lang) as PortfolioProject[]) ?? [];
   const merged = [...sanity];
 
   fallbacks.forEach((item) => {
-    const exists = merged.some(
-      (p) => p.slug === item.slug || p.title.toLowerCase() === item.title.toLowerCase()
-    );
+    const exists = merged.some((p) => supersedesFallback(p, item));
     if (!exists) merged.push(item);
   });
 
