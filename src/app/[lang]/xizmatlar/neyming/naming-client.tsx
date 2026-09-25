@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Lightbulb, Search, ShieldCheck, CheckCircle, ArrowRight } from 'lucide-react';
