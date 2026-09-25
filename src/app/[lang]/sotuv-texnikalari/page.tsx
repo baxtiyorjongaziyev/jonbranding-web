@@ -1,4 +1,7 @@
 import type { ReactNode } from 'react';
+import { cookies } from 'next/headers';
+import { ADMIN_COOKIE, TEAM_COOKIE, verifyAdminSession, verifyTeamSession } from '@/lib/admin/auth';
+import LoginForm from '@/app/admin/hamkorlar/login-form';
 import {
   ArrowRight,
   Brain,
@@ -240,7 +243,23 @@ function FormulaStep({ children, number }: { children: ReactNode; number: number
   );
 }
 
-export default function SalesTechniquesPage() {
+// Ichki sotuv skriptlari (narx e'tirozlari va h.k.) — faqat jamoa paroli
+// (SALES_TEAM_SECRET) yoki admin sessiyasi bilan. Tekshiruv sahifaning o'zida:
+// layout'da qilinsa, sahifa matni baribir RSC ma'lumotida HTML'ga tushardi.
+export default async function SalesTechniquesPage() {
+  const cookieStore = await cookies();
+  const allowed =
+    verifyAdminSession(cookieStore.get(ADMIN_COOKIE)?.value) ||
+    verifyTeamSession(cookieStore.get(TEAM_COOKIE)?.value);
+
+  if (!allowed) {
+    return <LoginForm title="Sotuv texnikalari — jamoa uchun" scope="team" />;
+  }
+
+  return <SalesTechniques />;
+}
+
+function SalesTechniques() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
       <section className="border-b border-slate-200 bg-white">
