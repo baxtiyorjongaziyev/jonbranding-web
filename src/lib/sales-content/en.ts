@@ -13,6 +13,24 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     intro: 'From the name to a complete visual system. Each part can be taken on its own.',
     items: [
       {
+        id: 'brand-strategy',
+        name: 'Brand strategy',
+        price: '48 000 000',
+        lead: 'We work out the place your brand should hold in the market. Who you serve, what sets you apart and what you say — brought into one strategic system.',
+        deliverables: [
+          'Brand Strategy Deck — a strategic document of 30–40+ pages (business, market, audience, positioning, messaging)',
+          'Brand Strategy Map — the whole strategic system on a single page',
+          'Creative Brief — the compass for every design, marketing and communication decision that follows',
+          'Business diagnostics and market trend analysis',
+          'Competitor analysis and identification of open strategic positions',
+          'Audience segments and a jobs-to-be-done needs analysis',
+          'Positioning formula, value proposition and a differentiation you can defend',
+          'Brand essence, brand personality and the core messaging pillars',
+        ],
+        benefit: 'Marketing, sales and design all pull in one direction. The 48 million som is not for a presentation — it is for the strategic system every later brand decision rests on.',
+        audience: 'Founders, CEOs, marketing leads, and businesses launching a new brand or going through a rebrand',
+      },
+      {
         id: 'naming',
         name: 'Naming',
         price: '10 000 000',
