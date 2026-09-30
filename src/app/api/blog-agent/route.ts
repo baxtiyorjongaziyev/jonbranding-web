@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
-import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { logger } from '@/lib/logger';
 import { toSlug } from '@/lib/slug';
 import {
@@ -11,24 +11,12 @@ import {
 } from '@/lib/sanity-write';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
-const CRON_SECRET = process.env.CRON_SECRET || '';
-const AMOCRM_CRON_SECRET = process.env.AMOCRM_CRON_SECRET || '';
 
 if (!GEMINI_API_KEY) {
   logger.warn('[blog-agent] GEMINI_API_KEY not configured');
 }
 function verifyAuth(req: NextRequest): boolean {
-  if (!CRON_SECRET && !AMOCRM_CRON_SECRET) return false;
-  const auth = req.headers.get('authorization');
-  const providedBearerToken = auth?.startsWith('Bearer ') ? auth.substring(7) : null;
-  const url = new URL(req.url);
-  const providedQuerySecret = url.searchParams.get('secret');
-  const providedSecret = providedBearerToken || providedQuerySecret;
-  if (!providedSecret) return false;
-
-  const isValidCronSecret = Boolean(CRON_SECRET) && safeCompare(providedSecret, CRON_SECRET);
-  const isValidAmocrmCronSecret = Boolean(AMOCRM_CRON_SECRET) && safeCompare(providedSecret, AMOCRM_CRON_SECRET);
-  return isValidCronSecret || isValidAmocrmCronSecret;
+  return isAuthorizedCronRequest(req);
 }
 
 

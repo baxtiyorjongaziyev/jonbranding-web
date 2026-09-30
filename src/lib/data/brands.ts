@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { staticBrands } from '@/lib/static-data';
 import type { Brand } from '@/lib/types';
+import { logger } from '@/lib/logger';
 
 const QUERY = `
   *[_type == "brand"] | order(coalesce(order, 999) asc) {
@@ -16,7 +17,7 @@ export async function fetchBrands(): Promise<Brand[]> {
     const data: Brand[] = await client.fetch(QUERY);
     if (data && data.length > 0) return data;
   } catch (e) {
-    console.error('Sanity brands fetch failed, using fallback:', e);
+    logger.error('Sanity brands fetch failed, using fallback:', e);
   }
   return staticBrands;
 }

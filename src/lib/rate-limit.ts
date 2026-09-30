@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { isIP } from 'node:net';
 import { getDb } from '@/lib/firebase-admin';
+import { logger } from '@/lib/logger';
 
 type LocalEntry = { count: number; resetAt: number };
 
@@ -82,7 +83,7 @@ export async function rateLimit(
   } catch (error) {
     if (!warnedAboutDistributedFallback) {
       warnedAboutDistributedFallback = true;
-      console.error('[rate-limit] Firestore unavailable; using local fallback.', error);
+      logger.error('[rate-limit] Firestore unavailable; using local fallback.', error);
     }
     return checkLocalBucket(key, maxRequests, windowMs, now);
   }

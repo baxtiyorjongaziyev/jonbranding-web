@@ -219,7 +219,7 @@ async function queueFailedAmoCrmLead(data: LeadData, error: unknown) {
       );
     return true;
   } catch (queueError) {
-    console.error('AmoCRM failed lead queue error:', queueError);
+    logger.error('AmoCRM failed lead queue error:', queueError);
     return false;
   }
 }
@@ -229,7 +229,7 @@ async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
   try {
     accessToken = await getValidAccessToken();
   } catch (error) {
-    console.error('Firestore token fetch failed, falling back to static env token:', error);
+    logger.error('Firestore token fetch failed, falling back to static env token:', error);
     accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
   }
 
@@ -307,7 +307,7 @@ async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
         body: leadBody,
       });
     } catch (refreshError) {
-      console.error('Failed to refresh AmoCRM token on 401:', refreshError);
+      logger.error('Failed to refresh AmoCRM token on 401:', refreshError);
     }
   }
 
@@ -368,7 +368,7 @@ async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
           params: { text: details },
         },
       ]),
-    }).catch((error) => console.error('AmoCRM note error:', error));
+    }).catch((error) => logger.error('AmoCRM note error:', error));
   }
 
   return { ok: true, leadId, contactId, merged: createdLead?.merged === true };
@@ -486,7 +486,7 @@ export async function POST(request: Request) {
         'lead alert',
       ),
       () => sendToAmoCrm(leadData).catch(async (error: unknown) => {
-        console.error('AmoCRM lead error:', error);
+        logger.error('AmoCRM lead error:', error);
         const queued = await queueFailedAmoCrmLead(leadData, error);
         const reason = describeAmoCrmError(error);
 
@@ -576,7 +576,7 @@ export async function POST(request: Request) {
       },
     });
   } catch (error: unknown) {
-    console.error('Submit form error:', error);
+    logger.error('Submit form error:', error);
     return NextResponse.json(
       { ok: false, error: 'Internal server error' },
       { status: 500 }

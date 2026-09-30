@@ -1,3 +1,5 @@
+import { logger } from '@/lib/logger';
+
 export interface CallAnalysisResult {
   transcript: string;
   summary: string;
@@ -104,7 +106,7 @@ MUHIM: Agar audio juda qisqa, bo'sh yoki faqat shovqin bo'lsa:
 
   if (!textResponse || textResponse.trim() === '') {
     // If finish reason is OTHER or MAX_TOKENS, handle gracefully
-    console.warn(
+    logger.warn(
       `Empty Gemini response. finishReason: ${finishReason}. Full response:`,
       JSON.stringify(result, null, 2)
     );
@@ -133,7 +135,7 @@ MUHIM: Agar audio juda qisqa, bo'sh yoki faqat shovqin bo'lsa:
 
     return parsed;
   } catch (parseError) {
-    console.error('JSON parse error from Gemini response:', textResponse);
+    logger.error('JSON parse error from Gemini response:', textResponse);
     // Return a fallback instead of throwing
     return {
       transcript: textResponse.substring(0, 1000),
@@ -256,7 +258,7 @@ ${text}
 
     return parsed;
   } catch (e) {
-    console.error('JSON parse error from Gemini response:', textResponse);
+    logger.error('JSON parse error from Gemini response:', textResponse);
     throw new Error('Failed to parse portfolio metadata JSON from Gemini: ' + e);
   }
 }
@@ -370,7 +372,7 @@ ${text}
     const parsed = JSON.parse(cleaned) as ParsedTestimonial;
     return parsed;
   } catch (e) {
-    console.error('JSON parse error from Gemini response:', textResponse);
+    logger.error('JSON parse error from Gemini response:', textResponse);
     throw new Error('Failed to parse review metadata JSON from Gemini: ' + e);
   }
 }

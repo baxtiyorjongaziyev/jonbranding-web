@@ -15,7 +15,7 @@ export async function scrapeTelegramPosts(channel: string, keyword: string): Pro
     });
 
     if (!response.ok) {
-      console.error(`[Telegram Scraper] Error fetching channel ${channel}: ${response.statusText}`);
+      logger.error(`[Telegram Scraper] Error fetching channel ${channel}: ${response.statusText}`);
       return null;
     }
 
@@ -42,7 +42,7 @@ export async function scrapeTelegramPosts(channel: string, keyword: string): Pro
       return null;
     }
   } catch (error) {
-    console.error(`[Telegram Scraper] Global error:`, error);
+    logger.error(`[Telegram Scraper] Global error:`, error);
     return null;
   }
 }

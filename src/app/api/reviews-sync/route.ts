@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@sanity/client';
 import { findFolderByName, listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parseReviewMetadata } from '@/lib/gemini';
-import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { logger } from '@/lib/logger';
 
 // Initialize Sanity client with write access token
@@ -24,21 +24,8 @@ export async function POST(request: NextRequest) {
 
 async function handleSync(request: NextRequest) {
   try {
-    // 1. Authorize the sync request (secret param OR Vercel cron auth)
-    const secret = request.nextUrl.searchParams.get('secret');
-    const cronSecret = process.env.AMOCRM_CRON_SECRET || process.env.CRON_SECRET || '';
-    const authHeader = request.headers.get('authorization');
-    const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const isVercelCron = Boolean(process.env.CRON_SECRET) && Boolean(bearerToken) && safeCompare(bearerToken!, process.env.CRON_SECRET!);
-
-    if (!cronSecret && !isVercelCron) {
-      return NextResponse.json(
-        { success: false, error: 'No auth configured' },
-        { status: 500 }
-      );
-    }
-
-    if (!isVercelCron && (!secret || !safeCompare(secret, cronSecret))) {
+    // 1. Faqat `Authorization: Bearer` (src/lib/cron-auth.ts)
+    if (!isAuthorizedCronRequest(request)) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }

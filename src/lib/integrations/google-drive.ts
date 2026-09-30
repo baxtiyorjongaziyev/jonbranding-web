@@ -1,4 +1,5 @@
 import { google } from 'googleapis';
+import { logger } from '@/lib/logger';
 
 function getAuth() {
   let saJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -14,7 +15,7 @@ function getAuth() {
     try {
       saJson = Buffer.from(saJson, 'base64').toString('utf8');
     } catch (e) {
-      console.error('Failed to decode base64 Google Service Account JSON:', e);
+      logger.error('Failed to decode base64 Google Service Account JSON:', e);
     }
   }
 
