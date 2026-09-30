@@ -12,7 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify
+        env:
+          BOT_TOKEN: ${{ secrets.OISHA_BOT_TOKEN }}
+          # Shaxsiy Telegram chat_id ochiq repo'da turmasin — GitHub secret'da.
+          CHAT_ID: ${{ secrets.DEPLOY_NOTIFY_CHAT_ID }}
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.OISHA_BOT_TOKEN }}/sendMessage" \
-            -d "chat_id=150074828" \
+          if [ -z "$BOT_TOKEN" ] || [ -z "$CHAT_ID" ]; then
+            echo "::notice::DEPLOY_NOTIFY_CHAT_ID yoki OISHA_BOT_TOKEN secret'i yo'q — Telegram xabari yuborilmadi."
+            exit 0
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
             -d "text=🚀 jonbranding.uz%0ACommit: ${{ github.sha }}%0ABranch: ${{ github.ref_name }}" || true
