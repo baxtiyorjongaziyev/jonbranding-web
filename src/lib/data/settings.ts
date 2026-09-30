@@ -1,3 +1,4 @@
+import { logger } from '@/lib/logger'
 import { client } from '@/sanity/lib/client'
 
 export interface SiteSettings {
@@ -29,7 +30,7 @@ export async function fetchSettings(): Promise<SiteSettings> {
     const data = await client.fetch<SiteSettings>(QUERY)
     if (data) return { ...DEFAULTS, ...data }
   } catch (e) {
-    console.error('Sanity settings fetch failed, using defaults:', e)
+    logger.error('Sanity settings fetch failed, using defaults:', e)
   }
   return DEFAULTS
 }

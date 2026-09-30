@@ -7,6 +7,7 @@ import { safeCompare } from '@/lib/security';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { getDb } from '@/lib/firebase-admin';
 import { portfolioDocId } from '@/lib/portfolio-dedup';
+import { logger } from '@/lib/logger';
 
 export const maxDuration = 60;
 
@@ -94,7 +95,7 @@ async function imagesFromDrive(title: string, client: string) {
       }))
     );
   } catch (error) {
-    console.error('[portfolio-telegram] Drive qidiruvi muvaffaqiyatsiz:', error);
+    logger.error('[portfolio-telegram] Drive qidiruvi muvaffaqiyatsiz:', error);
     return [];
   }
 }
@@ -189,7 +190,7 @@ async function publishGroup(key: string, group: QueuedGroup) {
         });
         assets.push(asset._id);
       } catch (uploadErr) {
-        console.warn('[portfolio-telegram] Rasm yuklashda xatolik:', uploadErr);
+        logger.warn('[portfolio-telegram] Rasm yuklashda xatolik:', uploadErr);
       }
     }
 

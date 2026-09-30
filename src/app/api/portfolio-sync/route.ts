@@ -226,7 +226,7 @@ async function handleSync(request: NextRequest) {
           title: parsedMeta.title,
         });
       } catch (folderError) {
-        console.error(`[portfolio-sync] Error syncing folder ${folder.name}:`, folderError);
+        logger.error(`[portfolio-sync] Error syncing folder ${folder.name}:`, folderError);
         results.push({
           folderName: folder.name,
           folderId: folder.id,
@@ -242,7 +242,7 @@ async function handleSync(request: NextRequest) {
       results,
     });
   } catch (error) {
-    console.error('[portfolio-sync] Global sync error:', error);
+    logger.error('[portfolio-sync] Global sync error:', error);
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : String(error) },
       { status: 500 }

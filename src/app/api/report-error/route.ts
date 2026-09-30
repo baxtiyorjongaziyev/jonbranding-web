@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { escapeTelegramHtml } from '@/lib/telegram-html';
+import { logger } from '@/lib/logger';
 
 const bodySchema = z.object({
   message: z.string().max(2000),
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
     const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
-        console.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables for error reporting.");
+        logger.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables for error reporting.");
         return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
@@ -70,14 +71,14 @@ export async function POST(request: Request) {
 
         if (!response.ok) {
             const errorResult = await response.json();
-            console.error("Telegram API Error while reporting error:", errorResult);
+            logger.error("Telegram API Error while reporting error:", errorResult);
             return NextResponse.json({ ok: true, reported: false });
         }
 
         return NextResponse.json({ ok: true, reported: true });
 
     } catch (error: any) {
-        console.error("Internal Server Error in error reporting endpoint:", error);
+        logger.error("Internal Server Error in error reporting endpoint:", error);
         return NextResponse.json({ ok: true, reported: false });
     }
 }

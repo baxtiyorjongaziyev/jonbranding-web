@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
   try {
     const configuredSecret = process.env.VIMEO_WEBHOOK_SECRET?.trim() ?? '';
     if (!configuredSecret) {
-      console.error('[vimeo-webhook] VIMEO_WEBHOOK_SECRET is not configured; rejecting request.');
+      logger.error('[vimeo-webhook] VIMEO_WEBHOOK_SECRET is not configured; rejecting request.');
       return NextResponse.json({ error: 'Webhook authentication is not configured' }, { status: 503 });
     }
 
@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
     });
 
   } catch (error) {
-    console.error('[vimeo-webhook] Error processing webhook:', error);
+    logger.error('[vimeo-webhook] Error processing webhook:', error);
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }

@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!tokenResponse.ok) {
-      console.error('[Instagram Callback] Short-lived token exchange failed:', tokenResponse.status);
+      logger.error('[Instagram Callback] Short-lived token exchange failed:', tokenResponse.status);
       return oauthError('Failed to exchange the Instagram authorization code.', 400);
     }
 
@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!longLivedResponse.ok) {
-      console.error('[Instagram Callback] Long-lived token exchange failed:', longLivedResponse.status);
+      logger.error('[Instagram Callback] Long-lived token exchange failed:', longLivedResponse.status);
       return oauthError('Failed to exchange the long-lived Instagram token.', 400);
     }
 
@@ -143,7 +143,7 @@ export async function GET(request: NextRequest) {
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     }));
   } catch (error) {
-    console.error('[Instagram Callback] OAuth exchange failed:', error);
+    logger.error('[Instagram Callback] OAuth exchange failed:', error);
     return oauthError('Instagram connection failed.', 500);
   }
 }
