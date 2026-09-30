@@ -1,0 +1,154 @@
+{
+    "metadata": {
+        "title": "POSM Materials Design",
+        "description": "Professional point-of-sale materials design: wobblers, roll-up banners, posters, stickers, shelf strips, table tents and a complete POS kit.",
+        "keywords": [
+            "POSM materials",
+            "POS materials design",
+            "wobbler design",
+            "roll-up banner",
+            "shelf strip",
+            "retail advertising materials",
+            "Jon Branding"
+        ]
+    },
+    "hero": {
+        "eyebrow": "Point-of-sale materials",
+        "title": "POSM Materials Design",
+        "subtitle": "Catch the shopper in the right place at the right moment.",
+        "description": "Wobblers, roll-up banners, shelf strips, posters, table tents — professional POSM design that stands out at the point of sale and lifts sales.",
+        "primaryCta": "Order POSM",
+        "secondaryCta": "See pricing"
+    },
+    "problem": {
+        "title": "Weak POSM sends shoppers to a competitor",
+        "description": "Most brands do not make their products stand out enough at the point of sale. A poor wobbler or a badly made shelf strip hurts the brand image and pushes the shopper towards a competing product."
+    },
+    "solution": {
+        "title": "We turn the point of sale into brand space",
+        "description": "The Jon Branding team designs a set of POSM materials that match your brand style, read well and draw attention. Every piece is built on retail psychology and your brand rules."
+    },
+    "included": {
+        "eyebrow": "What you get",
+        "title": "What is included in POSM design?",
+        "items": [
+            "Creative design concept that fits the brand",
+            "Wobbler and shelf strip design",
+            "Roll-up banner and poster design",
+            "Table tent and flyer design",
+            "Totem (standee) design",
+            "Floor sticker design",
+            "Final print-ready files",
+            "Print prepress for all materials"
+        ]
+    },
+    "benefits": {
+        "title": "What does this service give you?",
+        "items": [
+            "You get noticed at the point of sale",
+            "Your brand looks professional and trustworthy",
+            "Shoppers find your product faster",
+            "Encourages impulse purchases",
+            "The whole retail area in your brand colours and style",
+            "You stand out visually from competitors",
+            "Promotions and discounts get through",
+            "Your brand works at the checkout and on the shelf"
+        ]
+    },
+    "audience": {
+        "title": "Who is it for?",
+        "items": [
+            "Brands in supermarkets and stores",
+            "Food and beverage producers",
+            "Cosmetics and fragrance brands",
+            "Medicines and healthcare products",
+            "Café and restaurant chains",
+            "Electronics and accessories brands",
+            "Seasonal promotions and campaigns",
+            "New product or brand launches"
+        ]
+    },
+    "process": {
+        "title": "How do we work?",
+        "steps": [
+            "We study your brand rules and retail format",
+            "We define the list of materials and sizes",
+            "We develop a POSM design concept that fits the brand",
+            "We design every piece",
+            "After revisions we deliver print-ready files"
+        ]
+    },
+    "pricing": {
+        "eyebrow": "Pricing",
+        "title": "POSM materials design pricing",
+        "tiers": [
+            {
+                "name": "START",
+                "price": "499,000 UZS",
+                "features": [
+                    "2 material types (wobbler + shelf strip)",
+                    "1 creative direction",
+                    "On-brand design",
+                    "1 revision",
+                    "Print-ready file"
+                ]
+            },
+            {
+                "name": "STANDARD",
+                "price": "1,290,000 UZS",
+                "features": [
+                    "5 material types",
+                    "Wobbler, shelf strip, poster, table tent, flyer",
+                    "2 design options",
+                    "Composition that follows brand rules",
+                    "2 revisions",
+                    "Print-ready files"
+                ]
+            },
+            {
+                "name": "PREMIUM",
+                "price": "2,490,000 UZS",
+                "features": [
+                    "Complete POSM kit (7+ materials)",
+                    "Wobbler, shelf strip, roll-up, poster, table tent, flyer, totem",
+                    "3 creative design directions",
+                    "Layout based on retail psychology",
+                    "Floor sticker and promo banner",
+                    "3 revisions",
+                    "Print-ready and mockup files"
+                ]
+            }
+        ]
+    },
+    "cta": {
+        "brandLabel": "Jon.Branding",
+        "title": "Let your point of sale show your brand strength",
+        "description": "POSM materials nudge shoppers to choose in the right place. We will prepare a set of good-looking, effective materials that fit your brand.",
+        "button": "Order POSM materials"
+    },
+    "faq": {
+        "title": "Frequently asked questions",
+        "items": [
+            {
+                "question": "What types of materials do you make?",
+                "answer": "Wobblers, shelf strips, roll-up banners, posters, table tents, flyers, brochures, totems (standees), floor stickers and other point-of-sale materials."
+            },
+            {
+                "question": "In what format do you deliver files?",
+                "answer": "Print-ready PDF, AI or EPS files in the specified CMYK colours."
+            },
+            {
+                "question": "Can we provide our own sizes?",
+                "answer": "Yes, we can work in any size. We also advise on standard sizes."
+            },
+            {
+                "question": "Do you design just one material?",
+                "answer": "Yes, you can order individual materials too. The price depends on the material type."
+            },
+            {
+                "question": "Can you work fast for a promotion?",
+                "answer": "Yes, there is an express option for urgent orders. We agree on the timeline during the briefing."
+            }
+        ]
+    }
+}

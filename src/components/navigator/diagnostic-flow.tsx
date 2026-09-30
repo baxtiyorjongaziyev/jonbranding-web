@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { getLocalizedPath, type Locale } from '@/lib/i18n/locale'
 import { PAIN_POINTS, DESIRED_RESULTS, QUESTIONS, ANSWER_OPTIONS, scoreNavigatorAnswers } from '@/lib/navigator-data'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -12,7 +13,13 @@ import { Progress } from '@/components/ui/progress'
 
 type Step = 'PAIN' | 'RESULT' | 'QUESTIONS' | 'CONTACT'
 
-export function DiagnosticFlow() {
+type DiagnosticFlowProps = {
+  lang: string
+  /** `dictionary.navigatorErrors` — server sahifadan (butun lug'at klientga yuborilmaydi). */
+  errors: { phoneInvalid: string; generic: string }
+}
+
+export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
   const router = useRouter()
   
   const [step, setStep] = useState<Step>('PAIN')
@@ -77,17 +84,13 @@ export function DiagnosticFlow() {
           revenue: `Diagnostika ball: ${totalScore}`,
           pain: painTitles,
           ambition: resultTitle,
-          lang: 'uz',
+          lang,
         }),
       })
 
       if (!res.ok) {
         setIsSubmitting(false)
-        alert(
-          res.status === 400
-            ? "Telefon raqamini tekshiring: +998 90 123 45 67 ko'rinishida yozing."
-            : "Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring."
-        )
+        alert(res.status === 400 ? errors.phoneInvalid : errors.generic)
         return
       }
 
@@ -109,11 +112,11 @@ export function DiagnosticFlow() {
         }),
       }).catch(() => {})
 
-      router.push('/navigator/natija')
+      router.push(getLocalizedPath(lang as Locale, '/navigator/natija'))
     } catch (err) {
       console.error(err)
       setIsSubmitting(false)
-      alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.")
+      alert(errors.generic)
     }
   }
 

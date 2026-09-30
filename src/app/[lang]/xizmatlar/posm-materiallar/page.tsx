@@ -1,17 +1,23 @@
 import type { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PosmMateriallarClient from './posm-materiallar-client';
-import posmUzFallback from '@/locales/posm-uz.json';
-import { pageTitle } from '@/lib/seo';
+import posmUz from '@/locales/posm-uz.json';
+import posmRu from '@/locales/posm-ru.json';
+import posmEn from '@/locales/posm-en.json';
+import posmZh from '@/locales/posm-zh.json';
+import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
 
+// Oldin ru/en/zh sahifalar ham o'zbekcha matn bilan chiqardi.
+const POSM_BY_LANG: Record<string, typeof posmUz> = { uz: posmUz, ru: posmRu, en: posmEn, zh: posmZh };
+
 async function getPageTranslations(lang: string) {
   const dictionary = await getDictionary(lang as Locale);
   if (dictionary.posmPage) return dictionary.posmPage;
-  return posmUzFallback;
+  return POSM_BY_LANG[lang] ?? posmUz;
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
@@ -27,9 +33,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: pageTitle(metadata.title),
     description: metadata.description,
     keywords: metadata.keywords,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: getPageAlternates(
+      (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale,
+      '/xizmatlar/posm-materiallar',
+    ),
     openGraph: {
       title: metadata.title,
       description: metadata.description,
