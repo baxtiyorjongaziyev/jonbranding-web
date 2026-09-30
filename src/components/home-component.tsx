@@ -72,7 +72,6 @@ const HomeComponent: FC<{
   lang: string;
   dictionary: any;
   comparisons?: any[];
-  brands?: any[];
   testimonials?: any[];
   portfolioProjects?: any[];
 }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
