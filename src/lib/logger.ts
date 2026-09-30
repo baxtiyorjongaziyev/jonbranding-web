@@ -14,10 +14,22 @@ const shouldLog = (level: LogLevel): boolean => {
   return logLevelToNumber[level] >= logLevelToNumber[logLevel as LogLevel];
 };
 
+// JSON.stringify(Error) → "{}" bo'lardi: xato matni va stack logda yo'qolardi.
+const errorReplacer = (_key: string, value: unknown) =>
+  value instanceof Error ? { name: value.name, message: value.message, stack: value.stack } : value;
+
+const serialize = (data: unknown): string => {
+  try {
+    return JSON.stringify(data, errorReplacer);
+  } catch {
+    return String(data);
+  }
+};
+
 const formatLog = (level: LogLevel, message: string, data?: unknown): string => {
   const timestamp = new Date().toISOString();
-  if (data) {
-    return `[${timestamp}] ${level.toUpperCase()}: ${message} ${JSON.stringify(data)}`;
+  if (data !== undefined) {
+    return `[${timestamp}] ${level.toUpperCase()}: ${message} ${serialize(data)}`;
   }
   return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
 };

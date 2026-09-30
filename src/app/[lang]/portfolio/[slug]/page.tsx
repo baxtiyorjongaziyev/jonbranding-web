@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { fetchPortfolioBySlug } from '@/lib/data/portfolio';
+import { notFound, permanentRedirect } from 'next/navigation';
+import { fetchPortfolioBySlug, findSupersedingSlug } from '@/lib/data/portfolio';
+import { getLocalizedPath } from '@/lib/i18n/locale';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
@@ -59,10 +60,21 @@ export default async function PortfolioDetailPage(props: Props) {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as 'uz' | 'ru' | 'en' | 'zh';
 
-  const [dictionary, project] = await Promise.all([
+  const [dictionary, sanityProject] = await Promise.all([
     getDictionarySafe(safeLang),
-    fetchPortfolioBySlug(slug).then(p => p ?? getPortfolioFallback(safeLang, slug) as PortfolioProject | null),
+    fetchPortfolioBySlug(slug),
   ]);
+
+  // Shablon keys Sanity'dagi to'liq keys bilan almashtirilgan bo'lsa — eski URL
+  // yangisiga doimiy yo'naltiriladi (bitta keys, bitta manzil).
+  if (!sanityProject) {
+    const supersedingSlug = await findSupersedingSlug(safeLang, slug);
+    if (supersedingSlug) {
+      permanentRedirect(getLocalizedPath(safeLang, `/portfolio/${supersedingSlug}`));
+    }
+  }
+
+  const project = sanityProject ?? (getPortfolioFallback(safeLang, slug) as PortfolioProject | null);
 
   if (!project) {
     notFound();

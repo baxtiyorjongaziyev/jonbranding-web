@@ -37,7 +37,7 @@ async function handleCallProcessing(request: Request) {
     try {
       accessToken = await getValidAccessToken();
     } catch (tokenError: any) {
-      console.error('Firestore token fetch failed for call processing:', tokenError);
+      logger.error('Firestore token fetch failed for call processing:', tokenError);
       return NextResponse.json({ error: 'Failed to retrieve AmoCRM token from Firestore' }, { status: 500 });
     }
 
@@ -119,7 +119,7 @@ async function handleCallProcessing(request: Request) {
       try {
         const audioRes = await fetch(latestCall.link);
         if (!audioRes.ok) {
-          console.error(`Failed to download audio for Lead ID ${lead.id}: ${audioRes.status}`);
+          logger.error(`Failed to download audio for Lead ID ${lead.id}: ${audioRes.status}`);
           continue;
         }
 
@@ -173,7 +173,7 @@ async function handleCallProcessing(request: Request) {
         logger.info(`✅ Lead ID ${lead.id} processed successfully!`);
 
       } catch (processingError: any) {
-        console.error(`Error processing call for Lead ID ${lead.id}:`, processingError.message);
+        logger.error(`Error processing call for Lead ID ${lead.id}:`, processingError.message);
       }
     }
 
@@ -184,7 +184,7 @@ async function handleCallProcessing(request: Request) {
     }, { status: 200 });
 
   } catch (error: any) {
-    console.error('Call processing fatal error:', error);
+    logger.error('Call processing fatal error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

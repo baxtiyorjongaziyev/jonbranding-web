@@ -22,14 +22,6 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  const cleanPath = pathname.replace(/^\/(?:uz|ru|en|zh)(?:\/|$)/, '/');
-  if (cleanPath === '/xizmatlar/brand-strategiyasi' || cleanPath === '/xizmatlar/brand-strategy') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/brand-strategy';
-    url.searchParams.delete('__rewrite');
-    return NextResponse.redirect(url, 308);
-  }
-
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
     // nextUrl.clone() query stringni saqlaydi. `new URL(path, base)` esa uni
     // tashlab yuborardi va /uz/... havolalaridagi ?source= va UTM parametrlari

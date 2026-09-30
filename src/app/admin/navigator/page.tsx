@@ -18,7 +18,7 @@ export default async function NavigatorAdminPage() {
   const session = cookieStore.get(ADMIN_COOKIE)?.value
 
   if (!verifyAdminSession(session)) {
-    return <LoginForm />
+    return <LoginForm title="Admin — Navigator" />
   }
 
   // RLS anonim o'qishni rad etadi — sahifa admin sessiyasi orqasida,

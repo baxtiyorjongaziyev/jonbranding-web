@@ -134,16 +134,22 @@ function getMarkdownBlogEntries(): MetadataRoute.Sitemap {
 
 async function getPortfolioEntries(): Promise<MetadataRoute.Sitemap> {
   const projectsBySlug = new Map<string, Set<Locale>>();
+  const lastModifiedBySlug = new Map<string, Date>();
   const projectsByLocale = await Promise.all(
     locales.map(async (lang) => [lang, await fetchPortfolioList(lang)] as const),
   );
 
   projectsByLocale.forEach(([lang, projects]) => {
-    projects.forEach(({ slug }) => {
+    projects.forEach((project) => {
+      const { slug } = project;
       if (!slug) return;
       const availableLocales = projectsBySlug.get(slug) ?? new Set<Locale>();
       availableLocales.add(lang);
       projectsBySlug.set(slug, availableLocales);
+
+      const { _updatedAt, publishedAt } = project as { _updatedAt?: string; publishedAt?: string };
+      const parsed = new Date(_updatedAt || publishedAt || '');
+      if (!Number.isNaN(parsed.getTime())) lastModifiedBySlug.set(slug, parsed);
     });
   });
 
@@ -153,6 +159,7 @@ async function getPortfolioEntries(): Promise<MetadataRoute.Sitemap> {
 
     return availableLocales.map((lang) => ({
       url: localizedUrl(lang, route),
+      lastModified: lastModifiedBySlug.get(slug),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
       alternates: getAlternates(route, availableLocales),

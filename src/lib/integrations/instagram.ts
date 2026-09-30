@@ -42,7 +42,7 @@ export async function getInstagramToken(): Promise<string | null> {
 
     return data.accessToken;
   } catch (error) {
-    console.error('[Instagram API] Error getting token from DB:', error);
+    logger.error('[Instagram API] Error getting token from DB:', error);
     return null;
   }
 }
@@ -56,7 +56,7 @@ async function refreshLongLivedToken(accessToken: string): Promise<{ accessToken
     const response = await fetch(url);
     if (!response.ok) {
       const errText = await response.text();
-      console.error('[Instagram API] Refresh token error:', errText);
+      logger.error('[Instagram API] Refresh token error:', errText);
       return null;
     }
     const resData = await response.json();
@@ -65,7 +65,7 @@ async function refreshLongLivedToken(accessToken: string): Promise<{ accessToken
       expiresInSeconds: resData.expires_in
     };
   } catch (error) {
-    console.error('[Instagram API] Network error during token refresh:', error);
+    logger.error('[Instagram API] Network error during token refresh:', error);
     return null;
   }
 }
@@ -84,7 +84,7 @@ export async function scrapeInstagramPosts(keyword: string): Promise<string | nu
     const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,timestamp&access_token=${token}`;
     const response = await fetch(url);
     if (!response.ok) {
-      console.error('[Instagram API] Failed to fetch media from Graph API:', await response.text());
+      logger.error('[Instagram API] Failed to fetch media from Graph API:', await response.text());
       return null;
     }
 
@@ -102,7 +102,7 @@ export async function scrapeInstagramPosts(keyword: string): Promise<string | nu
     logger.info(`[Instagram API] No matching Instagram post found for: ${keyword}`);
     return null;
   } catch (error) {
-    console.error('[Instagram API] Error fetching Instagram posts:', error);
+    logger.error('[Instagram API] Error fetching Instagram posts:', error);
     return null;
   }
 }

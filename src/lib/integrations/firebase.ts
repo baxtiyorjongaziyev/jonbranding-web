@@ -1,5 +1,6 @@
 import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { logger } from '@/lib/logger';
 
 export function getDb() {
   let app;
@@ -13,7 +14,7 @@ export function getDb() {
       try {
         saJson = Buffer.from(saJson, 'base64').toString('utf8');
       } catch (e) {
-        console.error('Failed to decode base64 service account JSON:', e);
+        logger.error('Failed to decode base64 service account JSON:', e);
       }
     }
     

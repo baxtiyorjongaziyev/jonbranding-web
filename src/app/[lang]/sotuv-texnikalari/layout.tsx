@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
+// Sahifa cookie orqali himoyalangan (page.tsx) — keshlanmasin.
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Sotuv texnikalari',
   description: 'Jon Branding sotuvchilari uchun SPIN, FAB, JTBD, LAER, Contrast va boshqa konsultativ sotuv texnikalari.',

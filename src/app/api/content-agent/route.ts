@@ -2,14 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { slugify } from '@/lib/slug';
 import { client } from '@/sanity/lib/client';
 import { google } from 'googleapis';
-import { safeCompare } from '@/lib/security';
+import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+
+// IG + Telegram + Gemini: post boshiga bir nechta rasm ketma-ket ishlanadi —
+// standart 10–15 s yetmaydi, cron yarim yo'lda uzilardi (portfolio-telegram bilan bir xil).
+export const maxDuration = 60;
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const APIFY_API_KEY = process.env.APIFY_API_KEY || '';
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const SANITY_TOKEN = process.env.SANITY_TOKEN || '';
-const CRON_SECRET = process.env.CRON_SECRET || '';
-const AMOCRM_CRON_SECRET = process.env.AMOCRM_CRON_SECRET || '';
 
 const TG_CHANNELS = ['@JonBranding'];
 const IG_ACCOUNTS = ['jonbranding'];
@@ -23,28 +25,7 @@ const sanityClient = client.withConfig({
 
 /* ── Auth ─────────────────────────────────────── */
 function verifyAuth(req: NextRequest): boolean {
-  // Fail securely if no secrets are configured
-  if (!CRON_SECRET && !AMOCRM_CRON_SECRET) {
-    return false;
-  }
-
-  const auth = req.headers.get('authorization');
-  const providedBearerToken = auth?.startsWith('Bearer ') ? auth.substring(7) : null;
-  const url = new URL(req.url);
-  const providedQuerySecret = url.searchParams.get('secret');
-
-  const providedSecret = providedBearerToken || providedQuerySecret;
-
-  if (!providedSecret) {
-    return false;
-  }
-
-  // Use timing-safe comparison
-  const isValidCronSecret = Boolean(CRON_SECRET) && safeCompare(providedSecret, CRON_SECRET);
-  const isValidAmocrmCronSecret =
-    Boolean(AMOCRM_CRON_SECRET) && safeCompare(providedSecret, AMOCRM_CRON_SECRET);
-
-  return isValidCronSecret || isValidAmocrmCronSecret;
+  return isAuthorizedCronRequest(req);
 }
 
 /* ── Helpers ──────────────────────────────────── */

@@ -47,22 +47,6 @@ describe('proxy locale redirect', () => {
     expect(response.headers.get('x-middleware-rewrite')).toContain('/uz/patent-menejer');
   });
 
-  it('permanently redirects legacy brand-strategiyasi routes to /brand-strategy', () => {
-    const res1 = proxy(requestFor('https://jonbranding.uz/xizmatlar/brand-strategiyasi'));
-    expect(res1.status).toBe(308);
-    expect(new URL(res1.headers.get('location')!).pathname).toBe('/brand-strategy');
-
-    const res2 = proxy(requestFor('https://jonbranding.uz/uz/xizmatlar/brand-strategiyasi?utm_source=tg'));
-    expect(res2.status).toBe(308);
-    const loc2 = new URL(res2.headers.get('location')!);
-    expect(loc2.pathname).toBe('/brand-strategy');
-    expect(loc2.searchParams.get('utm_source')).toBe('tg');
-
-    const res3 = proxy(requestFor('https://jonbranding.uz/xizmatlar/brand-strategy'));
-    expect(res3.status).toBe(308);
-    expect(new URL(res3.headers.get('location')!).pathname).toBe('/brand-strategy');
-  });
-
   it('keeps Uzbek inner pages in Uzbek for other-language browsers and crawlers', () => {
     const request = new NextRequest(
       new Request('https://www.jonbranding.uz/narxlar', { headers: { 'accept-language': 'en-US,en;q=0.9' } }),

@@ -2295,6 +2295,10 @@
       "submitError": "Yuborishda xatolik yuz berdi. Yana bir bor urinib ko‘ring.",
       "progress": "Diagnostika jarayoni"
     },
+    "meta": {
+      "title": "Brend diagnostikasi — biznesingiz brendi o‘sishga tayyormi?",
+      "description": "7 ta savolga javob bering va 2 daqiqada brendingizdagi asosiy o‘sish nuqtasini aniqlang. Natijada biznesingizning hozirgi bosqichi va birinchi qadamlar."
+    },
     "segments": {
       "yangi": "Endi boshlayapman",
       "tarqoq": "Ishlayapti, lekin brend tarqoq",
@@ -2482,5 +2486,9 @@
       "payoutPending": "Kutilmoqda",
       "empty": "Hali takliflar yo'q. Promokodingizni ulashing!"
     }
+  },
+  "navigatorErrors": {
+    "phoneInvalid": "Telefon raqamini tekshiring: +998 90 123 45 67 ko'rinishida yozing.",
+    "generic": "Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring."
   }
 }

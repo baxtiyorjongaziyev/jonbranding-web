@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
 import type { Testimonial } from '@/lib/types';
+import { logger } from '@/lib/logger';
 
 const QUERY = `
   *[_type == "testimonial"] | order(coalesce(order, 999) asc) {
@@ -42,7 +43,7 @@ export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
     const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: 30 } });
     if (data && data.length > 0) return applyLocalCovers(data);
   } catch (e) {
-    console.error('Sanity testimonials fetch failed, using fallback:', e);
+    logger.error('Sanity testimonials fetch failed, using fallback:', e);
   }
   return getFallback(lang);
 }

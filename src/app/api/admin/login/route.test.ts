@@ -13,13 +13,13 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-async function login(secret: string) {
+async function login(secret: string, scope?: 'team') {
   const { POST } = await import('./route');
   return POST(
     new Request('http://localhost/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret }),
+      body: JSON.stringify({ secret, scope }),
     }),
   );
 }
@@ -43,5 +43,21 @@ describe('POST /api/admin/login', () => {
     delete process.env.ADMIN_SECRET;
     const res = await login('anything');
     expect(res.status).toBe(401);
+  });
+
+  it('gives the sales team its own cookie, never an admin one', async () => {
+    process.env.SALES_TEAM_SECRET = 'team-pass';
+    const res = await login('team-pass', 'team');
+    expect(res.status).toBe(200);
+    const cookie = res.headers.get('set-cookie') || '';
+    expect(cookie).toMatch(/team_session=/);
+    expect(cookie).not.toMatch(/admin_session=/);
+    delete process.env.SALES_TEAM_SECRET;
+  });
+
+  it('does not accept the team password on the admin login', async () => {
+    process.env.SALES_TEAM_SECRET = 'team-pass';
+    expect((await login('team-pass')).status).toBe(401);
+    delete process.env.SALES_TEAM_SECRET;
   });
 });

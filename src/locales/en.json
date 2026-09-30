@@ -2281,6 +2281,10 @@
       "submitError": "Something went wrong. Please try again.",
       "progress": "Diagnostics progress"
     },
+    "meta": {
+      "title": "Brand diagnostics — is your brand ready to grow?",
+      "description": "Answer 7 questions and find your brand’s main growth opportunity in 2 minutes. You get your business’s current stage and the first steps to take."
+    },
     "segments": {
       "yangi": "Just starting",
       "tarqoq": "Operating, but the brand is inconsistent",
@@ -2468,5 +2472,9 @@
       "payoutPending": "Pending",
       "empty": "No referrals yet. Share your promo code!"
     }
+  },
+  "navigatorErrors": {
+    "phoneInvalid": "Please check your phone number: use the format +998 90 123 45 67.",
+    "generic": "Something went wrong. Please try again."
   }
 }

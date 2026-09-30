@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { forceRefresh } from '@/lib/amocrm-token';
 import { safeCompare } from '@/lib/security';
+import { logger } from '@/lib/logger';
 
 export async function POST(request: Request) {
   const cronSecret = process.env.AMOCRM_CRON_SECRET?.trim();
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
     const result = await forceRefresh();
     return NextResponse.json({ ok: true, expires_at: result.expires_at });
   } catch (error: any) {
-    console.error('AmoCRM refresh endpoint error:', error);
+    logger.error('AmoCRM refresh endpoint error:', error);
     return NextResponse.json({ ok: false, error: 'Internal server error' }, { status: 500 });
   }
 }

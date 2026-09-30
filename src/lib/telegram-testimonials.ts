@@ -1,4 +1,5 @@
 import type { Testimonial } from '@/lib/types';
+import { logger } from '@/lib/logger';
 
 const TG_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const CACHE_FILE = 'public/data/testimonials-telegram.json';
@@ -114,7 +115,7 @@ export function writeCachedTestimonials(testimonials: Testimonial[]): void {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(filePath, JSON.stringify(testimonials, null, 2), 'utf-8');
   } catch (err) {
-    console.error('[telegram-testimonials] Cache write error:', err);
+    logger.error('[telegram-testimonials] Cache write error:', err);
   }
 }
 
@@ -139,7 +140,7 @@ function writeOffsetFile(offset: number): void {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(offsetPath, String(offset), 'utf-8');
   } catch (err) {
-    console.error('[telegram-testimonials] Offset write error:', err);
+    logger.error('[telegram-testimonials] Offset write error:', err);
   }
 }
 
@@ -185,7 +186,7 @@ async function uploadToSanity(
     const url = asset.url || `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'h6ymmj0v'}/${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}/${asset._id.replace('file-', '').replace(/-[^-]*$/, '')}.${filename.split('.').pop()}`;
     return { _id: asset._id, url };
   } catch (err) {
-    console.error('[telegram-testimonials] Sanity upload error:', err);
+    logger.error('[telegram-testimonials] Sanity upload error:', err);
     return null;
   }
 }
@@ -372,7 +373,7 @@ export async function syncTelegramTestimonials(): Promise<{ new: number; total: 
 
     return { new: newCount, total: existing.length };
   } catch (err) {
-    console.error('[telegram-testimonials] Sync error:', err);
+    logger.error('[telegram-testimonials] Sync error:', err);
     return { new: 0, total: readCachedTestimonials().length };
   }
 }
@@ -451,7 +452,7 @@ export async function syncAndProcessMedia(): Promise<{ processed: number; total:
 
     return { processed, total: existing.length, errors };
   } catch (err) {
-    console.error('[telegram-testimonials] Process media error:', err);
+    logger.error('[telegram-testimonials] Process media error:', err);
     return { processed: 0, total: readCachedTestimonials().length, errors: 0 };
   }
 }

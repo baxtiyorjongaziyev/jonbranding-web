@@ -4,7 +4,6 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import { fetchComparisons } from '@/lib/data/comparisons';
-import { fetchBrands } from '@/lib/data/brands';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { safeJsonStringify } from '@/lib/security';
@@ -69,12 +68,23 @@ export default async function Page(props: Props) {
     dictionary = await getDictionary('uz');
   }
 
-  const [comparisons, brands, testimonials, portfolioProjects] = await Promise.all([
+  const [comparisons, testimonials, portfolioProjects] = await Promise.all([
     fetchComparisons(),
-    fetchBrands(),
     fetchTestimonials(lang),
     fetchPortfolioList(lang),
   ]);
+
+  // HomeComponent klient komponent: unga berilgan hamma narsa HTML ichidagi RSC
+  // ma'lumotiga yoziladi. Butun lug'at (ru ~95 KB) o'rniga faqat bosh sahifa
+  // ishlatadigan bo'limlar beriladi.
+  const homeDictionary = {
+    atelier: dictionary.atelier,
+    beforeAfter: dictionary.beforeAfter,
+    processVideo: dictionary.processVideo,
+    founder: dictionary.founder,
+    answerHub: dictionary.answerHub,
+    contactModal: dictionary.contactModal,
+  };
 
   const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : 'uz';
   const canonical = getLocalizedAbsoluteUrl(SITE_URL, safeLang);
@@ -118,9 +128,8 @@ export default async function Page(props: Props) {
       />
       <HomeComponent
         lang={safeLang}
-        dictionary={dictionary}
+        dictionary={homeDictionary}
         comparisons={comparisons}
-        brands={brands}
         testimonials={testimonials}
         portfolioProjects={portfolioProjects}
       />
