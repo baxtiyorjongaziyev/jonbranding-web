@@ -80,7 +80,23 @@ async function doRefresh(): Promise<TokenData> {
   return fresh;
 }
 
+function getEnvAccessToken(): string | null {
+  const raw = process.env.AMOCRM_ACCESS_TOKEN?.trim();
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return String(parsed.access_token || '').trim() || null;
+  } catch {
+    return raw;
+  }
+}
+
 export async function getValidAccessToken(): Promise<string> {
+  const envToken = getEnvAccessToken();
+  if (envToken) {
+    return envToken;
+  }
+
   // Hot path: valid token in memory — zero Firestore reads
   if (memoryToken && memoryToken.expires_at - REFRESH_BUFFER_MS > Date.now()) {
     return memoryToken.access_token;
@@ -105,6 +121,11 @@ export async function getValidAccessToken(): Promise<string> {
 }
 
 export async function forceRefresh(): Promise<{ access_token: string; expires_at: number }> {
+  const envToken = getEnvAccessToken();
+  if (envToken) {
+    return { access_token: envToken, expires_at: Date.now() + 365 * 86400 * 1000 };
+  }
+
   if (!refreshInFlight) {
     refreshInFlight = doRefresh().finally(() => {
       refreshInFlight = null;
