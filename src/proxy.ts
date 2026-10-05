@@ -15,7 +15,16 @@ export function proxy(request: NextRequest) {
 
   const host = (request.nextUrl.hostname || request.headers.get('host') || '').toLowerCase();
   if (host.startsWith('patent.')) {
-    const locale = getLocale(request);
+    // Subdomen faqat bosh sahifasida (/, /ru, /en...) menejer kalkulyatorini
+    // ko'rsatadi. Boshqa har qanday yo'l (header/footer havolalari) asosiy
+    // saytga yo'naltiriladi — aks holda hamma tugma shu sahifaga qaytardi.
+    const localeRoot = locales.find((l) => pathname === `/${l}` || pathname === `/${l}/`);
+    const isManagerPage = pathname === '/' || localeRoot || /^\/([a-z]{2}\/)?patent-menejer\/?$/.test(pathname);
+    if (!isManagerPage) {
+      const target = new URL(request.nextUrl.pathname + request.nextUrl.search, 'https://www.jonbranding.uz');
+      return NextResponse.redirect(target, 307);
+    }
+    const locale = localeRoot ?? getLocale(request);
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/patent-menejer`;
     url.searchParams.set('__rewrite', '1');
