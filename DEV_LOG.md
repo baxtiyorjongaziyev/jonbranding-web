@@ -2,6 +2,15 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-10-05 | patent.jonbranding.uz havolalari va apple-touch-icon (PR #360, #362)
+
+**Qilingan ish:**
+- `src/proxy.ts`: `patent.` subdomeni endi faqat `/`, `/{lang}`, `/patent-menejer` da menejer kalkulyatorini ko'rsatadi. Boshqa yo'llar (header/footer tugmalari) `https://www.jonbranding.uz` + path + query ga 307 bilan o'tadi. Avval hamma yo'l kalkulyatorga rewrite bo'lardi.
+- `src/proxy.ts` matcher: `apple-touch-icon.png` qo'shildi — avval `/uz/apple-touch-icon.png` ga rewrite bo'lib 404 qaytarardi.
+- Production'da subdomen sahifasidagi 18 ta ichki havola tekshirildi: hammasi asosiy saytga o'tadi, 200.
+
+**Ochiq:** `npm audit` CI qizil — `braces` (GHSA-vfj7-8cjw-p6xm, sanity/@sanity/cli orqali), patch versiya hali yo'q.
+
 ## 2026-10-05 | /otzivlar: video, audio va yozma sharhlar bloklari (PR #358)
 
 **Qilingan ish:**
