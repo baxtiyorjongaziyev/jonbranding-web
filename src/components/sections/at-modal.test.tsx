@@ -20,25 +20,8 @@ const dictionary = {
     telegram: { label: 'Telegram (ixtiyoriy)', placeholder: '@username' },
   },
   atModal: {
-    eyebrow: 'Mini-tashxis · 1 daqiqa',
-    stepContact: '1/2 · Aloqa',
-    stepDetails: "2/2 · Ma'lumotlar (ixtiyoriy)",
-    detailsTitle: 'Bir nechta savol',
-    serviceLabel: 'Tashxis turi',
-    budgetLabel: 'Byudjet',
+    eyebrow: 'Bepul Brand Audit · 15 daqiqa',
     submitting: 'Yuborilmoqda',
-    serviceOptions: {
-      free: 'Bepul mini-tashxis',
-      full: "To'liq tashxis",
-      roadmap: "Tashxis + Yo'l xaritasi",
-      unsure: 'Hali aniq emas',
-    },
-    budgetOptions: {
-      free: 'Bepul — mini-tashxis',
-      starter: "4—5 mln so'm",
-      growth: "10—15 mln so'm",
-      unsure: 'Hali aniq emas',
-    },
   },
   buttons: {
     submit: 'Yuborish',
@@ -66,7 +49,7 @@ describe('AtModal', () => {
     vi.unstubAllGlobals();
   });
 
-  it('submits a required normalized phone with optional Telegram', async () => {
+  it('submits a required normalized phone with optional Telegram in a single step', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ ok: true, eventId: 'lead_test' }),
@@ -75,13 +58,15 @@ describe('AtModal', () => {
 
     render(<AtModal open onClose={vi.fn()} lang="uz" dictionary={dictionary} />);
 
+    fireEvent.change(screen.getByLabelText(/Ismingiz/), {
+      target: { value: 'Sardor Karimov' },
+    });
     fireEvent.change(screen.getByLabelText(/Telefon raqamingiz/), {
       target: { value: '90 123 45 67' },
     });
     fireEvent.change(screen.getByLabelText(/Telegram/), {
       target: { value: '@Sardor' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /Keyingi qadam/ }));
     fireEvent.click(screen.getByRole('button', { name: /Yuborish/ }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
@@ -89,12 +74,13 @@ describe('AtModal', () => {
     const payload = JSON.parse(String(request.body));
 
     expect(payload).toMatchObject({
+      fullName: 'Sardor Karimov',
       phone: '+998901234567',
       telegram: 'Sardor',
       source: 'at_modal',
       lang: 'uz',
-      role: 'Bepul mini-tashxis',
-      budget: 'Bepul — mini-tashxis',
+      role: 'Bepul Brand Audit',
+      budget: 'Bepul',
     });
   });
 
@@ -125,7 +111,7 @@ describe('AtModal', () => {
 
   it('announces validation errors and keeps focus on the invalid phone field', async () => {
     render(<AtModal open onClose={vi.fn()} lang="uz" dictionary={dictionary} />);
-    fireEvent.click(screen.getByRole('button', { name: /Keyingi qadam/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Yuborish/ }));
 
     expect(screen.getByRole('alert')).toHaveTextContent('To‘liq telefon raqamini kiriting');
     expect(screen.getByLabelText(/Telefon raqamingiz/)).toHaveFocus();
@@ -139,21 +125,21 @@ describe('AtModal', () => {
       steps: { step4: { subtitle: 'Leave your contact details' } },
       fields: {
         ...dictionary.fields,
+        name: { label: 'Your name', placeholder: 'John Doe' },
         phone: { label: 'Phone number', placeholder: '+998' },
         telegram: { label: 'Telegram (optional)', placeholder: '@username' },
       },
       atModal: {
         ...dictionary.atModal,
-        eyebrow: 'Mini audit · 1 minute',
-        stepContact: '1/2 · Contact',
+        eyebrow: 'Free Brand Audit · 15 minutes',
       },
-      buttons: { ...dictionary.buttons, next: 'Next step', close: 'Close' },
+      buttons: { ...dictionary.buttons, submit: 'Get Free Audit', close: 'Close' },
       trustBadge: 'Your data is kept private',
     };
 
     render(<AtModal open onClose={vi.fn()} lang="en" dictionary={englishDictionary} />);
     expect(screen.getByRole('dialog', { name: 'Free Brand Audit' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Next step/ })).toBeInTheDocument();
-    expect(screen.queryByText('Keyingi qadam')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Get Free Audit/ })).toBeInTheDocument();
+    expect(screen.queryByText('Yuborish')).not.toBeInTheDocument();
   });
 });
