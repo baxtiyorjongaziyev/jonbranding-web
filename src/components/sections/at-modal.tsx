@@ -68,6 +68,11 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
     const eventId = generateEventId('lead');
     const gaClientId = getGaClientId();
     const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
+    const pagePath = typeof window !== 'undefined' ? window.location.pathname : undefined;
+    const referrer = typeof document !== 'undefined' ? document.referrer || undefined : undefined;
+    const searchParams = typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search)
+      : null;
     const value = BUDGET_VALUE[budget];
 
     trackEvent({
@@ -97,6 +102,16 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           gaClientId,
           pageLocation,
           ctaSource: 'at_modal',
+          pagePath,
+          referrer,
+          section: 'lead_modal',
+          offerType: service,
+          ctaLabel: dictionary.buttons.submit,
+          utmSource: searchParams?.get('utm_source') || undefined,
+          utmMedium: searchParams?.get('utm_medium') || undefined,
+          utmCampaign: searchParams?.get('utm_campaign') || undefined,
+          utmContent: searchParams?.get('utm_content') || undefined,
+          utmTerm: searchParams?.get('utm_term') || undefined,
           totalPrice: value,
           companyWebsite: honeypot,
           promoCode: typeof window !== 'undefined'
