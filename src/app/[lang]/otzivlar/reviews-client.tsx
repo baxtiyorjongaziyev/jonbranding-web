@@ -30,27 +30,8 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Fallback translations if dictionary doesn't have it
-  const dict = dictionary?.reviewsPage || {
-    title: lang === 'ru' ? 'Отзывы наших клиентов' : lang === 'en' ? 'Our Clients\' Reviews' : lang === 'zh' ? '客户评价' : 'Mijozlarimiz sharhlari',
-    subtitle: lang === 'ru' ? 'Результаты говорят сами за себя. Голоса и видео реальных людей о нашей работе.' : lang === 'en' ? 'Results speak for themselves. Voice and video reviews from real people.' : lang === 'zh' ? '用事实说话。来自真实客户的语音和视频评价。' : 'Natijalar o\'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.',
-    back: lang === 'ru' ? 'На главную' : lang === 'en' ? 'Back to home' : lang === 'zh' ? '返回首页' : 'Bosh sahifaga',
-    ctaText: lang === 'ru' ? 'Получить бесплатный аудит' : lang === 'en' ? 'Get free audit' : lang === 'zh' ? '获取免费审计' : 'Bepul audit olish',
-    voiceLabel: lang === 'ru' ? 'Голосовой отзыв' : lang === 'en' ? 'Voice Review' : lang === 'zh' ? '语音评价' : 'Ovozli sharh',
-    videoLabel: lang === 'ru' ? 'Видео отзыв' : lang === 'en' ? 'Video Review' : lang === 'zh' ? '视频评价' : 'Video sharh',
-  };
-
-  const L = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as 'uz' | 'ru' | 'en' | 'zh';
-  const sec = {
-    video: { uz: 'Video sharhlar', ru: 'Видеоотзывы', en: 'Video reviews', zh: '视频评价' }[L],
-    videoDesc: { uz: "Mijozlar o'z natijalari haqida kamera oldida", ru: 'Клиенты о результатах на камеру', en: 'Clients on camera about their results', zh: '客户面对镜头分享成果' }[L],
-    audio: { uz: 'Audio sharhlar', ru: 'Аудиоотзывы', en: 'Audio reviews', zh: '语音评价' }[L],
-    audioDesc: { uz: 'Mijozlarning ovozli xabarlari', ru: 'Голосовые сообщения клиентов', en: 'Voice messages from clients', zh: '客户的语音留言' }[L],
-    text: { uz: 'Yozma sharhlar', ru: 'Текстовые отзывы', en: 'Written reviews', zh: '文字评价' }[L],
-    textDesc: { uz: 'Mijozlarning yozma fikrlari', ru: 'Письменные отзывы клиентов', en: 'Written feedback from clients', zh: '客户的书面反馈' }[L],
-    watch: { uz: "Videoni ko'rish", ru: 'Смотреть видео', en: 'Watch video', zh: '观看视频' }[L],
-    listen: { uz: 'Tinglash', ru: 'Слушать', en: 'Listen', zh: '收听' }[L],
-  };
+  const dict = dictionary.reviewsPage;
+  const sec = dict;
 
   const hasVideoOf = (t: Testimonial) => !!(t.videoFileUrl || t.videoUrl);
   const hasAudioOf = (t: Testimonial) => !!(t.audioFileUrl || t.audioUrl);
@@ -158,7 +139,7 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
             style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--accent)' }} />
-            {L === 'uz' ? 'Sharhlar' : L === 'ru' ? 'Отзывы' : L === 'en' ? 'Reviews' : '评价'}
+            {dict.badge}
           </div>
           <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight leading-[1.05]">{dict.title}</h1>
           <p className="mt-5 text-base md:text-lg leading-relaxed" style={{ color: 'var(--ink-2)' }}>
@@ -322,10 +303,10 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
           style={{ background: 'var(--ink)', color: 'var(--bg)' }}
         >
           <h3 className="text-xl font-bold">
-            {lang === 'uz' ? "O'z brendingizni hoziroq yaxshilang" : lang === 'ru' ? 'Улучшите свой бренд прямо сейчас' : lang === 'zh' ? '立即提升您的品牌价值' : 'Improve your brand right now'}
+            {dict.ctaTitle}
           </h3>
           <p className="text-sm opacity-70">
-            {lang === 'uz' ? '15 daqiqada brendingizdagi 3 ta yirik zaiflikni topib beramiz.' : lang === 'ru' ? 'За 15 минут найдем 3 главные слабости вашего бренда.' : lang === 'zh' ? '我们将在15分钟内为您找出品牌最大的3个弱点。' : 'We will find the 3 biggest weaknesses of your brand in 15 minutes.'}
+            {dict.ctaDesc}
           </p>
           <Link
             href={`/${lang}/#narxlar`}

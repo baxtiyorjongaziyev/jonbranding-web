@@ -2484,5 +2484,22 @@
   "navigatorErrors": {
     "phoneInvalid": "请检查电话号码：请按 +998 90 123 45 67 的格式填写。",
     "generic": "出现错误，请重试。"
+  },
+  "reviewsPage": {
+    "title": "客户评价",
+    "subtitle": "用事实说话。来自真实客户的语音和视频评价。",
+    "back": "返回首页",
+    "badge": "评价",
+    "ctaTitle": "立即提升您的品牌价值",
+    "ctaDesc": "我们将在15分钟内为您找出品牌最大的3个弱点。",
+    "ctaText": "获取免费审计",
+    "video": "视频评价",
+    "videoDesc": "客户面对镜头分享成果",
+    "audio": "语音评价",
+    "audioDesc": "客户的语音留言",
+    "text": "文字评价",
+    "textDesc": "客户的书面反馈",
+    "watch": "观看视频",
+    "listen": "收听"
   }
 }

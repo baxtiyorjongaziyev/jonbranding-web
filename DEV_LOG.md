@@ -2,6 +2,16 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-10-05 | /otzivlar: video, audio va yozma sharhlar bloklari (PR #358)
+
+**Qilingan ish:**
+- `/otzivlar` uch blokka bo'lindi: Video, Audio, Yozma sharhlar (`reviews-client.tsx`). Bo'sh blok ko'rsatilmaydi.
+- Sahifa sayt "paper" uslubiga o'tkazildi. `.atelier-theme *` margin/padding'ni nolga tushirgani uchun bu sahifada `atelier-theme` klassi ishlatilmaydi, tokenlar komponent ichida (`TOKENS`).
+- Barcha matnlar `dictionary.reviewsPage` ga (uz/ru/en/zh) ko'chirildi.
+- `static-data.ts`: fallback audio havolalari `.mp3` -> `.ogg` (`public/audio/` da faqat `.ogg` bor).
+
+**Holat:** ESLint toza, sahifa lokalda ko'rib tasdiqlandi (faqat fallback ma'lumot: Sanity sandbox'da bloklangan). Audio/yozma bloklar deploy preview'da tekshirilishi kerak. `npm audit` CI xatosi bu PR'ga aloqasiz (yangi `@grpc/grpc-js`, `braces` advisory'lari).
+
 ## 2026-09-25 | Code bazani mukammal (ideal) holatga keltirish, Dependabot, CodeQL va SEO to'liq yopildi
 
 **Qilingan ish:**
