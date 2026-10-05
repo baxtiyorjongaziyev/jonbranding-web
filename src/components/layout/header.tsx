@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import { DesktopNav } from './header-desktop-nav';
 import { MobileMenu } from './header-mobile-menu';
+import { useMainSiteOrigin } from '@/lib/use-main-site-origin';
 
 type Dictionary = {
   portfolio: string;
@@ -41,6 +42,7 @@ type Dictionary = {
 
 const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const pathname = usePathname();
+  const mainSiteOrigin = useMainSiteOrigin();
   const [visible, setVisible] = useState(true);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -88,8 +90,8 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const getLocalizedPath = (path: string) => {
     if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    if (lang === 'uz') return cleanPath;
-    return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
+    if (lang === 'uz') return `${mainSiteOrigin}${cleanPath}`;
+    return `${mainSiteOrigin}/${lang}${cleanPath === '/' ? '' : cleanPath}`;
   };
 
   if (!dictionary) return null;

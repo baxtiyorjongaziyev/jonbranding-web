@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { FC } from 'react';
+import { useMainSiteOrigin } from '@/lib/use-main-site-origin';
 import { trackContactClick } from '@/lib/analytics';
 
 type Dictionary = {
@@ -46,6 +47,7 @@ type Dictionary = {
 
 const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dictionary }) => {
   const pathname = usePathname();
+  const mainSiteOrigin = useMainSiteOrigin();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
@@ -56,8 +58,8 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const getLocalizedPath = (path: string) => {
     if (path.startsWith('http') || path.startsWith('tel:') || path.startsWith('mailto:')) return path;
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    if (lang === 'uz') return cleanPath;
-    return `/${lang}${cleanPath === '/' ? '' : cleanPath}`;
+    if (lang === 'uz') return `${mainSiteOrigin}${cleanPath}`;
+    return `${mainSiteOrigin}/${lang}${cleanPath === '/' ? '' : cleanPath}`;
   };
 
   return (
