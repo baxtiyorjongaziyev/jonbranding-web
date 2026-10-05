@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Loader2, Lock, Minus, Plus } from 'lucide-react';
+import { Download, Loader2, Lock, Minus, Plus } from 'lucide-react';
+import { downloadEstimateImage, type EstimateSection } from '@/lib/patent-estimate-image';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/analytics/gtag';
 import { motion } from 'framer-motion';
@@ -191,6 +192,8 @@ export default function TrademarkCalculator({
   const [success, setSuccess] = useState(false);
   const [honeypot, setHoneypot] = useState('');
 
+  // alwaysUnlocked = menejer rejimi: lead formasi yo'q, hisobni rasm qilib mijozga yuboradi.
+  const isManager = alwaysUnlocked;
   const isUnlocked = alwaysUnlocked || success;
 
   const watchFields = useWatch({ control: form.control });
@@ -263,6 +266,52 @@ export default function TrademarkCalculator({
     }
   };
 
+  const handleDownload = () => {
+    const t = translations ?? {};
+    const cur = t.currency ?? 'UZS';
+    const opt = (list: any[] | undefined, i: number, fb: string) => list?.[i]?.label || fb;
+    const extra = (fees.classCount ?? 1) - 1;
+    const sections: EstimateSection[] = [];
+    if (watchFields.hasEkspert) {
+      sections.push({ title: t.step0Title ?? '0-bosqich', rows: [
+        [t.expertBaseFee ?? '', fees.ekspertBase],
+        ...(extra > 0 ? [[getExtraClassesFeeLabel(), fees.ekspertExtra] as [string, number]] : []),
+      ], total: [t.step0Total ?? '', fees.ekspertTotal] });
+    }
+    sections.push({ title: t.step1Title ?? '1-bosqich', rows: [
+      [t.ourServiceFee ?? '', fees.agentTotal],
+      [t.applicationFee ?? '', fees.step1StateTotal],
+    ], total: [t.step1Total ?? '', fees.agentTotal + fees.step1StateTotal] });
+    if (watchFields.speed === 'tez') {
+      sections.push({ title: t.expediteTitle ?? '', rows: [
+        [t.expediteBaseFee ?? '', fees.expediteBase],
+        ...(fees.expediteExtra > 0 ? [[`${t.extraClassesFeeLabel ?? ''} (${extra})`, fees.expediteExtra] as [string, number]] : []),
+      ], total: [t.expediteTotal ?? '', fees.expediteTotal] });
+    }
+    sections.push({ title: t.step2Title ?? '2-bosqich', rows: [
+      [t.stateFeeBase ?? '', fees.step2Base],
+      ...(fees.step2Extra > 0 ? [[`${t.extraClassesFeeLabel ?? ''} (${extra})`, fees.step2Extra] as [string, number]] : []),
+    ], total: [t.step2Total ?? '', fees.step2Total] });
+
+    const meta = [
+      `${fees.classCount} ${t.classLabel ?? ''}`,
+      watchFields.isYuridik ? opt(t.personTypeOptions, 1, 'Yuridik') : opt(t.personTypeOptions, 0, 'Jismoniy'),
+      watchFields.speed === 'tez' ? opt(t.speedOptions, 1, 'Tez') : opt(t.speedOptions, 0, 'Oddiy'),
+    ];
+    downloadEstimateImage({
+      title: t.imageTitle ?? 'Patent hisob-kitobi',
+      client: watchFields.name ? `${t.imageClientLabel ?? 'Mijoz'}: ${watchFields.name}` : '',
+      brand: watchFields.brand ? `${t.imageBrandLabel ?? 'Brend'}: ${watchFields.brand}` : '',
+      meta: meta.join(' · '),
+      totalTitle: t.totalCostTitle ?? '',
+      total: formatPrice(fees.total, cur),
+      currency: cur,
+      sections,
+      footer: `${t.imageFooter ?? ''} ${t.importantNoteBHM?.replace('{bhm}', BHM.toLocaleString('fr-FR')) ?? ''}`.trim(),
+      fileName: `patent-${(watchFields.brand || 'hisob').replace(/[\s/\\:*?"<>|]+/g, '-').toLowerCase()}.png`,
+    });
+  };
+
   const resetForm = () => {
     setSuccess(false);
     form.reset();
@@ -288,6 +337,9 @@ export default function TrademarkCalculator({
                             <FormLabel className="font-medium">{translations?.classCountLabel ?? 'Klasslar'}</FormLabel>
                             <span className="text-xs text-slate-500">{translations?.classCountMax ?? 'Maks. 45'}</span>
                         </div>
+                        {translations?.classCountHint && (
+                            <p className="-mt-1 mb-2 text-xs text-muted-foreground">{translations.classCountHint}</p>
+                        )}
                         <div className="flex items-center gap-2">
                             <IconButton onClick={() => form.setValue('classCount', clampClassCount(field.value - 1))} disabled={field.value <= 1} aria-label={translations?.decreaseClassCount || 'Klasslar sonini kamaytirish'}>
                                 <Minus className="h-4 w-4"/>
@@ -347,6 +399,16 @@ export default function TrademarkCalculator({
                         <FormMessage />
                     </FormItem>
                 )} />
+                {isManager ? (
+                  <>
+                    <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.managerBrandLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? ''} {...field} /></FormControl></FormItem> )} />
+                    <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.managerClientLabel ?? 'Mijoz ismi'}</FormLabel><FormControl><Input {...field} /></FormControl></FormItem> )} />
+                    <Button type="button" className="w-full text-base py-6" onClick={handleDownload}>
+                      <Download className="mr-2 h-4 w-4" /> {translations?.downloadImageButton ?? 'Rasm qilib yuklab olish'}
+                    </Button>
+                  </>
+                ) : (
+                <>
                 <div className="border-t pt-6">
                   <h4 className="font-semibold text-foreground">{translations?.contactStepTitle ?? "Natijani qayerga yuboramiz?"}</h4>
                 </div>
@@ -383,6 +445,8 @@ export default function TrademarkCalculator({
                         <span>{translations.successMessage}</span>
                         <Button variant="outline" size="sm" onClick={resetForm}>{translations.tryAgainButton}</Button>
                     </div>
+                )}
+                </>
                 )}
             </form>
         </Form>
