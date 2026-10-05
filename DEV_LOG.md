@@ -7,6 +7,11 @@
 - Uning SEO sarlavha va description'i `xizmatlar/patent-kalkulyatori/layout.tsx` ga ko'chirildi. Sitemap'dan olib tashlandi.
 - Menejer versiyasi (`/patent-menejer`, `patent.jonbranding.uz`) o'zgarishsiz.
 
+## 2026-10-05 | amoCRM uzoq muddatli token (AMOCRM_ACCESS_TOKEN) to'g'ridan-to'g'ri integratsiya qilindi
+- **Muammo:** `src/lib/integrations/amocrm.ts` da `getValidAccessToken()` doim Firestore'dan eski tokenni o'qib, muddati o'tgan `refresh_token` orqali yangilashga urinardi. Oqibatda amoCRM 'Token has been revoked' qaytarib, arizalar navbatga tushib qolayotgan edi.
+- **Yechim:** `getValidAccessToken()` va `forceRefresh()` da birinchi navbatda `AMOCRM_ACCESS_TOKEN` (5 yillik uzoq muddatli token) mavjudligi tekshiriladigan qilindi. U mavjud bo'lsa, Firestore'ga so'rov yubormasdan va bekor bo'lgan refresh tokenni ishlatmasdan to'g'ridan-to'g'ri tokendan foydalanadi.
+- **Tekshiruv:** `npm run verify:fast` orqali 54 test to'plami va 376 ta test 100% yashil o'tdi.
+
 ## 2026-10-05 | Bosh sahifa AtModal formasi soddalashtirildi (1-bosqichli, konversiyasi yuqori premium forma)
 - **Muammo:** Bosh sahifadagi `AtModal` 2 bosqichli bo'lib, 2-bosqichda "Tashxis turi" (Bepul mini-tashxis) va "Byudjet" (Bepul — mini-tashxis) degan 2 ta dublikat va sun'iy dropdown mavjud edi. Shuningdek, terminologiya (Brand Audit vs Mini-tashxis) va UI ko'rinishi (arzon browser selectlar) sayt obro'siga salbiy ta'sir ko'rsatayotgan edi.
 - **Yechim (`src/components/sections/at-modal.tsx`):**
@@ -15,6 +20,7 @@
   3. UI dizayni Atelier estetikasiga moslandi: `var(--at-paper)` foni, `var(--at-line)` nozik hoshiyalari, silliq focus holatlari, ko'rkam yashil pulsatsiya indikatori va spamsiz xavfsizlik kafolati.
   4. i18n pariteti: `uz.json`, `ru.json`, `en.json`, `zh.json` da `atModal.eyebrow` yagona "Bepul Brand Audit · 15 daqiqa" standartiga sinxronlashtirildi.
 - **Tekshiruv:** `at-modal.test.tsx` 4 ta testi to'liq yashil, `npm run verify:fast` (barcha 54 test fayli, 376 ta test) 100% muvaffaqiyatli o'tdi.
+
 
 ## 2026-10-05 | BrandStrategyClient monolit komponenti modularizatsiyasi (1,801 qator -> 71 qator)
 - **Muammo:** `src/app/[lang]/brand-strategy/brand-strategy-client.tsx` fayli 1,801 qatordan iborat ulkan monolit bo'lib, uning ichida forma holati, 17 ta bo'lim, SVG/rasmlar, statik ma'lumotlar va har xil helper komponentlar aralashib ketgan edi.
