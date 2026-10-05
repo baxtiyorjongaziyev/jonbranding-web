@@ -13,7 +13,7 @@ test('320px services stay inside the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
   const rows = page.locator('.service-row');
-  await expect(rows).toHaveCount(6, { timeout: 15_000 });
+  await expect(rows).toHaveCount(3, { timeout: 15_000 });
 
   const layout = await page.evaluate(() => {
     const serviceRows = Array.from(document.querySelectorAll<HTMLElement>('.service-row'));
@@ -65,8 +65,8 @@ test('English modal traps focus, closes on Escape, and restores focus', async ({
 
   const dialog = page.getByRole('dialog', { name: /Free Brand Audit/i });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('button', { name: /Next step/i })).toBeVisible();
-  await expect(dialog.getByText('Keyingi qadam')).toHaveCount(0);
+  await expect(dialog.getByRole('button', { name: /Book free audit/i })).toBeVisible();
+  await expect(dialog.getByText('Bepul Brand Audit olish')).toHaveCount(0);
   await expect(page.getByLabel(/Phone number/i)).toBeFocused();
 
   await page.keyboard.press('Escape');

@@ -48,5 +48,5 @@ test('homepage remains usable with reduced motion', async ({ page }) => {
 
   const services = page.locator('#xizmat .service-row');
   await expect(services.first()).toBeVisible();
-  await expect(services).toHaveCount(6);
+  await expect(services).toHaveCount(3);
 });
