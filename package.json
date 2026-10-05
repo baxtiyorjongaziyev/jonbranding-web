@@ -18,6 +18,10 @@
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "test": "vitest run",
     "test:e2e": "playwright test --project=chromium",
+    "verify": "node scripts/harness/verify.mjs",
+    "verify:fast": "node scripts/harness/verify.mjs --fast",
+    "harness": "node scripts/harness/verify.mjs",
+    "mock:lead": "node scripts/harness/mock-lead.mjs",
     "prepare": "husky"
   },
   "engines": {

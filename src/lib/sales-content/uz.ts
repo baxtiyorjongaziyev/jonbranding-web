@@ -272,8 +272,8 @@ export const WHY_US = [
     desc: 'Dizayner logo chizadi va ketadi. Biz nomni tekshiramiz, ro‘yxatdan o‘tkazamiz va guvohnomani qo‘lingizga beramiz — brend huquqan sizniki bo‘ladi.',
   },
   {
-    title: '9 yil va 1000 dan ortiq loyiha',
-    desc: 'Bu ish bizda tajriba bo‘yicha qilinadi, urinib ko‘rish bo‘yicha emas. Qaysi yechim bozorda ishlashini oldindan bilamiz.',
+    title: 'Tizimli jarayon va ichki nazorat',
+    desc: 'Har loyiha brif, tahlil, konsepsiya va topshirish bosqichlaridan o‘tadi. Qarorlar taqdimot va tasdiq bilan yuradi.',
   },
   {
     title: 'Fayllar sizda qoladi',
@@ -333,7 +333,7 @@ export const uz: SalesContent = {
   priceFactors: PRICE_FACTORS,
   ui: {
     currency: 'so‘m',
-    stats: { experience: 'yil tajriba', clients: 'mijoz', projects: 'loyiha' },
+    stats: { experience: 'aniq bosqich', clients: 'bo‘lib to‘lash', projects: 'oldindan to‘lov' },
     payment: {
       contract: 'Shartnoma imzolanganda',
       delivery: 'Loyiha topshirilganda',
