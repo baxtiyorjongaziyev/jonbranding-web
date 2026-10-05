@@ -7,6 +7,12 @@ vi.mock('@/lib/rate-limit', () => ({
   getClientIp: () => 'ip',
 }));
 
+// `after()` faqat so'rov kontekstida ishlaydi — testda darhol bajaramiz.
+vi.mock('next/server', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('next/server')>()),
+  after: (task: () => unknown) => task(),
+}));
+
 const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true }), { status: 200 }));
 
 beforeEach(() => {

@@ -97,7 +97,8 @@ describe('calculatePackagePrice promo code validation', () => {
     it('rejects an arbitrary code (no discount applied)', () => {
         const result = calculatePackagePrice({ ...baseSelections, promoCode: 'RANDOMCODE' });
         expect(result.isPromoApplied).toBe(false);
-        expect(result.discountApplied).toHaveLength(0);
+        expect(result.discountApplied).toHaveLength(1);
+        expect(result.discountApplied[0].name).toContain('Istisno');
     });
 
     it('rejects an empty code', () => {
@@ -132,5 +133,18 @@ describe('calculatePackagePrice promo code validation', () => {
             ['SHERBEK'],
         );
         expect(result.isPromoApplied).toBe(false);
+    });
+
+    it('applies the strict 10% + 10% + 10% cascade and exposes Arboun terms', () => {
+        const result = calculatePackagePrice({
+            selectedServices: { logoStandard: true },
+            discountType: 'full',
+            promoCode: 'SALOM',
+        });
+
+        expect(result.final).toBeCloseTo(result.base * 0.9 * 0.9 * 0.9);
+        expect(result.discountApplied).toHaveLength(3);
+        expect(result.arbounAmount).toBe(50);
+        expect(result.arbounDays).toBe(3);
     });
 });

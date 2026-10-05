@@ -264,7 +264,7 @@ export const zh: SalesContent = {
       desc: '设计师画完标志就走了。我们会核查名称、完成注册，并把证书交到您手上——品牌在法律上归您所有。',
     },
     {
-      title: '9 年，1000 多个项目',
+      title: '系统化流程与内部审核',
       desc: '这里靠的是经验，而不是反复试错。哪种方案能在市场上奏效，我们心中有数。',
     },
     {
@@ -311,7 +311,7 @@ export const zh: SalesContent = {
   ],
   ui: {
     currency: '苏姆',
-    stats: { experience: '年经验', clients: '位客户', projects: '个项目' },
+    stats: { experience: '个明确阶段', clients: '分期付款', projects: '预付款' },
     payment: {
       contract: '签订合同时',
       delivery: '项目交付时',

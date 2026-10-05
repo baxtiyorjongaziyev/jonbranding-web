@@ -11,7 +11,7 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: [...configDefaults.exclude, 'tests/**', '.claude/**'],
+    exclude: [...configDefaults.exclude, 'tests/**', '.claude/**', '.kilo/**'],
     environment: 'jsdom',
     globals: true,
     setupFiles: './test/setup.ts',
