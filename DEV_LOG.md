@@ -1,5 +1,12 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-05 | Patent kalkulyatori sahifalari birlashtirildi
+
+**Qilingan ish:**
+- `/patent-narxi-hisoblagich` o'chirildi va `/xizmatlar/patent-kalkulyatori` ga 308 bilan yo'naltirildi (`next.config.js`, ru/en/zh ham). Ikkalasi bir xil gated kalkulyator edi — dublikat.
+- Uning SEO sarlavha va description'i `xizmatlar/patent-kalkulyatori/layout.tsx` ga ko'chirildi. Sitemap'dan olib tashlandi.
+- Menejer versiyasi (`/patent-menejer`, `patent.jonbranding.uz`) o'zgarishsiz.
+
 ## 2026-10-05 | Bosh sahifa AtModal formasi soddalashtirildi (1-bosqichli, konversiyasi yuqori premium forma)
 - **Muammo:** Bosh sahifadagi `AtModal` 2 bosqichli bo'lib, 2-bosqichda "Tashxis turi" (Bepul mini-tashxis) va "Byudjet" (Bepul — mini-tashxis) degan 2 ta dublikat va sun'iy dropdown mavjud edi. Shuningdek, terminologiya (Brand Audit vs Mini-tashxis) va UI ko'rinishi (arzon browser selectlar) sayt obro'siga salbiy ta'sir ko'rsatayotgan edi.
 - **Yechim (`src/components/sections/at-modal.tsx`):**

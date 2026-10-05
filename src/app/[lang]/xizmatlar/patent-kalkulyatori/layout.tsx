@@ -9,19 +9,29 @@ export async function generateMetadata(props: { params: Promise<{ lang: string }
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const titles: Record<string, string> = {
-    uz: 'Patent Kalkulyatori | Jon.Branding',
-    ru: 'Калькулятор Патентов | Jon.Branding',
-    en: 'Patent Calculator | Jon.Branding',
-    zh: '专利计算器 | Jon.Branding',
+    uz: 'Patent Narxi Hisoblagich — Bepul va Tez | Jon.Branding',
+    ru: 'Калькулятор Стоимости Патента — Бесплатно | Jon.Branding',
+    en: 'Free Trademark Cost Calculator | Jon.Branding',
+    zh: '免费商标费用计算器 | Jon.Branding',
   };
+  // /patent-narxi-hisoblagich shu sahifaga birlashtirildi (308) — uning SEO matnlari shu yerda.
+  const descriptions: Record<string, string> = {
+    uz: 'Tovar belgisini roʻyxatdan oʻtkazish narxini 30 soniyada hisoblang. Davlat boji + xizmat haqi — aniq raqamlar.',
+    ru: 'Рассчитайте стоимость регистрации товарного знака за 30 секунд. Госпошлина + услуга — точные цифры.',
+    en: 'Calculate your trademark registration cost in 30 seconds. State fees + service — exact numbers.',
+    zh: '30秒内计算商标注册费用。国家费用+服务费—精确数字。',
+  };
+  const description = descriptions[safeLang] || descriptions.uz;
   const title = titles[safeLang] || titles.uz;
   const alternates = getPageAlternates(safeLang, '/xizmatlar/patent-kalkulyatori');
   return {
     title: pageTitle(title),
+    description,
     alternates,
     // Ota /xizmatlar layout'ining openGraph'i (url va sarlavha) meros o'tmasligi uchun.
     openGraph: {
       title,
+      description,
       url: alternates.canonical,
       siteName: 'Jon.Branding',
       images: [{ url: '/images/cms/og-image.jpeg', width: 1200, height: 630 }],
