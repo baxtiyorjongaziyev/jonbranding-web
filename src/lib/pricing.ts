@@ -313,19 +313,10 @@ export const calculatePackagePrice = (
     const sd = getServiceDetails(lang) as any;
     
     let basePrice = 0;
-    let mainServicesCount = 0;
 
     for (const key in selectedServices) {
         if (selectedServices[key] && sd[key] && key !== 'urgency' && key !== 'nda') {
             basePrice += sd[key].price;
-            
-            if (key === 'logoPremium') {
-                mainServicesCount += 2;
-            } else if (key === 'logoVIP') {
-                mainServicesCount += 3;
-            } else {
-                mainServicesCount += 1;
-            }
         }
     }
 
@@ -354,12 +345,12 @@ export const calculatePackagePrice = (
         VALID_PROMO_CODES.includes(normalizedPromo) ||
         extraValidCodes.includes(normalizedPromo);
 
-    // Faza 1: Paketli chegirma (Faqat 2 yoki undan ortiq xizmat tanlanganda va to'lov turi tanlanganda)
-    if (mainServicesCount >= 2 && (discountType === 'half' || discountType === 'full') && totalBeforeDiscounts > 0) {
-        const paketliVal = finalPrice * 0.10;
-        const paketliName = isUz ? "Paketli chegirma (-10%)" : "Package Discount (-10%)";
-        discountsApplied.push({ name: paketliName, value: paketliVal });
-        finalPrice -= paketliVal;
+    // Faza 1: barcha mijozga avtomatik Istisno chegirmasi.
+    if (totalBeforeDiscounts > 0) {
+        const exceptionValue = finalPrice * 0.10;
+        const exceptionName = isUz ? "Istisno chegirmasi (-10%)" : "Exception Discount (-10%)";
+        discountsApplied.push({ name: exceptionName, value: exceptionValue });
+        finalPrice -= exceptionValue;
     }
 
     // Faza 2: Salom chegirmasi (100% oldindan to'lov qilsa, qoldiqdan yana 10%)
@@ -388,7 +379,9 @@ export const calculatePackagePrice = (
         surchargesApplied,
         savings: totalBeforeDiscounts - finalPrice,
         isPromoApplied,
-        upfrontAmount
+        upfrontAmount,
+        arbounAmount: 50,
+        arbounDays: 3,
     };
 }
 

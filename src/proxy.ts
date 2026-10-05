@@ -38,7 +38,15 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = pathname === '/uz' ? '/' : pathname.replace('/uz/', '/');
     // Doimiy (308): /uz/... hech qachon kanonik manzil emas.
-    return NextResponse.redirect(url, 308);
+    const redirect = NextResponse.redirect(url, 308);
+    // /uz ni aniq tanlagan foydalanuvchi browser tili yoki eski cookie sabab
+    // keyingi requestda /en yoki /ru ga qayta yuborilmasin.
+    redirect.cookies.set('NEXT_LOCALE', defaultLocale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+    });
+    return redirect;
   }
 
   const pathnameHasOtherLocale = locales
@@ -70,6 +78,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api/|admin|_next/static|_next/image|assets|images|videos|logos|favicon.ico|sitemap.xml|robots.txt|sw.js|icon.svg|apple-icon.png|manifest.json).*)',
+    '/((?!api/|admin|_next/static|_next/image|assets|images|videos|logos|favicon.ico|sitemap.xml|robots.txt|sw.js|icon.svg|apple-icon.png|apple-touch-icon.png|manifest.json).*)',
   ],
 };

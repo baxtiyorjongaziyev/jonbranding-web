@@ -1,7 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -13,6 +13,17 @@ interface Props {
   onOpen: () => void;
   lang?: string;
   portfolioImages?: PortfolioImage[];
+  dictionary?: {
+    hero_tagline?: string;
+    hero_badge?: string;
+    hero_title?: string;
+    hero_title_accent?: string;
+    hero_title_end?: string;
+    hero_description?: string;
+    hero_description_bold?: string;
+    hero_primary_cta?: string;
+    hero_secondary_cta?: string;
+  };
 }
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
@@ -105,32 +116,27 @@ const DEFAULT_IMAGES: PortfolioImage[] = [
   { src: '/images/cms/fidda-hozir.webp', name: 'Fidda', year: '2025' },
 ];
 
-const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
-  const l = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
+const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictionary }) => {
+  const fallback = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
+  const l = {
+    ...fallback,
+    tagline: dictionary?.hero_tagline ?? fallback.tagline,
+    badge: dictionary?.hero_badge ?? fallback.badge,
+    h1a: dictionary?.hero_title ?? fallback.h1a,
+    h1b: dictionary?.hero_title_accent ?? fallback.h1b,
+    h1c: dictionary?.hero_title_end ?? fallback.h1c,
+    desc: {
+      text: dictionary?.hero_description ?? fallback.desc.text,
+      bold: dictionary?.hero_description_bold ?? fallback.desc.bold,
+    },
+    cta1: dictionary?.hero_primary_cta ?? fallback.cta1,
+    cta2: dictionary?.hero_secondary_cta ?? fallback.cta2,
+  };
   const sectionRef = useRef<HTMLElement>(null);
   const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
 
   const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Pick a random starting image index on mount so page refreshes show different items
-  useEffect(() => {
-    if (pool.length > 1) {
-      const randomIndex = Math.floor(Math.random() * pool.length);
-      setCurrentIndex(randomIndex);
-    }
-  }, [pool.length]);
-
-  // Auto-rotate slideshow every 5 seconds
-  useEffect(() => {
-    if (pool.length <= 1) return;
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % pool.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [pool.length]);
-
-  const activeItem = pool[currentIndex] || pool[0];
+  const activeItem = pool[0] || DEFAULT_IMAGES[0];
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -208,7 +214,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [] }) => {
               </button>
               <button
                 onClick={() =>
-                  document.getElementById('narxlar')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' })
                 }
                 className="inline-flex items-center justify-center gap-2 border border-[var(--at-line)] rounded-full px-7 py-4 text-sm text-[var(--at-ink-2)] hover:text-[var(--at-ink)] hover:border-[var(--at-ink)] transition-colors bg-[var(--at-paper)]"
               >

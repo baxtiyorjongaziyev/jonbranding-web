@@ -165,9 +165,9 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
           className="mx-auto mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-neutral-200 pt-6"
         >
           {[
-            { value: '9', label: ui.stats.experience },
-            { value: '500+', label: ui.stats.clients },
-            { value: '1000+', label: ui.stats.projects },
+            { value: '4', label: ui.stats.experience },
+            { value: '50/50', label: ui.stats.clients },
+            { value: '100%', label: ui.stats.projects },
           ].map((stat) => (
             <div key={stat.label}>
               <dt className="sr-only">{stat.label}</dt>

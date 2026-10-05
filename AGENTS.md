@@ -15,8 +15,10 @@
 ## Buyruqlar
 
 ```bash
-npm run dev        # localhost:9002
-npm run build      # Build tekshirish
+npm run dev           # localhost:9002
+npm run verify        # Sifat va Agent Harness tekshiruvi (docs/HARNESS.md)
+npm run verify:fast   # Tezkor harness (i18n + kod standartlari + Vitest)
+npm run build         # Build tekshirish
 git push origin main  # Deploy (Vercel Integration orqali)
 ```
 

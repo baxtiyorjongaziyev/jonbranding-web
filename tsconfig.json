@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
@@ -41,10 +41,14 @@
     ".netlify",
     ".open-next",
     ".wrangler",
+    ".claude",
+    ".kilo",
     "node_modules",
     "services",
     "src/scripts",
     "mcp-server",
-    "archive"
+    "archive",
+    "playwright-report",
+    "test-results"
   ]
 }

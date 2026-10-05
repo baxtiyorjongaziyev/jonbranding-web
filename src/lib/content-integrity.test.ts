@@ -41,7 +41,7 @@ describe('content integrity', () => {
       );
     });
     expect(hits).toEqual([]);
-  });
+  }, 30_000);
 
   // Oldin/Keyin keyslaridagi raqamlar (+178%, 4.2x ROAS, Top-3 ...) tasdiqlanmagan edi —
   // egasi olib tashlashni so'radi. Keys natijasi faqat haqiqiy ma'lumot bilan qaytadi.

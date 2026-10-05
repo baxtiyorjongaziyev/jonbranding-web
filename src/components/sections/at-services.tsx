@@ -56,7 +56,11 @@ const HEADING: Record<string, { h: string; italic: string; sub: string; desc: st
 };
 
 const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
-  const SERVICES: ServiceItem[] = dictionary?.services ?? SERVICES_MAP[lang] ?? SERVICES_UZ;
+  const allServices: ServiceItem[] = dictionary?.services ?? SERVICES_MAP[lang] ?? SERVICES_UZ;
+  // Flagman offerga tegishli uchta asosiy natija. Qolgan xizmatlar add-on sifatida narxlar sahifasida qoladi.
+  const SERVICES = allServices.length >= 4
+    ? [allServices[1], allServices[2], allServices[3]]
+    : allServices;
   const h = HEADING[lang] ?? HEADING.uz;
   const headingLines = String(dictionary?.services_title ?? `${h.h}\n${h.italic}`).split('\n');
   const headingFirst = headingLines[0];

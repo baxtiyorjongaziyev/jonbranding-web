@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { NextRequest } from 'next/server';
-import { proxy } from './proxy';
+import { proxy, config } from './proxy';
 
 function requestFor(url: string) {
   return new NextRequest(new Request(url, { headers: { 'accept-language': 'uz' } }));
@@ -11,6 +11,7 @@ describe('proxy locale redirect', () => {
     const response = proxy(requestFor('https://jonbranding.uz/uz/diagnostika'));
     expect(response.status).toBe(308);
     expect(new URL(response.headers.get('location')!).pathname).toBe('/diagnostika');
+    expect(response.cookies.get('NEXT_LOCALE')?.value).toBe('uz');
   });
 
   it('keeps source and UTM parameters across the redirect', () => {
@@ -75,5 +76,11 @@ describe('proxy locale redirect', () => {
       }),
     );
     expect(new URL(proxy(request).headers.get('location')!).pathname).toBe('/en/narxlar');
+  });
+
+  it('excludes apple-touch-icon.png in config matcher pattern', () => {
+    const pattern = new RegExp('^' + config.matcher[0] + '$');
+    expect(pattern.test('/apple-touch-icon.png')).toBe(false);
+    expect(pattern.test('/diagnostika')).toBe(true);
   });
 });

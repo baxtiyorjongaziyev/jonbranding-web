@@ -1,5 +1,101 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-05 | BrandStrategyClient monolit komponenti modularizatsiyasi (1,801 qator -> 71 qator)
+- **Muammo:** `src/app/[lang]/brand-strategy/brand-strategy-client.tsx` fayli 1,801 qatordan iborat ulkan monolit bo'lib, uning ichida forma holati, 17 ta bo'lim, SVG/rasmlar, statik ma'lumotlar va har xil helper komponentlar aralashib ketgan edi.
+- **Yechim:**
+  1. `src/app/[lang]/brand-strategy/data.ts` (254 qator): `DELIVERABLES`, `PROCESS_STEPS`, `FAQS`, narx/manba konstantalari va tip ta'riflari ajratildi.
+  2. `src/app/[lang]/brand-strategy/components/ui.tsx` (80 qator): `Eyebrow`, `Section`, `Tag`, `PrimaryBtn`, `SecondaryBtn` umumiy UI primitivlari ajratildi.
+  3. `src/app/[lang]/brand-strategy/components/hero-strategy-map.tsx` (83 qator): Hero diagrammasi alohida komponentga olindi.
+  4. `src/app/[lang]/brand-strategy/components/brand-strategy-form.tsx` (367 qator): 2 bosqichli forma, validatsiya, honeypot, tahliliy hodisalar (`trackEvent`, `trackLead`) va `/api/submit-form` API integratsiyasi ajratildi.
+  5. Bo'lim komponentlari ajratildi:
+     - `hero-section.tsx` (86 qator)
+     - `problem-section.tsx` (122 qator)
+     - `what-is-section.tsx` (72 qator)
+     - `deliverables-section.tsx` (141 qator)
+     - `comparison-section.tsx` (269 qator)
+     - `process-and-audience-section.tsx` (239 qator)
+     - `faq-section.tsx` (50 qator)
+     - `final-cta-section.tsx` (56 qator)
+  6. `brand-strategy-client.tsx` (71 qator): Toza orkestratorga aylantirildi. Barcha yangi komponentlar qat'iy ravishda 400 qatordan kam qilib tuzildi.
+- **Tekshiruv:** `npm run verify:fast` (barcha 54 test fayli, 376 ta test, TypeScript typecheck va i18n pariteti 100% yashil o'tdi).
+
+## 2026-10-05 | Meta Conversions API (CAPI) xato diagnostikasi va payload tozalash
+- **Muammo:** Meta Conversions API orqali hodisalarni yuborishda faqat umumiy `http_400` xatosi qaytayotgan edi, lekin Graph API xato tanasi (`OAuthException`, `code`, `subcode`, `message`) saqlanmaganligi sababli ildiz sababini bilib bo'lmayotgan edi.
+- **Yechim (`src/lib/analytics-delivery.ts`):**
+  1. `describeMetaError()` funksiyasi qo'shildi: Meta Graph API javobidan `error.type`, `code`, `error_subcode` va `message` o'qiladi (masalan: `http_400: OAuthException code=190 subcode=463`).
+  2. Maxfiylik: `access_token` qiymati avtomatik tarzda `[redacted]` bilan almashtiriladi, token hech qachon logga sizmaydi.
+  3. Payload tozalash: `custom_data.value` satr emas, son (Number) qilib yuboriladi; bo'sh `fn`/`ph` massivlari olib tashlandi; buzilgan `fbc`/`fbp` cookie'lari regex filtrlari (`FBP_PATTERN`, `FBC_PATTERN`) orqali chiqarib tashlanadi; bo'sh `event_source_url` yuborilmaydi.
+  4. Test rejimi: ixtiyoriy `META_TEST_EVENT_CODE` env orqali Events Manager → Test Events bilan sinov o'tkazish imkoniyati qo'shildi.
+- **Testlar (`src/lib/analytics-delivery.test.ts`):** 4 ta test to'liq yashil (xato tanasi o'qilishi, token sizmasligi, toza payload).
+
+## 2026-10-05 | Proxy matcher va IDE Problems / Review Comments to'liq yopildi
+- **apple-touch-icon.png 404 muammosi:** `src/proxy.ts` matcheriga `apple-touch-icon.png` istisno sifatida qo'shildi (`PR #362` talabi bo'yicha). Endi ikonka so'rovi `/uz/...` ga noto'g'ri rewrite qilinmaydi va 404 qaytarmaydi.
+- **Tizimiy muammolar (158 ta problem) tozalanishi:**
+  - `tsconfig.json` va `.vscode/settings.json` sozlamalariga `.claude` va `.kilo` ishchi papkalari `exclude` qilib qo'shildi. Bu orqali tashqi worktree'lar sababli IDE Problems panelida chiqqan 158 ta xatolik butunlay bartaraf etildi.
+  - `src/app/api/submit-form/route.ts`, `src/proxy.ts`, `DEV_LOG.md` dagi barcha git merge ziddiyatlari to'liq tozalandi.
+- **Review commentlar (2 ta comment) yopilishi:** PR #362 dagi Codex bot review talabi (`Record the matcher change in DEV_LOG`) va statik fayl marshrutlash izohlari to'liq yopildi.
+- **Tekshiruv:** `npm run typecheck` (0 xato), `npm run verify:fast` (barcha 373 ta test va i18n pariteti 100% yashil).
+
+## 2026-10-05 | Service Layer Arxitekturasi Refaktoringi & submit-form modularizatsiyasi
+
+**Qilingan ishlar:**
+1. **API Route Bloat bartaraf etildi (`submit-form/route.ts`):**
+   - 619 qatorlik og'ir monolit fayl toza xizmat modullariga ajratilib, 174 qatorga qisqartirildi.
+   - Yangi servis modullari:
+     - `src/lib/services/lead-types.ts` — umumiy turlar (`LeadData`, `CleanLeadData`, `AmoCrmLeadResult`);
+     - `src/lib/services/amocrm-service.ts` — AmoCRM bilan ishlash, token avto-yangilash, deal & contact complex creation;
+     - `src/lib/services/telegram-service.ts` — Telegram xabarnomasi, HTML formatlash, xavfsiz yuborish va fallback chat;
+     - `src/lib/services/lead-queue-service.ts` — xatolik yuz berganda Firestore navbatiga zaxiralash;
+     - `src/lib/services/affiliate-attribution.ts` — promokod va referral komissiyasi logikasi.
+2. **Proxy va Stash ziddiyatlari to'liq yechildi:**
+   - `src/proxy.ts` dagi merge conflict bartaraf etildi (308 doimiy yo'naltirish + `NEXT_LOCALE` cookie).
+   - `.kilo/**` papkasi `vitest.config.ts` dan chiqarildi.
+3. **Tekshiruv natijalari:**
+   - `vitest run`: barcha 54 ta test fayli (373 ta test) 100% yashil o'tdi (15s).
+   - `npm run typecheck`: 0 xatolik bilan muvaffaqiyatli yakunlandi.
+   - `npm run verify:fast`: to'liq yashil.
+
+## 2026-10-02 | TypeScript target=ES5 eskirish ogohlantirishini bartaraf etish (ES2017)
+- **Sabab:** TypeScript 6.0/7.0 da `target=ES5` to'xtatilishi haqidagi ogohlantirish (`Option 'target=ES5' is deprecated...`).
+- **Yechim:** `tsconfig.json` faylida Next.js 16 tavsiyasiga mos ravishda `"target": "ES2017"` ga yangilandi.
+- **Tekshiruv:** `npm run typecheck` va `npm run verify:fast` (barcha 305 ta test va typecheck) muvaffaqiyatli yakunlandi.
+
+## 2026-10-02 | JonBranding Quality & Agent Verification Harness joriy etildi
+
+**Qilingan ishlar:**
+1. **Verification Harness Loop (`npm run verify` / `npm run harness`):**
+   - `scripts/harness/verify.mjs` yaratildi.
+   - Bitta buyruq bilan 4 ta bosqichni to'liq tekshiradi:
+     1) i18n lug'atlar pariteti (`uz.json` bazasi bo'yicha `ru`, `en`, `zh` 100% sinxronligi: 1,211 kalit);
+     2) Kod standartlari va tozalik (git conflict markerlar yo'qligi, 500+ qatorli fayllar nazorati);
+     3) TypeScript typecheck (`tsc --noEmit -p tsconfig.typecheck.json`);
+     4) Vitest unit va integratsiya testlari (barcha 305 test).
+   - `--fast` opsiyasi qo'shildi (`npm run verify:fast`).
+2. **AmoCRM & Telegram Mock Test Harness:**
+   - `src/app/api/submit-form/route.ts` da `MOCK_AMOCRM=true` va `MOCK_TELEGRAM=true` rejimlari joriy qilindi.
+   - Lokal dev yoki test muhitida real CRM/Telegram ga soxta lid tushirmasdan formani sinovdan o'tkazish imkoniyati yaratildi.
+   - `src/app/api/submit-form/route-harness.test.ts` integratsiya testi yozildi (yashil o'tdi).
+   - `scripts/harness/mock-lead.mjs` CLI lidi yuborish vositasi yaratildi (`npm run mock:lead`).
+3. **Hujjatlashtirish va integratsiya:**
+   - `docs/HARNESS.md` yaratildi.
+   - `AGENTS.md` va `package.json` buyruqlari yangilandi.
+
+## 2026-09-29 | Web sayt PRD hujjati qo‘shildi
+
+- `docs/PRD.md` yaratildi.
+- Hujjatda mahsulot maqsadi, auditoriya, user journey, sahifalar, P0–P2 funksional talablar, texnik talablar, metrikalar, MVP chegarasi va qabul qilish mezonlari jamlandi.
+- Hujjat boshqa AI agentlar uchun loyiha talablarining umumiy reference manbasi sifatida ishlatiladi.
+
+## 2026-09-26 | Instagram portfolio sinxronlash holati tekshirildi
+
+**Tekshiruv natijasi:**
+1. Sanity production datasetida hozir **21 ta** `portfolio` hujjati bor.
+2. Lokal `portfolio-bot` muhitida Instagram Graph API va Apify ulanishlari sozlanmagan; maxfiy qiymatlar logga yozilmadi.
+3. Mavjud oxirgi workflow logi 2026-06-28 sanasida tugagan va **0 ta yuklangan / 16 ta xato** natijasini ko'rsatadi.
+4. Xulosa: Instagramdagi barcha rasmlar saytga avtomatik joylangan deb tasdiqlab bo'lmaydi; amaldagi dalil bo'yicha sinxronlash ishlamayapti.
+
+---
+
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
 ## 2026-10-05 | Meta CAPI 400 diagnostikasi (PR #363)
@@ -19,6 +115,19 @@ Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigrav
 - `static-data.ts`: fallback audio havolalari `.mp3` -> `.ogg` (`public/audio/` da faqat `.ogg` bor).
 
 **Holat:** ESLint toza, sahifa lokalda ko'rib tasdiqlandi (faqat fallback ma'lumot: Sanity sandbox'da bloklangan). Audio/yozma bloklar deploy preview'da tekshirilishi kerak. `npm audit` CI xatosi bu PR'ga aloqasiz (yangi `@grpc/grpc-js`, `braces` advisory'lari).
+
+---
+
+## 2026-09-25 | Before/After (Oldin va Keyin) bloki qayta dizayn
+
+**Qilingan ish:**
+1. **Dizayn arxitekturasi va Atelier estetikasi:**
+   - O'rniga Atelier uslubiga mos, oliyjanob serif sarlavhali yangi "Isbot & Transformatsiya" bloki yangilandi.
+2. **Kod tozaligi:**
+   - Ortiqcha `src/components/image-comparison-slider.tsx` fayli o'chirildi.
+   - Barcha 4 tilda (`uz`, `ru`, `en`, `zh`) to'liq mahalliylashtirildi.
+
+---
 
 ## 2026-09-25 | Code bazani mukammal (ideal) holatga keltirish, Dependabot, CodeQL va SEO to'liq yopildi
 
@@ -1618,3 +1727,38 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `services/portfolio-bot` lock manifest bilan sinxronlandi va `brace-expansion` 2.1.4 ga yangilandi.
 - Nested sanitizer va cryptographic ID uchun regressiya testlari qo‘shildi.
 - Production merge gate: root hamda ikkala subproject audit/build/test tekshiruvlari va GitHub security rescan.
+## 2026-09-26 | JonBranding P0–P2 business implementation
+
+- Homepage flagman offeri `Visual Identity System / firma uslubi`ga o‘tkazildi; audit secondary lead magnet bo‘lib qoldi.
+- Hero rasmi deterministik qilindi va portfolio CTA `#ishlar`ga yo‘naltirildi.
+- `/uz` canonical redirecti endi `NEXT_LOCALE=uz` cookie o‘rnatadi; aniq o‘zbekcha URL brauzer tili sabab `/en`ga sakramaydi.
+- Homepage xizmatlari logotip/firma uslubi, brendbuk va qadoq/tashuvchilarga fokuslandi; qolganlari add-on sifatida ta’riflandi.
+- Lead schema va `AtModal`ga page, section, offer, CTA, referrer va UTM taxonomy qo‘shildi; ma’lumot AmoCRM note va Telegram alertga uzatiladi.
+- Protected `POST /api/admin/retry-amocrm-leads` endpointi Firestore pending queue leadlarini AmoCRMga qayta yuboradi.
+- `/admin/kp-builder` MVP qo‘shildi: xizmat tanlash, 50/50 yoki 100% to‘lov, promokod, copy va print.
+- Narxlash qoidasi majburiy 10% Istisno → 100% oldindan bo‘lsa 10% Salom → promokod bo‘lsa 10% kaskadga moslashtirildi; $50/3 kun Arboun metadata qo‘shildi.
+- Narxlar sahifasidagi dalilsiz 500+/1000+ raqamlari jarayon va to‘lov faktlariga almashtirildi.
+- `docs/CLAIM_PROOF_MAP.md` va `docs/P0_P2_BUSINESS_IMPLEMENTATION.md` qo‘shildi.
+
+
+## 2026-10-02 Codex: TypeScript ES5 deprecation fix
+
+- Changed tsconfig.json target from es5 to ES2017; inherited by tsconfig.typecheck.json. This removes the deprecated target rather than adding a compiler-version-specific suppression.
+- Verified TypeScript 6.0.3 option diagnostics: ES5 reproduces the reported deprecation, ES2017 yields no option errors. Installed Next.js browser support docs require modern browsers. npm run typecheck passed with local TypeScript 5.9.3; git diff --check passed.
+- Existing local/staged work preserved. No commit/push/deploy. Obsidian search/log returned 404/429; vault logging unconfirmed.
+
+
+## 2026-10-04 — Codex: Antigravity IDE project setup
+
+- Added .agents/rules/engineering-team.md and project-scoped deliver-task, review-change, release-readiness skills. Existing instructions, source code and dirty work preserved.
+- Separate Antigravity workspace saved under Documents/Codex/2026-10-04/review-the-latest-codex-feedback-on/outputs; settings cover formatter selection, search/watch exclusions and project verification tasks.
+- This is local IDE/workflow setup, not a production change. Rules guide the model; they do not enforce runtime permissions or replace CI/hooks.
+- Verification is recorded in the accompanying outputs/antigravity-setup.md report. Full application gates are not claimed by this setup. Existing Codex/Claude worktrees remain separate.
+- Obsidian context/search failed with MCP SSE 404/429; vault capture unconfirmed. No commit, push, merge or deploy.
+
+- Follow-up verification (2026-10-04): all six skill manifests valid; both workspace JSON/root checks pass; 10 process tasks; both workspace windows visible in native IDE. Prettier, ESLint, Ruff registered from existing local VS Code installations after marketplace timeout. Native Agent input automation did not accept text, so model response/skill activation remain unverified. Obsidian project append and brain_log subsequently succeeded. No production change.
+
+
+## 2026-10-05 — Antigravity IDE verification follow-up
+
+Native agent discovered all three project skills and accurately reported project rules. Oisha venv selection and Ruff native formatter verified in UI. Local VSIX installs succeeded. Web npm package manager corrected; native Prettier smoke check remains pending because the active window needs extension reload while another agent is working. GitHub login reported complete by owner; account session not independently verified. Separate Claude login remains visible. No commit, push, merge or deploy. See Antigravity setup report for evidence boundaries.

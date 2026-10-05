@@ -264,7 +264,7 @@ export const en: SalesContent = {
       desc: 'A designer draws a logo and leaves. We check the name, register it and hand you the certificate — the brand becomes yours in law.',
     },
     {
-      title: '9 years and more than 1000 projects',
+      title: 'A structured process with internal review',
       desc: 'This is done from experience, not by trial and error. We know in advance which solution works in this market.',
     },
     {
@@ -311,7 +311,7 @@ export const en: SalesContent = {
   ],
   ui: {
     currency: 'UZS',
-    stats: { experience: 'years of experience', clients: 'clients', projects: 'projects' },
+    stats: { experience: 'clear stages', clients: 'split payment', projects: 'upfront payment' },
     payment: {
       contract: 'On signing the contract',
       delivery: 'On delivery of the project',
