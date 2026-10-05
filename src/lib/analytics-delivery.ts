@@ -53,7 +53,39 @@ function skipped(reason = 'not_configured'): ChannelDelivery {
   return { state: 'skipped', reason, durationMs: 0 };
 }
 
-async function deliver(request: () => Promise<Response>): Promise<ChannelDelivery> {
+const FBP_PATTERN = /^fb\.\d\.\d{10,13}\.\d+$/;
+const FBC_PATTERN = /^fb\.\d\.\d{10,13}\.[\w-]+$/;
+
+function cleanFbCookie(value: unknown, pattern: RegExp) {
+  const normalized = String(value || '').trim();
+  return pattern.test(normalized) ? normalized : undefined;
+}
+
+// Graph API xato javobidan faqat diagnostik maydonlarni oladi (token yoki
+// so'rov tanasi hech qachon logga tushmaydi).
+export async function describeMetaError(response: Response): Promise<string> {
+  try {
+    const body = await response.json();
+    const error = body?.error;
+    if (!error || typeof error !== 'object') return `http_${response.status}`;
+    const parts = [
+      error.type,
+      error.code !== undefined ? `code=${error.code}` : '',
+      error.error_subcode !== undefined ? `subcode=${error.error_subcode}` : '',
+      error.error_user_msg || error.message,
+    ].filter(Boolean);
+    return `http_${response.status}: ${parts.join(' ')}`
+      .replace(/access_token=[^&\s]+/gi, 'access_token=[redacted]')
+      .slice(0, 500);
+  } catch {
+    return `http_${response.status}`;
+  }
+}
+
+async function deliver(
+  request: () => Promise<Response>,
+  describeError?: (response: Response) => Promise<string>,
+): Promise<ChannelDelivery> {
   const startedAt = Date.now();
   try {
     const response = await request();
@@ -62,7 +94,7 @@ async function deliver(request: () => Promise<Response>): Promise<ChannelDeliver
       return {
         state: 'failed',
         statusCode: response.status,
-        reason: `http_${response.status}`,
+        reason: describeError ? await describeError(response) : `http_${response.status}`,
         durationMs,
       };
     }
@@ -92,6 +124,10 @@ export async function runAnalyticsDeliveries(
   const valueInUzs = Number(data.totalPrice) || 0;
   const valueInUsd = (valueInUzs * UZS_TO_USD_RATE).toFixed(2);
 
+  const phoneHash = data.phone ? sha256(normalizePhone(data.phone)) : '';
+  const nameHash = data.fullName ? sha256(data.fullName) : '';
+  const testEventCode = cleanSecret(env.META_TEST_EVENT_CODE);
+
   const metaPromise = metaAccessToken && metaPixelId
     ? deliver(() => fetcher(`https://graph.facebook.com/v20.0/${metaPixelId}/events`, {
         method: 'POST',
@@ -102,24 +138,25 @@ export async function runAnalyticsDeliveries(
             event_time: Math.floor(Date.now() / 1000),
             event_id: data.eventId,
             action_source: 'website',
-            event_source_url: data.pageLocation,
+            event_source_url: data.pageLocation || undefined,
             user_data: {
-              ph: data.phone ? [sha256(normalizePhone(data.phone))] : [],
-              fn: data.fullName ? [sha256(data.fullName)] : [],
+              ph: phoneHash ? [phoneHash] : undefined,
+              fn: nameHash ? [nameHash] : undefined,
               client_ip_address: data.clientIp || undefined,
               client_user_agent: data.userAgent || undefined,
-              fbp: data.fbp || undefined,
-              fbc: data.fbc || undefined,
+              fbp: cleanFbCookie(data.fbp, FBP_PATTERN),
+              fbc: cleanFbCookie(data.fbc, FBC_PATTERN),
             },
             custom_data: {
-              value: valueInUsd,
+              value: Number(valueInUsd),
               currency: 'USD',
               content_name: data.source || 'website_contact_form',
             },
           }],
+          ...(testEventCode ? { test_event_code: testEventCode } : {}),
           access_token: metaAccessToken,
         }),
-      }))
+      }), describeMetaError)
     : Promise.resolve(skipped());
 
   const ga4Promise = gaApiSecret
