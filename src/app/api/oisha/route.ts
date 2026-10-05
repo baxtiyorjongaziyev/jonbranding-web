@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { logger } from '@/lib/logger';
@@ -7,6 +7,10 @@ import { containsContact } from '@/lib/oisha';
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
 const MAX_TEXT_LENGTH = 1500;
+// Backend yiqilgan bo'lsa har xabarda timeout kutmaslik uchun shu muddat
+// davomida to'g'ridan-to'g'ri offline javob beriladi.
+const BACKEND_COOLDOWN_MS = 60_000;
+let backendDownUntil = 0;
 
 function oishaConfig() {
     return {
@@ -59,7 +63,8 @@ async function sendOishaFallbackToTelegram(userId: string, text: string, lang: L
 
 async function offlineReply(userId: string, text: string, lang: Locale) {
     const hasContact = containsContact(text);
-    await sendOishaFallbackToTelegram(userId, text, lang, hasContact);
+    // Telegram'ga yuborish javobni kechiktirmasin.
+    after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
     const widget = (await getDictionary(lang)).oishaWidget;
     return NextResponse.json(
         { response: hasContact ? widget.offlineThanks : widget.offlineAskContact },
@@ -122,7 +127,7 @@ export async function POST(request: Request) {
     const cleanText = text.trim().slice(0, MAX_TEXT_LENGTH);
 
     const { url, secret } = oishaConfig();
-    if (!url || !secret) {
+    if (!url || !secret || Date.now() < backendDownUntil) {
         return offlineReply(user_id, cleanText, lang);
     }
     try {
@@ -135,9 +140,14 @@ export async function POST(request: Request) {
             body: JSON.stringify({ user_id, text: cleanText }),
             signal: AbortSignal.timeout(10_000),
         });
+        if (res.status >= 500) throw new Error(`Oisha backend ${res.status}`);
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
-    } catch {
+    } catch (err) {
+        backendDownUntil = Date.now() + BACKEND_COOLDOWN_MS;
+        logger.error('Oisha backend unavailable, using offline reply', {
+            reason: err instanceof Error ? err.message : String(err),
+        });
         return offlineReply(user_id, cleanText, lang);
     }
 }
