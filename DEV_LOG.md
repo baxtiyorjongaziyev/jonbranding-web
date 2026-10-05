@@ -2,6 +2,14 @@
 
 Har sessiyada nima qilingani qayd etiladi. Bu fayl Google AI Studio ↔ Antigravity o'rtasidagi "xotira" vazifasini bajaradi.
 
+## 2026-10-05 | Meta CAPI 400 diagnostikasi (PR #363)
+
+**Qilingan ish:**
+- `analytics-delivery.ts`: Meta Graph API xato tanasi (type/code/subcode/message) `reason` ga yoziladi; token qiymati har qanday formatda `[redacted]`.
+- Payload tozalandi: `value` raqam, bo'sh `fn`/`ph` yuborilmaydi, noto'g'ri `fbc`/`fbp` filtrlanadi, bo'sh `event_source_url` olib tashlandi. Ixtiyoriy `META_TEST_EVENT_CODE`.
+
+**Holat:** Unit testlar o'tdi. Deploydan keyin logdagi `reason` ni tekshirish kerak: `code=190` bo'lsa `META_CAPI_ACCESS_TOKEN` yangilanadi. `npm audit` CI xatosi aloqasiz (`braces` advisory, `sanity` orqali).
+
 ## 2026-10-05 | /otzivlar: video, audio va yozma sharhlar bloklari (PR #358)
 
 **Qilingan ish:**
