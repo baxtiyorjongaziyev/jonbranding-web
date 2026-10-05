@@ -613,44 +613,18 @@
     "solutionButton": "See the solution"
   },
   "beforeAfter": {
-    "eyebrow": "Proof & Transformation",
-    "title": "When your brand changes, sales change. Proof:",
-    "subtitle": "We don't just create pretty graphics. We engineer a premium brand system that builds instant trust and scales revenue.",
-    "ctaTitle": "Ready to clarify your brand?",
-    "ctaDesc": "We start with a brand audit and identify the change with the highest impact.",
-    "ctaButton": "Get the free Brand Audit",
-    "cta": "Get the free Brand Audit",
-    "caseLabel": "Before / After",
-    "sliderHint": "Drag the slider or click buttons to compare",
-    "beforeLabel": "BEFORE",
-    "afterLabel": "AFTER",
-    "viewCase": "View full case study",
-    "problemTitle": "Problem (Before)",
-    "solutionTitle": "Strategic Solution (After)",
-    "resultTitle": "Business Impact",
-    "compare50": "50 / 50 Comparison",
-    "compareBefore": "Before Only",
-    "compareAfter": "After Only",
-    "allTransformations": "All Transformations",
-    "allTransformationsSub": "Tailored strategic approaches and measurable market impact for every brand",
-    "proofCards": [
-      {
-        "value": "+178%",
-        "label": "average sales growth"
-      },
-      {
-        "value": "3.2x",
-        "label": "brand valuation lift"
-      },
-      {
-        "value": "120+",
-        "label": "page strategic brandbook"
-      },
-      {
-        "value": "Top-3",
-        "label": "market leadership"
-      }
-    ]
+    "title": "Same business. A different first impression.",
+    "subtitle": "Our clients' brands before and after working with us.",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "casesLabel": "Cases",
+    "viewCase": "View the {brand} case",
+    "cases": {
+      "den-aroma": "Perfumery",
+      "savod": "Education",
+      "fidda": "Jewelry",
+      "boyarin": "Dairy"
+    }
   },
   "testimonials": {
     "eyebrow": "Client voice",
