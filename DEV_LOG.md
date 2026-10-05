@@ -1,5 +1,12 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-05 | Patent kalkulyatori sahifalari birlashtirildi
+
+**Qilingan ish:**
+- `/patent-narxi-hisoblagich` o'chirildi va `/xizmatlar/patent-kalkulyatori` ga 308 bilan yo'naltirildi (`next.config.js`, ru/en/zh ham). Ikkalasi bir xil gated kalkulyator edi — dublikat.
+- Uning SEO sarlavha va description'i `xizmatlar/patent-kalkulyatori/layout.tsx` ga ko'chirildi. Sitemap'dan olib tashlandi.
+- Menejer versiyasi (`/patent-menejer`, `patent.jonbranding.uz`) o'zgarishsiz.
+
 ## 2026-10-05 | amoCRM uzoq muddatli token (AMOCRM_ACCESS_TOKEN) to'g'ridan-to'g'ri integratsiya qilindi
 - **Muammo:** `src/lib/integrations/amocrm.ts` da `getValidAccessToken()` doim Firestore'dan eski tokenni o'qib, muddati o'tgan `refresh_token` orqali yangilashga urinardi. Oqibatda amoCRM 'Token has been revoked' qaytarib, arizalar navbatga tushib qolayotgan edi.
 - **Yechim:** `getValidAccessToken()` va `forceRefresh()` da birinchi navbatda `AMOCRM_ACCESS_TOKEN` (5 yillik uzoq muddatli token) mavjudligi tekshiriladigan qilindi. U mavjud bo'lsa, Firestore'ga so'rov yubormasdan va bekor bo'lgan refresh tokenni ishlatmasdan to'g'ridan-to'g'ri tokendan foydalanadi.
