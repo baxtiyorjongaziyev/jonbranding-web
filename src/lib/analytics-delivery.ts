@@ -63,7 +63,8 @@ function cleanFbCookie(value: unknown, pattern: RegExp) {
 
 // Graph API xato javobidan faqat diagnostik maydonlarni oladi (token yoki
 // so'rov tanasi hech qachon logga tushmaydi).
-export async function describeMetaError(response: Response): Promise<string> {
+export async function describeMetaError(response: Response, secret = ''): Promise<string> {
+  const redact = (text: string) => (secret ? text.split(secret).join('[redacted]') : text);
   try {
     const body = await response.json();
     const error = body?.error;
@@ -74,7 +75,7 @@ export async function describeMetaError(response: Response): Promise<string> {
       error.error_subcode !== undefined ? `subcode=${error.error_subcode}` : '',
       error.error_user_msg || error.message,
     ].filter(Boolean);
-    return `http_${response.status}: ${parts.join(' ')}`
+    return redact(`http_${response.status}: ${parts.join(' ')}`)
       .replace(/access_token=[^&\s]+/gi, 'access_token=[redacted]')
       .slice(0, 500);
   } catch {
@@ -156,7 +157,7 @@ export async function runAnalyticsDeliveries(
           ...(testEventCode ? { test_event_code: testEventCode } : {}),
           access_token: metaAccessToken,
         }),
-      }), describeMetaError)
+      }), (response) => describeMetaError(response, metaAccessToken))
     : Promise.resolve(skipped());
 
   const ga4Promise = gaApiSecret

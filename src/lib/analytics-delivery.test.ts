@@ -36,7 +36,7 @@ describe('analytics delivery monitoring', () => {
   it('surfaces the Meta Graph API error body without leaking the token', async () => {
     const fetcher = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({
       error: {
-        message: 'Error validating access token: Session has expired. access_token=meta-secret',
+        message: 'Error validating access token: Session has expired. access_token=meta-secret {"access_token":"meta-secret"}',
         type: 'OAuthException',
         code: 190,
         error_subcode: 463,
