@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "@sanity/client": "^6.22.0",
-    "axios": "^1.7.7",
+    "axios": "^1.20.0",
     "dotenv": "^16.4.5",
     "form-data": "^4.0.1",
     "googleapis": "^173.0.0",
-    "telegram": "^2.26.0",
-    "input": "^1.0.1"
+    "input": "^1.0.1",
+    "telegram": "^2.26.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
