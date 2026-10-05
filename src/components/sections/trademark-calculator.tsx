@@ -52,6 +52,9 @@ const clampClassCount = (n: number) => {
   return Math.max(1, Math.min(45, Math.trunc(x)));
 };
 
+// Forma yuborilmaguncha haqiqiy summa DOM'ga tushmasin (blur faqat vizual).
+const MASK = 'X XXX XXX';
+
 const formatPrice = (price: number, currency: string) => {
     return `${price.toLocaleString('fr-FR')} ${currency}`;
 }
@@ -279,10 +282,6 @@ export default function TrademarkCalculator({
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <HoneypotField value={honeypot} onChange={setHoneypot} />
-                <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.brandNameLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? 'Masalan: MyBrand'} {...field} /></FormControl><FormMessage /></FormItem> )} />
-                <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.yourNameLabel ?? 'Ismingiz'}</FormLabel><FormControl><Input placeholder={translations?.yourNamePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
-                <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations?.phoneLabel ?? 'Telefon'}</FormLabel><FormControl><Input placeholder={translations?.phonePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
-
                 <FormField control={form.control} name="classCount" render={({ field }) => (
                     <FormItem>
                          <div className="flex items-center justify-between mb-2">
@@ -333,6 +332,9 @@ export default function TrademarkCalculator({
                         <FormControl>
                              <DynamicToggle id="expert-check" options={translations?.expertCheckOptions ?? []} selected={field.value ? 'ha' : 'yoq'} onSelect={(value) => field.onChange(value === 'ha')} />
                         </FormControl>
+                        {translations?.expertCheckHint && (
+                            <p className="mt-2 text-xs text-muted-foreground">{translations.expertCheckHint}</p>
+                        )}
                     </FormItem>
                 )} />
 
@@ -345,6 +347,12 @@ export default function TrademarkCalculator({
                         <FormMessage />
                     </FormItem>
                 )} />
+                <div className="border-t pt-6">
+                  <h4 className="font-semibold text-foreground">{translations?.contactStepTitle ?? "Natijani qayerga yuboramiz?"}</h4>
+                </div>
+                <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.brandNameLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? 'Masalan: MyBrand'} {...field} /></FormControl><FormMessage /></FormItem> )} />
+                <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.yourNameLabel ?? 'Ismingiz'}</FormLabel><FormControl><Input placeholder={translations?.yourNamePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
+                <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>{translations?.phoneLabel ?? 'Telefon'}</FormLabel><FormControl><Input placeholder={translations?.phonePlaceholder ?? ''} {...field} /></FormControl><FormMessage /></FormItem> )} />
                  <FormField
                     control={form.control}
                     name="privacyPolicy"
@@ -380,11 +388,11 @@ export default function TrademarkCalculator({
         </Form>
       </Card>
 
-      <aside className="lg:sticky lg:top-24 h-fit space-y-4">
+      <aside className="order-first lg:order-none lg:sticky lg:top-24 h-fit space-y-4">
         <Card className="relative overflow-hidden p-6 bg-gradient-to-br from-primary to-blue-900 text-white shadow-xl rounded-2xl">
           <div className="text-sm leading-5 opacity-90">{translations?.totalCostTitle}</div>
           <div className={cn("mt-2 text-4xl sm:text-5xl font-extrabold tracking-tight flex items-baseline", !isUnlocked && "blur-md select-none")}>
-            {formatPrice(fees?.total ?? 0, translations?.currency ?? 'UZS')}
+            {isUnlocked ? formatPrice(fees?.total ?? 0, translations?.currency ?? 'UZS') : `${MASK} ${translations?.currency ?? 'UZS'}`}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Pill>{fees?.classCount ?? 1} {translations?.classLabel}</Pill>
@@ -411,18 +419,18 @@ export default function TrademarkCalculator({
           )}
         </Card>
 
-        <Card className="relative overflow-hidden p-5">
+        <Card className={cn("relative overflow-hidden p-5", !isUnlocked && "hidden lg:block")}>
           <h3 className="font-bold text-foreground mb-3">{translations?.summaryTitle}</h3>
           <div className={cn("space-y-4", !isUnlocked && "blur-md select-none pointer-events-none")}>
             {watchFields.hasEkspert && (
               <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
                 <div className="font-semibold text-purple-700">{translations?.step0Title ?? '0-bosqich (Ekspertiza)'}</div>
-                <Row label={translations?.expertBaseFee ?? 'Dastlabki tekshiruv (1 klass)'} value={fees?.ekspertBase ?? 0} currency={translations?.currency ?? 'UZS'} />
+                <Row label={translations?.expertBaseFee ?? 'Dastlabki tekshiruv (1 klass)'} value={fees?.ekspertBase ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
                 {(fees?.classCount ?? 1)>1 && (
-                  <Row label={getExtraClassesFeeLabel()} value={fees?.ekspertExtra ?? 0} currency={translations?.currency ?? 'UZS'} />
+                  <Row label={getExtraClassesFeeLabel()} value={fees?.ekspertExtra ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
                 )}
                 <Divider />
-                <Row label={translations?.step0Total ?? '0-bosqich jami'} value={fees?.ekspertTotal ?? 0} bold currency={translations?.currency ?? 'UZS'} />
+                <Row label={translations?.step0Total ?? '0-bosqich jami'} value={fees?.ekspertTotal ?? 0} bold currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
               </div>
             )}
 
@@ -430,28 +438,28 @@ export default function TrademarkCalculator({
               <div className="font-semibold text-primary">{translations?.step1Title ?? '1-bosqich'}</div>
               <Row
                 label={translations?.ourServiceFee ?? 'Agentlik xizmati'}
-                value={fees?.agentTotal ?? 0} currency={translations?.currency ?? 'UZS'}
+                value={fees?.agentTotal ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked}
               />
               <Row
                 label={translations?.applicationFee ?? 'Davlat boji (Ariza)'}
-                value={fees?.step1StateTotal ?? 0} currency={translations?.currency ?? 'UZS'}
+                value={fees?.step1StateTotal ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked}
               />
               <Divider />
-              <Row label={translations?.step1Total ?? '1-bosqich jami'} value={(fees?.agentTotal ?? 0) + (fees?.step1StateTotal ?? 0)} bold currency={translations?.currency ?? 'UZS'} />
+              <Row label={translations?.step1Total ?? '1-bosqich jami'} value={(fees?.agentTotal ?? 0) + (fees?.step1StateTotal ?? 0)} bold currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
             </div>
 
             {watchFields.speed==='tez' && (
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
                 <div className="font-semibold text-amber-700">{translations?.expediteTitle ?? 'Tezlashtirilgan ko\'rib chiqish'}</div>
-                <Row label={translations?.expediteBaseFee ?? 'Tezlashtirish boji'} value={fees?.expediteBase ?? 0} currency={translations?.currency ?? 'UZS'} />
+                <Row label={translations?.expediteBaseFee ?? 'Tezlashtirish boji'} value={fees?.expediteBase ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
                 {fees.expediteExtra > 0 && (
                    <Row
                     label={`${translations?.extraClassesFeeLabel ?? 'Qo\'shimcha klasslar'} (${fees.classCount - 1} ta)`}
-                    value={fees.expediteExtra} currency={translations?.currency ?? 'UZS'}
+                    value={fees.expediteExtra} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked}
                   />
                 )}
                 <Divider />
-                <Row label={translations?.expediteTotal ?? 'Tezlashtirish jami'} value={fees?.expediteTotal ?? 0} bold currency={translations?.currency ?? 'UZS'} />
+                <Row label={translations?.expediteTotal ?? 'Tezlashtirish jami'} value={fees?.expediteTotal ?? 0} bold currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
               </div>
             )}
 
@@ -459,16 +467,16 @@ export default function TrademarkCalculator({
               <div className="font-semibold text-green-700">{translations?.step2Title ?? '2-bosqich (Guvohnoma olish)'}</div>
               <Row
                 label={`${translations?.stateFeeBase ?? 'Davlat boji (Guvohnoma)'}`}
-                value={fees?.step2Base ?? 0} currency={translations?.currency ?? 'UZS'}
+                value={fees?.step2Base ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked}
               />
               {fees?.step2Extra > 0 && (
                 <Row
                   label={`${translations?.extraClassesFeeLabel ?? 'Qo\'shimcha klasslar'} (${fees.classCount - 1} ta)`}
-                  value={fees?.step2Extra ?? 0} currency={translations?.currency ?? 'UZS'}
+                  value={fees?.step2Extra ?? 0} currency={translations?.currency ?? 'UZS'} masked={!isUnlocked}
                 />
               )}
               <Divider />
-              <Row label={translations?.step2Total ?? '2-bosqich jami'} value={fees?.step2Total ?? 0} bold currency={translations?.currency ?? 'UZS'} />
+              <Row label={translations?.step2Total ?? '2-bosqich jami'} value={fees?.step2Total ?? 0} bold currency={translations?.currency ?? 'UZS'} masked={!isUnlocked} />
             </div>
 
             <div className="rounded-xl border border-amber-300 bg-amber-100/50 p-4 text-amber-900 text-xs">
@@ -501,11 +509,11 @@ function Pill({ children }: { children: React.ReactNode }) {
   return <span className="px-2.5 py-1 rounded-full text-xs bg-white/15 ring-1 ring-white/25">{children}</span>;
 }
 
-function Row({ label, value, bold=false, currency }: { label: string, value: number, bold?: boolean, currency: string }) {
+function Row({ label, value, bold=false, currency, masked=false }: { label: string, value: number, bold?: boolean, currency: string, masked?: boolean }) {
   return (
     <div className="mt-2 flex items-center justify-between text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{Number(value).toLocaleString('fr-FR')} {currency}</span>
+      <span className={cn("font-semibold text-foreground", bold && 'font-bold')}>{masked ? MASK : Number(value).toLocaleString('fr-FR')} {currency}</span>
     </div>
   );
 }
