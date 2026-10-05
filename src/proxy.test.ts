@@ -47,6 +47,11 @@ describe('proxy locale redirect', () => {
     expect(response.headers.get('x-middleware-rewrite')).toContain('/uz/patent-menejer');
   });
 
+  it('sends other patent subdomain paths to the main site', () => {
+    const response = proxy(requestFor('https://patent.jonbranding.uz/narxlar?utm_source=x'));
+    expect(response.headers.get('location')).toBe('https://www.jonbranding.uz/narxlar?utm_source=x');
+  });
+
   it('keeps Uzbek inner pages in Uzbek for other-language browsers and crawlers', () => {
     const request = new NextRequest(
       new Request('https://www.jonbranding.uz/narxlar', { headers: { 'accept-language': 'en-US,en;q=0.9' } }),

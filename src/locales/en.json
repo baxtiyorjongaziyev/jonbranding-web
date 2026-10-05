@@ -2461,5 +2461,22 @@
   "navigatorErrors": {
     "phoneInvalid": "Please check your phone number: use the format +998 90 123 45 67.",
     "generic": "Something went wrong. Please try again."
+  },
+  "reviewsPage": {
+    "title": "Our Clients' Reviews",
+    "subtitle": "Results speak for themselves. Voice and video reviews from real people.",
+    "back": "Back to home",
+    "badge": "Reviews",
+    "ctaTitle": "Improve your brand right now",
+    "ctaDesc": "We will find the 3 biggest weaknesses of your brand in 15 minutes.",
+    "ctaText": "Get free audit",
+    "video": "Video reviews",
+    "videoDesc": "Clients on camera about their results",
+    "audio": "Audio reviews",
+    "audioDesc": "Voice messages from clients",
+    "text": "Written reviews",
+    "textDesc": "Written feedback from clients",
+    "watch": "Watch video",
+    "listen": "Listen"
   }
 }
