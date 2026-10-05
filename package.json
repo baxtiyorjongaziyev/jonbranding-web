@@ -73,7 +73,7 @@
     "lucide-react": "^0.417.0",
     "marked": "^18.0.6",
     "negotiator": "^0.6.3",
-    "next": "^16.3.5",
+    "next": "^16.3.8",
     "next-sanity": "^13.1.1",
     "node-fetch": "^3.3.2",
     "react": "^19.2.7",
@@ -107,7 +107,7 @@
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.3.5",
+    "eslint-config-next": "^16.3.8",
     "husky": "^9.0.0",
     "jsdom": "^29.1.1",
     "lint-staged": "^15.0.0",
@@ -146,6 +146,8 @@
     "brace-expansion@^2.0.0": "^2.1.7",
     "brace-expansion@^5.0.0": "^5.0.12",
     "markdown-it": "^14.3.1",
+    "@grpc/grpc-js": "^1.14.5",
+    "dompurify": "^3.4.16",
     "ws": "^8.21.0",
     "json-2-csv": "5.5.11",
     "smol-toml": "^1.8.0",
@@ -166,7 +168,10 @@
       "brace-expansion@<1.1.21": "1.1.21",
       "brace-expansion@>=2.0.0 <2.1.7": "2.1.7",
       "brace-expansion@>=4.0.0 <5.0.12": ">=5.0.12",
-      "markdown-it@<14.3.1": ">=14.3.1"
+      "markdown-it@<14.3.1": ">=14.3.1",
+      "next@>=16.2.0 <16.3.6": ">=16.3.6",
+      "@grpc/grpc-js@>=1.14.0 <1.14.5": ">=1.14.5",
+      "dompurify@>=3.4.13 <3.4.16": ">=3.4.16"
     }
   }
 }

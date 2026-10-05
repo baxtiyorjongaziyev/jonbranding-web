@@ -40,11 +40,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '3 Atirchi (Eski brending)',
       newHint: 'Den Aroma (Yangi premium brending)',
       description: 'Selective parfyumeriya tarmog\'i uchun yaratilgan global brend strategiyasi, nafis vizual aydentika va mukammal brendbuk loyihasi.',
-      results: [
-        { metric: 'Savdo hajmi o\'sishi', value: '+178%' },
-        { metric: 'Brend qiymati', value: '3.2 barobar' },
-        { metric: 'Bozor ulushi (Selective)', value: 'Top-3' }
-      ],
       body: [
         {
           heading: "Vazifa va Muammo",
@@ -52,11 +47,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         },
         {
           heading: "Strategik Yechim",
-          paragraph: "Jon Branding jamoasi tomonidan bozorni chuqur tahlil qilgan holda, yangi premium 'Den Aroma' nomi, minimalist va oliyjanob vizual konsepsiya, hamda brendning barcha nuqtalarini tartibga soluvchi 120 varaqdan iborat Premium Brendbuk ishlab chiqildi."
-        },
-        {
-          heading: "Yakuniy Natija",
-          paragraph: "Brend yangilanganidan so'ng, o'rtacha chek miqdori 2.5 barobar oshdi va kompaniya selective parfyumeriya bozorida o'zining mustahkam Top-3 o'rnini egalladi. Vizual aydentika brendning premium tabiatini 100% aks ettira oldi."
+          paragraph: "Jon Branding jamoasi tomonidan bozorni chuqur tahlil qilgan holda, yangi premium 'Den Aroma' nomi, minimalist va oliyjanob vizual konsepsiya, hamda brendning barcha nuqtalarini tartibga soluvchi Premium Brendbuk ishlab chiqildi."
         }
       ],
       galleryImages: [
@@ -80,11 +71,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Oddiy logotip dizayni',
       newHint: 'Fidda (Premium aydentika)',
       description: 'Zargarlik buyumlari butigi uchun nafis, nozik va estetik jihatdan yuqori darajada ishlangan premium vizual aydentika tizimi.',
-      results: [
-        { metric: 'Raqamli ROAS (Reklama)', value: '4.2x' },
-        { metric: 'Premium segment ulushi', value: '22%' },
-        { metric: 'Mijozlarning qaytishi', value: '+35%' }
-      ],
       body: [
         {
           heading: "Vazifa va Muammo",
@@ -93,10 +79,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Strategik Yechim",
           paragraph: "Biz kumush va zargarlik san'atining nafisligini aks ettiruvchi ingichka, nafis chiziqli logotip tizimi, unikal naqshlar va premium qadoqlash vizualizatsiyasini yaratdik. Vizual til o'ziga xoslik, go'zallik va ishonch tuyg'usini beradi."
-        },
-        {
-          heading: "Yakuniy Natija",
-          paragraph: "Brend yangilanganidan so'ng, ijtimoiy tarmoqlar va butikdagi visual aydentika yuqori toifadagi mijozlar diqqatini tortdi. Reklama kampaniyalarining samaradorligi (ROAS) 4.2 barobarga ko'tarilib, sotuvlarni rekord darajaga yetkazdi."
         }
       ],
       galleryImages: [
@@ -118,11 +100,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Eski mahsulot uslubi',
       newHint: 'Boyarin (Premium qadoq)',
       description: 'Saryog\' va sut mahsulotlari uchun supermarket javonlarida darhol ajralib turadigan, premium vizual til va qadoqlar.',
-      results: [
-        { metric: 'Javondagi jozibadorlik', value: '+300%' },
-        { metric: 'Supermarket savdolari', value: '+85%' },
-        { metric: 'Brend tanilishi', value: '4 barobar' }
-      ],
       body: [
         {
           heading: "Vazifa va Muammo",
@@ -131,10 +108,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Strategik Yechim",
           paragraph: "Biz o'ta jasur, to'q qora va oltin ranglar uyg'unligidagi ajoyib premium qadoq tizimini ishlab chiqdik. Markaziy qismda brendning oliyjanob xarakterini ko'rsatuvchi stilizatsiyalangan Boyar ramzi joylashtirildi."
-        },
-        {
-          heading: "Yakuniy Natija",
-          paragraph: "Supermarket javonlarida Boyarin mahsulotlari boshqa raqobatchilardan 3 barobar kuchliroq ko'zga tashlandi. Birinchi oylarning o'zidayoq savdo hajmi 85% ga oshib, premium do'konlar bilan yangi shartnomalar imzolandi."
         }
       ],
       galleryImages: [
@@ -248,11 +221,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '3 Atirchi (Старый бренд)',
       newHint: 'Den Aroma (Новый премиум брендинг)',
       description: 'Глобальная бренд-стратегия, элегантная айдентика и комплексный брендбук для первой премиальной сети селективной парфюмерии.',
-      results: [
-        { metric: 'Рост объема продаж', value: '+178%' },
-        { metric: 'Капитализация бренда', value: '3.2 раза' },
-        { metric: 'Доля рынка (Selective)', value: 'Топ-3' }
-      ],
       body: [
         {
           heading: "Задача и Проблема",
@@ -260,11 +228,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         },
         {
           heading: "Стратегическое Решение",
-          paragraph: "Команда Jon Branding провела глубокий анализ рынка, создала новое премиальное имя 'Den Aroma', разработала минималистичный визуальный стиль и детальный брендбук на 120 страниц, стандартизирующий каждую точку контакта."
-        },
-        {
-          heading: "Результат",
-          paragraph: "После ребрендинга средний чек увеличился в 2.5 раза, а компания заняла прочные позиции в Топ-3 сетей селективной парфюмерии Узбекистана. Визуальная айдентика на 100% передала премиальный характер бренда."
+          paragraph: "Команда Jon Branding провела глубокий анализ рынка, создала новое премиальное имя 'Den Aroma', разработала минималистичный визуальный стиль и детальный брендбук, стандартизирующий каждую точку контакта."
         }
       ],
       galleryImages: [
@@ -288,11 +252,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Простой логотип',
       newHint: 'Fidda (Премиум айдентика)',
       description: 'Изящный визуальный стиль премиум-класса для бутика дизайнерских ювелирных украшений ручной работы.',
-      results: [
-        { metric: 'Цифровой ROAS (Окупаемость)', value: '4.2x' },
-        { metric: 'Доля в премиум-сегменте', value: '22%' },
-        { metric: 'Возвратность клиентов', value: '+35%' }
-      ],
       body: [
         {
           heading: "Задача и Проблема",
@@ -301,10 +260,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Стратегическое Решение",
           paragraph: "Мы разработали деликатную лого-систему, элегантные паттерны и премиальную визуализацию упаковки. Визуальный язык бренда стал транслировать эксклюзивность, утонченность и ювелирную роскошь."
-        },
-        {
-          heading: "Результат",
-          paragraph: "Новый визуальный образ мгновенно привлек внимание целевой аудитории. Эффективность рекламных кампаний (ROAS) выросла в 4.2 раза, а розничные продажи бутика достигли исторического максимума."
         }
       ],
       galleryImages: [
@@ -326,11 +281,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Старая упаковка',
       newHint: 'Boyarin (Премиум упаковка)',
       description: 'Премиальный визуальный язык и дизайн упаковки для сливочного масла и молочных продуктов, доминирующий на полках супермаркетов.',
-      results: [
-        { metric: 'Заметность на полке', value: '+300%' },
-        { metric: 'Продажи в сетях', value: '+85%' },
-        { metric: 'Узнаваемость марки', value: 'В 4 раза' }
-      ],
       body: [
         {
           heading: "Задача и Проблема",
@@ -339,10 +289,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Стратегическое Решение",
           paragraph: "Мы разработали премиальную систему упаковки в глубоких угольно-черных и золотых тонах. В центре композиции был размещен благородный стилизованный образ Боярина, символизирующий качество."
-        },
-        {
-          heading: "Результат",
-          paragraph: "На полках премиальных супермаркетов продукция Boyarin стала выделяться в 3 раза сильнее конкурентов. В первый же месяц продажи выросли на 85%, были заключены новые крупные контракты."
         }
       ],
       galleryImages: [
@@ -456,11 +402,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '3 Atirchi (Old branding)',
       newHint: 'Den Aroma (New premium branding)',
       description: 'Global brand strategy, elegant visual identity, and comprehensive brandbook designed for a premium selective perfumery chain.',
-      results: [
-        { metric: 'Sales Volume Growth', value: '+178%' },
-        { metric: 'Brand Capitalization', value: '3.2x' },
-        { metric: 'Selective Market Share', value: 'Top-3' }
-      ],
       body: [
         {
           heading: "The Challenge",
@@ -468,11 +409,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         },
         {
           heading: "Strategic Solution",
-          paragraph: "Jon Branding team conducted a deep market analysis, created the new premium name 'Den Aroma', developed a minimalist yet noble visual identity, and a comprehensive 120-page brandbook standardizing all touchpoints."
-        },
-        {
-          heading: "The Result",
-          paragraph: "Following the rebranding, the average order value increased 2.5x, and the chain firmly established its position in the selective perfumery Top-3. Visual identity perfectly communicated the premium nature of the brand."
+          paragraph: "Jon Branding team conducted a deep market analysis, created the new premium name 'Den Aroma', developed a minimalist yet noble visual identity, and a comprehensive brandbook standardizing all touchpoints."
         }
       ],
       galleryImages: [
@@ -496,11 +433,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Simple logo',
       newHint: 'Fidda (Premium identity)',
       description: 'Delicate, sophisticated, and high-end visual identity system designed for a luxury artisan jewelry boutique.',
-      results: [
-        { metric: 'Digital Ads ROAS', value: '4.2x' },
-        { metric: 'Premium Market Share', value: '22%' },
-        { metric: 'Customer Retention Rate', value: '+35%' }
-      ],
       body: [
         {
           heading: "The Challenge",
@@ -509,10 +441,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Strategic Solution",
           paragraph: "We designed a delicate, fine-line logo system, elegant visual patterns, and premium packaging concepts. The visual language conveys exclusivity, artistic beauty, and luxurious trust."
-        },
-        {
-          heading: "The Result",
-          paragraph: "Visual presentation across social media and the boutique instantly captured high-end clients. Ad campaign efficiency (ROAS) reached 4.2x, pushing retail sales to record levels."
         }
       ],
       galleryImages: [
@@ -534,11 +462,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: 'Old package',
       newHint: 'Boyarin (Premium packaging)',
       description: 'A striking premium visual identity and packaging system designed to dominate gourmet store shelves.',
-      results: [
-        { metric: 'Shelf Eye-Catching Rate', value: '+300%' },
-        { metric: 'Retail Sales Increase', value: '+85%' },
-        { metric: 'Brand Recognition', value: '4x' }
-      ],
       body: [
         {
           heading: "The Challenge",
@@ -547,10 +470,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "Strategic Solution",
           paragraph: "We designed a premium packaging system using deep charcoal black and gold colors. At the center is a stylized Boyar character, symbolizing quality and tradition."
-        },
-        {
-          heading: "The Result",
-          paragraph: "On gourmet shelves, Boyarin products became 3x more eye-catching than competitors. Sales increased 85% in the very first month, securing new premium store listings."
         }
       ],
       galleryImages: [
@@ -664,11 +583,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '3 Atirchi (旧品牌)',
       newHint: 'Den Aroma (全新高端品牌包装)',
       description: '为高端定制香水连锁店打造的全球品牌战略、高雅视觉识别系统以及全方位品牌指南项目。',
-      results: [
-        { metric: '销售额增长', value: '+178%' },
-        { metric: '品牌估值提升', value: '3.2倍' },
-        { metric: '细分市场份额', value: '前3名' }
-      ],
       body: [
         {
           heading: "挑战与背景",
@@ -676,11 +590,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         },
         {
           heading: "战略性解决方案",
-          paragraph: "Jon Branding 团队对市场进行了深度分析，确立了全新高端名称 'Den Aroma'，设计了极简而高贵的视觉概念，并制定了120页的品牌规范指南，统一了所有接触点。"
-        },
-        {
-          heading: "成果",
-          paragraph: "品牌升级后，平均客单价提升了2.5倍，连锁店稳居高端定制香水市场前3名。全新的视觉识别系统百分之百地传达了品牌的高端定位。"
+          paragraph: "Jon Branding 团队对市场进行了深度分析，确立了全新高端名称 'Den Aroma'，设计了极简而高贵的视觉概念，并制定了完整的品牌规范指南，统一了所有接触点。"
         }
       ],
       galleryImages: [
@@ -704,11 +614,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '简约标志',
       newHint: 'Fidda (高端视觉识别)',
       description: '为奢华手作珠宝精品店量身定制的精致、典雅的高端视觉识别系统。',
-      results: [
-        { metric: '数字广告投资回报率', value: '4.2倍' },
-        { metric: '高端市场份额', value: '22%' },
-        { metric: '客户留存率', value: '+35%' }
-      ],
       body: [
         {
           heading: "挑战与背景",
@@ -717,10 +622,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "战略性解决方案",
           paragraph: "我们设计了精致的纤细线条标志系统、高雅的视觉图案以及高端包装概念。视觉语言精准传达了品牌的独特性、艺术美感以及尊贵信任感。"
-        },
-        {
-          heading: "成果",
-          paragraph: "社交媒体和实体精品店的全新视觉呈现瞬间吸引了高端客户。广告投资回报率（ROAS）达到了4.2倍，将零售额推向了创纪录的历史新高。"
         }
       ],
       galleryImages: [
@@ -742,11 +643,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       oldHint: '旧版包装',
       newHint: 'Boyarin (高端包装)',
       description: '专为抢占高端货架设计的醒目高级视觉识别与包装系统。',
-      results: [
-        { metric: '货架吸睛率', value: '+300%' },
-        { metric: '零售额增长', value: '+85%' },
-        { metric: '品牌知名度', value: '4倍' }
-      ],
       body: [
         {
           heading: "挑战与背景",
@@ -755,10 +651,6 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
         {
           heading: "战略性解决方案",
           paragraph: "我们使用深木炭黑和金色设计了高端包装系统。中心是风格化的 Boyar 人物形象，象征着品质与传统的传承。"
-        },
-        {
-          heading: "成果",
-          paragraph: "在精品货架上，Boyarin 产品比竞争对手吸睛3倍。在第一个月内销售额即增长了85%，并成功锁定了新的高端门店合作协议。"
         }
       ],
       galleryImages: [

@@ -3076,3 +3076,86 @@ html[data-theme="dark"] body:has(.atelier-home) {
   .atelier-theme .hide-mobile {
  display: none !important;   }
 }
+
+/* OLDIN / KEYIN: haqiqiy rasmlar diptixi (before-after.tsx) */
+.atelier-theme .ba-head {
+  display: flex; flex-direction: column; gap: 20px; max-width: 760px; margin-bottom: 56px; }
+.atelier-theme .ba-head h2 {
+  font-weight: 700; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -0.035em; color: var(--ink); }
+.atelier-theme .ba-head h2 .rest {
+  display: block; color: var(--muted); }
+.atelier-theme .ba-head p {
+  max-width: 52ch; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+.atelier-theme .ba-grid {
+  display: grid; grid-template-columns: 3fr 9fr; gap: 48px; align-items: start; }
+.atelier-theme .ba-tabs {
+  display: flex; flex-direction: column; }
+.atelier-theme .ba-tab {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  text-align: left; padding: 16px 0 16px 20px; border-left: 2px solid var(--line); color: var(--muted);
+  transition: color .2s, border-color .2s; }
+.atelier-theme .ba-tab:hover {
+  color: var(--ink); }
+.atelier-theme .ba-tab[aria-selected="true"] {
+  color: var(--ink); border-left-color: var(--accent); }
+.atelier-theme .ba-tab:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.atelier-theme .ba-tab .name {
+  display: block; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+.atelier-theme .ba-tab .cat {
+  display: block; font-size: 14px; color: var(--muted); }
+.atelier-theme .ba-pair {
+  display: grid; grid-template-columns: 5fr 7fr; gap: 24px; align-items: end; }
+.atelier-theme .ba-frame {
+  position: relative; overflow: hidden; border-radius: 16px; }
+.atelier-theme .ba-frame.before {
+  aspect-ratio: 1 / 1; background: var(--bg-2); }
+.atelier-theme .ba-frame.after {
+  aspect-ratio: 4 / 3; background: var(--paper); border: 1px solid var(--line); }
+.atelier-theme .ba-frame img {
+  object-fit: contain; padding: 28px; }
+.atelier-theme .ba-pair figcaption {
+  margin-top: 12px; font-size: 14px; color: var(--muted); }
+.atelier-theme .ba-pair figcaption.on {
+  color: var(--ink); font-weight: 600; }
+.atelier-theme .ba-link {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 32px; font-size: 14px; font-weight: 600; color: var(--ink);
+  text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 6px;
+  transition: color .2s, text-decoration-color .2s; }
+.atelier-theme .ba-link:hover {
+  color: var(--accent); text-decoration-color: var(--accent); }
+.atelier-theme .ba-link svg {
+  width: 16px; height: 16px; transition: transform .2s; }
+.atelier-theme .ba-link:hover svg {
+  transform: translate(2px, -2px); }
+@media (prefers-reduced-motion: reduce) {
+  .atelier-theme .ba-tab, .atelier-theme .ba-link, .atelier-theme .ba-link svg {
+    transition: none; }
+}
+@media (max-width: 1023px) {
+  .atelier-theme .ba-grid {
+    grid-template-columns: 1fr; gap: 32px; }
+  .atelier-theme .ba-tabs {
+    flex-direction: row; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -32px; padding: 0 32px 4px; scroll-padding-inline: 32px; scrollbar-width: none; }
+  .atelier-theme .ba-tabs::-webkit-scrollbar {
+    display: none; }
+  .atelier-theme .ba-tab {
+    flex-shrink: 0; scroll-snap-align: start; padding: 0 0 12px; border-left: 0; border-bottom: 2px solid transparent; }
+  .atelier-theme .ba-tab[aria-selected="true"] {
+    border-bottom-color: var(--accent); }
+}
+@media (max-width: 720px) {
+  .atelier-theme .ba-head {
+    margin-bottom: 40px; }
+  .atelier-theme .ba-tabs {
+    margin: 0 -20px; padding: 0 20px 4px; scroll-padding-inline: 20px; }
+  .atelier-theme .ba-tab .name {
+    font-size: 18px; }
+  .atelier-theme .ba-pair {
+    grid-template-columns: 1fr; gap: 20px; }
+  .atelier-theme .ba-frame.before {
+    aspect-ratio: 4 / 3; }
+  .atelier-theme .ba-frame img {
+    padding: 20px; }
+}

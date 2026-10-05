@@ -81,27 +81,16 @@ export interface AuditOfferDictionary {
 }
 
 export interface BeforeAfterDictionary {
-  eyebrow?: string;
   title?: string;
   subtitle?: string;
-  ctaTitle?: string;
-  ctaDesc?: string;
-  ctaButton?: string;
-  cta?: string;
-  caseLabel?: string;
-  proofCards?: Array<{ value: string; label: string }>;
-  sliderHint?: string;
   beforeLabel?: string;
   afterLabel?: string;
+  /** Keyslar ro'yxatining aria-label'i. */
+  casesLabel?: string;
+  /** `{brand}` o'rniga keys nomi qo'yiladi. */
   viewCase?: string;
-  problemTitle?: string;
-  solutionTitle?: string;
-  resultTitle?: string;
-  compare50?: string;
-  compareBefore?: string;
-  compareAfter?: string;
-  allTransformations?: string;
-  allTransformationsSub?: string;
+  /** Keys id → soha nomi. */
+  cases?: Record<string, string>;
 }
 
 export interface BlogPreviewDictionary {
