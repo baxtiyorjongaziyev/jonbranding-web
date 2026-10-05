@@ -2464,5 +2464,22 @@
   "navigatorErrors": {
     "phoneInvalid": "Telefon raqamini tekshiring: +998 90 123 45 67 ko'rinishida yozing.",
     "generic": "Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring."
+  },
+  "reviewsPage": {
+    "title": "Mijozlarimiz sharhlari",
+    "subtitle": "Natijalar o'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.",
+    "back": "Bosh sahifaga",
+    "badge": "Sharhlar",
+    "ctaTitle": "O'z brendingizni hoziroq yaxshilang",
+    "ctaDesc": "15 daqiqada brendingizdagi 3 ta yirik zaiflikni topib beramiz.",
+    "ctaText": "Bepul audit olish",
+    "video": "Video sharhlar",
+    "videoDesc": "Mijozlar o'z natijalari haqida kamera oldida",
+    "audio": "Audio sharhlar",
+    "audioDesc": "Mijozlarning ovozli xabarlari",
+    "text": "Yozma sharhlar",
+    "textDesc": "Mijozlarning yozma fikrlari",
+    "watch": "Videoni ko'rish",
+    "listen": "Tinglash"
   }
 }

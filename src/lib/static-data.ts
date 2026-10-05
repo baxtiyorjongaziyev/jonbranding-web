@@ -64,7 +64,7 @@ export const staticTestimonials: Testimonial[] = [
     image: "https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png",
     imageHint: "female entrepreneur portrait",
     quote: "Bu jamoa bilan ishlaganimdan juda xursandman. Tez va kutilganidan ham a'lo darajada natija oldim. O'zim ham brending, ham stiker, ham patentlash bo'yicha buyurtma qoldirgandim. 7 oydan so'ng hammasi tayyor bo'ladi Xudo xohlasa. Halol ishlaysizlar, Alloh rozi bo'lsin. Juda xursandman, ishlaringizda zafarlar tilab qolaman. Rahmat.",
-    audioUrl: "/audio/sevara-holmanova.mp3"
+    audioUrl: "/audio/sevara-holmanova.ogg"
   },
   {
     name: "Nodirbek",
@@ -81,7 +81,7 @@ export const staticTestimonials: Testimonial[] = [
     image: "",
     imageHint: "tech startup founder",
     quote: "Kutganimdan ham yaxshiroq bo'lib chiqibdi. Hozir logotipga qarab o'zim maza qilyapman. Menga yoqqan tarafi - ishonchli. Vaqtidan ertaroq qilib berganliklari ham juda yaxshi bo'ldi. Natijalarni tezroq ulashganlari a'lo. Katta rahmat aka!",
-    audioUrl: "/audio/javohir-haqberdiyev.mp3"
+    audioUrl: "/audio/javohir-haqberdiyev.ogg"
   },
   {
     name: "Hikmatulloh Toxirov",
