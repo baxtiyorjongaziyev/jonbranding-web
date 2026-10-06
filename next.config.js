@@ -112,6 +112,8 @@ const cspDirectives = {
     'https://player.vimeo.com',
     'https://www.google.com',
     'https://challenges.cloudflare.com',
+    // /jamoa ichki sahifasidagi Airtable moliya formasi.
+    'https://airtable.com',
     'https://td.doubleclick.net',
     'https://*.googletagmanager.com',
     'https://mc.yandex.ru',
@@ -154,6 +156,13 @@ const nextConfig = {
       { source: '/:uz(uz)?/xizmatlar/:old(brand-strategiyasi|brand-strategy)', destination: '/brand-strategy', permanent: true },
       { source: '/:lang(ru|en|zh)/xizmatlar/:old(brand-strategiyasi|brand-strategy)', destination: '/:lang/brand-strategy', permanent: true },
     ];
+  },
+  async rewrites() {
+    return {
+      // Ichki jamoa sahifasi — mustaqil HTML (public/jamoa.html), sayt
+      // shablonisiz. Menyu/footer/sitemap'ga qo'shilmaydi.
+      beforeFiles: [{ source: '/jamoa', destination: '/jamoa.html' }],
+    };
   },
   experimental: {
     cpus: 1,

@@ -31,6 +31,11 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // Ichki jamoa sahifasi (public/jamoa.html) — patent subdomen yo'naltirishidan keyin, til prefiksisiz qoladi.
+  if (pathname === '/jamoa' || pathname === '/jamoa.html') {
+    return response;
+  }
+
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
     // nextUrl.clone() query stringni saqlaydi. `new URL(path, base)` esa uni
     // tashlab yuborardi va /uz/... havolalaridagi ?source= va UTM parametrlari
