@@ -5,7 +5,7 @@
 **Qilingan ish:**
 - `public/jamoa.html` — egasi bergan mustaqil sahifa, o'zgarishsiz. `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
 - Menyu, footer, sitemap'ga qo'shilmagan; `robots.ts` da `Disallow: /jamoa`. CSP `frame-src` ga `https://airtable.com`.
-- Parol himoyasi faqat brauzer tomonida (hash HTML ichida). Haqiqiy himoya — Airtable formasining "Only users with base access" sozlamasi.
+- Parol ekrani olib tashlandi (egasi qarori). Himoya — Airtable formasining "Only users with base access" sozlamasi.
 
 ## 2026-10-05 | patent.jonbranding.uz havolalari va apple-touch-icon (PR #360, #362)
 
