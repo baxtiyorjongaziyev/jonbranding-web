@@ -1,5 +1,21 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-06 | Ichki /jamoa sahifasi (moliya formasi)
+
+**Qilingan ish:**
+- `public/jamoa.html` — egasi bergan mustaqil sahifa, o'zgarishsiz. `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
+- Menyu, footer, sitemap'ga qo'shilmagan; `robots.ts` da `Disallow: /jamoa`. CSP `frame-src` ga `https://airtable.com`.
+- Parol himoyasi faqat brauzer tomonida (hash HTML ichida). Haqiqiy himoya — Airtable formasining "Only users with base access" sozlamasi.
+
+## 2026-10-05 | patent.jonbranding.uz havolalari va apple-touch-icon (PR #360, #362)
+
+**Qilingan ish:**
+- `src/proxy.ts`: `patent.` subdomeni endi faqat `/`, `/{lang}`, `/patent-menejer` da menejer kalkulyatorini ko'rsatadi. Boshqa yo'llar (header/footer tugmalari) `https://www.jonbranding.uz` + path + query ga 307 bilan o'tadi. Avval hamma yo'l kalkulyatorga rewrite bo'lardi.
+- `src/proxy.ts` matcher: `apple-touch-icon.png` qo'shildi — avval `/uz/apple-touch-icon.png` ga rewrite bo'lib 404 qaytarardi.
+- Production'da subdomen sahifasidagi 18 ta ichki havola tekshirildi: hammasi asosiy saytga o'tadi, 200.
+
+**Ochiq:** `npm audit` CI qizil — `braces` (GHSA-vfj7-8cjw-p6xm, sanity/@sanity/cli orqali), patch versiya hali yo'q.
+
 ## 2026-10-05 | Patent kalkulyatori sahifalari birlashtirildi
 
 **Qilingan ish:**
