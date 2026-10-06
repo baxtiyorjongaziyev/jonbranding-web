@@ -1,5 +1,12 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-06 | CI tezlashtirildi
+
+- `test.yml`: typecheck/lint/test va build parallel job'larga ajratildi; majburiy `Typecheck, lint, test, build` endi ikkalasini yig'uvchi job (nomi branch protection uchun saqlangan).
+- `.next/cache` `actions/cache` bilan saqlanadi.
+- Playwright E2E faqat `main`'ga push'da ishlaydi, PR'larda emas.
+- Oldin PR tekshiruvi ~4 daqiqa (build 127s), maqsad ~2.5 daqiqa.
+
 ## 2026-10-05 | Patent kalkulyatori sahifalari birlashtirildi
 
 **Qilingan ish:**
