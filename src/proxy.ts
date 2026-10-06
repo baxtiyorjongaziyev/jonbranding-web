@@ -9,6 +9,11 @@ export function proxy(request: NextRequest) {
   // ham turli qiymatlar bilan qo'yilardi va redirect/rewrite javoblarida yo'q edi.
   const response = NextResponse.next();
 
+  // Ichki jamoa sahifasi (public/jamoa.html) — til prefiksisiz qoladi.
+  if (pathname === '/jamoa' || pathname === '/jamoa.html') {
+    return response;
+  }
+
   if (request.nextUrl.searchParams.get('__rewrite') === '1') {
     return response;
   }

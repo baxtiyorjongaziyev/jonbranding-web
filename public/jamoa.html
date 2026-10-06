@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Jon Branding — Jamoa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f6f4; --card:#ffffff; --ink:#111111; --muted:#6b6b6b;
+    --line:#e6e6e2; --accent:#111111; --accent-ink:#ffffff; --error:#c0392b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .wrap{max-width:880px;margin:0 auto;padding:32px 16px 64px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+  .logo{font-weight:700;font-size:20px;letter-spacing:-.02em}
+  .logo span{color:var(--muted);font-weight:500}
+  .logout{background:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;color:var(--muted);cursor:pointer}
+  .logout:hover{color:var(--ink);border-color:var(--ink)}
+  h1{font-size:clamp(26px,5vw,36px);letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:16px;line-height:1.5;margin-bottom:24px}
+  .rules{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:20px}
+  .rules h2{font-size:15px;margin-bottom:10px}
+  .rules ol{padding-left:20px;color:#333;font-size:14px;line-height:1.7}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  iframe{display:block;width:100%;height:1400px;border:0;background:transparent}
+  footer{margin-top:24px;color:var(--muted);font-size:13px;text-align:center}
+
+  /* Parol ekrani */
+  #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+  .gate-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px 28px;width:100%;max-width:380px;text-align:center}
+  .gate-box .logo{display:block;margin-bottom:18px}
+  .gate-box p{color:var(--muted);font-size:14px;margin-bottom:20px}
+  .gate-box input{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:16px;margin-bottom:12px;outline:none}
+  .gate-box input:focus{border-color:var(--ink)}
+  .gate-box button{width:100%;padding:14px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;font-size:16px;cursor:pointer}
+  .err{color:var(--error);font-size:13px;min-height:18px;margin-top:10px}
+  #app{display:none}
+</style>
+</head>
+<body>
+
+<!-- 1. PAROL EKRANI -->
+<div id="gate">
+  <form class="gate-box" id="gateForm" autocomplete="off">
+    <span class="logo">Jon Branding <span>· Jamoa</span></span>
+    <p>Bu sahifa faqat jamoa a'zolari uchun.<br>Parolni kiriting.</p>
+    <input type="password" id="pw" placeholder="Parol" aria-label="Parol" required>
+    <button type="submit">Kirish</button>
+    <div class="err" id="err"></div>
+  </form>
+</div>
+
+<!-- 2. ASOSIY SAHIFA -->
+<div id="app">
+  <div class="wrap">
+    <header>
+      <div class="logo">Jon Branding <span>· Jamoa</span></div>
+      <button class="logout" id="logout">Chiqish</button>
+    </header>
+
+    <h1>Moliyaga kirim va chiqim yuborish</h1>
+    <p class="sub">Har bir pul harakati shu kunning o'zida shu forma orqali kiritiladi.</p>
+
+    <div class="rules">
+      <h2>3 ta qoida</h2>
+      <ol>
+        <li>Chek yoki skrinshotni har doim biriktiring.</li>
+        <li>Summa va sana chekdagidan olinadi.</li>
+        <li>Mijozdan tushgan pul bo'lsa, loyihani albatta tanlang.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <iframe
+        title="Kirim va chiqim formasi"
+        loading="lazy"
+        data-src="https://airtable.com/embed/app8xoyx1XCumYFXV/pagXqD6m5BgxhXYzz/form">
+      </iframe>
+    </div>
+
+    <footer>Muammo bo'lsa, Baxtiyorjonga yozing.</footer>
+  </div>
+</div>
+
+<script>
+  // Parolni o'zgartirish: yangi parolning SHA-256 hash'ini shu yerga qo'ying.
+  // Hozirgi parol: JonJamoa2026
+  const PASSWORD_HASH = "d2d36dd7a75db26c28280fd7e1601310b3b36aecf3bad6046506768d43004652";
+  const KEY = "jb_jamoa_ok";
+
+  async function sha256(text){
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function openApp(){
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    const f = document.querySelector("iframe");
+    if (!f.src) f.src = f.dataset.src;   // forma faqat paroldan keyin yuklanadi
+  }
+
+  function remembered(){
+    try { return localStorage.getItem(KEY) === PASSWORD_HASH; } catch(e){ return false; }
+  }
+
+  if (remembered()) openApp();
+
+  document.getElementById("gateForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const val = document.getElementById("pw").value.trim();
+    if (await sha256(val) === PASSWORD_HASH) {
+      try { localStorage.setItem(KEY, PASSWORD_HASH); } catch(e){}
+      openApp();
+    } else {
+      document.getElementById("err").textContent = "Parol noto'g'ri. Qayta urinib ko'ring.";
+    }
+  });
+
+  document.getElementById("logout").addEventListener("click", () => {
+    try { localStorage.removeItem(KEY); } catch(e){}
+    location.reload();
+  });
+</script>
+</body>
+</html>
