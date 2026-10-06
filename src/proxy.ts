@@ -9,11 +9,6 @@ export function proxy(request: NextRequest) {
   // ham turli qiymatlar bilan qo'yilardi va redirect/rewrite javoblarida yo'q edi.
   const response = NextResponse.next();
 
-  // Ichki jamoa sahifasi (public/jamoa.html) — til prefiksisiz qoladi.
-  if (pathname === '/jamoa' || pathname === '/jamoa.html') {
-    return response;
-  }
-
   if (request.nextUrl.searchParams.get('__rewrite') === '1') {
     return response;
   }
@@ -34,6 +29,11 @@ export function proxy(request: NextRequest) {
     url.pathname = `/${locale}/patent-menejer`;
     url.searchParams.set('__rewrite', '1');
     return NextResponse.rewrite(url);
+  }
+
+  // Ichki jamoa sahifasi (public/jamoa.html) — patent subdomen yo'naltirishidan keyin, til prefiksisiz qoladi.
+  if (pathname === '/jamoa' || pathname === '/jamoa.html') {
+    return response;
   }
 
   if (pathname === '/uz' || pathname.startsWith('/uz/')) {
