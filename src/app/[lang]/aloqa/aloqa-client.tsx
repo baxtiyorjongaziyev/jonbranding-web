@@ -125,6 +125,8 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
             <div style={{ borderTop: '1px solid var(--at-line)' }}>
               {l.contacts.map((c) => (
                 <a key={c.label} href={c.href}
+                  data-oisha-phone={c.href.startsWith('tel:') ? '' : undefined}
+                  data-oisha-phone-text={c.href.startsWith('tel:') ? '0' : undefined}
                   target={c.href.startsWith('http') ? '_blank' : undefined}
                   rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="flex justify-between items-center py-5 group hover:text-[var(--at-accent)] transition-colors"

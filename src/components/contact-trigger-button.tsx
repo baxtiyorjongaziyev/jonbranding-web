@@ -37,7 +37,7 @@ const ContactTriggerButton: FC<ContactTriggerButtonProps> = ({
   };
 
   return (
-    <Button onClick={handleClick} size={size} variant={variant} className={className}>
+    <Button data-oisha-callback="" onClick={handleClick} size={size} variant={variant} className={className}>
       {children || ctaText}
       {showArrow && <ArrowRight className="ml-2 h-5 w-5 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />}
     </Button>

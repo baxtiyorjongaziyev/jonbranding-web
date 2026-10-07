@@ -496,6 +496,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             Ariza qoldirish
           </button>
           <a
+            data-oisha-phone=""
             href="tel:+998792000097"
             className="rounded-full border px-7 py-3.5 text-sm font-medium transition-colors hover:bg-white"
             style={{ borderColor: 'rgba(255,255,255,.28)', color: '#fff' }}

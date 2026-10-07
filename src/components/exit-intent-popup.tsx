@@ -80,7 +80,11 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[300] flex items-center justify-center p-4"
           style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
-          onClick={handleDismiss}
+          // Ichki kartadagi stopPropagation olib tashlandi: u Oisha vidjetining
+          // document darajasidagi `data-oisha-callback` click tinglovchisini to'sardi.
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleDismiss();
+          }}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -89,7 +93,6 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="relative max-w-md w-full rounded-[2rem] overflow-hidden atelier-theme"
             style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}
-            onClick={(e) => e.stopPropagation()}
           >
             {/* Glow */}
             <div
@@ -124,6 +127,7 @@ export default function ExitIntentPopup({ onOpen, lang = 'uz' }: ExitIntentPopup
               <div className="flex flex-col gap-3">
                 <button
                   className="btn btn-primary w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  data-oisha-callback=""
                   onClick={handleAccept}
                 >
                   {l.cta} <span className="ar">↗</span>

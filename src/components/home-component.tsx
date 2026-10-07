@@ -1,8 +1,8 @@
 'use client';
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { MotionConfig, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useMemo, useCallback } from 'react';
+import { MotionConfig } from 'framer-motion';
 
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
 import AtHero from '@/components/sections/at-hero';
@@ -61,7 +61,6 @@ const AtFinalCta = dynamic(
 );
 
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
-const AtModal = dynamic(() => import('@/components/sections/at-modal'), { ssr: false });
 const AtStickyCta = dynamic(() => import('@/components/sections/at-sticky-cta'), { ssr: false });
 const ExitIntentPopup = dynamic(() => import('@/components/exit-intent-popup'), { ssr: false });
 const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-analytics'), { ssr: false });
@@ -75,9 +74,13 @@ const HomeComponent: FC<{
   testimonials?: any[];
   portfolioProjects?: any[];
 }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const open = useCallback(() => setModalOpen(true), []);
-  const close = useCallback(() => setModalOpen(false), []);
+  // Ariza formasini Oisha callback vidjeti ochadi (tugmalardagi
+  // `data-oisha-callback`). Bu yerda faqat CTA analitikasi yuboriladi.
+  const open = useCallback(() => {
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage' } })
+    );
+  }, []);
 
   const heroImages = useMemo(
     () =>
@@ -90,42 +93,6 @@ const HomeComponent: FC<{
         })),
     [portfolioProjects]
   );
-
-  // ⚡ Bolt Optimization: Replacing native scroll listeners and DOM layout reads with Framer Motion's useScroll
-  // to avoid synchronous layout thrashing and main-thread blocking.
-  const { scrollYProgress } = useScroll();
-  const modalFiredRef = useRef(false);
-
-  const handleScroll = useCallback((latest: number) => {
-    if (modalFiredRef.current) return;
-    const KEY = 'at_modal_auto_popup_v1';
-    if (typeof window !== 'undefined' && sessionStorage.getItem(KEY)) {
-      modalFiredRef.current = true;
-      return;
-    }
-    if (latest >= 0.85) {
-      modalFiredRef.current = true;
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem(KEY, '1');
-      }
-      setModalOpen(true);
-    }
-  }, []);
-
-  useMotionValueEvent(scrollYProgress, 'change', handleScroll);
-
-  useEffect(() => {
-    // Initial state check on mount in case the user starts already scrolled down
-    handleScroll(scrollYProgress.get());
-  }, [handleScroll, scrollYProgress]);
-
-  // Global CTA hodisalarini (mobil nav, boshqa triggerlar) Atelier modaliga yo'naltirish
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const openHandler = () => setModalOpen(true);
-    window.addEventListener('openContactModal', openHandler);
-    return () => window.removeEventListener('openContactModal', openHandler);
-  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -160,7 +127,6 @@ const HomeComponent: FC<{
       <AtFinalCta onOpen={open} lang={lang} />
 
       {/* ── Utility / overlays ──── */}
-      <AtModal open={modalOpen} onClose={close} lang={lang} dictionary={dictionary.contactModal} />
       <AtStickyCta onOpen={open} lang={lang} />
       <ExitIntentPopup onOpen={open} lang={lang} />
       <ScrollDepthAnalytics />
