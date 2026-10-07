@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
@@ -10,13 +9,7 @@ declare global {
   }
 }
 
-const OISHA_WIDGET_SRC = 'https://oisha.jonbranding.uz/callback-widget.js';
-// Brendbuk asosiy rangi — Cobalt (`--primary`, `--at-accent`).
-const BRAND_COLOR = '#1B4DFF';
 const PHONE_SELECTOR = '[data-oisha-phone]';
-
-// Taqdimot sahifalari: suzuvchi tugma ekran ulashuvda slaydlar ustiga tushadi.
-const DECK_PATHS = new Set(['/credentials', '/pro-preview']);
 
 function applyPhones() {
   window.OishaCallback?.applyPhones?.();
@@ -27,18 +20,16 @@ function containsPhone(node: Node): boolean {
 }
 
 /**
- * Oisha "Sizga qo'ng'iroq qilamiz" vidjeti va call tracking.
+ * Oisha call tracking: SPA'da raqamlarni qayta almashtirish.
  *
- * - Skript `next/script` orqali bir marta yuklanadi va sahifa almashganda takrorlanmaydi.
- * - Sahifa almashganda va kechikib chiziladigan elementlar (mobil nav, menyu, popup)
- *   paydo bo'lganda `applyPhones()` raqamlarni qayta almashtiradi.
- * - Raqamlar va vidjet matnlari serverdan keladi — bu yerda qattiq yozilmaydi.
+ * Vidjet skriptining o'zi `[lang]/layout.tsx`da server HTML'iga yoziladi (bir marta,
+ * layout sahifa almashganda qayta chizilmaydi). Bu komponent faqat sahifa almashganda
+ * va kechikib chiziladigan elementlar (mobil nav, menyu, popup) paydo bo'lganda
+ * `applyPhones()` ni chaqiradi.
  */
-export default function OishaCallbackScript({ lang }: { lang: string }) {
+export default function OishaPhoneSync() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
-  const isDeck = DECK_PATHS.has(pathnameWithoutLocale);
 
   useEffect(() => {
     applyPhones();
@@ -62,20 +53,5 @@ export default function OishaCallbackScript({ lang }: { lang: string }) {
     };
   }, []);
 
-  if (isDeck) return null;
-
-  return (
-    <Script
-      id="oisha-callback-widget"
-      src={OISHA_WIDGET_SRC}
-      strategy="afterInteractive"
-      data-color={BRAND_COLOR}
-      // Vidjet faqat uz/ru tillarini qo'llaydi; en/zh sahifalarda ruscha forma.
-      data-lang={lang === 'uz' ? 'uz' : 'ru'}
-      data-call-tracking="1"
-      // O'ng pastki burchakda Oisha AI chat tugmasi turadi.
-      data-position="left"
-      onLoad={applyPhones}
-    />
-  );
+  return null;
 }

@@ -67,7 +67,7 @@ test('English hero CTA opens the Oisha callback widget, not the old modal', asyn
   );
   await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
 
-  const script = page.locator('script[src="https://oisha.jonbranding.uz/callback-widget.js"]');
+  const script = page.locator('script[src="https://oisha.jonbranding.uz/api/callback-widget.js"]');
   await expect(script).toHaveCount(1, { timeout: 15_000 });
   await expect(script).toHaveAttribute('data-call-tracking', '1');
   await expect(script).toHaveAttribute('data-lang', 'ru');

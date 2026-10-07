@@ -72,7 +72,7 @@ describe('Content-Security-Policy', () => {
 
   it('allows the Oisha callback widget and its call-tracking API', async () => {
     const csp = await readCsp();
-    expect(allows(csp.get('script-src'), 'https://oisha.jonbranding.uz/callback-widget.js')).toBe(true);
+    expect(allows(csp.get('script-src'), 'https://oisha.jonbranding.uz/api/callback-widget.js')).toBe(true);
     expect(allows(csp.get('connect-src'), 'https://oisha.jonbranding.uz/api/call-tracking/config')).toBe(true);
   });
 
