@@ -119,7 +119,7 @@ function HeroSection({ t }: { t: CarWrapPageTranslations }) {
           <Button
             type="button"
             size="lg"
-            onClick={openContactModal}
+            data-oisha-callback="" onClick={openContactModal}
             className="group h-14 rounded-full bg-blue-950 px-7 text-base font-black text-white shadow-[0_18px_46px_-22px_rgba(15,23,42,0.85)] hover:bg-brand-blue sm:h-16"
           >
             {t.hero.primaryCta}
@@ -176,7 +176,7 @@ function PricingSection({ pricing, primaryCta }: { pricing: CarWrapPageTranslati
               </ul>
               <Button
                 type="button"
-                onClick={openContactModal}
+                data-oisha-callback="" onClick={openContactModal}
                 className={index === 1 ? 'mt-8 h-12 rounded-full bg-white text-blue-950 hover:bg-brand-lime' : 'mt-8 h-12 rounded-full bg-blue-950 text-white hover:bg-brand-blue'}
               >
                 {primaryCta}
@@ -310,7 +310,7 @@ function FinalCta({ cta }: { cta: CarWrapPageTranslations['cta'] }) {
               <h2 className="max-w-4xl text-balance text-3xl font-black tracking-normal text-white sm:text-5xl">{cta.title}</h2>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-blue-100 sm:text-lg">{cta.description}</p>
             </div>
-            <Button type="button" size="lg" onClick={openContactModal} className="group h-14 rounded-full bg-white px-8 text-base font-black text-blue-950 hover:bg-brand-lime sm:h-16">
+            <Button type="button" size="lg" data-oisha-callback="" onClick={openContactModal} className="group h-14 rounded-full bg-white px-8 text-base font-black text-blue-950 hover:bg-brand-lime sm:h-16">
               {cta.button}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Button>

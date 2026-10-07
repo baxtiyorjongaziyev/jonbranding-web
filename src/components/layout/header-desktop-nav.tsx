@@ -68,6 +68,7 @@ const ExpandingButton = ({
   ariaLabel,
   useDarkHeaderText,
   onClick,
+  phoneTracking,
 }: {
   href: string;
   target?: string;
@@ -77,6 +78,8 @@ const ExpandingButton = ({
   ariaLabel: string;
   useDarkHeaderText?: boolean;
   onClick?: () => void;
+  /** Oisha call tracking: faqat href almashadi, ikonka/yozuv saqlanadi. */
+  phoneTracking?: boolean;
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -86,6 +89,8 @@ const ExpandingButton = ({
       target={target}
       rel={rel || (target === '_blank' ? 'noopener noreferrer' : undefined)}
       aria-label={ariaLabel}
+      data-oisha-phone={phoneTracking ? '' : undefined}
+      data-oisha-phone-text={phoneTracking ? '0' : undefined}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
@@ -181,6 +186,7 @@ export function DesktopNav({
           <div className="flex items-center gap-1 xl:gap-1.5 shrink-0">
             <ExpandingButton
               href="tel:+998792000097"
+              phoneTracking
               ariaLabel={dictionary.contact_by_phone}
               icon={<Phone className="h-4.5 w-4.5" />}
               text={dictionary.contact_by_phone}
@@ -200,6 +206,7 @@ export function DesktopNav({
           </div>
           <div className="rounded-full bg-transparent shrink-0">
             <Button
+              data-oisha-callback=""
               onClick={onContactClick}
               className={cn(
                 'h-11 rounded-full px-3 text-xs font-extrabold tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',

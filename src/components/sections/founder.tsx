@@ -193,6 +193,8 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-3 pt-1">
               <a
+                data-oisha-phone=""
+                data-oisha-phone-text="0"
                 href="tel:+998792000097"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
                 style={{ background: 'var(--at-accent)', color: '#fff' }}

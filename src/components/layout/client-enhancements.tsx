@@ -7,11 +7,6 @@ import { pageview } from '@/lib/analytics/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
 
-const ContactModal = dynamic(() => import('@/components/contact-modal'), {
-  loading: () => null,
-  ssr: false,
-});
-
 const OishaWidget = dynamic(() => import('@/components/oisha-widget'), {
   ssr: false,
 });
@@ -20,20 +15,11 @@ const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'
   ssr: false,
 });
 
-const ScrollDepthTrigger = dynamic(() => import('@/components/scroll-depth-trigger'), {
-  ssr: false,
-});
-
 const CookieConsentBanner = dynamic(() => import('@/components/cookie-consent-banner'), {
   ssr: false,
 });
 
 const ProactiveTrigger = dynamic(() => import('@/components/proactive-trigger'), {
-  ssr: false,
-});
-
-const StickyCTA = dynamic(() => import('@/components/ui/sticky-cta'), {
-  loading: () => null,
   ssr: false,
 });
 
@@ -91,90 +77,34 @@ export default function ClientEnhancements({
   leadMagnetDictionary,
   headerDictionary,
   lang: langProp,
-  stickyCtaLabel,
   tabNotificationMessage,
 }: ClientEnhancementsProps) {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [packageSummary, setPackageSummary] = useState('');
-  const [serviceKeys, setServiceKeys] = useState<string[]>([]);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [enhancementsReady, setEnhancementsReady] = useState(false);
   const [quickActionsReady, setQuickActionsReady] = useState(false);
 
   const pathname = usePathname();
   const lang = (langProp || pathname.split('/')[1] || 'uz') as any;
-  // Bosh sahifa o'z Atelier lead tizimini (AtStickyCta + AtModal) ishlatadi —
-  // global dublikatlarni (sticky CTA, scroll-popup, ko'k ContactModal) o'chiramiz
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
-  const isHome = pathnameWithoutLocale === '/';
-  // Taqdimot sahifasi: sticky CTA, chat widget, popup va mobil nav slaydlar
-  // ustiga tushib, ekran ulashuvda ko'rinib qoladi.
+  // Taqdimot sahifasi: chat widget, popup va mobil nav slaydlar ustiga
+  // tushib, ekran ulashuvda ko'rinib qoladi.
   const isDeck = pathnameWithoutLocale === '/credentials';
 
-  const handleOpenModal = useCallback(async (detail?: { section?: string; ctaText?: string; source?: string }) => {
-    if (typeof window === 'undefined') return;
-    const pathWithoutLocale = window.location.pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
-    if (pathWithoutLocale === '/') return;
-    // Taqdimot sahifasining o'z ariza formasi bor. Global ko'k modal slaydlar
-    // ustiga chiqsa, ekran ulashuvdagi uchrashuvni buzadi.
-    if (pathWithoutLocale === '/credentials') return;
-
-    let summary = '';
-    let finalPrice = 0;
-    let keys: string[] = [];
-
-    try {
-      const selectionsJSON = localStorage.getItem('selectedServices');
-      const discountType = (localStorage.getItem('discountOption') || 'none').replace(/"/g, '');
-      const promoCode = (localStorage.getItem('promoCode') || '').replace(/"/g, '');
-
-      if (selectionsJSON) {
-        const { calculatePackagePrice, generateSummary } = await import('@/lib/pricing');
-        const selectedServices = JSON.parse(selectionsJSON);
-        const selections = { selectedServices, discountType, promoCode };
-        const priceDetails = calculatePackagePrice(selections, lang);
-
-        if (priceDetails.base > 0) {
-          summary = generateSummary(selections, lang);
-          finalPrice = priceDetails.final;
-          // Stable, locale-independent calculator IDs (e.g. "logoPremium") —
-          // sent alongside the localized summary so affiliate payout
-          // matching doesn't depend on parsing translated display text.
-          keys = Object.entries(selectedServices)
-            .filter(([, v]) => v)
-            .map(([k]) => k);
-        }
-      }
-    } catch (e) {
-      console.error('Failed to parse package details from localStorage', e);
-    }
-
-    setPackageSummary(summary);
-    setServiceKeys(keys);
-    setTotalPrice(finalPrice);
+  // Ariza formasini endi Oisha callback vidjeti ochadi (`data-oisha-callback`
+  // atributi orqali). `openContactModal` hodisasi faqat CTA analitikasi uchun qoldi.
+  const trackCtaRequest = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
     trackCtaClick({
-      ctaText: detail?.ctaText || 'Bepul Brand Audit olish',
+      ctaText: detail?.ctaText || 'Bepul konsultatsiya',
       section: detail?.section || 'unknown',
       source: detail?.source || 'open_contact_modal',
     });
     trackEvent({
-      action: 'contact_modal_requested',
+      action: 'callback_widget_requested',
       category: 'Lead Form',
-      label: 'Brand Audit',
+      label: 'Oisha callback',
       lang,
-      packageSummary: summary,
-      totalPrice: finalPrice,
       section: detail?.section || 'unknown',
     });
-    setModalOpen(true);
   }, [lang]);
-
-  const handleCloseModal = useCallback(() => {
-    setModalOpen(false);
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('closeContactModal'));
-    }
-  }, []);
 
   const reportError = useCallback((error: ErrorEvent) => {
     const { message, filename, lineno, colno, error: errorObj } = error;
@@ -195,7 +125,7 @@ export default function ClientEnhancements({
   useEffect(() => {
     const listener = (event: Event) => {
       delete (window as any).__pendingContactModal;
-      void handleOpenModal((event as CustomEvent).detail || {});
+      trackCtaRequest((event as CustomEvent).detail || {});
     };
     window.addEventListener('openContactModal', listener);
     window.addEventListener('error', reportError);
@@ -203,14 +133,14 @@ export default function ClientEnhancements({
     const pendingContactModal = (window as any).__pendingContactModal;
     if (pendingContactModal) {
       delete (window as any).__pendingContactModal;
-      void handleOpenModal(pendingContactModal);
+      trackCtaRequest(pendingContactModal);
     }
 
     return () => {
       window.removeEventListener('openContactModal', listener);
       window.removeEventListener('error', reportError);
     };
-  }, [handleOpenModal, reportError]);
+  }, [trackCtaRequest, reportError]);
 
   useEffect(() => {
     const quickActions = window.setTimeout(() => setQuickActionsReady(true), 3500);
@@ -226,27 +156,8 @@ export default function ClientEnhancements({
       <Suspense fallback={null}>
         <AnalyticsTracker />
       </Suspense>
-      {enhancementsReady && !isHome && (
-        <ScrollDepthTrigger
-          onTrigger={handleOpenModal}
-          threshold={0.88}
-          sessionKey="contact_modal_auto_popup_v1"
-        />
-      )}
       <Toaster />
-      {isModalOpen && !isHome && !isDeck && (
-        <ContactModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          packageSummary={packageSummary}
-          serviceKeys={serviceKeys}
-          totalPrice={totalPrice}
-          onFormSubmitSuccess={handleCloseModal}
-          lang={lang}
-        />
-      )}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
-      {quickActionsReady && !isHome && !isDeck && <StickyCTA ariaLabel={stickyCtaLabel || 'Contact us'} />}
       {quickActionsReady && !isDeck && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
       {enhancementsReady && !isDeck && <CookieConsentBanner />}
       {enhancementsReady && !isDeck && <OishaWidget lang={lang} />}
