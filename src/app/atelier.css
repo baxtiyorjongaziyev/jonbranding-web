@@ -84,7 +84,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme[data-theme="dark"] body.grain::before {
  mix-blend-mode: screen; opacity: 0.25; }
 .atelier-theme .serif {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
+ font-family: 'Instrument Serif', var(--font-serif-cyrillic), 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
 .atelier-theme .mono {
  font-family: 'JetBrains Mono', monospace; font-weight: 400; }
 .atelier-theme .wrap {

@@ -70,15 +70,41 @@ async function doRefresh(): Promise<TokenData> {
     // Bootstrap: seed from env on first deploy
     seedRefreshToken = process.env.AMOCRM_REFRESH_TOKEN?.trim();
     if (!seedRefreshToken) {
+      const envToken = getEnvAccessToken();
+      if (envToken) {
+        const fallback: TokenData = {
+          access_token: envToken,
+          refresh_token: '',
+          expires_at: Date.now() + 5 * 365 * 86400 * 1000,
+        };
+        await writeTokensToFirestore(fallback).catch(() => {});
+        return fallback;
+      }
       throw new Error('No tokens in Firestore and AMOCRM_REFRESH_TOKEN env is not set');
     }
   }
 
   const refreshToken = current?.refresh_token ?? seedRefreshToken!;
-  const fresh = await exchangeRefreshToken(refreshToken);
-  await writeTokensToFirestore(fresh);
-  return fresh;
+  try {
+    const fresh = await exchangeRefreshToken(refreshToken);
+    await writeTokensToFirestore(fresh);
+    return fresh;
+  } catch (refreshErr) {
+    const envToken = getEnvAccessToken();
+    if (envToken) {
+      console.warn('OAuth refresh failed, falling back to static AMOCRM_ACCESS_TOKEN from env:', refreshErr);
+      const fallback: TokenData = {
+        access_token: envToken,
+        refresh_token: refreshToken || '',
+        expires_at: Date.now() + 5 * 365 * 86400 * 1000,
+      };
+      await writeTokensToFirestore(fallback).catch(() => {});
+      return fallback;
+    }
+    throw refreshErr;
+  }
 }
+
 
 function getEnvAccessToken(): string | null {
   const raw = process.env.AMOCRM_ACCESS_TOKEN?.trim();

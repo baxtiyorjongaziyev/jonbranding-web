@@ -104,6 +104,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
   // Faqat /avans tizim qorong'i rejimiga moslashadi.
   const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || (isAvansPage && isSystemDark);
+
   const useDarkHeaderText = !isDarkPage;
 
   const navItems = [

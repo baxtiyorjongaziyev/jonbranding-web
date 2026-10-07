@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
@@ -73,18 +73,18 @@ export function MobileMenu({
           side="right"
           className={cn(
             'w-full max-w-full border-0 p-0 sm:max-w-[420px]',
-            'bg-[#0a0d14] text-white'
+            'bg-[#FBF9F2] text-[#0E1015] border-l border-[#D8D2C2]'
           )}
         >
           {/* Header */}
-          <SheetHeader className="flex flex-row items-center justify-between border-b border-white/8 px-5 py-4">
-            <SheetTitle className="text-base font-bold tracking-wide text-white">
+          <SheetHeader className="flex flex-row items-center justify-between border-b border-[#D8D2C2] bg-[#F2EFE6] px-5 py-4">
+            <SheetTitle className="text-base font-bold tracking-wide text-[#0E1015]">
               <span className="font-serif italic text-primary">Jon</span>
-              <span className="ml-1 text-white/80">.Branding</span>
+              <span className="ml-1 text-[#0E1015]/90">.Branding</span>
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label="Close menu"
             >
               <X className="h-4.5 w-4.5" />
@@ -101,10 +101,10 @@ export function MobileMenu({
             >
               {/* Services section */}
               <motion.div variants={slideIn} className="mb-2">
-                <div className="mb-3 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
+                <div className="mb-3 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
                   {dictionary.services}
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1.5">
                   {services.map((service) => (
                     <Link
                       key={service.title}
@@ -113,19 +113,19 @@ export function MobileMenu({
                         onLinkClick(service.title);
                         onOpenChange(false);
                       }}
-                      className="group flex items-center justify-between rounded-2xl border border-white/6 bg-white/[0.04] px-4 py-3.5 transition-all duration-200 hover:border-white/12 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                      className="group flex items-center justify-between rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 py-3.5 transition-all duration-200 hover:border-[#0E1015]/30 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
-                      <span className="text-[15px] font-medium text-white/85 group-hover:text-white">
+                      <span className="text-[15px] font-medium text-[#0E1015]">
                         {service.title}
                       </span>
-                      <ChevronRight className="h-4 w-4 text-white/30 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white/60" />
+                      <ChevronRight className="h-4 w-4 text-[#8B8779] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0E1015]" />
                     </Link>
                   ))}
                 </div>
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-2 h-px bg-white/8" />
+              <motion.div variants={slideIn} className="my-2 h-px bg-[#D8D2C2]" />
 
               {/* Main nav items */}
               <motion.div variants={slideIn} className="flex flex-col gap-1">
@@ -137,7 +137,7 @@ export function MobileMenu({
                       onLinkClick(item.label);
                       onOpenChange(false);
                     }}
-                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-white/75 transition-all duration-200 hover:bg-white/5 hover:text-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-[#0E1015]/85 transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {item.label}
                   </Link>
@@ -145,11 +145,11 @@ export function MobileMenu({
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-3 h-px bg-white/8" />
+              <motion.div variants={slideIn} className="my-3 h-px bg-[#D8D2C2]" />
 
               {/* Contact links */}
               <motion.div variants={slideIn} className="flex flex-col gap-2">
-                <div className="mb-1 px-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white/40">
+                <div className="mb-1 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
                   Aloqa
                 </div>
                 <a
@@ -157,14 +157,14 @@ export function MobileMenu({
                   data-oisha-phone-text="0"
                   href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-500/15 text-green-400">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600/10 text-green-700">
                     <Phone className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-white">+998 79 200 00 97</div>
-                    <div className="text-[11px] text-white/40">Qo'ng'iroq qiling</div>
+                    <div className="text-[13px] font-bold text-[#0E1015]">+998 79 200 00 97</div>
+                    <div className="text-[11px] text-[#8B8779]">Qo'ng'iroq qiling</div>
                   </div>
                 </a>
                 <a
@@ -172,42 +172,60 @@ export function MobileMenu({
                   onClick={() => trackContactClick('telegram', 'mobile_menu')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500/15 text-sky-400">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
                     <Send className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-white">
+                    <div className="text-[13px] font-bold text-[#0E1015]">
                       {dictionary.contact_by_telegram}
                     </div>
-                    <div className="text-[11px] text-white/40">Telegram</div>
+                    <div className="text-[11px] text-[#8B8779]">Telegram</div>
                   </div>
                 </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onOpenChange(false);
+                    window.dispatchEvent(new CustomEvent('openPwaInstallPrompt'));
+                  }}
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
+                    <Download className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[13px] font-bold text-[#0E1015]">
+                      {lang === 'ru' ? 'Установить приложение' : lang === 'en' ? 'Install App' : "Ilovani o'rnatish"}
+                    </div>
+                    <div className="text-[11px] text-[#8B8779]">
+                      {lang === 'ru' ? 'Быстрый доступ на экран' : lang === 'en' ? 'Quick home screen access' : "Bosh ekranga joylash"}
+                    </div>
+                  </div>
+                </button>
               </motion.div>
             </motion.nav>
 
             {/* Sticky CTA at bottom */}
-            <div className="mt-auto p-4">
+            <div className="mt-auto p-4 border-t border-[#D8D2C2] bg-[#F2EFE6]">
               <button
                 data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);
                 }}
-                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-indigo-600 px-5 py-4 text-white shadow-[0_16px_48px_-16px_rgba(27,77,255,0.65)] transition-all duration-300 hover:shadow-[0_20px_56px_-14px_rgba(27,77,255,0.75)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-[#1B4DFF] px-5 py-4 text-white shadow-lg shadow-[#1B4DFF]/25 transition-all duration-300 hover:bg-[#153ecf] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B4DFF]"
               >
                 <div className="flex flex-col">
-                  <span className="text-[15px] font-black">{dictionary.free_consultation}</span>
-                  <span className="mt-0.5 text-[12px] font-medium text-white/70">
-                    Bepul · 30 daqiqa
+                  <span className="text-[15px] font-bold">{dictionary.free_consultation}</span>
+                  <span className="mt-0.5 text-[12px] font-medium text-white/80">
+                    Bepul Brand Audit · 30 daqiqa
                   </span>
                 </div>
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
-                {/* Shimmer effect */}
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </button>
             </div>
           </div>

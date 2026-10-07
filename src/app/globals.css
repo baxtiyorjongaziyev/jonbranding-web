@@ -629,7 +629,7 @@
 
 /* ── Atelier Design Utilities ── */
 .serif-highlight {
-  font-family: var(--font-serif), 'Instrument Serif', serif;
+  font-family: var(--font-serif), var(--font-serif-cyrillic), 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;

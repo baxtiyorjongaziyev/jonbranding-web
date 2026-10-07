@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { normalizePhone } from './lead-contact';
+import { normalizePhone } from './lead-contact.ts';
 
 const UZS_TO_USD_RATE = 1 / 12700;
 const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';

@@ -2489,5 +2489,12 @@
     "textDesc": "Written feedback from clients",
     "watch": "Watch video",
     "listen": "Listen"
+  },
+  "pwa": {
+    "title": "Jon.Branding App",
+    "description": "Install on home screen for quick and seamless access",
+    "install": "Install",
+    "ios_instruction": "Tap Share ⎋ and choose \"Add to Home Screen\" ⊕",
+    "dismiss": "Dismiss"
   }
 }

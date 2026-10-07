@@ -8,6 +8,7 @@ interface MainLayoutProps {
   children: ReactNode;
   leadMagnetDictionary?: any;
   headerDictionary?: any;
+  pwaDictionary?: any;
   lang?: string;
   stickyCtaLabel?: string;
   tabNotificationMessage?: string;
@@ -17,6 +18,7 @@ const MainLayout: FC<MainLayoutProps> = ({
   children,
   leadMagnetDictionary,
   headerDictionary,
+  pwaDictionary,
   lang,
   stickyCtaLabel,
   tabNotificationMessage,
@@ -29,6 +31,7 @@ const MainLayout: FC<MainLayoutProps> = ({
       <ClientEnhancementsLoader
         leadMagnetDictionary={leadMagnetDictionary}
         headerDictionary={headerDictionary}
+        pwaDictionary={pwaDictionary}
         lang={lang}
         stickyCtaLabel={stickyCtaLabel}
         tabNotificationMessage={tabNotificationMessage}
