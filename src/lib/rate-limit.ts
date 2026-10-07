@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { isIP } from 'node:net';
 import { getDb } from '@/lib/firebase-admin';
+import { getTursoClient, isTursoConfigured } from '@/lib/turso';
 import { logger } from '@/lib/logger';
 
 type LocalEntry = { count: number; resetAt: number };
@@ -44,6 +45,38 @@ export async function rateLimit(
   if (!key || maxRequests < 1 || windowMs < 1) return false;
 
   const now = Date.now();
+
+  // Primary: Turso distributed rate limit
+  if (isTursoConfigured() && process.env.NODE_ENV !== 'test') {
+    try {
+      const client = getTursoClient();
+      if (client) {
+        const bucketId = createHash('sha256').update(key).digest('hex');
+        const resetTime = now + windowMs;
+        const res = await client.execute({
+          sql: `INSERT INTO rate_limits (key, count, reset_at, updated_at)
+                VALUES (?, 1, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(key) DO UPDATE SET
+                  count = CASE WHEN ? >= reset_at THEN 1 ELSE count + 1 END,
+                  reset_at = CASE WHEN ? >= reset_at THEN ? ELSE reset_at END,
+                  updated_at = CURRENT_TIMESTAMP
+                RETURNING count, reset_at`,
+          args: [bucketId, resetTime, now, now, resetTime],
+        });
+
+        if (res.rows.length > 0) {
+          const count = Number(res.rows[0].count);
+          return count <= maxRequests;
+        }
+      }
+    } catch (tursoErr) {
+      if (!warnedAboutDistributedFallback) {
+        warnedAboutDistributedFallback = true;
+        logger.error('[rate-limit] Turso rate-limit error; using fallback.', tursoErr);
+      }
+    }
+  }
+
   const hasDistributedStore =
     process.env.NODE_ENV !== 'test' && Boolean(process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim());
 

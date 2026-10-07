@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getValidAccessToken } from '@/lib/amocrm-token';
 import { getDb } from '@/lib/firebase-admin';
+import { getTursoClient, isTursoConfigured } from '@/lib/turso';
 import { safeCompare } from '@/lib/security';
 
 export const dynamic = 'force-dynamic';
@@ -108,13 +109,30 @@ export async function GET(request: Request) {
   let accessToken = '';
   try {
     accessToken = await getValidAccessToken();
-    checks.token = { ok: true, source: 'firestore' };
+    const source = process.env.AMOCRM_ACCESS_TOKEN?.trim()
+      ? 'env'
+      : isTursoConfigured()
+        ? 'turso'
+        : 'firestore';
+    checks.token = { ok: true, source };
   } catch (error) {
     checks.token = {
       ok: false,
       reason: error instanceof Error ? error.message : String(error),
     };
     problems.push('token');
+  }
+
+  // Turso DB ping check
+  if (isTursoConfigured()) {
+    try {
+      const client = getTursoClient();
+      const dbRes = await client?.execute('SELECT 1 as ping');
+      checks.turso = { ok: Boolean(dbRes && dbRes.rows.length > 0) };
+    } catch (dbErr) {
+      checks.turso = { ok: false, error: String(dbErr) };
+      problems.push('turso');
+    }
   }
 
   // 2. Host resolution — configured vs token vs refresh flow.
