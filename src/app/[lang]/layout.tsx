@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono, Inter_Tight } from 'next/font/google';
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import '../atelier.css';
@@ -11,6 +11,7 @@ import { safeJsonStringify } from '@/lib/security';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
+import OishaCallbackScript from '@/components/layout/oisha-callback-script';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -278,6 +279,9 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
           </div>
         </noscript>
         </MainLayout>
+        <Suspense fallback={null}>
+          <OishaCallbackScript lang={lang} />
+        </Suspense>
       </body>
     </html>
   );

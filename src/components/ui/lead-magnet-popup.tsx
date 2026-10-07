@@ -305,7 +305,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                     <p className="text-[10px] text-gray-500 uppercase font-bold tracking-[0.2em]">
                       {dictionary.blocked.contactHint}
                     </p>
-                    <a href={`tel:${dictionary.blocked.phone}`} className="text-2xl font-black text-blue-500 hover:text-blue-400 transition-colors">
+                    <a data-oisha-phone="" href={`tel:${dictionary.blocked.phone}`} className="text-2xl font-black text-blue-500 hover:text-blue-400 transition-colors">
                       {dictionary.blocked.phone}
                     </a>
                   </div>

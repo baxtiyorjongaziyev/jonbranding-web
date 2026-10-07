@@ -229,7 +229,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
               {dictionary?.gallery_similar ||
                 "O'xshash biznesmisiz? Sizga ham shunday natija mumkin."}
             </span>
-            <button className="btn btn-primary" onClick={onOpen}>
+            <button className="btn btn-primary" data-oisha-callback="" onClick={onOpen}>
               {dictionary?.gallery_cta || 'Mening biznesim uchun tashxis'}{' '}
               <span className="ar">↗</span>
             </button>

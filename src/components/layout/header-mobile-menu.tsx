@@ -153,6 +153,8 @@ export function MobileMenu({
                   Aloqa
                 </div>
                 <a
+                  data-oisha-phone=""
+                  data-oisha-phone-text="0"
                   href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
                   className="flex h-14 items-center gap-4 rounded-2xl border border-white/6 bg-white/[0.04] px-4 transition-all duration-200 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d14]"
@@ -188,6 +190,7 @@ export function MobileMenu({
             {/* Sticky CTA at bottom */}
             <div className="mt-auto p-4">
               <button
+                data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);

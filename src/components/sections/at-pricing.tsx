@@ -139,6 +139,7 @@ export default function AtPricing({ onOpen, lang = 'uz' }: Props) {
           </ul>
 
           <button
+            data-oisha-callback=""
             onClick={onOpen}
             className="w-full font-semibold text-sm rounded-full py-4 transition-opacity duration-200 motion-reduce:transition-none hover:opacity-90"
             style={{ background: 'var(--at-accent)', color: '#fff', border: 'none' }}

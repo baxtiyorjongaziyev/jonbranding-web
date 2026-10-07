@@ -100,6 +100,8 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           >
             {/* Phone */}
             <a
+              data-oisha-phone=""
+              data-oisha-phone-text="0"
               href="tel:+998792000097"
               aria-label={labels.call}
               onClick={() => trackContactClick('phone', 'mobile_nav_bar')}
@@ -157,6 +159,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             {/* Primary CTA */}
             <button
               type="button"
+              data-oisha-callback=""
               onClick={openConsultation}
               className={cn(
                 'group relative flex flex-[1.9] flex-col items-center justify-center gap-1 overflow-hidden',

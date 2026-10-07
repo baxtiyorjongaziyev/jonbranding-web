@@ -49,6 +49,7 @@ const CtaBlock: FC<CtaBlockProps> = ({ title, description, buttonText, onCtaClic
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-white/65 sm:text-lg">{description}</p>
             </div>
             <Button
+              data-oisha-callback=""
               onClick={handleCtaClick}
               size="lg"
               className="group h-14 justify-between rounded-full bg-white py-2 pl-6 pr-2 text-base font-extrabold text-brand-ink shadow-[0_26px_80px_-34px_rgba(255,255,255,0.82)] transition-[background-color,box-shadow,transform] duration-300 hover:bg-brand-lime active:scale-[0.98] sm:h-16 sm:min-w-[290px] sm:text-lg"

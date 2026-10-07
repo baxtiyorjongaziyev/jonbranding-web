@@ -491,6 +491,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
 
           <div className="relative pt-2">
             <Button
+              data-oisha-callback=""
               onClick={triggerLeadModal}
               size="lg"
               className="h-16 px-12 bg-blue-600 hover:bg-blue-700 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-900/30 hover:scale-[1.03] transition-all duration-300"

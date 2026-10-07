@@ -207,6 +207,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 data-testid="hero-audit-trigger"
+                data-oisha-callback=""
                 onClick={onOpen}
                 className="inline-flex items-center justify-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-7 py-4 font-semibold text-sm hover:-translate-y-0.5 transition-transform"
               >

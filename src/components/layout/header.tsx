@@ -125,6 +125,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
       {dictionary.urgencyBadge && (
         <div
           className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#ef4444] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
+          data-oisha-callback=""
           onClick={handleContactClick}
           style={{ top: visible ? (scrolled ? -40 : 0) : -40 }}
         >
