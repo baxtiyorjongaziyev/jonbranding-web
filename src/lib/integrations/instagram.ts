@@ -1,4 +1,5 @@
 import { getDb } from './firebase';
+import { getTursoClient, isTursoConfigured } from '@/lib/turso';
 import { logger } from '@/lib/logger';
 
 interface InstagramTokenDoc {
@@ -7,35 +8,104 @@ interface InstagramTokenDoc {
   updatedAt: number; // timestamp in ms
 }
 
+async function readInstagramFromTurso(): Promise<InstagramTokenDoc | null> {
+  const client = getTursoClient();
+  if (!client) return null;
+  try {
+    const res = await client.execute({
+      sql: `SELECT access_token, expires_at FROM oauth_tokens WHERE service_name = 'instagram' LIMIT 1`,
+      args: [],
+    });
+    if (res.rows.length === 0) return null;
+    const row = res.rows[0];
+    const token = String(row.access_token || '').trim();
+    if (!token) return null;
+    const rawExp = row.expires_at;
+    const exp = typeof rawExp === 'number' ? rawExp : new Date(String(rawExp || '')).getTime();
+    return {
+      accessToken: token,
+      expiresAt: Number.isNaN(exp) ? Date.now() + 60 * 86400 * 1000 : exp,
+      updatedAt: Date.now(),
+    };
+  } catch (err) {
+    logger.error('[Turso] Error reading Instagram token:', err);
+    return null;
+  }
+}
+
+async function saveInstagramToTurso(data: InstagramTokenDoc): Promise<void> {
+  const client = getTursoClient();
+  if (!client) return;
+  try {
+    await client.execute({
+      sql: `INSERT INTO oauth_tokens (service_name, access_token, refresh_token, expires_at, updated_at, extra_data)
+            VALUES ('instagram', ?, '', ?, ?, ?)
+            ON CONFLICT(service_name) DO UPDATE SET
+              access_token = excluded.access_token,
+              expires_at = excluded.expires_at,
+              updated_at = excluded.updated_at`,
+      args: [
+        data.accessToken,
+        new Date(data.expiresAt).toISOString(),
+        new Date().toISOString(),
+        JSON.stringify({ source: 'instagram_oauth' }),
+      ],
+    });
+  } catch (err) {
+    logger.error('[Turso] Error saving Instagram token:', err);
+  }
+}
+
 /**
- * Firebase'dan Instagram OAuth tokenini oladi va kerak bo'lsa uni avtomatik yangilaydi (Refresh).
+ * Turso/Firebase'dan Instagram OAuth tokenini oladi va kerak bo'lsa uni avtomatik yangilaydi (Refresh).
  */
 export async function getInstagramToken(): Promise<string | null> {
   try {
-    const db = getDb();
-    const docRef = db.collection('settings').doc('instagram');
-    const docSnap = await docRef.get();
+    let data: InstagramTokenDoc | null = null;
 
-    if (!docSnap.exists) {
-      logger.info('[Instagram API] No token stored in Firestore');
+    if (isTursoConfigured()) {
+      data = await readInstagramFromTurso();
+    }
+
+    if (!data && process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim()) {
+      const db = getDb();
+      const docSnap = await db.collection('settings').doc('instagram').get();
+      if (docSnap.exists) {
+        data = docSnap.data() as InstagramTokenDoc;
+      }
+    }
+
+    if (!data) {
+      logger.info('[Instagram API] No token stored in Turso or Firestore');
       return null;
     }
 
-    const data = docSnap.data() as InstagramTokenDoc;
     const now = Date.now();
-
-    // Agar token muddati tugashiga 15 kundan kam qolgan bo'lsa, avtomatik yangilaymiz (15 kun = 15 * 24 * 60 * 60 * 1000 ms)
     const fifteenDaysInMs = 15 * 24 * 60 * 60 * 1000;
+
     if (data.expiresAt - now < fifteenDaysInMs) {
       logger.info('[Instagram API] Token expires soon, attempting auto-refresh');
       const newTokenData = await refreshLongLivedToken(data.accessToken);
       if (newTokenData) {
         const expiresAtVal = Date.now() + (newTokenData.expiresInSeconds * 1000);
-        await docRef.set({
+        const updated: InstagramTokenDoc = {
           accessToken: newTokenData.accessToken,
           expiresAt: expiresAtVal,
-          updatedAt: Date.now()
-        }, { merge: true });
+          updatedAt: Date.now(),
+        };
+
+        if (isTursoConfigured()) {
+          await saveInstagramToTurso(updated);
+        }
+
+        if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim()) {
+          try {
+            await getDb().collection('settings').doc('instagram').set(updated, { merge: true });
+          } catch {
+            // fail soft
+          }
+        }
+
         return newTokenData.accessToken;
       }
     }
@@ -59,13 +129,52 @@ async function refreshLongLivedToken(accessToken: string): Promise<{ accessToken
       logger.error('[Instagram API] Refresh token error:', errText);
       return null;
     }
-    const resData = await response.json();
+    const data = await response.json();
     return {
-      accessToken: resData.access_token,
-      expiresInSeconds: resData.expires_in
+      accessToken: data.access_token,
+      expiresInSeconds: data.expires_in,
     };
   } catch (error) {
     logger.error('[Instagram API] Network error during token refresh:', error);
+    return null;
+  }
+}
+
+/**
+ * Berilgan kalit so'z (keyword) bo'yicha Instagram postini qidiradi va uning permalink'ini qaytaradi.
+ */
+export async function getInstagramPostByKeyword(keyword: string): Promise<{ permalink: string; id: string } | null> {
+  const token = await getInstagramToken();
+  if (!token) {
+    logger.info('[Instagram API] Cannot search Instagram posts, no access token available');
+    return null;
+  }
+
+  try {
+    const fields = 'id,caption,permalink,media_type,timestamp';
+    const url = `https://graph.instagram.com/me/media?fields=${fields}&access_token=${token}&limit=25`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      logger.error('[Instagram API] Failed to fetch media from Graph API:', await response.text());
+      return null;
+    }
+
+    const result = await response.json();
+    const posts: Array<{ id: string; caption?: string; permalink: string }> = result.data || [];
+
+    const lowerKeyword = keyword.toLowerCase();
+    for (const post of posts) {
+      if (post.caption && post.caption.toLowerCase().includes(lowerKeyword)) {
+        logger.info(`[Instagram API] Found matching Instagram post for: ${keyword}`);
+        return { permalink: post.permalink, id: post.id };
+      }
+    }
+
+    logger.info(`[Instagram API] No matching Instagram post found for: ${keyword}`);
+    return null;
+  } catch (error) {
+    logger.error('[Instagram API] Error fetching Instagram posts:', error);
     return null;
   }
 }

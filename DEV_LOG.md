@@ -1,5 +1,22 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-07 | Firestore'dan Turso libSQL bazasiga to'liq o'tildi (Yagona operatsion baza)
+- **Tashabbus:** Firestore o'rniga Oisha-OS bilan yagona Turso (libSQL) bulutli bazasiga to'liq migratsiya qilindi. GCP Service Account JSON, murakkab ruxsatlar va billing muammolariga chek qo'yildi.
+- **Bajarilgan ishlar:**
+  1. `@libsql/client` kutubxonasi o'rnatildi va `src/lib/turso.ts` toza mijoz/fasad moduli yaratildi.
+  2. Turso'da `oauth_tokens`, `failed_leads` (indekslar bilan) va `rate_limits` jadvallari yaratildi hamda tekshirildi.
+  3. `src/lib/integrations/amocrm.ts`: Tokenlarni saqlash va o'qishda birinchi navbatda Turso `oauth_tokens` jadvali ulandi. Firestore zaxira sifatida fail-soft rejimda qoldirildi.
+  4. `src/lib/services/lead-queue-service.ts`: Xatolikka uchragan arizalar endi avtomatik ravishda Turso `failed_leads` jadvaliga yoziladi.
+  5. `src/app/api/admin/retry-amocrm-leads/route.ts`: Navbatdagi arizalarni qayta yuborish Turso `failed_leads` jadvali bilan integratsiya qilindi.
+  6. `src/app/api/amocrm-health/route.ts`: Token manbasi (turso / firestore / env) va Turso bazasi jonli `SELECT 1` diagnostikasi qo'shildi.
+  7. `src/lib/rate-limit.ts`: So'rovlar cheklovi (rate limit) Turso `rate_limits` jadvali orqali taqsimlangan atomik `UPSERT` ga o'tkazildi.
+  8. `src/lib/integrations/instagram.ts` va OAuth callback: Instagram tokenlari ham Turso `oauth_tokens` orqali sinxronlashtirildi.
+  9. **Ma'lumotlar migratsiyasi:** Firestore'dagi 16 ta arxiv arizalar va uzoq muddatli `website_tokens` Turso'ga to'liq ko'chirildi.
+- **Tekshiruv:**
+  - `npm run typecheck` — 0 xato, to'liq toza.
+  - `scripts/harness/verify.mjs` — barcha 4 bosqich (i18n pariteti, kod standartlari, typecheck, 55 test fayli, 379 ta test) 100% yashil o'tdi.
+
+
 ## 2026-10-07 | amoCRM 5 yillik uzoq muddatli token yaratildi, Firestore yangilandi va 16 ta lid to'liq tiklandi
 - **Muammo:** amoCRM OAuth refresh token muddati o'tib ketgani sababli 401 xatosi yuzaga kelgan va oxirgi haftalarda saytdan yuborilgan 16 ta lid `amocrm_failed_leads` Firestore navbatiga tushib to'xtab qolgan edi.
 - **Yechim:**
