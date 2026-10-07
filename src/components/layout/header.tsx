@@ -100,9 +100,10 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
 
-  const isHomepage = pathnameWithoutLocale === '/';
   const isAvansPage = pathnameWithoutLocale === '/avans';
-  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || ((isHomepage || isAvansPage) && isSystemDark);
+  // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
+  // Faqat /avans tizim qorong'i rejimiga moslashadi.
+  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || (isAvansPage && isSystemDark);
   const useDarkHeaderText = !isDarkPage;
 
   const navItems = [

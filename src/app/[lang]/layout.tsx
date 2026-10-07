@@ -11,7 +11,7 @@ import { safeJsonStringify } from '@/lib/security';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
-import OishaCallbackScript from '@/components/layout/oisha-callback-script';
+import OishaPhoneSync from '@/components/layout/oisha-callback-script';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -279,8 +279,20 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
           </div>
         </noscript>
         </MainLayout>
+        {/* Oisha "Sizga qo'ng'iroq qilamiz" vidjeti + call tracking. Server HTML'iga
+            bir marta yoziladi (data-* atributlari bilan); layout sahifa almashganda
+            qayta chizilmaydi. Rang — brend Cobalt (#1B4DFF); vidjet faqat uz/ru tillarini
+            qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
+        <script
+          src="https://oisha.jonbranding.uz/api/callback-widget.js"
+          data-color="#1B4DFF"
+          data-lang={lang === 'uz' ? 'uz' : 'ru'}
+          data-call-tracking="1"
+          data-position="left"
+          defer
+        />
         <Suspense fallback={null}>
-          <OishaCallbackScript lang={lang} />
+          <OishaPhoneSync />
         </Suspense>
       </body>
     </html>
