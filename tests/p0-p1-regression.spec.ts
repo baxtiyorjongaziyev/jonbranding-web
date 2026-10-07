@@ -55,23 +55,31 @@ test('language routes expose one main landmark and one skip target', async ({ pa
   }
 });
 
-test('English modal traps focus, closes on Escape, and restores focus', async ({ page }) => {
+test('English hero CTA opens the Oisha callback widget, not the old modal', async ({ page }) => {
+  // Haqiqiy vidjet tashqi serverdan keladi; bu yerda faqat saytdagi bog'lanish tekshiriladi.
+  await page.route('https://oisha.jonbranding.uz/**', (route) =>
+    route.fulfill({
+      contentType: 'application/javascript',
+      body: `document.addEventListener('click', (e) => {
+        if (e.target.closest && e.target.closest('[data-oisha-callback]')) window.__oishaOpens = (window.__oishaOpens || 0) + 1;
+      });`,
+    })
+  );
   await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
+
+  const script = page.locator('script[src="https://oisha.jonbranding.uz/api/callback-widget.js"]');
+  await expect(script).toHaveCount(1, { timeout: 15_000 });
+  await expect(script).toHaveAttribute('data-call-tracking', '1');
+  await expect(script).toHaveAttribute('data-lang', 'ru');
+
   const trigger = page.getByTestId('hero-audit-trigger');
   await expect(trigger).toBeVisible({ timeout: 15_000 });
+  await expect(trigger).toHaveAttribute('data-oisha-callback', '');
   await expect.poll(() => trigger.evaluate((element) => Object.keys(element).some((key) => key.startsWith('__reactProps')))).toBe(true);
-  await trigger.focus();
-  await page.keyboard.press('Enter');
+  await trigger.click();
 
-  const dialog = page.getByRole('dialog', { name: /Free Brand Audit/i });
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('button', { name: /Book free audit/i })).toBeVisible();
-  await expect(dialog.getByText('Bepul Brand Audit olish')).toHaveCount(0);
-  await expect(page.getByLabel(/Phone number/i)).toBeFocused();
-
-  await page.keyboard.press('Escape');
-  await expect(dialog).toBeHidden();
-  await expect(trigger).toBeFocused();
+  await expect.poll(() => page.evaluate(() => (window as any).__oishaOpens || 0)).toBe(1);
+  await expect(page.getByRole('dialog', { name: /Free Brand Audit/i })).toHaveCount(0);
 });
 
 test('Vimeo is click-to-load and the text fallback remains available', async ({ page }) => {

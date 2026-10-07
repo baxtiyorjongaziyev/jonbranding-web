@@ -100,9 +100,11 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
 
-  const isHomepage = pathnameWithoutLocale === '/';
   const isAvansPage = pathnameWithoutLocale === '/avans';
-  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || ((isHomepage || isAvansPage) && isSystemDark);
+  // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
+  // Faqat /avans tizim qorong'i rejimiga moslashadi.
+  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || (isAvansPage && isSystemDark);
+
   const useDarkHeaderText = !isDarkPage;
 
   const navItems = [
@@ -125,6 +127,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
       {dictionary.urgencyBadge && (
         <div
           className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#ef4444] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
+          data-oisha-callback=""
           onClick={handleContactClick}
           style={{ top: visible ? (scrolled ? -40 : 0) : -40 }}
         >

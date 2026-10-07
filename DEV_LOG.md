@@ -1,15 +1,40 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-07 | amoCRM 5 yillik uzoq muddatli token yaratildi, Firestore yangilandi va 16 ta lid to'liq tiklandi
+- **Muammo:** amoCRM OAuth refresh token muddati o'tib ketgani sababli 401 xatosi yuzaga kelgan va oxirgi haftalarda saytdan yuborilgan 16 ta lid `amocrm_failed_leads` Firestore navbatiga tushib to'xtab qolgan edi.
+- **Yechim:**
+  1. AmoCRM brauzer orqali `JouBranding Website Integration` integratsiyasidan 5 yillik (1823 kun, 2031-yil 4-oktyabrgacha amal qiluvchi) uzoq muddatli token generatsiya qilindi.
+  2. Firestore `amocrm/website_tokens` hujjatiga ushbu token `expires_at = 1948838400000` (2031-yil) bilan yozildi.
+  3. `amocrm_failed_leads` dagi barcha 16 ta lid AmoCRM complex API orqali bitim va kontakt sifatida muvaffaqiyatli ro'yxatdan o'tkazildi (16/16 success, 0 failed). Hujjatlar statusi `sent` ga o'tkazildi.
+  4. `src/lib/integrations/amocrm.ts`: Refresh token yiqilganda xavfsiz static token fallback va avtomatik Firestore sinxronizatsiyasi qo'shildi.
+  5. `src/app/api/amocrm-refresh/route.ts` va `.github/workflows/amocrm-keepalive.yml`: Tokenni AmoCRM jonli account API orqali tekshirish va nosozlikda workflow qizil bo'lib aniq xato berishi ta'minlandi.
+
+## 2026-10-07 | Dizayn auditi va sifat tahlili bo'yicha kamchiliklar to'liq tuzatildi
+- **Muammolar va Yechimlar:**
+  1. **Agressiv avto-popup olib tashlandi (`src/components/home-component.tsx`):**
+     - 85% skrolldagi majburiy `setModalOpen(true)` invaziv avto-popupi butunlay olib tashlandi. Endi modal faqat mijoz o'zi CTA bosganda ochiladi.
+  2. **Tizim Dark Mode'da ko'rinmas Header tuzatildi (`src/components/layout/header.tsx`):**
+     - `isSystemDark` sababli och bej fonda oq matn (`text-white`) chiqish xatosi tuzatildi. Faqat haqiqiy qorong'i sahifalarda dark navbar faollashadi.
+  3. **Mobil Menyudagi "Vizual Shok" bartaraf etildi (`src/components/layout/header-mobile-menu.tsx`):**
+     - Qora `#0a0d14` mobil menyu butun sayt bilan uyg'un **Atelier Warm Paper** (`#FBF9F2`, `#F2EFE6`, `#0E1015`, `#D8D2C2`) estetikasiga keltirildi.
+  4. **Kirillitsa uchun serif shrifti tuzatildi (`layout.tsx`, `tailwind.config.ts`, `globals.css`, `atelier.css`):**
+     - `Instrument_Serif` faqat lotincha bo'lgani sababli rus tilida kirillcha kursiv so'zlar tizim shriftiga sakrab ketardi. `Cormorant_Garamond` qo'shildi va fallback sifatida ulandi.
+  5. **Eskirgan soxta taqchillik va bepul auditdagi mantiqsizlik tuzatildi (`at-sticky-cta.tsx`, `at-pricing.tsx`):**
+     - `at-sticky-cta.tsx` dagi eskirgan "Iyul oyida 4 joy qoldi" o'chirilib, 4 tilda professional "Har oy sifat uchun cheklangan qabul" matniga almashtirildi.
+     - `at-pricing.tsx` dagi bepul audit uchun ko'rsatilgan kulgili "foydali bo'lmasa pul qaytadi" o'chirilib, 100% amaliy tahlil va to'liq maxfiylik kafolatiga almashtirildi.
+- **Tekshiruv:** `npm run verify:fast` — barcha 54 test fayli va 376 ta test 100% muvaffaqiyatli (yashil) o'tdi.
+
 ## 2026-10-06 | CI tezlashtirildi
 
 - `test.yml`: typecheck/lint/test va build parallel job'larga ajratildi; majburiy `Typecheck, lint, test, build` endi ikkalasini yig'uvchi job (nomi branch protection uchun saqlangan).
 - `.next/cache` `actions/cache` bilan saqlanadi.
 - Playwright E2E faqat `main`'ga push'da ishlaydi, PR'larda emas.
 - Oldin PR tekshiruvi ~4 daqiqa (build 127s), maqsad ~2.5 daqiqa.
+
 ## 2026-10-06 | Ichki /jamoa sahifasi (moliya formasi)
 
 **Qilingan ish:**
-- `public/jamoa.html` — egasi bergan mustaqil sahifa, o'zgarishsiz. `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
+- `public/jamoa.html` — egasi bergan mustaqil sahifa (keyin parol ekrani olib tashlandi). `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
 - Menyu, footer, sitemap'ga qo'shilmagan; `robots.ts` da `Disallow: /jamoa`. CSP `frame-src` ga `https://airtable.com`.
 - Parol ekrani olib tashlandi (egasi qarori). Himoya — Airtable formasining "Only users with base access" sozlamasi.
 
@@ -28,6 +53,7 @@
 - `/patent-narxi-hisoblagich` o'chirildi va `/xizmatlar/patent-kalkulyatori` ga 308 bilan yo'naltirildi (`next.config.js`, ru/en/zh ham). Ikkalasi bir xil gated kalkulyator edi — dublikat.
 - Uning SEO sarlavha va description'i `xizmatlar/patent-kalkulyatori/layout.tsx` ga ko'chirildi. Sitemap'dan olib tashlandi.
 - Menejer versiyasi (`/patent-menejer`, `patent.jonbranding.uz`) o'zgarishsiz.
+
 
 ## 2026-10-05 | amoCRM uzoq muddatli token (AMOCRM_ACCESS_TOKEN) to'g'ridan-to'g'ri integratsiya qilindi
 - **Muammo:** `src/lib/integrations/amocrm.ts` da `getValidAccessToken()` doim Firestore'dan eski tokenni o'qib, muddati o'tgan `refresh_token` orqali yangilashga urinardi. Oqibatda amoCRM 'Token has been revoked' qaytarib, arizalar navbatga tushib qolayotgan edi.
@@ -1806,3 +1832,41 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 ## 2026-10-05 — Antigravity IDE verification follow-up
 
 Native agent discovered all three project skills and accurately reported project rules. Oisha venv selection and Ruff native formatter verified in UI. Local VSIX installs succeeded. Web npm package manager corrected; native Prettier smoke check remains pending because the active window needs extension reload while another agent is working. GitHub login reported complete by owner; account session not independently verified. Separate Claude login remains visible. No commit, push, merge or deploy. See Antigravity setup report for evidence boundaries.
+
+## 2026-10-05 — Umumiy AI agent skills qoidasi AGENTS.md ga qo‘shildi
+
+- `.agents/skills/` barcha AI agentlar uchun umumiy skill manbasi sifatida belgilandi.
+- Anti-AI-slop workflow uchun `impeccable`, `design-taste-frontend`, `copy-editing` va `web-quality-audit` skill’lari ko‘rsatildi.
+- Kod o‘zgarishlaridan keyin `npm run verify:fast` va `npm run verify` harness tekshiruvlari belgilandi.
+
+## 2026-10-05 | SEO metadata qo'shildi
+- `avans` va `credentials` sahifalariga `generateMetadata` funksiyasi qo'shildi, `alternates` (canonical + hreflang) dinamik tarzda yaratiladi.
+- `avans/layout.tsx` da ham `generateMetadata` qo'shildi, `use client` bilan muammo hal qilindi.
+- SEO ma'lumotlari sahifa yo'li (`/avans`, `/credentials`) ga bog'liq, shuning uchun URL yoki yo'l o'zgarmasa SEO qayta ishlash shart emas.
+- Dizayn (CSS/layout) o'zgarsa, canonical URL va alternates tekshirilishi lozim; `npm run verify` (canonical.test.ts) bajarilishi tavsiya etiladi.
+- Kelgusida har bir sahifada `generateMetadata` ning mavjudligini va `getPageAlternates` dan foydalanganligini tekshirish uchun `DEV_LOG` ga qo'shildi.
+
+## 2026-10-05 | Codex integration recovery (in progress)
+- Browser metadata only: AMOCRM_ACCESS_TOKEN and Telegram chat/topic variables cover Production and Preview. META search showed META_API_ACCESS_TOKEN in Production; META_CAPI_ACCESS_TOKEN was not listed. No values decrypted or shown.
+- Owner authorized continuation. Production redeploy dpl_2TPJQYg9CYVWwcQVno4wcyWsZrQg started from existing deployed commit 3ce8eaa; local dirty code was not deployed or modified.
+- Meta Settings returned a UI error. Credential creation and entry require owner handoff. No integration success claimed; last-hour Route search had no submit-form match.
+- Obsidian brain_log failed: Session terminated. Application tests omitted because no application code changed.
+
+- Recovery follow-up: Production redeploy dpl_2TPJQYg9CYVWwcQVno4wcyWsZrQg reached READY in browser (4m 3s build), assigned www.jonbranding.uz. Telegram Yangi lead topic contains website test messages at 13:40 and 13:55, followed by AmoCRM Unauthorized notices; these predate this redeploy. No post-deploy form request or server Lead success confirmed.
+
+## 2026-10-05 | Codex API/MCP access
+- Existing Oisha MCP check_amo_auth returned AUTH OK: Jon Branding Agency (account 32681154). get_instagram_profile returned ok=true for baxtiyorjongaziyev. These are separate from the website deployment credentials and do not prove form delivery or CAPI access.
+- Existing Vercel app connector required reauthentication. Added official global Codex MCP vercel at https://mcp.vercel.com using codex mcp add. Existing team OAuth authorization was renewed; CLI returned Successfully logged in. codex mcp get vercel confirms enabled streamable_http config. Runtime project tool call via newly added MCP still pending tool reload/new session.
+- No token or env value printed, decrypted, copied, or committed. Application source unchanged. Verification used real read-only API calls and OAuth CLI result; app test suites are not applicable.
+
+
+## 2026-10-07 | PWA (Progressive Web App) to'liq integratsiyasi va mobil ilova o'rnatish tajribasi joriy etildi
+- **Muammo:** Saytda `manifest.json` va ikonalar mavjud bo'lsa-da, Next.js metadata'sida `manifest` ulanmagan, Service Worker yo'q edi va foydalanuvchilar saytni telefoniga ilova qilib o'rnatish (PWA install) imkoniyatiga ega emas edi.
+- **Yechim:**
+  1. `public/manifest.json`: W3C PWA talablariga mos ravishda `id: "/"`, `scope: "/"`, va `orientation: "portrait-primary"` qo'shildi.
+  2. `src/app/[lang]/layout.tsx`: `generateMetadata` da `manifest: '/manifest.json'` va `appleWebApp` to'liq ulandi.
+  3. `public/sw.js`: Ishonchli, xavfsiz va yengil Service Worker yaratildi — HTML sahifalar uchun Network-First (yangiliklar doimiy yangi turishi uchun), statik fayllar (rasmlar, ikonlar, shriftlar) uchun Stale-While-Revalidate kesh strategiyasi va oflayn himoya.
+  4. `src/components/pwa/pwa-installer.tsx`: Premium Atelier uslubidagi PWA o'rnatish komponenti yaratildi (Service Worker ro'yxatdan o'tkazish, Android/Chrome `beforeinstallprompt` tutish, iOS Safari ko'rsatmasi, avtomatik va qo'lda ochish, tahliliy hodisalar `trackEvent`).
+  5. `src/components/layout/header-mobile-menu.tsx`: Mobil gamburger menyuga "Ilovani o'rnatish" tugmasi qo'shildi.
+  6. i18n: `uz.json`, `ru.json`, `en.json`, `zh.json` fayllariga `pwa` kalitlari Uzbek-first tamoyilida to'liq qo'shildi.
+- **Tekshiruv:** `npm run verify:fast` (barcha 54 test to'plami, 376 ta test) va `npm run typecheck` 100% xatosiz muvaffaqiyatli o'tdi.

@@ -9,31 +9,31 @@ type Stage = 'belgilar' | 'tashxis' | 'narxlar' | 'jarayon' | 'savol';
 
 const t: Record<Lang, Record<Stage, { num: string; text: string; cta: string }>> = {
   uz: {
-    belgilar: { num: '§ 01', text: "Belgilarni ko'ryapsizmi?", cta: 'Tashxis →' },
-    tashxis:  { num: '12/12', text: '12 mezon · 14 kun · 4.8M dan', cta: 'Boshlash →' },
-    narxlar:  { num: '4',   text: 'Iyul oyida 4 joy qoldi', cta: 'Buyurtma →' },
-    jarayon:  { num: '14',    text: '14 kun · 100% kafolat', cta: 'Tashxis →' },
-    savol:    { num: '24h',   text: 'Savol bormi? 24h ichida javob', cta: 'Yozish →' },
+    belgilar: { num: '§ 01', text: "Brendingiz yo'qotyaptimi?", cta: 'Audit →' },
+    tashxis:  { num: '12/12', text: '12 mezon · Bepul brand audit', cta: 'Boshlash →' },
+    narxlar:  { num: '§ 05', text: 'Har oy sifat uchun cheklangan qabul', cta: 'Audit olish →' },
+    jarayon:  { num: '100%', text: '14 kun · Kafolatlangan natija', cta: 'Boshlash →' },
+    savol:    { num: '24h',   text: 'Savol bormi? 24 soatda javob', cta: "Bog'lanish →" },
   },
   ru: {
-    belgilar: { num: '§ 01', text: 'Видите симптомы?', cta: 'Диагностика →' },
-    tashxis:  { num: '12/12', text: '12 критериев · 14 дней · от 4.8M', cta: 'Начать →' },
-    narxlar:  { num: '4/6',   text: 'В июле осталось 4 места', cta: 'Заказать →' },
-    jarayon:  { num: '14',    text: '14 дней · 100% гарантия', cta: 'Диагностика →' },
-    savol:    { num: '24h',   text: 'Вопросы? Ответим за 24ч', cta: 'Написать →' },
+    belgilar: { num: '§ 01', text: 'Сколько теряет ваш бренд?', cta: 'Аудит →' },
+    tashxis:  { num: '12/12', text: '12 критериев · Бесплатный аудит', cta: 'Начать →' },
+    narxlar:  { num: '§ 05', text: 'Ограниченный прием для гарантии качества', cta: 'Получить аудит →' },
+    jarayon:  { num: '100%', text: '14 дней · Гарантия результата', cta: 'Начать →' },
+    savol:    { num: '24h',   text: 'Есть вопросы? Ответим за 24ч', cta: 'Связаться →' },
   },
   en: {
-    belgilar: { num: '§ 01', text: 'Seeing the symptoms?', cta: 'Diagnose →' },
-    tashxis:  { num: '12/12', text: '12 criteria · 14 days · from 4.8M', cta: 'Start →' },
-    narxlar:  { num: '4/6',   text: '4 spots left in July', cta: 'Order →' },
-    jarayon:  { num: '14',    text: '14 days · 100% guarantee', cta: 'Diagnose →' },
-    savol:    { num: '24h',   text: 'Questions? Reply in 24h', cta: 'Write →' },
+    belgilar: { num: '§ 01', text: 'How much is your brand losing?', cta: 'Audit →' },
+    tashxis:  { num: '12/12', text: '12 criteria · Free brand audit', cta: 'Start →' },
+    narxlar:  { num: '§ 05', text: 'Limited monthly intake for quality control', cta: 'Get Audit →' },
+    jarayon:  { num: '100%', text: '14 days · Guaranteed quality', cta: 'Start →' },
+    savol:    { num: '24h',   text: 'Questions? Reply in 24h', cta: 'Contact →' },
   },
   zh: {
-    belgilar: { num: '§ 01', text: '看到症状了吗？', cta: '诊断 →' },
-    tashxis:  { num: '12/12', text: '12项标准 · 14天 · 从4.8M起', cta: '开始 →' },
-    narxlar:  { num: '4/6',   text: '7月剩余4个名额', cta: '预订 →' },
-    jarayon:  { num: '14',    text: '14天 · 100%保证', cta: '诊断 →' },
+    belgilar: { num: '§ 01', text: '您的品牌在损失多少？', cta: '诊断 →' },
+    tashxis:  { num: '12/12', text: '12项标准 · 免费品牌诊断', cta: '开始 →' },
+    narxlar:  { num: '§ 05', text: '每月限量接单以保证交付质量', cta: '获取诊断 →' },
+    jarayon:  { num: '100%', text: '14天 · 结果保障', cta: '开始 →' },
     savol:    { num: '24h',   text: '有问题？24小时内回复', cta: '联系 →' },
   },
 };
@@ -86,7 +86,7 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
       <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 rounded-full shadow-2xl max-w-[90vw] sm:max-w-none" style={{ background: 'var(--at-ink)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px -10px rgba(14,16,21,0.5)' }}>
         <span className="text-xs font-semibold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-accent)', letterSpacing: '0.06em' }}>{v.num}</span>
         <span className="text-[11px] sm:text-sm line-clamp-1 truncate flex-1 min-w-[100px]" style={{ color: 'rgba(244,241,232,.7)' }}>{v.text}</span>
-        <button onClick={onOpen} tabIndex={show ? 0 : -1} className="relative min-h-11 overflow-hidden font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-opacity duration-200 hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
+        <button data-oisha-callback="" onClick={onOpen} tabIndex={show ? 0 : -1} className="relative min-h-11 overflow-hidden font-semibold text-xs sm:text-sm rounded-full px-4 py-2 transition-opacity duration-200 hover:opacity-90 group shrink-0" style={{ background: 'var(--at-accent)', color: '#fff', whiteSpace: 'nowrap' }}>
           <span className="relative z-10">{v.cta}</span>
           <span aria-hidden="true" className="absolute inset-0 rounded-full motion-safe:animate-ping opacity-20" style={{ background: 'var(--at-accent)' }}></span>
         </button>

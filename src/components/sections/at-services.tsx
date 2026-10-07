@@ -119,6 +119,7 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
           <button
             type="button"
             key={s.num}
+            data-oisha-callback=""
             onClick={onOpen}
             className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-[background-color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >

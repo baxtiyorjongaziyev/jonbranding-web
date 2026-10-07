@@ -70,6 +70,12 @@ describe('Content-Security-Policy', () => {
     expect(allows(csp.get('connect-src'), 'https://api2.amplitude.com/2/httpapi')).toBe(true);
   });
 
+  it('allows the Oisha callback widget and its call-tracking API', async () => {
+    const csp = await readCsp();
+    expect(allows(csp.get('script-src'), 'https://oisha.jonbranding.uz/api/callback-widget.js')).toBe(true);
+    expect(allows(csp.get('connect-src'), 'https://oisha.jonbranding.uz/api/call-tracking/config')).toBe(true);
+  });
+
   it('keeps unsafe-eval out of non-development builds and blocks plugins', async () => {
     const csp = await readCsp();
     expect(csp.get('script-src')).not.toContain("'unsafe-eval'");

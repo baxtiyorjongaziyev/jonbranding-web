@@ -40,6 +40,8 @@ const cspDirectives = {
     'https://cdn.amplitude.com',
     // Cloudflare Turnstile
     'https://challenges.cloudflare.com',
+    // Oisha callback vidjeti va call tracking
+    'https://oisha.jonbranding.uz',
   ],
   'style-src': [
     "'self'",
@@ -99,6 +101,8 @@ const cspDirectives = {
     'https://c.bing.com',
     'https://api.amplitude.com',
     'https://api2.amplitude.com',
+    // Oisha: /api/call-tracking/config va callback so'rovi
+    'https://oisha.jonbranding.uz',
   ],
   'media-src': [
     "'self'",

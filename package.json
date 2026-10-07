@@ -86,7 +86,7 @@
     "react-hook-form": "^7.52.1",
     "sanity": "^6.4.0",
     "server-only": "^0.0.1",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "styled-components": "^6.4.2",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",

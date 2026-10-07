@@ -1,6 +1,7 @@
 import Script from 'next/script';
-import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono, Inter_Tight } from 'next/font/google';
-import type { ReactNode } from 'react';
+import { Hanken_Grotesk, Instrument_Serif, JetBrains_Mono, Inter_Tight, Cormorant_Garamond } from 'next/font/google';
+import { Suspense, type ReactNode } from 'react';
+
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import '../atelier.css';
@@ -11,6 +12,7 @@ import { safeJsonStringify } from '@/lib/security';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
+import OishaPhoneSync from '@/components/layout/oisha-callback-script';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -35,6 +37,14 @@ const instrumentSerif = Instrument_Serif({
   weight: ['400'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
+  display: 'swap',
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif-cyrillic',
   display: 'swap',
 });
 
@@ -81,6 +91,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
       ],
     },
+    manifest: '/manifest.json',
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: 'black-translucent',
+      title: 'JonBranding',
+    },
     openGraph: {
       type: 'website',
       locale: ogLocales[safeLang],
@@ -124,7 +140,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
     '(1) Yangi xabar! | Jon Branding';
 
   return (
-    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${cormorantGaramond.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
@@ -256,6 +272,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <MainLayout
           leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
           headerDictionary={dictionary.header}
+          pwaDictionary={(dictionary as any).pwa}
           lang={lang}
           stickyCtaLabel={dictionary.header?.free_consultation || 'Contact us'}
           tabNotificationMessage={tabNotificationMessage}
@@ -278,6 +295,21 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
           </div>
         </noscript>
         </MainLayout>
+        {/* Oisha "Sizga qo'ng'iroq qilamiz" vidjeti + call tracking. Server HTML'iga
+            bir marta yoziladi (data-* atributlari bilan); layout sahifa almashganda
+            qayta chizilmaydi. Rang — brend Cobalt (#1B4DFF); vidjet faqat uz/ru tillarini
+            qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
+        <script
+          src="https://oisha.jonbranding.uz/api/callback-widget.js"
+          data-color="#1B4DFF"
+          data-lang={lang === 'uz' ? 'uz' : 'ru'}
+          data-call-tracking="1"
+          data-position="left"
+          defer
+        />
+        <Suspense fallback={null}>
+          <OishaPhoneSync />
+        </Suspense>
       </body>
     </html>
   );

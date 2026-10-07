@@ -115,7 +115,7 @@ export default function AtFaq({ lang = 'uz', onOpen }: Props) {
 
         {onOpen && (
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-4" style={{ borderTop: '1px solid var(--at-line)', paddingTop: 28 }}>
-            <button className="btn btn-primary" onClick={onOpen}>
+            <button className="btn btn-primary" data-oisha-callback="" onClick={onOpen}>
               {lang === 'uz' ? 'Savolingiz bormi? Yozing' : lang === 'ru' ? 'Есть вопрос? Напишите' : lang === 'zh' ? '有问题？联系我们' : 'Got questions? Reach out'} <span className="ar">↗</span>
             </button>
             <span style={{ fontSize: 13, color: 'var(--at-muted)' }}>

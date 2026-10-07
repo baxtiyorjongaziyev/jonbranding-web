@@ -11,6 +11,14 @@ jobs:
     steps:
       - name: Refresh AmoCRM token
         run: |
-          curl -fsS -X POST https://jonbranding.uz/api/amocrm-refresh \
+          response=$(curl -s -w "\n%{http_code}" -X POST https://jonbranding.uz/api/amocrm-refresh \
             -H "Authorization: Bearer ${{ secrets.AMOCRM_CRON_SECRET }}" \
-            --max-time 30
+            --max-time 30)
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          echo "Response: $body (HTTP $http_code)"
+          if [ "$http_code" -ne 200 ]; then
+            echo "::error::AmoCRM token refresh or verification failed: HTTP $http_code - $body"
+            exit 1
+          fi
+
