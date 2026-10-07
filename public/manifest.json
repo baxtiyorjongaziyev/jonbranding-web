@@ -3,10 +3,12 @@
   "short_name": "JonBranding",
   "description": "Professional Branding & Naming Agency in Tashkent",
   "start_url": "/",
+  "id": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#F2EFE6",
   "theme_color": "#F2EFE6",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -45,12 +47,12 @@
   ],
   "shortcuts": [
     {
-      "name": "Uzbek",
+      "name": "JonBranding (O'zbekcha)",
       "url": "/uz",
       "description": "JonBranding O'zbek tilida"
     },
     {
-      "name": "Russian",
+      "name": "JonBranding (Русский)",
       "url": "/ru",
       "description": "JonBranding на Русском"
     }

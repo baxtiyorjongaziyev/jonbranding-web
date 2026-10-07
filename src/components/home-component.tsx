@@ -2,6 +2,7 @@
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useMemo, useCallback } from 'react';
+
 import { MotionConfig } from 'framer-motion';
 
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
@@ -93,6 +94,7 @@ const HomeComponent: FC<{
         })),
     [portfolioProjects]
   );
+
 
   return (
     <MotionConfig reducedMotion="user">

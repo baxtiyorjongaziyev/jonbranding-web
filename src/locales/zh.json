@@ -2497,5 +2497,12 @@
     "textDesc": "客户的书面反馈",
     "watch": "观看视频",
     "listen": "收听"
+  },
+  "pwa": {
+    "title": "Jon.Branding 应用",
+    "description": "安装到主屏幕，以便快速流畅地使用",
+    "install": "安装",
+    "ios_instruction": "点击分享 ⎋ 并选择“添加到主屏幕” ⊕",
+    "dismiss": "关闭"
   }
 }

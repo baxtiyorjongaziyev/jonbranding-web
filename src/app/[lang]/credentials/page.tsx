@@ -4,6 +4,7 @@ import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchBrands } from '@/lib/data/brands';
 import CredentialsClient from './credentials-client';
+import { getPageAlternates } from '@/lib/seo';
 import type { CredCase, CredLogo, CredQuote } from './credentials-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -16,11 +17,18 @@ const DESCRIPTION =
  * Sotuvchi uchun taqdimot sahifasi. Link bilan ochiq, lekin qidiruv tizimlari
  * indekslamaydi — narxlar ochiq turgani uchun sahifa faqat suhbat davomida beriladi.
  */
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  robots: { index: false, follow: false, nocache: true },
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }) {
+  const { lang } = await params;
+  const safeLang: Locale = (['uz', 'ru', 'en', 'zh'] as const).includes(lang as Locale) ? (lang as Locale) : 'uz';
+  const alternates = await getPageAlternates(safeLang, '/credentials');
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    robots: { index: false, follow: false, nocache: true },
+    alternates,
+  } as Metadata;
+}
+
 
 const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await props.params;

@@ -2503,5 +2503,12 @@
     "textDesc": "Mijozlarning yozma fikrlari",
     "watch": "Videoni ko'rish",
     "listen": "Tinglash"
+  },
+  "pwa": {
+    "title": "Jon.Branding Ilovasi",
+    "description": "Telefoningizga o'rnating — qulay va tezkor ishlaydi",
+    "install": "O'rnatish",
+    "ios_instruction": "Ulashish ⎋ tugmasini bosing va \"Bosh ekranga qo'shish\" ⊕ ni tanlang",
+    "dismiss": "Yopish"
   }
 }

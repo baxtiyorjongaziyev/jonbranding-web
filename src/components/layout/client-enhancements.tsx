@@ -33,6 +33,11 @@ const TabNotification = dynamic(() => import('@/components/layout/tab-notificati
   ssr: false,
 });
 
+const PwaInstaller = dynamic(() => import('@/components/pwa/pwa-installer'), {
+  loading: () => null,
+  ssr: false,
+});
+
 
 
 
@@ -68,6 +73,7 @@ function AnalyticsTracker() {
 type ClientEnhancementsProps = {
   leadMagnetDictionary?: any;
   headerDictionary?: any;
+  pwaDictionary?: any;
   lang?: string;
   stickyCtaLabel?: string;
   tabNotificationMessage?: string;
@@ -76,6 +82,7 @@ type ClientEnhancementsProps = {
 export default function ClientEnhancements({
   leadMagnetDictionary,
   headerDictionary,
+  pwaDictionary,
   lang: langProp,
   tabNotificationMessage,
 }: ClientEnhancementsProps) {
@@ -159,6 +166,7 @@ export default function ClientEnhancements({
       <Toaster />
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
       {quickActionsReady && !isDeck && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
+      {quickActionsReady && !isDeck && <PwaInstaller lang={lang} dictionary={pwaDictionary} />}
       {enhancementsReady && !isDeck && <CookieConsentBanner />}
       {enhancementsReady && !isDeck && <OishaWidget lang={lang} />}
       {enhancementsReady && !isDeck && <ProactiveTrigger lang={lang} />}

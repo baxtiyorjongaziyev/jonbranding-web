@@ -22,8 +22,8 @@ const t = {
     ],
     cta: 'Bepul audit olish',
     guarantees: [
-      "100% kafolat — foydali bo'lmasa, pul qaytadi",
-      'Maxfiylik — NDA ixtiyoriy',
+      "100% amaliy tahlil — vaqtingiz behuda ketmasligiga kafolat",
+      "To'liq maxfiylik — NDA ixtiyoriy",
     ],
   },
   ru: {
@@ -40,7 +40,7 @@ const t = {
     ],
     cta: 'Получить аудит бесплатно',
     guarantees: [
-      '100% гарантия — если не поможет, вернём деньги',
+      '100% практический анализ — гарантия пользы вашего времени',
       'Конфиденциальность — NDA по желанию',
     ],
   },
@@ -58,7 +58,7 @@ const t = {
     ],
     cta: 'Get Free Audit',
     guarantees: [
-      "100% guarantee — full refund if not helpful",
+      '100% actionable analysis — guaranteed value for your time',
       'Confidentiality — NDA optional',
     ],
   },
@@ -76,7 +76,7 @@ const t = {
     ],
     cta: '免费获取审计报告',
     guarantees: [
-      '100%保证——无效全额退款',
+      '100%实用分析——保障您的宝贵时间价值',
       '保密性——可选签署保密协议',
     ],
   },

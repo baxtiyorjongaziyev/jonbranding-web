@@ -25,7 +25,7 @@ const config: Config = {
         body: ['var(--font-inter)', 'sans-serif'],
         headline: ['var(--font-jakarta)', 'sans-serif'],
         sans: ['var(--font-inter)', 'sans-serif'],
-        serif: ['var(--font-serif)', 'serif'],
+        serif: ['var(--font-serif)', 'var(--font-serif-cyrillic)', 'Georgia', 'serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {

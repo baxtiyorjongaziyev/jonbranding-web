@@ -8,6 +8,14 @@
 - **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Sanity CMS, Vercel
 - **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
+## 🌐 Jon Branding Unified Ecosystem
+
+`jonbranding-web` va `oisha-os` — alohida mustaqil loyihalar EMAS, bitta Jon Branding biznes platformasining ikki qanoti:
+1. **jonbranding-web** (Frontend & Public Interface): Mijozlar yuzi, portfolio, interaktiv formalar, tashqi lid intake.
+2. **oisha-os** (`c:\Users\baxti\playground\oisha-os`) (Backend, Operations & AI Core): Markaziy operatsion tizim, AI agentlar, amoCRM / Meta CAPI / Instagram / Google Sheets integratsiyalari, Telegram userbot/bot.
+- **Qat'iy qoida:** amoCRM tokenlari, webhooklar, field ID'lar yoki statuslar o'zgarganda ikkala loyiha ham bir vaqtda muvofiqlashtirilishi shart! Bitta AmoCRM integratsiyasida token bekor qilinmasligi (revoked bo'lmasligi) uchun OAuth boshqaruvi markazlashgan bo'lishi kerak.
+
+
 ## Locks
 
 - None
@@ -124,6 +132,37 @@ Barcha AI agentlar (Claude, Gemini, ChatGPT va boshqalar) **JonBranding agentlig
 2. **Master Context**: Biznes, Baxtiyorjon, maqsadlar, qadriyatlar va xizmatlar haqidagi ma'lumotlar uchun `jonbranding_ai_memory_pack/jonbranding_ai_memory_pack/01_JonBranding_Master_Context.md` faylini o'qib chiqing va shu asosda qaror qabul qiling.
 3. **Agent Roles**: Maxsus vazifalar (Sales, PM, Finance, Content) uchun `07_AI_Agent_Roles.md` dagi agent profillariga moslashing.
 4. Javoblar doimo **qisqa, amaliy, tadbirkor tilida** va **Baxtiyorjonni operatsiyadan chiqarish** hamda **$10K/oy, $300K/yil maqsadlariga xizmat qilish** tamoyillariga mos bo'lishi shart!
+
+## AI agent skills — majburiy foydalanish
+
+Repo ichidagi `.agents/skills/` barcha AI agentlar uchun umumiy skill manbasi
+hisoblanadi. Ish boshlashdan oldin agent vazifaga mos `SKILL.md` faylini to‘liq
+o‘qishi va undagi qoidalarga amal qilishi kerak.
+
+### Anti-AI-slop web workflow
+
+Web sahifa, UI, UX yoki kontent ustida ishlaganda quyidagi skill’lar vazifaga
+mos ravishda qo‘llanadi:
+
+- `.agents/skills/impeccable/SKILL.md` — sun’iy, takroriy va generik AI dizaynini kamaytirish;
+- `.agents/skills/design-taste-frontend/SKILL.md` — premium, original va brendga mos frontend;
+- `.agents/skills/copy-editing/SKILL.md` — tabiiy, aniq va Uzbek-first copy;
+- `.agents/skills/web-quality-audit/SKILL.md` — yakuniy UX, accessibility, performance va sifat auditi.
+
+Faqat kerakli skill’lar tanlanadi; bir xil qoidani takrorlaydigan skill’lar
+ortiqcha yuklanmaydi. Skill ishlatilgan bo‘lsa, yakuniy javobda qaysi skill’lar
+qo‘llangani va qanday ta’sir qilgani qisqa qayd etiladi.
+
+### Agent harness verification
+
+Har bir kod o‘zgarishidan keyin imkon qadar:
+
+```bash
+npm run verify:fast
+npm run verify
+```
+
+buyruqlari bajariladi. Faqat mos bo‘lmagan holatda sabab `DEV_LOG.md` ga yoziladi.
 
 ## Obsidian "Ikkinchi Miya" Qoidalari (Barcha Agentlar Uchun!)
 
