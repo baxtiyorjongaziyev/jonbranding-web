@@ -157,6 +157,13 @@ async function exchangeRefreshToken(refreshToken: string): Promise<TokenData> {
 async function doRefresh(): Promise<TokenData> {
   const current = await readStoredTokens();
 
+  // If stored token is a valid long-lived token (no refresh token or valid for > 30 days), preserve it
+  if (current?.access_token && (!current.refresh_token || current.expires_at > Date.now() + 30 * 86400 * 1000)) {
+    if (current.expires_at > Date.now()) {
+      return current;
+    }
+  }
+
   let seedRefreshToken: string | undefined;
   if (!current) {
     seedRefreshToken = process.env.AMOCRM_REFRESH_TOKEN?.trim();
@@ -175,7 +182,24 @@ async function doRefresh(): Promise<TokenData> {
     }
   }
 
-  const refreshToken = current?.refresh_token ?? seedRefreshToken!;
+  const refreshToken = current?.refresh_token || seedRefreshToken;
+  if (!refreshToken) {
+    const envToken = getEnvAccessToken();
+    if (envToken) {
+      const fallback: TokenData = {
+        access_token: envToken,
+        refresh_token: '',
+        expires_at: Date.now() + 5 * 365 * 86400 * 1000,
+      };
+      await writeStoredTokens(fallback).catch(() => {});
+      return fallback;
+    }
+    if (current?.access_token && current.expires_at > Date.now()) {
+      return current;
+    }
+    throw new Error('No refresh token available to refresh AmoCRM OAuth');
+  }
+
   try {
     const fresh = await exchangeRefreshToken(refreshToken);
     await writeStoredTokens(fresh);
@@ -191,6 +215,10 @@ async function doRefresh(): Promise<TokenData> {
       };
       await writeStoredTokens(fallback).catch(() => {});
       return fallback;
+    }
+    if (current?.access_token && current.expires_at > Date.now()) {
+      console.warn('OAuth refresh failed, using still-valid stored token until', new Date(current.expires_at).toISOString());
+      return current;
     }
     throw refreshErr;
   }
