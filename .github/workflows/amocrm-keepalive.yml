@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Refresh AmoCRM token
         run: |
-          response=$(curl -s -w "\n%{http_code}" -X POST https://jonbranding.uz/api/amocrm-refresh \
+          response=$(curl -sL -w "\n%{http_code}" -X POST https://www.jonbranding.uz/api/amocrm-refresh \
             -H "Authorization: Bearer ${{ secrets.AMOCRM_CRON_SECRET }}" \
             --max-time 30)
           http_code=$(echo "$response" | tail -n1)
