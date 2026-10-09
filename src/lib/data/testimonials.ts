@@ -39,11 +39,18 @@ function getFallback(lang: string): Testimonial[] {
 }
 
 export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
+  const fallback = getFallback(lang);
   try {
     const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: 30 } });
-    if (data && data.length > 0) return applyLocalCovers(data);
+    if (data && data.length > 0) {
+      const sanityNames = new Set(data.map((t) => t.name.toLowerCase().trim()));
+      return [
+        ...applyLocalCovers(data),
+        ...fallback.filter((f) => !sanityNames.has(f.name.toLowerCase().trim())),
+      ];
+    }
   } catch (e) {
     logger.error('Sanity testimonials fetch failed, using fallback:', e);
   }
-  return getFallback(lang);
+  return fallback;
 }

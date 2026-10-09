@@ -87,10 +87,80 @@ export const staticTestimonials: Testimonial[] = [
     name: "Hikmatulloh Toxirov",
     company: "Almaz Shoes asoschisi",
     avatar: "HT",
-    image: "",
+    image: "/images/testimonials/hikmatulloh-toxirov-cover.webp",
     imageHint: "Almaz Shoes founder",
     quote: "Tezkor patent juda foydali bo'ldi. Brend himoyasi haqida o'ylab yurgan edim, juda o'z vaqtida taklif qildingiz. Hujjatlar tez tayyorlandi, jarayon aniq va shaffof. Rahmat!",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sherzodbek Jumanov",
+    company: "Zayan brendi asoschisi",
+    avatar: "SJ",
+    image: "/images/testimonials/sherzodbek-jumanov.jpg",
+    imageHint: "Zayan brendi asoschisi",
+    quote: "Yaqinda Zayan brendimizni Jon Branding agentligidan patentladik. Baxtiyorjon va jamoasiga kattakon rahmat! Bizni ortiqcha ovora qilmasdan hamma ishni o'zlari qilib, ruxsatnomalarigacha qo'limizga topshirishdi. Shunaqa xizmat kerak bo'lsa, bemalol Jon Branding'ga murojaat qilishni tavsiya qilaman.",
+    videoUrl: "/videos/testimonials/sherzodbek-jumanov.mp4"
+  },
+  {
+    name: "Umidjon Rahimov",
+    company: "Velzo (Avto Moy) asoschisi",
+    avatar: "UR",
+    image: "/images/testimonials/umidjon-velzo.jpg",
+    imageHint: "Velzo servis asoschisi",
+    quote: "Moy almashtirish servisimizga Velzo deb nom qo'ydik, logotipidan tortib Adliya vazirligidan patent guvohnomalarigacha to'liq chiqarib berishdi. Baxtiyorjondan va Jon Branding jamoasidan juda minnatdormiz, ishlaringizga baraka!",
+    videoUrl: "/videos/testimonials/umidjon-velzo.mp4"
+  },
+  {
+    name: "Ramziddin",
+    company: "Arfadel brendi asoschisi",
+    avatar: "R",
+    image: "/images/testimonials/ramziddin-arfadel.jpg",
+    imageHint: "Arfadel brendi asoschisi",
+    quote: "Jon Branding jamoasi bilan birga ishladik, Arfadel nomini topib, brend va logotiplarini qilib berishdi. Bizga ishlari rosa yoqdi. Ishonchli va juda tez hal qilib berishadi. Jamoa asoschisi Baxtiyor aka ham juda samimiy inson. Hammaga tavsiya qilaman!",
+    videoUrl: "/videos/testimonials/ramziddin-arfadel.mp4"
+  },
+  {
+    name: "Tulqin Xolmirzayev",
+    company: "Tadbirkor, brending mijozi",
+    avatar: "TX",
+    image: "/images/testimonials/tulqin-xolmirzayev.jpg",
+    imageHint: "Brending va patent mijozi",
+    quote: "Jon Branding'da brend qildirdik va patent oldik. O'z vaqtida va sifatli qilib berishdi. Logotip, qadoq va korobkalar dizaynlari judayam chiroyli chiqdi, o'zimizga rosa yoqdi. Baxtiyor akaga va jamoaga kattakon rahmat!",
+    videoUrl: "/videos/testimonials/tulqin-xolmirzayev.mp4"
+  },
+  {
+    name: "Xoshimboy Usmanov",
+    company: "Dilbaroy Clinic asoschisi",
+    avatar: "XU",
+    image: "/images/testimonials/xoshimboy-usmanov.jpg",
+    imageHint: "Dilbaroy Clinic asoschisi",
+    quote: "Baxtiyor aka, rahmat kattakon, sog' bo'ling! Ishlarimizni a'lo darajada qilib berdingiz. Yana yangi loyihalarimiz bo'lsa, albatta yana sizlarga murojaat qilamiz.",
+    videoUrl: "/videos/testimonials/xoshimboy-usmanov.mp4"
+  },
+  {
+    name: "Saltanat Axmedova",
+    company: "Sadiya Cakes asoschisi",
+    avatar: "SA",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Sadiya Cakes asoschisi",
+    quote: "Jon Branding jamoasiga rahmat, baraka topinglar! Dizayn judayam kuchli o'ylangan. Variantlar berganingizda qaysi birini tanlashni bilmay qoldik, hammasi ajoyib. Jamoamiz bilan karamel rangini tanladik. Hozir biznes tanishlarim so'rayapti, barchasiga sizlarni tavsiya beryapman!",
+    audioUrl: "/audio/saltanat-axmedova.ogg"
+  },
+  {
+    name: "Azizjon Dexkonov",
+    company: "Azel Shoes asoschisi",
+    avatar: "AD",
+    image: "/images/testimonials/azel-patent.jpg",
+    imageHint: "Azel Shoes patent guvohnomasi",
+    quote: "Azel Shoes tovar belgisi Jon Branding patentlash agentligi tomonidan to'liq qonuniy ro'yxatdan o'tkazildi (№ MGU 66985). Hujjatlar to'liq va o'z vaqtida qo'limizga topshirildi."
+  },
+  {
+    name: "Sunnah Products jamoasi",
+    company: "Sunnah Products brendi",
+    avatar: "SP",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Sunnah Products jamoasi",
+    quote: "Sunnah Products jamoasidan shirin hadya va samimiy minnatdorchilik. Brending va qadoqlash loyihasidagi samarali va mehr bilan qilingan hamkorlik uchun katta rahmat!"
   },
 ];
 
@@ -141,10 +211,80 @@ export const staticTestimonialsRu: Testimonial[] = [
     name: "Хикматулло Тохиров",
     company: "Основатель Almaz Shoes",
     avatar: "ХТ",
-    image: "",
+    image: "/images/testimonials/hikmatulloh-toxirov-cover.webp",
     imageHint: "Almaz Shoes founder",
     quote: "Быстрый патент оказался очень полезным. Я думал о защите бренда, и вы предложили это очень вовремя. Документы были быстро готовы, процесс чёткий и прозрачный. Спасибо!",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Шерзодбек Джуманов",
+    company: "Основатель бренда Zayan",
+    avatar: "ШД",
+    image: "/images/testimonials/sherzodbek-jumanov.jpg",
+    imageHint: "Основатель Zayan",
+    quote: "Недавно мы запатентовали наш бренд Zayan через агентство Jon Branding. Огромное спасибо Бахтиёржону и его команде! Все процессы выполнили сами без лишних хлопот для нас и выдали официальные разрешения. Рекомендую обращаться в Jon Branding!",
+    videoUrl: "/videos/testimonials/sherzodbek-jumanov.mp4"
+  },
+  {
+    name: "Умиджон Рахимов",
+    company: "Основатель автосервиса Velzo",
+    avatar: "УР",
+    image: "/images/testimonials/umidjon-velzo.jpg",
+    imageHint: "Основатель сервиса Velzo",
+    quote: "Для нашего сервиса по замене масла выбрали название Velzo, разработали логотип и получили свидетельство о регистрации от Министерства юстиции. Очень благодарны Бахтиёржону и команде Jon Branding!",
+    videoUrl: "/videos/testimonials/umidjon-velzo.mp4"
+  },
+  {
+    name: "Рамзиддин",
+    company: "Основатель Arfadel",
+    avatar: "Р",
+    image: "/images/testimonials/ramziddin-arfadel.jpg",
+    imageHint: "Основатель бренда Arfadel",
+    quote: "Работали с командой Jon Branding: разработали название Arfadel, айдентику и логотип. Работа очень понравилась — надежно, быстро и профессионально. Сам основатель Бахтиёр ака — очень искренний человек. Всем рекомендую!",
+    videoUrl: "/videos/testimonials/ramziddin-arfadel.mp4"
+  },
+  {
+    name: "Тулкин Холмирзаев",
+    company: "Предприниматель, клиент брендинга",
+    avatar: "ТХ",
+    image: "/images/testimonials/tulqin-xolmirzayev.jpg",
+    imageHint: "Клиент брендинга и патентования",
+    quote: "Заказывали в Jon Branding создание бренда и патентование. Все сделали в срок и качественно. Логотип, дизайн упаковки и коробок вышли великолепно. Большое спасибо Бахтиёр ака и всей команде!",
+    videoUrl: "/videos/testimonials/tulqin-xolmirzayev.mp4"
+  },
+  {
+    name: "Хошимбой Усманов",
+    company: "Основатель Dilbaroy Clinic",
+    avatar: "ХУ",
+    image: "/images/testimonials/xoshimboy-usmanov.jpg",
+    imageHint: "Основатель Dilbaroy Clinic",
+    quote: "Бахтиёр ака, огромное спасибо, будьте здоровы! Выполнили нашу работу на высшем уровне. По новым проектам обязательно обратимся именно к вам.",
+    videoUrl: "/videos/testimonials/xoshimboy-usmanov.mp4"
+  },
+  {
+    name: "Салтанат Ахмедова",
+    company: "Основательница Sadiya Cakes",
+    avatar: "СА",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Основательница Sadiya Cakes",
+    quote: "Спасибо команде Jon Branding! Дизайн продуман невероятно глубоко. Когда прислали варианты, мы даже не знали, какой выбрать — все потрясающие. Выбрали карамельный цвет. Знакомые предприниматели спрашивают — всем рекомендую вас!",
+    audioUrl: "/audio/saltanat-axmedova.ogg"
+  },
+  {
+    name: "Азизжон Дехконов",
+    company: "Основатель Azel Shoes",
+    avatar: "АД",
+    image: "/images/testimonials/azel-patent.jpg",
+    imageHint: "Патентное свидетельство Azel Shoes",
+    quote: "Товарный знак Azel Shoes был официально зарегистрирован патентным агентством Jon Branding (№ MGU 66985). Все документы были подготовлены точно и в срок."
+  },
+  {
+    name: "Команда Sunnah Products",
+    company: "Бренд Sunnah Products",
+    avatar: "СП",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Команда Sunnah Products",
+    quote: "Искренняя благодарность от команды Sunnah Products за отличное сотрудничество в создании брендинга и упаковки. Спасибо за теплое отношение и качественную работу!"
   },
 ];
 
@@ -195,10 +335,80 @@ export const staticTestimonialsEn: Testimonial[] = [
     name: "Hikmatulloh Toxirov",
     company: "Founder of Almaz Shoes",
     avatar: "HT",
-    image: "",
+    image: "/images/testimonials/hikmatulloh-toxirov-cover.webp",
     imageHint: "Almaz Shoes founder",
     quote: "The quick patent service was very useful. I was thinking about brand protection, and you offered it at the right time. The documents were prepared quickly, the process was clear and transparent. Thank you!",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sherzodbek Jumanov",
+    company: "Founder of Zayan",
+    avatar: "SJ",
+    image: "/images/testimonials/sherzodbek-jumanov.jpg",
+    imageHint: "Founder of Zayan",
+    quote: "We recently patented our Zayan brand through Jon Branding agency. Huge thanks to Bakhtiyorjon and the team! They handled everything seamlessly without taking our time and delivered all official permits directly. I highly recommend Jon Branding!",
+    videoUrl: "/videos/testimonials/sherzodbek-jumanov.mp4"
+  },
+  {
+    name: "Umidjon Rahimov",
+    company: "Founder of Velzo Auto Service",
+    avatar: "UR",
+    image: "/images/testimonials/umidjon-velzo.jpg",
+    imageHint: "Founder of Velzo Auto Service",
+    quote: "We named our oil-change service Velzo. The team developed the logo and successfully obtained the official trademark certificate from the Ministry of Justice. We are very grateful to Bakhtiyorjon and Jon Branding!",
+    videoUrl: "/videos/testimonials/umidjon-velzo.mp4"
+  },
+  {
+    name: "Ramziddin",
+    company: "Founder of Arfadel",
+    avatar: "R",
+    image: "/images/testimonials/ramziddin-arfadel.jpg",
+    imageHint: "Founder of Arfadel",
+    quote: "We worked with the Jon Branding team: they crafted the name Arfadel, identity, and logo. We loved their work — reliable, prompt, and smooth. Founder Bakhtiyor aka is a genuinely sincere person. Highly recommended!",
+    videoUrl: "/videos/testimonials/ramziddin-arfadel.mp4"
+  },
+  {
+    name: "Tulqin Kholmirzayev",
+    company: "Entrepreneur, branding client",
+    avatar: "TK",
+    image: "/images/testimonials/tulqin-xolmirzayev.jpg",
+    imageHint: "Branding and patent client",
+    quote: "We created our brand and obtained patents through Jon Branding. Everything was delivered on time with high quality. The logo, packaging, and box designs turned out beautiful. Thank you so much!",
+    videoUrl: "/videos/testimonials/tulqin-xolmirzayev.mp4"
+  },
+  {
+    name: "Khoshimboy Usmanov",
+    company: "Founder of Dilbaroy Clinic",
+    avatar: "KU",
+    image: "/images/testimonials/xoshimboy-usmanov.jpg",
+    imageHint: "Founder of Dilbaroy Clinic",
+    quote: "Bakhtiyor aka, thank you so much! You completed our project at the highest level. For our future projects, we will definitely work with you again.",
+    videoUrl: "/videos/testimonials/xoshimboy-usmanov.mp4"
+  },
+  {
+    name: "Saltanat Akhmedova",
+    company: "Founder of Sadiya Cakes",
+    avatar: "SA",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Founder of Sadiya Cakes",
+    quote: "Thank you to the Jon Branding team! The design strategy is exceptionally thoughtful. When you provided the concept variations, every single one was stunning. Our entire team chose the caramel colorway. Business peers keep asking who designed it, and I recommend you to everyone!",
+    audioUrl: "/audio/saltanat-axmedova.ogg"
+  },
+  {
+    name: "Azizjon Dexkonov",
+    company: "Founder of Azel Shoes",
+    avatar: "AD",
+    image: "/images/testimonials/azel-patent.jpg",
+    imageHint: "Azel Shoes trademark certificate",
+    quote: "The Azel Shoes trademark was officially registered and protected by Jon Branding patent agency (No. MGU 66985). All legal documents were delivered on schedule."
+  },
+  {
+    name: "Sunnah Products Team",
+    company: "Sunnah Products Brand",
+    avatar: "SP",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Sunnah Products Team",
+    quote: "Warm appreciation and gifts from the Sunnah Products team for our productive branding and packaging partnership. Thank you for your care and outstanding dedication!"
   },
 ];
 
@@ -304,9 +514,79 @@ export const staticTestimonialsZh: Testimonial[] = [
     name: "Hikmatulloh Toxirov",
     company: "Almaz Shoes 创始人",
     avatar: "HT",
-    image: "",
+    image: "/images/testimonials/hikmatulloh-toxirov-cover.webp",
     imageHint: "Almaz Shoes founder",
     quote: "快速商标专利服务非常及时有效。我当时正考虑品牌保护，你们在最关键的时刻提供了方案。文件办理迅速，流程透明清晰。十分感谢！",
     videoUrl: "https://player.vimeo.com/video/1205182267?badge=0&autopause=0&player_id=0&app_id=58479"
+  },
+  {
+    name: "Sherzodbek Jumanov",
+    company: "Zayan 品牌创始人",
+    avatar: "SJ",
+    image: "/images/testimonials/sherzodbek-jumanov.jpg",
+    imageHint: "Zayan 品牌创始人",
+    quote: "我们最近通过 Jon Branding 机构为 Zayan 品牌成功申请了专利。非常感谢巴赫蒂约尔及团队！他们专业高效地处理了所有手续，直接将官方许可交付给我们。强烈推荐 Jon Branding！",
+    videoUrl: "/videos/testimonials/sherzodbek-jumanov.mp4"
+  },
+  {
+    name: "Umidjon Rahimov",
+    company: "Velzo 汽车养护创始人",
+    avatar: "UR",
+    image: "/images/testimonials/umidjon-velzo.jpg",
+    imageHint: "Velzo 汽车养护创始人",
+    quote: "我们将机油更换养护服务命名为 Velzo，团队设计了标志并顺利取得了司法部的官方商标注册证。非常感谢巴赫蒂约尔和 Jon Branding 团队！",
+    videoUrl: "/videos/testimonials/umidjon-velzo.mp4"
+  },
+  {
+    name: "Ramziddin",
+    company: "Arfadel 创始人",
+    avatar: "R",
+    image: "/images/testimonials/ramziddin-arfadel.jpg",
+    imageHint: "Arfadel 创始人",
+    quote: "我们与 Jon Branding 团队合作，他们为我们构思了 Arfadel 品牌名称、全套设计与标志。我们非常喜欢他们的成果，可靠又高效。创始人巴赫蒂约尔大哥非常真诚。向大家极力推荐！",
+    videoUrl: "/videos/testimonials/ramziddin-arfadel.mp4"
+  },
+  {
+    name: "Tulqin Xolmirzayev",
+    company: "企业家，品牌客户",
+    avatar: "TX",
+    image: "/images/testimonials/tulqin-xolmirzayev.jpg",
+    imageHint: "品牌客户",
+    quote: "我们委托 Jon Branding 进行了品牌建设和商标注册。一切都按时高质量完成。标志、包装和包装盒设计非常美观。非常感谢巴赫蒂约尔大哥及团队！",
+    videoUrl: "/videos/testimonials/tulqin-xolmirzayev.mp4"
+  },
+  {
+    name: "Xoshimboy Usmanov",
+    company: "Dilbaroy Clinic 创始人",
+    avatar: "XU",
+    image: "/images/testimonials/xoshimboy-usmanov.jpg",
+    imageHint: "Dilbaroy Clinic 创始人",
+    quote: "巴赫蒂约尔大哥，非常感谢！你们以最高水准完成了我们的项目。如果有新的业务，我们一定还会再次与你们合作。",
+    videoUrl: "/videos/testimonials/xoshimboy-usmanov.mp4"
+  },
+  {
+    name: "Saltanat Axmedova",
+    company: "Sadiya Cakes 创始人",
+    avatar: "SA",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Sadiya Cakes 创始人",
+    quote: "非常感谢 Jon Branding 团队！设计构思极其深入。当你们提供不同方案时，每一个都惊艳至极。我们整个团队最终选定了焦糖色系。周围的商业朋友都在打听，我向所有人极力推荐你们！",
+    audioUrl: "/audio/saltanat-axmedova.ogg"
+  },
+  {
+    name: "Azizjon Dexkonov",
+    company: "Azel Shoes 创始人",
+    avatar: "AD",
+    image: "/images/testimonials/azel-patent.jpg",
+    imageHint: "Azel Shoes 商标专利证书",
+    quote: "Azel Shoes 商标由 Jon Branding 专利代理机构顺利完成全面法律注册（编号 MGU 66985）。所有法定证书均如期交付。"
+  },
+  {
+    name: "Sunnah Products 团队",
+    company: "Sunnah Products 品牌",
+    avatar: "SP",
+    image: "https://cdn.sanity.io/images/h6ymmj0v/production/1819adae1b4f694dc745f7b91ab1c73f15a7e56a-222x71.png",
+    imageHint: "Sunnah Products 团队",
+    quote: "来自 Sunnah Products 团队的诚挚感谢与心意礼品，感谢在品牌塑造与包装设计项目中的卓越合作与用心投入！"
   },
 ];

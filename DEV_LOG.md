@@ -1,5 +1,23 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-09 | Telegram @baxtiyor_gaziyev_otzivlar kanalidagi barcha otzivlar tahlil qilinib saytga joylashtirildi
+- **Tashabbus:** `@baxtiyor_gaziyev_otzivlar` Telegram kanalidagi barcha postlar, video kruglyashlar, ovozli xabarlar va patent guvohnomalari Telethon orqali to'liq yuklab olindi, Groq Whisper va AI yordamida tahlil qilinib, haqiqiy mijozlar va brend egalari aniqlandi.
+- **Aniqlangan va saytga kiritilgan yangi otzivlar (8 ta yangi keys):**
+  1. **Sherzodbek Jumanov** (`Zayan` brendi asoschisi): Zayan brendini to'liq qonuniy patentlab berilgani haqidagi video testimonial (`/videos/testimonials/sherzodbek-jumanov.mp4`, `/images/testimonials/sherzodbek-jumanov.jpg`).
+  2. **Umidjon Rahimov** (`Velzo` avto moy servisi asoschisi): Velzo brendi, logotipi va Adliya vazirligidan patent guvohnomasi olingani haqidagi video testimonial (`/videos/testimonials/umidjon-velzo.mp4`, `/images/testimonials/umidjon-velzo.jpg`).
+  3. **Ramziddin** (`Arfadel` brendi asoschisi): Arfadel nomlash, brending va logotip yaratish jarayoni, Baxtiyorjon va Jon Branding jamoasiga minnatdorchilik video testimoniali (`/videos/testimonials/ramziddin-arfadel.mp4`, `/images/testimonials/ramziddin-arfadel.jpg`).
+  4. **Tulqin Xolmirzayev** (Brending va patentlash mijozi): Brending, logotip, qadoq/korobka va patentlash bo'yicha video testimonial (`/videos/testimonials/tulqin-xolmirzayev.mp4`, `/images/testimonials/tulqin-xolmirzayev.jpg`).
+  5. **Xoshimboy Usmanov** (`Dilbaroy Clinic` asoschisi): Tibbiyot klinikasi brending ishlari bo'yicha video minnatdorchilik (`/videos/testimonials/xoshimboy-usmanov.mp4`, `/images/testimonials/xoshimboy-usmanov.jpg`).
+  6. **Saltanat Axmedova** (`Sadiya Cakes` asoschisi): Jon Branding dizayni juda kuchli o'ylangani, karamel rangini tanlashgani va barcha biznes tanishlariga tavsiya qilayotgani haqida ovozli xabar audio testimoniali (`/audio/saltanat-axmedova.ogg`).
+  7. **Azizjon Dexkonov** (`Azel Shoes` asoschisi): № MGU 66985 tovar belgisi rasmiy patent guvohnomasi keysi (`/images/testimonials/azel-patent.jpg`).
+  8. **Sunnah Products jamoasi**: Shirin hadya va samimiy minnatdorchilik, brending hamkorligi.
+- **Arxitektura va komponentlar yaxshilandi:**
+  - `src/components/sections/testimonials.tsx`: Direct video (`<video>` player) qo'llab-quvvatlashi qo'shildi — endi nafaqat Vimeo, balki mahalliy MP4 video sharhlari ham modal lightbox'da bir marta bosish bilan silliq ijro etiladi.
+  - `src/lib/data/testimonials.ts`: Sanity faqat 1 ta testimonial qaytarganda qolgan barcha boy static/telegram sharhlarini yashirib qo'ymasligi uchun Sanity va boy fallback to'liq deduplikatsiya qilinib birlashtirildi (merge).
+  - Barcha yangi otzivlar 4 ta tilda (`uz`, `ru`, `en`, `zh`) professional tarzda `src/lib/static-data.ts` ga joylashtirildi.
+- **Tekshiruv:**
+  - `npm run verify:fast` — 55 test fayli, 379 ta test 100% muvaffaqiyatli o'tdi.
+
 ## 2026-10-07 | Firestore'dan Turso libSQL bazasiga to'liq o'tildi (Yagona operatsion baza)
 - **Tashabbus:** Firestore o'rniga Oisha-OS bilan yagona Turso (libSQL) bulutli bazasiga to'liq migratsiya qilindi. GCP Service Account JSON, murakkab ruxsatlar va billing muammolariga chek qo'yildi.
 - **Bajarilgan ishlar:**
