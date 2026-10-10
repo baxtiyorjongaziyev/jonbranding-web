@@ -1935,3 +1935,9 @@ Native agent discovered all three project skills and accurately reported project
 - Added v2 icon URLs, manifest/apple metadata/SW cache updated; installer uses unoptimized local PNG to avoid broken optimizer delivery.
 - verify:fast and verify passed (56 files, 384 tests, typecheck, 4 locales); PNG dimensions/opaque checks passed. Self-review completed. No unrelated changes reverted.
 
+
+- Production image readback exposed root cause of prior broken icon: src/proxy.ts matcher rewrites icon PNG paths into locale pages ->404. Added exclusions for icon-* and versioned apple-touch-icon; 8 actual Next matcher regression cases added. First deploy Ready but asset readback failed; corrective deploy follows after gates.
+
+
+- Corrective verification: installed Next exports unstable_doesMiddlewareMatch despite bundled docs naming doesProxyMatch; corrected test API. verify and verify:fast pass392 tests and typecheck. Reviewer: self-review; locale exclusions narrowly scoped to icon assets.
+
