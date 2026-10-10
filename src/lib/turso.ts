@@ -79,6 +79,36 @@ export async function ensureTursoSchema(): Promise<void> {
           reset_at INTEGER NOT NULL,
           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );`,
+        `CREATE TABLE IF NOT EXISTS affiliates (
+          id TEXT PRIMARY KEY,
+          full_name TEXT NOT NULL,
+          phone TEXT NOT NULL UNIQUE,
+          telegram_username TEXT,
+          promo_code TEXT NOT NULL UNIQUE,
+          access_token TEXT NOT NULL UNIQUE,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`,
+        `CREATE TABLE IF NOT EXISTS referrals (
+          id TEXT PRIMARY KEY,
+          affiliate_id TEXT NOT NULL REFERENCES affiliates(id),
+          amocrm_lead_id INTEGER,
+          lead_name TEXT NOT NULL,
+          lead_phone TEXT NOT NULL,
+          service_hint TEXT,
+          status TEXT NOT NULL DEFAULT 'new',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          won_at TIMESTAMP
+        );`,
+        `CREATE TABLE IF NOT EXISTS payouts (
+          id TEXT PRIMARY KEY,
+          referral_id TEXT NOT NULL UNIQUE REFERENCES referrals(id),
+          affiliate_id TEXT NOT NULL REFERENCES affiliates(id),
+          service TEXT NOT NULL,
+          amount INTEGER NOT NULL,
+          paid INTEGER NOT NULL DEFAULT 0,
+          paid_at TIMESTAMP,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`,
       ],
       'write'
     );
