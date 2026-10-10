@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { NextRequest } from 'next/server';
+import { unstable_doesMiddlewareMatch } from 'next/experimental/testing/server';
 import { proxy, config } from './proxy';
 
 function requestFor(url: string) {
@@ -7,6 +8,14 @@ function requestFor(url: string) {
 }
 
 describe('proxy locale redirect', () => {
+  it.each([
+    '/icon-192.png', '/icon-512.png', '/icon-192-v2.png', '/icon-512-v2.png',
+    '/icon-maskable-192-v2.png', '/icon-maskable-512-v2.png', '/icon-v2.svg',
+    '/apple-touch-icon-v2.png',
+  ])('serves PWA asset %s without locale rewriting', (url) => {
+    expect(unstable_doesMiddlewareMatch({ config, nextConfig: {}, url })).toBe(false);
+  });
+
   it('strips the default locale prefix', () => {
     const response = proxy(requestFor('https://jonbranding.uz/uz/diagnostika'));
     expect(response.status).toBe(308);
