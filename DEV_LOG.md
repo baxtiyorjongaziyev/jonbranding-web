@@ -1,5 +1,16 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-10 | Hamkorlik (Affiliate) tizimi Turso libSQL bazasiga ulanib jonli productionda ishga tushirildi
+- **Muammo:** Hamkorlik sahifasida ro'yxatdan o'tishda forma 503 xatosi qaytarayotgan edi, chunki eski kod faqat Supabase kalitiga bog'langan, Vercelda esa `SUPABASE_SERVICE_ROLE_KEY` mavjud emas edi.
+- **Yechim:**
+  1. Loyihaning yagona operatsion bazasi bo'lgan Turso libSQL (`src/lib/turso.ts`)ga `affiliates`, `referrals` va `payouts` jadvallari qo'shildi va avto-migratsiya sozlandi.
+  2. `src/lib/affiliate/store.ts`: Turso bazasi birlamchi qilib ulandi (barcha CRUD operatsiyalari, statistikalar, dashboard va to'lovlar). Supabase esa xavfsiz zaxira fallback sifatida saqlandi.
+  3. Barcha 75 ta affiliate va tegishli testlar 100% muvaffaqiyatli o'tdi.
+  4. Yangi versiya `main` tarmog'iga push qilindi va Vercel productionda (`jonbranding.uz`) deploy bo'ldi.
+- **Jonli tekshiruv:**
+  - `POST /api/affiliate/register` — 200 OK, unikal promokod va maxfiy token muvaffaqiyatli generatsiya bo'ldi.
+  - `https://www.jonbranding.uz/hamkor/[token]` — Hamkor shaxsiy kabineti va statistikasi to'liq jonli ishlamoqda.
+
 ## 2026-10-09 | Telegram @baxtiyor_gaziyev_otzivlar kanalidagi barcha otzivlar tahlil qilinib saytga joylashtirildi
 - **Tashabbus:** `@baxtiyor_gaziyev_otzivlar` Telegram kanalidagi barcha postlar, video kruglyashlar, ovozli xabarlar va patent guvohnomalari Telethon orqali to'liq yuklab olindi, Groq Whisper va AI yordamida tahlil qilinib, haqiqiy mijozlar va brend egalari aniqlandi.
 - **Aniqlangan va saytga kiritilgan yangi otzivlar (8 ta yangi keys):**
