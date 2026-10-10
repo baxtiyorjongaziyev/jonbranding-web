@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* One mobile contact surface at a time. The external widget exposes its FAB
+   through ::part; its form and tracked phone links remain available. */
+@media (max-width: 767px) {
+  [data-oisha-callback-host]::part(button) {
+    display: none;
+  }
+  body:has([role="dialog"][data-state="open"]) [data-mobile-quick-actions],
+  body:has([data-mobile-overlay="true"]) [data-mobile-quick-actions],
+  body:has([data-pwa-install]) [data-mobile-quick-actions],
+  body[data-callback-open="true"] [data-mobile-quick-actions],
+  body:has([role="dialog"][data-state="open"]) [data-pwa-install],
+  body:has([data-mobile-overlay="true"]) [data-pwa-install],
+  body[data-callback-open="true"] [data-pwa-install] {
+    display: none;
+  }
+}
+
 /* ── Jon Atelier Design Tokens ── */
 :root {
   --at-bg:      #F2EFE6;   /* Warm paper beige */

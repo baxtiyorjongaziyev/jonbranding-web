@@ -37,7 +37,10 @@
     "mobile_quick_actions": "Mobil tezkor amallar",
     "about": "Haqimizda",
     "contacts": "Aloqa",
-    "online_brief": "Onlayn-brief"
+    "online_brief": "Onlayn-brief",
+    "close_menu": "Menyuni yopish",
+    "install_app": "Ilovani o'rnatish",
+    "install_app_hint": "Bosh ekranga joylash"
   },
   "layout": {
     "skipToMainContent": "Asosiy kontentga o'tish",
@@ -2080,7 +2083,7 @@
     "brand_system_mark": "Belgi",
     "brand_system_lockup": "Lockup",
     "gallery_title": "Tanlangan\nishlar.",
-    "gallery_lede": "2023—2025 davrida tanlangan 6 ta loyiha. Har biri real biznes, real qadoq, real natija. Sohaga qarab filterlang.",
+    "gallery_lede": "Logotip, firma uslubi va qadoq bo‘yicha tanlangan ishlar. Xizmat turiga qarab ko‘ring; barcha loyihalar portfolio sahifasida.",
     "gallery_similar": "O'xshash biznesmisiz? Sizga ham shunday natija mumkin.",
     "gallery_cta": "Mening biznesim uchun tashxis",
     "audit_title": "Tashxisda\nnimalarni tekshiramiz.",
@@ -2168,6 +2171,18 @@
       "title": "Instagramda bizni kuzating",
       "subtitle": "So'nggi loyihalarimiz va jamoa hayoti",
       "followBtn": "Kuzatish"
+    },
+    "gallery_label": "Portfolio",
+    "gallery_empty": "Bu xizmat bo‘yicha tanlangan ishlar hozircha yo‘q. Barcha loyihalarni portfolio sahifasida ko‘ring.",
+    "gallery_view_all": "Barcha loyihalarni ko‘rish",
+    "gallery_filters": {
+      "all": "Hammasi",
+      "brand-strategy": "Brend-strategiya",
+      "logo-design": "Logotip",
+      "brandbook": "Brendbuk",
+      "corporate-style": "Firma uslubi",
+      "packaging": "Qadoq",
+      "naming": "Neyming"
     }
   },
   "onlineBrief": {
@@ -2509,6 +2524,8 @@
     "description": "Telefoningizga o'rnating — qulay va tezkor ishlaydi",
     "install": "O'rnatish",
     "ios_instruction": "Ulashish ⎋ tugmasini bosing va \"Bosh ekranga qo'shish\" ⊕ ni tanlang",
-    "dismiss": "Yopish"
+    "dismiss": "Yopish",
+    "share": "Ulashish",
+    "add_to_home": "Bosh ekranga qo'shish"
   }
 }

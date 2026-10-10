@@ -36,6 +36,9 @@ type Dictionary = {
   contact_by_telegram: string;
   free_consultation: string;
   open_menu: string;
+  close_menu: string;
+  install_app: string;
+  install_app_hint: string;
   switch_lang: string;
   urgencyBadge?: string;
 };

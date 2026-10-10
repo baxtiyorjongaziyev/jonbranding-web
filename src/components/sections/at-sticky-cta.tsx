@@ -82,7 +82,7 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const v = variants[stage];
 
   return (
-    <div aria-hidden={!show} inert={!show ? true : undefined} className="fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-1/2 z-40 transition-[transform,opacity] duration-300 motion-reduce:transition-none" style={{ transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
+    <div data-sticky-audit="" aria-hidden={!show} inert={!show ? true : undefined} className="hidden md:block fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-1/2 z-40 transition-[transform,opacity] duration-300 motion-reduce:transition-none" style={{ transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
       <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 rounded-full shadow-2xl max-w-[90vw] sm:max-w-none" style={{ background: 'var(--at-ink)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px -10px rgba(14,16,21,0.5)' }}>
         <span className="text-xs font-semibold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-accent)', letterSpacing: '0.06em' }}>{v.num}</span>
         <span className="text-[11px] sm:text-sm line-clamp-1 truncate flex-1 min-w-[100px]" style={{ color: 'rgba(244,241,232,.7)' }}>{v.text}</span>

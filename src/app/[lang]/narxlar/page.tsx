@@ -64,9 +64,9 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     .map((project) => ({
       slug: project.slug,
       title: project.title,
-      client: project.client,
+      client: project.client || project.title,
       category: project.category,
-      categoryLabel: project.categoryLabel,
+      categoryLabel: project.categoryLabel || '',
       coverImage: project.coverImage,
       result: project.results?.[0],
     }));

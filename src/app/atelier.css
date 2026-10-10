@@ -1423,6 +1423,16 @@ html[data-theme="dark"] body:has(.atelier-home) {
   cursor: pointer;
   transition: background .15s, color .15s;
   background: transparent;
+  min-height: 44px;
+}
+@media (max-width: 767px) {
+  .atelier-theme .ind-filter {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    border-radius: 16px;
+  }
+  .atelier-theme .ind-pill { flex-shrink: 0; }
 }
 .atelier-theme .ind-pill.on {
 

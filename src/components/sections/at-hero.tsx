@@ -249,7 +249,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                         {activeItem.name}
                       </h2>
                       <span className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full shadow-lg">
-                        {l.portfolioBadge} · {activeItem.year}
+                        {l.portfolioBadge}{activeItem.year ? ` · ${activeItem.year}` : ''}
                       </span>
                     </div>
 

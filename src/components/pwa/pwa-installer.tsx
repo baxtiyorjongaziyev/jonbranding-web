@@ -5,6 +5,10 @@ import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Download, X, Share2, PlusSquare } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import uz from '@/locales/uz.json';
+import ru from '@/locales/ru.json';
+import en from '@/locales/en.json';
+import zh from '@/locales/zh.json';
 
 interface PwaInstallerProps {
   lang?: string;
@@ -14,10 +18,13 @@ interface PwaInstallerProps {
     install?: string;
     ios_instruction?: string;
     dismiss?: string;
+    share?: string;
+    add_to_home?: string;
   };
 }
 
 export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerProps) {
+  const guideCopy = ({ uz, ru, en, zh }[lang as 'uz' | 'ru' | 'en' | 'zh'] || uz).pwa;
   const reduceMotion = useReducedMotion();
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isIos, setIsIos] = useState(false);
@@ -192,7 +199,8 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.95 }}
         transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
-        className="fixed bottom-[calc(78px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-50 mx-auto max-w-sm"
+        data-pwa-install=""
+        className="fixed bottom-[calc(12px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-50 mx-auto max-w-sm"
       >
         <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#080d16]/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
           {/* Subtle accent glow */}
@@ -236,12 +244,12 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
               <div className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] text-white/80">
                 <span className="flex items-center gap-1.5 font-medium">
                   <Share2 className="h-3.5 w-3.5 text-primary" />
-                  1. Share
+                  1. {dictionary?.share || guideCopy.share}
                 </span>
                 <span className="text-white/30">→</span>
                 <span className="flex items-center gap-1.5 font-medium">
                   <PlusSquare className="h-3.5 w-3.5 text-emerald-400" />
-                  2. Add to Home Screen
+                  2. {dictionary?.add_to_home || guideCopy.add_to_home}
                 </span>
               </div>
             ) : (

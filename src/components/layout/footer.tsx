@@ -130,11 +130,11 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <div className="space-y-6">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.agency}</h3>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link href={getLocalizedPath('/#portfolio')} className="hover:text-white transition-colors">{copy.portfolio}</Link></li>
+              <li><Link href={getLocalizedPath('/#ishlar')} className="hover:text-white transition-colors">{copy.portfolio}</Link></li>
               <li><Link href={getLocalizedPath('/#founder')} className="hover:text-white transition-colors">{copy.founder}</Link></li>
               <li><Link href={getLocalizedPath('/haqimizda')} className="hover:text-white transition-colors">{copy.about_us}</Link></li>
               <li><Link href={getLocalizedPath('/aloqa')} className="hover:text-white transition-colors">{copy.contacts_page}</Link></li>
-              <li><Link href={getLocalizedPath('/#faq')} className="hover:text-white transition-colors">{copy.faq}</Link></li>
+              <li><Link href={getLocalizedPath('/#savol')} className="hover:text-white transition-colors">{copy.faq}</Link></li>
             </ul>
           </div>
 
@@ -165,7 +165,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
             <div className="space-y-3">
               <Link 
-                href={getLocalizedPath('/#portfolio')}
+                href={getLocalizedPath('/#ishlar')}
                 className="text-xs font-bold text-[#8f9cff] hover:text-white flex items-center gap-2 uppercase tracking-widest transition-colors"
               >
                 {copy.explore_work}
