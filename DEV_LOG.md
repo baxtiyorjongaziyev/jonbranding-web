@@ -70,10 +70,17 @@
      - `at-pricing.tsx` dagi bepul audit uchun ko'rsatilgan kulgili "foydali bo'lmasa pul qaytadi" o'chirilib, 100% amaliy tahlil va to'liq maxfiylik kafolatiga almashtirildi.
 - **Tekshiruv:** `npm run verify:fast` — barcha 54 test fayli va 376 ta test 100% muvaffaqiyatli (yashil) o'tdi.
 
+## 2026-10-06 | CI tezlashtirildi
+
+- `test.yml`: typecheck/lint/test va build parallel job'larga ajratildi; majburiy `Typecheck, lint, test, build` endi ikkalasini yig'uvchi job (nomi branch protection uchun saqlangan).
+- `.next/cache` `actions/cache` bilan saqlanadi.
+- Playwright E2E faqat `main`'ga push'da ishlaydi, PR'larda emas.
+- Oldin PR tekshiruvi ~4 daqiqa (build 127s), maqsad ~2.5 daqiqa.
+
 ## 2026-10-06 | Ichki /jamoa sahifasi (moliya formasi)
 
 **Qilingan ish:**
-- `public/jamoa.html` — egasi bergan mustaqil sahifa, o'zgarishsiz. `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
+- `public/jamoa.html` — egasi bergan mustaqil sahifa (keyin parol ekrani olib tashlandi). `/jamoa` ga `beforeFiles` rewrite; proxy uni til prefiksiga o'tkazmaydi.
 - Menyu, footer, sitemap'ga qo'shilmagan; `robots.ts` da `Disallow: /jamoa`. CSP `frame-src` ga `https://airtable.com`.
 - Parol ekrani olib tashlandi (egasi qarori). Himoya — Airtable formasining "Only users with base access" sozlamasi.
 
