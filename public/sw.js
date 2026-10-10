@@ -1,5 +1,5 @@
 // Service Worker for Jon.Branding PWA
-const CACHE_NAME = 'jonbranding-v2-icons';
+const CACHE_NAME = 'jonbranding-v3-recovery';
 
 const STATIC_ASSETS = [
   '/',
@@ -28,17 +28,23 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
+    (async () => {
+      const current = await caches.open(CACHE_NAME);
+      for (const key of await caches.keys()) {
+        if (key === CACHE_NAME || !key.startsWith('jonbranding-')) continue;
+        const previous = await caches.open(key);
+        // An already-open app can still need immutable chunks from its build.
+        for (const request of await previous.keys()) {
+          if (new URL(request.url).pathname.startsWith('/_next/static/')) {
+            const response = await previous.match(request);
+            if (response) await current.put(request, response);
           }
-        })
-      )
-    )
+        }
+        await caches.delete(key);
+      }
+      await self.clients.claim();
+    })()
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
@@ -62,7 +68,7 @@ self.addEventListener('fetch', (event) => {
   // Navigation (HTML pages): Network-First
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'no-store' })
         .then((response) => {
           if (response && response.status === 200) {
             const copy = response.clone();
@@ -81,9 +87,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets (Next.js static assets, fonts, icons): Stale-While-Revalidate
+  // Build-hashed chunks are immutable. Keep them available across SW updates.
+  if (url.origin === self.location.origin && url.pathname.startsWith('/_next/static/')) {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const cached = await cache.match(event.request);
+      if (cached) return cached;
+      try {
+        const response = await fetch(event.request);
+        // Storage quota must never turn a successful network load into an error.
+        if (response.status === 200) await cache.put(event.request, response.clone()).catch(() => {});
+        return response;
+      } catch {
+        return new Response('Asset unavailable', { status: 503 });
+      }
+    })());
+    return;
+  }
+
+  // Other static assets: Stale-While-Revalidate
   if (
-    url.pathname.startsWith('/_next/static/') ||
     url.pathname.endsWith('.png') ||
     url.pathname.endsWith('.jpg') ||
     url.pathname.endsWith('.jpeg') ||
@@ -100,7 +123,7 @@ self.addEventListener('fetch', (event) => {
             }
             return networkResponse;
           })
-          .catch(() => cached);
+          .catch(() => cached || new Response('Asset unavailable', { status: 503 }));
 
         return cached || fetchPromise;
       })
