@@ -37,7 +37,10 @@
     "mobile_quick_actions": "移动端快捷操作",
     "about": "关于我们",
     "contacts": "联系我们",
-    "online_brief": "在线简报"
+    "online_brief": "在线简报",
+    "close_menu": "关闭菜单",
+    "install_app": "安装应用",
+    "install_app_hint": "添加到主屏幕"
   },
   "layout": {
     "skipToMainContent": "跳到主要内容",
@@ -1905,7 +1908,7 @@
     "brand_system_mark": "标志",
     "brand_system_lockup": "组合标志",
     "gallery_title": "精选\n作品。",
-    "gallery_lede": "2023—2025 期间精选的 6 个项目。每个都是真实的业务、真实的包装、真实的结果。按行业筛选。",
+    "gallery_lede": "精选标志、视觉识别与包装项目。按服务类型浏览，完整项目请见作品集。",
     "gallery_similar": "您的业务类似吗？您也可以获得同样的结果。",
     "gallery_cta": "为我的业务进行诊断",
     "audit_title": "诊断中\n我们检查什么。",
@@ -1993,6 +1996,18 @@
       "title": "在 Instagram 上关注我们",
       "subtitle": "我们最新的项目和团队生活",
       "followBtn": "关注"
+    },
+    "gallery_label": "作品集",
+    "gallery_empty": "精选项目中暂时没有这项服务的作品。请在作品集中查看所有项目。",
+    "gallery_view_all": "查看所有项目",
+    "gallery_filters": {
+      "all": "全部",
+      "brand-strategy": "品牌策略",
+      "logo-design": "标志",
+      "brandbook": "品牌手册",
+      "corporate-style": "视觉识别",
+      "packaging": "包装",
+      "naming": "命名"
     }
   },
   "onlineBrief": {
@@ -2503,6 +2518,8 @@
     "description": "安装到主屏幕，以便快速流畅地使用",
     "install": "安装",
     "ios_instruction": "点击分享 ⎋ 并选择“添加到主屏幕” ⊕",
-    "dismiss": "关闭"
+    "dismiss": "关闭",
+    "share": "分享",
+    "add_to_home": "添加到主屏幕"
   }
 }

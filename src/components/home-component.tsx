@@ -2,6 +2,7 @@
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useMemo, useCallback } from 'react';
+import { selectHomePortfolioProjects, portfolioYear } from '@/lib/portfolio-presentation';
 
 import { MotionConfig } from 'framer-motion';
 
@@ -83,16 +84,17 @@ const HomeComponent: FC<{
     );
   }, []);
 
+  const homeProjects = useMemo(() => selectHomePortfolioProjects(portfolioProjects), [portfolioProjects]);
   const heroImages = useMemo(
     () =>
-      portfolioProjects
+      homeProjects
         .filter((p: any) => p.coverImage)
         .map((p: any) => ({
           src: p.coverImage,
-          name: p.title?.split(' ')[0] || p.client,
-          year: '2026',
+          name: p.title?.split(':')[0] || p.client,
+          year: portfolioYear(p.publishedAt),
         })),
-    [portfolioProjects]
+    [homeProjects]
   );
 
 
@@ -115,7 +117,7 @@ const HomeComponent: FC<{
 
       {/* ── Below-the-fold (lazy) ── */}
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
-        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={homeProjects} />
         <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter || dictionary} comparisons={comparisons} />
         <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
       </div>

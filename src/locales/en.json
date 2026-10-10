@@ -37,7 +37,10 @@
     "mobile_quick_actions": "Mobile quick actions",
     "about": "About Us",
     "contacts": "Contact",
-    "online_brief": "Online Brief"
+    "online_brief": "Online Brief",
+    "close_menu": "Close menu",
+    "install_app": "Install app",
+    "install_app_hint": "Add to home screen"
   },
   "layout": {
     "skipToMainContent": "Skip to main content",
@@ -1897,7 +1900,7 @@
     "brand_system_mark": "Mark",
     "brand_system_lockup": "Lockup",
     "gallery_title": "Selected\nworks.",
-    "gallery_lede": "6 selected projects from 2023—2025. Each represents a real business, real packaging, real results. Filter by industry.",
+    "gallery_lede": "Selected logo, visual identity and packaging projects. Browse by service; explore every project in our portfolio.",
     "gallery_similar": "Do you have a similar business? You can achieve the same results.",
     "gallery_cta": "Diagnosis for my business",
     "audit_title": "What we examine\nin a diagnosis.",
@@ -1985,6 +1988,18 @@
       "title": "Follow us on Instagram",
       "subtitle": "Our latest projects and team life",
       "followBtn": "Follow"
+    },
+    "gallery_label": "Portfolio",
+    "gallery_empty": "No selected projects for this service yet. Explore all projects in our portfolio.",
+    "gallery_view_all": "View all projects",
+    "gallery_filters": {
+      "all": "All",
+      "brand-strategy": "Brand strategy",
+      "logo-design": "Logo",
+      "brandbook": "Brandbook",
+      "corporate-style": "Visual identity",
+      "packaging": "Packaging",
+      "naming": "Naming"
     }
   },
   "onlineBrief": {
@@ -2495,6 +2510,8 @@
     "description": "Install on home screen for quick and seamless access",
     "install": "Install",
     "ios_instruction": "Tap Share ⎋ and choose \"Add to Home Screen\" ⊕",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "share": "Share",
+    "add_to_home": "Add to Home Screen"
   }
 }

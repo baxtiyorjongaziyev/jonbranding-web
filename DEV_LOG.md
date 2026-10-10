@@ -1941,3 +1941,18 @@ Native agent discovered all three project skills and accurately reported project
 
 - Corrective verification: installed Next exports unstable_doesMiddlewareMatch despite bundled docs naming doesProxyMatch; corrected test API. verify and verify:fast pass392 tests and typecheck. Reviewer: self-review; locale exclusions narrowly scoped to icon assets.
 
+
+- Final production verified 2026-10-10 19:01 Asia/Tashkent: commit622fc58, Vercel7rmmCP86Vot4RejLgJhrwhVzU9Va Ready, www.jonbranding.uz assigned. Browser icon-192-v2.png renders with naturalWidth/Height192 and complete=true; screenshot saved external mobile-audit/pwa-icon-production.png. Real installed launcher icon refresh not tested.
+
+
+### 2026-10-10 — mobil audit remediation
+- Implemented single mobile contact surface: external callback FAB hidden through exposed CSS part; mobile sticky CTA disabled; menu/dialog/chat/PWA suppress quick actions. Shadow callback observer tracks form open/closed without changing backend or tracking.
+- Footer anchors ->ishlar/savol; mobile drawer one localized44x44 close; PWA share/home-screen steps localized all4 languages.
+- Home portfolio six known projects with existing local brand art, canonical CMS URLs retained; service-based filters replace all-null industry fields; selected-state semantics, empty state, full portfolio link; no guessed years.
+- Perfona gallery inspected live: logo and Telegram IT product confirmed. Prior perfume inference withdrawn; existing description retained. Only old promotional cover replaced with existing gallery logo, future CMS cover edits retain precedence.
+- Pricing case alt/client fallback removes undefined; prices unchanged. Focused regressions added. verify:fast397 tests passed; verify initially found test API exact-option mismatch, corrected; subsequent verify397 tests +typecheck passed. Scoped ESLint passed.
+- Local390px visual checks: menu single close44x44, no callback FAB; PWA no broken images;6 gallery tiles; Qadoq onlyBoyarin; callback form hides quick actions. Form not submitted.
+
+
+- Final checks: verify:fast +verify397 tests59 files, typecheck/i18n1253keys per locale, scoped ESLint and git diff --check pass. Local pricing320 and Perfona360 overflow0; AI chat360 width336px and mobile nav hidden. Self-review completed; screenshots saved outside repo. Real-device native install/keyboard and lead delivery remain unverified.
+

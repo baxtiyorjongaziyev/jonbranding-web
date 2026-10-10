@@ -25,6 +25,11 @@ interface MobileMenuProps {
     services: string;
     free_consultation: string;
     open_menu: string;
+    close_menu: string;
+    contacts: string;
+    contact_by_phone: string;
+    install_app: string;
+    install_app_hint: string;
     contact_by_telegram: string;
   };
 }
@@ -58,7 +63,7 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              'flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
               useDarkHeaderText
                 ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-white'
                 : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-[#0a0d14]'
@@ -71,6 +76,8 @@ export function MobileMenu({
         {/* Full-screen mobile drawer */}
         <SheetContent
           side="right"
+          showCloseButton={false}
+          aria-describedby={undefined}
           className={cn(
             'w-full max-w-full border-0 p-0 sm:max-w-[420px]',
             'bg-[#FBF9F2] text-[#0E1015] border-l border-[#D8D2C2]'
@@ -84,8 +91,8 @@ export function MobileMenu({
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label="Close menu"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label={dictionary.close_menu}
             >
               <X className="h-4.5 w-4.5" />
             </button>
@@ -150,7 +157,7 @@ export function MobileMenu({
               {/* Contact links */}
               <motion.div variants={slideIn} className="flex flex-col gap-2">
                 <div className="mb-1 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
-                  Aloqa
+                  {dictionary.contacts}
                 </div>
                 <a
                   data-oisha-phone=""
@@ -164,7 +171,7 @@ export function MobileMenu({
                   </div>
                   <div>
                     <div className="text-[13px] font-bold text-[#0E1015]">+998 79 200 00 97</div>
-                    <div className="text-[11px] text-[#8B8779]">Qo'ng'iroq qiling</div>
+                    <div className="text-[11px] text-[#8B8779]">{dictionary.contact_by_phone}</div>
                   </div>
                 </a>
                 <a
@@ -197,10 +204,10 @@ export function MobileMenu({
                   </div>
                   <div className="text-left">
                     <div className="text-[13px] font-bold text-[#0E1015]">
-                      {lang === 'ru' ? 'Установить приложение' : lang === 'en' ? 'Install App' : "Ilovani o'rnatish"}
+                      {dictionary.install_app}
                     </div>
                     <div className="text-[11px] text-[#8B8779]">
-                      {lang === 'ru' ? 'Быстрый доступ на экран' : lang === 'en' ? 'Quick home screen access' : "Bosh ekranga joylash"}
+                      {dictionary.install_app_hint}
                     </div>
                   </div>
                 </button>

@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { logger } from '@/lib/logger';
+import { presentPortfolioProject } from '@/lib/portfolio-presentation';
 
 const LIST_QUERY = `
   *[_type == "portfolio"] | order(publishedAt desc, _createdAt desc) {
@@ -70,7 +71,8 @@ export function supersedesFallback(
 
 async function fetchSanityPortfolioList(): Promise<PortfolioProject[]> {
   try {
-    return (await client.fetch(LIST_QUERY)) ?? [];
+    const projects: PortfolioProject[] = (await client.fetch(LIST_QUERY)) ?? [];
+    return projects.map(presentPortfolioProject);
   } catch (e) {
     logger.error('Sanity portfolio fetch failed, using fallback:', e);
     return [];
@@ -121,7 +123,8 @@ export async function fetchPortfolioList(lang: string): Promise<PortfolioProject
 
 export async function fetchPortfolioBySlug(slug: string): Promise<PortfolioProject | null> {
   try {
-    return await client.fetch(SLUG_QUERY, { slug });
+    const project = await client.fetch(SLUG_QUERY, { slug });
+    return project ? presentPortfolioProject(project) : null;
   } catch {
     return null;
   }

@@ -219,7 +219,8 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-[60] w-[calc(100%-3rem)] sm:bottom-6 sm:w-[400px] h-[600px] max-h-[80vh]"
+            data-mobile-overlay="true"
+            className="fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] right-3 z-[60] w-[calc(100%_-_1.5rem)] sm:right-6 sm:bottom-6 sm:w-[400px] h-[600px] max-h-[85dvh]"
           >
             <Card className="h-full flex flex-col shadow-2xl rounded-3xl overflow-hidden border-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/5">
               <CardHeader className="p-4 border-b flex flex-row items-center justify-between bg-blue-600 text-white">

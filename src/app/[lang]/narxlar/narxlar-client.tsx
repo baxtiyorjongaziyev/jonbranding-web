@@ -295,7 +295,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
                       <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100">
                         <Image
                           src={item.coverImage}
-                          alt={`${item.client} — ${item.categoryLabel}`}
+                          alt={[item.client || item.title, item.categoryLabel].filter(Boolean).join(' — ')}
                           fill
                           sizes="(max-width: 768px) 100vw, 45vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
