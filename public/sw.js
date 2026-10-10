@@ -1,15 +1,15 @@
 // Service Worker for Jon.Branding PWA
-const CACHE_NAME = 'jonbranding-v1';
+const CACHE_NAME = 'jonbranding-v2-icons';
 
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/icon-maskable-192.png',
-  '/icon-maskable-512.png',
-  '/icon.svg',
-  '/apple-touch-icon.png',
+  '/icon-192-v2.png',
+  '/icon-512-v2.png',
+  '/icon-maskable-192-v2.png',
+  '/icon-maskable-512-v2.png',
+  '/icon-v2.svg',
+  '/apple-touch-icon-v2.png',
   '/favicon.ico',
 ];
 
