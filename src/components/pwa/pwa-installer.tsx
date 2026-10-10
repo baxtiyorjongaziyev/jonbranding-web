@@ -41,31 +41,27 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
   };
 
   useEffect(() => {
-    // 1. Register Service Worker in production or non-localhost
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      if (!isLocalhost || process.env.NODE_ENV === 'production') {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then((registration) => {
-            // Check for service worker updates periodically
-            registration.onupdatefound = () => {
-              const installingWorker = registration.installing;
-              if (installingWorker) {
-                installingWorker.onstatechange = () => {
-                  if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    console.log('[PWA] Yangi versiya tayyor.');
-                  }
-                };
-              }
-            };
-          })
-          .catch((err) => {
-            console.warn('[PWA] Service Worker ro\'yxatdan o\'tmadi:', err);
-          });
+    if (!('serviceWorker' in navigator)) return;
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocalhost && process.env.NODE_ENV !== 'production') return;
+    let registration: ServiceWorkerRegistration | undefined;
+    let active = true;
+    const checkForUpdate = () => {
+      if (document.visibilityState === 'visible' && navigator.onLine) {
+        void registration?.update().catch(() => {});
       }
-    }
+    };
+    void navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' })
+      .then((result) => { if (active) registration = result; })
+      .catch((err) => console.warn('[PWA] Service Worker ro\'yxatdan o\'tmadi:', err));
+    document.addEventListener('visibilitychange', checkForUpdate);
+    return () => {
+      active = false;
+      document.removeEventListener('visibilitychange', checkForUpdate);
+    };
+  }, []);
 
+  useEffect(() => {
     // 2. Check if already installed / standalone
     const isStandaloneMode =
       window.matchMedia('(display-mode: standalone)').matches ||

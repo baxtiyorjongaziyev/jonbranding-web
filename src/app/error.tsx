@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, RefreshCcw, Home } from 'lucide-react';
+import { isAssetLoadError, recoverAssetLoadError } from '@/lib/pwa-recovery';
 
 const errorText: Record<string, { title: string; desc: string; retry: string; home: string }> = {
   uz: { title: "Nimadir noto'g'ri ketdi", desc: "Tizimda kutilmagan xatolik yuz berdi. Biz buni allaqachon qayd etdik va bartaraf etish ustida ishlayapmiz.", retry: 'Qayta urinish', home: 'Bosh sahifa' },
@@ -21,10 +22,21 @@ function getLang(): string {
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     console.error('Application Error:', error);
+    try {
+      recoverAssetLoadError(error, {
+        storage: window.sessionStorage,
+        online: navigator.onLine,
+        now: Date.now(),
+        reload: () => window.location.reload(),
+      });
+    } catch {
+      // Storage access can be blocked; the manual retry remains available.
+    }
   }, [error]);
 
   const lang = getLang();
   const t = errorText[lang] || errorText.uz;
+  const retry = () => isAssetLoadError(error) ? window.location.reload() : reset();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -40,7 +52,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           {error.digest && <p className="text-xs text-gray-400 font-mono">Error ID: {error.digest}</p>}
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <Button onClick={() => reset()} variant="default" className="rounded-full px-8 py-6 bg-dark-blue hover:bg-blue-900 transition-all flex items-center gap-2">
+          <Button onClick={retry} variant="default" className="rounded-full px-8 py-6 bg-dark-blue hover:bg-blue-900 transition-all flex items-center gap-2">
             <RefreshCcw className="h-4 w-4" />
             {t.retry}
           </Button>

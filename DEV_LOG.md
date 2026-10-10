@@ -1956,3 +1956,19 @@ Native agent discovered all three project skills and accurately reported project
 
 - Final checks: verify:fast +verify397 tests59 files, typecheck/i18n1253keys per locale, scoped ESLint and git diff --check pass. Local pricing320 and Perfona360 overflow0; AI chat360 width336px and mobile nav hidden. Self-review completed; screenshots saved outside repo. Real-device native install/keyboard and lead delivery remain unverified.
 
+
+### 2026-10-10 — Mobile audit production verification
+- Commit 57aec492 deployed: Vercel FvJxU2ykZqW9FgaoKen67G8YjbKh Ready at 19:21:47 Asia/Tashkent, www.jonbranding.uz assigned; GitHub Vercel status success.
+- Live Chrome iPhone emulation 390px: one 44px menu close, no horizontal overflow; bottom actions hidden while menu/callback open; service Qadoq filter shows only Boyarin, reset restores six tiles; FAQ navigates #savol with section top 0.14px.
+- Live pricing 320px: scrollWidth=clientWidth=320, undefined image alt absent. Local 360px AI chat and Perfona cover verified earlier. No fake lead or chat submitted.
+- verify:fast and verify passed (397 tests, typecheck, four-locale parity). Real iPhone/Android installation, OS keyboard and actual lead delivery remain unverified.
+- Screenshots saved outside repository in Codex visualizations mobile-audit folder. Obsidian project append succeeded. Own local dev server stopped.
+
+### 2026-10-10 — Installed PWA scroll error investigation
+- Owner reports root homepage error after scrolling in installed PWA. Fresh Chrome mobile page scrolled to footer without runtime errors; exact phone exception is not yet reproduced.
+- Applied deliver-task workflow; self-review only. Scope: service worker cache lifecycle, registration/resume update, root chunk error recovery, SW response headers, focused behavioral tests.
+- Confirmed defect: old SW activation deleted prior immutable Next chunks while immediately taking over existing clients. Fixed by migrating cached build assets before cleanup/claim and preserving unrelated caches. Navigations bypass HTTP cache; offline missing assets return a real 503 response.
+- Added no-store sw.js header, updateViaCache none and visibility/resume update check for standalone as well as browser. Chunk import errors recover by hard reload once per two minutes/session; generic render/offline/storage-blocked errors are not reloaded.
+- 9 regression cases cover cache migration, old chunk access without network, fresh navigation/offline fallback, missing asset503, chunk classification and loop guard. verify:fast: 406 tests passed; focused ESLint and diff check passed. Full verify and deployment pending.
+- Limitation: likely deployment/cache failure mitigation; actual owner phone error is not proven resolved until device retest.
+- Full verify passed: typecheck, 406 tests, four locales. Self-review adjusted immutable cache writes so quota failures do not discard successful network responses; focused SW/recovery tests rerun passed before publication.
