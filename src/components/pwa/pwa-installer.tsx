@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Download, X, Share2, PlusSquare } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 
@@ -18,6 +18,7 @@ interface PwaInstallerProps {
 }
 
 export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerProps) {
+  const reduceMotion = useReducedMotion();
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isIos, setIsIos] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
@@ -69,36 +70,45 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
 
     // Check iOS
     const ua = window.navigator.userAgent.toLowerCase();
-    const isIosDevice = /iphone|ipad|ipod/.test(ua) && !(window as any).MSStream;
+    const isIosDevice = /iphone|ipad|ipod/.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isMobileDevice = isIosDevice || /android/.test(ua);
+    // A narrow desktop window is still a desktop: install offers are mobile-only.
+    if (!isMobileDevice) return;
     setIsIos(isIosDevice);
 
     // Check if dismissed recently (3 days)
-    const dismissedAt = localStorage.getItem('jb_pwa_dismissed');
+    let dismissedAt: string | null = null;
+    try {
+      dismissedAt = localStorage.getItem('jb_pwa_dismissed');
+    } catch {}
     const isDismissedRecently = dismissedAt && Date.now() - parseInt(dismissedAt, 10) < 3 * 24 * 60 * 60 * 1000;
+    let promptTimer: ReturnType<typeof setTimeout> | undefined;
+    const clearPromptTimer = () => {
+      if (promptTimer !== undefined) clearTimeout(promptTimer);
+    };
+    const schedulePrompt = () => {
+      clearPromptTimer();
+      if (isDismissedRecently) return;
+      promptTimer = setTimeout(() => {
+        setShowPrompt(true);
+        trackEvent({ action: 'pwa_prompt_shown', category: 'PWA', label: 'automatic' });
+      }, 6000);
+    };
 
     // 3. Listen for Android / Chrome beforeinstallprompt
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
 
-      if (!isDismissedRecently) {
-        // Show after 6 seconds so user can see initial page
-        const timer = setTimeout(() => {
-          setShowPrompt(true);
-          trackEvent({
-            action: 'pwa_prompt_shown',
-            category: 'PWA',
-            label: 'automatic',
-          });
-        }, 6000);
-        return () => clearTimeout(timer);
-      }
+      schedulePrompt();
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     // 4. Listen for app installed
     const handleAppInstalled = () => {
+      clearPromptTimer();
       setShowPrompt(false);
       setDeferredPrompt(null);
       setIsStandalone(true);
@@ -112,14 +122,18 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
 
     // 5. Custom trigger from menu or buttons
     const handleCustomTrigger = () => {
+      clearPromptTimer();
       setShowPrompt(true);
       if (isIosDevice && !isStandaloneMode) {
         setShowIosGuide(true);
       }
     };
     window.addEventListener('openPwaInstallPrompt', handleCustomTrigger);
+    // Safari does not emit beforeinstallprompt; offer its home-screen guide.
+    if (isIosDevice) schedulePrompt();
 
     return () => {
+      clearPromptTimer();
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
       window.removeEventListener('openPwaInstallPrompt', handleCustomTrigger);
@@ -174,11 +188,11 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 30, scale: 0.95 }}
-        transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-        className="fixed bottom-[78px] left-3 right-3 z-50 mx-auto max-w-sm sm:bottom-6 sm:left-auto sm:right-6 sm:max-w-[380px]"
+        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.95 }}
+        transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
+        className="fixed bottom-[calc(78px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-50 mx-auto max-w-sm"
       >
         <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#080d16]/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
           {/* Subtle accent glow */}
@@ -189,7 +203,7 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
             type="button"
             onClick={handleDismiss}
             aria-label={t.dismiss}
-            className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+            className="absolute right-1 top-1 flex h-11 w-11 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
           >
             <X className="h-4 w-4" />
           </button>
@@ -234,14 +248,14 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
                 <button
                   type="button"
                   onClick={handleDismiss}
-                  className="rounded-xl px-3 py-1.5 text-xs font-medium text-white/60 transition-colors hover:text-white"
+                  className="min-h-11 rounded-xl px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:text-white"
                 >
                   {t.dismiss}
                 </button>
                 <button
                   type="button"
                   onClick={handleInstallClick}
-                  className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-indigo-600 px-4 py-2 text-xs font-bold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-primary/50 active:scale-95"
+                  className="flex min-h-11 items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-primary/90"
                 >
                   <Download className="h-3.5 w-3.5" />
                   {t.install}
