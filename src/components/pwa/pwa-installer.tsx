@@ -212,7 +212,8 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
             {/* Logo / App Icon */}
             <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-black/40 shadow-inner">
               <Image
-                src="/icon-192.png"
+                src="/icon-192-v2.png"
+                unoptimized
                 alt="Jon.Branding"
                 width={48}
                 height={48}

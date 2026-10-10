@@ -1,6 +1,9 @@
 # 📓 Dev Log — Jon Branding Web
 
 ## 2026-10-10 | Mobil PWA production deploy boshlandi (Codex)
+- Yakun: 18:03 Asia/Tashkent, PWA commit 1765f033 Vercel production Ready; deployment 9nBE2t33cTxZbBXvDduzxx66YKvf. www.jonbranding.uz domeni shu deployment'ga ulanganini Vercel browser UI tasdiqladi; GitHub Vercel commit status success.
+- Production build: 165 sahifa, deployment 2m 43s. Lighthouse CI va CodeQL success; asosiy GitHub CI tekshiruvi kuzatuv paytida davom etmoqda. Haqiqiy telefonda install testi bajarilmadi.
+- Bu yakuniy log qaydi lokal saqlandi; PWA kodi va regression testlari main'ga push qilingan.
 - Owner «deploy qil» deb production chiqarishni tasdiqladi.
 - main origin/main bilan teng; faqat PWA komponenti, 5 regression test va DEV_LOG chiqariladi.
 - Deploy oldidan to'liq verify o'tdi: typecheck, 4 til parity, 56 test fayl / 384 test.
@@ -1925,3 +1928,10 @@ Native agent discovered all three project skills and accurately reported project
   5. `src/components/layout/header-mobile-menu.tsx`: Mobil gamburger menyuga "Ilovani o'rnatish" tugmasi qo'shildi.
   6. i18n: `uz.json`, `ru.json`, `en.json`, `zh.json` fayllariga `pwa` kalitlari Uzbek-first tamoyilida to'liq qo'shildi.
 - **Tekshiruv:** `npm run verify:fast` (barcha 54 test to'plami, 376 ta test) va `npm run typecheck` 100% xatosiz muvaffaqiyatli o'tdi.
+\n### 2026-10-10 � production mobil vizual audit\n- jonbranding.uz home, menu, PWA, portfolio filter, footer, pricing va Perfona detail tekshirildi (Chrome emulation 390/320/360).\n- Tasdiqlandi: callback/mobile-nav/menu collision; food filter 23 tiles; nonexistent footer anchors; PWA broken icon; gallery copy mismatch; duplicate close.\n- Report: docs/audits/2026-10-10-mobile-audit.md; screenshots external visualization directory.\n- Audit-only: product code unchanged, no lead submitted. Harness rerun not required for docs-only audit; prior code verification remains separate from visual findings.\n
+
+### 2026-10-10 � PWA icon contrast fix
+- Reproduced: dark JON on transparent regular icons disappears against dark backgrounds. Existing brand vector retained; opaque cream backgrounds rasterized with sharp at exact 192/512/180 sizes; maskable safe-area retained.
+- Added v2 icon URLs, manifest/apple metadata/SW cache updated; installer uses unoptimized local PNG to avoid broken optimizer delivery.
+- verify:fast and verify passed (56 files, 384 tests, typecheck, 4 locales); PNG dimensions/opaque checks passed. Self-review completed. No unrelated changes reverted.
+
