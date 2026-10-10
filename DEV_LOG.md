@@ -1,5 +1,21 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-10 | Mobil PWA production deploy boshlandi (Codex)
+- Owner «deploy qil» deb production chiqarishni tasdiqladi.
+- main origin/main bilan teng; faqat PWA komponenti, 5 regression test va DEV_LOG chiqariladi.
+- Deploy oldidan to'liq verify o'tdi: typecheck, 4 til parity, 56 test fayl / 384 test.
+- Vercel connector reauthentication so'radi; GitHub Git integration orqali deploy va commit status tekshiruvi ishlatiladi.
+- Self-review bajarildi. Rollback: PWA release commitini git revert qilib main'ga push qilish.
+
+## 2026-10-10 | PWA mobil qurilmalar uchun moslandi (Codex)
+- Owner talabi: PWA desktop uchun emas, mobil uchun kerak.
+- Tekshiruv: manifest allaqachon standalone va portrait-primary; muammo install taklifining desktop Chrome'da ham chiqishi edi.
+- Android/iOS qurilma cheklovi qo'shildi (iPadOS desktop UA ham hisobga olinadi); tor desktop oynasi mobil sifatida qabul qilinmaydi.
+- iPhone uchun avtomatik install taklifi; timer cleanup, localStorage himoyasi, 44px touch targets, safe-area va reduced-motion moslandi.
+- Skill: impeccable/adapt. Tasodifiy boshqa fayllarga tegilmadi.
+- Verification: verify:fast va verify o'tdi (379 mavjud test, typecheck, i18n); 5 yangi PWA regression test alohida o'tdi; scoped ESLint toza; git diff --check toza.
+- Status: lokal o'zgarish, commit/push/deploy qilinmadi. Haqiqiy telefonda install tekshiruvi hali ochiq. Talab va ish holati Obsidian'ga yozildi.
+
 ## 2026-10-10 | Hamkorlik (Affiliate) tizimi Turso libSQL bazasiga ulanib jonli productionda ishga tushirildi
 - **Muammo:** Hamkorlik sahifasida ro'yxatdan o'tishda forma 503 xatosi qaytarayotgan edi, chunki eski kod faqat Supabase kalitiga bog'langan, Vercelda esa `SUPABASE_SERVICE_ROLE_KEY` mavjud emas edi.
 - **Yechim:**
