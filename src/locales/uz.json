@@ -553,6 +553,8 @@
     "recommend_val": "90%"
   },
   "trustedBy": {
+    "pause": "Harakatni to‘xtatish",
+    "resume": "Harakatni davom ettirish",
     "eyebrow": "Bizga ishonch bildirgan kompaniyalar",
     "title": "Bizneslar bizga ko'rinish emas, ishonch tizimini topshirishadi.",
     "subtitle": "Mahalliy brendlar Jon.Branding bilan bozorda qimmatroq, tushunarliroq va tanlashga osonroq ko'rinish uchun ishlaydi.",

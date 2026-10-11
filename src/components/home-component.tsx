@@ -115,7 +115,7 @@ const HomeComponent: FC<{
       {/* ── Above-the-fold (SSR) ─── */}
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
       <AtMarquee lang={lang} />
-      <ClientLogos title={dictionary.trustedBy.eyebrow} />
+      <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
       <PriceOverview lang={lang} />

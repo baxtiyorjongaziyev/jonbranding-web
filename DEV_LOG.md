@@ -1988,3 +1988,14 @@ Native agent discovered all three project skills and accurately reported project
 - Local E2E unavailable: installed Playwright Chromium executable missing; CI will execute suite. No real leads submitted.
 
 - Logo release e2e97355 prerender failed: trimmed homeDictionary omitted trustedBy. Added only required eyebrow to the server-to-client dictionary; rerunning full build before release. Live footer and 20-minute consultation dialogs verified after resetting conflicting browser emulation overrides.
+
+- Final release a7f1adb22d1b9ab47404850ce61a921343013a97: Vercel 3jvkcwqcyTs44rnQRACUHX3HJ5xZ Production Ready at 14:28:43 Asia/Tashkent, www.jonbranding.uz assigned. Four logo images loaded on live page; screenshot production-client-logos.png saved outside repo. 320px layout clientWidth=scrollWidth=320. Full homepage scroll, footer team form, 20-minute consultation and PWA entry verified in browser emulation. Local full production build passed 165 static pages; lint and 418 tests passed. Physical Android and real CRM lead delivery remain unverified.
+
+- Final CI run 38128411228 success: core Typecheck/lint/test/build and Playwright Chromium E2E both passed for a7f1adb22d1b9ab47404850ce61a921343013a97.
+
+## 2026-10-11 - Three-row client logo train
+- Owner requested two rows moving left and one right. Replaced static four-logo grid with three seamless tracks (left/right/left), using existing client logo sources with prior hiddenInHero exclusions preserved.
+- CSS transform-only linear loops, identical duplicated groups with aria-hidden, offscreen IntersectionObserver pause, localized pause/resume controls, and static reduced-motion layout. No new client/service claims or CMS changes.
+- Applied ui-animation skill; verify, lint, visual checks and release pending.
+
+- Verification passed: 4 locales /1323 keys, TypeScript, 65 test files /418 tests, full lint. CSS loops animate transform only. Production build and visual verification will run on exact release commit.
