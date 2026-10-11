@@ -7,7 +7,6 @@ export const staticBrands: Brand[] = [
     { name: 'M-Karim', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/fad5b1fdb82621fbd2172ec3db4f07ddfe93d032-198x101.png' }, 
     { name: 'Prime Fit', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/c703c9e98c9bec5e8b1b4c82e5e82f22cb713730-518x103.png' }, 
     { name: 'Revo', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/e4a0a8cdbea0ecfc5493501f962f7454856ee038-595x294.png' }, 
-    { name: 'To\'maris', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/988c07b7a9bdbb8ce925ba2c93d54918dd4ac339-401x143.png' }, 
     { name: 'Aisha Mebel', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/9dbd2b8a7a6adb43828abc2c8a595c148260f5f8-333x201.png' }, 
     { name: 'Den Aroma', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/eba37120fa078eaf1cfabb93273ef5a8755e89bc-286x63.png' }, 
     { name: 'Velzo', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/5789862c43bcf1423a4e7d9abfa9e976dcdce4c9-383x141.png' }, 
