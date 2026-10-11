@@ -2,6 +2,7 @@ import { client } from '@/sanity/lib/client';
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
 import type { Testimonial } from '@/lib/types';
 import { logger } from '@/lib/logger';
+import { presentTestimonial } from '@/lib/testimonial-presentation';
 
 const QUERY = `
   *[_type == "testimonial"] | order(coalesce(order, 999) asc) {
@@ -25,9 +26,9 @@ const HIKMATULLOH_COVER = '/images/testimonials/hikmatulloh-toxirov-cover.webp';
 function applyLocalCovers(testimonials: Testimonial[]): Testimonial[] {
   return testimonials.map((testimonial) => {
     if (testimonial.videoUrl?.includes(HIKMATULLOH_VIDEO_ID)) {
-      return { ...testimonial, image: HIKMATULLOH_COVER };
+      return presentTestimonial({ ...testimonial, image: HIKMATULLOH_COVER });
     }
-    return testimonial;
+    return presentTestimonial(testimonial);
   });
 }
 

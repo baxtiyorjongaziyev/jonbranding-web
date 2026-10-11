@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { getSalesFlow } from '@/lib/sales-flow';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
+import { Menu, Phone, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
@@ -174,23 +175,6 @@ export function MobileMenu({
                     <div className="text-[11px] text-[#8B8779]">{dictionary.contact_by_phone}</div>
                   </div>
                 </a>
-                <a
-                  href="https://t.me/baxtiyorjongaziyev"
-                  onClick={() => trackContactClick('telegram', 'mobile_menu')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
-                    <Send className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <div className="text-[13px] font-bold text-[#0E1015]">
-                      {dictionary.contact_by_telegram}
-                    </div>
-                    <div className="text-[11px] text-[#8B8779]">Telegram</div>
-                  </div>
-                </a>
                 <button
                   type="button"
                   onClick={() => {
@@ -217,7 +201,6 @@ export function MobileMenu({
             {/* Sticky CTA at bottom */}
             <div className="mt-auto p-4 border-t border-[#D8D2C2] bg-[#F2EFE6]">
               <button
-                data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);
@@ -227,7 +210,7 @@ export function MobileMenu({
                 <div className="flex flex-col">
                   <span className="text-[15px] font-bold">{dictionary.free_consultation}</span>
                   <span className="mt-0.5 text-[12px] font-medium text-white/80">
-                    Bepul Brand Audit · 30 daqiqa
+                    {getSalesFlow(lang).consultation}
                   </span>
                 </div>
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

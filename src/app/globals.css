@@ -140,6 +140,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }

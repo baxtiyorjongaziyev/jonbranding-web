@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Download, X, Share2, PlusSquare } from 'lucide-react';
+import { Download, X, Share2, PlusSquare, MoreVertical } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import uz from '@/locales/uz.json';
 import ru from '@/locales/ru.json';
@@ -11,26 +11,30 @@ import en from '@/locales/en.json';
 import zh from '@/locales/zh.json';
 
 interface PwaInstallerProps {
+  installRequest?: number;
   lang?: string;
   dictionary?: {
     title?: string;
     description?: string;
     install?: string;
     ios_instruction?: string;
+    android_instruction?: string;
+    browser_menu?: string;
     dismiss?: string;
     share?: string;
     add_to_home?: string;
   };
 }
 
-export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerProps) {
+export default function PwaInstaller({ lang = 'uz', dictionary, installRequest }: PwaInstallerProps) {
   const guideCopy = ({ uz, ru, en, zh }[lang as 'uz' | 'ru' | 'en' | 'zh'] || uz).pwa;
   const reduceMotion = useReducedMotion();
+  const externallyTriggered = installRequest !== undefined;
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isIos, setIsIos] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
-  const [showIosGuide, setShowIosGuide] = useState(false);
+  const [showManualGuide, setShowManualGuide] = useState(false);
 
   const t = {
     title: dictionary?.title || (lang === 'ru' ? 'Приложение Jon.Branding' : lang === 'en' ? 'Jon.Branding App' : "Jon.Branding Ilovasi"),
@@ -128,10 +132,10 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
       clearPromptTimer();
       setShowPrompt(true);
       if (isIosDevice && !isStandaloneMode) {
-        setShowIosGuide(true);
+        setShowManualGuide(true);
       }
     };
-    window.addEventListener('openPwaInstallPrompt', handleCustomTrigger);
+    if (!externallyTriggered) window.addEventListener('openPwaInstallPrompt', handleCustomTrigger);
     // Safari does not emit beforeinstallprompt; offer its home-screen guide.
     if (isIosDevice) schedulePrompt();
 
@@ -141,7 +145,17 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
       window.removeEventListener('appinstalled', handleAppInstalled);
       window.removeEventListener('openPwaInstallPrompt', handleCustomTrigger);
     };
-  }, []);
+  }, [externallyTriggered]);
+
+  useEffect(() => {
+    if (!installRequest || isStandalone) return;
+    const ua = navigator.userAgent.toLowerCase();
+    const ios = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!ios && !/android/.test(ua)) return;
+    if (window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone === true || document.referrer.includes('android-app://')) return;
+    setShowPrompt(true);
+    setShowManualGuide(ios);
+  }, [installRequest, isStandalone]);
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
@@ -166,14 +180,14 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
       } catch (err) {
         console.error('[PWA] Prompt xatosi:', err);
       }
-    } else if (isIos) {
-      setShowIosGuide(true);
+    } else {
+      setShowManualGuide(true);
     }
   };
 
   const handleDismiss = useCallback(() => {
     setShowPrompt(false);
-    setShowIosGuide(false);
+    setShowManualGuide(false);
     try {
       localStorage.setItem('jb_pwa_dismissed', Date.now().toString());
     } catch {}
@@ -184,7 +198,7 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
     });
   }, []);
 
-  if (isStandalone || (!showPrompt && !showIosGuide)) {
+  if (isStandalone || (!showPrompt && !showManualGuide)) {
     return null;
   }
 
@@ -229,18 +243,20 @@ export default function PwaInstaller({ lang = 'uz', dictionary }: PwaInstallerPr
             <div className="flex-1">
               <div className="text-[14px] font-bold tracking-tight text-white">{t.title}</div>
               <p className="mt-0.5 text-[12px] leading-relaxed text-white/70">
-                {showIosGuide ? t.iosInstruction : t.description}
+                {showManualGuide
+                  ? (isIos ? t.iosInstruction : dictionary?.android_instruction || guideCopy.android_instruction)
+                  : t.description}
               </p>
             </div>
           </div>
 
           {/* Action Row */}
           <div className="mt-3.5 flex items-center justify-end gap-2">
-            {showIosGuide ? (
+            {showManualGuide ? (
               <div className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] text-white/80">
                 <span className="flex items-center gap-1.5 font-medium">
-                  <Share2 className="h-3.5 w-3.5 text-primary" />
-                  1. {dictionary?.share || guideCopy.share}
+                  {isIos ? <Share2 className="h-3.5 w-3.5 text-primary" /> : <MoreVertical className="h-3.5 w-3.5 text-primary" />}
+                  1. {isIos ? dictionary?.share || guideCopy.share : dictionary?.browser_menu || guideCopy.browser_menu}
                 </span>
                 <span className="text-white/30">→</span>
                 <span className="flex items-center gap-1.5 font-medium">

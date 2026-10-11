@@ -10,6 +10,7 @@ import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/ana
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
 import { getSalesContent, SERVICE_CATEGORIES } from '@/lib/sales-content';
 import type { ServiceId } from '@/lib/sales-content';
+import PriceOverview from '@/components/sales/price-overview';
 import LeadModal from '@/components/sales/lead-modal';
 
 const fadeUp: Variants = {
@@ -157,6 +158,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
         >
           {ui.hero.sub}
         </motion.p>
+        <PriceOverview lang={lang} local />
         <motion.dl
           initial="hidden"
           whileInView="visible"
@@ -258,6 +260,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
       {ALL_SERVICES.map((service, i) => (
         <motion.section
           key={service.name}
+          id={`service-${service.id}`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -542,6 +545,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
           variants={fadeUp}
           className="text-center max-w-2xl mx-auto mb-14"
         >
+          <span id="packages" className="block scroll-mt-24" />
           <Eyebrow index="§ 06" label={ui.eyebrows.packages} />
           <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
             {ui.packages.pre} <span className="serif-highlight">{ui.packages.hi}</span>
@@ -828,7 +832,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
         {ui.footnote}
       </p>
 
-      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} source="narxlar" lang={lang} />
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} presetService={presetService} source="narxlar" lang={lang} intent={presetService === ui.notSure ? 'consultation' : 'project'} />
     </div>
   );
 }

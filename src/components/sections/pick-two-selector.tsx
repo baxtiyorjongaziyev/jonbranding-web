@@ -181,7 +181,6 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
               size="lg"
               className="text-lg shadow-ocean animate-subtle-pulse disabled:shadow-none disabled:animate-none"
               disabled={selected.length !== 2}
-              data-oisha-callback={onCtaClick ? '' : undefined}
               onClick={handleCta}
             >
               {translations.ctaText}

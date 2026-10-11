@@ -1,4 +1,5 @@
 'use client';
+import { getSalesFlow } from '@/lib/sales-flow';
 import type { FC } from 'react';
 import Image from 'next/image';
 import { useRef, useState, useCallback } from 'react';
@@ -121,7 +122,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
   const l = {
     ...fallback,
     tagline: dictionary?.hero_tagline ?? fallback.tagline,
-    badge: dictionary?.hero_badge ?? fallback.badge,
+    badge: getSalesFlow(lang).consultation,
     h1a: dictionary?.hero_title ?? fallback.h1a,
     h1b: dictionary?.hero_title_accent ?? fallback.h1b,
     h1c: dictionary?.hero_title_end ?? fallback.h1c,
@@ -207,7 +208,6 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 data-testid="hero-audit-trigger"
-                data-oisha-callback=""
                 onClick={onOpen}
                 className="inline-flex items-center justify-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-7 py-4 font-semibold text-sm hover:-translate-y-0.5 transition-transform"
               >
