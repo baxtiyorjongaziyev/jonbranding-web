@@ -1999,3 +1999,15 @@ Native agent discovered all three project skills and accurately reported project
 - Applied ui-animation skill; verify, lint, visual checks and release pending.
 
 - Verification passed: 4 locales /1323 keys, TypeScript, 65 test files /418 tests, full lint. CSS loops animate transform only. Production build and visual verification will run on exact release commit.
+
+- Production release 39204cc83e78a1e98a39b84d4011b5040edcda40 Vercel FMAjF3y3EPxmZjSfjBaj899hmK9o Ready 14:45:52 Asia/Tashkent. Live 3 tracks running normal/reverse/normal; measured x values moved left/right/left between observations. Duplicate group widths equal, no seam gap. 320px clientWidth=scrollWidth=320. Screenshot production-logo-train.png saved outside repo; pause/reduced-motion/offscreen verified locally. Physical Android not tested.
+
+- CI 38129360943 complete success: Typecheck/lint/test/build plus Playwright Chromium E2E passed for final 39204cc83e78a1e98a39b84d4011b5040edcda40.
+
+## 2026-10-11 - White-background logo removal
+- Owner requested identify/list white-background logos and stop using until clean SVG arrives.
+- Read original Sanity PNG alpha channels and visually reviewed all assets on site beige background. Confirmed To'maris supermarket has white rectangle (including partial white alpha on corners); other logo whites are glyphs/graphic elements, not rectangular backgrounds.
+- Removed To'maris from staticBrands; recorded source URL and SVG requirements in docs/audits/2026-10-11-logo-replacements.md. No CMS mutation or source image editing. Repo public and G:/My Drive/JonBranding SVG filename search found no To'maris SVG.
+- Focused verification and deploy pending; owner AGENTS/unrelated untracked files preserved.
+
+- verify:fast passed 65 files/418 tests and i18n parity. Change is one static logo data entry plus audit documentation; full typecheck/lint/build will run in release CI on exact commit. Drive filename search across all file types also found no To'maris source vector.
