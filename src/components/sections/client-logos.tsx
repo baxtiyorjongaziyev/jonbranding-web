@@ -26,7 +26,7 @@ const ClientLogos: FC<{ title: string; pauseLabel: string; resumeLabel: string }
 
   return (
     <section ref={sectionRef} aria-label={title} className="client-logos overflow-hidden py-10 md:py-14" data-running={visible && !paused}>
-      <h2 className="mb-6 px-5 text-center text-sm font-medium text-[var(--at-muted)]">{title}</h2>
+      <h2 className="mx-auto mb-8 max-w-3xl px-5 text-center text-3xl font-semibold leading-tight tracking-tight text-[var(--at-ink)] md:mb-10 md:text-5xl">{title}</h2>
       <div className="space-y-5 md:space-y-7">
         {rows.map((row, index) => (
           <div key={index} className="client-logos-row overflow-hidden" data-direction={index === 1 ? 'right' : 'left'}>
@@ -34,8 +34,8 @@ const ClientLogos: FC<{ title: string; pauseLabel: string; resumeLabel: string }
               {[false, true].map((clone) => (
                 <div key={String(clone)} className={`client-logos-group${clone ? ' client-logos-clone' : ''}`} aria-hidden={clone || undefined}>
                   {row.map((brand) => brand?.logo && (
-                    <div key={brand.name} className="flex h-20 w-36 shrink-0 items-center justify-center md:h-24 md:w-44">
-                      <Image src={brand.logo} alt={clone ? '' : brand.name} width={180} height={100} sizes="(max-width: 767px) 144px, 176px" className="h-full w-full object-contain" />
+                    <div key={brand.name} className="flex h-14 w-24 shrink-0 items-center justify-center md:h-16 md:w-32">
+                      <Image src={brand.logo} alt={clone ? '' : brand.name} width={180} height={100} sizes="(max-width: 767px) 96px, 128px" className="h-full w-full object-contain" />
                     </div>
                   ))}
                 </div>
