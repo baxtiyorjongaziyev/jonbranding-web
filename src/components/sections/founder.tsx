@@ -5,9 +5,7 @@ import {
   Globe,
   Linkedin,
   Medal,
-  Phone,
   PlayCircle,
-  Send,
   Users,
   Volume2,
   VolumeX,
@@ -19,6 +17,8 @@ import { motion, type Variants } from 'framer-motion';
 import { renderHeadline } from '@/lib/headline';
 import { sanitizeRichText } from '@/lib/sanitize-html';
 import type { FounderDictionary } from '@/lib/types/dictionary';
+import { getSalesFlow } from '@/lib/sales-flow';
+import Link from 'next/link';
 
 const icons: { [key: string]: FC<LucideProps> } = { Medal, Globe, Zap, Users };
 
@@ -39,7 +39,8 @@ const itemVariants: Variants = {
   },
 };
 
-const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictionary }) => {
+const Founder: FC<{ lang: string; dictionary: FounderDictionary; onOpen?: () => void }> = ({ dictionary, lang, onOpen }) => {
+  const flow = getSalesFlow(lang);
   const [showVideo, setShowVideo] = useState(false);
   const [unmuted, setUnmuted] = useState(false);
   const translations = dictionary;
@@ -192,26 +193,21 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary }> = ({ dictiona
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-3 pt-1">
-              <a
-                data-oisha-phone=""
-                data-oisha-phone-text="0"
-                href="tel:+998792000097"
+              <button
+                type="button"
+                onClick={onOpen || (() => window.dispatchEvent(new CustomEvent('openContactModal', { detail: {source:'founder',intent:'project'} })))}
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
                 style={{ background: 'var(--at-accent)', color: '#fff' }}
               >
-                <Phone className="h-4 w-4" aria-hidden="true" />
-                {translations.phoneButton}
-              </a>
-              <a
-                href="https://t.me/baxtiyorjongaziyev"
-                target="_blank"
-                rel="noopener noreferrer"
+                {flow.team}
+              </button>
+              <Link
+                href={`/${lang}/narxlar`}
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
                 style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
               >
-                <Send className="h-4 w-4" aria-hidden="true" />
-                {translations.telegramButton}
-              </a>
+                {flow.prices}
+              </Link>
             </div>
           </motion.div>
         </div>

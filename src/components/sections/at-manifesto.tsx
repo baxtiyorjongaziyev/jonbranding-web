@@ -1,37 +1,11 @@
 'use client';
 import type { FC } from 'react';
+import { getSalesFlow } from '@/lib/sales-flow';
 
 interface Props { lang?: string; }
 
-const CONTENT: Record<string, { label: string; sub: string; pre: string; strike: string; mid: string; italic: string; post: string; bold: string }> = {
-  uz: {
-    label: '— Manifest',
-    sub: "Tashxis — bu professional ko'rik. Aniq raqamlar, aniq xulosalar, aniq harakat. Taxmin va his bilan biznesni yo'qotmaymiz.",
-    pre: 'Tashxissiz', strike: 'tuzatish', mid: '—\nbu', italic: "qorong'ida", post: "o'q otish.\nAvval ko'rinmagan teshikni topamiz, keyin yopamiz. Tartib shu —\naks holda",
-    bold: "siz pul to'laysiz, raqib daromad oladi.",
-  },
-  ru: {
-    label: '— Манифест',
-    sub: 'Диагностика — это профессиональный осмотр. Чёткие цифры, чёткие выводы, чёткие действия. Не теряем бизнес на догадках.',
-    pre: 'Без диагностики', strike: 'лечение', mid: '—\nэто', italic: 'стрельба', post: 'в темноте.\nСначала находим невидимую дыру, потом закрываем. Порядок такой —\nиначе',
-    bold: 'вы платите, конкурент зарабатывает.',
-  },
-  en: {
-    label: '— Manifesto',
-    sub: 'Diagnosis is a professional audit. Clear numbers, clear conclusions, clear action. We don\'t lose business on guesses.',
-    pre: 'Without diagnosis', strike: 'fixing', mid: '—\nit\'s', italic: 'shooting', post: 'in the dark.\nFirst we find the invisible hole, then we close it. That\'s the order —\notherwise',
-    bold: 'you pay, your competitor earns.',
-  },
-  zh: {
-    label: '— 宣言',
-    sub: '诊断是专业的审查。明确数字，明确结论，明确行动。我们不会在猜测中损失业务。',
-    pre: '没有诊断的', strike: '修复', mid: '——\n这是', italic: '黑暗中', post: '射击。\n先找到看不见的漏洞，再堵住它。顺序就是这样——\n否则',
-    bold: '您付钱，竞争对手赚钱。',
-  },
-};
-
 const AtManifesto: FC<Props> = ({ lang = 'uz' }) => {
-  const c = CONTENT[lang] ?? CONTENT.uz;
+  const c = getSalesFlow(lang).manifest;
   return (
     <section className="py-[120px] relative z-[2] border-b border-[var(--at-line)]">
       <div className="max-w-[1320px] mx-auto px-5 md:px-8">

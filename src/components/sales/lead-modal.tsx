@@ -6,6 +6,7 @@ import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
 import { getSalesContent } from '@/lib/sales-content';
+import { getSalesFlow } from '@/lib/sales-flow';
 
 type LeadModalProps = {
   open: boolean;
@@ -15,9 +16,10 @@ type LeadModalProps = {
   source?: string;
   /** Xizmatlar ro'yxati va CRM yozuvi shu tilda bo'ladi. */
   lang?: string;
+  intent?: 'consultation' | 'project';
 };
 
-export default function LeadModal({ open, onClose, presetService, source = 'narxlar', lang = 'uz' }: LeadModalProps) {
+export default function LeadModal({ open, onClose, presetService, source = 'narxlar', lang = 'uz', intent = 'project' }: LeadModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [service, setService] = useState(presetService);
@@ -43,6 +45,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
 
   const content = getSalesContent(lang);
   const t = content.ui.modal;
+  const flow = getSalesFlow(lang);
   const allServices = content.serviceGroups.flatMap((group) =>
     group.items.map((item) => item.name)
   );
@@ -75,14 +78,17 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     });
 
     let result: { ok?: boolean; eventId?: string; error?: string } = {};
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
     try {
       const res = await fetch('/api/submit-form', {
         method: 'POST',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName: name || 'Mijoz',
           phone: normalizedPhone,
-          role: service,
+          role: intent === 'consultation' ? `${flow.consultation} — ${service}` : service,
           source: `${source}_modal`,
           lang,
           eventId,
@@ -102,6 +108,8 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
       setSubmitErr(t.submitError);
       setSending(false);
       return;
+    } finally {
+      window.clearTimeout(timeout);
     }
 
     trackLead({
@@ -122,17 +130,18 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
         <Dialog.Content
+          data-mobile-overlay="true"
           className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
           onOpenAutoFocus={(e) => { e.preventDefault(); phoneRef.current?.focus(); }}
         >
-          <Dialog.Title className="mb-1.5 text-2xl font-bold text-black" style={{ letterSpacing: '-0.03em' }}>
-            {done ? t.titleDone : t.title}
+          <Dialog.Title className="mb-1.5 pr-9 text-2xl font-bold text-black" style={{ letterSpacing: '-0.03em' }}>
+            {done ? t.titleDone : intent === 'consultation' ? flow.consultation : t.title}
           </Dialog.Title>
           <Dialog.Description className="mb-6 text-sm text-neutral-500" style={{ lineHeight: 1.6 }}>
-            {done ? t.descDone : t.desc}
+            {done ? flow.done : intent === 'consultation' ? flow.consultationDesc : flow.projectDesc}
           </Dialog.Description>
           <Dialog.Close asChild>
-            <button aria-label={t.close} className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center border border-neutral-200 text-neutral-500 hover:bg-neutral-50">✕</button>
+            <button aria-label={t.close} className="absolute top-3 right-3 w-11 h-11 rounded-full grid place-items-center border border-neutral-200 text-neutral-500 hover:bg-neutral-50">✕</button>
           </Dialog.Close>
 
           {done ? (
@@ -147,7 +156,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={t.namePlaceholder}
-                  className="rounded-xl border border-neutral-200 px-4 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
+                  className="rounded-xl border border-neutral-200 px-4 py-3 text-base md:text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -162,7 +171,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                   onChange={(e) => { setPhone(e.target.value); setPhoneErr(''); }}
                   placeholder={t.phonePlaceholder}
                   aria-invalid={Boolean(phoneErr)}
-                  className="rounded-xl border px-4 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
+                  className="rounded-xl border px-4 py-3 text-base md:text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                   style={{ borderColor: phoneErr ? '#dc2626' : undefined }}
                 />
                 {phoneErr && <span role="alert" className="text-xs text-red-600">{phoneErr}</span>}
@@ -173,7 +182,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                   id="tariflar-service"
                   value={service}
                   onChange={(e) => setService(e.target.value)}
-                  className="rounded-xl border border-neutral-200 px-3 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
+                  className="rounded-xl border border-neutral-200 px-3 py-3 text-base md:text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
                 >
                   {allServices.map((item) => (
                     <option key={item}>{item}</option>
@@ -189,10 +198,11 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm disabled:opacity-60"
+                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60"
               >
-                {sending ? t.sending : t.submit}
+                {sending ? t.sending : flow.submit}
               </button>
+              <p className="text-xs leading-relaxed text-neutral-600">{flow.privacy}</p>
             </form>
           )}
         </Dialog.Content>

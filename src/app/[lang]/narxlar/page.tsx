@@ -82,7 +82,7 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   ).slice(0, 8);
 
   const quotes: ServiceQuote[] = testimonials
-    .filter((item) => item.quote && item.quote.length > 60)
+    .filter((item) => !item.videoUrl && !item.videoFileUrl && item.quote && item.quote.length > 60)
     .slice(0, 3)
     .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
 

@@ -1,89 +1,16 @@
 'use client';
+import { getSalesFlow } from '@/lib/sales-flow';
 
 interface Props {
   onOpen: () => void;
   lang?: string;
 }
 
-type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
-const t = {
-  uz: {
-    label: 'Bepul',
-    heading: 'Brendingiz tayyormi?',
-    headingEm: 'tekshirib oling.',
-    sub: "150$ o'rniga bepul · 1 kun",
-    badge: 'Bepul',
-    items: [
-      "12 mezon bo'yicha tezkor audit",
-      "Yo'qotilgan daromad hisobi",
-      "1 soatlik prezentatsiya",
-      "Hech qanday majburiyatsiz",
-    ],
-    cta: 'Bepul audit olish',
-    guarantees: [
-      "100% amaliy tahlil — vaqtingiz behuda ketmasligiga kafolat",
-      "To'liq maxfiylik — NDA ixtiyoriy",
-    ],
-  },
-  ru: {
-    label: 'Бесплатно',
-    heading: 'Ваш бренд готов?',
-    headingEm: 'проверьте.',
-    sub: 'вместо $150 · 1 день',
-    badge: 'Бесплатно',
-    items: [
-      'Быстрый аудит по 12 критериям',
-      'Расчет упущенной прибыли',
-      '1-часовая презентация',
-      'Без обязательств',
-    ],
-    cta: 'Получить аудит бесплатно',
-    guarantees: [
-      '100% практический анализ — гарантия пользы вашего времени',
-      'Конфиденциальность — NDA по желанию',
-    ],
-  },
-  en: {
-    label: 'Free',
-    heading: 'Is your brand ready?',
-    headingEm: 'find out.',
-    sub: 'instead of $150 · 1 day',
-    badge: 'Free',
-    items: [
-      'Quick audit across 12 criteria',
-      'Lost revenue calculation',
-      '1-hour presentation session',
-      'No obligations',
-    ],
-    cta: 'Get Free Audit',
-    guarantees: [
-      '100% actionable analysis — guaranteed value for your time',
-      'Confidentiality — NDA optional',
-    ],
-  },
-  zh: {
-    label: '免费',
-    heading: '您的品牌准备好了吗？',
-    headingEm: '立即检测。',
-    sub: '原价 $150 · 1天完成',
-    badge: '免费',
-    items: [
-      '基于12项标准的快速审计',
-      '流失利润精确计算',
-      '1小时现场演示',
-      '无任何强制条件',
-    ],
-    cta: '免费获取审计报告',
-    guarantees: [
-      '100%实用分析——保障您的宝贵时间价值',
-      '保密性——可选签署保密协议',
-    ],
-  },
-} as const;
+
 
 export default function AtPricing({ onOpen, lang = 'uz' }: Props) {
-  const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
+  const l = getSalesFlow(lang).pricing;
 
   return (
     <section className="py-20 md:py-28" id="brand-audit" style={{ background: 'var(--at-bg)' }}>
@@ -139,7 +66,6 @@ export default function AtPricing({ onOpen, lang = 'uz' }: Props) {
           </ul>
 
           <button
-            data-oisha-callback=""
             onClick={onOpen}
             className="w-full font-semibold text-sm rounded-full py-4 transition-opacity duration-200 motion-reduce:transition-none hover:opacity-90"
             style={{ background: 'var(--at-accent)', color: '#fff', border: 'none' }}

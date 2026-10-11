@@ -14,7 +14,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
-        name: 'Brand strategy',
+        name: "Brand strategy",
         price: '48 000 000',
         lead: 'We work out the place your brand should hold in the market. Who you serve, what sets you apart and what you say — brought into one strategic system.',
         deliverables: [
@@ -32,10 +32,10 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
-        name: 'Naming',
+        name: "Naming",
         price: '10 000 000',
         duration: '10 days',
-        lead: 'A good name is the first impression of your business. Built once, it pays back for as long as you trade.',
+        lead: "We develop a memorable name for your business and explain the choice.",
         deliverables: [
           'A professional name that fits your business',
           'The strategic reasoning — why this name',
@@ -44,9 +44,9 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Trademark search across the Uzbekistan register',
           '3 free revisions',
         ],
-        benefit: 'Every som you spend making the name known stays with you — no letter five years from now saying the name is someone else’s.',
+        benefit: "A name, the reasoning behind it and availability checks. Registration is a separate service.",
         audience: 'For people starting a business, or whose current name is not working',
-        note: 'Choose the name wrongly and the patent, domain and advertising all cost three times as much later.',
+        note: "Domain, social account and trademark availability are considered.",
         proof: {
           label: 'Names we have created',
           items: [
@@ -57,7 +57,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
-        name: 'Logo',
+        name: "Logo",
         price: '8 000 000',
         duration: '7 days',
         lead: 'A mark that works the same on a small screen and on a large banner.',
@@ -68,12 +68,12 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Horizontal, vertical and compact (icon) variants',
           'Minimum size and clear space rules',
         ],
-        benefit: 'From business card to banner, from avatar to packaging — you stop paying a designer each time to “adapt it”.',
+        benefit: "Ready logo files in different sizes and formats make application easier.",
         audience: 'For a business with no logo, or one that looks dated',
       },
       {
         id: 'visual-identity',
-        name: 'Visual identity',
+        name: "Visual identity",
         price: '18 000 000',
         duration: '10 days',
         lead: 'A logo is one mark. A visual identity is your brand being recognised everywhere.',
@@ -84,12 +84,12 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Photography and illustration style',
           'More than 10 applications: business card, letterhead, envelope, uniform, banner, social templates',
         ],
-        benefit: 'Your advertising stops introducing you from scratch every month — each impression builds on the last. The budget compounds instead of leaking away.',
+        benefit: "Colours, fonts and layouts help keep materials consistent.",
         audience: 'For a business that has a logo but looks different everywhere it appears',
       },
       {
         id: 'brandbook',
-        name: 'Brandbook',
+        name: "Brandbook — usage rules",
         price: '24 000 000',
         duration: '7 days',
         lead: 'Your brand’s rules in one document. A new designer joins and nothing breaks.',
@@ -112,7 +112,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
-        name: 'Packaging (1 SKU)',
+        name: "Packaging design (1 product variant)",
         price: '12 000 000',
         duration: '7 days',
         lead: 'Complete packaging design for one product — ready for the printer.',
@@ -123,12 +123,12 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Barcode, ingredients, dates and symbols correctly placed',
           'Print-ready files',
         ],
-        benefit: 'The product sells itself — no one has to explain it. And you gain grounds to raise the price.',
+        benefit: "Packaging helps distinguish the product and present its information clearly.",
         audience: 'For producers moving into shops, marketplaces or retail chains',
       },
       {
         id: 'packaging-extra',
-        name: 'Each additional SKU',
+        name: "Each additional product variant",
         price: 'from 4 000 000',
         duration: '+3 days',
         lead: 'Once the first pack is done, the rest of the range costs less.',
@@ -159,7 +159,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'A verdict on the likelihood of registration',
           'We work out which classes you need',
         ],
-        benefit: 'A one-day search protects a name you have spent years building. The cheapest insurance you can buy.',
+        benefit: "An assessment of similar names and registration risks. This is not a registration guarantee.",
         audience: 'For those who have chosen a name but not yet registered it',
         note: 'Price is per class. This search is already included in the Naming service.',
         addon: { label: 'Each additional class', price: '+440 000 UZS' },
@@ -176,7 +176,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'The process followed through to the end',
           'The certificate handed to you',
         ],
-        benefit: 'The name becomes legally yours — franchising, exporting and bidding for tenders all open up. The brand becomes an asset.',
+        benefit: "Document preparation and registration support. The decision depends on examination.",
         audience: 'For those in no hurry who still want the name protected',
       },
       {
@@ -190,7 +190,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
           'Expedited examination',
           'The wait drops from 7 months to 20–40 days',
         ],
-        benefit: 'Where the deadline will not wait — about a month instead of seven. You do not lose the contract.',
+        benefit: "Application preparation and support through the expedited procedure. Final timing depends on the official process.",
         audience: 'For those under pressure from a tender, marketplace or export deadline',
       },
     ],
@@ -265,7 +265,7 @@ export const en: SalesContent = {
     },
     {
       title: 'A structured process with internal review',
-      desc: 'This is done from experience, not by trial and error. We know in advance which solution works in this market.',
+      desc: "Each project follows a brief, analysis, concept and handover. Decisions are presented for approval.",
     },
     {
       title: 'The files stay with you',
@@ -282,19 +282,19 @@ export const en: SalesContent = {
   jobs: [
     {
       pain: 'Your product is better than your competitor’s, but the buyer picks the better-looking pack off the shelf.',
-      gain: 'The product sells itself — no one has to explain it.',
+      gain: "Packaging that distinguishes the product and presents information clearly.",
     },
     {
       pain: 'You say “our quality is high”, but it looks cheap. So you settle for a low price.',
-      gain: 'The look justifies the price — you raise it and the customer does not query it.',
+      gain: "A visual identity suited to the product and the business.",
     },
     {
       pain: 'A different designer each time, a different colour each time. Someone can see you ten times and still not remember you.',
-      gain: 'Each impression builds on the last — the advertising budget compounds.',
+      gain: "Consistent colours, fonts and style across advertising and materials.",
     },
     {
       pain: 'Your name is not registered. One day a letter may arrive saying the name belongs to someone else.',
-      gain: 'The name is legally yours — franchising, export and tenders all open up.',
+      gain: "Help with trademark checks and the registration process.",
     },
   ],
   processSteps: [

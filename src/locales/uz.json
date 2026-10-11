@@ -26,14 +26,14 @@
     "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
     "contact_by_phone": "Qo'ng'iroq",
     "contact_by_telegram": "Telegram orqali",
-    "free_consultation": "Bepul Brand Audit",
+    "free_consultation": "20 daqiqalik bepul maslahat",
     "open_menu": "Menyuni ochish",
     "switch_lang": "Tilni o'zgartirish",
     "lang_ru": "Русский",
     "lang_uz": "O'zbekcha",
     "lang_en": "English",
     "ai": "AI Yordamchi",
-    "consultation_short": "Audit olish",
+    "consultation_short": "Maslahatga yozilish",
     "mobile_quick_actions": "Mobil tezkor amallar",
     "about": "Haqimizda",
     "contacts": "Aloqa",
@@ -666,8 +666,8 @@
         "text": "Har bosqichda shaffof aloqa"
       }
     ],
-    "phoneButton": "Shaxsan bog'lanish",
-    "telegramButton": "Telegramda yozish",
+    "phoneButton": "Jamoa bilan bog‘lanish",
+    "telegramButton": "Xizmatlar va narxlar",
     "videoButton": "Asoschidan 45 soniya",
     "videoAlt": "Baxtiyorjon Gaziyev, Jon.Branding asoschisi",
     "principles": [
@@ -870,7 +870,7 @@
   },
   "mobileCtaBar": {
     "final_price": "Yakuniy narx",
-    "get_offer": "Audit olish",
+    "get_offer": "Maslahatga yozilish",
     "cta": "Bepul Brand Audit olish",
     "hint": "Brendingizdagi ishonch signallarini tekshiramiz"
   },
@@ -1757,13 +1757,13 @@
       {
         "num": "03",
         "name": "Brendbuk",
-        "desc": "40+ betlik to'liq qo'llanma — rang, shrift, ovoz, misollar, qoidalar.",
+        "desc": "Logotip, rang, shrift va qo‘llash qoidalari bitta qo‘llanmada. Tarkib shartnomada kelishiladi.",
         "time": "2–3 hafta"
       },
       {
         "num": "04",
         "name": "Qadoq dizayni",
-        "desc": "Mokap, bosmaga tayyor fayl, retsept va texnik chizmalar. SKU tizimi.",
+        "desc": "Mahsulot ko‘rinishi, texnik chizma, bosmaga tayyor fayllar va mahsulot turlariga moslashtirish.",
         "time": "4–8 hafta"
       },
       {
@@ -2063,8 +2063,8 @@
     "hero_primary_cta": "Loyihani muhokama qilish",
     "hero_secondary_cta": "Ishlarni ko'rish",
     "services_title": "Sotiladigan firma\nuslubi.",
-    "services_lede": "Asosiy offer: logotip va firma uslubi, brendbuk, qadoq hamda tashuvchilar. Neyming, patent va digital dizayn loyiha ehtiyojiga ko'ra add-on sifatida qo'shiladi.",
-    "services_label": "§ 04 Asosiy offer",
+    "services_lede": "Logotip, firma uslubi, brendbuk va qadoq. Kerakli xizmatlarni tanlaymiz; neyming va tovar belgisini ro‘yxatdan o‘tkazish alohida qo‘shilishi mumkin.",
+    "services_label": "§ 04 Xizmatlar",
     "services_timeline_note": "Muddat loyiha hajmiga qarab belgilanadi",
     "featured_title": "Asosiy keys",
     "featured_live": "Davom etmoqda",
@@ -2442,7 +2442,7 @@
     "title": "Mijozlarimiz sharhlari",
     "subtitle": "Natijalar o'zi gapiradi. Ishimiz haqida real insonlarning ovozli va video fikrlari.",
     "back": "Bosh sahifaga",
-    "ctaText": "Bepul audit olish",
+    "ctaText": "Maslahatga yozilish",
     "voiceLabel": "Ovozli sharh",
     "videoLabel": "Video sharh"
   },
@@ -2509,7 +2509,7 @@
     "badge": "Sharhlar",
     "ctaTitle": "O'z brendingizni hoziroq yaxshilang",
     "ctaDesc": "15 daqiqada brendingizdagi 3 ta yirik zaiflikni topib beramiz.",
-    "ctaText": "Bepul audit olish",
+    "ctaText": "Maslahatga yozilish",
     "video": "Video sharhlar",
     "videoDesc": "Mijozlar o'z natijalari haqida kamera oldida",
     "audio": "Audio sharhlar",
@@ -2526,6 +2526,162 @@
     "ios_instruction": "Ulashish ⎋ tugmasini bosing va \"Bosh ekranga qo'shish\" ⊕ ni tanlang",
     "dismiss": "Yopish",
     "share": "Ulashish",
-    "add_to_home": "Bosh ekranga qo'shish"
+    "add_to_home": "Bosh ekranga qo'shish",
+    "browser_menu": "Brauzer menyusi",
+    "android_instruction": "Brauzer menyusi ⋮ ni oching va «Ilovani o‘rnatish» yoki «Bosh ekranga qo‘shish»ni tanlang."
+  },
+  "salesFlow": {
+    "consultation": "20 daqiqalik bepul maslahat",
+    "cta": "Maslahatga yozilish",
+    "prices": "Xizmatlar va narxlar",
+    "team": "Jamoa bilan bog‘lanish",
+    "privacy": "Raqamingiz faqat siz bilan bog‘lanish uchun ishlatiladi.",
+    "consultationDesc": "Ehtiyojingizni muhokama qilamiz va mos xizmatni tanlashga yordam beramiz. Jamoamiz telefon orqali suhbat vaqtini kelishadi.",
+    "projectDesc": "Tanlangan xizmat va ehtiyojingiz bo‘yicha jamoamiz siz bilan bog‘lanadi. Hajm, narx va muddat ish boshlanishidan oldin kelishiladi.",
+    "submit": "Bog‘lanishni so‘rash",
+    "done": "Arizangiz qabul qilindi. Jamoamiz suhbat vaqtini kelishish uchun bog‘lanadi.",
+    "manifest": {
+      "label": "— Yondashuv",
+      "sub": "Yangi biznes yoki rebrending: avval ehtiyoj, keyin dizayn.",
+      "pre": "Har joyda",
+      "strike": "",
+      "mid": "bir xil",
+      "italic": "taniladigan",
+      "post": "brend. ",
+      "bold": "Logotipdan qadoqqacha — bitta tizim."
+    },
+    "process": {
+      "sectionLabel": "Jarayon",
+      "heading": "Brifdan",
+      "headingEm": "tayyor faylgacha.",
+      "subtitle": "Hajm, muddat va topshiriladigan materiallar shartnomada kelishiladi.",
+      "exampleLabel": "Topshiriladigan natija",
+      "cta": "Loyihani muhokama qilish",
+      "note": "50% shartnomada · 50% topshirilganda",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Brif va tahlil",
+          "dur": "",
+          "summary": "Biznesingiz, xaridoringiz va vazifani aniqlaymiz.",
+          "detail": "Yangi biznes bo‘lsa, g‘oya va maqsaddan boshlaymiz. Mavjud brend bo‘lsa, hozirgi materiallarni ko‘rib chiqamiz. Kerakli xizmatlar va ish hajmini kelishamiz.",
+          "example": "Kelishilgan vazifa va xizmat tarkibi."
+        },
+        {
+          "n": "02",
+          "title": "Konsepsiya",
+          "dur": "",
+          "summary": "Uchta yo‘nalishdan birini tanlaysiz.",
+          "detail": "Konsepsiyalarni taqdim etamiz va nima uchun shunday yechim taklif qilganimizni tushuntiramiz. Tanlangan yo‘nalishni siz tasdiqlaysiz.",
+          "example": "Tanlangan va tasdiqlangan dizayn yo‘nalishi."
+        },
+        {
+          "n": "03",
+          "title": "Ishlab chiqish",
+          "dur": "",
+          "summary": "Tanlangan yo‘nalishni kerakli tashuvchilarga moslaymiz.",
+          "detail": "Shartnomadagi hajmga qarab logotip, ranglar, shriftlar, qadoq va boshqa materiallarni ishlab chiqamiz. Keyingi bosqichga tasdiqdan so‘ng o‘tamiz.",
+          "example": "Kelishilgan dizaynlar va qo‘llash qoidalari."
+        },
+        {
+          "n": "04",
+          "title": "Topshirish",
+          "dur": "",
+          "summary": "Manba fayllari va qo‘llanmalar sizda qoladi.",
+          "detail": "Kelishilgan formatdagi fayllarni topshiramiz. Brendbuk yoki bosmaga tayyor qadoq fayllari tanlangan xizmat tarkibiga qarab beriladi.",
+          "example": "Jamoangiz va ijrochilaringiz ishlatadigan tayyor fayllar."
+        }
+      ]
+    },
+    "pricing": {
+      "label": "Bepul maslahat",
+      "heading": "Nimadan boshlashni",
+      "headingEm": "birga aniqlaymiz.",
+      "sub": "20 daqiqa · bepul suhbat",
+      "badge": "Bepul",
+      "items": [
+        "Biznesingiz va hozirgi vazifani muhokama qilamiz",
+        "Qaysi xizmat kerakligini aniqlaymiz",
+        "Narx va loyiha hajmini tushuntiramiz",
+        "Buyurtma qilish majburiyati yo‘q"
+      ],
+      "cta": "Maslahatga yozilish",
+      "guarantees": [
+        "Bu suhbat — tayyor dizayn yoki batafsil audit hisoboti emas.",
+        "Ish hajmi va muddat buyurtmadan oldin kelishiladi."
+      ]
+    },
+    "faq": {
+      "sectionN": "§ 07",
+      "label": "Savol-javob",
+      "heading": "Buyurtmadan",
+      "headingEm": "oldin.",
+      "note": "Savolingiz qolsa, jamoamiz bilan muhokama qiling.",
+      "cta": "Jamoaga savol berish",
+      "footerNote": "Ehtiyojingizga mos xizmatni tanlaymiz.",
+      "faqs": [
+        {
+          "q": "Yangi biznes uchun ham ishlaysizmi?",
+          "a": "Ha. Yangi biznes uchun nom, logotip va firma uslubi; mavjud biznes uchun esa kerakli yangilanishni kelishamiz. Barcha xizmatni birdan olish shart emas."
+        },
+        {
+          "q": "Logotip va firma uslubi nimasi bilan farq qiladi?",
+          "a": "Logotip — belgi. Firma uslubi — ranglar, shriftlar va grafik elementlarning turli materiallarda bir xil ishlashi. Tarkib tanlangan xizmatga bog‘liq."
+        },
+        {
+          "q": "Bepul maslahatda nima olaman?",
+          "a": "20 daqiqalik suhbatda ehtiyojingizni muhokama qilamiz va mos xizmatni tanlashga yordam beramiz. Bu batafsil audit, daromad hisobi yoki tayyor dizayn emas. Buyurtma qilish majburiyati yo‘q."
+        },
+        {
+          "q": "Narx va muddat qanday belgilanadi?",
+          "a": "Xizmatlar va paketlar narxlar sahifasida ko‘rsatilgan. Yakuniy hajm, muddat va fayllar shartnomada yoziladi. Patent guvohnomasi muddati dizayn ishlaridan alohida."
+        },
+        {
+          "q": "Dizayn yoqmasa nima bo‘ladi?",
+          "a": "Avval uchta konsepsiyadan yo‘nalish tanlaysiz. Tanlangan yo‘nalishni kelishilgan tahrirlar bilan sayqallaymiz. Siz tasdiqlamaguningizcha keyingi bosqich boshlanmaydi."
+        },
+        {
+          "q": "To‘lov va fayllar topshirilishi qanday?",
+          "a": "50% shartnoma imzolanganda, 50% loyiha topshirilganda. Kelishilgan manba fayllari va qo‘llash qoidalari sizga beriladi. Majburiyatlar shartnomada belgilanadi."
+        }
+      ]
+    },
+    "final": {
+      "badge": "Keyingi qadam",
+      "h2a": "Brendingiz uchun",
+      "h2b": "mos yechim.",
+      "body": "Qaysi xizmat kerakligini suhbatda aniqlaymiz. Ish boshlanishidan oldin",
+      "bodyStrong": "hajm, narx va muddatni kelishamiz.",
+      "cta": "Maslahatga yozilish ↗",
+      "stats": [
+        {
+          "k": "Boshlash",
+          "v": "20",
+          "s": " daqiqalik suhbat"
+        },
+        {
+          "k": "To‘lov",
+          "v": "50/50",
+          "s": ""
+        },
+        {
+          "k": "Topshirish",
+          "v": "Manba",
+          "s": " fayllari"
+        }
+      ]
+    },
+    "caseScope": "Loyiha tarkibi",
+    "caseMaterials": "Ko‘rsatilgan materiallar",
+    "caseNote": "Quyidagi tasvirlarda loyiha yechimlarini ko‘ring.",
+    "source": "Manba",
+    "period": "Davr",
+    "choose": "Sizga mos yo‘lni tanlang",
+    "individual": "Alohida xizmatlar",
+    "packages": "Paketlar",
+    "logoPath": "Logotip kerak",
+    "identityPath": "Firma uslubini tartibga solish",
+    "packagingPath": "Mahsulot qadoqlari",
+    "newPath": "Yangi biznes uchun"
   }
 }

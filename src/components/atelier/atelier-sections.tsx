@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PlayCircle, Pause, Play, X } from 'lucide-react';
 import { portfolioYear } from '@/lib/portfolio-presentation';
+import { presentTestimonial } from '@/lib/testimonial-presentation';
 import {
   staticTestimonials,
   staticTestimonialsEn,
@@ -225,7 +226,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
               {dictionary?.gallery_similar ||
                 "O'xshash biznesmisiz? Sizga ham shunday natija mumkin."}
             </span>
-            <button className="btn btn-primary" data-oisha-callback="" onClick={onOpen}>
+            <button className="btn btn-primary" onClick={onOpen}>
               {dictionary?.gallery_cta || 'Mening biznesim uchun tashxis'}{' '}
               <span className="ar">↗</span>
             </button>
@@ -253,7 +254,8 @@ export const ATQuotes: FC<ATQuotesProps> = ({
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   useEffect(() => {
-    const cached = sessionStorage.getItem(`testimonials_${lang}`);
+    let cached: string | null = null;
+    try { cached = sessionStorage.getItem(`testimonials_${lang}`); } catch { /* Storage can be unavailable in an installed browser. */ }
     if (cached) {
       try {
         setApiTestimonials(JSON.parse(cached));
@@ -291,9 +293,10 @@ export const ATQuotes: FC<ATQuotesProps> = ({
             }
           })();
 
-  const videoTestimonials = list.filter((t) => t.videoUrl);
-  const audioTestimonials = list.filter((t) => !t.videoUrl && t.audioUrl);
-  const textTestimonials = list.filter((t) => !t.videoUrl && !t.audioUrl && t.quote?.trim());
+  const publicList = list.map(presentTestimonial);
+  const videoTestimonials = publicList.filter((t) => t.videoUrl);
+  const audioTestimonials = publicList.filter((t) => !t.videoUrl && t.audioUrl);
+  const textTestimonials = publicList.filter((t) => !t.videoUrl && !t.audioUrl && t.quote?.trim());
 
   const vimeoHosts = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
 

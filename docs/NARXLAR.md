@@ -4,7 +4,7 @@
 > Gemini, Codex, Antigravity — kim ishlashidan qat'i nazar, narx yoki sotuv matniga
 > tegishdan oldin shu faylni o'qisin.
 >
-> **Oxirgi yangilanish:** 2026-09-21
+> **Oxirgi yangilanish:** 2026-10-11
 
 ---
 
@@ -14,14 +14,14 @@
 |---|---|
 | Sahifa (server) | `src/app/[lang]/narxlar/page.tsx` |
 | Sahifa (client) | `src/app/[lang]/narxlar/narxlar-client.tsx` |
-| **Matn va narxlar** | **`src/lib/sales-content.ts`** |
+| **Matn va narxlar** | **`src/lib/sales-content/{uz,ru,en,zh}.ts`** (`index.ts` eksporti) |
 | Ariza formasi | `src/components/sales/lead-modal.tsx` |
 | Sotuvchi taqdimoti | `src/app/[lang]/credentials/` |
 | Brand Strategy sahifasi | `src/app/[lang]/brand-strategy/` |
 
 **Eng muhim qoida:** narx, xizmat tarkibi, kafolat, FAQ — hammasi
-`src/lib/sales-content.ts` da. JSX ichida qattiq yozilgan narx **yo'q** va
-bo'lmasligi kerak. `/narxlar` va `/credentials` ikkalasi shu bitta fayldan o'qiydi,
+`src/lib/sales-content/` dagi til modullarida. Eski `src/lib/sales-content.ts` manzili shu modulga ajratilgan. JSX ichida qattiq yozilgan narx **yo'q** va
+bo'lmasligi kerak. `/narxlar` va `/credentials` ikkalasi shu moduldan o'qiydi,
 shuning uchun bir joyda o'zgartirish ikkala sahifada ham aks etadi.
 
 Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
@@ -35,18 +35,18 @@ Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
 
 | Xizmat | Narx (so'm) | Muddat |
 |---|---|---|
-| Brand Strategy | 48 000 000 | — |
-| Naming | 10 000 000 | 10 kun |
-| Logo | 8 000 000 | 7 kun |
-| Visual identity | 18 000 000 | 10 kun |
-| Brandbook | 24 000 000 | 7 kun |
+| Brend strategiyasi | 48 000 000 | — |
+| Neyming — nom ishlab chiqish | 10 000 000 | 10 kun |
+| Logotip | 8 000 000 | 7 kun |
+| Firma uslubi | 18 000 000 | 10 kun |
+| Brendbuk — qo‘llash qoidalari | 24 000 000 | 7 kun |
 
 ### Qadoq
 
 | Xizmat | Narx (so'm) | Muddat |
 |---|---|---|
-| Packaging (1 SKU) | 12 000 000 | 7 kun |
-| Har qo‘shimcha SKU | 4 000 000 dan | +3 kun |
+| Qadoq dizayni (1 mahsulot turi) | 12 000 000 | 7 kun |
+| Har qo‘shimcha mahsulot turi | 4 000 000 dan | +3 kun |
 
 ### Huquqiy himoya
 
@@ -65,9 +65,9 @@ Bu alohida xizmat emas — ekspert tekshiruviga qo'shilib ketadigan summa.
 
 | Paket | Narx | Alohida olinsa | Tejaladi | Tarkibi | Muddat |
 |---|---|---|---|---|---|
-| VIP | 70 000 000 | 85 000 000 | 15 000 000 | Naming, Logo, Visual identity, Brandbook, Patent, Packaging (3 SKU) | 35–45 kun |
-| **PREMIUM** *(ko'p tanlanadi)* | 55 000 000 | 65 000 000 | 10 000 000 | Naming, Logo, Visual identity, Brandbook, Patent | 30–35 kun |
-| STANDART | 20 000 000 | 23 000 000 | 3 000 000 | Naming, Logo, Patent | 20–25 kun |
+| VIP | 70 000 000 | 85 000 000 | 15 000 000 | Neyming, Logotip, Firma uslubi, Brendbuk, Patent, Qadoq dizayni (3 mahsulot turi) | 35–45 kun |
+| **PREMIUM** *(ko'p tanlanadi)* | 55 000 000 | 65 000 000 | 10 000 000 | Neyming, Logotip, Firma uslubi, Brendbuk, Patent | 30–35 kun |
+| STANDART | 20 000 000 | 23 000 000 | 3 000 000 | Neyming, Logotip, Patent | 20–25 kun |
 
 **Diqqat — ziddiyatga o'xshaydi, lekin to'g'ri:** paket muddatlari (20–45 kun) faqat
 dizayn ishlariga tegishli. Patent guvohnomasi alohida chiqadi: oddiy tartibda 7 oy,
@@ -105,7 +105,7 @@ Kafolat — biznes majburiyati, uni faqat egasi (Baxtiyorjon) belgilaydi.
 
 `§ 01` dan `§ 10` gacha raqamlangan bo'limlar:
 
-1. Hero — "Narxlarimiz ochiq, hamma uchun birdek"
+1. Hero — "Narxlarimiz ochiq, hamma uchun birdek"; darhol 4 narx yo‘li va barcha xizmat/paketga havolalar
 2. JTBD — mijoz qaysi azobdan qutuladi, qaysi natijaga keladi
 3. Xizmatlar kirish
 4. **Har xizmatga bitta to'liq ekran** (`min-h-[100svh]`) — lead, deliverables, benefit, audience, proof
@@ -133,9 +133,7 @@ Egasining uslub talablari — bularni buzmang:
 
 ## 8. Ochiq qolgan ishlar
 
-- **i18n**: matn hozircha komponent/`sales-content.ts` ichida, `src/locales/*.json` da emas.
-  `/ru`, `/en`, `/zh` da o'zbekcha chiqadi. AGENTS.md 1/2/9-qoidalarining buzilishi.
-  Tuzatish uchun egasidan rasmiy tarjima kerak — mashina tarjimasi yaramaydi.
+- **i18n**: narx matnlari 4 til modulida. Bosh sahifa maslahat/FAQ/jarayon matnlari `src/locales/*.json` dagi `salesFlow` bo‘limidan olinadi.
 - **Paket kalkulyatori** (`PackageBuilder`) hozir hech qayerdan chaqirilmaydi —
   eski narxlar sahifasi olib tashlanganda o'lik kodga aylandi. Qarori kutilmoqda.
 
@@ -143,7 +141,7 @@ Egasining uslub talablari — bularni buzmang:
 
 ## 9. Narxni o'zgartirish kerak bo'lsa
 
-1. Faqat `src/lib/sales-content.ts` ni tahrirlang.
+1. `src/lib/sales-content/uz.ts` va boshqa uchta til modulini tahrirlang.
 2. Paket narxini o'zgartirsangiz, `separate` va `saving` ni ham qayta hisoblang —
    ular avtomatik hisoblanmaydi.
 3. `npm run typecheck && npm run lint && npx vitest run && npm run build`.

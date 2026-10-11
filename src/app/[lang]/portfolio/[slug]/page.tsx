@@ -3,6 +3,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import { fetchPortfolioBySlug, findSupersedingSlug } from '@/lib/data/portfolio';
 import { getLocalizedPath } from '@/lib/i18n/locale';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
+import { presentPortfolioProject } from '@/lib/portfolio-presentation';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
 
@@ -90,7 +91,7 @@ export default async function PortfolioDetailPage(props: Props) {
 
   return (
     <PortfolioDetailClient 
-      project={project} 
+      project={presentPortfolioProject(project)} 
       lang={safeLang} 
       dictionary={{ backBtn, resultsTitle, transformTitle, ctaTitle, ctaDesc, ctaBtn }}
     />

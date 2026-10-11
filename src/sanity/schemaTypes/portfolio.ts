@@ -131,6 +131,9 @@ export const portfolio = defineType({
         fields: [
           { name: 'metric', title: 'Ko\'rsatkich', type: 'string' },
           { name: 'value', title: 'Qiymat', type: 'string' },
+          { name: 'sourceUrl', title: 'Dalil manbasi URL', type: 'url' },
+          { name: 'period', title: 'Natija davri', type: 'string' },
+          { name: 'approved', title: 'Dalil tekshirildi va nashr tasdiqlandi', type: 'boolean', initialValue: false },
         ]
       }],
     }),

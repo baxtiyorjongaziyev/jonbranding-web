@@ -26,14 +26,14 @@
     "services_and_prices_desc": "Build your package and get a price instantly.",
     "contact_by_phone": "Call",
     "contact_by_telegram": "Via Telegram",
-    "free_consultation": "Free Brand Audit",
+    "free_consultation": "Free 20-minute consultation",
     "open_menu": "Open Menu",
     "switch_lang": "Change Language",
     "lang_ru": "Russian",
     "lang_uz": "Uzbek",
     "lang_en": "English",
     "ai": "AI Assistant",
-    "consultation_short": "Get Audit",
+    "consultation_short": "Book a consultation",
     "mobile_quick_actions": "Mobile quick actions",
     "about": "About Us",
     "contacts": "Contact",
@@ -664,8 +664,8 @@
         "text": "Clear communication at every stage"
       }
     ],
-    "phoneButton": "Call directly",
-    "telegramButton": "Write on Telegram",
+    "phoneButton": "Contact the team",
+    "telegramButton": "Services and prices",
     "videoButton": "45 seconds from founder",
     "videoAlt": "Bahtiyorjon Gaziyev, founder of Jon.Branding",
     "principles": [
@@ -1574,13 +1574,13 @@
       {
         "num": "03",
         "name": "Brand Book",
-        "desc": "A comprehensive 40+ page guide — color, font, tone of voice, examples, rules.",
+        "desc": "Logo, colours, fonts and usage rules in one guide. Scope is agreed in the contract.",
         "time": "2–3 weeks"
       },
       {
         "num": "04",
         "name": "Packaging Design",
-        "desc": "Mockup, print-ready file, recipe and technical drawings. SKU system.",
+        "desc": "Product presentation, technical layout, print-ready files and adaptation to product variants.",
         "time": "4–8 weeks"
       },
       {
@@ -1880,8 +1880,8 @@
     "hero_primary_cta": "Discuss the project",
     "hero_secondary_cta": "View our work",
     "services_title": "A visual identity\nthat works.",
-    "services_lede": "Core offer: logo and visual identity, brand book, packaging and brand applications. Naming, trademark and digital design are available as add-ons.",
-    "services_label": "§ 04 Core offer",
+    "services_lede": "Logo, identity, brandbook and packaging. We choose the services you need; naming and trademark registration can be added separately.",
+    "services_label": "§ 04 Services",
     "services_timeline_note": "Timeline depends on project scope",
     "featured_title": "Featured case",
     "featured_live": "Ongoing",
@@ -2512,6 +2512,162 @@
     "ios_instruction": "Tap Share ⎋ and choose \"Add to Home Screen\" ⊕",
     "dismiss": "Dismiss",
     "share": "Share",
-    "add_to_home": "Add to Home Screen"
+    "add_to_home": "Add to Home Screen",
+    "browser_menu": "Browser menu",
+    "android_instruction": "Open the browser menu ⋮ and choose ‘Install app’ or ‘Add to Home Screen’."
+  },
+  "salesFlow": {
+    "consultation": "Free 20-minute consultation",
+    "cta": "Book a consultation",
+    "prices": "Services and prices",
+    "team": "Contact the team",
+    "privacy": "Your number is used only to contact you.",
+    "consultationDesc": "Discuss your needs and choose a suitable service. Our team will contact you to arrange a time.",
+    "projectDesc": "Our team will contact you about your chosen service. Scope, price and timeline are agreed before work starts.",
+    "submit": "Request a call",
+    "done": "Your request was received. Our team will contact you to arrange a conversation.",
+    "manifest": {
+      "label": "— Approach",
+      "sub": "New business or rebranding: understand the need before designing.",
+      "pre": "A brand that is",
+      "strike": "",
+      "mid": "consistently",
+      "italic": "recognisable.",
+      "post": "",
+      "bold": "From logo to packaging — one system."
+    },
+    "process": {
+      "sectionLabel": "Process",
+      "heading": "From brief",
+      "headingEm": "to ready files.",
+      "subtitle": "Scope, timeline and deliverables are agreed in the contract.",
+      "exampleLabel": "Stage outcome",
+      "cta": "Discuss your project",
+      "note": "50% at contract · 50% at delivery",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Brief and analysis",
+          "dur": "",
+          "summary": "Understand your business, audience and needs.",
+          "detail": "For a new business, we start with the idea and goal. For an existing brand, we review available materials. We agree on services and scope.",
+          "example": "An agreed task and service scope."
+        },
+        {
+          "n": "02",
+          "title": "Concept",
+          "dur": "",
+          "summary": "Choose one of three directions.",
+          "detail": "We present concepts and explain the choices. You approve the selected direction.",
+          "example": "An approved design direction."
+        },
+        {
+          "n": "03",
+          "title": "Development",
+          "dur": "",
+          "summary": "Adapt the chosen direction to your materials.",
+          "detail": "We develop the logo, colours, fonts, packaging and materials within the agreed scope. We proceed after approval.",
+          "example": "Agreed designs and usage rules."
+        },
+        {
+          "n": "04",
+          "title": "Delivery",
+          "dur": "",
+          "summary": "You receive source files and guides.",
+          "detail": "We deliver files in agreed formats. A brandbook or print-ready packaging files depend on the selected service.",
+          "example": "Ready files for your team and suppliers."
+        }
+      ]
+    },
+    "pricing": {
+      "label": "Free consultation",
+      "heading": "Decide together",
+      "headingEm": "where to start.",
+      "sub": "20 minutes · free conversation",
+      "badge": "Free",
+      "items": [
+        "Discuss your business and current task",
+        "Identify suitable services",
+        "Explain pricing and scope",
+        "No obligation to order"
+      ],
+      "cta": "Book a consultation",
+      "guarantees": [
+        "The conversation does not include a finished design or a detailed audit.",
+        "Scope and timeline are agreed before ordering."
+      ]
+    },
+    "faq": {
+      "sectionN": "§ 07",
+      "label": "Questions",
+      "heading": "Before",
+      "headingEm": "you order.",
+      "note": "Have questions? Discuss them with our team.",
+      "cta": "Ask our team",
+      "footerNote": "Choose a service that fits your needs.",
+      "faqs": [
+        {
+          "q": "Do you work with new businesses?",
+          "a": "Yes. We agree on naming, a logo and identity for a new business, or necessary updates for an existing one. You do not need every service at once."
+        },
+        {
+          "q": "How do a logo and identity differ?",
+          "a": "A logo is a mark. Identity is the consistent use of colours, fonts and graphic elements across materials. The scope depends on your service."
+        },
+        {
+          "q": "What is included in the free consultation?",
+          "a": "In 20 minutes we discuss your needs and help choose a service. This is not a detailed audit, revenue calculation or finished design. There is no obligation to order."
+        },
+        {
+          "q": "How are price and timeline agreed?",
+          "a": "Service and package prices are on our pricing page. Final scope, timeline and files are agreed in the contract. Trademark certification has a separate timeline from design work."
+        },
+        {
+          "q": "What if I do not like the design?",
+          "a": "First, choose a direction from three concepts. We refine it with agreed revisions. The next stage starts after your approval."
+        },
+        {
+          "q": "How do payment and delivery work?",
+          "a": "50% at contract signing and 50% at project delivery. You receive agreed source files and usage rules. Obligations are stated in the contract."
+        }
+      ]
+    },
+    "final": {
+      "badge": "Next step",
+      "h2a": "The right solution",
+      "h2b": "for your brand.",
+      "body": "Discuss the services you need. Before starting,",
+      "bodyStrong": "we agree on scope, price and timeline.",
+      "cta": "Book a consultation ↗",
+      "stats": [
+        {
+          "k": "Start",
+          "v": "20",
+          "s": " minute conversation"
+        },
+        {
+          "k": "Payment",
+          "v": "50/50",
+          "s": ""
+        },
+        {
+          "k": "Delivery",
+          "v": "Source",
+          "s": " files"
+        }
+      ]
+    },
+    "caseScope": "Project scope",
+    "caseMaterials": "Project materials",
+    "caseNote": "Explore the project solutions in the images below.",
+    "source": "Source",
+    "period": "Period",
+    "choose": "Choose your starting point",
+    "individual": "Individual services",
+    "packages": "Packages",
+    "logoPath": "Need a logo",
+    "identityPath": "A consistent identity",
+    "packagingPath": "Product packaging",
+    "newPath": "For a new business"
   }
 }

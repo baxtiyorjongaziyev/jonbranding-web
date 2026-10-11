@@ -33,7 +33,11 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
   });
 
   useEffect(() => {
-    const status = localStorage.getItem('lead_magnet_status');
+    let status: string | null;
+    try { status = localStorage.getItem('lead_magnet_status'); } catch {
+      setIsDismissed(true);
+      return;
+    }
     if (status === 'dismissed' || status === 'converted') {
       setIsDismissed(true);
       return;
@@ -52,7 +56,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
 
   const handleClose = () => {
     setIsVisible(false);
-    localStorage.setItem('lead_magnet_status', 'dismissed');
+    try { localStorage.setItem('lead_magnet_status', 'dismissed'); } catch {}
     setIsDismissed(true);
   };
 
@@ -99,7 +103,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
           phone: formData.phone
         });
         setStep('success');
-        localStorage.setItem('lead_magnet_status', 'converted');
+        try { localStorage.setItem('lead_magnet_status', 'converted'); } catch {}
         setTimeout(() => setIsVisible(false), 5000);
       } else {
         throw new Error('Submission failed');
@@ -119,6 +123,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
+        data-mobile-overlay="true"
         className="fixed bottom-0 md:bottom-6 left-0 md:left-6 z-[100] w-full md:max-w-md p-4 md:p-0"
       >
         <Card className="relative overflow-hidden border-none shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#0A0A0A] text-white rounded-3xl md:rounded-2xl border border-white/5">

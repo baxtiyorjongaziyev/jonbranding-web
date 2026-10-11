@@ -20,6 +20,11 @@ function installEvent() {
 }
 
 describe('mobile PWA install offers', () => {
+  it('replays an install request captured before the lazy widget mounted', () => {
+    device('Mozilla/5.0 (Linux; Android 14) Chrome/130 Mobile');
+    render(<PwaInstaller installRequest={1} />);
+    expect(screen.getByRole('button', { name: "O'rnatish" })).toBeInTheDocument();
+  });
   beforeEach(() => { vi.useFakeTimers(); localStorage.clear(); });
   afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); });
 
@@ -56,6 +61,15 @@ describe('mobile PWA install offers', () => {
     installEvent();
     act(() => { vi.advanceTimersByTime(6000); });
     expect(screen.queryByText('Jon.Branding Ilovasi')).not.toBeInTheDocument();
+  });
+
+  it('gives Android instructions when the browser has no native install prompt', async () => {
+    device('Mozilla/5.0 (Linux; Android 14) Chrome/130 Mobile');
+    render(<PwaInstaller />);
+    act(() => { window.dispatchEvent(new Event('openPwaInstallPrompt')); });
+    await act(async () => { screen.getByRole('button', { name: "O'rnatish" }).click(); });
+    expect(screen.getByText(/Brauzer menyusi ⋮ ni oching/)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: "O'rnatish" })).not.toBeInTheDocument();
   });
 
   it('cancels a pending offer when the app is installed', () => {

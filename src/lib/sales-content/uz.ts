@@ -14,7 +14,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
-        name: 'Brand Strategy',
+        name: "Brend strategiyasi",
         price: '48 000 000',
         lead: 'Brendingiz bozorda qaysi joyni egallashi kerakligini aniqlaymiz. Kim uchun ishlaysiz, nimasi bilan farqlanasiz va nima deysiz — bitta strategik tizimga keltiramiz.',
         deliverables: [
@@ -32,10 +32,10 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
-        name: 'Naming',
+        name: "Neyming — nom ishlab chiqish",
         price: '10 000 000',
         duration: '10 kun',
-        lead: 'Yaxshi nom — biznesingizning birinchi taassuroti. Bir marta ishlab chiqiladi, butun umr foyda keltiradi.',
+        lead: "Biznesingizga mos, esda qoladigan nom va uning tanlash asosini ishlab chiqamiz.",
         deliverables: [
           'Biznesingizga mos professional nom',
           'Nomning strategik izohi — nega aynan shu nom',
@@ -44,9 +44,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'O‘zbekiston bo‘yicha patent/trademark tekshiruvi',
           '3 ta bepul tahrir',
         ],
-        benefit: 'Nomingizni tanitishga sarflagan har bir so‘m o‘zingizda qoladi — besh yildan keyin “bu nom bizniki” degan xat kelmaydi.',
+        benefit: "Biznesingizga mos nom, tanlash izohi va mavjudlik tekshiruvlarini olasiz. Ro‘yxatdan o‘tkazish alohida xizmat.",
         audience: 'Yangi biznes ochayotgan yoki hozirgi nomi ishlamayotganlar uchun',
-        note: 'Nom noto‘g‘ri tanlansa, keyin patent, domen va reklama uch barobar qimmatga tushadi.',
+        note: "Nom tanlashda domen, ijtimoiy tarmoq va tovar belgisi bo‘yicha mavjudlik hisobga olinadi.",
         proof: {
           label: 'Biz ishlab chiqqan nomlar',
           items: [
@@ -57,7 +57,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
-        name: 'Logo',
+        name: "Logotip",
         price: '8 000 000',
         duration: '7 kun',
         lead: 'Kichkina ekranda ham, katta bannerda ham bir xil ishlaydigan belgi.',
@@ -68,15 +68,15 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Gorizontal, vertikal va ixcham (ikonka) variantlari',
           'Minimal o‘lcham va bo‘sh joy qoidalari',
         ],
-        benefit: 'Vizitkadan bannergacha, avatardan qadoqqacha — har safar dizaynerga “moslashtirib bering” deb pul to‘lamaysiz.',
+        benefit: "Turli o‘lcham va formatdagi tayyor logotip fayllari ishlatishni osonlashtiradi.",
         audience: 'Logosi yo‘q yoki eskirgan, zamonaviy ko‘rinmayotgan biznes uchun',
       },
       {
         id: 'visual-identity',
-        name: 'Visual identity',
+        name: "Firma uslubi",
         price: '18 000 000',
         duration: '10 kun',
-        lead: 'Logo — bu bitta belgi. Visual identity — brendingiz hamma joyda tanilishi.',
+        lead: 'Logotip — bitta belgi. Firma uslubi — ranglar, shriftlar va grafik elementlarning turli materiallarda bir xil ishlashi.',
         deliverables: [
           'Rang palitrasi (Pantone, CMYK, RGB, HEX)',
           'Shrift tizimi: sarlavha, matn, urg‘u',
@@ -84,12 +84,12 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Foto va rasm uslubi',
           '10 dan ortiq tashuvchi maketi: vizitka, blank, konvert, forma, banner, ijtimoiy tarmoq shablonlari',
         ],
-        benefit: 'Reklamangiz har oy noldan tanishtirmaydi — har bir ko‘rish oldingisining ustiga qo‘shiladi. Byudjet yig‘iladi, teshik chelakka quyilmaydi.',
+        benefit: "Ranglar, shriftlar va maketlar turli materiallarda bir xil ko‘rinish yaratishga yordam beradi.",
         audience: 'Logosi bor, lekin har joyda har xil ko‘rinayotgan biznes uchun',
       },
       {
         id: 'brandbook',
-        name: 'Brandbook',
+        name: "Brendbuk — qo‘llash qoidalari",
         price: '24 000 000',
         duration: '7 kun',
         lead: 'Brendingiz qoidalari bitta hujjatda. Yangi dizayner kelsa ham tizim buzilmaydi.',
@@ -112,7 +112,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
-        name: 'Packaging (1 SKU)',
+        name: "Qadoq dizayni (1 mahsulot turi)",
         price: '12 000 000',
         duration: '7 kun',
         lead: 'Bitta mahsulot uchun to‘liq qadoq dizayni — tipografiyaga tayyor holda.',
@@ -123,12 +123,12 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Shtrix-kod, tarkib, muddat va belgilarning to‘g‘ri joylashuvi',
           'Tipografiyaga topshirishga tayyor fayllar',
         ],
-        benefit: 'Mahsulot javonda o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi. Va narxni ko‘tarishga asos paydo bo‘ladi.',
+        benefit: "Qadoq mahsulotni ajratib ko‘rsatishga va uning ma’lumotlarini tushunarli berishga yordam beradi.",
         audience: 'Do‘kon, marketplace yoki tarmoqqa chiqayotgan ishlab chiqaruvchilar uchun',
       },
       {
         id: 'packaging-extra',
-        name: 'Har qo‘shimcha SKU',
+        name: "Har qo‘shimcha mahsulot turi",
         price: '4 000 000 dan',
         duration: '+3 kun',
         lead: 'Birinchi qadoq tayyor bo‘lgach, qolgan mahsulotlar arzonroq.',
@@ -159,7 +159,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Ro‘yxatdan o‘tish ehtimoli bo‘yicha xulosa',
           'Sizga qaysi sinflar kerakligini o‘zimiz aniqlab beramiz',
         ],
-        benefit: 'Bir kunlik tekshiruv sizni yillab tanitgan nomdan ayrilishdan saqlaydi. Eng arzon sug‘urta.',
+        benefit: "O‘xshash nomlar va ro‘yxatdan o‘tish xavflari haqida xulosa olasiz. Bu ro‘yxatdan o‘tish kafolati emas.",
         audience: 'Nomni tanlagan, lekin hali ro‘yxatdan o‘tkazmaganlar uchun',
         note: 'Narx bitta sinf uchun. Naming xizmatiga bu tekshiruv allaqachon kiritilgan.',
         addon: { label: 'Har qo‘shimcha sinf', price: '+440 000 so‘m' },
@@ -176,7 +176,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Jarayon oxirigacha kuzatib boriladi',
           'Guvohnoma qo‘lingizga topshiriladi',
         ],
-        benefit: 'Nom qonuniy sizniki bo‘ladi — franshiza sotish, eksportga chiqish va tenderga kirish yo‘li ochiladi. Brend aktivga aylanadi.',
+        benefit: "Ro‘yxatdan o‘tkazish uchun hujjatlar tayyorlanadi va jarayon kuzatiladi. Qaror ekspertiza natijasiga bog‘liq.",
         audience: 'Shoshilmayotgan, lekin nomini himoyalamoqchi bo‘lganlar uchun',
       },
       {
@@ -190,7 +190,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
           'Tezlashtirilgan ekspertiza',
           'Muddat 7 oydan 20–40 kunga qisqaradi',
         ],
-        benefit: 'Muddat sizni kutib turmaydigan joyda — yetti oy o‘rniga bir oycha. Shartnomani boy bermaysiz.',
+        benefit: "Tezlashtirilgan tartibda ariza tayyorlash va jarayonni kuzatish. Yakuniy muddat rasmiy jarayonga bog‘liq.",
         audience: 'Tender, marketplace yoki eksport muddati siqib turganlar uchun',
       },
     ],
@@ -200,12 +200,12 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
 /** Ekspert tekshiruv (`/expert-tekshiruv`) — narx va muddat shu yozuvdan olinadi. */
 export const EXPERT_CHECK_SERVICE: Service = SERVICE_GROUPS
   .flatMap((group) => group.items)
-  .find((item) => item.name === 'Patent tekshiruvi')!;
+  .find((item) => item.id === 'trademark-search')!;
 
 /** Brand Strategy (`/brand-strategy`) — narx shu yozuvdan olinadi. */
 export const BRAND_STRATEGY_SERVICE: Service = SERVICE_GROUPS
   .flatMap((group) => group.items)
-  .find((item) => item.name === 'Brand Strategy')!;
+  .find((item) => item.id === 'brand-strategy')!;
 
 export const PACKAGES: Package[] = [
   {
@@ -214,7 +214,7 @@ export const PACKAGES: Package[] = [
     separate: '85 000 000',
     saving: '15 000 000',
     audience: 'Eksportga chiqayotgan, marketplace yoki tarmoq do‘konga kirayotgan ishlab chiqaruvchilar uchun',
-    features: ['Naming', 'Logo', 'Visual identity', 'Brandbook', 'Patent', 'Packaging (3 SKU)'],
+    features: ['Neyming', 'Logotip', 'Firma uslubi', 'Brendbuk', 'Patent', 'Qadoq dizayni (3 mahsulot turi)'],
     duration: '35–45 kun',
   },
   {
@@ -223,7 +223,7 @@ export const PACKAGES: Package[] = [
     separate: '65 000 000',
     saving: '10 000 000',
     audience: 'Brendini to‘liq tartibga solmoqchi bo‘lgan, o‘sayotgan biznes uchun',
-    features: ['Naming', 'Logo', 'Visual identity', 'Brandbook', 'Patent'],
+    features: ['Neyming', 'Logotip', 'Firma uslubi', 'Brendbuk', 'Patent'],
     duration: '30–35 kun',
     featured: true,
     badge: 'Ko‘p tanlanadi',
@@ -234,7 +234,7 @@ export const PACKAGES: Package[] = [
     separate: '23 000 000',
     saving: '3 000 000',
     audience: 'Endi boshlayotgan yoki brendi hali yo‘q biznes uchun',
-    features: ['Naming', 'Logo', 'Patent'],
+    features: ['Neyming', 'Logotip', 'Patent'],
     duration: '20–25 kun',
   },
 ];
@@ -242,7 +242,7 @@ export const PACKAGES: Package[] = [
 export const FAQS = [
   {
     q: 'Nega 8 mln, Instagramda 500 mingga logo qilishadi-ku?',
-    a: '500 minglik logo — bu bitta rasm. Siz undan keyin har bir banner, qadoq va vizitka uchun yana to‘laysiz, chunki fayllar to‘liq emas, qoida yo‘q, har safar yangidan chiziladi. Bizda logo barcha formatlarda, barcha versiyalarda va ishlatish qoidalari bilan keladi. Ustiga patent tekshiruvi — nomingiz birovniki chiqib qolmasligi uchun. Farq narxda emas, keyin qancha to‘lashingizda.',
+    a: "Logotip narxiga uchta konsepsiya, tanlangan yo‘nalishni sayqallash, turli format va versiyadagi fayllar hamda qo‘llash qoidalari kiradi. Tovar belgisi tekshiruvi va ro‘yxatdan o‘tkazish alohida xizmatlar.",
   },
   {
     q: 'Yoqmasa nima bo‘ladi?',
@@ -269,11 +269,11 @@ export const WHY_US = [
   },
   {
     title: 'Patent ham biz tomondan',
-    desc: 'Dizayner logo chizadi va ketadi. Biz nomni tekshiramiz, ro‘yxatdan o‘tkazamiz va guvohnomani qo‘lingizga beramiz — brend huquqan sizniki bo‘ladi.',
+    desc: "Patent tekshiruvi va ro‘yxatdan o‘tkazish alohida xizmat sifatida tanlanadi. Dizayn narxiga avtomatik qo‘shilmaydi.",
   },
   {
     title: 'Tizimli jarayon va ichki nazorat',
-    desc: 'Har loyiha brif, tahlil, konsepsiya va topshirish bosqichlaridan o‘tadi. Qarorlar taqdimot va tasdiq bilan yuradi.',
+    desc: "Har loyiha brif, tahlil, konsepsiya va topshirish bosqichlaridan o‘tadi. Qarorlar taqdimot va tasdiq bilan yuradi.",
   },
   {
     title: 'Fayllar sizda qoladi',
@@ -292,19 +292,19 @@ export const GUARANTEES = [
 export const JOBS = [
   {
     pain: 'Mahsulotingiz raqobatchinikidan yaxshi, lekin xaridor javondan chiroyliroq qadoqni oladi.',
-    gain: 'Mahsulot o‘zini o‘zi sotadi — sotuvchi tushuntirib o‘tirmaydi.',
+    gain: "Mahsulotni ajratib ko‘rsatadigan va ma’lumotlarini tushunarli beradigan qadoq.",
   },
   {
     pain: '“Sifatimiz yuqori” deysiz, lekin ko‘rinishi arzon. Shuning uchun arzon narxga rozi bo‘lasiz.',
-    gain: 'Ko‘rinish narxni oqlaydi — narxni ko‘tarasiz va mijoz savol bermaydi.',
+    gain: "Mahsulot sifati va biznes yo‘nalishiga mos vizual ko‘rinish.",
   },
   {
     pain: 'Har safar boshqa dizayner, har safar boshqa rang. Odam o‘n marta ko‘rsa ham esda qolmaydi.',
-    gain: 'Har bir ko‘rish oldingisining ustiga qo‘shiladi — reklama byudjeti yig‘iladi.',
+    gain: "Har xil reklama va materiallarda bir xil rang, shrift va uslub.",
   },
   {
     pain: 'Nomingiz ro‘yxatdan o‘tmagan. Bir kun kelib “bu nom bizniki” degan xat kelishi mumkin.',
-    gain: 'Nom qonuniy sizniki — franshiza, eksport va tender yo‘li ochiladi.',
+    gain: "Tovar belgisi bo‘yicha tekshiruv va ro‘yxatdan o‘tkazish jarayonida yordam.",
   },
 ];
 
@@ -316,7 +316,7 @@ export const PROCESS_STEPS = [
 ];
 
 export const PRICE_FACTORS = [
-  'Mahsulot turlari soni (SKU)',
+  'Mahsulot turlari soni',
   'Patent klasslari soni',
   'Tashuvchilar soni (vizitka, banner, forma va boshqalar)',
   'Muddat — tezkor bajarish +50%',

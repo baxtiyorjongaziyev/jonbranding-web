@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+import { getSalesContent } from '@/lib/sales-content';
 import type { FC } from 'react';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
@@ -10,44 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 interface Props { onOpen: () => void; lang?: string; dictionary?: any; }
 interface ServiceItem { num: string; name: string; desc: string; time: string; }
 
-const SERVICES_UZ = [
-  { num: '01', name: 'Neyming', desc: "Biznesingizga to'g'ri nom berish — esda qolarli, yuridik toza, va domen hamda Instagram handle bilan.", time: '2–4 hafta' },
-  { num: '02', name: 'Logotip & Aydentika', desc: "Chiroyli logo + vizitkada, veb-saytda, ijtimoiy tarmoqda bir xil ko'rinis uchun ranglar va shriftlar.", time: '3–5 hafta' },
-  { num: '03', name: 'Brendbuk', desc: "Hamkasblar uchun: logotip, ranglar, shriftlarni qanday ishlatish kerakligini tushuntiradigan qo'llanma.", time: '2–3 hafta' },
-  { num: '04', name: 'Qadoq dizayni', desc: 'Mahsulot qadoqini sotish kerak shunchalik chiroyli qilish + bosmaga tayyor fayl.', time: '4–8 hafta' },
-  { num: '05', name: 'Tovar belgisi', desc: "Biznesingizni qonuniy tarzda himoya qilish — O'zbekiston, CIS va boshqa mamlakatlar.", time: '4–9 oy' },
-  { num: '06', name: 'Raqamli brend', desc: "Veb-sayt, ijtimoiy tarmoqlar uchun dizayn, animatsiyalar — internetda shirinli ko'rinish.", time: '4–8 hafta' },
-];
-
-const SERVICES_RU = [
-  { num: '01', name: 'Нейминг', desc: 'Правильное имя для вашего бизнеса — запоминающееся, законное, готовое для домена и Instagram.', time: '2–4 недели' },
-  { num: '02', name: 'Логотип & Айдентика', desc: 'Красивый логотип + единый стиль на визитке, сайте, в соцсетях (цвета и шрифты).', time: '3–5 недель' },
-  { num: '03', name: 'Брендбук', desc: 'Инструкция для команды: как правильно использовать логотип, цвета и шрифты.', time: '2–3 недели' },
-  { num: '04', name: 'Дизайн упаковки', desc: 'Красивая упаковка продукта, которая продаёт сама по себе + файл для типографии.', time: '4–8 недель' },
-  { num: '05', name: 'Товарный знак', desc: 'Юридическая защита вашего бренда — в Узбекистане, СНГ и мире.', time: '4–9 мес.' },
-  { num: '06', name: 'Цифровой бренд', desc: 'Сайт, дизайн для соцсетей, анимация — красивый вид в интернете.', time: '4–8 недель' },
-];
-
-const SERVICES_EN = [
-  { num: '01', name: 'Naming', desc: 'The perfect name for your business — memorable, legal, ready for domain and social media.', time: '2–4 weeks' },
-  { num: '02', name: 'Logo & Identity', desc: 'Beautiful logo + consistent look on business cards, website, Instagram (colors & fonts).', time: '3–5 weeks' },
-  { num: '03', name: 'Brand Book', desc: 'Instructions for your team: how to properly use the logo, colors, and fonts.', time: '2–3 weeks' },
-  { num: '04', name: 'Packaging Design', desc: 'Eye-catching product packaging that sells itself + print-ready file for production.', time: '4–8 weeks' },
-  { num: '05', name: 'Trademark', desc: 'Legal protection for your brand — in Uzbekistan, CIS countries, and worldwide.', time: '4–9 mo.' },
-  { num: '06', name: 'Digital Brand', desc: 'Website, social media design, animations — a professional look online.', time: '4–8 weeks' },
-];
-
-const SERVICES_ZH = [
-  { num: '01', name: '品牌命名', desc: '为您的企业取一个好名字——易记、合法、准备好域名和社交账号。', time: '2–4周' },
-  { num: '02', name: '标志与视觉识别', desc: '漂亮的标志 + 名片、网站、Instagram上的统一风格（颜色和字体）。', time: '3–5周' },
-  { num: '03', name: '品牌手册', desc: '您的团队指南：如何正确使用标志、颜色和字体。', time: '2–3周' },
-  { num: '04', name: '包装设计', desc: '抢眼的产品包装能自己销售 + 可用于印刷的文件。', time: '4–8周' },
-  { num: '05', name: '商标注册', desc: '保护您的品牌——在乌兹别克斯坦、独联体和全球范围内。', time: '4–9月' },
-  { num: '06', name: '数字品牌', desc: '网站、社交媒体设计、动画——专业的网络形象。', time: '4–8周' },
-];
-
-const SERVICES_MAP: Record<string, typeof SERVICES_UZ> = { uz: SERVICES_UZ, ru: SERVICES_RU, en: SERVICES_EN, zh: SERVICES_ZH };
-
 const HEADING: Record<string, { h: string; italic: string; sub: string; desc: string }> = {
   uz: { h: 'Brend — boshidan', italic: 'oxirigacha.', sub: '§ 04 Xizmatlar', desc: "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi." },
   ru: { h: 'Бренд — с начала', italic: 'до конца.', sub: '§ 04 Услуги', desc: 'Нейминг, айдентика, упаковка, товарный знак и digital-присутствие — в одном месте, одна команда, одна цена. Каждая услуга заказывается отдельно.' },
@@ -55,12 +19,12 @@ const HEADING: Record<string, { h: string; italic: string; sub: string; desc: st
   zh: { h: '品牌——从开始', italic: '到结束。', sub: '§ 04 服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
 };
 
-const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
-  const allServices: ServiceItem[] = dictionary?.services ?? SERVICES_MAP[lang] ?? SERVICES_UZ;
-  // Flagman offerga tegishli uchta asosiy natija. Qolgan xizmatlar add-on sifatida narxlar sahifasida qoladi.
-  const SERVICES = allServices.length >= 4
-    ? [allServices[1], allServices[2], allServices[3]]
-    : allServices;
+const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
+  const services = getSalesContent(lang).serviceGroups.flatMap(group => group.items);
+  const SERVICES: ServiceItem[] = ['visual-identity', 'brandbook', 'packaging'].map((id, index) => {
+    const service = services.find(item => item.id === id)!;
+    return { num: String(index + 1).padStart(2, '0'), name: service.name, desc: service.lead, time: service.duration || '' };
+  });
   const h = HEADING[lang] ?? HEADING.uz;
   const headingLines = String(dictionary?.services_title ?? `${h.h}\n${h.italic}`).split('\n');
   const headingFirst = headingLines[0];
@@ -115,12 +79,10 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
       </div>
 
       <div ref={listRef} className="border-t border-[var(--at-ink)]">
-        {SERVICES.map((s) => (
-          <button
-            type="button"
+        {SERVICES.map((s, i) => (
+          <Link
             key={s.num}
-            data-oisha-callback=""
-            onClick={onOpen}
+            href={`/${lang}/narxlar#service-${['visual-identity', 'brandbook', 'packaging'][i]}`}
             className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-[background-color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >
             <div
@@ -154,7 +116,7 @@ const AtServices: FC<Props> = ({ onOpen, lang = 'uz', dictionary }) => {
               <div className="col-span-3 min-w-0 break-words text-xs text-[var(--at-ink-2)] leading-[1.55]">{s.desc}</div>
               <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-2">{s.time}</div>
             </div>
-          </button>
+          </Link>
         ))}
       </div>
     </div>

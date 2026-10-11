@@ -1,6 +1,7 @@
 'use client';
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
+import PriceOverview from '@/components/sales/price-overview';
 import { useMemo, useCallback } from 'react';
 import { selectHomePortfolioProjects, portfolioYear } from '@/lib/portfolio-presentation';
 
@@ -64,7 +65,7 @@ const AtFinalCta = dynamic(
 
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
 const AtStickyCta = dynamic(() => import('@/components/sections/at-sticky-cta'), { ssr: false });
-const ExitIntentPopup = dynamic(() => import('@/components/exit-intent-popup'), { ssr: false });
+
 const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-analytics'), { ssr: false });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -76,12 +77,13 @@ const HomeComponent: FC<{
   testimonials?: any[];
   portfolioProjects?: any[];
 }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
-  // Ariza formasini Oisha callback vidjeti ochadi (tugmalardagi
-  // `data-oisha-callback`). Bu yerda faqat CTA analitikasi yuboriladi.
   const open = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage' } })
+      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'project' } })
     );
+  }, []);
+  const openConsultation = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('openContactModal', { detail: { section: 'homepage_consultation', source: 'homepage_consultation', intent: 'consultation' } }));
   }, []);
 
   const homeProjects = useMemo(() => selectHomePortfolioProjects(portfolioProjects), [portfolioProjects]);
@@ -114,6 +116,7 @@ const HomeComponent: FC<{
       <AtMarquee lang={lang} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
+      <PriceOverview lang={lang} />
 
       {/* ── Below-the-fold (lazy) ── */}
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
@@ -124,15 +127,15 @@ const HomeComponent: FC<{
 
       <ProcessVideo dictionary={dictionary.processVideo} />
       <AtProcess lang={lang} onOpen={open} />
-      <Founder lang={lang} dictionary={dictionary.founder} />
+      <Founder lang={lang} dictionary={dictionary.founder} onOpen={open} />
       <SeoAnswerHub lang={lang} {...dictionary.answerHub} />
-      <AtPricing onOpen={open} lang={lang} />
+      <AtPricing onOpen={openConsultation} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
-      <AtFinalCta onOpen={open} lang={lang} />
+      <AtFinalCta onOpen={openConsultation} lang={lang} />
 
       {/* ── Utility / overlays ──── */}
-      <AtStickyCta onOpen={open} lang={lang} />
-      <ExitIntentPopup onOpen={open} lang={lang} />
+      <AtStickyCta onOpen={openConsultation} lang={lang} />
+
       <ScrollDepthAnalytics />
       </div>
     </MotionConfig>

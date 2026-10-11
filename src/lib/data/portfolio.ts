@@ -96,7 +96,7 @@ export async function fetchPortfolioList(lang: string): Promise<PortfolioProject
 
   fallbacks.forEach((item) => {
     const exists = merged.some((p) => supersedesFallback(p, item));
-    if (!exists) merged.push(item);
+    if (!exists) merged.push(presentPortfolioProject(item));
   });
 
   return merged.sort((a, b) => {

@@ -6,6 +6,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/analytics/gtag';
 import { Toaster } from '@/components/ui/toaster';
 import { trackCtaClick, trackEvent } from '@/lib/analytics';
+import LeadModal from '@/components/sales/lead-modal';
+import { getSalesContent } from '@/lib/sales-content';
 
 const OishaWidget = dynamic(() => import('@/components/oisha-widget'), {
   ssr: false,
@@ -88,6 +90,23 @@ export default function ClientEnhancements({
 }: ClientEnhancementsProps) {
   const [enhancementsReady, setEnhancementsReady] = useState(false);
   const [quickActionsReady, setQuickActionsReady] = useState(false);
+  const [installRequest, setInstallRequest] = useState(0);
+  const [chatRequest, setChatRequest] = useState(0);
+  const [leadRequest, setLeadRequest] = useState<{ service: string; source: string; intent: 'consultation' | 'project' } | null>(null);
+
+  // Capture clicks before the lazy widgets have downloaded and mounted.
+  useEffect(() => {
+    const install = () => { delete (window as any).__pendingPwaInstall; setQuickActionsReady(true); setInstallRequest(count => count + 1); };
+    const chat = () => { delete (window as any).__pendingOisha; setEnhancementsReady(true); setChatRequest(count => count + 1); };
+    window.addEventListener('openPwaInstallPrompt', install);
+    window.addEventListener('toggleOisha', chat);
+    if ((window as any).__pendingPwaInstall) install();
+    if ((window as any).__pendingOisha) chat();
+    return () => {
+      window.removeEventListener('openPwaInstallPrompt', install);
+      window.removeEventListener('toggleOisha', chat);
+    };
+  }, []);
 
   const pathname = usePathname();
   const lang = (langProp || pathname.split('/')[1] || 'uz') as any;
@@ -96,8 +115,7 @@ export default function ClientEnhancements({
   // tushib, ekran ulashuvda ko'rinib qoladi.
   const isDeck = pathnameWithoutLocale === '/credentials';
 
-  // Ariza formasini endi Oisha callback vidjeti ochadi (`data-oisha-callback`
-  // atributi orqali). `openContactModal` hodisasi faqat CTA analitikasi uchun qoldi.
+  // One contextual form owns website CTAs; the external widget keeps call tracking.
   const trackCtaRequest = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
     trackCtaClick({
       ctaText: detail?.ctaText || 'Bepul konsultatsiya',
@@ -105,9 +123,9 @@ export default function ClientEnhancements({
       source: detail?.source || 'open_contact_modal',
     });
     trackEvent({
-      action: 'callback_widget_requested',
+      action: 'lead_form_requested',
       category: 'Lead Form',
-      label: 'Oisha callback',
+      label: 'Website lead form',
       lang,
       section: detail?.section || 'unknown',
     });
@@ -132,7 +150,9 @@ export default function ClientEnhancements({
   useEffect(() => {
     const listener = (event: Event) => {
       delete (window as any).__pendingContactModal;
-      trackCtaRequest((event as CustomEvent).detail || {});
+      const detail = (event as CustomEvent).detail || {};
+      trackCtaRequest(detail);
+      setLeadRequest({ service: detail.service || getSalesContent(lang).ui.notSure, source: detail.source || detail.section || 'website', intent: detail.intent === 'project' ? 'project' : 'consultation' });
     };
     window.addEventListener('openContactModal', listener);
     window.addEventListener('error', reportError);
@@ -141,13 +161,14 @@ export default function ClientEnhancements({
     if (pendingContactModal) {
       delete (window as any).__pendingContactModal;
       trackCtaRequest(pendingContactModal);
+      setLeadRequest({ service: pendingContactModal.service || getSalesContent(lang).ui.notSure, source: pendingContactModal.source || 'website', intent: pendingContactModal.intent === 'project' ? 'project' : 'consultation' });
     }
 
     return () => {
       window.removeEventListener('openContactModal', listener);
       window.removeEventListener('error', reportError);
     };
-  }, [trackCtaRequest, reportError]);
+  }, [trackCtaRequest, reportError, lang]);
 
   useEffect(() => {
     const quickActions = window.setTimeout(() => setQuickActionsReady(true), 3500);
@@ -164,13 +185,14 @@ export default function ClientEnhancements({
         <AnalyticsTracker />
       </Suspense>
       <Toaster />
+      {leadRequest && <LeadModal open onClose={() => setLeadRequest(null)} presetService={leadRequest.service} source={leadRequest.source} intent={leadRequest.intent} lang={lang} />}
       {quickActionsReady && tabNotificationMessage && <TabNotification message={tabNotificationMessage} />}
       {quickActionsReady && !isDeck && headerDictionary && <MobileNavBar lang={lang} dictionary={headerDictionary} />}
-      {quickActionsReady && !isDeck && <PwaInstaller lang={lang} dictionary={pwaDictionary} />}
+      {quickActionsReady && !isDeck && <PwaInstaller lang={lang} dictionary={pwaDictionary} installRequest={installRequest} />}
       {enhancementsReady && !isDeck && <CookieConsentBanner />}
-      {enhancementsReady && !isDeck && <OishaWidget lang={lang} />}
+      {enhancementsReady && !isDeck && <OishaWidget lang={lang} chatRequest={chatRequest} />}
       {enhancementsReady && !isDeck && <ProactiveTrigger lang={lang} />}
-      {enhancementsReady && !isDeck && leadMagnetDictionary && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
+      {enhancementsReady && !isDeck && leadMagnetDictionary?.roleSelection && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>
   );

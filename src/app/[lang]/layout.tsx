@@ -60,6 +60,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: 'cover',
+  interactiveWidget: 'resizes-content',
   themeColor: '#2c2bf5',
 };
 

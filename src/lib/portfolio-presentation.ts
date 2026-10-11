@@ -1,3 +1,4 @@
+import { publicPortfolioResults } from '@/lib/portfolio-evidence';
 import type { PortfolioProject } from '@/lib/portfolio-fallbacks';
 
 // Existing project gallery, inspected 2026-10-10. Apply only to the unsuitable
@@ -5,6 +6,10 @@ import type { PortfolioProject } from '@/lib/portfolio-fallbacks';
 const PERFONA_LOGO = 'https://cdn.sanity.io/images/h6ymmj0v/production/d7530f34143051ec24f70aa445b713ad880bd933-1280x720.jpg';
 
 export function presentPortfolioProject<T extends PortfolioProject>(project: T): T {
+  if (project.results?.length) project = { ...project, results: publicPortfolioResults(project.results) };
+  // The audited Den Aroma CMS case contains unattributed market-impact copy.
+  // Keep its actual artwork; withhold that narrative until it has evidence.
+  if (project.slug === 'den-aroma' || project.slug.startsWith('den-aroma-')) project = { ...project, body: [] };
   if (project.slug === 'perfona-logotip-va-brending' && project.coverImage?.includes('24f2d8b6cac168bbdd8fd3619fb58a20cf84e6aa')) {
     return { ...project, coverImage: PERFONA_LOGO };
   }

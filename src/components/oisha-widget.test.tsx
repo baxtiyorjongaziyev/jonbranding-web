@@ -11,10 +11,27 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
   vi.clearAllMocks();
 });
 
 describe('OishaWidget proactive message', () => {
+  it('replays a chat request captured before mount and reopens after closing', async () => {
+    const view = render(<OishaWidget lang="uz" chatRequest={1} />);
+    expect(screen.getByRole('textbox', { name: 'Xabar yozing...' })).toBeTruthy();
+    await act(async () => { screen.getByRole('button', { name: 'Oisha chatini yopish' }).click(); });
+    view.rerender(<OishaWidget lang="uz" chatRequest={2} />);
+    expect(screen.getByRole('textbox', { name: 'Xabar yozing...' })).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+  it('opens safely when Android browser storage access is blocked', async () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('Storage blocked'); });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Quota exceeded'); });
+    render(<OishaWidget lang="uz" />);
+    await act(async () => { window.dispatchEvent(new Event('toggleOisha')); });
+    expect(screen.getByRole('textbox', { name: 'Xabar yozing...' })).toBeTruthy();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
   it('shows the greeting as Oisha and never posts it to the backend on the visitor behalf', async () => {
     render(<OishaWidget lang="uz" />);
     const greeting = "Assalomu alaykum! Xizmatlarimizni o'rganyapsiz.";

@@ -13,6 +13,7 @@ import ru from '@/locales/ru.json';
 import en from '@/locales/en.json';
 import zh from '@/locales/zh.json';
 import type { Locale } from '@/lib/dictionaries';
+import { useVisualViewport } from '@/hooks/use-visual-viewport';
 
 interface OishaMessage {
   id: string;
@@ -33,14 +34,16 @@ export function createOishaUserId() {
   return `web_${crypto.randomUUID()}`;
 }
 
-const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
+const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatRequest }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const visibleViewport = useVisualViewport(isOpen);
   const [messages, setMessages] = useState<OishaMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [proactiveMsg, setProactiveMsg] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const sessionUserIdRef = useRef<string | null>(null);
   const { toast } = useToast();
 
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
@@ -68,11 +71,13 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
 
   // Initialize User ID and Fetch History
   useEffect(() => {
-    let storedId = localStorage.getItem('oisha_user_id');
+    let storedId = sessionUserIdRef.current;
+    try { storedId = localStorage.getItem('oisha_user_id') || storedId; } catch {}
     if (!storedId) {
       storedId = createOishaUserId();
-      localStorage.setItem('oisha_user_id', storedId);
+      try { localStorage.setItem('oisha_user_id', storedId); } catch {}
     }
+    sessionUserIdRef.current = storedId;
     setUserId(storedId);
 
     // Initial welcome message if no history
@@ -94,10 +99,15 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
   }, [messages, isLoading]);
 
   useEffect(() => {
+    if (chatRequest !== undefined) return;
     const handleToggle = () => setIsOpen((prev) => !prev);
     window.addEventListener('toggleOisha', handleToggle);
     return () => window.removeEventListener('toggleOisha', handleToggle);
-  }, []);
+  }, [chatRequest]);
+
+  useEffect(() => {
+    if (chatRequest) setIsOpen(true);
+  }, [chatRequest]);
 
   useEffect(() => {
     const handler = (e: CustomEvent) => {
@@ -220,16 +230,20 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             data-mobile-overlay="true"
+            style={visibleViewport ? {
+              bottom: `calc(env(safe-area-inset-bottom, 0px) + 12px + ${visibleViewport.bottom}px)`,
+              maxHeight: Math.max(0, visibleViewport.height - 24),
+            } : undefined}
             className="fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] right-3 z-[60] w-[calc(100%_-_1.5rem)] sm:right-6 sm:bottom-6 sm:w-[400px] h-[600px] max-h-[85dvh]"
           >
             <Card className="h-full flex flex-col shadow-2xl rounded-3xl overflow-hidden border-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/5">
-              <CardHeader className="p-4 border-b flex flex-row items-center justify-between bg-blue-600 text-white">
+              <CardHeader className="shrink-0 p-4 border-b flex flex-row items-center justify-between bg-blue-600 text-white">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                     <Bot className="w-6 h-6" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-bold">{translations.title}</CardTitle>
+                    <CardTitle className="text-sm font-bold text-white">{translations.title}</CardTitle>
                     <p className="text-[10px] opacity-80 uppercase tracking-widest">
                       {translations.subtitle}
                     </p>
@@ -279,14 +293,15 @@ const OishaWidget: FC<{ lang: string }> = ({ lang }) => {
                 </ScrollArea>
               </CardContent>
 
-              <CardFooter className="p-4 border-t bg-zinc-50/50 dark:bg-zinc-900/50">
+              <CardFooter className="shrink-0 p-4 border-t bg-zinc-50/50 dark:bg-zinc-900/50">
                 <div className="flex w-full gap-2">
                   <Input
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder={translations.placeholder}
-                    className="rounded-xl border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+                    aria-label={translations.placeholder}
+                    className="h-11 md:h-10 min-w-0 text-base md:text-sm rounded-xl border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
                   />
                   <button
                     onClick={handleSendMessage}

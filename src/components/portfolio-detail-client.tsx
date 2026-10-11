@@ -1,4 +1,6 @@
 'use client';
+import { getSalesFlow } from '@/lib/sales-flow';
+import type { PortfolioResult } from '@/lib/portfolio-evidence';
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,7 +22,7 @@ interface Project {
   oldHint?: string;
   newHint?: string;
   description: string;
-  results?: { metric: string; value: string }[];
+  results?: PortfolioResult[];
   body: { heading: string; paragraph: string }[] | any;
   galleryImages?: string[];
 }
@@ -207,6 +209,8 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   <p className="text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-widest leading-relaxed max-w-[180px]">
                     {res.metric}
                   </p>
+                  <p className="text-xs text-gray-300">{getSalesFlow(lang).period}: {res.period}</p>
+                  <a href={res.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 underline">{getSalesFlow(lang).source}</a>
                 </SpotlightCard>
               ))}
             </div>
@@ -485,18 +489,17 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             </h3>
             
             <p className="text-sm sm:text-base text-gray-400 font-medium leading-relaxed">
-              {dictionary.ctaDesc}
+              {getSalesFlow(lang).consultationDesc}
             </p>
           </div>
 
           <div className="relative pt-2">
             <Button
-              data-oisha-callback=""
               onClick={triggerLeadModal}
               size="lg"
               className="h-16 px-12 bg-blue-600 hover:bg-blue-700 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-900/30 hover:scale-[1.03] transition-all duration-300"
             >
-              {dictionary.ctaBtn}
+              {getSalesFlow(lang).cta}
             </Button>
           </div>
         </div>

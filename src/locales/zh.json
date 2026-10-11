@@ -26,14 +26,14 @@
     "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
     "contact_by_phone": "联系电话",
     "contact_by_telegram": "通过电报",
-    "free_consultation": "Brand Audit",
+    "free_consultation": "20分钟免费咨询",
     "open_menu": "菜单",
     "switch_lang": "语言",
     "lang_ru": "Русский",
     "lang_uz": "O‘zbekcha",
     "lang_en": "English",
     "ai": "人工智能",
-    "consultation_short": "获取审计",
+    "consultation_short": "预约咨询",
     "mobile_quick_actions": "移动端快捷操作",
     "about": "关于我们",
     "contacts": "联系我们",
@@ -672,8 +672,8 @@
         "text": "每个阶段清晰沟通"
       }
     ],
-    "phoneButton": "直接致电",
-    "telegramButton": "通过 Telegram 联系",
+    "phoneButton": "联系团队",
+    "telegramButton": "服务与价格",
     "videoButton": "创始人45秒介绍",
     "videoAlt": "Jon.Branding 创始人 Bahtiyorjon Gaziyev",
     "principles": [
@@ -868,7 +868,7 @@
   },
   "mobileCtaBar": {
     "final_price": "最终价格",
-    "get_offer": "获取审计",
+    "get_offer": "预约咨询",
     "cta": "获取免费品牌审计",
     "hint": "我们检查您品牌中的信任信号"
   },
@@ -1582,13 +1582,13 @@
       {
         "num": "03",
         "name": "品牌手册",
-        "desc": "40+页完整指南 — 颜色、字体、语调、案例、规则。",
+        "desc": "标志、色彩、字体和使用规则在同一指南中。范围写入合同。",
         "time": "2–3 周"
       },
       {
         "num": "04",
         "name": "包装设计",
-        "desc": "模型图，可打印文件，配方和技术图纸。SKU系统。",
+        "desc": "产品展示、技术图、印刷文件及不同产品的适配。",
         "time": "4–8 周"
       },
       {
@@ -1888,8 +1888,8 @@
     "hero_primary_cta": "讨论项目",
     "hero_secondary_cta": "查看案例",
     "services_title": "真正有效的\n视觉识别。",
-    "services_lede": "核心服务：标志与视觉识别、品牌手册、包装与品牌载体。命名、商标和数字设计可作为附加服务。",
-    "services_label": "§ 04 核心服务",
+    "services_lede": "标志、视觉系统、品牌手册和包装。选择所需服务；命名和商标注册可以单独添加。",
+    "services_label": "§ 04 服务",
     "services_timeline_note": "时间表取决于项目范围",
     "featured_title": "主要案例",
     "featured_live": "进行中",
@@ -2520,6 +2520,162 @@
     "ios_instruction": "点击分享 ⎋ 并选择“添加到主屏幕” ⊕",
     "dismiss": "关闭",
     "share": "分享",
-    "add_to_home": "添加到主屏幕"
+    "add_to_home": "添加到主屏幕",
+    "browser_menu": "浏览器菜单",
+    "android_instruction": "打开浏览器菜单 ⋮，选择“安装应用”或“添加到主屏幕”。"
+  },
+  "salesFlow": {
+    "consultation": "免费20分钟咨询",
+    "cta": "预约咨询",
+    "prices": "服务与价格",
+    "team": "联系团队",
+    "privacy": "您的电话号码仅用于联系您。",
+    "consultationDesc": "讨论您的需求并选择合适的服务。团队将联系您安排时间。",
+    "projectDesc": "团队将就所选服务与您联系。工作开始前确认范围、价格和时间。",
+    "submit": "请求联系",
+    "done": "申请已收到。团队将联系您安排沟通时间。",
+    "manifest": {
+      "label": "— 方法",
+      "sub": "新业务或品牌更新：先了解需求，再进行设计。",
+      "pre": "在不同场景中",
+      "strike": "",
+      "mid": "保持",
+      "italic": "一致的品牌。",
+      "post": "",
+      "bold": "从标志到包装——统一的系统。"
+    },
+    "process": {
+      "sectionLabel": "流程",
+      "heading": "从需求",
+      "headingEm": "到交付文件。",
+      "subtitle": "合同中确认范围、时间和交付内容。",
+      "exampleLabel": "阶段成果",
+      "cta": "讨论项目",
+      "note": "签约支付50% · 交付支付50%",
+      "steps": [
+        {
+          "n": "01",
+          "title": "需求与分析",
+          "dur": "",
+          "summary": "了解业务、受众和需求。",
+          "detail": "新业务从想法和目标开始。现有品牌则查看已有材料。确认服务和范围。",
+          "example": "确认的需求和服务范围。"
+        },
+        {
+          "n": "02",
+          "title": "概念",
+          "dur": "",
+          "summary": "从三个方向中选择一个。",
+          "detail": "展示概念并解释设计选择。由您确认所选方向。",
+          "example": "确认的设计方向。"
+        },
+        {
+          "n": "03",
+          "title": "设计开发",
+          "dur": "",
+          "summary": "将所选方向应用到材料。",
+          "detail": "按约定范围开发标志、色彩、字体、包装和材料。确认后进入下一阶段。",
+          "example": "约定的设计和使用规则。"
+        },
+        {
+          "n": "04",
+          "title": "交付",
+          "dur": "",
+          "summary": "源文件和指南交给您。",
+          "detail": "按约定格式交付文件。品牌手册或印刷包装文件取决于所选服务。",
+          "example": "团队和供应商可用的文件。"
+        }
+      ]
+    },
+    "pricing": {
+      "label": "免费咨询",
+      "heading": "一起确定",
+      "headingEm": "从哪里开始。",
+      "sub": "20分钟 · 免费沟通",
+      "badge": "免费",
+      "items": [
+        "讨论业务和当前需求",
+        "选择所需服务",
+        "说明价格和项目范围",
+        "无需承诺下单"
+      ],
+      "cta": "预约咨询",
+      "guarantees": [
+        "沟通不包括完成的设计或详细审计。",
+        "下单前确认范围和时间。"
+      ]
+    },
+    "faq": {
+      "sectionN": "§ 07",
+      "label": "问题",
+      "heading": "下单",
+      "headingEm": "之前。",
+      "note": "还有问题？与团队讨论。",
+      "cta": "向团队提问",
+      "footerNote": "选择符合需求的服务。",
+      "faqs": [
+        {
+          "q": "是否服务新业务？",
+          "a": "是。为新业务确认名称、标志和视觉系统；为现有业务确认所需更新。不必一次购买全部服务。"
+        },
+        {
+          "q": "标志与视觉系统有什么区别？",
+          "a": "标志是品牌符号。视觉系统是色彩、字体和图形在不同材料中的一致应用。范围取决于服务。"
+        },
+        {
+          "q": "免费咨询包括什么？",
+          "a": "20分钟内讨论需求并帮助选择服务。这不是详细审计、收入计算或完成的设计。无需承诺下单。"
+        },
+        {
+          "q": "价格和时间如何确定？",
+          "a": "服务和套餐价格在价格页面展示。最终范围、时间和文件写入合同。商标证书时间与设计工作分开。"
+        },
+        {
+          "q": "如果不喜欢设计怎么办？",
+          "a": "先从三个概念中选择方向。按约定修改完善。您确认后才进入下一阶段。"
+        },
+        {
+          "q": "付款和交付如何进行？",
+          "a": "签约支付50%，交付支付50%。提供约定的源文件和使用规则。责任写入合同。"
+        }
+      ]
+    },
+    "final": {
+      "badge": "下一步",
+      "h2a": "为您的品牌",
+      "h2b": "选择合适方案。",
+      "body": "讨论所需服务。开始前",
+      "bodyStrong": "确认范围、价格和时间。",
+      "cta": "预约咨询 ↗",
+      "stats": [
+        {
+          "k": "开始",
+          "v": "20",
+          "s": "分钟沟通"
+        },
+        {
+          "k": "付款",
+          "v": "50/50",
+          "s": ""
+        },
+        {
+          "k": "交付",
+          "v": "源",
+          "s": "文件"
+        }
+      ]
+    },
+    "caseScope": "项目范围",
+    "caseMaterials": "项目材料",
+    "caseNote": "查看下方图片中的项目方案。",
+    "source": "来源",
+    "period": "时期",
+    "choose": "选择起点",
+    "individual": "单项服务",
+    "packages": "套餐",
+    "logoPath": "需要标志",
+    "identityPath": "统一视觉系统",
+    "packagingPath": "产品包装",
+    "newPath": "新业务"
   }
 }
