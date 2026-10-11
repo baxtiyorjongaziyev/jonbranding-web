@@ -1986,3 +1986,5 @@ Native agent discovered all three project skills and accurately reported project
 - Owner requested Rash Milk, Goodwell, Rahimov School and Savod. Added real owner-provided Rash Milk SVG plus existing verified CDN assets in a mobile 2-column / desktop 4-column logo row, translated heading in all locales.
 - CI core build/typecheck/lint/unit tests passed; E2E 9/10 passed, outdated Oisha CTA expectation failed. Updated expectation for one contextual lead form and no duplicate callback.
 - Local E2E unavailable: installed Playwright Chromium executable missing; CI will execute suite. No real leads submitted.
+
+- Logo release e2e97355 prerender failed: trimmed homeDictionary omitted trustedBy. Added only required eyebrow to the server-to-client dictionary; rerunning full build before release. Live footer and 20-minute consultation dialogs verified after resetting conflicting browser emulation overrides.

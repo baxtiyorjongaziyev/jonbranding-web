@@ -78,6 +78,7 @@ export default async function Page(props: Props) {
   // ma'lumotiga yoziladi. Butun lug'at (ru ~95 KB) o'rniga faqat bosh sahifa
   // ishlatadigan bo'limlar beriladi.
   const homeDictionary = {
+    trustedBy: { eyebrow: dictionary.trustedBy.eyebrow },
     atelier: dictionary.atelier,
     beforeAfter: dictionary.beforeAfter,
     processVideo: dictionary.processVideo,
