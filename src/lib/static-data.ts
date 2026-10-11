@@ -2,6 +2,7 @@
 import { type Brand, type Project, type Testimonial } from '@/lib/types';
 
 export const staticBrands: Brand[] = [
+    { name: 'Rash Milk', logo: '/images/clients/rashmilk.svg' },
     { name: 'Sarmilk', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/397532414b3865441a468b33dacc295f195030d1-511x112.png' }, 
     { name: 'M-Karim', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/fad5b1fdb82621fbd2172ec3db4f07ddfe93d032-198x101.png' }, 
     { name: 'Prime Fit', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/c703c9e98c9bec5e8b1b4c82e5e82f22cb713730-518x103.png' }, 
