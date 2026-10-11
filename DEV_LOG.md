@@ -2011,3 +2011,9 @@ Native agent discovered all three project skills and accurately reported project
 - Focused verification and deploy pending; owner AGENTS/unrelated untracked files preserved.
 
 - verify:fast passed 65 files/418 tests and i18n parity. Change is one static logo data entry plus audit documentation; full typecheck/lint/build will run in release CI on exact commit. Drive filename search across all file types also found no To'maris source vector.
+
+- Release 91b641680f82e6769f1a7d68c4aa0b673765aa93 deployed: Vercel 5A9WBS4rFyCkpsEoq76mN2PS6SQQ Ready Production at 14:56:12 Asia/Tashkent, www.jonbranding.uz assigned. Production mobile readback: removed ToMaris asset count 0, three rows running normal/reverse/normal, 320px clientWidth=scrollWidth=320. Screenshot production-transparent-logo-train.png saved outside repo. CI 38130034147 complete success: typecheck/lint/tests/build and Chromium E2E. Browser emulation reset and owned tabs closed. Final verification record left local to avoid another release.
+
+## 2026-10-11 - Client logo visual hierarchy
+- Owner requested prominent title and smaller logos. ClientLogos heading changed from muted 14px to ink 30px mobile/48px desktop. Logo frames reduced from 144x80 to 96x56 mobile and 176x96 to 128x64 desktop; responsive image sizes updated. Three-row motion and controls preserved. Responsive-design skill applied. Verification/deploy pending.
+- verify:fast passed 65 files/418 tests and all 4 locales. Styling-only change; full typecheck/lint/build/E2E delegated to exact-commit release CI. No new mirror tests added.
