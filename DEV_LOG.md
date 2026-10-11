@@ -2017,3 +2017,14 @@ Native agent discovered all three project skills and accurately reported project
 ## 2026-10-11 - Client logo visual hierarchy
 - Owner requested prominent title and smaller logos. ClientLogos heading changed from muted 14px to ink 30px mobile/48px desktop. Logo frames reduced from 144x80 to 96x56 mobile and 176x96 to 128x64 desktop; responsive image sizes updated. Three-row motion and controls preserved. Responsive-design skill applied. Verification/deploy pending.
 - verify:fast passed 65 files/418 tests and all 4 locales. Styling-only change; full typecheck/lint/build/E2E delegated to exact-commit release CI. No new mirror tests added.
+- 921dcceb003109057a0483614bd990875dec021c Vercel DuKt7RJ5i7fVqZe2H3Fb5zgwnDQr Ready Production, domain www.jonbranding.uz. Live visual screenshot production-logo-size.png: title 30px/mobile and 48px/1440px, logo96x56/mobile and128x64/desktop. 320px no overflow; three rows retained. Browser emulation reset/tabs closed. Release CI38130754007 still running.
+- Final CI38130754007 completed success: typecheck/lint/tests/build and Chromium E2E. Final verification log remains local to avoid duplicate deploy.
+
+## 2026-10-11 - Unify pricing client logos
+- Owner found stale pricing trust block. Replaced independent grayscale CMS logo grid and legacy trust heading with shared ClientLogos and locale trustedBy labels. Removed obsolete brands fetch/16-logo slice and ServiceLogo prop. Testimonials retained. Home and pricing now share heading, compact sizes, three-row directions and white-background exclusion. Verification pending.
+
+## 2026-10-11 | Codex CAPI live status audit
+- Meta Events Manager pixel 1134785364752294, window 13 Sep-10 Oct: Lead active, Browser only, count 3, latest 6 days ago. No Server Lead evidence visible. CAPI success not confirmed.
+- Vercel runtime logs MCP returned UNAUTHORIZED (reauthentication required); vercel CLI absent on PATH. No secret values read; no production changes or test events sent. Application tests not applicable to read-only status audit.
+
+- verify:fast418tests/locales and typecheck passed. Full lint/build/E2E run in exact-commit release CI; no price/package/lead behavior changed.
