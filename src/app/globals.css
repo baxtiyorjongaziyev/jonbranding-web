@@ -36,6 +36,34 @@
 }
 
 /* Marquee animation */
+.client-logos-track {
+  display: flex;
+  width: max-content;
+  animation: client-logos-train 72s linear infinite;
+  animation-play-state: paused;
+}
+.client-logos-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+.client-logos-row[data-direction="right"] .client-logos-track {
+  animation-direction: reverse;
+}
+.client-logos[data-running="true"] .client-logos-track {
+  animation-play-state: running;
+}
+@keyframes client-logos-train {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .client-logos-track { animation: none; width: auto; }
+  .client-logos-group { flex-wrap: wrap; justify-content: center; padding: 0 1.25rem; gap: 1rem; }
+  .client-logos-clone { display: none; }
+}
 .at-marquee-track {
   display: inline-block;
   animation: at-marquee 28s linear infinite;
