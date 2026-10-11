@@ -55,7 +55,7 @@ test('language routes expose one main landmark and one skip target', async ({ pa
   }
 });
 
-test('English hero CTA opens the Oisha callback widget, not the old modal', async ({ page }) => {
+test('English hero CTA opens one contextual lead form', async ({ page }) => {
   // Haqiqiy vidjet tashqi serverdan keladi; bu yerda faqat saytdagi bog'lanish tekshiriladi.
   await page.route('https://oisha.jonbranding.uz/**', (route) =>
     route.fulfill({
@@ -74,11 +74,13 @@ test('English hero CTA opens the Oisha callback widget, not the old modal', asyn
 
   const trigger = page.getByTestId('hero-audit-trigger');
   await expect(trigger).toBeVisible({ timeout: 15_000 });
-  await expect(trigger).toHaveAttribute('data-oisha-callback', '');
+  await expect(trigger).not.toHaveAttribute('data-oisha-callback', '');
   await expect.poll(() => trigger.evaluate((element) => Object.keys(element).some((key) => key.startsWith('__reactProps')))).toBe(true);
   await trigger.click();
 
-  await expect.poll(() => page.evaluate(() => (window as any).__oishaOpens || 0)).toBe(1);
+  await expect(page.getByRole('dialog')).toHaveCount(1);
+  await expect(page.getByRole('combobox', { name: 'Service', exact: true })).toHaveValue('Not sure — I need advice');
+  await expect.poll(() => page.evaluate(() => (window as any).__oishaOpens || 0)).toBe(0);
   await expect(page.getByRole('dialog', { name: /Free Brand Audit/i })).toHaveCount(0);
 });
 

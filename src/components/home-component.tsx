@@ -10,6 +10,7 @@ import { MotionConfig } from 'framer-motion';
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
+import ClientLogos from '@/components/sections/client-logos';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
 import SeoAnswerHub from '@/components/sections/seo-answer-hub';
@@ -114,6 +115,7 @@ const HomeComponent: FC<{
       {/* ── Above-the-fold (SSR) ─── */}
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
       <AtMarquee lang={lang} />
+      <ClientLogos title={dictionary.trustedBy.eyebrow} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
       <PriceOverview lang={lang} />
