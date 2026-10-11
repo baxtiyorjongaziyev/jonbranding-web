@@ -12,6 +12,7 @@ import { getSalesContent, SERVICE_CATEGORIES } from '@/lib/sales-content';
 import type { ServiceId } from '@/lib/sales-content';
 import PriceOverview from '@/components/sales/price-overview';
 import LeadModal from '@/components/sales/lead-modal';
+import ClientLogos from '@/components/sections/client-logos';
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -29,13 +30,12 @@ export type ServiceCase = {
 };
 
 export type ServiceQuote = { name: string; company: string; quote: string };
-export type ServiceLogo = { name: string; logo: string };
 
 type Props = {
   lang: string;
   cases: ServiceCase[];
   quotes: ServiceQuote[];
-  logos: ServiceLogo[];
+  clientLogoLabels: { title: string; pauseLabel: string; resumeLabel: string };
   showcase: string[];
 };
 
@@ -97,7 +97,7 @@ function Eyebrow({ index, label, muted }: { index: string; label: string; muted?
 }
 
 
-export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: Props) {
+export default function NarxlarClient({ lang, cases, quotes, clientLogoLabels, showcase }: Props) {
   const content = getSalesContent(lang);
   const {
     serviceGroups: SERVICE_GROUPS,
@@ -621,45 +621,9 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
       </section>
 
       {/* IJTIMOIY ISBOT */}
-      {(logos.length > 0 || quotes.length > 0) && (
-        <section className="border-t border-neutral-200 px-5 py-20 sm:px-8 md:py-28">
-          <div className="mx-auto max-w-5xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="mx-auto mb-12 max-w-2xl text-center"
-            >
-              <Eyebrow index="§ 07" label={ui.eyebrows.trust} />
-              <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 3.8vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.08 }}>
-                {ui.trust.pre} <span className="serif-highlight">{ui.trust.hi}</span>
-              </h2>
-            </motion.div>
-
-            {logos.length > 0 && (
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="mb-14 grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6"
-              >
-                {logos.map((brand) => (
-                  <div key={brand.name} className="relative h-10 opacity-60 transition-opacity hover:opacity-100">
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      fill
-                      sizes="120px"
-                      className="object-contain"
-                      style={{ filter: 'grayscale(1)' }}
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            )}
-
+      <section className="border-t border-neutral-200 py-10 md:py-14">
+        <ClientLogos {...clientLogoLabels} />
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
             {quotes.length > 0 && (
               <div className="grid gap-5 md:grid-cols-3">
                 {quotes.map((item) => (
@@ -683,8 +647,7 @@ export default function NarxlarClient({ lang, cases, quotes, logos, showcase }: 
               </div>
             )}
           </div>
-        </section>
-      )}
+      </section>
 
       {/* NEGA AYNAN BIZ */}
       <section className="border-t border-neutral-200 px-5 py-20 sm:px-8 md:py-28">
