@@ -84,7 +84,7 @@ const includedIcons = [Sparkles, Tag, Printer, Layers, Megaphone, Paintbrush, Fi
 const benefitIcons = [Eye, BadgeCheck, TrendingUp, ShoppingBag, ClipboardCheck, Star, Sparkles, CheckCircle2];
 
 function openContactModal() {
-  window.dispatchEvent(new CustomEvent('openContactModal'));
+  window.dispatchEvent(new CustomEvent('openContactModal', { detail: { via: 'oisha' } }));
 }
 
 const PosmMateriallarClient: FC<{ translations: PosmPageTranslations }> = ({ translations: t }) => {

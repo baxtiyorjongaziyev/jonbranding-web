@@ -11,7 +11,16 @@ function openContactModal() {
 }
 
 export function XizmatlarHero({ lang }: { lang: string }) {
-  return <AtHero onOpen={openContactModal} lang={lang} />;
+  return (
+    <AtHero
+      onOpen={() =>
+        window.dispatchEvent(
+          new CustomEvent('openContactModal', { detail: { section: 'xizmatlar_hero', source: 'xizmatlar_page', via: 'oisha' } })
+        )
+      }
+      lang={lang}
+    />
+  );
 }
 
 export function XizmatlarServices({ lang }: { lang: string }) {
