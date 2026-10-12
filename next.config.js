@@ -77,6 +77,9 @@ const cspDirectives = {
     'https://*.hotjar.com',
     'https://*.clarity.ms',
     'https://c.bing.com',
+    // Google Ads konversiya pikseli (ad.doubleclick.net va boshqa subdomenlar)
+    'https://ad.doubleclick.net',
+    'https://*.doubleclick.net',
   ],
   'connect-src': [
     "'self'",
@@ -103,6 +106,9 @@ const cspDirectives = {
     'https://api2.amplitude.com',
     // Oisha: /api/call-tracking/config va callback so'rovi
     'https://oisha.jonbranding.uz',
+    // Google Ads konversiya pikseli (ad.doubleclick.net va boshqa subdomenlar)
+    'https://ad.doubleclick.net',
+    'https://*.doubleclick.net',
   ],
   'media-src': [
     "'self'",

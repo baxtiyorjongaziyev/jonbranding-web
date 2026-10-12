@@ -26,24 +26,14 @@ const iconBtn =
   'press-effect flex min-w-0 flex-1 flex-col items-center justify-center gap-1.5 rounded-[14px] py-2.5 text-white/40 transition-colors duration-150 active:bg-white/[0.06] hover:bg-white/[0.04] hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 
 export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
-  const [isVisible, setIsVisible] = useState(true);
+  // Panel scroll paytida yashirinmaydi: mobilda Oisha formasining doim ko'rinadigan
+  // yagona kirish nuqtasi shu yerdagi `data-oisha-callback` tugma (vidjetning suzuvchi
+  // tugmasi globals.css'da mobilda yashirilgan).
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    const previous = scrollY.getPrevious() || 0;
-    const diff = latest - previous;
-    const atBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 60;
-
     setScrolled(latest > 60);
-
-    if (atBottom || latest < 80) {
-      setIsVisible(true);
-    } else if (diff > 8) {
-      setIsVisible(false);
-    } else if (diff < -8) {
-      setIsVisible(true);
-    }
   });
 
   const labels = {
@@ -62,6 +52,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           section: 'mobile_quick_actions',
           ctaText: labels.consultation,
           source: 'mobile_nav_bar',
+          via: 'oisha',
         },
       })
     );
@@ -79,7 +70,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
 
   return (
     <AnimatePresence>
-      {isVisible && (
         <motion.div
           key="mobile-nav-bar"
           data-mobile-quick-actions=""
@@ -160,6 +150,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             {/* Primary CTA */}
             <button
               type="button"
+              data-oisha-callback=""
               onClick={openConsultation}
               className={cn(
                 'group relative flex flex-[1.9] flex-col items-center justify-center gap-1 overflow-hidden',
@@ -180,7 +171,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             </button>
           </nav>
         </motion.div>
-      )}
     </AnimatePresence>
   );
 }

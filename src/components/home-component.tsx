@@ -83,6 +83,11 @@ const HomeComponent: FC<{
       new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'project' } })
     );
   }, []);
+  const openCallback = useCallback(() => {
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', { detail: { section: 'homepage_hero', source: 'homepage', intent: 'project', via: 'oisha' } })
+    );
+  }, []);
   const openConsultation = useCallback(() => {
     window.dispatchEvent(new CustomEvent('openContactModal', { detail: { section: 'homepage_consultation', source: 'homepage_consultation', intent: 'consultation' } }));
   }, []);
@@ -113,7 +118,7 @@ const HomeComponent: FC<{
         }}
       >
       {/* ── Above-the-fold (SSR) ─── */}
-      <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
+      <AtHero onOpen={openCallback} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
       <AtMarquee lang={lang} />
       <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />

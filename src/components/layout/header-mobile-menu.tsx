@@ -201,6 +201,7 @@ export function MobileMenu({
             {/* Sticky CTA at bottom */}
             <div className="mt-auto p-4 border-t border-[#D8D2C2] bg-[#F2EFE6]">
               <button
+                data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);
