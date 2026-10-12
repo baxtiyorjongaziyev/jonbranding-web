@@ -1,6 +1,7 @@
 import { logger } from '@/lib/logger';
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/integrations/firebase';
+import { getTursoClient, isTursoConfigured } from '@/lib/turso';
 import {
   INSTAGRAM_OAUTH_STATE_COOKIE,
   isValidInstagramOAuthState,
@@ -104,15 +105,45 @@ export async function GET(request: NextRequest) {
     }
 
     const now = Date.now();
-    const db = getDb();
-    await db.collection('settings').doc('instagram').set(
-      {
-        accessToken: longLivedToken,
-        expiresAt: now + expiresInSeconds * 1000,
-        updatedAt: now,
-      },
-      { merge: true },
-    );
+    const expiresAt = now + expiresInSeconds * 1000;
+
+    if (isTursoConfigured()) {
+      try {
+        const client = getTursoClient();
+        await client?.execute({
+          sql: `INSERT INTO oauth_tokens (service_name, access_token, refresh_token, expires_at, updated_at, extra_data)
+                VALUES ('instagram', ?, '', ?, ?, ?)
+                ON CONFLICT(service_name) DO UPDATE SET
+                  access_token = excluded.access_token,
+                  expires_at = excluded.expires_at,
+                  updated_at = excluded.updated_at`,
+          args: [
+            longLivedToken,
+            new Date(expiresAt).toISOString(),
+            new Date(now).toISOString(),
+            JSON.stringify({ source: 'instagram_callback' }),
+          ],
+        });
+      } catch (tursoErr) {
+        logger.error('[Instagram Callback] Failed to save token to Turso:', tursoErr);
+      }
+    }
+
+    if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim()) {
+      try {
+        const db = getDb();
+        await db.collection('settings').doc('instagram').set(
+          {
+            accessToken: longLivedToken,
+            expiresAt,
+            updatedAt: now,
+          },
+          { merge: true },
+        );
+      } catch (fsErr) {
+        logger.error('[Instagram Callback] Failed to save token to Firestore:', fsErr);
+      }
+    }
 
     logger.info('[Instagram Callback] Long-lived token saved successfully.');
 

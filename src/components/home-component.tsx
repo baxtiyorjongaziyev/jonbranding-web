@@ -1,13 +1,16 @@
 'use client';
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
+import PriceOverview from '@/components/sales/price-overview';
 import { useMemo, useCallback } from 'react';
+import { selectHomePortfolioProjects, portfolioYear } from '@/lib/portfolio-presentation';
 
 import { MotionConfig } from 'framer-motion';
 
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
 import AtHero from '@/components/sections/at-hero';
 import AtMarquee from '@/components/sections/at-marquee';
+import ClientLogos from '@/components/sections/client-logos';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
 import SeoAnswerHub from '@/components/sections/seo-answer-hub';
@@ -63,7 +66,7 @@ const AtFinalCta = dynamic(
 
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
 const AtStickyCta = dynamic(() => import('@/components/sections/at-sticky-cta'), { ssr: false });
-const ExitIntentPopup = dynamic(() => import('@/components/exit-intent-popup'), { ssr: false });
+
 const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-analytics'), { ssr: false });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -75,24 +78,26 @@ const HomeComponent: FC<{
   testimonials?: any[];
   portfolioProjects?: any[];
 }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
-  // Ariza formasini Oisha callback vidjeti ochadi (tugmalardagi
-  // `data-oisha-callback`). Bu yerda faqat CTA analitikasi yuboriladi.
   const open = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage' } })
+      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'project' } })
     );
   }, []);
+  const openConsultation = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('openContactModal', { detail: { section: 'homepage_consultation', source: 'homepage_consultation', intent: 'consultation' } }));
+  }, []);
 
+  const homeProjects = useMemo(() => selectHomePortfolioProjects(portfolioProjects), [portfolioProjects]);
   const heroImages = useMemo(
     () =>
-      portfolioProjects
+      homeProjects
         .filter((p: any) => p.coverImage)
         .map((p: any) => ({
           src: p.coverImage,
-          name: p.title?.split(' ')[0] || p.client,
-          year: '2026',
+          name: p.title?.split(':')[0] || p.client,
+          year: portfolioYear(p.publishedAt),
         })),
-    [portfolioProjects]
+    [homeProjects]
   );
 
 
@@ -110,27 +115,29 @@ const HomeComponent: FC<{
       {/* ── Above-the-fold (SSR) ─── */}
       <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
       <AtMarquee lang={lang} />
+      <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
+      <PriceOverview lang={lang} />
 
       {/* ── Below-the-fold (lazy) ── */}
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
-        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={portfolioProjects} />
+        <ATGallery dictionary={dictionary.atelier || dictionary} onOpen={open} lang={lang} projects={homeProjects} />
         <BeforeAfter lang={lang} dictionary={dictionary.beforeAfter || dictionary} comparisons={comparisons} />
         <ATQuotes dictionary={dictionary.atelier || dictionary} testimonials={testimonials} lang={lang} />
       </div>
 
       <ProcessVideo dictionary={dictionary.processVideo} />
       <AtProcess lang={lang} onOpen={open} />
-      <Founder lang={lang} dictionary={dictionary.founder} />
+      <Founder lang={lang} dictionary={dictionary.founder} onOpen={open} />
       <SeoAnswerHub lang={lang} {...dictionary.answerHub} />
-      <AtPricing onOpen={open} lang={lang} />
+      <AtPricing onOpen={openConsultation} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
-      <AtFinalCta onOpen={open} lang={lang} />
+      <AtFinalCta onOpen={openConsultation} lang={lang} />
 
       {/* ── Utility / overlays ──── */}
-      <AtStickyCta onOpen={open} lang={lang} />
-      <ExitIntentPopup onOpen={open} lang={lang} />
+      <AtStickyCta onOpen={openConsultation} lang={lang} />
+
       <ScrollDepthAnalytics />
       </div>
     </MotionConfig>

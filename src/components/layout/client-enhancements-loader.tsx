@@ -22,16 +22,22 @@ export default function ClientEnhancementsLoader(props: ClientEnhancementsLoader
 
   useEffect(() => {
     const loadEnhancements = (event?: Event) => {
-      if (event instanceof CustomEvent) {
+      if (event?.type === 'openContactModal' && event instanceof CustomEvent) {
         (window as any).__pendingContactModal = event.detail || {};
       }
+      if (event?.type === 'toggleOisha') (window as any).__pendingOisha = true;
+      if (event?.type === 'openPwaInstallPrompt') (window as any).__pendingPwaInstall = true;
       setReady(true);
     };
     window.addEventListener('openContactModal', loadEnhancements);
+    window.addEventListener('toggleOisha', loadEnhancements);
+    window.addEventListener('openPwaInstallPrompt', loadEnhancements);
 
     const id = globalThis.setTimeout(loadEnhancements, 6000);
     return () => {
       window.removeEventListener('openContactModal', loadEnhancements);
+      window.removeEventListener('toggleOisha', loadEnhancements);
+      window.removeEventListener('openPwaInstallPrompt', loadEnhancements);
       globalThis.clearTimeout(id);
     };
   }, []);

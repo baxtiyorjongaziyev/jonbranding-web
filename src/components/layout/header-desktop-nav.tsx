@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { Phone, Send } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
@@ -193,20 +193,9 @@ export function DesktopNav({
               useDarkHeaderText={useDarkHeaderText}
               onClick={() => trackContactClick('phone', 'header')}
             />
-            <ExpandingButton
-              href="https://t.me/baxtiyorjongaziyev"
-              target="_blank"
-              rel="noopener noreferrer"
-              ariaLabel={dictionary.contact_by_telegram}
-              icon={<Send className="h-4.5 w-4.5" />}
-              text={dictionary.contact_by_telegram}
-              useDarkHeaderText={useDarkHeaderText}
-              onClick={() => trackContactClick('telegram', 'header')}
-            />
           </div>
           <div className="rounded-full bg-transparent shrink-0">
             <Button
-              data-oisha-callback=""
               onClick={onContactClick}
               className={cn(
                 'h-11 rounded-full px-3 text-xs font-extrabold tracking-[0.04em] shadow-[0_14px_32px_-18px_rgba(44,43,245,0.85)] transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:scale-[0.98] xl:px-6 xl:text-sm shrink-0 whitespace-nowrap',

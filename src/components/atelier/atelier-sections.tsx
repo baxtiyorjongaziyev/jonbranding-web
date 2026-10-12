@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PlayCircle, Pause, Play, X } from 'lucide-react';
+import { portfolioYear } from '@/lib/portfolio-presentation';
+import { presentTestimonial } from '@/lib/testimonial-presentation';
 import {
   staticTestimonials,
   staticTestimonialsEn,
@@ -26,6 +28,7 @@ interface ATGalleryProject {
   results?: { metric: string; value: string }[];
   featured?: boolean;
   order?: number;
+  publishedAt?: string;
 }
 
 interface ATGalleryProps {
@@ -86,12 +89,6 @@ function getFirstResult(project: ATGalleryProject): string {
   return '';
 }
 
-function getYear(project: ATGalleryProject): string {
-  const d = (project as any).publishedAt;
-  if (d) return new Date(d).getFullYear().toString();
-  return '2025';
-}
-
 export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projects = [] }) => {
   const [filter, setFilter] = useState('all');
 
@@ -100,33 +97,23 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
     .map((p, i) => ({
       cls: TILE_CLASSES[i % TILE_CLASSES.length],
       img: p.coverImage,
-      name: p.title,
-      yr: getYear(p),
+      name: p.title.split(':')[0],
+      yr: portfolioYear(p.publishedAt),
       city: p.city || '',
       cat: getCategoryLabel(p.category, lang),
       res: getFirstResult(p),
-      ind: p.industry || 'food',
+      category: p.category,
       slug: p.slug,
     }));
 
   const filters = [
-    {
-      id: 'all',
-      l: lang === 'uz' ? 'Hammasi' : lang === 'ru' ? 'Все' : lang === 'zh' ? '全部' : 'All',
-    },
-    {
-      id: 'food',
-      l: lang === 'uz' ? 'Oziq-ovqat' : lang === 'ru' ? 'Еда' : lang === 'zh' ? '食品' : 'Food',
-    },
-    { id: 'fmcg', l: 'FMCG' },
-    { id: 'fintech', l: 'Fintech' },
-    {
-      id: 'fashion',
-      l: lang === 'uz' ? 'Moda' : lang === 'ru' ? 'Мода' : lang === 'zh' ? '时尚' : 'Fashion',
-    },
+    { id: 'all', l: dictionary.gallery_filters.all },
+    ...Object.keys(CATEGORY_LABELS.uz)
+      .filter((category) => items.some((item) => item.category === category))
+      .map((category) => ({ id: category, l: dictionary.gallery_filters[category] })),
   ];
 
-  const tiles = filter === 'all' ? items : items.filter((t) => t.ind === filter);
+  const tiles = filter === 'all' ? items : items.filter((t) => t.category === filter);
 
   if (items.length === 0) return null;
 
@@ -145,7 +132,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
             <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
               <span className="dot" />
               <span className="ix">§ 03</span>
-              <span>{dictionary?.nav?.[1]?.label || 'Portfolio'}</span>
+              <span>{dictionary.gallery_label}</span>
             </span>
             <p>
               {dictionary?.gallery_lede ||
@@ -157,6 +144,8 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
           {filters.map((f) => (
             <button
               key={f.id}
+              type="button"
+              aria-pressed={filter === f.id}
               className={`ind-pill ${filter === f.id ? 'on' : ''}`}
               onClick={() => setFilter(f.id)}
             >
@@ -167,7 +156,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
         <div className="gal-grid">
           {tiles.map((t, i) => (
             <Link
-              key={t.name}
+              key={t.slug}
               href={`/${lang}/portfolio/${t.slug}`}
               className={`gal-tile ${t.cls}`}
             >
@@ -202,7 +191,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   <span>{t.cat}</span>
                   {t.res && (
                     <span className="res">
-                      {t.res} · {t.yr}
+                      {t.res}{t.yr ? ` · ${t.yr}` : ''}
                     </span>
                   )}
                 </div>
@@ -210,7 +199,15 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
             </Link>
           ))}
         </div>
-        {filter !== 'all' && (
+        {tiles.length === 0 && (
+          <p role="status" className="py-8">{dictionary.gallery_empty}</p>
+        )}
+        <div className="mt-8 flex justify-center">
+          <Link className="btn btn-primary" href={lang === 'uz' ? '/portfolio' : `/${lang}/portfolio`}>
+            {dictionary.gallery_view_all}<span aria-hidden="true"> →</span>
+          </Link>
+        </div>
+        {filter !== 'all' && tiles.length > 0 && (
           <div
             style={{
               marginTop: 32,
@@ -229,7 +226,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
               {dictionary?.gallery_similar ||
                 "O'xshash biznesmisiz? Sizga ham shunday natija mumkin."}
             </span>
-            <button className="btn btn-primary" data-oisha-callback="" onClick={onOpen}>
+            <button className="btn btn-primary" onClick={onOpen}>
               {dictionary?.gallery_cta || 'Mening biznesim uchun tashxis'}{' '}
               <span className="ar">↗</span>
             </button>
@@ -257,7 +254,8 @@ export const ATQuotes: FC<ATQuotesProps> = ({
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   useEffect(() => {
-    const cached = sessionStorage.getItem(`testimonials_${lang}`);
+    let cached: string | null = null;
+    try { cached = sessionStorage.getItem(`testimonials_${lang}`); } catch { /* Storage can be unavailable in an installed browser. */ }
     if (cached) {
       try {
         setApiTestimonials(JSON.parse(cached));
@@ -295,9 +293,10 @@ export const ATQuotes: FC<ATQuotesProps> = ({
             }
           })();
 
-  const videoTestimonials = list.filter((t) => t.videoUrl);
-  const audioTestimonials = list.filter((t) => !t.videoUrl && t.audioUrl);
-  const textTestimonials = list.filter((t) => !t.videoUrl && !t.audioUrl && t.quote?.trim());
+  const publicList = list.map(presentTestimonial);
+  const videoTestimonials = publicList.filter((t) => t.videoUrl);
+  const audioTestimonials = publicList.filter((t) => !t.videoUrl && t.audioUrl);
+  const textTestimonials = publicList.filter((t) => !t.videoUrl && !t.audioUrl && t.quote?.trim());
 
   const vimeoHosts = new Set(['vimeo.com', 'www.vimeo.com', 'player.vimeo.com']);
 

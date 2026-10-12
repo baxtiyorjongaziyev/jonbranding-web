@@ -1,3 +1,4 @@
+import type { PortfolioResult } from '@/lib/portfolio-evidence';
 export interface PortfolioProject {
   _id: string;
   slug: string;
@@ -17,7 +18,7 @@ export interface PortfolioProject {
   metaTitle?: string;
   metaDescription?: string;
   seoKeywords?: string[];
-  results?: { metric: string; value: string }[];
+  results?: PortfolioResult[];
   body: { heading: string; paragraph: string }[];
   galleryImages?: string[];
   featured?: boolean;

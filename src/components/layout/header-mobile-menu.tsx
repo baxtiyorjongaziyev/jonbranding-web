@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { getSalesFlow } from '@/lib/sales-flow';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Phone, Send, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
+import { Menu, Phone, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';
@@ -25,6 +26,11 @@ interface MobileMenuProps {
     services: string;
     free_consultation: string;
     open_menu: string;
+    close_menu: string;
+    contacts: string;
+    contact_by_phone: string;
+    install_app: string;
+    install_app_hint: string;
     contact_by_telegram: string;
   };
 }
@@ -58,7 +64,7 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              'flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
               useDarkHeaderText
                 ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-white'
                 : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-[#0a0d14]'
@@ -71,6 +77,8 @@ export function MobileMenu({
         {/* Full-screen mobile drawer */}
         <SheetContent
           side="right"
+          showCloseButton={false}
+          aria-describedby={undefined}
           className={cn(
             'w-full max-w-full border-0 p-0 sm:max-w-[420px]',
             'bg-[#FBF9F2] text-[#0E1015] border-l border-[#D8D2C2]'
@@ -84,8 +92,8 @@ export function MobileMenu({
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label="Close menu"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label={dictionary.close_menu}
             >
               <X className="h-4.5 w-4.5" />
             </button>
@@ -150,7 +158,7 @@ export function MobileMenu({
               {/* Contact links */}
               <motion.div variants={slideIn} className="flex flex-col gap-2">
                 <div className="mb-1 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
-                  Aloqa
+                  {dictionary.contacts}
                 </div>
                 <a
                   data-oisha-phone=""
@@ -164,24 +172,7 @@ export function MobileMenu({
                   </div>
                   <div>
                     <div className="text-[13px] font-bold text-[#0E1015]">+998 79 200 00 97</div>
-                    <div className="text-[11px] text-[#8B8779]">Qo'ng'iroq qiling</div>
-                  </div>
-                </a>
-                <a
-                  href="https://t.me/baxtiyorjongaziyev"
-                  onClick={() => trackContactClick('telegram', 'mobile_menu')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
-                    <Send className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <div className="text-[13px] font-bold text-[#0E1015]">
-                      {dictionary.contact_by_telegram}
-                    </div>
-                    <div className="text-[11px] text-[#8B8779]">Telegram</div>
+                    <div className="text-[11px] text-[#8B8779]">{dictionary.contact_by_phone}</div>
                   </div>
                 </a>
                 <button
@@ -197,10 +188,10 @@ export function MobileMenu({
                   </div>
                   <div className="text-left">
                     <div className="text-[13px] font-bold text-[#0E1015]">
-                      {lang === 'ru' ? 'Установить приложение' : lang === 'en' ? 'Install App' : "Ilovani o'rnatish"}
+                      {dictionary.install_app}
                     </div>
                     <div className="text-[11px] text-[#8B8779]">
-                      {lang === 'ru' ? 'Быстрый доступ на экран' : lang === 'en' ? 'Quick home screen access' : "Bosh ekranga joylash"}
+                      {dictionary.install_app_hint}
                     </div>
                   </div>
                 </button>
@@ -210,7 +201,6 @@ export function MobileMenu({
             {/* Sticky CTA at bottom */}
             <div className="mt-auto p-4 border-t border-[#D8D2C2] bg-[#F2EFE6]">
               <button
-                data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);
@@ -220,7 +210,7 @@ export function MobileMenu({
                 <div className="flex flex-col">
                   <span className="text-[15px] font-bold">{dictionary.free_consultation}</span>
                   <span className="mt-0.5 text-[12px] font-medium text-white/80">
-                    Bepul Brand Audit · 30 daqiqa
+                    {getSalesFlow(lang).consultation}
                   </span>
                 </div>
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

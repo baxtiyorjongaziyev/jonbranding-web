@@ -82,6 +82,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
       {isVisible && (
         <motion.div
           key="mobile-nav-bar"
+          data-mobile-quick-actions=""
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
@@ -94,8 +95,8 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               'mx-auto flex max-w-[460px] items-stretch overflow-hidden rounded-[18px]',
               'border shadow-[0_-4px_30px_-8px_rgba(0,0,0,0.4),0_25px_60px_-15px_rgba(0,0,0,0.85)]',
               scrolled
-                ? 'border-white/10 bg-[#060a12]/92 backdrop-blur-2xl'
-                : 'border-white/8 bg-[#070b14]/88 backdrop-blur-xl'
+                ? 'border-white/10 bg-[#060a12]/95 backdrop-blur-2xl'
+                : 'border-white/10 bg-[#070b14]/95 backdrop-blur-xl'
             )}
           >
             {/* Phone */}
@@ -105,7 +106,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               href="tel:+998792000097"
               aria-label={labels.call}
               onClick={() => trackContactClick('phone', 'mobile_nav_bar')}
-              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-400 transition-colors duration-150 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
+              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-300 transition-colors duration-150 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
             >
               <div className="flex h-6 w-6 items-center justify-center">
                 <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
@@ -125,7 +126,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               rel="noopener noreferrer"
               aria-label={labels.telegram}
               onClick={() => trackContactClick('telegram', 'mobile_nav_bar')}
-              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-400 transition-colors duration-150 hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
+              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-300 transition-colors duration-150 hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
             >
               <div className="flex h-6 w-6 items-center justify-center">
                 <Send className="h-[18px] w-[18px]" aria-hidden="true" />
@@ -143,7 +144,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               type="button"
               onClick={toggleOisha}
               aria-label={labels.ai}
-              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-400 transition-colors duration-150 hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
+              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-300 transition-colors duration-150 hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
             >
               <div className="relative flex h-6 w-6 items-center justify-center">
                 <Sparkles className="h-[18px] w-[18px] text-indigo-400" aria-hidden="true" />
@@ -159,7 +160,6 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             {/* Primary CTA */}
             <button
               type="button"
-              data-oisha-callback=""
               onClick={openConsultation}
               className={cn(
                 'group relative flex flex-[1.9] flex-col items-center justify-center gap-1 overflow-hidden',

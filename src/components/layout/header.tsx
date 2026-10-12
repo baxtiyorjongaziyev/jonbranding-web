@@ -36,6 +36,9 @@ type Dictionary = {
   contact_by_telegram: string;
   free_consultation: string;
   open_menu: string;
+  close_menu: string;
+  install_app: string;
+  install_app_hint: string;
   switch_lang: string;
   urgencyBadge?: string;
 };
@@ -127,7 +130,6 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
       {dictionary.urgencyBadge && (
         <div
           className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#ef4444] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
-          data-oisha-callback=""
           onClick={handleContactClick}
           style={{ top: visible ? (scrolled ? -40 : 0) : -40 }}
         >

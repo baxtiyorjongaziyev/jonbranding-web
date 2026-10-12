@@ -53,7 +53,7 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
     }));
 
   const quotes: CredQuote[] = testimonials
-    .filter((item) => item.quote && item.quote.length > 60)
+    .filter((item) => !item.videoUrl && !item.videoFileUrl && item.quote && item.quote.length > 60)
     .slice(0, 3)
     .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
 

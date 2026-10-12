@@ -35,6 +35,11 @@ const getVimeoVideoId = (url?: string) => {
   }
 };
 
+const isDirectVideo = (url?: string) => {
+  if (!url) return false;
+  return url.endsWith('.mp4') || url.startsWith('/videos/') || url.includes('.mp4');
+};
+
 const isCaseStudyVideo = (testimonial: Testimonial) =>
   CASE_STUDY_VIDEO_IDS.includes(getVimeoVideoId(testimonial.videoUrl));
 
@@ -289,9 +294,9 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
   const [textApi, setTextApi] = useState<CarouselApi>();
 
   const { videoTestimonials, audioTestimonials, textTestimonials } = useMemo(() => {
-    const video = testimonials.filter((testimonial) => testimonial.videoUrl && !isCaseStudyVideo(testimonial));
-    const audio = testimonials.filter((testimonial) => !testimonial.videoUrl && testimonial.audioUrl);
-    const text = testimonials.filter((testimonial) => !testimonial.videoUrl && !testimonial.audioUrl && testimonial.quote?.trim());
+    const video = testimonials.filter((testimonial) => (testimonial.videoUrl || testimonial.videoFileUrl) && !isCaseStudyVideo(testimonial));
+    const audio = testimonials.filter((testimonial) => (!testimonial.videoUrl && !testimonial.videoFileUrl) && (testimonial.audioUrl || testimonial.audioFileUrl));
+    const text = testimonials.filter((testimonial) => (!testimonial.videoUrl && !testimonial.videoFileUrl) && (!testimonial.audioUrl && !testimonial.audioFileUrl) && testimonial.quote?.trim());
 
     const prioritizedVideos = video.sort((a, b) => {
       if (a.name.includes('Ibrohimjon Mahammadjonov')) return -1;
@@ -442,14 +447,24 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
               className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-[9/16] overflow-hidden rounded-[20px] border border-white/10 bg-[#070b13] shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col justify-end"
               onClick={(e) => e.stopPropagation()}
             >
-              <iframe
-                src={getVimeoEmbedUrl(activeVideo.videoUrl, true)}
-                title={`${activeVideo.name} video testimonial`}
-                className="absolute inset-0 h-full w-full"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
+              {isDirectVideo(activeVideo.videoFileUrl || activeVideo.videoUrl) ? (
+                <video
+                  src={activeVideo.videoFileUrl || activeVideo.videoUrl}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <iframe
+                  src={getVimeoEmbedUrl(activeVideo.videoUrl, true)}
+                  title={`${activeVideo.name} video testimonial`}
+                  className="absolute inset-0 h-full w-full"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              )}
               <button
                 type="button"
                 onClick={closeLightbox}

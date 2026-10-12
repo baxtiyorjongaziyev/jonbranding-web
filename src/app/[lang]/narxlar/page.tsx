@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Locale } from '@/lib/dictionaries';
+import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
 import { fetchTestimonials } from '@/lib/data/testimonials';
-import { fetchBrands } from '@/lib/data/brands';
 import NarxlarClient from './narxlar-client';
-import type { ServiceCase, ServiceLogo, ServiceQuote } from './narxlar-client';
+import type { ServiceCase, ServiceQuote } from './narxlar-client';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
@@ -53,10 +52,10 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await props.params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
 
-  const [projects, testimonials, brands] = await Promise.all([
+  const [projects, testimonials, dictionary] = await Promise.all([
     fetchPortfolioList(safeLang),
     fetchTestimonials(safeLang),
-    fetchBrands(),
+    getDictionary(safeLang),
   ]);
 
   const cases: ServiceCase[] = projects
@@ -64,9 +63,9 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     .map((project) => ({
       slug: project.slug,
       title: project.title,
-      client: project.client,
+      client: project.client || project.title,
       category: project.category,
-      categoryLabel: project.categoryLabel,
+      categoryLabel: project.categoryLabel || '',
       coverImage: project.coverImage,
       result: project.results?.[0],
     }));
@@ -82,13 +81,9 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   ).slice(0, 8);
 
   const quotes: ServiceQuote[] = testimonials
-    .filter((item) => item.quote && item.quote.length > 60)
+    .filter((item) => !item.videoUrl && !item.videoFileUrl && item.quote && item.quote.length > 60)
     .slice(0, 3)
     .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
-
-  const logos: ServiceLogo[] = brands
-    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []))
-    .slice(0, 16);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -106,7 +101,7 @@ const TariflarPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <NarxlarClient lang={safeLang} cases={cases} quotes={quotes} logos={logos} showcase={showcase} />
+      <NarxlarClient lang={safeLang} cases={cases} quotes={quotes} clientLogoLabels={{ title: dictionary.trustedBy.eyebrow, pauseLabel: dictionary.trustedBy.pause, resumeLabel: dictionary.trustedBy.resume }} showcase={showcase} />
     </div>
   );
 };

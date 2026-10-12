@@ -37,7 +37,24 @@ export default function OishaPhoneSync() {
 
   useEffect(() => {
     let frame = 0;
+    let callbackObserver: MutationObserver | undefined;
+    let observedHost: Element | null = null;
+    const observeCallback = () => {
+      const host = document.querySelector('[data-oisha-callback-host]');
+      if (!host || host === observedHost) return;
+      callbackObserver?.disconnect();
+      observedHost = host;
+      const root = host.shadowRoot || host;
+      const syncCallback = () => {
+        document.body.dataset.callbackOpen = String(!!root.querySelector('.wrap.open'));
+      };
+      callbackObserver = new MutationObserver(syncCallback);
+      callbackObserver.observe(root, { subtree: true, attributes: true, attributeFilter: ['class'] });
+      syncCallback();
+    };
+    observeCallback();
     const observer = new MutationObserver((mutations) => {
+      observeCallback();
       if (frame) return;
       const hasNewPhone = mutations.some((mutation) => Array.from(mutation.addedNodes).some(containsPhone));
       if (!hasNewPhone) return;
@@ -49,6 +66,8 @@ export default function OishaPhoneSync() {
     observer.observe(document.body, { childList: true, subtree: true });
     return () => {
       observer.disconnect();
+      callbackObserver?.disconnect();
+      delete document.body.dataset.callbackOpen;
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);

@@ -32,6 +32,7 @@
     "@formatjs/intl-localematcher": "^0.8.10",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
+    "@libsql/client": "^0.18.0",
     "@marsidev/react-turnstile": "^1.5.4",
     "@portabletext/react": "^6.2.0",
     "@radix-ui/react-accordion": "^1.2.0",

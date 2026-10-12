@@ -1,5 +1,70 @@
 # ðŸ““ Dev Log â€” Jon Branding Web
 
+## 2026-10-10 | Mobil PWA production deploy boshlandi (Codex)
+- Yakun: 18:03 Asia/Tashkent, PWA commit 1765f033 Vercel production Ready; deployment 9nBE2t33cTxZbBXvDduzxx66YKvf. www.jonbranding.uz domeni shu deployment'ga ulanganini Vercel browser UI tasdiqladi; GitHub Vercel commit status success.
+- Production build: 165 sahifa, deployment 2m 43s. Lighthouse CI va CodeQL success; asosiy GitHub CI tekshiruvi kuzatuv paytida davom etmoqda. Haqiqiy telefonda install testi bajarilmadi.
+- Bu yakuniy log qaydi lokal saqlandi; PWA kodi va regression testlari main'ga push qilingan.
+- Owner Â«deploy qilÂ» deb production chiqarishni tasdiqladi.
+- main origin/main bilan teng; faqat PWA komponenti, 5 regression test va DEV_LOG chiqariladi.
+- Deploy oldidan to'liq verify o'tdi: typecheck, 4 til parity, 56 test fayl / 384 test.
+- Vercel connector reauthentication so'radi; GitHub Git integration orqali deploy va commit status tekshiruvi ishlatiladi.
+- Self-review bajarildi. Rollback: PWA release commitini git revert qilib main'ga push qilish.
+
+## 2026-10-10 | PWA mobil qurilmalar uchun moslandi (Codex)
+- Owner talabi: PWA desktop uchun emas, mobil uchun kerak.
+- Tekshiruv: manifest allaqachon standalone va portrait-primary; muammo install taklifining desktop Chrome'da ham chiqishi edi.
+- Android/iOS qurilma cheklovi qo'shildi (iPadOS desktop UA ham hisobga olinadi); tor desktop oynasi mobil sifatida qabul qilinmaydi.
+- iPhone uchun avtomatik install taklifi; timer cleanup, localStorage himoyasi, 44px touch targets, safe-area va reduced-motion moslandi.
+- Skill: impeccable/adapt. Tasodifiy boshqa fayllarga tegilmadi.
+- Verification: verify:fast va verify o'tdi (379 mavjud test, typecheck, i18n); 5 yangi PWA regression test alohida o'tdi; scoped ESLint toza; git diff --check toza.
+- Status: lokal o'zgarish, commit/push/deploy qilinmadi. Haqiqiy telefonda install tekshiruvi hali ochiq. Talab va ish holati Obsidian'ga yozildi.
+
+## 2026-10-10 | Hamkorlik (Affiliate) tizimi Turso libSQL bazasiga ulanib jonli productionda ishga tushirildi
+- **Muammo:** Hamkorlik sahifasida ro'yxatdan o'tishda forma 503 xatosi qaytarayotgan edi, chunki eski kod faqat Supabase kalitiga bog'langan, Vercelda esa `SUPABASE_SERVICE_ROLE_KEY` mavjud emas edi.
+- **Yechim:**
+  1. Loyihaning yagona operatsion bazasi bo'lgan Turso libSQL (`src/lib/turso.ts`)ga `affiliates`, `referrals` va `payouts` jadvallari qo'shildi va avto-migratsiya sozlandi.
+  2. `src/lib/affiliate/store.ts`: Turso bazasi birlamchi qilib ulandi (barcha CRUD operatsiyalari, statistikalar, dashboard va to'lovlar). Supabase esa xavfsiz zaxira fallback sifatida saqlandi.
+  3. Barcha 75 ta affiliate va tegishli testlar 100% muvaffaqiyatli o'tdi.
+  4. Yangi versiya `main` tarmog'iga push qilindi va Vercel productionda (`jonbranding.uz`) deploy bo'ldi.
+- **Jonli tekshiruv:**
+  - `POST /api/affiliate/register` â€” 200 OK, unikal promokod va maxfiy token muvaffaqiyatli generatsiya bo'ldi.
+  - `https://www.jonbranding.uz/hamkor/[token]` â€” Hamkor shaxsiy kabineti va statistikasi to'liq jonli ishlamoqda.
+
+## 2026-10-09 | Telegram @baxtiyor_gaziyev_otzivlar kanalidagi barcha otzivlar tahlil qilinib saytga joylashtirildi
+- **Tashabbus:** `@baxtiyor_gaziyev_otzivlar` Telegram kanalidagi barcha postlar, video kruglyashlar, ovozli xabarlar va patent guvohnomalari Telethon orqali to'liq yuklab olindi, Groq Whisper va AI yordamida tahlil qilinib, haqiqiy mijozlar va brend egalari aniqlandi.
+- **Aniqlangan va saytga kiritilgan yangi otzivlar (8 ta yangi keys):**
+  1. **Sherzodbek Jumanov** (`Zayan` brendi asoschisi): Zayan brendini to'liq qonuniy patentlab berilgani haqidagi video testimonial (`/videos/testimonials/sherzodbek-jumanov.mp4`, `/images/testimonials/sherzodbek-jumanov.jpg`).
+  2. **Umidjon Rahimov** (`Velzo` avto moy servisi asoschisi): Velzo brendi, logotipi va Adliya vazirligidan patent guvohnomasi olingani haqidagi video testimonial (`/videos/testimonials/umidjon-velzo.mp4`, `/images/testimonials/umidjon-velzo.jpg`).
+  3. **Ramziddin** (`Arfadel` brendi asoschisi): Arfadel nomlash, brending va logotip yaratish jarayoni, Baxtiyorjon va Jon Branding jamoasiga minnatdorchilik video testimoniali (`/videos/testimonials/ramziddin-arfadel.mp4`, `/images/testimonials/ramziddin-arfadel.jpg`).
+  4. **Tulqin Xolmirzayev** (Brending va patentlash mijozi): Brending, logotip, qadoq/korobka va patentlash bo'yicha video testimonial (`/videos/testimonials/tulqin-xolmirzayev.mp4`, `/images/testimonials/tulqin-xolmirzayev.jpg`).
+  5. **Xoshimboy Usmanov** (`Dilbaroy Clinic` asoschisi): Tibbiyot klinikasi brending ishlari bo'yicha video minnatdorchilik (`/videos/testimonials/xoshimboy-usmanov.mp4`, `/images/testimonials/xoshimboy-usmanov.jpg`).
+  6. **Saltanat Axmedova** (`Sadiya Cakes` asoschisi): Jon Branding dizayni juda kuchli o'ylangani, karamel rangini tanlashgani va barcha biznes tanishlariga tavsiya qilayotgani haqida ovozli xabar audio testimoniali (`/audio/saltanat-axmedova.ogg`).
+  7. **Azizjon Dexkonov** (`Azel Shoes` asoschisi): â„– MGU 66985 tovar belgisi rasmiy patent guvohnomasi keysi (`/images/testimonials/azel-patent.jpg`).
+  8. **Sunnah Products jamoasi**: Shirin hadya va samimiy minnatdorchilik, brending hamkorligi.
+- **Arxitektura va komponentlar yaxshilandi:**
+  - `src/components/sections/testimonials.tsx`: Direct video (`<video>` player) qo'llab-quvvatlashi qo'shildi â€” endi nafaqat Vimeo, balki mahalliy MP4 video sharhlari ham modal lightbox'da bir marta bosish bilan silliq ijro etiladi.
+  - `src/lib/data/testimonials.ts`: Sanity faqat 1 ta testimonial qaytarganda qolgan barcha boy static/telegram sharhlarini yashirib qo'ymasligi uchun Sanity va boy fallback to'liq deduplikatsiya qilinib birlashtirildi (merge).
+  - Barcha yangi otzivlar 4 ta tilda (`uz`, `ru`, `en`, `zh`) professional tarzda `src/lib/static-data.ts` ga joylashtirildi.
+- **Tekshiruv:**
+  - `npm run verify:fast` â€” 55 test fayli, 379 ta test 100% muvaffaqiyatli o'tdi.
+
+## 2026-10-07 | Firestore'dan Turso libSQL bazasiga to'liq o'tildi (Yagona operatsion baza)
+- **Tashabbus:** Firestore o'rniga Oisha-OS bilan yagona Turso (libSQL) bulutli bazasiga to'liq migratsiya qilindi. GCP Service Account JSON, murakkab ruxsatlar va billing muammolariga chek qo'yildi.
+- **Bajarilgan ishlar:**
+  1. `@libsql/client` kutubxonasi o'rnatildi va `src/lib/turso.ts` toza mijoz/fasad moduli yaratildi.
+  2. Turso'da `oauth_tokens`, `failed_leads` (indekslar bilan) va `rate_limits` jadvallari yaratildi hamda tekshirildi.
+  3. `src/lib/integrations/amocrm.ts`: Tokenlarni saqlash va o'qishda birinchi navbatda Turso `oauth_tokens` jadvali ulandi. Firestore zaxira sifatida fail-soft rejimda qoldirildi.
+  4. `src/lib/services/lead-queue-service.ts`: Xatolikka uchragan arizalar endi avtomatik ravishda Turso `failed_leads` jadvaliga yoziladi.
+  5. `src/app/api/admin/retry-amocrm-leads/route.ts`: Navbatdagi arizalarni qayta yuborish Turso `failed_leads` jadvali bilan integratsiya qilindi.
+  6. `src/app/api/amocrm-health/route.ts`: Token manbasi (turso / firestore / env) va Turso bazasi jonli `SELECT 1` diagnostikasi qo'shildi.
+  7. `src/lib/rate-limit.ts`: So'rovlar cheklovi (rate limit) Turso `rate_limits` jadvali orqali taqsimlangan atomik `UPSERT` ga o'tkazildi.
+  8. `src/lib/integrations/instagram.ts` va OAuth callback: Instagram tokenlari ham Turso `oauth_tokens` orqali sinxronlashtirildi.
+  9. **Ma'lumotlar migratsiyasi:** Firestore'dagi 16 ta arxiv arizalar va uzoq muddatli `website_tokens` Turso'ga to'liq ko'chirildi.
+- **Tekshiruv:**
+  - `npm run typecheck` â€” 0 xato, to'liq toza.
+  - `scripts/harness/verify.mjs` â€” barcha 4 bosqich (i18n pariteti, kod standartlari, typecheck, 55 test fayli, 379 ta test) 100% yashil o'tdi.
+
+
 ## 2026-10-07 | amoCRM 5 yillik uzoq muddatli token yaratildi, Firestore yangilandi va 16 ta lid to'liq tiklandi
 - **Muammo:** amoCRM OAuth refresh token muddati o'tib ketgani sababli 401 xatosi yuzaga kelgan va oxirgi haftalarda saytdan yuborilgan 16 ta lid `amocrm_failed_leads` Firestore navbatiga tushib to'xtab qolgan edi.
 - **Yechim:**
@@ -1870,3 +1935,103 @@ Native agent discovered all three project skills and accurately reported project
   5. `src/components/layout/header-mobile-menu.tsx`: Mobil gamburger menyuga "Ilovani o'rnatish" tugmasi qo'shildi.
   6. i18n: `uz.json`, `ru.json`, `en.json`, `zh.json` fayllariga `pwa` kalitlari Uzbek-first tamoyilida to'liq qo'shildi.
 - **Tekshiruv:** `npm run verify:fast` (barcha 54 test to'plami, 376 ta test) va `npm run typecheck` 100% xatosiz muvaffaqiyatli o'tdi.
+\n### 2026-10-10 — production mobil vizual audit\n- jonbranding.uz home, menu, PWA, portfolio filter, footer, pricing va Perfona detail tekshirildi (Chrome emulation 390/320/360).\n- Tasdiqlandi: callback/mobile-nav/menu collision; food filter 23 tiles; nonexistent footer anchors; PWA broken icon; gallery copy mismatch; duplicate close.\n- Report: docs/audits/2026-10-10-mobile-audit.md; screenshots external visualization directory.\n- Audit-only: product code unchanged, no lead submitted. Harness rerun not required for docs-only audit; prior code verification remains separate from visual findings.\n
+
+### 2026-10-10 — PWA icon contrast fix
+- Reproduced: dark JON on transparent regular icons disappears against dark backgrounds. Existing brand vector retained; opaque cream backgrounds rasterized with sharp at exact 192/512/180 sizes; maskable safe-area retained.
+- Added v2 icon URLs, manifest/apple metadata/SW cache updated; installer uses unoptimized local PNG to avoid broken optimizer delivery.
+- verify:fast and verify passed (56 files, 384 tests, typecheck, 4 locales); PNG dimensions/opaque checks passed. Self-review completed. No unrelated changes reverted.
+
+
+- Production image readback exposed root cause of prior broken icon: src/proxy.ts matcher rewrites icon PNG paths into locale pages ->404. Added exclusions for icon-* and versioned apple-touch-icon; 8 actual Next matcher regression cases added. First deploy Ready but asset readback failed; corrective deploy follows after gates.
+
+
+- Corrective verification: installed Next exports unstable_doesMiddlewareMatch despite bundled docs naming doesProxyMatch; corrected test API. verify and verify:fast pass392 tests and typecheck. Reviewer: self-review; locale exclusions narrowly scoped to icon assets.
+
+
+- Final production verified 2026-10-10 19:01 Asia/Tashkent: commit622fc58, Vercel7rmmCP86Vot4RejLgJhrwhVzU9Va Ready, www.jonbranding.uz assigned. Browser icon-192-v2.png renders with naturalWidth/Height192 and complete=true; screenshot saved external mobile-audit/pwa-icon-production.png. Real installed launcher icon refresh not tested.
+
+
+### 2026-10-10 — mobil audit remediation
+- Implemented single mobile contact surface: external callback FAB hidden through exposed CSS part; mobile sticky CTA disabled; menu/dialog/chat/PWA suppress quick actions. Shadow callback observer tracks form open/closed without changing backend or tracking.
+- Footer anchors ->ishlar/savol; mobile drawer one localized44x44 close; PWA share/home-screen steps localized all4 languages.
+- Home portfolio six known projects with existing local brand art, canonical CMS URLs retained; service-based filters replace all-null industry fields; selected-state semantics, empty state, full portfolio link; no guessed years.
+- Perfona gallery inspected live: logo and Telegram IT product confirmed. Prior perfume inference withdrawn; existing description retained. Only old promotional cover replaced with existing gallery logo, future CMS cover edits retain precedence.
+- Pricing case alt/client fallback removes undefined; prices unchanged. Focused regressions added. verify:fast397 tests passed; verify initially found test API exact-option mismatch, corrected; subsequent verify397 tests +typecheck passed. Scoped ESLint passed.
+- Local390px visual checks: menu single close44x44, no callback FAB; PWA no broken images;6 gallery tiles; Qadoq onlyBoyarin; callback form hides quick actions. Form not submitted.
+
+
+- Final checks: verify:fast +verify397 tests59 files, typecheck/i18n1253keys per locale, scoped ESLint and git diff --check pass. Local pricing320 and Perfona360 overflow0; AI chat360 width336px and mobile nav hidden. Self-review completed; screenshots saved outside repo. Real-device native install/keyboard and lead delivery remain unverified.
+
+
+### 2026-10-10 — Mobile audit production verification
+- Commit 57aec492 deployed: Vercel FvJxU2ykZqW9FgaoKen67G8YjbKh Ready at 19:21:47 Asia/Tashkent, www.jonbranding.uz assigned; GitHub Vercel status success.
+- Live Chrome iPhone emulation 390px: one 44px menu close, no horizontal overflow; bottom actions hidden while menu/callback open; service Qadoq filter shows only Boyarin, reset restores six tiles; FAQ navigates #savol with section top 0.14px.
+- Live pricing 320px: scrollWidth=clientWidth=320, undefined image alt absent. Local 360px AI chat and Perfona cover verified earlier. No fake lead or chat submitted.
+- verify:fast and verify passed (397 tests, typecheck, four-locale parity). Real iPhone/Android installation, OS keyboard and actual lead delivery remain unverified.
+- Screenshots saved outside repository in Codex visualizations mobile-audit folder. Obsidian project append succeeded. Own local dev server stopped.
+
+### 2026-10-10 — Installed PWA scroll error investigation
+- Owner reports root homepage error after scrolling in installed PWA. Fresh Chrome mobile page scrolled to footer without runtime errors; exact phone exception is not yet reproduced.
+- Applied deliver-task workflow; self-review only. Scope: service worker cache lifecycle, registration/resume update, root chunk error recovery, SW response headers, focused behavioral tests.
+- Confirmed defect: old SW activation deleted prior immutable Next chunks while immediately taking over existing clients. Fixed by migrating cached build assets before cleanup/claim and preserving unrelated caches. Navigations bypass HTTP cache; offline missing assets return a real 503 response.
+- Added no-store sw.js header, updateViaCache none and visibility/resume update check for standalone as well as browser. Chunk import errors recover by hard reload once per two minutes/session; generic render/offline/storage-blocked errors are not reloaded.
+- 9 regression cases cover cache migration, old chunk access without network, fresh navigation/offline fallback, missing asset503, chunk classification and loop guard. verify:fast: 406 tests passed; focused ESLint and diff check passed. Full verify and deployment pending.
+- Limitation: likely deployment/cache failure mitigation; actual owner phone error is not proven resolved until device retest.
+- Full verify passed: typecheck, 406 tests, four locales. Self-review adjusted immutable cache writes so quota failures do not discard successful network responses; focused SW/recovery tests rerun passed before publication.
+- Production verified: 7ecb787e, Vercel Bnxm97ohdfK1mg3vgHwLt2B1XGns Ready at 19:38:57 Asia/Tashkent. Live sw.js HTTP200 and Cache-Control no-cache/no-store/must-revalidate.
+- Chrome controlled ServiceWorker upgrade observed from jonbranding-v2-icons to jonbranding-v3-recovery; previously cached old build CSS retained after old cache deletion. Android UA/mobile390px full homepage scroll to footer, console errors empty, error boundary absent. This is browser emulation with real SW lifecycle, not physical installed Android verification.
+\n2026-10-11 | Codex | Sales-machine visual audit completed: live homepage, Den Aroma, pricing and forms; 8 evidence-led findings in docs/audits/2026-10-11-sales-machine-audit.md. No production code edits or submissions during audit; conversion and CRM delivery unverified. CRO skill applied. Tests not run: documentation-only audit; pre-existing code work preserved.
+
+
+2026-10-11 â€” Sales audit remediation (local): Unified the free offer as a 20-minute consultation in four locales; added shared contextual /api/submit-form lead intake with a 15s timeout and retained service/source; removed duplicate callback attributes and owner Telegram from header/footer primary flows; added early canonical-price shortcuts and service/package anchors; withheld metrics without reviewed source/period and unattributed Den Aroma narrative; kept actual project images and video testimonials, excluded editorial captions from direct quotes; replaced absolute sales/legal promises with scope/deliverables. Mobile polish includes opaque quick nav, guarded storage, viewport-aware chat and early PWA/chat events. Found and guarded homepage testimonials sessionStorage read. Audit report: docs/audits/2026-10-11-sales-machine-audit.md. Verification and deployment still pending.
+2026-10-11 — Verification: final verify:fast and verify passed (65 files / 418 tests, 4 locales x 1321 keys, TypeScript); full eslint passed; local optimized production build passed (165 static pages). Chrome mobile emulation: contextual home form opens; pricing logo anchor works; logo remains selected in form; 390px and 320px form fits with no horizontal overflow. No real lead submitted. Preparing authorized production release.
+2026-10-11 — Release queued: commit 82ee5cbc07288806ea9a4b76a26f2f1b3813e2a4 pushed to main; Vercel deployment 7doNxvY8jfJcqCzZ5HCEe9Tgs8Xx pending. The server reported a main-branch PR/check rule bypass by the authorized account; GitHub CI is running separately. User AGENTS.md edit and unrelated untracked files were excluded. Production completion has not yet been claimed.
+
+## 2026-10-11 - Client logos and release readback
+- 82ee5cb Vercel production Ready at 13:49 Asia/Tashkent; live mobile selected Logotip form verified and screenshot saved.
+- Owner requested Rash Milk, Goodwell, Rahimov School and Savod. Added real owner-provided Rash Milk SVG plus existing verified CDN assets in a mobile 2-column / desktop 4-column logo row, translated heading in all locales.
+- CI core build/typecheck/lint/unit tests passed; E2E 9/10 passed, outdated Oisha CTA expectation failed. Updated expectation for one contextual lead form and no duplicate callback.
+- Local E2E unavailable: installed Playwright Chromium executable missing; CI will execute suite. No real leads submitted.
+
+- Logo release e2e97355 prerender failed: trimmed homeDictionary omitted trustedBy. Added only required eyebrow to the server-to-client dictionary; rerunning full build before release. Live footer and 20-minute consultation dialogs verified after resetting conflicting browser emulation overrides.
+
+- Final release a7f1adb22d1b9ab47404850ce61a921343013a97: Vercel 3jvkcwqcyTs44rnQRACUHX3HJ5xZ Production Ready at 14:28:43 Asia/Tashkent, www.jonbranding.uz assigned. Four logo images loaded on live page; screenshot production-client-logos.png saved outside repo. 320px layout clientWidth=scrollWidth=320. Full homepage scroll, footer team form, 20-minute consultation and PWA entry verified in browser emulation. Local full production build passed 165 static pages; lint and 418 tests passed. Physical Android and real CRM lead delivery remain unverified.
+
+- Final CI run 38128411228 success: core Typecheck/lint/test/build and Playwright Chromium E2E both passed for a7f1adb22d1b9ab47404850ce61a921343013a97.
+
+## 2026-10-11 - Three-row client logo train
+- Owner requested two rows moving left and one right. Replaced static four-logo grid with three seamless tracks (left/right/left), using existing client logo sources with prior hiddenInHero exclusions preserved.
+- CSS transform-only linear loops, identical duplicated groups with aria-hidden, offscreen IntersectionObserver pause, localized pause/resume controls, and static reduced-motion layout. No new client/service claims or CMS changes.
+- Applied ui-animation skill; verify, lint, visual checks and release pending.
+
+- Verification passed: 4 locales /1323 keys, TypeScript, 65 test files /418 tests, full lint. CSS loops animate transform only. Production build and visual verification will run on exact release commit.
+
+- Production release 39204cc83e78a1e98a39b84d4011b5040edcda40 Vercel FMAjF3y3EPxmZjSfjBaj899hmK9o Ready 14:45:52 Asia/Tashkent. Live 3 tracks running normal/reverse/normal; measured x values moved left/right/left between observations. Duplicate group widths equal, no seam gap. 320px clientWidth=scrollWidth=320. Screenshot production-logo-train.png saved outside repo; pause/reduced-motion/offscreen verified locally. Physical Android not tested.
+
+- CI 38129360943 complete success: Typecheck/lint/test/build plus Playwright Chromium E2E passed for final 39204cc83e78a1e98a39b84d4011b5040edcda40.
+
+## 2026-10-11 - White-background logo removal
+- Owner requested identify/list white-background logos and stop using until clean SVG arrives.
+- Read original Sanity PNG alpha channels and visually reviewed all assets on site beige background. Confirmed To'maris supermarket has white rectangle (including partial white alpha on corners); other logo whites are glyphs/graphic elements, not rectangular backgrounds.
+- Removed To'maris from staticBrands; recorded source URL and SVG requirements in docs/audits/2026-10-11-logo-replacements.md. No CMS mutation or source image editing. Repo public and G:/My Drive/JonBranding SVG filename search found no To'maris SVG.
+- Focused verification and deploy pending; owner AGENTS/unrelated untracked files preserved.
+
+- verify:fast passed 65 files/418 tests and i18n parity. Change is one static logo data entry plus audit documentation; full typecheck/lint/build will run in release CI on exact commit. Drive filename search across all file types also found no To'maris source vector.
+
+- Release 91b641680f82e6769f1a7d68c4aa0b673765aa93 deployed: Vercel 5A9WBS4rFyCkpsEoq76mN2PS6SQQ Ready Production at 14:56:12 Asia/Tashkent, www.jonbranding.uz assigned. Production mobile readback: removed ToMaris asset count 0, three rows running normal/reverse/normal, 320px clientWidth=scrollWidth=320. Screenshot production-transparent-logo-train.png saved outside repo. CI 38130034147 complete success: typecheck/lint/tests/build and Chromium E2E. Browser emulation reset and owned tabs closed. Final verification record left local to avoid another release.
+
+## 2026-10-11 - Client logo visual hierarchy
+- Owner requested prominent title and smaller logos. ClientLogos heading changed from muted 14px to ink 30px mobile/48px desktop. Logo frames reduced from 144x80 to 96x56 mobile and 176x96 to 128x64 desktop; responsive image sizes updated. Three-row motion and controls preserved. Responsive-design skill applied. Verification/deploy pending.
+- verify:fast passed 65 files/418 tests and all 4 locales. Styling-only change; full typecheck/lint/build/E2E delegated to exact-commit release CI. No new mirror tests added.
+- 921dcceb003109057a0483614bd990875dec021c Vercel DuKt7RJ5i7fVqZe2H3Fb5zgwnDQr Ready Production, domain www.jonbranding.uz. Live visual screenshot production-logo-size.png: title 30px/mobile and 48px/1440px, logo96x56/mobile and128x64/desktop. 320px no overflow; three rows retained. Browser emulation reset/tabs closed. Release CI38130754007 still running.
+- Final CI38130754007 completed success: typecheck/lint/tests/build and Chromium E2E. Final verification log remains local to avoid duplicate deploy.
+
+## 2026-10-11 - Unify pricing client logos
+- Owner found stale pricing trust block. Replaced independent grayscale CMS logo grid and legacy trust heading with shared ClientLogos and locale trustedBy labels. Removed obsolete brands fetch/16-logo slice and ServiceLogo prop. Testimonials retained. Home and pricing now share heading, compact sizes, three-row directions and white-background exclusion. Verification pending.
+
+## 2026-10-11 | Codex CAPI live status audit
+- Meta Events Manager pixel 1134785364752294, window 13 Sep-10 Oct: Lead active, Browser only, count 3, latest 6 days ago. No Server Lead evidence visible. CAPI success not confirmed.
+- Vercel runtime logs MCP returned UNAUTHORIZED (reauthentication required); vercel CLI absent on PATH. No secret values read; no production changes or test events sent. Application tests not applicable to read-only status audit.
+
+- verify:fast418tests/locales and typecheck passed. Full lint/build/E2E run in exact-commit release CI; no price/package/lead behavior changed.
