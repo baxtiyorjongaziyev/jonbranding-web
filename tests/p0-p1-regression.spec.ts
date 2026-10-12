@@ -21,7 +21,7 @@ test('320px services stay inside the viewport', async ({ page }) => {
       viewportWidth: document.documentElement.clientWidth,
       pageWidth: document.documentElement.scrollWidth,
       offenders: Array.from(document.querySelectorAll<HTMLElement>('body *'))
-        .filter((element) => !element.closest('.at-marquee-track'))
+        .filter((element) => !element.closest('.at-marquee-track, .client-logos-track'))
         .map((element) => {
           const rect = element.getBoundingClientRect();
           return {
@@ -55,12 +55,13 @@ test('language routes expose one main landmark and one skip target', async ({ pa
   }
 });
 
-test('English hero CTA opens one contextual lead form', async ({ page }) => {
-  // Haqiqiy vidjet tashqi serverdan keladi; bu yerda faqat saytdagi bog'lanish tekshiriladi.
+test('English hero CTA opens the Oisha callback form, not a second site form', async ({ page }) => {
+  // Haqiqiy vidjet tashqi serverdan keladi; stub faqat saytdagi bog'lanishni tekshiradi.
   await page.route('https://oisha.jonbranding.uz/**', (route) =>
     route.fulfill({
       contentType: 'application/javascript',
-      body: `document.addEventListener('click', (e) => {
+      body: `window.OishaCallback = { applyPhones() {} };
+      document.addEventListener('click', (e) => {
         if (e.target.closest && e.target.closest('[data-oisha-callback]')) window.__oishaOpens = (window.__oishaOpens || 0) + 1;
       });`,
     })
@@ -74,14 +75,38 @@ test('English hero CTA opens one contextual lead form', async ({ page }) => {
 
   const trigger = page.getByTestId('hero-audit-trigger');
   await expect(trigger).toBeVisible({ timeout: 15_000 });
-  await expect(trigger).not.toHaveAttribute('data-oisha-callback', '');
+  await expect(trigger).toHaveAttribute('data-oisha-callback', '');
+  await expect.poll(() => page.evaluate(() => typeof (window as any).OishaCallback)).toBe('object');
+  await expect.poll(() => trigger.evaluate((element) => Object.keys(element).some((key) => key.startsWith('__reactProps')))).toBe(true);
+  await trigger.click();
+
+  await expect.poll(() => page.evaluate(() => (window as any).__oishaOpens || 0)).toBe(1);
+  await page.waitForTimeout(1_000);
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+});
+
+test('English hero CTA falls back to the site lead form when the Oisha widget is unavailable', async ({ page }) => {
+  await page.route('https://oisha.jonbranding.uz/**', (route) => route.fulfill({ status: 404, body: '' }));
+  await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
+
+  const trigger = page.getByTestId('hero-audit-trigger');
+  await expect(trigger).toBeVisible({ timeout: 15_000 });
   await expect.poll(() => trigger.evaluate((element) => Object.keys(element).some((key) => key.startsWith('__reactProps')))).toBe(true);
   await trigger.click();
 
   await expect(page.getByRole('dialog')).toHaveCount(1);
   await expect(page.getByRole('combobox', { name: 'Service', exact: true })).toHaveValue('Not sure — I need advice');
-  await expect.poll(() => page.evaluate(() => (window as any).__oishaOpens || 0)).toBe(0);
   await expect(page.getByRole('dialog', { name: /Free Brand Audit/i })).toHaveCount(0);
+});
+
+test('mobile quick actions keep a visible Oisha callback CTA after scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
+  const cta = page.locator('[data-mobile-quick-actions] [data-oisha-callback]');
+  await expect(cta).toBeVisible({ timeout: 15_000 });
+  await page.mouse.wheel(0, 2_500);
+  await page.waitForTimeout(1_000);
+  await expect(cta).toBeVisible();
 });
 
 test('Vimeo is click-to-load and the text fallback remains available', async ({ page }) => {

@@ -148,11 +148,17 @@ export default function ClientEnhancements({
   }, []);
 
   useEffect(() => {
+    const handleRequest = (detail: any) => {
+      trackCtaRequest(detail);
+      // `data-oisha-callback` tugmalar formani Oisha vidjeti orqali ochadi. Vidjet
+      // yuklanmagan bo'lsa (bloklangan/o'chirilgan) tugma "o'lik" qolmasin —
+      // o'rniga sayt formasi ochiladi. Ikkala forma bir vaqtda ochilmaydi.
+      if (detail.via === 'oisha' && window.OishaCallback) return;
+      setLeadRequest({ service: detail.service || getSalesContent(lang).ui.notSure, source: detail.source || detail.section || 'website', intent: detail.intent === 'project' ? 'project' : 'consultation' });
+    };
     const listener = (event: Event) => {
       delete (window as any).__pendingContactModal;
-      const detail = (event as CustomEvent).detail || {};
-      trackCtaRequest(detail);
-      setLeadRequest({ service: detail.service || getSalesContent(lang).ui.notSure, source: detail.source || detail.section || 'website', intent: detail.intent === 'project' ? 'project' : 'consultation' });
+      handleRequest((event as CustomEvent).detail || {});
     };
     window.addEventListener('openContactModal', listener);
     window.addEventListener('error', reportError);
@@ -160,8 +166,7 @@ export default function ClientEnhancements({
     const pendingContactModal = (window as any).__pendingContactModal;
     if (pendingContactModal) {
       delete (window as any).__pendingContactModal;
-      trackCtaRequest(pendingContactModal);
-      setLeadRequest({ service: pendingContactModal.service || getSalesContent(lang).ui.notSure, source: pendingContactModal.source || 'website', intent: pendingContactModal.intent === 'project' ? 'project' : 'consultation' });
+      handleRequest(pendingContactModal);
     }
 
     return () => {

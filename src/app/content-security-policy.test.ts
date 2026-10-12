@@ -70,6 +70,14 @@ describe('Content-Security-Policy', () => {
     expect(allows(csp.get('connect-src'), 'https://api2.amplitude.com/2/httpapi')).toBe(true);
   });
 
+  it('allows Google Ads conversion pixels on ad.doubleclick.net and other subdomains', async () => {
+    const csp = await readCsp();
+    for (const url of ['https://ad.doubleclick.net/activity;src=1', 'https://stats.g.doubleclick.net/g/collect']) {
+      expect(allows(csp.get('connect-src'), url), url).toBe(true);
+      expect(allows(csp.get('img-src'), url), url).toBe(true);
+    }
+  });
+
   it('allows the Oisha callback widget and its call-tracking API', async () => {
     const csp = await readCsp();
     expect(allows(csp.get('script-src'), 'https://oisha.jonbranding.uz/api/callback-widget.js')).toBe(true);
