@@ -10,7 +10,7 @@ import { PATENT_PAGE } from '@/lib/service-pages/patent';
 type Props = { params: Promise<{ lang: string }> };
 
 const DESCRIPTION =
-  'Brend nomi va logotipini O‘zbekistonda tovar belgisi sifatida ro‘yxatdan o‘tkazish: tekshiruv 880 000 so‘mdan, oddiy ~7 oy yoki tezkor 20–40 kun. 13 ta guvohnoma olib berganmiz.';
+  `Brend nomi va logotipini O‘zbekistonda tovar belgisi sifatida ro‘yxatdan o‘tkazish: tekshiruv 880 000 so‘mdan, oddiy ~7 oy yoki tezkor 20–40 kun. ${PATENT_CERTIFICATES.length} ta guvohnoma olib berganmiz.`;
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;

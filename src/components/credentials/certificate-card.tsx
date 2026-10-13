@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type { FC } from 'react';
-import { formatCertDate, validUntil, type PatentCertificate } from '@/lib/patent-certificates';
+import { certificateLabel, formatCertDate, validUntil, type PatentCertificate } from '@/lib/patent-certificates';
 
 const BLUE = '#1677ff';
 
@@ -46,7 +46,7 @@ const CertificateCard: FC<{ cert: PatentCertificate }> = ({ cert }) => {
             <div className="relative h-full w-[74%]" style={{ maxHeight: '44cqw' }}>
               <Image
                 src={cert.logo}
-                alt={`${cert.brand} — ro‘yxatdan o‘tgan tovar belgisi`}
+                alt={`${certificateLabel(cert)} — ro‘yxatdan o‘tgan tovar belgisi`}
                 fill
                 sizes="(max-width: 640px) 60vw, 640px"
                 className="object-contain"

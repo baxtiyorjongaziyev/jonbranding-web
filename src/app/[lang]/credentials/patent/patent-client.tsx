@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import CertificateCard from '@/components/credentials/certificate-card';
 import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, rise, serif, Slide } from '@/components/credentials/deck';
-import { certificateDays, formatCertDate, PATENT_CERTIFICATES } from '@/lib/patent-certificates';
+import { certificateDays, certificateLabel, formatCertDate, PATENT_CERTIFICATES } from '@/lib/patent-certificates';
 
 const SERVICE = 'Patent';
 const withLogo = PATENT_CERTIFICATES.filter((cert) => cert.logo);
@@ -225,7 +225,7 @@ export default function PatentClient() {
             {byDuration.map((cert) => (
               <li key={cert.number} className="cred-row grid grid-cols-[1fr_auto] items-baseline gap-4 border-t py-3" style={{ borderColor: 'rgba(11,11,12,.12)' }}>
                 <div>
-                  <p className="font-medium" style={{ color: INK }}>{cert.brand === '—' ? cert.industry : cert.brand}</p>
+                  <p className="font-medium" style={{ color: INK }}>{cert.brand || cert.industry}</p>
                   <p className="text-[12px]" style={{ ...mono, color: 'rgba(11,11,12,.5)' }}>
                     {cert.number} · {formatCertDate(cert.filed)} → {formatCertDate(cert.registered)}
                   </p>
@@ -252,7 +252,7 @@ export default function PatentClient() {
                 key={cert.number}
                 type="button"
                 onClick={() => setZoomed(i)}
-                aria-label={`${cert.brand} ma’lumotnomasini kattalashtirish`}
+                aria-label={`${certificateLabel(cert)} ma’lumotnomasini kattalashtirish`}
                 className="block cursor-zoom-in text-left transition-transform duration-300 hover:-translate-y-1"
               >
                 <CertificateCard cert={cert} />
@@ -315,7 +315,7 @@ export default function PatentClient() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`${withLogo[zoomed].brand} ma’lumotnomasi`}
+          aria-label={`${certificateLabel(withLogo[zoomed])} ma’lumotnomasi`}
           onClick={() => setZoomed(null)}
           className="cred-no-print fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center p-4"
           style={{ background: 'rgba(11,11,12,.82)', backdropFilter: 'blur(6px)' }}
