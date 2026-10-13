@@ -2,7 +2,7 @@
    Scoped to .atelier-home so embedded .atelier-theme sections on other pages
    (e.g. narxlar testimonials) don't repaint the whole body. */
 body:has(.atelier-home) {
-  background-color: #F2EFE6 !important;
+  background-color: #F4F5F7 !important;
 }
 html[data-theme="dark"] body:has(.atelier-home) {
   background-color: #0B0C10 !important;
@@ -10,15 +10,15 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
 .atelier-theme {
 
-  /* warm paper system */
-  --bg: #F2EFE6;
-  --bg-2: #E9E5D9;
-  --paper: #FBF9F2;
+  /* cool neutral system */
+  --bg: #F4F5F7;
+  --bg-2: #EAECF0;
+  --paper: #FFFFFF;
   --ink: #0E1015;
   --ink-2: #3B3D45;
-  --muted: #8B8779;
-  --line: #D8D2C2;
-  --line-2: #E5E0D2;
+  --muted: #6B7280;
+  --line: #DDE0E6;
+  --line-2: #E8EAEE;
   --accent: #1B4DFF;
   --accent-soft: #E6EBFF;
   --terra: #C2552A;

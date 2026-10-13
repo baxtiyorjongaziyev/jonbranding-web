@@ -213,10 +213,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
         </div>
 
-        <div className="relative z-10 select-none pointer-events-none mt-20 pb-0 overflow-hidden leading-none w-full">
-          <h2 className="text-[9vw] font-semibold leading-[0.8] text-white/95 tracking-[-0.05em] text-center transition-all whitespace-nowrap mb-[-0.15em] uppercase">
-            Jon Branding
-          </h2>
+        <div className="relative z-10 select-none pointer-events-none mt-20 pb-6 md:pb-10 w-full px-4 md:px-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/logos/jon-white.svg"
+            alt="JON"
+            className="block w-full h-auto opacity-95"
+            loading="lazy"
+          />
         </div>
       </div>
     </footer>
