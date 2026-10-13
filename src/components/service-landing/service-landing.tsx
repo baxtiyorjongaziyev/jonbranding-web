@@ -4,8 +4,9 @@ import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check, ChevronDown, X } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import { CasesSection, HeroCollage, Reveal, VideoCard } from './media';
 import { ServiceLeadForm } from './service-lead-form';
-import type { ServicePageContent } from './types';
+import type { ServiceCase, ServicePageContent, ServiceVideo } from './types';
 
 const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace', letterSpacing: '0.12em' } as const;
 const h2Style = { fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.1 } as const;
@@ -18,7 +19,7 @@ const Eyebrow: FC<{ children: ReactNode; light?: boolean }> = ({ children, light
 
 const Section: FC<{ id?: string; children: ReactNode; className?: string }> = ({ id, children, className = '' }) => (
   <section id={id} className={`scroll-mt-20 px-5 py-20 sm:px-8 md:py-28 ${className}`}>
-    <div className="mx-auto max-w-5xl">{children}</div>
+    <Reveal className="mx-auto max-w-5xl">{children}</Reveal>
   </section>
 );
 
@@ -30,7 +31,12 @@ const btnBase =
  * hero → muammo → xizmat nima → tarkib → dalil → jarayon → kimga mos →
  * kafolatlar → keyingi xizmatlar → FAQ → ariza.
  */
-export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactNode }> = ({ content: c, children }) => {
+export const ServiceLanding: FC<{
+  content: ServicePageContent;
+  cases?: ServiceCase[];
+  videos?: ServiceVideo[];
+  children?: ReactNode;
+}> = ({ content: c, cases = [], videos = [], children }) => {
   const priceText = `${c.price} so‘m${c.priceFrom ? 'dan' : ''}`;
   const formRef = useRef<HTMLDivElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
@@ -51,8 +57,9 @@ export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactN
   return (
     <div className="bg-white text-neutral-950">
       {/* 1. HERO */}
-      <section className="px-5 pb-16 pt-28 sm:px-8 md:pb-24 md:pt-36">
-        <div className="mx-auto max-w-5xl">
+      <section className="overflow-hidden px-5 pb-16 pt-28 sm:px-8 md:pb-24 md:pt-36">
+        <div className={`mx-auto grid items-center gap-12 ${cases.length >= 3 ? 'max-w-6xl lg:grid-cols-[1.15fr_1fr]' : 'max-w-5xl'}`}>
+          <Reveal>
           <Eyebrow>{c.hero.eyebrow}</Eyebrow>
           <h1 className="max-w-[20ch] font-bold tracking-tight" style={{ fontSize: 'clamp(34px, 5.2vw, 62px)', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
             {c.hero.title}
@@ -87,6 +94,8 @@ export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactN
             </button>
           </div>
           {c.hero.note ? <p className="mt-6 max-w-[58ch] text-xs leading-relaxed text-neutral-500">{c.hero.note}</p> : null}
+          </Reveal>
+          {cases.length >= 3 ? <HeroCollage cases={cases} /> : null}
         </div>
       </section>
 
@@ -162,23 +171,37 @@ export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactN
         </div>
       </Section>
 
-      {/* 5. DALIL */}
-      {c.proof ? (
+      {/* 4b. QILINGAN ISHLAR */}
+      {cases.length ? <CasesSection cases={cases} /> : null}
+
+      {/* 5. DALIL: video sharhlar, nomlar, iqtiboslar */}
+      {c.proof || videos.length ? (
         <section className="bg-black px-5 py-24 text-white sm:px-8 md:py-32">
-          <div className="mx-auto max-w-5xl">
-            <Eyebrow light>Natijalar</Eyebrow>
-            <h2 className="max-w-3xl font-bold text-white" style={h2Style}>{c.proof.title}</h2>
-            <p className="mt-5 max-w-2xl text-neutral-400" style={{ fontSize: 16, lineHeight: 1.65 }}>{c.proof.lead}</p>
-            {c.proof.chips ? (
+          <div className="mx-auto max-w-6xl">
+            <Reveal>
+              <Eyebrow light>Natijalar</Eyebrow>
+              <h2 className="max-w-3xl font-bold text-white" style={h2Style}>{c.proof?.title ?? 'Mijozlarimiz nima deydi'}</h2>
+              {c.proof?.lead ? <p className="mt-5 max-w-2xl text-neutral-400" style={{ fontSize: 16, lineHeight: 1.65 }}>{c.proof.lead}</p> : null}
+            </Reveal>
+            {videos.length ? (
+              <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {videos.map((video, i) => (
+                  <Reveal key={video.src} delay={i * 0.08}>
+                    <VideoCard video={video} />
+                  </Reveal>
+                ))}
+              </div>
+            ) : null}
+            {c.proof?.chips ? (
               <ul className="mt-10 flex flex-wrap gap-2.5">
                 {c.proof.chips.map((chip) => (
                   <li key={chip} className="rounded-full border border-white/15 px-4 py-2 text-base font-semibold text-white">{chip}</li>
                 ))}
               </ul>
             ) : null}
-            {c.proof.quotes ? (
+            {c.proof?.quotes?.length ? (
               <div className="mt-12 grid gap-4 md:grid-cols-2">
-                {c.proof.quotes.map((q) => (
+                {c.proof.quotes.filter((q) => !videos.some((v) => v.name === q.name)).map((q) => (
                   <figure key={q.name} className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
                     <blockquote className="text-[15px] leading-relaxed text-neutral-200">“{q.quote}”</blockquote>
                     <figcaption className="mt-5 text-sm">

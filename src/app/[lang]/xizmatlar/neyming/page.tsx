@@ -3,7 +3,12 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import NamingClient from './naming-client';
 import ServiceLanding from '@/components/service-landing/service-landing';
 import { NAMING_PAGE } from '@/lib/service-pages/naming';
+import { fetchServiceCases } from '@/lib/service-pages/cases';
+import { videosFrom } from '@/lib/service-pages/quotes';
 import { pageTitle } from '@/lib/seo';
+
+// Keyslar Sanity'dan — yangi loyiha soat ichida chiqadi.
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -25,7 +30,10 @@ export default async function Page(props: Props) {
   const { lang } = await props.params;
   // Uzbek-first: batafsil sahifa avval o'zbekchada; tarjimalar tayyor bo'lguncha
   // boshqa tillar eski sahifani ko'rsatadi.
-  if (lang === 'uz') return <ServiceLanding content={NAMING_PAGE} />;
+  if (lang === 'uz') {
+    const cases = await fetchServiceCases(NAMING_PAGE.caseCategories);
+    return <ServiceLanding content={NAMING_PAGE} cases={cases} videos={videosFrom(NAMING_PAGE.videoCompanies ?? [])} />;
+  }
 
   const dictionary = await getDictionary(lang as Locale);
 

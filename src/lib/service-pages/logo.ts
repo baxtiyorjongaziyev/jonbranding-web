@@ -83,6 +83,9 @@ export const LOGO_PAGE: ServicePageContent = {
     ],
   },
 
+  caseCategories: ['logo-design', 'corporate-style'],
+  videoCompanies: ['Tadbirkor', 'Arfadel', 'Dilbaroy', 'Velzo'],
+
   proof: {
     title: 'Mijozlarimiz nima deydi',
     lead: 'Logotip ishlangan mijozlarimizning o‘z so‘zlari.',

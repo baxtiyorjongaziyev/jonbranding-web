@@ -3,8 +3,13 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import LogoClient from './logo-client';
 import ServiceLanding from '@/components/service-landing/service-landing';
 import { LOGO_PAGE } from '@/lib/service-pages/logo';
+import { fetchServiceCases } from '@/lib/service-pages/cases';
+import { videosFrom } from '@/lib/service-pages/quotes';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { pageTitle } from '@/lib/seo';
+
+// Keyslar Sanity'dan — yangi loyiha soat ichida chiqadi.
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -25,7 +30,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
-  
+  const cases = lang === 'uz' ? await fetchServiceCases(LOGO_PAGE.caseCategories) : [];
+
   return (
     <>
       <ServiceJsonLd
@@ -36,7 +42,7 @@ export default async function Page(props: Props) {
       />
       {/* Uzbek-first: batafsil sahifa avval o'zbekchada. */}
       {lang === 'uz' ? (
-        <ServiceLanding content={LOGO_PAGE} />
+        <ServiceLanding content={LOGO_PAGE} cases={cases} videos={videosFrom(LOGO_PAGE.videoCompanies ?? [])} />
       ) : (
         <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />
       )}

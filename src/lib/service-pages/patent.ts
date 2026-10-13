@@ -92,6 +92,8 @@ export const PATENT_PAGE: ServicePageContent = {
     ],
   },
 
+  videoCompanies: ['Zayan', 'Almaz', 'Velzo', 'Tadbirkor'],
+
   proof: {
     title: `${PATENT_CERTIFICATES.length} ta brend — rasman himoyada`,
     lead: 'Oddiy tartibda real muddat odatda ~7 oy bo‘ldi. Quyida — guvohnoma olib bergan mijozlarimiz.',

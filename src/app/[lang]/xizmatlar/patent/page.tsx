@@ -6,6 +6,7 @@ import { Locale } from '@/lib/dictionaries';
 import { PATENT_CERTIFICATES } from '@/lib/patent-certificates';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
 import { PATENT_PAGE } from '@/lib/service-pages/patent';
+import { videosFrom } from '@/lib/service-pages/quotes';
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -31,7 +32,7 @@ export default async function PatentPage(props: Props) {
   return (
     <>
       <ServiceJsonLd lang={lang as Locale} path="/xizmatlar/patent" name="Patent — tovar belgisini ro‘yxatdan o‘tkazish" description={DESCRIPTION} />
-      <ServiceLanding content={PATENT_PAGE}>
+      <ServiceLanding content={PATENT_PAGE} videos={videosFrom(PATENT_PAGE.videoCompanies ?? [])}>
         <section className="border-b border-neutral-200/80 bg-neutral-50 px-5 py-20 sm:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
             <p className="mb-4 text-[11px] font-medium uppercase text-blue-700" style={{ fontFamily: 'var(--font-mono), monospace', letterSpacing: '0.12em' }}>

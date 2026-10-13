@@ -87,6 +87,9 @@ export const NAMING_PAGE: ServicePageContent = {
     ],
   },
 
+  caseCategories: ['naming'],
+  videoCompanies: ['Arfadel', 'Velzo', 'Zayan', 'Tadbirkor'],
+
   proof: {
     title: 'Biz ishlab chiqqan nomlar',
     lead: 'Bularning bir qismi keyin tovar belgisi sifatida ro‘yxatdan o‘tkazildi — Rutera, Zayyan, Viton, Revo, FIDDA guvohnomalari qo‘limizda.',

@@ -18,6 +18,22 @@ export type ServiceQuote = {
   image?: string;
 };
 
+/** Portfolio keysi (Sanity) — sahifa server tomonda yuklaydi. */
+export type ServiceCase = {
+  slug: string;
+  title: string;
+  client?: string;
+  image: string;
+};
+
+/** Mijozning video sharhi: mp4 (`/videos/...`) yoki Vimeo player havolasi. */
+export type ServiceVideo = {
+  name: string;
+  company: string;
+  src: string;
+  poster?: string;
+};
+
 export type ServicePageContent = {
   /** Analytics va CRM manbasi, masalan `naming_page`. */
   source: string;
@@ -59,6 +75,11 @@ export type ServicePageContent = {
     lead: string;
     items: ServiceDeliverable[];
   };
+
+  /** Sanity portfolio kategoriyalari (`naming`, `logo-design`, ...) — keyslar shu bo'yicha tanlanadi. */
+  caseCategories?: string[];
+  /** Video sharhlar — `static-data.ts` dagi kompaniya nomining boshi. */
+  videoCompanies?: string[];
 
   proof?: {
     title: string;
