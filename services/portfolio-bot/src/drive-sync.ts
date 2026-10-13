@@ -53,6 +53,8 @@ async function main(): Promise<void> {
 
     const brief = (await getTextFileContent(folder.id)) ?? '';
     const parsed = await parseFullCase(brief || folder.name, folder.name, images);
+    // Raqamli natija faqat matnda yozilgan bo'lsa — Gemini to'qigan foizlar saytga chiqmasin.
+    if (!/\d/.test(brief)) parsed.results = [];
     const id = await createPortfolioDocument(parsed, images, undefined, undefined, docId);
     published.push(`${parsed.title} (${images.length} rasm) → ${id}`);
     console.log(`[drive-sync] JOYLANDI: ${parsed.title}`);
