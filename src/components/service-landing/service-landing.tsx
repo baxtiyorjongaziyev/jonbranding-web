@@ -30,7 +30,8 @@ const btnBase =
  * hero → muammo → xizmat nima → tarkib → dalil → jarayon → kimga mos →
  * kafolatlar → keyingi xizmatlar → FAQ → ariza.
  */
-export const ServiceLanding: FC<{ content: ServicePageContent }> = ({ content: c }) => {
+export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactNode }> = ({ content: c, children }) => {
+  const priceText = `${c.price} so‘m${c.priceFrom ? 'dan' : ''}`;
   const formRef = useRef<HTMLDivElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -63,7 +64,7 @@ export const ServiceLanding: FC<{ content: ServicePageContent }> = ({ content: c
           <dl className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-4 border-t border-neutral-200 pt-6">
             <div>
               <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Narxi</dt>
-              <dd className="mt-1 text-3xl font-bold tracking-tight">{c.price} so‘m</dd>
+              <dd className="mt-1 text-3xl font-bold tracking-tight">{priceText}</dd>
             </div>
             {c.duration ? (
               <div>
@@ -192,6 +193,9 @@ export const ServiceLanding: FC<{ content: ServicePageContent }> = ({ content: c
         </section>
       ) : null}
 
+      {/* Xizmatga xos qo'shimcha bo'lim (masalan, patent guvohnomalari). */}
+      {children}
+
       {/* 6. JARAYON */}
       <Section>
         <Eyebrow>Jarayon</Eyebrow>
@@ -307,7 +311,7 @@ export const ServiceLanding: FC<{ content: ServicePageContent }> = ({ content: c
             <p className="mt-6 text-neutral-300" style={{ fontSize: 17, lineHeight: 1.65 }}>{c.finalCta.lead}</p>
             <dl className="mt-8 border-t border-white/10 pt-6">
               <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Xizmat qiymati</dt>
-              <dd className="mt-1 text-3xl font-bold tracking-tight text-white">{c.price} so‘m</dd>
+              <dd className="mt-1 text-3xl font-bold tracking-tight text-white">{priceText}</dd>
             </dl>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="tel:+998792000097" data-oisha-phone="" className={`${btnBase} border border-white/30 text-white hover:bg-white/10`}>

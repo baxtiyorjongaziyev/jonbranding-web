@@ -112,7 +112,7 @@ export const ServiceLeadForm: FC<{
   return (
     <div ref={formRef} className="scroll-mt-24 rounded-3xl bg-white p-6 text-neutral-900 sm:p-8">
       <p className="text-[11px] uppercase text-neutral-400" style={mono}>
-        {serviceName} · {price} so‘m
+        {serviceName} · {price} so‘m{content.priceFrom ? 'dan' : ''}
       </p>
       <p className="mt-2 text-lg font-bold">Bepul konsultatsiyaga yoziling</p>
       <form onSubmit={handleSubmit} onChange={onStart} className="mt-6 space-y-3" noValidate>

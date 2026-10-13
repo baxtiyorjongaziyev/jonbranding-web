@@ -26,6 +26,8 @@ export type ServicePageContent = {
   serviceName: string;
   price: string;
   priceValue: number;
+  /** Narx boshlang'ich bo'lsa: "880 000 so‘mdan". */
+  priceFrom?: boolean;
   duration?: string;
 
   hero: {

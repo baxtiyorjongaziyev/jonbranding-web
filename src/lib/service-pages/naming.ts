@@ -1,6 +1,6 @@
 import type { ServicePageContent } from '@/components/service-landing/types';
 import { ALL_SERVICES, GUARANTEES } from '@/lib/sales-content';
-import { staticTestimonials } from '@/lib/static-data';
+import { quoteFrom } from './quotes';
 
 /**
  * Neyming sahifasi mazmuni (o'zbekcha). Narx, muddat, tarkib va dalil
@@ -9,10 +9,6 @@ import { staticTestimonials } from '@/lib/static-data';
  */
 const naming = ALL_SERVICES.find((s) => s.id === 'naming')!;
 
-const quoteFrom = (company: string) => {
-  const t = staticTestimonials.find((item) => item.company.startsWith(company) && item.quote);
-  return t ? { name: t.name, company: t.company, quote: t.quote } : null;
-};
 
 export const NAMING_PAGE: ServicePageContent = {
   source: 'naming_page',

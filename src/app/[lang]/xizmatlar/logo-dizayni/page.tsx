@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import LogoClient from './logo-client';
+import ServiceLanding from '@/components/service-landing/service-landing';
+import { LOGO_PAGE } from '@/lib/service-pages/logo';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { pageTitle } from '@/lib/seo';
 
@@ -32,7 +34,12 @@ export default async function Page(props: Props) {
         name={dictionary.header.logo_design}
         description={dictionary.logoDesignPage.metadata.description}
       />
-      <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />
+      {/* Uzbek-first: batafsil sahifa avval o'zbekchada. */}
+      {lang === 'uz' ? (
+        <ServiceLanding content={LOGO_PAGE} />
+      ) : (
+        <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />
+      )}
     </>
   );
 }
