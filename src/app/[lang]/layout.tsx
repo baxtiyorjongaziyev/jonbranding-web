@@ -143,7 +143,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
   return (
     <html lang={lang} className={`${hankenGrotesk.variable} ${instrumentSerif.variable} ${cormorantGaramond.variable} ${jetbrainsMono.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
-        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F2EFE6}' }} />
+        <style dangerouslySetInnerHTML={{ __html: 'html,body{background:#F4F5F7}' }} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
