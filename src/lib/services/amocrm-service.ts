@@ -172,6 +172,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
 
   let createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
     method: 'POST',
+    signal: AbortSignal.timeout(10_000),
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
@@ -186,6 +187,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
       baseUrl = getAmoCrmBaseUrl(accessToken) || baseUrl;
       createResponse = await fetch(`${baseUrl}/api/v4/leads/complex`, {
         method: 'POST',
+        signal: AbortSignal.timeout(10_000),
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
@@ -225,6 +227,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
   if (leadId && details) {
     await fetch(`${baseUrl}/api/v4/leads/${leadId}/notes`, {
       method: 'POST',
+      signal: AbortSignal.timeout(10_000),
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
@@ -235,7 +238,13 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
           params: { text: details },
         },
       ]),
-    }).catch((error) => console.error('AmoCRM note error:', error));
+    })
+      .then((noteResponse) => {
+        if (!noteResponse.ok) {
+          console.error('AmoCRM note HTTP error:', { leadId, status: noteResponse.status });
+        }
+      })
+      .catch((error) => console.error('AmoCRM note error:', error));
   }
 
   return { ok: true, leadId, contactId, merged: createdLead?.merged === true };
