@@ -113,7 +113,7 @@ export default function ClientEnhancements({
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifasi: chat widget, popup va mobil nav slaydlar ustiga
   // tushib, ekran ulashuvda ko'rinib qoladi.
-  const isDeck = pathnameWithoutLocale === '/credentials';
+  const isDeck = pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/');
 
   // One contextual form owns website CTAs; the external widget keeps call tracking.
   const trackCtaRequest = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
