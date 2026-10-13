@@ -52,7 +52,7 @@ export default function AvansClient() {
   };
 
   return (
-    <div className={`min-h-screen py-16 px-4 sm:py-24 flex flex-col items-center relative overflow-hidden transition-colors duration-500 ${isSystemDark ? 'dark bg-slate-950 text-white' : 'bg-[#F2EFE6] text-slate-900'}`}
+    <div className={`min-h-screen py-16 px-4 sm:py-24 flex flex-col items-center relative overflow-hidden transition-colors duration-500 ${isSystemDark ? 'dark bg-slate-950 text-white' : 'bg-[#F4F5F7] text-slate-900'}`}
       style={{
         fontFamily: "'IBM Plex Sans', sans-serif",
         backgroundImage: `
