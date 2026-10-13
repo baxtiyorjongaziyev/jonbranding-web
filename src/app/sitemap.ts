@@ -34,6 +34,7 @@ const staticRoutes = [
   '/xizmatlar/car-wrap-design',
   '/xizmatlar/posm-materiallar',
   '/xizmatlar/brandbook',
+  '/xizmatlar/patent',
   '/xizmatlar/patent-kalkulyatori',
 ] as const;
 
