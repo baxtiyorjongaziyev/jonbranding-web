@@ -149,28 +149,12 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
       id: `keys-${item.slug}`,
       label: item.title,
       render: () => (
-        <div className="cred-slide cred-dark cred-case relative h-full w-full overflow-hidden" style={{ background: INK }}>
-          <Image
-            src={item.coverImage}
-            alt={item.title}
-            fill
-            sizes="100vw"
-            priority={index === 0}
-            // Chop etish nusxasi ekrandan tashqarida turadi, lazy rasm esa
-            // u yerda hech qachon yuklanmaydi va PDF qop-qora chiqadi.
-            loading="eager"
-            className="object-cover"
-            style={{ opacity: 0.55 }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, rgba(11,11,12,.92) 0%, rgba(11,11,12,.35) 55%, rgba(11,11,12,.55) 100%)' }}
-          />
+        <div className="cred-slide cred-dark cred-case h-full w-full overflow-y-auto" style={{ background: INK }}>
           <motion.div
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="relative mx-auto flex h-full w-full max-w-6xl flex-col justify-end"
+            className="mx-auto grid min-h-full w-full max-w-6xl items-center gap-8 lg:grid-cols-[1fr_1.45fr] lg:gap-14"
             style={{
               paddingLeft: 'var(--cred-px)',
               paddingRight: 'var(--cred-px)',
@@ -178,17 +162,41 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
               paddingBottom: 'var(--cred-pb)',
             }}
           >
-            <Eyebrow light>{item.categoryLabel}</Eyebrow>
-            <Display light>{item.title}</Display>
-            <motion.div variants={rise} className="mt-7 flex flex-wrap items-baseline gap-x-10 gap-y-3">
-              <p className="text-sm" style={{ color: 'rgba(255,255,255,.6)' }}>{item.client}</p>
-              {item.result ? (
-                <p className="text-sm" style={{ color: 'rgba(255,255,255,.85)' }}>
-                  <span className="text-2xl font-medium" style={{ ...nums, color: '#fff' }}>{item.result.value}</span>{' '}
-                  {item.result.metric}
-                </p>
-              ) : null}
+            {/* Ish to'liq rangda va aniq ko'rinadi — xiralashtirilgan fon emas. */}
+            <motion.div
+              variants={rise}
+              className="relative order-first aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-last"
+              style={{ background: '#1a1a1c', boxShadow: '0 30px 80px -30px rgba(0,0,0,.8)' }}
+            >
+              <Image
+                src={item.coverImage}
+                alt={item.title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 720px"
+                quality={85}
+                priority={index === 0}
+                // Chop etish nusxasi ekrandan tashqarida turadi, lazy rasm esa
+                // u yerda hech qachon yuklanmaydi va PDF qop-qora chiqadi.
+                loading="eager"
+                className="object-cover"
+              />
             </motion.div>
+            <div>
+              <Eyebrow light>
+                Keys {String(index + 1).padStart(2, '0')}
+                {item.categoryLabel ? ` · ${item.categoryLabel}` : ''}
+              </Eyebrow>
+              <Display light>{item.title}</Display>
+              <motion.div variants={rise} className="mt-7 flex flex-col gap-3">
+                <p className="text-sm" style={{ color: 'rgba(255,255,255,.6)' }}>{item.client}</p>
+                {item.result ? (
+                  <p className="text-sm" style={{ color: 'rgba(255,255,255,.85)' }}>
+                    <span className="text-3xl font-medium" style={{ ...nums, color: '#fff' }}>{item.result.value}</span>{' '}
+                    {item.result.metric}
+                  </p>
+                ) : null}
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       ),
