@@ -246,7 +246,7 @@ function collapsedSubstringScore(a: string, b: string): number {
   return 0;
 }
 
-function nameSimilarity(a: string, b: string): number {
+export function nameSimilarity(a: string, b: string): number {
   return Math.max(wordOverlapScore(a, b), collapsedSubstringScore(a, b));
 }
 

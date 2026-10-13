@@ -1,0 +1,47 @@
+# Google Drive portfolio papkasidagi YANGI loyiha papkalarini Sanity'ga keys qilib joylaydi.
+# Sayt Sanity'dan 60 soniyada yangilanadi (ISR) — deploy kerak emas.
+# Secrets: GDRIVE_SERVICE_ACCOUNT_JSON, PORTFOLIO_DRIVE_FOLDER_ID, GEMINI_API_KEY, SANITY_TOKEN.
+# Batafsil: scripts/patent-sync/README.md ("Portfolio" bo'limi).
+name: Portfolio sync (Google Drive)
+
+on:
+  schedule:
+    - cron: '0 */3 * * *' # har 3 soatda
+  workflow_dispatch: {}
+
+concurrency:
+  group: portfolio-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: services/portfolio-bot
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: services/portfolio-bot/package-lock.json
+      - run: npm ci
+      - name: Drive → Sanity
+        env:
+          GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          DRIVE_PARENT_FOLDER_ID: ${{ secrets.PORTFOLIO_DRIVE_FOLDER_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+          SANITY_PROJECT_ID: h6ymmj0v
+          SANITY_DATASET: production
+          # Shu sanadan oldin yaratilgan papkalar olinmaydi (eski loyihalar takror yozilmasin).
+          PORTFOLIO_SYNC_SINCE: ${{ vars.PORTFOLIO_SYNC_SINCE || '2026-10-13' }}
+        run: |
+          umask 077
+          printf '%s' "$GDRIVE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          GOOGLE_SERVICE_ACCOUNT_JSON="$RUNNER_TEMP/sa.json" npm run drive-sync

@@ -46,3 +46,37 @@ Drive papka ──(Drive API, faqat o'qish)──▶ GitHub Actions ──▶ sr
 pip install -r scripts/patent-sync/requirements.txt
 python scripts/patent-sync/sync.py --src "G:/My Drive/JonBranding/Patent" --dry-run
 ```
+
+---
+
+# Portfolio sync — Google Drive → Sanity → sayt
+
+`.github/workflows/portfolio-sync.yml` har 3 soatda Drive'dagi portfolio papkasini
+tekshiradi. **Har bir ichki papka = bitta loyiha:**
+
+```
+Portfolio/
+  Sayr — brending/          ← papka nomi = loyiha/mijoz nomi
+    01.jpg, 02.jpg, ...     ← kamida 2 ta rasm
+    tavsif.txt              ← ixtiyoriy: vazifa, nima qilindi, natija (1–5 gap)
+```
+
+Gemini rasmlar va matndan to'liq keys yasaydi (sarlavha, tavsif, SEO, cover tanlash),
+Sanity'ga yozadi va sayt ~1 daqiqada yangilanadi (deploy kerak emas).
+
+Himoya: bir papka faqat bir marta joylanadi; `PORTFOLIO_SYNC_SINCE` sanasidan
+(standart 2026-10-13) oldingi papkalar olinmaydi; saytda o'xshash nomli keys bo'lsa
+papka o'tkazib yuboriladi; bir ishga tushishda ko'pi bilan 5 ta loyiha.
+
+Raqamli natijalar (masalan "+40% sotuv") faqat `.txt` da yozilgan bo'lsa chiqadi —
+Gemini o'zidan raqam to'qimasligi kerak; joylangan keysni Sanity Studio'da ko'rib chiqing.
+
+## Qo'shimcha secrets
+
+| Secret | Qayerdan |
+|---|---|
+| `PORTFOLIO_DRIVE_FOLDER_ID` | Portfolio papkasi URL'idagi ID (papkani service account'ga **Viewer** qilib ulashing) |
+| `GEMINI_API_KEY` | aistudio.google.com/app/apikey — patent brend nomini ham shu o'qiydi |
+| `SANITY_TOKEN` | sanity.io/manage → h6ymmj0v → API → Tokens → **Editor** |
+
+`GDRIVE_SERVICE_ACCOUNT_JSON` patent bilan umumiy.

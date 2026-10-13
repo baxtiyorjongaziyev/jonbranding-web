@@ -13,7 +13,8 @@
     "workflow:instagram": "WORKFLOW_MODE=instagram ts-node --esm src/index.ts",
     "workflow:telegram": "WORKFLOW_MODE=telegram ts-node --esm src/index.ts",
     "workflow:all": "WORKFLOW_MODE=all ts-node --esm src/index.ts",
-    "sync": "ts-node --esm src/sync.ts"
+    "sync": "ts-node --esm src/sync.ts",
+    "drive-sync": "tsc && node dist/drive-sync.js"
   },
   "dependencies": {
     "@sanity/client": "^6.22.0",

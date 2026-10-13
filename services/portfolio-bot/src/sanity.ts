@@ -94,7 +94,9 @@ export async function createPortfolioDocument(
   imageFiles: { path: string; mime: string }[],
   bodyBlocks?: Array<{ style: string; children: Array<{ text: string }> }>,
   /** Postning asl matni — dublikatga qarshi barqaror ID shundan hisoblanadi. */
-  sourceCaption?: string
+  sourceCaption?: string,
+  /** Aniq hujjat ID'si (masalan `drive-<papkaId>`) — `sourceCaption` dan ustun. */
+  explicitId?: string
 ): Promise<string> {
   if (imageFiles.length === 0) {
     throw new Error('No images provided for portfolio document');
@@ -146,7 +148,7 @@ export async function createPortfolioDocument(
   // `createIfNotExists` ishlatiladi: webhook allaqachon yozib ulgurgan
   // bo'lsa, yangi hujjat yaratilmaydi. Matnsiz (masalan Drive papkasidan
   // kelgan) hollarda oldingi xatti-harakat saqlanadi.
-  const docId = sourceCaption ? portfolioDocId(sourceCaption) : null;
+  const docId = explicitId ?? (sourceCaption ? portfolioDocId(sourceCaption) : null);
   if (docId) {
     const existingDoc = await client.createIfNotExists({ ...payload, _id: docId });
     return existingDoc._id;

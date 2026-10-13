@@ -128,6 +128,40 @@ def mark_image(doc: pymupdf.Document) -> Image.Image | None:
     return img
 
 
+def read_brand(img: Image.Image) -> str:
+    """Belgi rasmidagi brend nomini Gemini bilan o'qiydi. Kalit yo'q yoki xato — bo'sh qatordan."""
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key:
+        return ""
+    import base64
+    import urllib.request
+
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
+    body = {
+        "contents": [{"parts": [
+            {"inlineData": {"mimeType": "image/png", "data": base64.b64encode(buf.getvalue()).decode()}},
+            {"text": "Bu tovar belgisi (logotip). Unda yozilgan brend nomini qaytar — faqat nomning o'zi, "
+                     "odatiy yozilishda (masalan 'Velzo', 'FIDDA by Sevara'). Matn bo'lmasa: NONE."},
+        ]}],
+        "generationConfig": {"temperature": 0, "maxOutputTokens": 32},
+    }
+    req = urllib.request.Request(
+        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+        data=json.dumps(body).encode(), headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as res:
+            text = json.load(res)["candidates"][0]["content"]["parts"][0]["text"].strip().strip("\"'")
+    except Exception as exc:
+        print(f"Gemini brend nomini o'qiy olmadi: {exc}")
+        return ""
+    if not text or text.upper() == "NONE" or len(text) > 40 or "\n" in text:
+        return ""
+    return text
+
+
 def download_from_drive(folder_id: str, target: Path) -> None:
     """Papkadagi barcha PDF'larni yuklab oladi (faqat o'qish huquqi yetarli)."""
     from google.oauth2 import service_account
@@ -210,13 +244,25 @@ def main() -> int:
     added = [c for n, c in sorted(found.items()) if n not in by_number]
     for c in added:
         c["logo"] = logo_path(c["number"]) if c["number"] in marks else None
+        if c["number"] in marks:
+            c["brand"] = read_brand(marks[c["number"]])
+    # Avval nomsiz qo'shilgan yozuvlar ham Gemini bilan to'ldiriladi.
+    named = []
+    for n, c in by_number.items():
+        if not c.get("brand") and n in marks:
+            brand = read_brand(marks[n])
+            if brand:
+                c["brand"] = brand
+                named.append(n)
     logos = [n for n, c in by_number.items() if c.get("logo") is None and n in marks]
 
     lines = [
-        f"{c['number']} — {c['industry']}, sinflar {', '.join(map(str, c['classes']))}, "
+        f"{c['number']} {c['brand'] or ''} — {c['industry']}, sinflar {', '.join(map(str, c['classes']))}, "
         f"{c['filed']} → {c['registered']}, logo: {'bor' if c['logo'] else 'yo‘q'}"
         for c in added
-    ] + [f"{n} — ilova keldi, logo qo'shildi" for n in logos]
+    ] + [f"{n} — ilova keldi, logo qo'shildi" for n in logos] + [
+        f"{n} — brend nomi aniqlandi: {by_number[n]['brand']}" for n in named
+    ]
 
     if not lines:
         print(f"Yangi guvohnoma yo'q ({len(found)} ta topildi, hammasi saytda)")

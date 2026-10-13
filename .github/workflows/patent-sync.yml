@@ -36,6 +36,7 @@ jobs:
         env:
           GDRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/patent-sync/sync.py
 
       # Faqat ma'lumot (JSON + rasm) o'zgaradi, lekin baribir tekshiramiz:
@@ -72,5 +73,4 @@ jobs:
             echo "### Saytga qo'shildi"
             echo "$SUMMARY"
             echo
-            echo "Brend nomi PDF matnida yo'q — kerak bo'lsa \`src/data/patent-certificates.json\` da \`brand\` ni to'ldiring."
           } >> "$GITHUB_STEP_SUMMARY"
