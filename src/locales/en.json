@@ -21,6 +21,8 @@
     "corporate_style_simple": "Consistent look of logo, colors, and fonts across all touchpoints.",
     "packaging_design": "Packaging Design",
     "packaging_design_desc": "Attractive design making you stand out.",
+    "patent": "Trademark",
+    "patent_desc": "We register your brand name as a trademark.",
     "packaging_design_simple": "Attractive packaging design that sells products on shelves.",
     "services_and_prices": "Services & Prices",
     "services_and_prices_desc": "Build your package and get a price instantly.",
@@ -1904,7 +1906,7 @@
     "gallery_title": "Selected\nworks.",
     "gallery_lede": "Selected logo, visual identity and packaging projects. Browse by service; explore every project in our portfolio.",
     "gallery_similar": "Do you have a similar business? You can achieve the same results.",
-    "gallery_cta": "Diagnosis for my business",
+    "gallery_cta": "Discuss a similar project",
     "audit_title": "What we examine\nin a diagnosis.",
     "audit_lede": "12 criteria · 4 directions. Each point is rated 0—100, and lost revenue is calculated with precise figures. No aspect is overlooked.",
     "audit_deliv_title": "Diagnosis outcome · What you receive",
@@ -2013,8 +2015,8 @@
       "title": "The birth of a brand is an exciting process!",
       "description": "Fill out our smart brief and lay the foundation of your brand right now!",
       "startButton": "Start Filling",
-      "tipTitle": "Take breaks",
-      "tipDesc": "You can fill out partially, in several steps, the system saves everything."
+      "tipTitle": "About 10 minutes",
+      "tipDesc": "Fill in the brief in one sitting: answers are not saved if the page reloads."
     },
     "steps": {
       "step1": "Industry",

@@ -21,6 +21,7 @@ export function hasTelegramConfig(botToken: string, chatId: string): boolean {
 export async function sendTelegramMessage(botToken: string, payload: Record<string, unknown>) {
   const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: 'POST',
+    signal: AbortSignal.timeout(10_000),
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });

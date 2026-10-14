@@ -99,7 +99,8 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
         }),
       });
       result = await res.json().catch(() => ({}));
-      if (!res.ok) {
+      // Success faqat server arizani saqlaganini tasdiqlasa (ok:true).
+      if (!res.ok || (result as { ok?: boolean }).ok !== true) {
         setSubmitErr(t.submitError);
         setSending(false);
         return;

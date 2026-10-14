@@ -1,7 +1,7 @@
 /**
  * Sahifa yuklanayotgandagi ekran.
  *
- * Atelier palitrasida: qog'oz foni (#F2EFE6) va siyoh rangi (#0E1015).
+ * Atelier palitrasida: qog'oz foni (#F4F5F7) va siyoh rangi (#0E1015).
  * Logo asta-sekin ko'rinadi, ostida ingichka progress chizig'i yuradi.
  * Matn yo'q — til tanlangan sahifadan oldin ishga tushadi.
  */
@@ -11,7 +11,7 @@ export default function Loading() {
   return (
     <div
       className="flex min-h-screen items-center justify-center"
-      style={{ background: '#F2EFE6' }}
+      style={{ background: '#F4F5F7' }}
       role="status"
       aria-label="Yuklanmoqda"
     >

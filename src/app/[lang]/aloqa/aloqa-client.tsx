@@ -7,7 +7,7 @@ const t = {
     sectionN: '§ 09',
     label: 'Aloqa',
     heading: 'Gaplashamiz.',
-    subtext: 'Yangi loyiha, hamkorlik yoki savol — biz 24 soat online.',
+    subtext: 'Yangi loyiha, hamkorlik yoki savol — arizani istalgan payt qoldiring, ish vaqtida javob beramiz.',
     contactsLabel: "Bog'lanish",
     contacts: [
       { label: 'Telefon', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
@@ -20,7 +20,7 @@ const t = {
     workLabel: 'Ish vaqti',
     work: 'Du–Sha · 09:00–19:00 TST',
     briefLabel: 'Brifingni boshlang',
-    briefText: "Loyihangiz haqida 10 daqiqa quiz to'ldiring — biz 24 soat ichida javob beramiz.",
+    briefText: "Loyihangiz haqida onlayn briefni to'ldiring — ish vaqtida javob beramiz.",
     briefBtn: 'Online brief →',
     ctaLabel: "Yoki to'g'ridan-to'g'ri yozing",
     ctaBtn: 'Telegram orqali yozish ↗',
@@ -29,7 +29,7 @@ const t = {
     sectionN: '§ 09',
     label: 'Контакты',
     heading: 'Поговорим.',
-    subtext: 'Новый проект, сотрудничество или вопрос — мы онлайн 24 часа.',
+    subtext: 'Новый проект, сотрудничество или вопрос — оставьте заявку в любое время, ответим в рабочие часы.',
     contactsLabel: 'Связаться',
     contacts: [
       { label: 'Телефон', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
@@ -42,7 +42,7 @@ const t = {
     workLabel: 'Рабочее время',
     work: 'Пн–Сб · 09:00–19:00 TST',
     briefLabel: 'Начать брифинг',
-    briefText: 'Заполните quiz о проекте за 10 минут — мы ответим в течение 24 часов.',
+    briefText: 'Заполните онлайн-бриф о проекте — ответим в рабочие часы.',
     briefBtn: 'Онлайн брифинг →',
     ctaLabel: 'Или написать напрямую',
     ctaBtn: 'Написать в Telegram ↗',
@@ -51,7 +51,7 @@ const t = {
     sectionN: '§ 09',
     label: 'Contact',
     heading: "Let's talk.",
-    subtext: 'New project, collaboration or question — we are online 24/7.',
+    subtext: 'New project, collaboration or question — leave a request any time, we reply during working hours.',
     contactsLabel: 'Get in touch',
     contacts: [
       { label: 'Phone', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
@@ -64,7 +64,7 @@ const t = {
     workLabel: 'Working hours',
     work: 'Mon–Sat · 09:00–19:00 TST',
     briefLabel: 'Start a brief',
-    briefText: 'Fill out the project quiz in 10 minutes — we reply within 24 hours.',
+    briefText: 'Fill out the online project brief — we reply during working hours.',
     briefBtn: 'Online brief →',
     ctaLabel: 'Or reach out directly',
     ctaBtn: 'Message on Telegram ↗',
@@ -73,7 +73,7 @@ const t = {
     sectionN: '§ 09',
     label: '联系我们',
     heading: '我们来聊聊。',
-    subtext: '新项目、合作或问题——我们24小时在线。',
+    subtext: '新项目、合作或问题——随时留言，我们在工作时间回复。',
     contactsLabel: '联系方式',
     contacts: [
       { label: '电话', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
@@ -86,7 +86,7 @@ const t = {
     workLabel: '工作时间',
     work: '周一至周六 · 09:00–19:00 TST',
     briefLabel: '开始简报',
-    briefText: '填写10分钟的项目问卷——我们在24小时内回复。',
+    briefText: '填写在线项目简报——我们在工作时间回复。',
     briefBtn: '在线简报 →',
     ctaLabel: '或直接联系',
     ctaBtn: 'Telegram 留言 ↗',
@@ -97,7 +97,7 @@ interface Props { lang: string; }
 
 const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
-  const quizHref = lang === 'uz' ? '/quiz' : `/${lang}/quiz`;
+  const briefHref = lang === 'uz' ? '/online-brief' : `/${lang}/online-brief`;
   const tgHref = 'https://t.me/jonbranding';
 
   return (
@@ -164,7 +164,7 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
             <div className="p-8 rounded-2xl" style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)', marginBottom: 16 }}>{l.briefLabel}</div>
               <p style={{ fontSize: 15, color: 'var(--at-ink-2)', lineHeight: 1.65, marginBottom: 24 }}>{l.briefText}</p>
-              <a href={quizHref} className="inline-flex items-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-6 py-3.5 font-semibold text-sm hover:-translate-y-0.5 transition-transform">{l.briefBtn}</a>
+              <a href={briefHref} className="inline-flex items-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-6 py-3.5 font-semibold text-sm hover:-translate-y-0.5 transition-transform">{l.briefBtn}</a>
             </div>
             <div className="p-8 rounded-2xl flex flex-col justify-between" style={{ background: '#0E1015', border: '1px solid rgba(255,255,255,.08)', minHeight: 220 }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)', marginBottom: 16 }}>{l.ctaLabel}</div>

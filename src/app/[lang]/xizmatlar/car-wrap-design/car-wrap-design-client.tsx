@@ -80,7 +80,7 @@ const includedIcons = [Sparkles, Truck, Megaphone, Languages, PanelTop, Paintbru
 const benefitIcons = [Megaphone, BadgeCheck, Route, Truck, ClipboardCheck, Paintbrush, Sparkles, CheckCircle2];
 
 function openContactModal() {
-  window.dispatchEvent(new CustomEvent('openContactModal'));
+  window.dispatchEvent(new CustomEvent('openContactModal', { detail: { via: 'oisha' } }));
 }
 
 const CarWrapDesignClient: FC<{ translations: CarWrapPageTranslations }> = ({ translations: t }) => {

@@ -81,18 +81,18 @@ export function MobileMenu({
           aria-describedby={undefined}
           className={cn(
             'w-full max-w-full border-0 p-0 sm:max-w-[420px]',
-            'bg-[#FBF9F2] text-[#0E1015] border-l border-[#D8D2C2]'
+            'bg-[#FFFFFF] text-[#0E1015] border-l border-[#DDE0E6]'
           )}
         >
           {/* Header */}
-          <SheetHeader className="flex flex-row items-center justify-between border-b border-[#D8D2C2] bg-[#F2EFE6] px-5 py-4">
+          <SheetHeader className="flex flex-row items-center justify-between border-b border-[#DDE0E6] bg-[#F4F5F7] px-5 py-4">
             <SheetTitle className="text-base font-bold tracking-wide text-[#0E1015]">
               <span className="font-serif italic text-primary">Jon</span>
               <span className="ml-1 text-[#0E1015]/90">.Branding</span>
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D8D2C2] bg-[#FBF9F2] text-[#4A4845] transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#DDE0E6] bg-[#FFFFFF] text-[#4A4845] transition-all duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={dictionary.close_menu}
             >
               <X className="h-4.5 w-4.5" />
@@ -109,7 +109,7 @@ export function MobileMenu({
             >
               {/* Services section */}
               <motion.div variants={slideIn} className="mb-2">
-                <div className="mb-3 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
+                <div className="mb-3 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#6B7280]">
                   {dictionary.services}
                 </div>
                 <div className="flex flex-col gap-1.5">
@@ -121,19 +121,19 @@ export function MobileMenu({
                         onLinkClick(service.title);
                         onOpenChange(false);
                       }}
-                      className="group flex items-center justify-between rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 py-3.5 transition-all duration-200 hover:border-[#0E1015]/30 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      className="group flex items-center justify-between rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 py-3.5 transition-all duration-200 hover:border-[#0E1015]/30 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       <span className="text-[15px] font-medium text-[#0E1015]">
                         {service.title}
                       </span>
-                      <ChevronRight className="h-4 w-4 text-[#8B8779] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0E1015]" />
+                      <ChevronRight className="h-4 w-4 text-[#6B7280] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#0E1015]" />
                     </Link>
                   ))}
                 </div>
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-2 h-px bg-[#D8D2C2]" />
+              <motion.div variants={slideIn} className="my-2 h-px bg-[#DDE0E6]" />
 
               {/* Main nav items */}
               <motion.div variants={slideIn} className="flex flex-col gap-1">
@@ -145,7 +145,7 @@ export function MobileMenu({
                       onLinkClick(item.label);
                       onOpenChange(false);
                     }}
-                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-[#0E1015]/85 transition-all duration-200 hover:bg-[#E9E5D9] hover:text-[#0E1015] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-[#0E1015]/85 transition-all duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {item.label}
                   </Link>
@@ -153,11 +153,11 @@ export function MobileMenu({
               </motion.div>
 
               {/* Divider */}
-              <motion.div variants={slideIn} className="my-3 h-px bg-[#D8D2C2]" />
+              <motion.div variants={slideIn} className="my-3 h-px bg-[#DDE0E6]" />
 
               {/* Contact links */}
               <motion.div variants={slideIn} className="flex flex-col gap-2">
-                <div className="mb-1 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#8B8779]">
+                <div className="mb-1 px-2 text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#6B7280]">
                   {dictionary.contacts}
                 </div>
                 <a
@@ -165,14 +165,14 @@ export function MobileMenu({
                   data-oisha-phone-text="0"
                   href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition-all duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600/10 text-green-700">
                     <Phone className="h-4 w-4" />
                   </div>
                   <div>
                     <div className="text-[13px] font-bold text-[#0E1015]">+998 79 200 00 97</div>
-                    <div className="text-[11px] text-[#8B8779]">{dictionary.contact_by_phone}</div>
+                    <div className="text-[11px] text-[#6B7280]">{dictionary.contact_by_phone}</div>
                   </div>
                 </a>
                 <button
@@ -181,7 +181,7 @@ export function MobileMenu({
                     onOpenChange(false);
                     window.dispatchEvent(new CustomEvent('openPwaInstallPrompt'));
                   }}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#D8D2C2] bg-[#F2EFE6] px-4 transition-all duration-200 hover:bg-[#E9E5D9] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition-all duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
                     <Download className="h-4 w-4" />
@@ -190,7 +190,7 @@ export function MobileMenu({
                     <div className="text-[13px] font-bold text-[#0E1015]">
                       {dictionary.install_app}
                     </div>
-                    <div className="text-[11px] text-[#8B8779]">
+                    <div className="text-[11px] text-[#6B7280]">
                       {dictionary.install_app_hint}
                     </div>
                   </div>
@@ -199,8 +199,9 @@ export function MobileMenu({
             </motion.nav>
 
             {/* Sticky CTA at bottom */}
-            <div className="mt-auto p-4 border-t border-[#D8D2C2] bg-[#F2EFE6]">
+            <div className="mt-auto p-4 border-t border-[#DDE0E6] bg-[#F4F5F7]">
               <button
+                data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);

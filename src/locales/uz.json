@@ -21,6 +21,8 @@
     "corporate_style_simple": "Logo, ranglar va shriftlarning vizitkada, saytda, sotsialda bir xil ko'rinishi.",
     "packaging_design": "Qadoq dizayni",
     "packaging_design_desc": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
+    "patent": "Patent",
+    "patent_desc": "Brend nomingizni tovar belgisi sifatida ro‘yxatdan o‘tkazamiz.",
     "packaging_design_simple": "Mahsulot qadoqini sotishi kerak shunchalik chiroyli qilish.",
     "services_and_prices": "Xizmatlar va narxlar",
     "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
@@ -2064,7 +2066,7 @@
     "hero_description_bold": "Avval ehtiyojingizni aniqlaymiz, keyin bitta ishlaydigan vizual tizim quramiz.",
     "hero_primary_cta": "Loyihani muhokama qilish",
     "hero_secondary_cta": "Ishlarni ko'rish",
-    "services_title": "Sotiladigan firma\nuslubi.",
+    "services_title": "Biznesingiz uchun\nyagona ko'rinish.",
     "services_lede": "Logotip, firma uslubi, brendbuk va qadoq. Kerakli xizmatlarni tanlaymiz; neyming va tovar belgisini ro‘yxatdan o‘tkazish alohida qo‘shilishi mumkin.",
     "services_label": "§ 04 Xizmatlar",
     "services_timeline_note": "Muddat loyiha hajmiga qarab belgilanadi",
@@ -2087,7 +2089,7 @@
     "gallery_title": "Tanlangan\nishlar.",
     "gallery_lede": "Logotip, firma uslubi va qadoq bo‘yicha tanlangan ishlar. Xizmat turiga qarab ko‘ring; barcha loyihalar portfolio sahifasida.",
     "gallery_similar": "O'xshash biznesmisiz? Sizga ham shunday natija mumkin.",
-    "gallery_cta": "Mening biznesim uchun tashxis",
+    "gallery_cta": "Shunday loyihani muhokama qilish",
     "audit_title": "Tashxisda\nnimalarni tekshiramiz.",
     "audit_lede": "12 mezon · 4 yo'nalish. Har bir nuqta 0—100 baholanadi, yo'qotilayotgan daromad esa aniq raqamda hisoblanadi. Hech bir tomon e'tibordan chetda qolmaydi.",
     "audit_deliv_title": "Tashxis yakuni · Sizga nima beriladi",
@@ -2196,8 +2198,8 @@
       "title": "Brendning yaratilishi — hayajonli jarayon!",
       "description": "Bizning aqlli smart-briefimizni to'ldiring va brendingiz poydevorini hozirroq qo'ying!",
       "startButton": "Hozir boshlash",
-      "tipTitle": "Tanaffus qilishingiz mumkin",
-      "tipDesc": "Briefni qisman to'ldirish imkoniyati mavjud, tizim kiritilgan barcha ma'lumotlarni avtomatik saqlab qoladi."
+      "tipTitle": "Taxminan 10 daqiqa",
+      "tipDesc": "Briefni bir o'tirishda to'ldiring: sahifa yangilansa, javoblar saqlanmaydi."
     },
     "steps": {
       "step1": "Soha",

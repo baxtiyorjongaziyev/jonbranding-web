@@ -15,8 +15,8 @@ interface Props {
 
 // Atelier tokens, scoped here: `.atelier-theme *` resets margin/padding and would break Tailwind spacing.
 const TOKENS = {
-  '--bg': '#F2EFE6', '--bg-2': '#E9E5D9', '--paper': '#FBF9F2', '--ink': '#0E1015', '--ink-2': '#3B3D45',
-  '--muted': '#8B8779', '--line': '#D8D2C2', '--line-2': '#E5E0D2', '--accent': '#1B4DFF',
+  '--bg': '#F4F5F7', '--bg-2': '#EAECF0', '--paper': '#FFFFFF', '--ink': '#0E1015', '--ink-2': '#3B3D45',
+  '--muted': '#6B7280', '--line': '#DDE0E6', '--line-2': '#E5E0D2', '--accent': '#1B4DFF',
   '--accent-soft': '#E6EBFF', '--terra': '#C2552A',
 } as React.CSSProperties;
 

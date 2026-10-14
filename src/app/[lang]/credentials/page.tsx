@@ -48,7 +48,8 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
       title: project.title,
       client: project.client,
       categoryLabel: project.categoryLabel,
-      coverImage: project.coverImage,
+      // Ro'yxat so'rovi kichik (w=800) rasm beradi — slayd butun ekranni egallaydi.
+      coverImage: project.coverImage.replace(/\?.*$/, '?w=2400&q=90&auto=format'),
       result: project.results?.[0],
     }));
 

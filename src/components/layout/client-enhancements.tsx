@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/analytics/gtag';
@@ -46,11 +46,16 @@ const PwaInstaller = dynamic(() => import('@/components/pwa/pwa-installer'), {
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const isFirstRunRef = useRef(true);
 
   useEffect(() => {
+    // Birinchi yuklanishdagi page_view'ni GA loader'ining `config` chaqiruvi yuboradi;
+    // bu yerda faqat client-side navigatsiyalar — aks holda page_view ikki marta.
+    const isInitialLoad = isFirstRunRef.current;
+    isFirstRunRef.current = false;
     const run = () => {
       const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-      pageview(url);
+      if (!isInitialLoad) pageview(url);
       trackEvent({
         action: 'page_viewed',
         category: 'Page',
@@ -113,7 +118,7 @@ export default function ClientEnhancements({
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifasi: chat widget, popup va mobil nav slaydlar ustiga
   // tushib, ekran ulashuvda ko'rinib qoladi.
-  const isDeck = pathnameWithoutLocale === '/credentials';
+  const isDeck = pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/');
 
   // One contextual form owns website CTAs; the external widget keeps call tracking.
   const trackCtaRequest = useCallback((detail?: { section?: string; ctaText?: string; source?: string }) => {
@@ -148,11 +153,17 @@ export default function ClientEnhancements({
   }, []);
 
   useEffect(() => {
+    const handleRequest = (detail: any) => {
+      trackCtaRequest(detail);
+      // `data-oisha-callback` tugmalar formani Oisha vidjeti orqali ochadi. Vidjet
+      // yuklanmagan bo'lsa (bloklangan/o'chirilgan) tugma "o'lik" qolmasin —
+      // o'rniga sayt formasi ochiladi. Ikkala forma bir vaqtda ochilmaydi.
+      if (detail.via === 'oisha' && window.OishaCallback) return;
+      setLeadRequest({ service: detail.service || getSalesContent(lang).ui.notSure, source: detail.source || detail.section || 'website', intent: detail.intent === 'project' ? 'project' : 'consultation' });
+    };
     const listener = (event: Event) => {
       delete (window as any).__pendingContactModal;
-      const detail = (event as CustomEvent).detail || {};
-      trackCtaRequest(detail);
-      setLeadRequest({ service: detail.service || getSalesContent(lang).ui.notSure, source: detail.source || detail.section || 'website', intent: detail.intent === 'project' ? 'project' : 'consultation' });
+      handleRequest((event as CustomEvent).detail || {});
     };
     window.addEventListener('openContactModal', listener);
     window.addEventListener('error', reportError);
@@ -160,8 +171,7 @@ export default function ClientEnhancements({
     const pendingContactModal = (window as any).__pendingContactModal;
     if (pendingContactModal) {
       delete (window as any).__pendingContactModal;
-      trackCtaRequest(pendingContactModal);
-      setLeadRequest({ service: pendingContactModal.service || getSalesContent(lang).ui.notSure, source: pendingContactModal.source || 'website', intent: pendingContactModal.intent === 'project' ? 'project' : 'consultation' });
+      handleRequest(pendingContactModal);
     }
 
     return () => {
