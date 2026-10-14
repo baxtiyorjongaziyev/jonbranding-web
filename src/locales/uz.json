@@ -136,10 +136,78 @@
     "message": "Saytimizda shirin 'cookie'lar bor. Ular bizga sizni eslab qolishga yordam beradi. Agar rozilik bersangiz, ularni birga baham ko'ramiz.",
     "acceptButton": "Tushunarlilar"
   },
+  "serviceFacts": {
+    "logo": {
+      "title": "Logotip: narxi, muddati va savollar",
+      "price_label": "Logotip narxi",
+      "duration_label": "Muddati",
+      "includes_title": "Narxga nimalar kiradi",
+      "includes": [
+        "3 ta konsepsiya, tanlanganini oxirigacha sayqallaymiz",
+        "Barcha formatlar: AI, EPS, SVG, PDF, PNG",
+        "Rangli, oq-qora va bir rangli versiyalar",
+        "Gorizontal, vertikal va ixcham (ikonka) variantlar",
+        "Minimal o‘lcham va bo‘sh joy qoidalari"
+      ],
+      "payment": "To‘lov ikki bosqichda: 50% shartnoma imzolanganda, 50% loyiha topshirilganda.",
+      "faq_title": "Logotip buyurtma qilish haqida savollar",
+      "faq": [
+        {
+          "q": "Toshkentda logotip buyurtma qilish qancha turadi?",
+          "a": "Logotip dizayni {price} turadi, muddati — {duration}. Narxga 3 ta konsepsiya, barcha formatdagi fayllar va ishlatish qoidalari kiradi."
+        },
+        {
+          "q": "Nega logotip Instagramdagi 500 ming so‘mlik takliflardan qimmat?",
+          "a": "Arzon logotip odatda bitta rasm: keyin banner, qadoq va vizitka uchun alohida to‘lanadi, chunki fayllar to‘liq emas va qoidalar yo‘q. Bizda logotip barcha format va versiyalarda, ishlatish qoidalari bilan topshiriladi."
+        },
+        {
+          "q": "Logotip yoqmasa nima bo‘ladi?",
+          "a": "Tayyor ishni birdan ko‘rsatmaymiz. Avval 3 ta yo‘nalish taqdim etamiz, bittasini siz tanlaysiz — shundan keyingina sayqallaymiz. Siz tasdiqlamaguncha keyingi bosqich boshlanmaydi."
+        },
+        {
+          "q": "Logotipni tovar belgisi sifatida ro‘yxatdan o‘tkazish mumkinmi?",
+          "a": "Ha, bu alohida xizmat. Avval rasmiy bazada tekshiramiz va xavf darajasini ochiq aytamiz, keyin ro‘yxatdan o‘tkazamiz."
+        }
+      ]
+    },
+    "brandbook": {
+      "title": "Brendbuk: narxi, muddati va savollar",
+      "price_label": "Brendbuk narxi",
+      "duration_label": "Muddati",
+      "includes_title": "Narxga nimalar kiradi",
+      "includes": [
+        "60 betdan ortiq PDF qo‘llanma",
+        "Logotipdan foydalanish qoidalari va taqiqlar (xato misollari bilan)",
+        "Ranglar va tipografikaning to‘liq spetsifikatsiyasi",
+        "Barcha tashuvchilar bo‘yicha tayyor maketlar",
+        "Brend tili va muloqot ohangi (tone of voice)"
+      ],
+      "payment": "To‘lov ikki bosqichda: 50% shartnoma imzolanganda, 50% loyiha topshirilganda. Firma uslubi bilan birga buyurtma qilinsa, ikkalasi yagona tizim sifatida ishlanadi.",
+      "faq_title": "Brendbuk haqida savollar",
+      "faq": [
+        {
+          "q": "Toshkentda brendbuk ishlab chiqish qancha turadi?",
+          "a": "Brendbuk {price} turadi, muddati — {duration}. Narxga 60 betdan ortiq PDF qo‘llanma, logotip qoidalari, ranglar va shriftlar, tayyor maketlar hamda muloqot ohangi kiradi."
+        },
+        {
+          "q": "Brendbuk nima va u logotipdan nimasi bilan farq qiladi?",
+          "a": "Brendbuk — brendingiz qoidalari bir hujjatda: logotip, ranglar, shriftlar va muloqot ohangi qanday ishlatilishi. Logotip — bitta belgi, brendbuk esa uni har joyda bir xil ishlatish tizimi."
+        },
+        {
+          "q": "Brendbuk kimga kerak?",
+          "a": "Jamoasi o‘sayotgan va bir nechta dizayner hamda bosmaxona bilan ishlaydiganlarga. Yangi dizayner kelsa, tizim buzilmaydi."
+        },
+        {
+          "q": "Brendbuk uchun avval logotip va firma uslubi kerakmi?",
+          "a": "Ha, brendbuk ular asosida tuziladi. Logotip va firma uslubi bo‘lmasa, avval ularni ishlab chiqamiz."
+        }
+      ]
+    }
+  },
   "brandbookPage": {
     "metadata": {
-      "title": "Brendbuk yaratish",
-      "description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
+      "title": "Toshkentda brendbuk ishlab chiqish: narxi {price}, {duration} | Jon.Branding",
+      "description": "Brendbuk Toshkentda: 60+ betlik PDF qo‘llanma — logotip qoidalari, ranglar, shriftlar, tayyor maketlar, muloqot ohangi. Narxi {price}, muddati {duration}.",
       "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
     },
     "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
@@ -1090,8 +1158,8 @@
   },
   "logoDesignPage": {
     "metadata": {
-      "title": "Logotip dizayni",
-      "description": "Biznesingiz mohiyatini aks ettiruvchi, strategik va esda qolarli logotip."
+      "title": "Toshkentda logotip buyurtma qilish: {price}, {duration} | Jon.Branding",
+      "description": "Toshkentda logotip dizayni: 3 ta konsepsiyadan tanlaysiz, barcha formatda fayllar (AI, SVG, PDF, PNG) va ishlatish qoidalari. Narxi {price}, muddati {duration}, to‘lov 50/50."
     },
     "title": "Logotip dizayni",
     "subtitle": "Shunchaki chiroyli rasm emas — brendingizning yuzini belgilaydigan strategik belgi.",
