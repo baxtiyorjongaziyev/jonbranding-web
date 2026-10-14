@@ -87,8 +87,18 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 340, damping: 32 }}
-          className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] md:hidden"
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={{ top: 0.05, bottom: 0.5 }}
+          onDragEnd={(_, info) => {
+            if (info.offset.y > 35 || info.velocity.y > 250) {
+              setIsVisible(false);
+            }
+          }}
+          className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] md:hidden touch-pan-y select-none"
         >
+          {/* Native drag indicator pill */}
+          <div className="mx-auto mb-1.5 h-1 w-10 rounded-full bg-white/25 active:bg-white/40" aria-hidden="true" />
           <nav
             aria-label="Mobile quick actions"
             className={cn(

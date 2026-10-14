@@ -73,7 +73,10 @@ const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-ana
 
 const HomeComponent: FC<{
   lang: string;
-  dictionary: any;
+  dictionary: {
+    trustedBy: { eyebrow: string; pause: string; resume: string };
+    [section: string]: any;
+  };
   comparisons?: any[];
   testimonials?: any[];
   portfolioProjects?: any[];
@@ -104,7 +107,7 @@ const HomeComponent: FC<{
   return (
     <MotionConfig reducedMotion="user">
       <div
-        className="min-h-screen"
+        className="jon-home min-h-screen"
         style={{
           background: 'var(--at-bg)',
           color: 'var(--at-ink)',

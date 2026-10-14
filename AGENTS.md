@@ -14,6 +14,7 @@
 1. **jonbranding-web** (Frontend & Public Interface): Mijozlar yuzi, portfolio, interaktiv formalar, tashqi lid intake.
 2. **oisha-os** (`c:\Users\baxti\playground\oisha-os`) (Backend, Operations & AI Core): Markaziy operatsion tizim, AI agentlar, amoCRM / Meta CAPI / Instagram / Google Sheets integratsiyalari, Telegram userbot/bot.
 - **Qat'iy qoida:** amoCRM tokenlari, webhooklar, field ID'lar yoki statuslar o'zgarganda ikkala loyiha ham bir vaqtda muvofiqlashtirilishi shart! Bitta AmoCRM integratsiyasida token bekor qilinmasligi (revoked bo'lmasligi) uchun OAuth boshqaruvi markazlashgan bo'lishi kerak.
+- **Qat'iy Haqiqat, Soxta Ma'lumot va Galutsinatsiyani Mutlaq Taqiqlash (Zero Hallucination & Zero Fabrication):** Barcha AI agentlar uchun yolg'on, to'qima, soxta (fictional/simulated) yoki galutsinatsiya qilingan ma'lumot, keys, narx, mijoz dialogi, fayl yo'li, kod, statistika yoki fakt yozish **MUTLAQO VA QAT'IY TAQIQLANADI**! Agar fakt manbada aniq bo'lmasa, uni to'qimasdan "Bunday ma'lumot mavjud emas" deb ochiq aytish yoki foydalanuvchidan aniqlashtirish shart. Taxminni haqiqat deb taqdim etish qat'iyan man etiladi.
 
 
 ## Locks

@@ -209,10 +209,20 @@ export default function PwaInstaller({ lang = 'uz', dictionary, installRequest }
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.95 }}
         transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={{ top: 0.05, bottom: 0.6 }}
+        onDragEnd={(_, info) => {
+          if (info.offset.y > 40 || info.velocity.y > 250) {
+            handleDismiss();
+          }
+        }}
         data-pwa-install=""
-        className="fixed bottom-[calc(12px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-50 mx-auto max-w-sm"
+        className="fixed bottom-[calc(76px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(16px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-50 mx-auto max-w-sm touch-pan-y"
       >
-        <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#080d16]/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
+        <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-[#080d16]/95 p-4 pt-3 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
+          {/* Subtle swipe down pill */}
+          <div className="mx-auto mb-2 h-1 w-8 rounded-full bg-white/20 sm:hidden" aria-hidden="true" />
           {/* Subtle accent glow */}
           <div className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-2xl" />
 

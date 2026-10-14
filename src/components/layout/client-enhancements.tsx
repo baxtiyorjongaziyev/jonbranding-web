@@ -171,8 +171,8 @@ export default function ClientEnhancements({
   }, [trackCtaRequest, reportError, lang]);
 
   useEffect(() => {
-    const quickActions = window.setTimeout(() => setQuickActionsReady(true), 3500);
-    const fallback = window.setTimeout(() => setEnhancementsReady(true), 6000);
+    const quickActions = window.setTimeout(() => setQuickActionsReady(true), 100);
+    const fallback = window.setTimeout(() => setEnhancementsReady(true), 3000);
     return () => {
       window.clearTimeout(quickActions);
       window.clearTimeout(fallback);

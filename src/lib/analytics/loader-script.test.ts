@@ -53,4 +53,31 @@ describe('analytics loader script', () => {
     expect(srcs.filter((src) => src?.includes('gtm.js'))).toHaveLength(1);
     expect(srcs.filter((src) => src?.includes('gtag/js?id=G-TEST'))).toHaveLength(1);
   });
+
+  it('restricts Meta Pixel to jonbranding.uz and www.jonbranding.uz', () => {
+    // Non-production host (e.g. localhost / happy-dom default)
+    document.cookie = 'cookie_consent_accepted=true; path=/';
+    run();
+
+    const nonProdSrcs = Array.from(document.head.querySelectorAll('script[src]'), (s) =>
+      s.getAttribute('src'),
+    );
+    expect(nonProdSrcs.some((src) => src?.includes('connect.facebook.net'))).toBe(false);
+    expect(typeof window.fbq).toBe('function'); // safe noop
+
+    // Production host
+    reset();
+    Object.defineProperty(window, 'location', {
+      value: { hostname: 'jonbranding.uz' },
+      writable: true,
+      configurable: true,
+    });
+    document.cookie = 'cookie_consent_accepted=true; path=/';
+    run();
+
+    const prodSrcs = Array.from(document.head.querySelectorAll('script[src]'), (s) =>
+      s.getAttribute('src'),
+    );
+    expect(prodSrcs.some((src) => src?.includes('connect.facebook.net'))).toBe(true);
+  });
 });
