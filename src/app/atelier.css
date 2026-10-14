@@ -16,7 +16,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   --paper: #FFFFFF;
   --ink: #0E1015;
   --ink-2: #3B3D45;
-  --muted: #6B7280;
+  --muted: #5F6571; /* WCAG AA: bg, bg-2, paper ustida ≥4.9:1 */
   --line: #DDE0E6;
   --line-2: #E8EAEE;
   --accent: #1B4DFF;
@@ -34,7 +34,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   --paper: #14161C;
   --ink: #F4F1E8;
   --ink-2: #C1BDB0;
-  --muted: #7A7668;
+  --muted: #8A8678; /* WCAG AA: dark bg ustida ≥4.9:1 */
   --line: #1F222A;
   --line-2: #262934;
   --accent: #5B7CFF;
@@ -1322,6 +1322,10 @@ html[data-theme="dark"] body:has(.atelier-home) {
   border-radius: 2px;
   background: rgba(244,241,232,.12);
   outline: none;
+}
+.atelier-theme .calc-slider:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
 }
 .atelier-theme .calc-slider::-webkit-slider-thumb {
 
