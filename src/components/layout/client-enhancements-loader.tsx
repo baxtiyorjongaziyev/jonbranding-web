@@ -29,15 +29,22 @@ export default function ClientEnhancementsLoader(props: ClientEnhancementsLoader
       if (event?.type === 'openPwaInstallPrompt') (window as any).__pendingPwaInstall = true;
       setReady(true);
     };
+    const onInteraction = () => loadEnhancements();
     window.addEventListener('openContactModal', loadEnhancements);
     window.addEventListener('toggleOisha', loadEnhancements);
     window.addEventListener('openPwaInstallPrompt', loadEnhancements);
+    window.addEventListener('scroll', onInteraction, { once: true, passive: true });
+    window.addEventListener('touchstart', onInteraction, { once: true, passive: true });
+    window.addEventListener('pointerdown', onInteraction, { once: true, passive: true });
 
-    const id = globalThis.setTimeout(loadEnhancements, 6000);
+    const id = globalThis.setTimeout(loadEnhancements, 2500);
     return () => {
       window.removeEventListener('openContactModal', loadEnhancements);
       window.removeEventListener('toggleOisha', loadEnhancements);
       window.removeEventListener('openPwaInstallPrompt', loadEnhancements);
+      window.removeEventListener('scroll', onInteraction);
+      window.removeEventListener('touchstart', onInteraction);
+      window.removeEventListener('pointerdown', onInteraction);
       globalThis.clearTimeout(id);
     };
   }, []);

@@ -3,6 +3,7 @@ import { type SubmitFormData } from '@/lib/validation/submit-form';
 export type CleanLeadData = Omit<SubmitFormData, 'companyWebsite' | 'turnstileToken'>;
 
 export interface LeadData extends CleanLeadData {
+  analyticsConsent?: boolean;
   eventId: string;
   clientIp: string;
   userAgent: string;

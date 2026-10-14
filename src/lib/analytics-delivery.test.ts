@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { runAnalyticsDeliveries } from './analytics-delivery';
+import { cleanMetaSourceUrl, runAnalyticsDeliveries } from './analytics-delivery';
 
 const lead = {
   eventId: 'lead_test_1',
@@ -80,5 +80,16 @@ describe('analytics delivery monitoring', () => {
 
     expect(report.ok).toBe(false);
     expect(report.summary).toEqual({ delivered: 0, failed: 0, skipped: 3 });
+  });
+
+  it('normalizes preview and dev hostnames to canonical domain for event_source_url', () => {
+    expect(cleanMetaSourceUrl('https://studio--jonbranding-85662071-ea38e.us-central1.hosted.app/uz/diagnostika?foo=bar#hash'))
+      .toBe('https://www.jonbranding.uz/uz/diagnostika');
+    expect(cleanMetaSourceUrl('https://ais-dev-rjtvb6tnjee4j2fn4oefp6-832749046619.asia-southeast1.run.app/'))
+      .toBe('https://www.jonbranding.uz/');
+    expect(cleanMetaSourceUrl('https://jonbranding.uz/uz/narxlar?utm_source=fb'))
+      .toBe('https://jonbranding.uz/uz/narxlar');
+    expect(cleanMetaSourceUrl('')).toBeUndefined();
+    expect(cleanMetaSourceUrl('invalid-url')).toBeUndefined();
   });
 });

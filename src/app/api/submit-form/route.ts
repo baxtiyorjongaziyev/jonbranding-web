@@ -87,6 +87,7 @@ export async function POST(request: Request) {
 
     const leadData: LeadData = {
       ...cleanData,
+      analyticsConsent: /(?:^|;\s*)cookie_consent_accepted=true(?:;|$)/.test(cookieHeader),
       eventId: cleanData.eventId || `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
       clientIp: ip,
       userAgent,
