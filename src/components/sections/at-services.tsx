@@ -70,7 +70,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
           <span className="font-[family-name:var(--font-serif)] italic font-normal">{headingLast}</span>
         </h2>
         <div>
-          <span className="inline-flex items-center gap-2 mb-3.5 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--at-muted)]">
+          <span className="inline-flex items-center gap-2 mb-3.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--at-muted)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--at-accent)] inline-block" />
             <span>{sectionLabel}</span>
           </span>
@@ -103,7 +103,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
               <div className="text-sm text-[var(--at-ink-2)] leading-[1.55] hidden md:block">{s.desc}</div>
               <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] hidden md:block relative group/time">
                 <span className="border-b border-dashed border-[var(--at-muted)] cursor-help pb-0.5 transition-colors group-hover/time:text-[var(--at-accent)] group-hover/time:border-[var(--at-accent)]">{s.time}</span>
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[10px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-[opacity,transform] duration-300 z-10 motion-reduce:transition-none">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] bg-[var(--at-ink)] text-white text-[11px] normal-case tracking-normal p-2 rounded shadow-xl opacity-0 pointer-events-none group-hover/time:opacity-100 group-hover/time:-translate-y-1 transition-[opacity,transform] duration-300 z-10 motion-reduce:transition-none">
                   {timelineNote}
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[var(--at-ink)]"></div>
                 </div>
@@ -114,7 +114,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
             </div>
             <div className="grid w-full min-w-0 grid-cols-3 gap-x-3 px-2 pb-4 -mt-2 md:hidden">
               <div className="col-span-3 min-w-0 break-words text-xs text-[var(--at-ink-2)] leading-[1.55]">{s.desc}</div>
-              <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-2">{s.time}</div>
+              <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.06em] text-[var(--at-muted)] mt-2">{s.time}</div>
             </div>
           </Link>
         ))}

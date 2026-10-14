@@ -11,7 +11,7 @@ const AtManifesto: FC<Props> = ({ lang = 'uz' }) => {
       <div className="max-w-[1320px] mx-auto px-5 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-8 md:gap-14 items-start">
           <div className="pt-3">
-            <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--at-muted)] mb-3.5">
+            <div className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.08em] text-[var(--at-muted)] mb-3.5">
               {c.label}
             </div>
             <div className="text-sm leading-[1.55] text-[var(--at-ink-2)] max-w-[240px]">
