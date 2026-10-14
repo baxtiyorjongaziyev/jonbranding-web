@@ -27,13 +27,14 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   packageSummary?: string;
+  source?: string;
   serviceKeys?: string[];
   totalPrice?: number;
   onFormSubmitSuccess?: () => void;
   lang: string;
 }
 
-const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, serviceKeys, totalPrice, onFormSubmitSuccess, lang }) => {
+const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, source, serviceKeys, totalPrice, onFormSubmitSuccess, lang }) => {
   const { toast } = useToast();
   const [isSubmitting, setSubmitting] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
@@ -161,7 +162,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
     const eventId = generateEventId('lead');
     const gaClientId = getGaClientId();
     const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
-    const ctaSource = packageSummary ? 'package_builder' : 'brand_audit_modal';
+    const ctaSource = source ?? (packageSummary ? 'package_builder' : 'brand_audit_modal');
 
     trackEvent({
       action: 'lead_form_submitted',

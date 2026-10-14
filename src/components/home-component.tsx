@@ -67,7 +67,6 @@ const AtFinalCta = dynamic(
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
 const AtStickyCta = dynamic(() => import('@/components/sections/at-sticky-cta'), { ssr: false });
 
-const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-analytics'), { ssr: false });
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -143,7 +142,6 @@ const HomeComponent: FC<{
       {/* ── Utility / overlays ──── */}
       <AtStickyCta onOpen={openConsultation} lang={lang} />
 
-      <ScrollDepthAnalytics />
       </div>
     </MotionConfig>
   );

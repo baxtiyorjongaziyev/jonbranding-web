@@ -1,5 +1,6 @@
 'use client';
 
+import type { ComponentProps } from 'react';
 import AtHero from '@/components/sections/at-hero';
 import AtServices from '@/components/sections/at-services';
 import AtFinalCta from '@/components/sections/at-final-cta';
@@ -10,7 +11,7 @@ function openContactModal() {
   );
 }
 
-export function XizmatlarHero({ lang }: { lang: string }) {
+export function XizmatlarHero({ lang, dictionary }: { lang: string; dictionary?: ComponentProps<typeof AtHero>["dictionary"] }) {
   return (
     <AtHero
       onOpen={() =>
@@ -19,6 +20,7 @@ export function XizmatlarHero({ lang }: { lang: string }) {
         )
       }
       lang={lang}
+      dictionary={dictionary}
     />
   );
 }
