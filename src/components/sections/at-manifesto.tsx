@@ -20,7 +20,7 @@ const AtManifesto: FC<Props> = ({ lang = 'uz' }) => {
           </div>
           <p
             className="font-medium text-[var(--at-ink)] leading-[1.04] whitespace-pre-line"
-            style={{ fontSize: 'clamp(32px, 4.6vw, 72px)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(32px, 4.6vw, 72px)', letterSpacing: '-0.045em' }}
           >
             {c.pre}{' '}
             <span className="line-through decoration-[var(--at-terra)] decoration-[4px] text-[var(--at-muted)] font-normal">

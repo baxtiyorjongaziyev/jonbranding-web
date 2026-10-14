@@ -63,7 +63,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-16">
         <h2
           className="font-bold text-[var(--at-ink)]"
-          style={{ fontSize: 'clamp(40px, 5vw, 72px)', lineHeight: 0.95, letterSpacing: '-0.035em' }}
+          style={{ fontSize: 'clamp(40px, 5vw, 72px)', lineHeight: 0.95, letterSpacing: '-0.045em' }}
         >
           {headingFirst}
           <br />

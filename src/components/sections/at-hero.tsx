@@ -159,11 +159,15 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
               style={{
                 fontSize: 'clamp(36px, 5vw, 72px)',
                 lineHeight: 1.04,
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.045em',
               }}
             >
               <span className="block">{l.h1a}</span>
-              <span className="block text-[var(--at-ink)]">
+              {/* Urg'u so'zi: qalin Inter Tight ichida bitta kursiv serif — brend "imzosi" */}
+              <span
+                className="serif block text-[var(--at-ink)]"
+                style={{ fontWeight: 400, letterSpacing: '-0.015em' }}
+              >
                 {l.h1b}
               </span>
               <span className="block">{l.h1c}</span>

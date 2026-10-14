@@ -56,7 +56,7 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <h2
               className="font-bold leading-none"
-              style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}
+              style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', letterSpacing: '-0.045em', color: 'var(--at-ink)' }}
             >
               {l.heading}{' '}
               <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>
