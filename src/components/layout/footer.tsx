@@ -188,6 +188,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               {copy.privacy_policy_link}
             </Link>
             <span className="text-white/10 px-1">/</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
+              className="uppercase hover:text-white transition-colors"
+            >
+              {lang === 'uz' ? 'Cookie sozlamalari' : lang === 'ru' ? 'Настройки cookie' : lang === 'zh' ? 'Cookie 设置' : 'Cookie settings'}
+            </button>
+            <span className="text-white/10 px-1">/</span>
             <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">
               {copy.terms_of_use_link}
             </Link>
