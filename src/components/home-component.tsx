@@ -67,7 +67,6 @@ const AtFinalCta = dynamic(
 // ── Non-visual / utility: lazy but still ssr:false ───────────────────────────
 const AtStickyCta = dynamic(() => import('@/components/sections/at-sticky-cta'), { ssr: false });
 
-const ScrollDepthAnalytics = dynamic(() => import('@/components/scroll-depth-analytics'), { ssr: false });
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -84,6 +83,11 @@ const HomeComponent: FC<{
   const open = useCallback(() => {
     window.dispatchEvent(
       new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'project' } })
+    );
+  }, []);
+  const openCallback = useCallback(() => {
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', { detail: { section: 'homepage_hero', source: 'homepage', intent: 'project', via: 'oisha' } })
     );
   }, []);
   const openConsultation = useCallback(() => {
@@ -116,7 +120,7 @@ const HomeComponent: FC<{
         }}
       >
       {/* ── Above-the-fold (SSR) ─── */}
-      <AtHero onOpen={open} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
+      <AtHero onOpen={openCallback} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
       <AtMarquee lang={lang} />
       <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
@@ -141,7 +145,6 @@ const HomeComponent: FC<{
       {/* ── Utility / overlays ──── */}
       <AtStickyCta onOpen={openConsultation} lang={lang} />
 
-      <ScrollDepthAnalytics />
       </div>
     </MotionConfig>
   );

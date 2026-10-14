@@ -21,6 +21,7 @@ import {
   describeAmoCrmError,
 } from '@/lib/services/lead-queue-service';
 import { attributeAffiliateReferral } from '@/lib/services/affiliate-attribution';
+import { saveLeadToInbox, markLeadDelivery } from '@/lib/services/lead-inbox';
 
 // Re-export types for backward compatibility with existing tests and modules
 export type { CleanLeadData, LeadData, AmoCrmLeadResult };
@@ -95,6 +96,13 @@ export async function POST(request: Request) {
       fbc,
     };
 
+    // Durable acceptance: ariza delivery'dan OLDIN saqlanadi.
+    const inbox = await saveLeadToInbox(leadData);
+    if (inbox.saved && inbox.duplicate && inbox.delivered) {
+      // Shu eventId allaqachon yetkazilgan — qayta yubormaymiz (idempotent).
+      return NextResponse.json({ ok: true, eventId: leadData.eventId, duplicate: true });
+    }
+
     const { fullName, phone } = leadData;
     const threadId = cleanSecret(process.env.TELEGRAM_MESSAGE_THREAD_ID);
 
@@ -139,6 +147,30 @@ export async function POST(request: Request) {
       }),
     );
 
+    const durable =
+      inbox.saved || telegramSuccess || amoCrmResult.ok === true || amoCrmResult.queued === true;
+
+    if (inbox.saved) {
+      await markLeadDelivery(
+        leadData.eventId as string,
+        {
+          telegram: telegramSuccess,
+          amoCrm: amoCrmResult.ok === true,
+          error: amoCrmResult.ok ? undefined : amoCrmResult.error,
+        },
+        1,
+      );
+    }
+
+    if (!durable) {
+      // Hech qayerda saqlanmadi — mijozga success ko'rsatmaymiz.
+      logger.error('Lead not saved anywhere', { eventId: leadData.eventId });
+      return NextResponse.json(
+        { ok: false, error: 'lead_not_saved', eventId: leadData.eventId },
+        { status: 503 }
+      );
+    }
+
     const analyticsDelivery = await runAnalyticsDeliveries(leadData);
     for (const [channel, delivery] of Object.entries(analyticsDelivery.channels)) {
       if (delivery.state === 'failed') {
@@ -157,6 +189,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       eventId: leadData.eventId,
+      saved: inbox.saved,
       integrations: {
         telegram: telegramSuccess,
         amoCrm: amoCrmResult.ok === true,

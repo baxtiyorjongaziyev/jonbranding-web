@@ -19,7 +19,7 @@ export default function SeoAnswerHub({ eyebrow, title, intro, items, lang }: Pro
   return (
     <section
       aria-labelledby="branding-answers-title"
-      className="border-y border-black/10 bg-[#f2efe6] py-20 text-[#171714] md:py-28"
+      className="border-y border-black/10 bg-[#F4F5F7] py-20 text-[#171714] md:py-28"
     >
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 md:grid-cols-[0.8fr_1.2fr] md:px-8">
         <div>

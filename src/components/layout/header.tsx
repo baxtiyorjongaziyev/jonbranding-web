@@ -24,6 +24,8 @@ type Dictionary = {
   naming_desc: string;
   logo_design: string;
   logo_design_desc: string;
+  patent?: string;
+  patent_desc?: string;
   brandbook: string;
   brandbook_desc: string;
   corporate_style: string;
@@ -80,7 +82,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     setMobileMenuOpen(false);
     window.dispatchEvent(
       new CustomEvent('openContactModal', {
-        detail: { section: 'header', ctaText: dictionary.free_consultation, source: 'header' },
+        detail: { section: 'header', ctaText: dictionary.free_consultation, source: 'header', via: 'oisha' },
       })
     );
   };
@@ -101,7 +103,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
-  if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
+  if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/')) return null;
 
   const isAvansPage = pathnameWithoutLocale === '/avans';
   // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
@@ -122,6 +124,9 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.corporate_style, href: getLocalizedPath('/xizmatlar/firmenniy-stil'), description: dictionary.corporate_style_desc },
     { title: dictionary.brandbook, href: getLocalizedPath('/xizmatlar/brandbook'), description: dictionary.brandbook_desc },
     { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
+    ...(dictionary.patent
+      ? [{ title: dictionary.patent, href: getLocalizedPath('/xizmatlar/patent'), description: dictionary.patent_desc ?? '' }]
+      : []),
     { title: dictionary.services_and_prices, href: getLocalizedPath('/narxlar'), description: dictionary.services_and_prices_desc },
   ];
 
@@ -130,6 +135,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
       {dictionary.urgencyBadge && (
         <div
           className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#ef4444] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
+          data-oisha-callback=""
           onClick={handleContactClick}
           style={{ top: visible ? (scrolled ? -40 : 0) : -40 }}
         >

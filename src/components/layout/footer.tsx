@@ -51,7 +51,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   const mainSiteOrigin = useMainSiteOrigin();
   const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
-  if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials') return null;
+  if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/')) return null;
 
   const currentYear = new Date().getFullYear();
   if (!dictionary) return null;
@@ -188,6 +188,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
               {copy.privacy_policy_link}
             </Link>
             <span className="text-white/10 px-1">/</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
+              className="uppercase hover:text-white transition-colors"
+            >
+              {lang === 'uz' ? 'Cookie sozlamalari' : lang === 'ru' ? 'Настройки cookie' : lang === 'zh' ? 'Cookie 设置' : 'Cookie settings'}
+            </button>
+            <span className="text-white/10 px-1">/</span>
             <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">
               {copy.terms_of_use_link}
             </Link>
@@ -213,10 +221,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
         </div>
 
-        <div className="relative z-10 select-none pointer-events-none mt-20 pb-0 overflow-hidden leading-none w-full">
-          <h2 className="text-[9vw] font-semibold leading-[0.8] text-white/95 tracking-[-0.05em] text-center transition-all whitespace-nowrap mb-[-0.15em] uppercase">
-            Jon Branding
-          </h2>
+        <div className="relative z-10 select-none pointer-events-none mt-20 pb-6 md:pb-10 w-full px-4 md:px-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/logos/jon-white.svg"
+            alt="JON"
+            className="block w-full h-auto opacity-95"
+            loading="lazy"
+          />
         </div>
       </div>
     </footer>
