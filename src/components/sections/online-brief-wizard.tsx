@@ -159,6 +159,17 @@ Kutilayotgan xizmatlar: ${resultObj.services}
   // Total progress percentage (20% per step)
   const progressValue = step * 20;
 
+  const zhStyles: Record<string, { title: string; desc: string }> = {
+    minimalist: { title: '极简 & 干净', desc: '简单清晰，没有多余元素' },
+    classic: { title: '经典 & 优雅', desc: '高贵、有地位感、传统价值' },
+    bold: { title: '强烈 & 大胆', desc: '鲜艳色彩、粗体字、吸引眼球' },
+    playful: { title: '活泼 & 多彩', desc: '动感、真诚、富有情感' },
+    eco: { title: '环保 & 自然', desc: '自然色彩、柔和质感、可持续' },
+    tech: { title: '科技 & 现代', desc: '未来感元素、干净的霓虹线条' },
+    retro: { title: '复古 & 怀旧', desc: '怀旧感、复古质感、往昔魅力' },
+    luxury: { title: '高端 & 奢华', desc: '高品质、限量、极简奢华' },
+  };
+
   // Custom visual styles for Step 2
   const visualStyles = [
     { id: 'minimalist', title: lang === 'uz' ? 'Minimalistik & Toza' : lang === 'ru' ? 'Минималистичный & Чистый' : 'Minimalist & Clean', desc: lang === 'uz' ? 'Oddiy, tushunarli va keraksiz elementlarsiz' : lang === 'ru' ? 'Простой, понятный и без лишних деталей' : 'Simple, clear and without clutter', gradient: 'from-[#E2E8F0] to-[#cbd5e1] text-gray-800' },
@@ -169,7 +180,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
     { id: 'tech', title: lang === 'uz' ? 'Texnologik & Zamonaviy' : lang === 'ru' ? 'Технологичный & Современный' : 'Tech-savvy & Modern', desc: lang === 'uz' ? 'Futuristik elementlar, toza neon nurlari' : lang === 'ru' ? 'Футуристичные элементы, чистые неоновые линии' : 'Futuristic elements, clean neon lines', gradient: 'from-[#2563eb] to-[#3b82f6] text-white' },
     { id: 'retro', title: lang === 'uz' ? 'Retro & Vintage' : lang === 'ru' ? 'Ретро & Винтаж' : 'Retro & Vintage', desc: lang === 'uz' ? 'Nostalgiya, teksturalar, o\'tmish jozibasi' : lang === 'ru' ? 'Ностальгия, винтажные текстуры, шарм прошлого' : 'Nostalgia, vintage textures, charm of the past', gradient: 'from-[#b45309] to-[#d97706] text-white' },
     { id: 'luxury', title: lang === 'uz' ? 'Premium & Hashamatli' : lang === 'ru' ? 'Премиум & Роскошный' : 'Premium & Luxury', desc: lang === 'uz' ? 'Yuqori sifat, cheklangan nashr, minimalist hashamat' : lang === 'ru' ? 'Высокое качество, лимитированность, минималистичный люкс' : 'High quality, limited edition, minimalist luxury', gradient: 'from-[#7c3aed] to-[#8b5cf6] text-white' }
-  ];
+  ].map((style) => (lang === 'zh' && zhStyles[style.id] ? { ...style, ...zhStyles[style.id] } : style));
 
   return (
     <div className="container max-w-4xl mx-auto px-4">
@@ -575,6 +586,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         packageSummary={packageSummary}
+        source="online_brief"
         lang={lang}
       />
     </div>

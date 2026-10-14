@@ -82,7 +82,7 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbSchema) }}
       />
-      <XizmatlarHero lang={safeLang} />
+      <XizmatlarHero lang={safeLang} dictionary={dictionary.atelier} />
       <AtMarquee lang={safeLang} />
       <AtManifesto lang={safeLang} />
       <XizmatlarServices lang={safeLang} />
