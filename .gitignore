@@ -114,3 +114,9 @@ node_modules/
 node_modules.zip
 node_modules.tar.gz
 lighthouse-report.json
+
+# Scratch & temporary artifacts
+public/temp_screenshots/
+telegram_web_screen.png
+publish_lessons.py
+published_academy_articles.json

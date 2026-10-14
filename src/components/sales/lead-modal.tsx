@@ -132,9 +132,11 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
         <Dialog.Content
           data-mobile-overlay="true"
-          className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
+          className="fixed inset-x-0 bottom-0 top-auto z-50 max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-t-[28px] rounded-b-none bg-white p-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] shadow-2xl sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-h-[calc(100dvh-2rem)] sm:w-[calc(100%-2rem)] sm:max-w-md sm:rounded-2xl sm:p-8"
           onOpenAutoFocus={(e) => { e.preventDefault(); phoneRef.current?.focus(); }}
         >
+          {/* Mobile pull/sheet indicator handle */}
+          <div className="mx-auto -mt-2 mb-4 h-1.5 w-12 rounded-full bg-neutral-300 sm:hidden" aria-hidden="true" />
           <Dialog.Title className="mb-1.5 pr-9 text-2xl font-bold text-black" style={{ letterSpacing: '-0.03em' }}>
             {done ? t.titleDone : intent === 'consultation' ? flow.consultation : t.title}
           </Dialog.Title>

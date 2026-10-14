@@ -2035,3 +2035,58 @@ Native agent discovered all three project skills and accurately reported project
 - Vercel runtime logs MCP returned UNAUTHORIZED (reauthentication required); vercel CLI absent on PATH. No secret values read; no production changes or test events sent. Application tests not applicable to read-only status audit.
 
 - verify:fast418tests/locales and typecheck passed. Full lint/build/E2E run in exact-commit release CI; no price/package/lead behavior changed.
+
+## 2026-10-12 | e2e9735 build investigation (Codex)
+- Applied deliver-task; self-reviewed scoped diff; preserved unrelated changes.
+- CI38128130692: Typecheck/lint/418 tests passed; webpack compiled and TypeScript finished; prerender failed reading trustedBy.eyebrow. Lighthouse38128130643 stopped at Build with the same error, before audit. a7f1adb2 already repaired the reduced dictionary; 39204cc8 added pause/resume labels. Later logo commits have green CI.
+- CI38126028141: obsolete Oisha callback E2E expectation failed after 82ee5cbc contextual lead-flow change. e2e97355 aligned it to one dialog and zero widget opens.
+- Changed src/components/home-component.tsx: required trustedBy string fields replace unconstrained dictionary prop; missing projection now fails Typecheck. No runtime or asset changes needed.
+- Checks: verify:fast 418 tests; after edit verify passed Typecheck and 418 tests; build passed 165 pages; focused ESLint and diff check passed. Windows native SWC fell back to WASM. Existing env values not exposed.
+- ec883566 remote CI38131502066 including Chromium E2E and Lighthouse38131502079 audit passed, before local safeguard.
+- Local E2E missing Chromium1234 initially. Interrupted slow browser download; installed Chrome fallback used through temporary config. Dev and localhost production page.goto timed out; IP-based rerun result below. No assertions weakened.
+- Evidence: docs/audits/2026-10-12-build-e2e9735.md. No commit/push/deploy. Live Vercel exact SHA/Ready, locale pages, pricing logos, hydrated CTA and actual CRM delivery remain unverified.
+- Brain context/search completed. Append MCP transport failed; verified findings appended locally to 10-Projects/JonBranding.md. DEV_LOG has pre-existing non-UTF8 bytes, so appended without rewriting existing content.
+Final local production Chrome result: contextual lead CTA passed (2.3s); remaining 3 tests timed out at page.goto/DOMContentLoaded (30s), cause unconfirmed. Temporary config removed. Full local E2E not green. brain_log MCP timed out; local Activity Log fallback appended.
+
+## 2026-10-12 | Codex CAPI recheck blocked
+- Production Analytics delivery log query returned Vercel UNAUTHORIZED/reauthentication required.
+- Chrome control timed out; retry failed to load request-header policy. Playwright fallback extension absent. Current CAPI state could not be verified; no current success or failure claim.
+- No secrets read or production mutation performed. Prior 2026-10-11 Browser-only Lead observation is historical. Read-only audit; application tests not applicable.
+
+- 2026-10-12 final live readback /uz/narxlar: old heading absent, shared heading present, 3 logo rows, removed ToMaris asset0. Vercel Ca8FHWdkMUrDEm6btjdaPrrnSMmw previously confirmed Ready; exact ec883566 CI38131502066 now completed success. Screenshot production-pricing-client-logos.png outside repo.
+
+## 2026-10-13 | Homepage 60/30/10 redesign (Codex)
+- Owner-approved white/black/blue direction, scoped to homepage. Dark services/process; neutral gallery tokens; enlarged hero artwork; removed spotlight state updates, italic headline accent and heavy image shadow.
+- Preserved existing dirty edits. No pricing, copy or CRM changes.
+- verify:fast + verify passed: 65 files / 418 tests; TypeScript passed. Browser: 1280px desktop and 390px mobile, no horizontal overflow, one H1; portfolio scroll and contact modal opening checked. No form submission.
+- Screenshot: docs/audits/home-2026-10-13/desktop.png. Local only; no commit/push/deploy. Build pending.
+- Skills: impeccable, design-taste-frontend, web-quality-audit. PRODUCT.md absent; existing-code refinement continued. Context helper emitted Windows shutdown assertion after output.
+- Build completed successfully: 165 pages, TypeScript clean. Existing native SWC warning fell back to WASM; no build failure. Production CSS/browser read-back next.
+- Production browser read-back unavailable: localhost connection refused in IAB after next start. Development browser screenshots/checks and successful production compilation are verified separately.
+
+
+## 2026-10-14 | Oisha CAPI platform server adapter (Codex)
+- Branch feat/oisha-capi-platform; local only, no commit/push/deploy or live event sends.
+- Added src/lib/oisha-capi-delivery.ts and synthetic tests. Updated analytics-delivery.ts, submit-form/route.ts and services/lead-types.ts. Existing dirty homepage changes preserved.
+- Server-only OISHA_CAPI_URL and OISHA_CAPI_INGEST_SECRET select Oisha intake. Same Pixel event ID, actual timestamp, observed cookie consent; source URL query/fragment removed. No direct Meta fallback when Oisha is selected. HTTP 202 is queued, not Meta-delivered. Invalid receipt or configuration is failure; absent consent skips CAPI.
+- verify:fast and verify: 66 files / 422 tests passed; TypeScript clean; production build passed, 165 pages. Existing native SWC warning used WASM fallback. Focused adapter ESLint clean.
+- Related Oisha branch feat/capi-platform adds console, queue and worker. Its full preflight has existing skill mirror and auth eval blockers. No PR/deploy claimed.
+- Open: configure endpoints/credentials securely, authorize deployment, verify Test Events and actual production read-back. Website-side durable recovery before Oisha receipt not implemented.
+- Skill: deliver-task. Self-review performed. No credentials read/written. Locks released.
+
+## 2026-10-14 | Meta Pixel & CAPI Domain Isolation (Antigravity)
+- Muammo: Meta Events Manager da "Подтвердите домены, владельцем которых вы являетесь" ogohlantirishi (Pixel 1134785364752294 ga ais-dev-...run.app va studio--...hosted.app test muhitlaridan eventlar tushgan).
+- Ildiz yechimi:
+  1. src/lib/analytics/loader-script.ts: Meta Pixel (fbevents.js yuklash, fbq('init') va fbq('track', 'PageView')) faqat rasmiy jonbranding.uz va www.jonbranding.uz domenlarida ishga tushishi ta'minlandi. Boshqa test/preview (Cloud Run, IDX Studio, localhost) muhitlarda window.fbq xavfsiz no-op funksiya qilib belgilandi.
+  2. src/lib/analytics-delivery.ts & src/lib/oisha-capi-delivery.ts: cleanMetaSourceUrl funksiyasi qo'shildi. Test yoki preview domenlardan kelgan pageLocation canonical https://www.jonbranding.uz/... ga normalizatsiya qilinadi, shunda Meta CAPI ga test domenlar yuborilmaydi.
+  3. Testlar: src/lib/analytics/loader-script.test.ts va src/lib/analytics-delivery.test.ts ga domen izolatsiyasi testlari kiritildi.
+- Tekshiruv: npm run verify:fast muvaffaqiyatli o'tdi (66 ta test fayl, 424 ta test 100% yashil).
+
+## 2026-10-14 | Mobile Native Gestures, Bottom Sheets & PWA Enhancements (Antigravity)
+- Mobil ilova tajribasini (App-like experience) ta'minlash va PWA kechikishlarini bartaraf etish:
+  1. src/components/layout/mobile-nav-bar.tsx: Native swipe/drag-to-hide jesti (drag="y", dragElastic) va tortish indikatori (drag pill) qo'shildi. Foydalanuvchi panelni pastga sursa yoki pastga tezkor siltasa, u yumshoq yashirinadi; yuqoriga aylantirganda (scroll up) qayta chiqadi.
+  2. src/components/sales/lead-modal.tsx: Mobilda modal markazlashtirilgan quti o'rniga zamonaviy native pastki varaqqa (bottom sheet drawer: rounded-t-[28px], max-h-[92dvh], drag grab handle) aylantirildi. Katta ekranlarda (sm:) asl dialog dizayni saqlandi.
+  3. src/components/layout/client-enhancements-loader.tsx: Sun'iy 6 soniyalik kechikish o'rniga foydalanuvchining birinchi teginishi (touchstart, scroll, pointerdown) orqali interaktiv elementlarni bir zumda yuklash ta'minlandi, bo'sh turganda 2500ms xavfsiz fallback o'rnatildi.
+  4. src/components/layout/client-enhancements.tsx: quickActionsReady 3500ms dan 100ms ga tushirildi, mobil navigatsiya va PWA o'rnatish taklifi darhol ishga tushishi ta'minlandi.
+  5. src/components/pwa/pwa-installer.tsx: PWA o'rnatish banneriga pastga surib yopish (swipe-to-dismiss) jesti va drag indikatori qo'shildi, mobil navigatsiya paneli bilan to'qnashmasligi uchun pastki oraliq (bottom-[calc(76px+env(...))]) to'g'rilandi.
+- Tekshiruv: npm run verify:fast (66 fayl, 424 test 100% yashil) va npm run build (165 sahifa xatosiz ishlab chiqildi).

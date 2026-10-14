@@ -2,7 +2,6 @@
 import { getSalesFlow } from '@/lib/sales-flow';
 import type { FC } from 'react';
 import Image from 'next/image';
-import { useRef, useState, useCallback } from 'react';
 
 interface PortfolioImage {
   src: string;
@@ -133,45 +132,21 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
     cta1: dictionary?.hero_primary_cta ?? fallback.cta1,
     cta2: dictionary?.hero_secondary_cta ?? fallback.cta2,
   };
-  const sectionRef = useRef<HTMLElement>(null);
-  const [spot, setSpot] = useState({ x: -999, y: -999, visible: false });
 
   const pool = portfolioImages.length > 0 ? portfolioImages : DEFAULT_IMAGES;
   const activeItem = pool[0] || DEFAULT_IMAGES[0];
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setSpot((s) => ({ ...s, visible: false }));
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="bg-[var(--at-bg)] pt-16 pb-16 md:pt-24 relative overflow-hidden"
+      className="home-hero bg-[var(--at-bg)] pt-12 pb-12 md:pt-20 md:pb-20 relative overflow-hidden"
     >
-      {/* Spotlight */}
-      <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
-        style={{
-          opacity: spot.visible ? 1 : 0,
-          background: `radial-gradient(600px circle at ${spot.x}px ${spot.y}px, rgba(27,77,255,0.07), transparent 60%)`,
-        }}
-      />
-
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* LEFT — Text Copy */}
-          <div className="flex-1 w-full pb-8 lg:pb-16 max-w-[700px] z-20">
+          <div className="flex-1 w-full max-w-[700px] z-20">
             <div className="flex flex-wrap items-center gap-3 mb-8">
               <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--at-muted)]">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-green)] animate-pulse" />
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-accent)]" />
                 {l.tagline}
               </span>
               <span className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest border border-[var(--at-line)] rounded-full px-3 py-1 text-[var(--at-ink-2)] bg-[var(--at-paper)]">
@@ -183,19 +158,13 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
               className="font-bold text-[var(--at-ink)] mb-8"
               style={{
                 fontSize: 'clamp(36px, 5vw, 72px)',
-                lineHeight: 0.95,
+                lineHeight: 1.04,
                 letterSpacing: '-0.03em',
               }}
             >
               <span className="block">{l.h1a}</span>
-              <span className="block text-[var(--at-accent)] font-[family-name:var(--font-serif)] italic">
+              <span className="block text-[var(--at-ink)]">
                 {l.h1b}
-                <sup
-                  className="font-[family-name:var(--font-mono)] not-italic text-[var(--at-muted)]"
-                  style={{ fontSize: '0.22em', top: '-0.6em', letterSpacing: '0' }}
-                >
-                  *
-                </sup>
               </span>
               <span className="block">{l.h1c}</span>
             </h1>
@@ -226,11 +195,11 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
           </div>
 
           {/* RIGHT — Single Image Slideshow */}
-          <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] pb-12 lg:pb-16 flex items-center justify-center">
+          <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex items-center justify-center">
             <a
               href="#ishlar"
               aria-label={`${l.portfolioBadge}: ${activeItem.name}`}
-              className="relative block w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-[var(--at-line)] bg-[var(--at-paper)] shadow-2xl group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)]"
+              className="home-hero-project relative block w-full aspect-[4/3] lg:aspect-[5/6] overflow-hidden bg-[var(--at-ink)] group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] focus-visible:ring-offset-4"
             >
                 <div className="absolute inset-0">
                   <Image

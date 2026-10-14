@@ -58,7 +58,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
   }, { scope: listRef });
 
   return (
-  <section className="py-[120px] relative z-[2]" id="xizmat">
+  <section className="home-contrast py-20 md:py-[120px] relative z-[2]" id="xizmat">
     <div className="max-w-[1320px] mx-auto px-5 md:px-8">
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-16">
         <h2

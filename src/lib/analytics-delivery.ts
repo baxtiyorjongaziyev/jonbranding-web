@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { normalizePhone } from './lead-contact.ts';
+import { deliverOishaCapi } from './oisha-capi-delivery';
 
 const UZS_TO_USD_RATE = 1 / 12700;
 const DEFAULT_GA_MEASUREMENT_ID = 'G-BTSGJQLMMV';
@@ -7,7 +8,7 @@ const DEFAULT_META_PIXEL_ID = '1134785364752294';
 
 type AnalyticsEnvironment = Record<string, string | undefined>;
 
-export type DeliveryState = 'delivered' | 'failed' | 'skipped';
+export type DeliveryState = 'delivered' | 'queued' | 'failed' | 'skipped';
 
 export interface ChannelDelivery {
   state: DeliveryState;
@@ -22,6 +23,7 @@ export interface AnalyticsDeliveryReport {
     delivered: number;
     failed: number;
     skipped: number;
+    queued?: number;
   };
   channels: {
     meta: ChannelDelivery;
@@ -59,6 +61,23 @@ const FBC_PATTERN = /^fb\.\d\.\d{10,13}\.[\w-]+$/;
 function cleanFbCookie(value: unknown, pattern: RegExp) {
   const normalized = String(value || '').trim();
   return pattern.test(normalized) ? normalized : undefined;
+}
+
+export function cleanMetaSourceUrl(rawUrl: unknown): string | undefined {
+  if (!rawUrl || typeof rawUrl !== 'string') return undefined;
+  try {
+    const parsed = new URL(rawUrl);
+    parsed.search = '';
+    parsed.hash = '';
+    const host = parsed.hostname.toLowerCase();
+    if (host === 'jonbranding.uz' || host === 'www.jonbranding.uz') {
+      return parsed.toString();
+    }
+    // Normalize dev/preview URLs (run.app, hosted.app, vercel.app, localhost) to canonical
+    return new URL(parsed.pathname, 'https://www.jonbranding.uz').toString();
+  } catch {
+    return undefined;
+  }
 }
 
 // Graph API xato javobidan faqat diagnostik maydonlarni oladi (token yoki
@@ -129,7 +148,9 @@ export async function runAnalyticsDeliveries(
   const nameHash = data.fullName ? sha256(data.fullName) : '';
   const testEventCode = cleanSecret(env.META_TEST_EVENT_CODE);
 
-  const metaPromise = metaAccessToken && metaPixelId
+  const metaPromise = env.OISHA_CAPI_URL || env.OISHA_CAPI_INGEST_SECRET
+    ? deliverOishaCapi(data, env, fetcher)
+    : metaAccessToken && metaPixelId
     ? deliver(() => fetcher(`https://graph.facebook.com/v20.0/${metaPixelId}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -139,7 +160,7 @@ export async function runAnalyticsDeliveries(
             event_time: Math.floor(Date.now() / 1000),
             event_id: data.eventId,
             action_source: 'website',
-            event_source_url: data.pageLocation || undefined,
+            event_source_url: cleanMetaSourceUrl(data.pageLocation),
             user_data: {
               ph: phoneHash ? [phoneHash] : undefined,
               fn: nameHash ? [nameHash] : undefined,
@@ -203,9 +224,11 @@ export async function runAnalyticsDeliveries(
     failed: values.filter((item) => item.state === 'failed').length,
     skipped: values.filter((item) => item.state === 'skipped').length,
   };
+  const queued = values.filter((item) => item.state === 'queued').length;
+  if (queued > 0) Object.assign(summary, { queued });
 
   return {
-    ok: summary.delivered > 0 && summary.failed === 0,
+    ok: (summary.delivered > 0 || queued > 0) && summary.failed === 0,
     summary,
     channels: { meta, ga4, n8n },
   };

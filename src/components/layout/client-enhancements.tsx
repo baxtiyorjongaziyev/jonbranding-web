@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/analytics/gtag';
@@ -46,11 +46,16 @@ const PwaInstaller = dynamic(() => import('@/components/pwa/pwa-installer'), {
 function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const isFirstRunRef = useRef(true);
 
   useEffect(() => {
+    // Birinchi yuklanishdagi page_view'ni GA loader'ining `config` chaqiruvi yuboradi;
+    // bu yerda faqat client-side navigatsiyalar — aks holda page_view ikki marta.
+    const isInitialLoad = isFirstRunRef.current;
+    isFirstRunRef.current = false;
     const run = () => {
       const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-      pageview(url);
+      if (!isInitialLoad) pageview(url);
       trackEvent({
         action: 'page_viewed',
         category: 'Page',
@@ -176,8 +181,8 @@ export default function ClientEnhancements({
   }, [trackCtaRequest, reportError, lang]);
 
   useEffect(() => {
-    const quickActions = window.setTimeout(() => setQuickActionsReady(true), 3500);
-    const fallback = window.setTimeout(() => setEnhancementsReady(true), 6000);
+    const quickActions = window.setTimeout(() => setQuickActionsReady(true), 100);
+    const fallback = window.setTimeout(() => setEnhancementsReady(true), 3000);
     return () => {
       window.clearTimeout(quickActions);
       window.clearTimeout(fallback);
