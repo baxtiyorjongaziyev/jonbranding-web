@@ -1,0 +1,25 @@
+{
+  "name": "jonbranding-case-reels",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio keyslaridan 9:16 Reels (Remotion)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "tsx scripts/render-case.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/google-fonts": "4.0.535",
+    "@sanity/client": "^6.22.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}
