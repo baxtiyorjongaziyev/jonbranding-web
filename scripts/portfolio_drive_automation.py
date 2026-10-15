@@ -583,19 +583,26 @@ async def process_brand(brand_name: str, image_files: List[Path], local_txt: Opt
     if not cover_path:
         cover_path = image_files[0]
 
-    log(f"Chosen cover image: {cover_path.name}")
+    def sanitize_filename(p: Path, prefix: str, idx: int) -> str:
+        s = slugify(p.stem)
+        ext = p.suffix.lower()
+        if not s or not all(ord(c) < 128 for c in s):
+            s = f"{prefix}-{idx}"
+        return f"{s}{ext}"
 
     # 4. Copy to local web dir if web repo is present
-    cover_local_rel = f"/images/cms/portfolio/{slug}/{cover_path.name}"
+    cover_clean_name = f"{slug}-cover{cover_path.suffix.lower()}"
+    cover_local_rel = f"/images/cms/portfolio/{slug}/{cover_clean_name}"
     gallery_local_rels = []
     if PUBLIC_CMS_DIR.parent.exists():
         local_target_dir = PUBLIC_CMS_DIR / slug
         local_target_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(cover_path, local_target_dir / cover_path.name)
-        for img in image_files:
-            shutil.copy2(img, local_target_dir / img.name)
+        shutil.copy2(cover_path, local_target_dir / cover_clean_name)
+        for idx, img in enumerate(image_files, 1):
             if img != cover_path:
-                gallery_local_rels.append(f"/images/cms/portfolio/{slug}/{img.name}")
+                clean_name = sanitize_filename(img, f"{slug}-asset", idx)
+                shutil.copy2(img, local_target_dir / clean_name)
+                gallery_local_rels.append(f"/images/cms/portfolio/{slug}/{clean_name}")
 
     # 5. Upload images to Sanity CMS
     log(f"Uploading cover image: {cover_path.name}...")

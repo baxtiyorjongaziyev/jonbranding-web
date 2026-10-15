@@ -35,7 +35,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'brandbook',
       categoryLabel: "Rebrending va Identika",
       tags: ["Savod", "Rebrending", "Identika", "Logotip", "Brandbook"],
-      coverImage: '/images/cms/portfolio/savod/Без имени-19.png',
+      coverImage: '/images/cms/portfolio/savod/savod-cover.png',
       description: "Iyman Academy bizga murojaat qildi. Yangi qonunchilik talablariga ko‘ra diniy so‘zlar ishlatilgan nomlardan foydalanib reklama qilish mumkin emas edi. Eski nom esa endi ishlamaydigan bo‘ldi.",
       body: [
         {
@@ -71,7 +71,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
                 "paragraph": "Shunday qilib, Savod brendi nafaqat yangi nom, balki to‘liq yangilangan ovoz va qiyofaga ega bo‘ldi."
         }
 ],
-      galleryImages: ["/images/cms/portfolio/savod/Без имени-110.png", "/images/cms/portfolio/savod/Без имени-1.png", "/images/cms/portfolio/savod/Без имени-111.png", "/images/cms/portfolio/savod/Без имени-12.png", "/images/cms/portfolio/savod/viveska.png", "/images/cms/portfolio/savod/Без имени-13.png"],
+      galleryImages: ["/images/cms/portfolio/savod/savod-identity-8.png", "/images/cms/portfolio/savod/savod-identity-1.png", "/images/cms/portfolio/savod/savod-identity-9.png", "/images/cms/portfolio/savod/savod-identity-2.png", "/images/cms/portfolio/savod/savod-signage.png", "/images/cms/portfolio/savod/savod-identity-3.png"],
       order: 1
     },
 
