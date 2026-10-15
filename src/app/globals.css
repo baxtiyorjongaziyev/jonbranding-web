@@ -2,67 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Collins & Koto Obsidian Dark palette for Jon Branding agency homepage */
+/* Jon Branding Design System: 60% White (Canvas), 30% Black (Structure/Typography), 10% Electric Blue (Action/Accent) */
 .jon-home,
 .jon-home .atelier-theme {
-  --at-bg: #08090C;
-  --at-bg-2: #0D0F16;
-  --at-paper: #121520;
-  --at-ink: #FFFFFF;
-  --at-ink-2: #A8ADB8;
+  --at-bg: #FFFFFF;
+  --at-bg-2: #F8F9FB;
+  --at-paper: #FFFFFF;
+  --at-ink: #0A0B0E;
+  --at-ink-2: #4B5563;
   --at-muted: #6B7280;
-  --at-line: #1F2433;
-  --at-line-2: #282E40;
+  --at-line: #E5E7EB;
+  --at-line-2: #D1D5DB;
   --at-accent: #2554FF;
-  --at-accent-soft: #141B33;
+  --at-accent-soft: rgba(37, 84, 255, 0.08);
   --at-green: #2554FF;
-  --at-green-soft: #141B33;
-  --bg: #08090C;
-  --bg-2: #0D0F16;
-  --paper: #121520;
-  --ink: #FFFFFF;
-  --ink-2: #A8ADB8;
+  --at-green-soft: rgba(37, 84, 255, 0.08);
+  --bg: #FFFFFF;
+  --bg-2: #F8F9FB;
+  --paper: #FFFFFF;
+  --ink: #0A0B0E;
+  --ink-2: #4B5563;
   --muted: #6B7280;
-  --line: #1F2433;
-  --line-2: #282E40;
+  --line: #E5E7EB;
+  --line-2: #D1D5DB;
   --accent: #2554FF;
   --terra: #2554FF;
-  --terra-soft: #141B33;
+  --terra-soft: rgba(37, 84, 255, 0.08);
   --green: #2554FF;
-  --green-soft: #141B33;
+  --green-soft: rgba(37, 84, 255, 0.08);
 }
 
 body:has(.jon-home) {
-  background-color: #08090C !important;
-  color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: #0A0B0E !important;
 }
 
 .jon-home .home-contrast {
-  --at-bg: #101010;
-  --at-paper: #181818;
-  --at-ink: #ffffff;
-  --at-ink-2: #d4d4d4;
-  --at-muted: #b4b4b4;
-  --at-line: #3d3d3d;
-  --at-accent: #8ca6ff;
-  --at-accent-soft: #202940;
-  --at-green: #8ca6ff;
-  background: #101010;
-  color: #ffffff;
+  --at-bg: #FFFFFF;
+  --at-paper: #FFFFFF;
+  --at-ink: #0A0B0E;
+  --at-ink-2: #4B5563;
+  --at-muted: #6B7280;
+  --at-line: #E5E7EB;
+  --at-accent: #2554FF;
+  --at-accent-soft: rgba(37, 84, 255, 0.08);
+  background: #FFFFFF;
+  color: #0A0B0E;
 }
 
 .jon-home .home-contrast h2 {
   line-height: 1.08 !important;
 }
 
-
 .jon-home .home-hero-project {
   border-radius: 24px;
 }
 
-/* Premium Collins & Koto Editorial Gallery */
+/* Premium 60-30-10 Editorial Gallery */
 .jon-home .gal {
   padding: 100px 0 120px !important;
+  background-color: #FFFFFF !important;
   position: relative !important;
   z-index: 2 !important;
 }
@@ -88,10 +87,10 @@ body:has(.jon-home) {
   aspect-ratio: 16 / 11 !important;
   min-height: 400px !important;
   border-radius: 24px !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: #121520 !important;
+  border: 1px solid #E5E7EB !important;
+  background: #FFFFFF !important;
   overflow: hidden !important;
-  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.7) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08) !important;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.6s ease !important;
 }
 
@@ -105,8 +104,8 @@ body:has(.jon-home) {
 
 .jon-home .gal-tile:hover {
   transform: translateY(-6px) scale(1.01) !important;
-  border-color: rgba(37, 84, 255, 0.4) !important;
-  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(37, 84, 255, 0.3) !important;
+  border-color: rgba(37, 84, 255, 0.5) !important;
+  box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.15), 0 0 30px -10px rgba(37, 84, 255, 0.25) !important;
 }
 
 .jon-home .gal-tile .foot .name {
@@ -119,8 +118,8 @@ body:has(.jon-home) {
 }
 
 .jon-home .gal-tile .arr {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   backdrop-filter: blur(12px) !important;
   color: #FFFFFF !important;
 }
@@ -131,6 +130,7 @@ body:has(.jon-home) {
   color: #FFFFFF !important;
   transform: rotate(-45deg) scale(1.1) !important;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .jon-home .home-hero-project img {

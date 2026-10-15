@@ -64,11 +64,11 @@ describe('Header component — dark / light page contrast', () => {
     currentPathname = '/';
   });
 
-  it('renders white logo and dark navigation on dark home page', () => {
+  it('renders dark logo and dark navigation on light home page', () => {
     currentPathname = '/';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
   it('renders white logo and inverted header on /portfolio', () => {

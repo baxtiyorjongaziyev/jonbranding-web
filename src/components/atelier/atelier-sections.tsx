@@ -465,7 +465,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(135deg, #1B4DFF15, #C2552A15)',
+                      background: 'linear-gradient(135deg, #2554FF15, #2554FF08)',
                     }}
                   />
                 )}
@@ -625,7 +625,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
                       cursor: 'pointer',
                       transition: 'all 0.3s',
                       boxShadow:
-                        playingAudio === t.audioUrl ? '0 8px 24px rgba(194, 85, 42, 0.25)' : 'none',
+                        playingAudio === t.audioUrl ? '0 8px 24px rgba(37, 84, 255, 0.25)' : 'none',
                     }}
                   >
                     {playingAudio === t.audioUrl ? (

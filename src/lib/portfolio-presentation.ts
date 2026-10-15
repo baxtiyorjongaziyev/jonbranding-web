@@ -83,7 +83,9 @@ const HOME_WORKS = [
 export function selectHomePortfolioProjects<T extends { slug: string; coverImage: string }>(projects: T[]): T[] {
   return HOME_WORKS.flatMap(({ slug, image }) => {
     const project = projects.find((p) => p.slug === slug || p.slug.startsWith(`${slug}-`));
-    return project ? [{ ...project, coverImage: image || project.coverImage }] : [];
+    if (!project) return [];
+    const coverImage = (project.coverImage?.startsWith('https://cdn.sanity.io/') ? project.coverImage : image) || project.coverImage;
+    return [{ ...project, coverImage }];
   });
 }
 
