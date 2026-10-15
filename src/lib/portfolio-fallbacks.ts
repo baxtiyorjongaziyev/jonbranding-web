@@ -28,6 +28,54 @@ export interface PortfolioProject {
 export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
   uz: [
     {
+      _id: 'fallback-savod',
+      slug: 'savod',
+      title: "SAVOD — o‘quv markazi uchun rebrending keys",
+      client: "Savod",
+      category: 'brandbook',
+      categoryLabel: "Rebrending va Identika",
+      tags: ["Savod", "Rebrending", "Identika", "Logotip", "Brandbook"],
+      coverImage: '/images/cms/portfolio/savod/Без имени-19.png',
+      description: "Iyman Academy bizga murojaat qildi. Yangi qonunchilik talablariga ko‘ra diniy so‘zlar ishlatilgan nomlardan foydalanib reklama qilish mumkin emas edi. Eski nom esa endi ishlamaydigan bo‘ldi.",
+      body: [
+        {
+                "heading": "Loyiha haqida",
+                "paragraph": "SAVOD — o‘quv markazi uchun rebrending keys"
+        },
+        {
+                "heading": "Vazifa va Muammo",
+                "paragraph": "Iyman Academy bizga murojaat qildi. Yangi qonunchilik talablariga ko‘ra diniy so‘zlar ishlatilgan nomlardan foydalanib reklama qilish mumkin emas edi. Eski nom esa endi ishlamaydigan bo‘ldi."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Shu sababli loyihani Namingdan boshladik."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Biz tanlagan nom — SAVOD. Oddiy, xalq tilida tez qabul qilinadigan, ta’lim markazining mohiyatini aniq ifodalovchi so‘z. Eng muhimi — patentga topshirish mumkin, domenlar va ijtimoiy tarmoqlarda bo‘sh edi."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Nom asosida logotip va firma uslubini ishlab chiqdik. Ochiq kitob shaklidan ilhomlanib, logotipni o‘zgaruvchan va moslashuvchan qildik. Har bir yo‘nalish uchun alohida rang palettasi ishlab chiqdik: Arabic, English, Russkiy, Medicine va boshqalar."
+        },
+        {
+                "heading": "Logotip va Vizual Identika",
+                "paragraph": "Bozorni tahlil qilib, ta’lim sohasida kam ishlatiladigan binafsha rangni asosiy brend rangi sifatida tanladik. Tipografiyada esa o‘qishga oson sans serif shriftlar qo‘lladik. Keyin bu uslubni to‘liq tizimga aylantirdik."
+        },
+        {
+                "heading": "Natija va Brand Tizimi",
+                "paragraph": "Billboardlar, ichki bannerlar, flaglar, kitoblar, ID-kartalar, merch — barchasi yagona vizual identifikatsiya asosida bir butun ko‘rinish oldi."
+        },
+        {
+                "heading": "Natija va Brand Tizimi",
+                "paragraph": "Shunday qilib, Savod brendi nafaqat yangi nom, balki to‘liq yangilangan ovoz va qiyofaga ega bo‘ldi."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/savod/Без имени-110.png", "/images/cms/portfolio/savod/Без имени-1.png", "/images/cms/portfolio/savod/Без имени-111.png", "/images/cms/portfolio/savod/Без имени-12.png", "/images/cms/portfolio/savod/viveska.png", "/images/cms/portfolio/savod/Без имени-13.png"],
+      order: 1
+    },
+
+    {
       _id: 'fallback-shirona',
       slug: 'shirona',
       title: "Shirona Café & Bakery: Samarqand xarakterida pishgan brend",

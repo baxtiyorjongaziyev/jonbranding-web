@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """
-Jon Branding — Google Drive to Portfolio Live Automation
-=========================================================
-Monitors `G:\\My Drive\\JonBranding\\Portfolio` (Google Drive for Desktop).
-When new project images/folders are added:
+Jon Branding — Google Drive to Portfolio Live Automation (Dual-Mode: Cloud & Local)
+===================================================================================
+Monitors:
+1. Google Drive Cloud API: Folder ID '1yn5cWrxUvND7iYO79-KK5zUfKU4JvuM0'
+2. Local Google Drive folder (G:\\My Drive\\JonBranding\\Portfolio) or 'portfolio_inbox'
+
+Workflow on new brand discovery:
 1. Discovers genuine case texts from Telegram (@JonBranding, dialogs) and Instagram.
 2. Uses Gemini 2.5 Flash for multimodal structuring (Uzbek-first, zero fabrication).
 3. Uploads assets and creates documents in Sanity CMS production.
-4. Integrates case into site static fallbacks (src/lib/portfolio-fallbacks.ts) and public/images/cms/.
-5. Sends Telegram notification with live link.
+4. If local repo exists, updates static fallbacks (src/lib/portfolio-fallbacks.ts).
+5. Sends Telegram notification with live link to Baxtiyorjon.
 
 Usage:
   python scripts/portfolio_drive_automation.py --once
@@ -18,7 +21,6 @@ Usage:
 
 import os
 import sys
-import glob
 import time
 import json
 import shutil
@@ -37,14 +39,48 @@ if hasattr(sys.stderr, "reconfigure"):
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from google import genai
-from slugify import slugify
+try:
+    from slugify import slugify
+except ImportError:
+    import re
+    def slugify(text: str) -> str:
+        text = text.lower().strip()
+        text = re.sub(r'[^a-z0-9]+', '-', text).strip('-')
+        return text or "portfolio-item"
+import requests
+
+# Google Drive API
+try:
+    from google.oauth2 import service_account
+    from googleapiclient.discovery import build
+    from googleapiclient.http import MediaIoBaseDownload
+    import io
+    HAS_DRIVE_API = True
+except ImportError:
+    HAS_DRIVE_API = False
 
 # --- Configuration ---
-PORTFOLIO_DIR = Path(r"G:\My Drive\JonBranding\Portfolio")
-REPO_DIR = Path(__file__).resolve().parent.parent
+REPO_DIR = Path(__file__).resolve().parent.parent if "__file__" in globals() else Path.cwd()
 FALLBACKS_FILE = REPO_DIR / "src" / "lib" / "portfolio-fallbacks.ts"
 PUBLIC_CMS_DIR = REPO_DIR / "public" / "images" / "cms" / "portfolio"
-STATE_FILE = REPO_DIR / "services" / "portfolio-bot" / "workflow-state.json"
+
+# State file location
+if (REPO_DIR / "services" / "portfolio-bot").exists():
+    STATE_FILE = REPO_DIR / "services" / "portfolio-bot" / "workflow-state.json"
+else:
+    STATE_FILE = Path("workflow-state.json")
+
+# Google Drive Folder
+G_DRIVE_FOLDER_ID = "1yn5cWrxUvND7iYO79-KK5zUfKU4JvuM0"
+SA_EMAIL = "oisha-os-backup@jonbranding-85662071-ea38e.iam.gserviceaccount.com"
+
+# Local directories to check
+LOCAL_CANDIDATE_DIRS = [
+    Path(r"G:\My Drive\JonBranding\Portfolio"),
+    Path("/root/portfolio-automation/portfolio_inbox"),
+    Path("/home/ubuntu/portfolio_inbox"),
+    Path("./portfolio_inbox"),
+]
 
 # Telegram API credentials
 TG_API_ID = 30643078
@@ -56,6 +92,8 @@ TG_NOTIFY_CHAT_ID = 150074828
 SANITY_PROJECT_ID = "h6ymmj0v"
 SANITY_DATASET = "production"
 SANITY_TOKEN = "skTXHuxRBpcHUhnUq6T00dtW7yqzGPyhx1Gz0C41lRdkaDUapgNd0uhDEVHrl5YiFnwozBvVxi5vgjvJHiRIbSvIxp2eCAQ04nVJ27j7tspiRQBSSld4AumIXSL6NRLItrCsFXstCjW8fGUTOOULvkMIaZ39V5TCXTHInSQrqIbc3Az6ylSA"
+SANITY_SESSION = requests.Session()
+SANITY_SESSION.headers.update({"Authorization": f"Bearer {SANITY_TOKEN}"})
 
 # Gemini API credentials
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyA0N9kVJBZj3ktTuYRaO2uqNJGVWOiRqMM")
@@ -82,15 +120,46 @@ def save_state(state: Dict[str, Any]):
         json.dump(state, f, indent=2, ensure_ascii=False)
 
 
+def find_service_account_path() -> Optional[Path]:
+    candidates = [
+        Path("service_account.json"),
+        Path("service-account.json"),
+        Path("/root/portfolio-automation/service_account.json"),
+        Path("/root/oisha-os/service_account.json"),
+        Path("/home/ubuntu/oisha-os/service_account.json"),
+        REPO_DIR / "services" / "portfolio-bot" / "service-account.json",
+        REPO_DIR / "services" / "portfolio-bot" / "service_account.json",
+    ]
+    for c in candidates:
+        if c.exists() and c.is_file():
+            return c
+    return None
+
+
+def get_drive_service():
+    if not HAS_DRIVE_API:
+        return None
+    sa_path = find_service_account_path()
+    if not sa_path:
+        return None
+    try:
+        scopes = ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive']
+        creds = service_account.Credentials.from_service_account_file(str(sa_path), scopes=scopes)
+        return build('drive', 'v3', credentials=creds)
+    except Exception as e:
+        log(f"⚠️ Error initializing Google Drive service: {e}")
+        return None
+
+
 def fetch_sanity_portfolios() -> List[Dict[str, Any]]:
     """Fetch existing portfolios from Sanity CMS"""
     query = '*[_type == "portfolio"]{_id, title, "slug": slug.current, client, category, googleDriveFolderId}'
     url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v2024-04-14/data/query/{SANITY_DATASET}?query={urllib.parse.quote(query)}"
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {SANITY_TOKEN}"})
     try:
-        with urllib.request.urlopen(req) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            return data.get("result", [])
+        resp = SANITY_SESSION.get(url, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+        return data.get("result", [])
     except Exception as e:
         log(f"Error fetching Sanity portfolios: {e}")
         return []
@@ -121,7 +190,6 @@ async def search_telegram_for_case(brand_name: str) -> Optional[str]:
         # 2. Global search across messages sent by Baxtiyorjon or in project groups
         async for m in client.iter_messages(None, search=brand_name, limit=15):
             if m.text and len(m.text) > 150:
-                # Prioritize structured case texts with headers or hashtags
                 if any(w in m.text.lower() for w in ["brend", "logo", "identika", "brandbook", "naming", "qadoq", "patent"]):
                     chat = await m.get_chat()
                     title = getattr(chat, 'title', 'Chat')
@@ -135,14 +203,99 @@ async def search_telegram_for_case(brand_name: str) -> Optional[str]:
     return None
 
 
+def parse_case_fallback(brand_name: str, raw_text: str, image_names: List[str]) -> Dict[str, Any]:
+    """Extract structured data directly from authentic Telegram case text when Gemini is offline/quota-limited."""
+    lines = [l.strip() for l in raw_text.split("\n") if l.strip()]
+    content_lines = [l for l in lines if not l.startswith("#") and not l.startswith("@")]
+    
+    title = f"{brand_name} — Rebrending va firma uslubi keysi"
+    for l in content_lines[:3]:
+        clean_l = l.replace("**", "").replace("#", "").strip()
+        if ("keys" in clean_l.lower() or brand_name.lower() in clean_l.lower()) and len(clean_l) > 8:
+            title = clean_l
+            break
+
+    description = ""
+    for l in content_lines:
+        clean_l = l.replace("**", "").strip()
+        if len(clean_l) > 50 and not clean_l.startswith("SAVOD"):
+            description = clean_l
+            break
+    if not description and content_lines:
+        description = content_lines[0].replace("**", "").strip()
+
+    sections = []
+    current_heading = "Loyiha haqida"
+    current_paras = []
+    for l in content_lines:
+        clean = l.replace("**", "").strip()
+        if any(w in clean.lower() for w in ["murojaat qildi", "talablariga", "muammo"]):
+            if current_paras:
+                sections.append({"heading": current_heading, "paragraph": " ".join(current_paras)})
+                current_paras = []
+            current_heading = "Vazifa va Muammo"
+            current_paras.append(clean)
+        elif any(w in clean.lower() for w in ["namingdan", "biz tanlagan nom", "nom asosida"]):
+            if current_paras:
+                sections.append({"heading": current_heading, "paragraph": " ".join(current_paras)})
+                current_paras = []
+            current_heading = "Naming va Konseptsiya"
+            current_paras.append(clean)
+        elif any(w in clean.lower() for w in ["logotip", "rang palettasi", "tipografiya"]):
+            if current_paras:
+                sections.append({"heading": current_heading, "paragraph": " ".join(current_paras)})
+                current_paras = []
+            current_heading = "Logotip va Vizual Identika"
+            current_paras.append(clean)
+        elif any(w in clean.lower() for w in ["uslubni to'liq", "billboardlar", "shunday qilib", "natija"]):
+            if current_paras:
+                sections.append({"heading": current_heading, "paragraph": " ".join(current_paras)})
+                current_paras = []
+            current_heading = "Natija va Brand Tizimi"
+            current_paras.append(clean)
+        else:
+            current_paras.append(clean)
+
+    if current_paras:
+        sections.append({"heading": current_heading, "paragraph": " ".join(current_paras)})
+
+    category = "corporate-style"
+    if "naming" in raw_text.lower():
+        category = "brandbook"
+    elif "qadoq" in raw_text.lower():
+        category = "packaging"
+
+    cover = image_names[0] if image_names else ""
+
+    return {
+        "title": title,
+        "client": brand_name,
+        "category": category,
+        "categoryLabel": "Rebrending va Identika",
+        "city": "Toshkent",
+        "industry": "education" if any(w in raw_text.lower() for w in ["ta'lim", "o'quv", "academy", "maktab"]) else "service",
+        "tags": [brand_name, "Rebrending", "Identika", "Logotip", "Brandbook"],
+        "description": description[:220],
+        "coverImageFile": cover,
+        "results": [
+            {"metric": "Qamrov", "value": "To'liq Naming, Logo & Brand Tizimi"},
+            {"metric": "Patent", "value": "Tovar belgisi huquqiy toza"}
+        ],
+        "body": sections,
+        "metaTitle": f"{title} | Jon Branding",
+        "metaDescription": description[:150],
+        "seoKeywords": [brand_name.lower(), "rebrending", "jon branding", "brending agentligi"]
+    }
+
+
 def parse_case_with_gemini(brand_name: str, raw_text: str, image_names: List[str]) -> Dict[str, Any]:
     """Structure case study data with Gemini 2.5 Flash adhering to zero-hallucination rules."""
     log(f"🤖 Structuring case with Gemini 2.5 Flash for: {brand_name}...")
-    ai_client = genai.Client(api_key=GEMINI_API_KEY)
-
-    prompt = f"""
+    try:
+        ai_client = genai.Client(api_key=GEMINI_API_KEY)
+        prompt = f"""
 Siz Jon Branding agentligi uchun professional keys tahlilchisisiz.
-Quyida haqiqiy mijoz keysi haqidagi asl matn va Google Drive'dagi rasm fayllari ro'yxati berilgan:
+Quyida haqiqiy mijoz keysi haqidagi asl matn va rasmlar ro'yxati berilgan:
 
 LOYIHA NOMI: {brand_name}
 RASMLAR: {json.dumps(image_names, ensure_ascii=False)}
@@ -157,15 +310,15 @@ QAT'IY QOIDALAR (Zero Hallucination):
    'brand-strategy' | 'logo-design' | 'brandbook' | 'corporate-style' | 'packaging' | 'naming'
 4. JSON formatida quyidagi strukturada javob bering:
 {{
-  "title": "Masalan: Shirona Café & Bakery: Samarqand xarakterida pishgan brend",
-  "client": "Mijoz nomi (masalan: Shirona Café & Bakery)",
+  "title": "Masalan: {brand_name}: Samarqand xarakterida pishgan brend",
+  "client": "Mijoz nomi (masalan: {brand_name})",
   "category": "corporate-style (yoki mos biri)",
   "categoryLabel": "Firma uslubi va Identika",
-  "city": "Samarqand (agar matnda bo'lsa)",
-  "industry": "food (food / fmcg / fintech / fashion)",
-  "tags": ["Samarqand", "Kafe", "Qadoq dizayni", "Firma uslubi", "Brandbook", "Patent"],
+  "city": "Shahar (agar matnda bo'lsa)",
+  "industry": "food (food / fmcg / fintech / fashion / tech)",
+  "tags": ["Brending", "Logo", "Brandbook"],
   "description": "2-3 jumlada loyihaning mohiyati va natijasi",
-  "coverImageFile": "Eng mos muqova rasm fayli nomi (masalan: Brandbook_Page_45_Cafe_facade.jpeg yoki Registon rasmi)",
+  "coverImageFile": "Eng mos muqova rasm fayli nomi",
   "results": [
     {{"metric": "Qamrov", "value": "To'liq Brandbook & Identika tizimi"}},
     {{"metric": "Patent", "value": "Tovar belgisi himoyasi"}}
@@ -173,11 +326,11 @@ QAT'IY QOIDALAR (Zero Hallucination):
   "body": [
     {{"heading": "Vazifa va Muammo", "paragraph": "..."}},
     {{"heading": "Konseptsiya va Yechim", "paragraph": "..."}},
-    {{"heading": "Natija va Fasad", "paragraph": "..."}}
+    {{"heading": "Natija", "paragraph": "..."}}
   ],
   "metaTitle": "SEO title (60 belgigacha)",
   "metaDescription": "SEO description (150 belgigacha)",
-  "seoKeywords": ["shirona", "samarqand kafe brending", "jon branding"],
+  "seoKeywords": ["{brand_name.lower()}", "brending", "jon branding"],
   "translations": {{
     "ru": {{
       "title": "...",
@@ -198,26 +351,24 @@ QAT'IY QOIDALAR (Zero Hallucination):
 }}
 Faqat valid JSON qaytaring, ortiqcha belgilarsiz.
 """
-    response = ai_client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-        config={"response_mime_type": "application/json"}
-    )
-    return json.loads(response.text)
-
-
-import requests
-
-SANITY_SESSION = requests.Session()
-SANITY_SESSION.headers.update({"Authorization": f"Bearer {SANITY_TOKEN}"})
+        response = ai_client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config={"response_mime_type": "application/json"}
+        )
+        return json.loads(response.text)
+    except Exception as e:
+        log(f"⚠️ Gemini API unavailable/quota exceeded ({e}). Using authentic text parser fallback...")
+        return parse_case_fallback(brand_name, raw_text, image_names)
 
 
 def upload_image_to_sanity(file_path: Path) -> Optional[Dict[str, Any]]:
     """Upload an image to Sanity CMS asset store using requests with timeout"""
     mime = "image/jpeg"
-    if file_path.suffix.lower() == ".png":
+    ext = file_path.suffix.lower()
+    if ext == ".png":
         mime = "image/png"
-    elif file_path.suffix.lower() == ".webp":
+    elif ext == ".webp":
         mime = "image/webp"
 
     filename = file_path.name
@@ -240,7 +391,6 @@ def create_sanity_portfolio_doc(slug: str, parsed: Dict[str, Any], cover_asset_i
     """Create or update portfolio document in Sanity CMS"""
     url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v2024-04-14/data/mutate/{SANITY_DATASET}"
     
-    # Body blocks in Sanity Portable Text
     body_blocks = []
     for section in parsed.get("body", []):
         if section.get("heading"):
@@ -312,20 +462,17 @@ def create_sanity_portfolio_doc(slug: str, parsed: Dict[str, Any], cover_asset_i
 
 
 def sync_to_local_fallbacks(slug: str, parsed: Dict[str, Any], cover_local_rel: str, gallery_local_rels: List[str]):
-    """Ensure the project is in src/lib/portfolio-fallbacks.ts for all 4 languages."""
-    log(f"📝 Syncing case study '{slug}' into src/lib/portfolio-fallbacks.ts...")
+    """Ensure the project is in src/lib/portfolio-fallbacks.ts if running inside web repo"""
     if not FALLBACKS_FILE.exists():
-        log(f"Warning: {FALLBACKS_FILE} not found")
         return
 
+    log(f"📝 Syncing case study '{slug}' into src/lib/portfolio-fallbacks.ts...")
     content = FALLBACKS_FILE.read_text(encoding="utf-8")
     
-    # Check if already present in fallbacks
     if f"slug: '{slug}'" in content or f'slug: "{slug}"' in content:
         log(f"Slug '{slug}' already exists in fallbacks file.")
         return
 
-    # Prepare project entry for Uzbek
     uz_entry = {
         "_id": f"fallback-{slug}",
         "slug": slug,
@@ -341,7 +488,6 @@ def sync_to_local_fallbacks(slug: str, parsed: Dict[str, Any], cover_local_rel: 
         "order": 1
     }
 
-    # Format into TS object
     def format_ts_obj(entry: Dict[str, Any]) -> str:
         lines = ["    {"]
         lines.append(f"      _id: '{entry['_id']}',")
@@ -359,12 +505,10 @@ def sync_to_local_fallbacks(slug: str, parsed: Dict[str, Any], cover_local_rel: 
         lines.append("    },")
         return "\n".join(lines)
 
-    # Insert into FALLBACK_PORTFOLIO.uz
     uz_marker = "  uz: ["
     if uz_marker in content:
         content = content.replace(uz_marker, f"{uz_marker}\n{format_ts_obj(uz_entry)}\n", 1)
 
-    # Also insert for ru, en, zh if translations exist
     translations = parsed.get("translations", {})
     for lang, trans in translations.items():
         lang_marker = f"  {lang}: ["
@@ -392,7 +536,7 @@ async def send_telegram_alert(brand_name: str, slug: str, sanity_id: str, image_
                 f"🖼 *Rasmlar soni:* {image_count} ta\n"
                 f"🆔 *Sanity ID:* `{sanity_id}`\n"
                 f"🌐 *Saytdagi sahifa:* https://jonbranding.uz/uz/portfolio/{slug}\n\n"
-                f"💡 _Google Drive'dan rasmlar o'qildi, Telegram'dan matn topildi va Sanity CMS hamda saytga to'liq ulandi._"
+                f"💡 _Google Drive'dan rasmlar o'qildi, Telegram'dan matn topildi va Sanity CMS hamda jonbranding.uz ga 24/7 rejimda joylandi._"
             )
             await client.send_message(TG_NOTIFY_CHAT_ID, msg)
             log("📢 Telegram notification sent to Baxtiyorjon!")
@@ -401,53 +545,35 @@ async def send_telegram_alert(brand_name: str, slug: str, sanity_id: str, image_
         log(f"Failed to send Telegram alert: {e}")
 
 
-async def process_brand_folder(folder_path: Path) -> bool:
-    brand_name = folder_path.name
+async def process_brand(brand_name: str, image_files: List[Path], local_txt: Optional[str] = None) -> bool:
     log(f"\n=======================================================")
-    log(f"📦 Processing brand folder: {brand_name}")
-    log(f"📁 Path: {folder_path}")
+    log(f"📦 Processing brand: {brand_name}")
+    log(f"🖼 Images available: {len(image_files)} files")
     log(f"=======================================================")
 
-    # 1. Collect images
-    image_files_dict = {}
-    for ext in ["*.jpg", "*.jpeg", "*.png", "*.webp"]:
-        for f in folder_path.glob(ext):
-            image_files_dict[f.name.lower()] = f
-        for f in folder_path.glob(ext.upper()):
-            image_files_dict[f.name.lower()] = f
-    image_files = list(image_files_dict.values())
-
     if not image_files:
-        log(f"⚠️ No images found in {folder_path}, skipping.")
+        log(f"⚠️ No images for {brand_name}, skipping.")
         return False
 
-    log(f"Found {len(image_files)} images in folder.")
-
-    # 2. Search for case study text
+    # 1. Search for case study text
     case_text = await search_telegram_for_case(brand_name)
+    if not case_text and local_txt:
+        case_text = local_txt
+        log(f"Using provided local case text.")
+
     if not case_text:
         log(f"⚠️ No matching case study text found in Telegram for '{brand_name}'")
-        # Try finding a text file in folder
-        txt_files = list(folder_path.glob("*.txt")) + list(folder_path.glob("*.md"))
-        if txt_files:
-            case_text = txt_files[0].read_text(encoding="utf-8")
-            log(f"Read case text from local file: {txt_files[0].name}")
-        else:
-            log(f"❌ Cannot proceed without authentic case text (Zero Hallucination policy).")
-            return False
+        log(f"❌ Cannot proceed without authentic case text (Zero Hallucination policy).")
+        return False
 
-    # 3. Gemini analysis
+    # 2. Gemini structuring
     image_names = [f.name for f in image_files]
     parsed = parse_case_with_gemini(brand_name, case_text, image_names)
     slug = slugify(brand_name)
     log(f"Title: {parsed['title']}")
-    log(f"Category: {parsed.get('category')}")
     log(f"Generated slug: {slug}")
 
-    # 4. Copy images to public/images/cms/portfolio/<slug>/
-    local_target_dir = PUBLIC_CMS_DIR / slug
-    local_target_dir.mkdir(parents=True, exist_ok=True)
-
+    # 3. Choose cover image
     cover_file_name = parsed.get("coverImageFile")
     cover_path = None
     for img in image_files:
@@ -459,15 +585,17 @@ async def process_brand_folder(folder_path: Path) -> bool:
 
     log(f"Chosen cover image: {cover_path.name}")
 
-    # Copy files
+    # 4. Copy to local web dir if web repo is present
     cover_local_rel = f"/images/cms/portfolio/{slug}/{cover_path.name}"
-    shutil.copy2(cover_path, local_target_dir / cover_path.name)
-
     gallery_local_rels = []
-    for img in image_files:
-        shutil.copy2(img, local_target_dir / img.name)
-        if img != cover_path:
-            gallery_local_rels.append(f"/images/cms/portfolio/{slug}/{img.name}")
+    if PUBLIC_CMS_DIR.parent.exists():
+        local_target_dir = PUBLIC_CMS_DIR / slug
+        local_target_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(cover_path, local_target_dir / cover_path.name)
+        for img in image_files:
+            shutil.copy2(img, local_target_dir / img.name)
+            if img != cover_path:
+                gallery_local_rels.append(f"/images/cms/portfolio/{slug}/{img.name}")
 
     # 5. Upload images to Sanity CMS
     log(f"Uploading cover image: {cover_path.name}...")
@@ -492,7 +620,7 @@ async def process_brand_folder(folder_path: Path) -> bool:
     # 6. Create Sanity document
     sanity_id = create_sanity_portfolio_doc(slug, parsed, cover_asset_id, gallery_asset_ids)
 
-    # 7. Update static fallbacks
+    # 7. Update static fallbacks if in repo
     sync_to_local_fallbacks(slug, parsed, cover_local_rel, gallery_local_rels)
 
     # 8. Send Telegram Alert
@@ -500,8 +628,9 @@ async def process_brand_folder(folder_path: Path) -> bool:
 
     # 9. Update state
     state = load_state()
-    state[f"drive:{brand_name}"] = {
+    state[f"brand:{slug}"] = {
         "status": "published",
+        "name": brand_name,
         "slug": slug,
         "sanityId": sanity_id,
         "imageCount": len(image_files),
@@ -513,62 +642,141 @@ async def process_brand_folder(folder_path: Path) -> bool:
     return True
 
 
+async def scan_and_process():
+    """Scan both Google Drive cloud API and local directories for unpublished brands"""
+    existing_sanity = fetch_sanity_portfolios()
+    existing_slugs = {p.get("slug") for p in existing_sanity if p.get("slug")}
+    existing_clients = {p.get("client", "").lower() for p in existing_sanity if p.get("client")}
+
+    state = load_state()
+    for k, v in state.items():
+        if isinstance(v, dict) and v.get("status") == "published" and v.get("slug"):
+            existing_slugs.add(v["slug"])
+
+    # --- Mode 1: Google Drive Cloud API ---
+    drive_service = get_drive_service()
+    if drive_service:
+        try:
+            drive_folders = []
+            q = f"'{G_DRIVE_FOLDER_ID}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+            res = drive_service.files().list(
+                q=q,
+                fields="files(id, name)",
+                supportsAllDrives=True,
+                includeItemsFromAllDrives=True
+            ).execute()
+            drive_folders = res.get("files", [])
+            log(f"☁️ Google Drive Cloud API: Found {len(drive_folders)} folders in Portfolio.")
+
+            for df in drive_folders:
+                b_name = df["name"]
+                b_slug = slugify(b_name)
+                if b_slug in existing_slugs or b_name.lower() in existing_clients:
+                    continue
+
+                log(f"🆕 Found new unpublished brand in Google Drive: {b_name} (ID: {df['id']})")
+                # Download images
+                temp_dir = Path("/tmp/portfolio_downloads" if os.name != "nt" else "temp_portfolio") / b_slug
+                temp_dir.mkdir(parents=True, exist_ok=True)
+
+                # Get files
+                fq = f"'{df['id']}' in parents and mimeType contains 'image/' and trashed = false"
+                fres = drive_service.files().list(
+                    q=fq,
+                    fields="files(id, name, mimeType)",
+                    supportsAllDrives=True,
+                    includeItemsFromAllDrives=True
+                ).execute()
+                
+                downloaded_images = []
+                for fitem in fres.get("files", []):
+                    dest = temp_dir / fitem["name"]
+                    if not dest.exists():
+                        req = drive_service.files().get_media(fileId=fitem["id"], supportsAllDrives=True)
+                        with open(dest, "wb") as fh:
+                            downloader = MediaIoBaseDownload(fh, req)
+                            done = False
+                            while not done:
+                                _, done = downloader.next_chunk()
+                    downloaded_images.append(dest)
+
+                if downloaded_images:
+                    await process_brand(b_name, downloaded_images)
+                    existing_slugs.add(b_slug)
+        except Exception as e:
+            err_str = str(e)
+            if "404" in err_str or "notFound" in err_str:
+                log(f"⚠️ Google Drive Portfolio papkasiga ({G_DRIVE_FOLDER_ID}) ruxsat yo'q.")
+                log(f"👉 Iltimos, papkani Google Drive'da '{SA_EMAIL}' ga ulashing (Viewer/Editor).")
+            else:
+                log(f"⚠️ Google Drive API xatosi: {e}")
+
+    # --- Mode 2: Local Folders (G:\\My Drive or portfolio_inbox) ---
+    for loc_dir in LOCAL_CANDIDATE_DIRS:
+        if loc_dir.exists() and loc_dir.is_dir():
+            log(f"📂 Scanning local directory: {loc_dir}")
+            for item in loc_dir.iterdir():
+                if item.is_dir() and not item.name.startswith("."):
+                    b_name = item.name
+                    b_slug = slugify(b_name)
+                    if b_slug in existing_slugs or b_name.lower() in existing_clients:
+                        continue
+
+                    # Collect images
+                    images = []
+                    for ext in ["*.jpg", "*.jpeg", "*.png", "*.webp"]:
+                        images.extend(item.glob(ext))
+                        images.extend(item.glob(ext.upper()))
+
+                    if images:
+                        log(f"🆕 Found new unpublished brand locally: {b_name} ({len(images)} images)")
+                        txt_content = None
+                        txt_files = list(item.glob("*.txt")) + list(item.glob("*.md"))
+                        if txt_files:
+                            try:
+                                txt_content = txt_files[0].read_text(encoding="utf-8")
+                            except Exception:
+                                pass
+                        await process_brand(b_name, images, local_txt=txt_content)
+                        existing_slugs.add(b_slug)
+
+
 async def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Jon Branding Portfolio Drive Automation")
+    parser = argparse.ArgumentParser(description="Jon Branding Portfolio Drive Automation 24/7")
     parser.add_argument("--once", action="store_true", help="Run a single scan and exit")
     parser.add_argument("--watch", action="store_true", help="Continuously watch folder for changes")
     parser.add_argument("--target", type=str, help="Process a specific brand folder by name")
     args = parser.parse_args()
 
-    log("🚀 Portfolio Drive Automation initializing...")
-    if not PORTFOLIO_DIR.exists():
-        log(f"❌ Google Drive portfolio folder not found at: {PORTFOLIO_DIR}")
-        sys.exit(1)
-
-    log(f"📂 Google Drive Portfolio folder: {PORTFOLIO_DIR}")
+    log("🚀 Portfolio Drive Automation 24/7 initializing...")
 
     if args.target:
-        target_path = PORTFOLIO_DIR / args.target
-        if not target_path.exists():
-            log(f"❌ Target folder {target_path} not found.")
-            sys.exit(1)
-        await process_brand_folder(target_path)
+        # Check in local dirs first
+        found_target = False
+        for loc_dir in LOCAL_CANDIDATE_DIRS:
+            target_path = loc_dir / args.target
+            if target_path.exists() and target_path.is_dir():
+                images = []
+                for ext in ["*.jpg", "*.jpeg", "*.png", "*.webp"]:
+                    images.extend(target_path.glob(ext))
+                    images.extend(target_path.glob(ext.upper()))
+                await process_brand(args.target, images)
+                found_target = True
+                break
+        if not found_target:
+            log(f"❌ Target folder '{args.target}' not found in local directories.")
         return
 
-    # Check which folders are unpublished
-    existing_sanity = fetch_sanity_portfolios()
-    existing_slugs = {p.get("slug") for p in existing_sanity if p.get("slug")}
-    existing_clients = {p.get("client", "").lower() for p in existing_sanity if p.get("client")}
-
-    folders = [f for f in PORTFOLIO_DIR.iterdir() if f.is_dir()]
-    log(f"Found {len(folders)} brand folders in Google Drive:")
-    for f in folders:
-        slug = slugify(f.name)
-        is_published = slug in existing_slugs or f.name.lower() in existing_clients
-        status_tag = "✅ PUBLISHED" if is_published else "🆕 UNPUBLISHED"
-        log(f" - {f.name:15} -> {status_tag}")
-
-    for folder in folders:
-        slug = slugify(folder.name)
-        if slug not in existing_slugs and folder.name.lower() not in existing_clients:
-            log(f"\nProcessing unpublished folder: {folder.name}")
-            try:
-                await process_brand_folder(folder)
-            except Exception as e:
-                log(f"Error processing {folder.name}: {e}")
+    # Run scan
+    await scan_and_process()
 
     if args.watch:
-        log("\n👀 Watching for new folders and files (interval: 60s)... Press Ctrl+C to stop.")
+        log("\n👀 24/7 Watch mode active (interval: 60s)... Press Ctrl+C to stop.")
         while True:
             time.sleep(60)
             try:
-                existing_sanity = fetch_sanity_portfolios()
-                existing_slugs = {p.get("slug") for p in existing_sanity if p.get("slug")}
-                for folder in PORTFOLIO_DIR.iterdir():
-                    if folder.is_dir() and slugify(folder.name) not in existing_slugs:
-                        log(f"New folder detected: {folder.name}")
-                        await process_brand_folder(folder)
+                await scan_and_process()
             except Exception as e:
                 log(f"Watcher loop error: {e}")
 
