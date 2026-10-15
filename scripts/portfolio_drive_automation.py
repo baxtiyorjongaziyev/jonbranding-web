@@ -686,17 +686,35 @@ async def scan_and_process():
                 temp_dir = Path("/tmp/portfolio_downloads" if os.name != "nt" else "temp_portfolio") / b_slug
                 temp_dir.mkdir(parents=True, exist_ok=True)
 
-                # Get files
-                fq = f"'{df['id']}' in parents and mimeType contains 'image/' and trashed = false"
-                fres = drive_service.files().list(
-                    q=fq,
-                    fields="files(id, name, mimeType)",
-                    supportsAllDrives=True,
-                    includeItemsFromAllDrives=True
-                ).execute()
-                
+                # Recursively fetch all image files (including subfolders like Miro/Sut)
+                def fetch_drive_images_recursive(parent_id: str) -> List[Dict[str, str]]:
+                    collected = []
+                    # Files in this folder
+                    fq = f"'{parent_id}' in parents and mimeType contains 'image/' and trashed = false"
+                    fres = drive_service.files().list(
+                        q=fq,
+                        fields="files(id, name, mimeType)",
+                        supportsAllDrives=True,
+                        includeItemsFromAllDrives=True,
+                        pageSize=100
+                    ).execute()
+                    collected.extend(fres.get("files", []))
+                    # Subfolders
+                    sq = f"'{parent_id}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                    sres = drive_service.files().list(
+                        q=sq,
+                        fields="files(id, name)",
+                        supportsAllDrives=True,
+                        includeItemsFromAllDrives=True,
+                        pageSize=50
+                    ).execute()
+                    for sub in sres.get("files", []):
+                        collected.extend(fetch_drive_images_recursive(sub["id"]))
+                    return collected
+
+                all_image_meta = fetch_drive_images_recursive(df['id'])
                 downloaded_images = []
-                for fitem in fres.get("files", []):
+                for fitem in all_image_meta:
                     dest = temp_dir / fitem["name"]
                     if not dest.exists():
                         req = drive_service.files().get_media(fileId=fitem["id"], supportsAllDrives=True)
@@ -729,16 +747,16 @@ async def scan_and_process():
                     if b_slug in existing_slugs or b_name.lower() in existing_clients:
                         continue
 
-                    # Collect images
+                    # Collect images recursively (including subfolders)
                     images = []
                     for ext in ["*.jpg", "*.jpeg", "*.png", "*.webp"]:
-                        images.extend(item.glob(ext))
-                        images.extend(item.glob(ext.upper()))
+                        images.extend(item.rglob(ext))
+                        images.extend(item.rglob(ext.upper()))
 
                     if images:
                         log(f"🆕 Found new unpublished brand locally: {b_name} ({len(images)} images)")
                         txt_content = None
-                        txt_files = list(item.glob("*.txt")) + list(item.glob("*.md"))
+                        txt_files = list(item.rglob("*.txt")) + list(item.rglob("*.md"))
                         if txt_files:
                             try:
                                 txt_content = txt_files[0].read_text(encoding="utf-8")
