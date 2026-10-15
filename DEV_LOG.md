@@ -1,5 +1,36 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | 60-30-10 Dizayn Tizimi, Hero Rasm Rotatori va Shirona Keysi (Antigravity)
+- **Foydalanuvchi talablari:**
+  1. "60% oq rang 30% qora 10% ko'k rang ishlatilishi kerak edi. Polniy sayt design system bo'yicha"
+  2. "Heroda Qilgan ishlarimiz rasmlari almashib tursin"
+  3. "home pageda shirona ko'rinmayapti"
+  4. "Juda xira bo'lib ketmasin sifati buzilmagan holatda tez ochilsin"
+  5. Barcha ishonch bildirgan mijozlar logolari ko'rinsin.
+- **Kiritilgan asosiy o'zgarishlar:**
+  1. **60-30-10 Rang Arxitekturasi (`globals.css` & `atelier.css`):**
+     - Bosh sahifa va atelier seksiyalari qat'iy 60% oq fon (`--at-bg: #FFFFFF;`, `--paper: #FFFFFF;`), 30% qora struktura/matn (`--at-ink: #0A0B0E;`, `--at-ink-2: #4B5563;`, chuqur ankor bloklari `#08090C`) va 10% elektr ko'k aksent (`--at-accent: #2554FF;`, hover/action elementlari) qoidasiga keltirildi.
+     - `.atelier-theme` va `body:has(.atelier-home)` fonlari kulrang `#F4F5F7` dan toza oppoq `#FFFFFF` ga almashtirildi.
+     - Barcha eskirgan terrakotta (`#C2552A`) aksentlari zamonaviy elektr ko'k (`#2554FF`) rangiga o'tkazildi.
+     - Galereya kartochkalari (`.gal-tile`) oq fon, nozik `#E5E7EB` chegaralar, yumshoq soya va elektr ko'k neon hover bilan bezatildi.
+  2. **Hero Flagman Ishlar Avto-Rotatori (`at-hero.tsx`):**
+     - Flagman loyihalar (Rash Milk, Shirona, Savod, Den Aroma, Boyarin, Fidda) har 3.8 soniyada silliq va o'ta tiniq almashib turadigan rotatsiya mexanizmi qo'shildi.
+     - Kartochka ustiga kursor olib borilganda rotatsiya avtomatik to'xtaydi (`isPaused`), kursor olinganda davom etadi.
+     - Interaktiv nuqtalar (slide dots) orqali istalgan keysga qo'lda o'tish imkoniyati berildi.
+     - Rasmlarni oldindan xotiraga yuklash (`new window.Image()`) orqali slaydlar bir lahzada, hech qanday xiralik yoki kechikishsiz (zero blur/zero lag) ochiladi.
+     - `at-hero.test.tsx` dagi yagona rasm rendersi va atributlari (`data-priority="true"`, `data-quality="75"`) to'liq saqlanib, 100% yashil o'tdi.
+  3. **Shirona Keysi Qayta Tiklandi (`portfolio-presentation.ts`):**
+     - Sanity CMS dagi `portfolio-shirona` ma'lumotlari (`image-72d13e2a...`) bosh sahifada ustuvor qilib ulandi.
+     - Mahalliy `public/images/cms/portfolio/shirona/shirona-cover.jpg` fayli to'ldirildi. Natijada Shirona bosh sahifada (Hero va Galereya) to'liq ko'rinadigan bo'ldi.
+  4. **Tepa Menyu (`header.tsx` & `header.test.tsx`):**
+     - Oq fonli bosh sahifa uchun qora brend logosi (`logo-black.svg`) va qora navigatsiya havolalari yoqildi.
+     - Header testlari (8/8) 100% yashil o'tdi.
+  5. **Mijozlar Logolari (`static-data.ts`):**
+     - Fidda brendidagi `hiddenInHero` cheklovi olib tashlanib, barcha 34 ta mijoz logolari to'liq faollashtirildi.
+- **Sifat va Test Natijalari:**
+  - `npm run verify:fast`: 68 ta test fayli, 440 ta test 100% yashil o'tdi.
+  - `npm run build`: 165 ta statik sahifa muvaffaqiyatli va xatosiz generatsiya qilindi.
+
 ## 2026-10-15 | Bosh Sahifa Collins & Koto Obsidian Dark Uslubida To'liq Yangilandi (Antigravity)
 - **Foydalanuvchi murojaati:** "home page Juda rasvo dizaynda umuman Premium branding agentlikka o'xshamaydi".
 - **Tanlangan yo'nalish:** Collins, Koto va Pentagram darajasidagi premium Obsidian Dark & Platinum palitrasi (`#08090C`), grand editorial tipografiya (`Instrument Serif` + tight modern grotesk), flagman keyslarning (Rash Milk, Shirona, Savod, Boyarin, Fidda) keng formatli vizual ko'rinishi va SaaS elementlari (narx jadvallari, chegirma bloklari, ortiqcha SEO matnlari)ni bosh sahifadan chiqarish.

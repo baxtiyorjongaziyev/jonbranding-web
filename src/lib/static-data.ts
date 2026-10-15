@@ -11,7 +11,7 @@ export const staticBrands: Brand[] = [
     { name: 'Den Aroma', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/eba37120fa078eaf1cfabb93273ef5a8755e89bc-286x63.png' }, 
     { name: 'Velzo', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/5789862c43bcf1423a4e7d9abfa9e976dcdce4c9-383x141.png' }, 
     { name: 'Bodomchi', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/6bd5ebb503173ffe04133091154e5a30cc2380ef-555x141.png' },
-    { name: 'Fidda by Sevara', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png', hiddenInHero: true }, 
+    { name: 'Fidda by Sevara', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/0485c3ac7efb8043632c9bb57db90cca1223fbe0-219x71.png' }, 
     { name: 'Boyarin', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/e3f60742daeebc03b51ab018d630a87eb62ae7b1-546x140.png' }, 
     { name: 'Viton', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/5fb8453d398d0449e03e81c16b31a331a8ca2a79-455x141.png' }, 
     { name: 'Ravza Mebel', logo: 'https://cdn.sanity.io/images/h6ymmj0v/production/43c823497d60761a33fb26ba3750df418d4989b4-203x71.png' }, 
