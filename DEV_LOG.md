@@ -1,5 +1,24 @@
 # ðŸ““ Dev Log â€” Jon Branding Web
 
+## 2026-10-15 | Google Drive Portfolio avtomatizatsiyasi & Shirona keysi jonli saytga chiqarildi (Antigravity)
+- **Talab:** Google Drive Portfolio papkasiga yangi ish rasmlari qo'shilganda, automation Telegram va Instagram'dan loyiha matnlarini topib, keys sifatida Sanity CMS va saytga avtomatik joylashtirishi.
+- **Yechim & Arxitektura:**
+  1. `scripts/portfolio_drive_automation.py` yaratildi: `G:\My Drive\JonBranding\Portfolio` (va Drive API) ni kuzatadi, yangi brend papkalari va rasmlarni aniqlaydi.
+  2. Telethon (`StringSession`) orqali Telegram kanallari (`@JonBranding`, guruhlar, dialoglar) va Instagram'dan haqiqiy keys matnini qidirib topadi (Zero Hallucination siyosati: faqat real yozilgan matn olinadi).
+  3. Gemini 2.5 Flash yordamida matn va rasmlarni multimodal tahlil qilib, 4 tilda (`uz`, `ru`, `en`, `zh`) professional keys tuzilmasini (sarlavha, mijoz, kategoriya, teglar, muammo, konseptsiya, fasad, natijalar) hosil qiladi.
+  4. Rasmlarni Sanity CMS asset API (`cdn.sanity.io`)ga yuklaydi, muqova va galereya havolalarini ulaydi, `portfolio` hujjatini yaratadi.
+  5. `src/lib/portfolio-fallbacks.ts` faylini avtomatik yangilaydi va tasvirlarni `public/images/cms/portfolio/<slug>/` papkasiga saqlaydi (offline / instant SSG fallback).
+  6. Baxtiyorjon (@baxtiyorjongaziyev / 150074828)ga Telegram orqali jonli sahifa havolasi bilan xabarnoma yuboradi.
+- **Jonli test & Natija:**
+  - `Shirona` brendi (Samarqand shirinliklar uyi) bo'yicha to'liq pipeline ishga tushirildi:
+    - Telegram `@JonBranding` (msg 235) dagi Registon madrasasi peshtoqi va piksel naqshga asoslangan haqiqiy post matni topildi.
+    - 15 ta original brandbook va qadoq rasmlari Sanity'ga yuklandi va lokal saqlandi.
+    - Sanity CMS `portfolio-shirona` hujjati muvaffaqiyatli yaratildi.
+    - `https://jonbranding.uz/uz/portfolio/shirona` sahifasi jonli holatga keltirildi.
+  - `package.json` ga `npm run portfolio:sync` va `npm run portfolio:watch` buyruqlari qo'shildi.
+- **Verifikatsiya:**
+  - `npm run verify:fast`: 67 test fayli, 432 ta test 100% muvaffaqiyatli o'tdi.
+
 ## 2026-10-10 | Mobil PWA production deploy boshlandi (Codex)
 - Yakun: 18:03 Asia/Tashkent, PWA commit 1765f033 Vercel production Ready; deployment 9nBE2t33cTxZbBXvDduzxx66YKvf. www.jonbranding.uz domeni shu deployment'ga ulanganini Vercel browser UI tasdiqladi; GitHub Vercel commit status success.
 - Production build: 165 sahifa, deployment 2m 43s. Lighthouse CI va CodeQL success; asosiy GitHub CI tekshiruvi kuzatuv paytida davom etmoqda. Haqiqiy telefonda install testi bajarilmadi.
@@ -1935,9 +1954,9 @@ Native agent discovered all three project skills and accurately reported project
   5. `src/components/layout/header-mobile-menu.tsx`: Mobil gamburger menyuga "Ilovani o'rnatish" tugmasi qo'shildi.
   6. i18n: `uz.json`, `ru.json`, `en.json`, `zh.json` fayllariga `pwa` kalitlari Uzbek-first tamoyilida to'liq qo'shildi.
 - **Tekshiruv:** `npm run verify:fast` (barcha 54 test to'plami, 376 ta test) va `npm run typecheck` 100% xatosiz muvaffaqiyatli o'tdi.
-\n### 2026-10-10 — production mobil vizual audit\n- jonbranding.uz home, menu, PWA, portfolio filter, footer, pricing va Perfona detail tekshirildi (Chrome emulation 390/320/360).\n- Tasdiqlandi: callback/mobile-nav/menu collision; food filter 23 tiles; nonexistent footer anchors; PWA broken icon; gallery copy mismatch; duplicate close.\n- Report: docs/audits/2026-10-10-mobile-audit.md; screenshots external visualization directory.\n- Audit-only: product code unchanged, no lead submitted. Harness rerun not required for docs-only audit; prior code verification remains separate from visual findings.\n
+\n### 2026-10-10 ï¿½ production mobil vizual audit\n- jonbranding.uz home, menu, PWA, portfolio filter, footer, pricing va Perfona detail tekshirildi (Chrome emulation 390/320/360).\n- Tasdiqlandi: callback/mobile-nav/menu collision; food filter 23 tiles; nonexistent footer anchors; PWA broken icon; gallery copy mismatch; duplicate close.\n- Report: docs/audits/2026-10-10-mobile-audit.md; screenshots external visualization directory.\n- Audit-only: product code unchanged, no lead submitted. Harness rerun not required for docs-only audit; prior code verification remains separate from visual findings.\n
 
-### 2026-10-10 — PWA icon contrast fix
+### 2026-10-10 ï¿½ PWA icon contrast fix
 - Reproduced: dark JON on transparent regular icons disappears against dark backgrounds. Existing brand vector retained; opaque cream backgrounds rasterized with sharp at exact 192/512/180 sizes; maskable safe-area retained.
 - Added v2 icon URLs, manifest/apple metadata/SW cache updated; installer uses unoptimized local PNG to avoid broken optimizer delivery.
 - verify:fast and verify passed (56 files, 384 tests, typecheck, 4 locales); PNG dimensions/opaque checks passed. Self-review completed. No unrelated changes reverted.
@@ -1952,7 +1971,7 @@ Native agent discovered all three project skills and accurately reported project
 - Final production verified 2026-10-10 19:01 Asia/Tashkent: commit622fc58, Vercel7rmmCP86Vot4RejLgJhrwhVzU9Va Ready, www.jonbranding.uz assigned. Browser icon-192-v2.png renders with naturalWidth/Height192 and complete=true; screenshot saved external mobile-audit/pwa-icon-production.png. Real installed launcher icon refresh not tested.
 
 
-### 2026-10-10 — mobil audit remediation
+### 2026-10-10 ï¿½ mobil audit remediation
 - Implemented single mobile contact surface: external callback FAB hidden through exposed CSS part; mobile sticky CTA disabled; menu/dialog/chat/PWA suppress quick actions. Shadow callback observer tracks form open/closed without changing backend or tracking.
 - Footer anchors ->ishlar/savol; mobile drawer one localized44x44 close; PWA share/home-screen steps localized all4 languages.
 - Home portfolio six known projects with existing local brand art, canonical CMS URLs retained; service-based filters replace all-null industry fields; selected-state semantics, empty state, full portfolio link; no guessed years.
@@ -1964,14 +1983,14 @@ Native agent discovered all three project skills and accurately reported project
 - Final checks: verify:fast +verify397 tests59 files, typecheck/i18n1253keys per locale, scoped ESLint and git diff --check pass. Local pricing320 and Perfona360 overflow0; AI chat360 width336px and mobile nav hidden. Self-review completed; screenshots saved outside repo. Real-device native install/keyboard and lead delivery remain unverified.
 
 
-### 2026-10-10 — Mobile audit production verification
+### 2026-10-10 ï¿½ Mobile audit production verification
 - Commit 57aec492 deployed: Vercel FvJxU2ykZqW9FgaoKen67G8YjbKh Ready at 19:21:47 Asia/Tashkent, www.jonbranding.uz assigned; GitHub Vercel status success.
 - Live Chrome iPhone emulation 390px: one 44px menu close, no horizontal overflow; bottom actions hidden while menu/callback open; service Qadoq filter shows only Boyarin, reset restores six tiles; FAQ navigates #savol with section top 0.14px.
 - Live pricing 320px: scrollWidth=clientWidth=320, undefined image alt absent. Local 360px AI chat and Perfona cover verified earlier. No fake lead or chat submitted.
 - verify:fast and verify passed (397 tests, typecheck, four-locale parity). Real iPhone/Android installation, OS keyboard and actual lead delivery remain unverified.
 - Screenshots saved outside repository in Codex visualizations mobile-audit folder. Obsidian project append succeeded. Own local dev server stopped.
 
-### 2026-10-10 — Installed PWA scroll error investigation
+### 2026-10-10 ï¿½ Installed PWA scroll error investigation
 - Owner reports root homepage error after scrolling in installed PWA. Fresh Chrome mobile page scrolled to footer without runtime errors; exact phone exception is not yet reproduced.
 - Applied deliver-task workflow; self-review only. Scope: service worker cache lifecycle, registration/resume update, root chunk error recovery, SW response headers, focused behavioral tests.
 - Confirmed defect: old SW activation deleted prior immutable Next chunks while immediately taking over existing clients. Fixed by migrating cached build assets before cleanup/claim and preserving unrelated caches. Navigations bypass HTTP cache; offline missing assets return a real 503 response.
@@ -1985,8 +2004,8 @@ Native agent discovered all three project skills and accurately reported project
 
 
 2026-10-11 â€” Sales audit remediation (local): Unified the free offer as a 20-minute consultation in four locales; added shared contextual /api/submit-form lead intake with a 15s timeout and retained service/source; removed duplicate callback attributes and owner Telegram from header/footer primary flows; added early canonical-price shortcuts and service/package anchors; withheld metrics without reviewed source/period and unattributed Den Aroma narrative; kept actual project images and video testimonials, excluded editorial captions from direct quotes; replaced absolute sales/legal promises with scope/deliverables. Mobile polish includes opaque quick nav, guarded storage, viewport-aware chat and early PWA/chat events. Found and guarded homepage testimonials sessionStorage read. Audit report: docs/audits/2026-10-11-sales-machine-audit.md. Verification and deployment still pending.
-2026-10-11 — Verification: final verify:fast and verify passed (65 files / 418 tests, 4 locales x 1321 keys, TypeScript); full eslint passed; local optimized production build passed (165 static pages). Chrome mobile emulation: contextual home form opens; pricing logo anchor works; logo remains selected in form; 390px and 320px form fits with no horizontal overflow. No real lead submitted. Preparing authorized production release.
-2026-10-11 — Release queued: commit 82ee5cbc07288806ea9a4b76a26f2f1b3813e2a4 pushed to main; Vercel deployment 7doNxvY8jfJcqCzZ5HCEe9Tgs8Xx pending. The server reported a main-branch PR/check rule bypass by the authorized account; GitHub CI is running separately. User AGENTS.md edit and unrelated untracked files were excluded. Production completion has not yet been claimed.
+2026-10-11 ï¿½ Verification: final verify:fast and verify passed (65 files / 418 tests, 4 locales x 1321 keys, TypeScript); full eslint passed; local optimized production build passed (165 static pages). Chrome mobile emulation: contextual home form opens; pricing logo anchor works; logo remains selected in form; 390px and 320px form fits with no horizontal overflow. No real lead submitted. Preparing authorized production release.
+2026-10-11 ï¿½ Release queued: commit 82ee5cbc07288806ea9a4b76a26f2f1b3813e2a4 pushed to main; Vercel deployment 7doNxvY8jfJcqCzZ5HCEe9Tgs8Xx pending. The server reported a main-branch PR/check rule bypass by the authorized account; GitHub CI is running separately. User AGENTS.md edit and unrelated untracked files were excluded. Production completion has not yet been claimed.
 
 ## 2026-10-11 - Client logos and release readback
 - 82ee5cb Vercel production Ready at 13:49 Asia/Tashkent; live mobile selected Logotip form verified and screenshot saved.
