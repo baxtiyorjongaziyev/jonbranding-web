@@ -26,7 +26,7 @@ export default function AtPricing({ onOpen, lang = 'uz' }: Props) {
 
         <h2
           className="font-bold leading-tight mb-4"
-          style={{ fontSize: 'clamp(32px, 4.4vw, 56px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}
+          style={{ fontSize: 'clamp(32px, 4.4vw, 56px)', letterSpacing: '-0.045em', color: 'var(--at-ink)' }}
         >
           {l.heading}{' '}
           <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>

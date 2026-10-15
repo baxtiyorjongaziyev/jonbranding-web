@@ -47,6 +47,7 @@ const config = [
       ".claude/worktrees/**",
       "opencode_app/**",
       "graphify-out/**",
+      "services/case-reels/**",
       "DESIGN_AUDIT/**",
       "opencode_app/**",
     ],

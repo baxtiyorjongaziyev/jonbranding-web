@@ -11,7 +11,7 @@ export default function AtFinalCta({ onOpen, lang = 'uz' }: Props) {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(27,77,255,0.18) 0%, transparent 70%)' }} />
       <div className="relative max-w-[1320px] mx-auto px-8 sm:px-5 text-center">
         <div className="inline-block mb-6 px-4 py-2 rounded-full text-xs tracking-widest uppercase" style={{ fontFamily: 'var(--font-mono)', color: 'rgba(244,241,232,.5)', border: '1px solid rgba(244,241,232,.12)' }}>{l.badge}</div>
-        <h2 className="font-bold leading-none mb-8" style={{ fontSize: 'clamp(48px, 7vw, 112px)', letterSpacing: '-0.04em', color: 'var(--at-bg)' }}>
+        <h2 className="font-bold leading-none mb-8" style={{ fontSize: 'clamp(48px, 7vw, 112px)', letterSpacing: '-0.045em', color: 'var(--at-bg)' }}>
           {l.h2a}<br />
           <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>{l.h2b}</span>
         </h2>

@@ -16,7 +16,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   --paper: #FFFFFF;
   --ink: #0E1015;
   --ink-2: #3B3D45;
-  --muted: #6B7280;
+  --muted: #5F6571; /* WCAG AA: bg, bg-2, paper ustida ≥4.9:1 */
   --line: #DDE0E6;
   --line-2: #E8EAEE;
   --accent: #1B4DFF;
@@ -34,7 +34,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   --paper: #14161C;
   --ink: #F4F1E8;
   --ink-2: #C1BDB0;
-  --muted: #7A7668;
+  --muted: #8A8678; /* WCAG AA: dark bg ustida ≥4.9:1 */
   --line: #1F222A;
   --line-2: #262934;
   --accent: #5B7CFF;
@@ -297,7 +297,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .hero-eyebrows .pill .b {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   background: var(--green-soft); color: var(--green);
   padding: 3px 8px; border-radius: 999px;
   letter-spacing: 0.04em; font-weight: 600;
@@ -370,7 +370,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .hero-meta .k {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; text-transform: uppercase;
+  font-size: 11px; text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
   margin-bottom: 6px;
@@ -418,7 +418,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   position: absolute; left: 12px; right: 12px; bottom: 12px;
   display: flex; justify-content: space-between; align-items: end;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(255,255,255,.85);
@@ -534,7 +534,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .bs-cell .lbl {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   opacity: .65;
@@ -543,7 +543,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .bs-cell .val {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   opacity: .7;
 }
@@ -683,7 +683,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   top: 16px; left: 16px; right: 16px;
   display: flex; justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255,255,255,.7);
@@ -819,7 +819,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .audit-glabel {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--muted);
   text-transform: uppercase;
@@ -834,7 +834,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .audit-count {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--muted);
   text-transform: uppercase;
@@ -1032,7 +1032,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 @media (max-width: 480px) {
   .atelier-theme .report-page {
-    font-size: 9px;
+    font-size: 11px;
     padding: 14px 12px;
   }
   .atelier-theme .rp-top, .atelier-theme .rp-bot {
@@ -1070,7 +1070,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .rp-eb {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   color: var(--muted);
   text-transform: uppercase;
@@ -1140,7 +1140,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .rp-bars {
  display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
 .atelier-theme .rp-bar {
- display: grid; grid-template-columns: 60px 1fr 24px; gap: 8px; align-items: center; font-size: 9px; }
+ display: grid; grid-template-columns: 60px 1fr 24px; gap: 8px; align-items: center; font-size: 11px; }
 .atelier-theme .rp-bar-l {
  color: var(--ink-2); }
 .atelier-theme .rp-bar-track {
@@ -1148,7 +1148,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .rp-bar-fill {
  height: 100%; border-radius: 3px; }
 .atelier-theme .rp-bar-v {
- font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--ink); text-align: right; font-size: 9px; }
+ font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--ink); text-align: right; font-size: 11px; }
 .atelier-theme .rp-recs {
  margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
 .atelier-theme .rp-recs-head {
@@ -1161,7 +1161,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   margin-bottom: 8px;
 }
 .atelier-theme .rp-rec {
- display: grid; grid-template-columns: 12px 1fr; gap: 6px; padding: 4px 0; font-size: 10px; align-items: center; }
+ display: grid; grid-template-columns: 12px 1fr; gap: 6px; padding: 4px 0; font-size: 11px; align-items: center; }
 .atelier-theme .rp-rec-dot {
  width: 7px; height: 7px; border-radius: 50%; }
 .atelier-theme .rp-rec-urgent {
@@ -1303,7 +1303,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
   display: flex; justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(244,241,232,.55);
@@ -1322,6 +1322,10 @@ html[data-theme="dark"] body:has(.atelier-home) {
   border-radius: 2px;
   background: rgba(244,241,232,.12);
   outline: none;
+}
+.atelier-theme .calc-slider:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
 }
 .atelier-theme .calc-slider::-webkit-slider-thumb {
 
@@ -1360,7 +1364,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .calc-out .k {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   color: rgba(244,241,232,.55);
   text-transform: uppercase;
@@ -1540,7 +1544,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 /* Modal 2-step */.atelier-theme .mdl-step {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   color: var(--muted);
   margin-bottom: 8px;
@@ -1696,7 +1700,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .manifesto-meta .k {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
+  font-size: 11px; letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 14px;
@@ -1740,7 +1744,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .ledger-label {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--muted);
   display: flex; flex-direction: column; gap: 4px;
 }
@@ -1775,7 +1779,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .ledger-logo .yr {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
   vertical-align: super;
   margin-left: 4px;
@@ -1891,7 +1895,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .diag-head .tag {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
+  font-size: 11px; letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -2045,7 +2049,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   position: absolute;
   top: 24px; left: 24px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255,255,255,.7);
@@ -2120,7 +2124,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .feat-metric .l {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.06em;
+  font-size: 11px; letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(255,255,255,.55);
   margin-top: 10px;
@@ -2141,7 +2145,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .idx-row.head {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -2268,7 +2272,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   padding-top: 28px;
   border-top: 1px solid var(--line);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
+  font-size: 11px; letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -2313,7 +2317,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   background: var(--accent);
   color: #fff;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2367,7 +2371,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .guarantee-text {
  font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
 .atelier-theme .guarantee-text .l {
- display: block; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; margin-bottom: 2px; }
+ display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; margin-bottom: 2px; }
 .atelier-theme .price-card.featured::before {
 
   content: '';
@@ -2385,7 +2389,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .price-tag {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--muted);
   text-transform: uppercase;
@@ -2457,7 +2461,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   background: var(--bg-2);
   color: var(--ink);
   display: grid; place-items: center;
-  font-size: 10px; font-weight: 700;
+  font-size: 11px; font-weight: 700;
   margin-top: 2px;
 }
 .atelier-theme .price-card.featured li .ck {
@@ -2698,7 +2702,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .final-meta .k {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(244,241,232,.5);
@@ -2734,7 +2738,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .foot-col h4 {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(244,241,232,.45);
@@ -2830,7 +2834,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .fld label {
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
+  font-size: 11px; letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -2857,7 +2861,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 /* DECORATIONS — shared */@keyframes spin-slow {
  from { transform: rotate(0); } to { transform: rotate(360deg); } }@keyframes float-y {
  0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }.atelier-theme .marg {
- position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); opacity: 0.55; z-index: 3; }
+ position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); opacity: 0.55; z-index: 3; }
 .atelier-theme .marg.left {
  left: 16px; top: 80px; }
 .atelier-theme .marg.right {
@@ -2867,7 +2871,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
  display: none;   }
 }
 .atelier-theme .stamp {
- display: inline-block; padding: 6px 12px; border: 2px solid var(--terra); color: var(--terra); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; transform: rotate(-3deg); border-radius: 6px; background: rgba(194,85,42,0.04); }
+ display: inline-block; padding: 6px 12px; border: 2px solid var(--terra); color: var(--terra); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; transform: rotate(-3deg); border-radius: 6px; background: rgba(194,85,42,0.04); }
 .atelier-theme .watermark {
  position: absolute; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(180px, 22vw, 360px); color: var(--ink); opacity: 0.04; line-height: 0.8; pointer-events: none; z-index: 0; letter-spacing: -0.03em; }
 .atelier-theme .asterisk {

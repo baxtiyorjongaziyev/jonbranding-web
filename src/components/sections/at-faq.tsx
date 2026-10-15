@@ -20,7 +20,7 @@ export default function AtFaq({ lang = 'uz', onOpen }: Props) {
               <span style={{ color: 'var(--at-ink)', fontWeight: 500 }}>{l.sectionN}</span>
               {l.label}
             </span>
-            <h2 className="font-bold leading-none mb-5" style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}>
+            <h2 className="font-bold leading-none mb-5" style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', letterSpacing: '-0.045em', color: 'var(--at-ink)' }}>
               {l.heading}<br /><span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>{l.headingEm}</span>
             </h2>
             <p style={{ color: 'var(--at-ink-2)', fontSize: 15, lineHeight: 1.65, maxWidth: 280 }}>{l.note}</p>
