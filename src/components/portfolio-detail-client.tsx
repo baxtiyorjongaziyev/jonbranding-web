@@ -84,6 +84,21 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
   const [isDragging, setIsDragging] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
+  // Preload adjacent images in lightbox for instantaneous browsing
+  React.useEffect(() => {
+    if (lightboxIndex === null || !project.galleryImages) return;
+    const len = project.galleryImages.length;
+    if (len <= 1) return;
+    const nextIdx = (lightboxIndex + 1) % len;
+    const prevIdx = (lightboxIndex - 1 + len) % len;
+    if (typeof window !== 'undefined') {
+      const imgNext = new window.Image();
+      imgNext.src = project.galleryImages[nextIdx];
+      const imgPrev = new window.Image();
+      imgPrev.src = project.galleryImages[prevIdx];
+    }
+  }, [lightboxIndex, project.galleryImages]);
+
   // Before/After Slider Move handler
   const handleSliderMove = (clientX: number, containerRect: DOMRect) => {
     const x = clientX - containerRect.left;
@@ -245,7 +260,10 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   src={project.afterImage}
                   alt={project.newHint || 'After'}
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 1024px) 100vw, 1200px"
+                  quality={75}
+                  priority
+                  unoptimized={project.afterImage.startsWith('https://cdn.sanity.io/')}
                   className="object-cover"
                   draggable={false}
                 />
@@ -267,7 +285,10 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     src={project.beforeImage}
                     alt={project.oldHint || 'Before'}
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 1024px) 100vw, 1200px"
+                    quality={75}
+                    priority
+                    unoptimized={project.beforeImage.startsWith('https://cdn.sanity.io/')}
                     className="object-cover"
                     draggable={false}
                   />
@@ -385,10 +406,13 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                 >
                   <Image
                     src={img}
-                    alt={`Gallery ${i}`}
+                    alt={`${project.title} - visual ${i + 1}`}
                     fill
-                    loading="lazy"
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    priority={i < 2}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                    quality={75}
+                    unoptimized={img.startsWith('https://cdn.sanity.io/')}
                     className="object-cover group-hover:scale-102 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -453,8 +477,12 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
               >
                 <Image
                   src={project.galleryImages[lightboxIndex]}
-                  alt={`Lightbox ${lightboxIndex}`}
+                  alt={`Full view ${lightboxIndex + 1}`}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 900px"
+                  priority
+                  quality={75}
+                  unoptimized={project.galleryImages[lightboxIndex].startsWith('https://cdn.sanity.io/')}
                   className="object-contain"
                 />
               </motion.div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { optimizeSanityUrl } from '@/lib/portfolio-presentation';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchBrands } from '@/lib/data/brands';
 import CredentialsClient from './credentials-client';
@@ -44,9 +45,9 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
     .filter((project) => project.coverImage)
     .slice(0, 8)
     .map((project) => {
-      const cover = project.coverImage.replace(/\?.*$/, '?w=2400&q=90&auto=format');
+      const cover = optimizeSanityUrl(project.coverImage, 1000, 75);
       const gallery = (project.galleryImages && project.galleryImages.length > 0)
-        ? project.galleryImages.map((img: string) => img.replace(/\?.*$/, '?w=2400&q=90&auto=format'))
+        ? project.galleryImages.map((img: string) => optimizeSanityUrl(img, 1000, 75))
         : [cover];
       return {
         slug: project.slug,
