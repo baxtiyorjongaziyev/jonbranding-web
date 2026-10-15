@@ -1,5 +1,21 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | Contabo VPS 24/7 Portfolio Automation & Oisha-OS Barqarorlashtirish (Antigravity)
+- **Foydalanuvchi talabi:** "Hamma narsa contabo serverimizda 24/7 ishlasin".
+- **Bajarilgan ishlar:**
+  1. **Contabo VPS (`109.199.100.137`):**
+     - `oisha-os.service` barqarorlashtirildi: `LeadOperatingSystem._parse_dt` dagi `offset-naive` va `offset-aware` datetime solishtirish xatosi tuzatildi (`timezone.utc`), xizmat toza qayta ishga tushirildi va barqaror ishlab turibdi.
+     - Yangi `/etc/systemd/system/portfolio-automation.service` systemd xizmati yaratildi, venv o'rnatildi, `enabled` qilindi va Contabo VPS da 24/7 fonda uzluksiz ishga tushirildi (`active (running)`).
+  2. **Dual-Mode Portfolio Automation (`scripts/portfolio_drive_automation.py`):**
+     - Bulutli Google Drive API (Folder ID: `1yn5cWrxUvND7iYO79-KK5zUfKU4JvuM0`) va lokal papkalar (`portfolio_inbox`) monitoringi yo'lga qo'yildi (har 60 soniyada tekshiradi).
+     - Telegram (@JonBranding kanali va shaxsiy dialoglar) orqali haqiqiy keys matnini qidirib topish va Gemini 2.5 Flash / Smart authentic fallback orqali tahlil qilish integratsiyasi yakunlandi.
+     - Rasmlarni Sanity CMS assetlariga avtomatik yuklash, portfolio hujjatini yaratish va saytga chiqarish to'liq avtomatlashtirildi.
+  3. **Muvaffaqiyatli jonli test:**
+     - `Savod` (o'quv markazi rebrending keysi) Google Drive'dan yuklab olindi, Telegram @JonBranding dagi asl matni (msg ID: 37) topildi, Sanity CMS ga yuklandi va https://jonbranding.uz/uz/portfolio/savod manzilida jonli efirga chiqdi.
+     - Baxtiyorjonga Telegram orqali xabar avtomatik yuborildi.
+  4. **Deploy:**
+     - Kodlar `origin main` va `production main` ga to'liq push qilindi.
+
 ## 2026-10-15 | Google Drive Portfolio avtomatizatsiyasi & Shirona keysi jonli saytga chiqarildi (Antigravity)
 - **Talab:** Google Drive Portfolio papkasiga yangi ish rasmlari qo'shilganda, automation Telegram va Instagram'dan loyiha matnlarini topib, keys sifatida Sanity CMS va saytga avtomatik joylashtirishi.
 - **Yechim & Arxitektura:**
