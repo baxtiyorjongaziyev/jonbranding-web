@@ -56,6 +56,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
     setIsSystemDark(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsSystemDark(e.matches);
@@ -101,14 +102,23 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   if (!dictionary) return null;
 
-  const pathnameWithoutLocale = pathname.replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
+  const pathnameWithoutLocale = (pathname || '').replace(/^\/(uz|ru|en|zh)(?=\/|$)/, '') || '/';
   // Taqdimot sahifalarida sayt menyusi slaydlar ustiga tushib qoladi.
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/')) return null;
 
   const isAvansPage = pathnameWithoutLocale === '/avans';
   // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
-  // Faqat /avans tizim qorong'i rejimiga moslashadi.
-  const isDarkPage = pathname.includes('/portfolio') || pathname.includes('/sotuvchi-kartochka') || (isAvansPage && isSystemDark);
+  // /portfolio, /blog, /pricing sahifalari qorong'i fonda (#05070f) — header oq matn/elementlar bilan chiqadi.
+  // /avans tizim qorong'i rejimiga moslashadi.
+  const isDarkPage =
+    pathnameWithoutLocale.startsWith('/portfolio') ||
+    pathnameWithoutLocale.startsWith('/blog') ||
+    pathnameWithoutLocale.startsWith('/pricing') ||
+    pathname.includes('/portfolio') ||
+    pathname.includes('/blog') ||
+    pathname.includes('/pricing') ||
+    pathname.includes('/sotuvchi-kartochka') ||
+    (isAvansPage && isSystemDark);
 
   const useDarkHeaderText = !isDarkPage;
 

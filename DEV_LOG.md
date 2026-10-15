@@ -1,5 +1,17 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | Rash Milk Qadoq Dizayni Keysi Saytga Chiqarildi (Antigravity)
+- **Foydalanuvchi ko'rsatmasi:** "Hammasi joylasa bo'ladi rasmlar bo'lsa joylansin".
+- **Bajarilgan ishlar:**
+  1. Google Drive'dagi Rashmilk papkasidan (Miro/Sut va Miro/Sirok subfolderlari) jami 15 ta original rasm yuklab olindi va toza ASCII nomlar bilan public/images/cms/portfolio/rashmilk/ papkasiga saqlandi.
+  2. Telegram loyiha guruhidan (Rash Milk | Jon.Branding, Bobur aka, Elyorjon aka) haqiqiy loyiha brifi va talablari olindi (Zero Hallucination).
+  3. Barcha 15 ta rasm Sanity CMS asset API'ga yuklandi va portfolio-rashmilk hujjati muvaffaqiyatli yaratildi.
+  4. src/lib/portfolio-fallbacks.ts ga rashmilk kiritildi.
+  5. Baxtiyorjon (@baxtiyorjongaziyev)ga Telegram orqali xabarnoma yuborildi.
+  6. npm run verify:fast: 68 test fayli, 440 ta test 100% yashil o'tdi.
+  7. Jonli sahifa: https://jonbranding.uz/uz/portfolio/rashmilk
+
+
 ## 2026-10-15 | Portfolio Galereyasi & Vercel Build Tuzatildi (Antigravity)
 - **Muammo:** 
   1. Portfolioda (masalan, `/portfolio/shirona`, `/portfolio/savod`) faqat bitta muqova rasm ko'rinib, qolgan 14-20 ta rasm ko'rinmayotgan edi. Sababi: `src/lib/data/portfolio.ts` dagi GROQ query'da massivga `+ "?w=1200..."` qo'shilgani tufayli Sanity API har doim `galleryImages: null` qaytargan.
@@ -2136,3 +2148,39 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   4. src/components/layout/client-enhancements.tsx: quickActionsReady 3500ms dan 100ms ga tushirildi, mobil navigatsiya va PWA o'rnatish taklifi darhol ishga tushishi ta'minlandi.
   5. src/components/pwa/pwa-installer.tsx: PWA o'rnatish banneriga pastga surib yopish (swipe-to-dismiss) jesti va drag indikatori qo'shildi, mobil navigatsiya paneli bilan to'qnashmasligi uchun pastki oraliq (bottom-[calc(76px+env(...))]) to'g'rilandi.
 - Tekshiruv: npm run verify:fast (66 fayl, 424 test 100% yashil) va npm run build (165 sahifa xatosiz ishlab chiqildi).
+
+## 2026-10-15 | Meta Events Manager Traffic Allowlist Configured (Browser Subagent)
+- Subagent /browser orqali Meta Events Manager dataset 1134785364752294 (Jon.Branding sayt) boshqaruviga ulandi.
+- 'Разрешения для трафика: сайты' bo'limida 'jonbranding.uz' va uning barcha subdomenlari (www.jonbranding.uz va hk) ruxsat etilganlar ro'yxatiga (Allowlist) muvaffaqiyatli qo'shildi.
+- Test domenlar (*.run.app, *.hosted.app) Allowlist'dan chiqarildi va avtomatik filtrlanish holatiga keltirildi.
+- Diagnostika bo'limida jonbranding.uz tasdiqlandi; dataset holati toza holatga keltirildi.
+
+## 2026-10-15 | Header Dark Pages Contrast & Visibility Fix (Antigravity)
+- Muammo: Qorong'i sahifalarda (`/blog`, `/blog/[slug]`, `/pricing`, `/pricing/sotuvchi-kartochka`, `/portfolio` va hk) header elementlari (logo, menyu havolalari, til tanlagich va telefon tugmasi) qora rangda qolib, to'q fon (`#05070f`) ustida deyarli ko'rinmayotgan edi.
+- Sabab: `src/components/layout/header.tsx` da `isDarkPage` faqat `/portfolio` va `/sotuvchi-kartochka` ni tekshirar, `/blog` va `/pricing` sahifalarini inobatga olmagan, shuningdek i18n prefikslari bilan boshlanish holatlari to'liq qamrab olinmagan edi.
+- Yechim:
+  1. `src/components/layout/header.tsx`: `pathnameWithoutLocale.startsWith('/portfolio')`, `startsWith('/blog')`, `startsWith('/pricing')` va tegishli sub-yo'nalishlar `isDarkPage` ga to'liq qo'shildi.
+  2. Barcha dark sahifalarda `useDarkHeaderText = false` bo'lib, oq logotip (`logo-white.svg`), oq matnlar (`text-white/88 hover:text-white`), oq til tanlagich va oq telefon tugmasi chiqishi ta'minlandi.
+  3. `window.matchMedia` funksiyasining mavjudligi xavfsiz tekshirildi (SSR / jsdom muhitlarida xatolik chiqmasligi uchun).
+  4. `src/components/layout/header.test.tsx`: Barcha dark/light marshrutlar (`/`, `/portfolio`, `/blog`, `/pricing`, `/avans`) uchun 8 ta unit test yozildi va 100% muvaffaqiyatli o'tdi.
+
+
+## 2026-10-15 | Codex Meta Pixel verification
+- Live production /uz: HTTP 200; Pixel 1134785364752294, cookie consent hook and production domain guard present.
+- Meta Settings: jonbranding.uz and subdomains already allowed. Diagnostics now lists only four test domains, not jonbranding.uz.
+- Overview: PageView and Lead Active; Lead match quality 2.5/10. No synthetic lead sent.
+- Focused loader-script tests: 4 passed. No code/settings changes required; full harness not run for this read-only verification.
+
+## 2026-10-15 | Meta dataset advanced settings in progress
+- Connected pending Meta CAPI: activation toast, persisted Active/company-connected panel, browser-only label; last data 23h. This does not verify new server delivery.
+- Website advanced matching, first-party cookies and no-code events already enabled.
+- Page/product enrichment changes base data restriction; parameter review requires Meta terms commitment. Owner confirmation requested before either action.
+- Offline ad-account auto-tracking save reported success, first reopen off; retry in progress, not confirmed.
+- No source code change; no full harness required for browser configuration.
+
+## 2026-10-15 | Meta advanced features approved and applied
+- Owner explicitly approved enrichment/base restriction change and sensitive-data commitment.
+- Page/product automatic enrichment enabled; success toast and switch on, base setup off.
+- Parameter review: no blocks/action needed.
+- Confirmed 31 business custom events; confirmed total now 39, only TestEvent remains pending. Screenshot saved.
+- Offline auto-tracking persistence remains unresolved. No code changes or new server-event verification.

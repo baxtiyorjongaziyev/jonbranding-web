@@ -28,6 +28,34 @@ export interface PortfolioProject {
 export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
   uz: [
     {
+      _id: 'fallback-rashmilk-uz',
+      slug: 'rashmilk',
+      title: "Rash Milk: Sut va Sirok mahsulotlari qadoq dizayni",
+      client: "Rash Milk",
+      category: 'packaging',
+      categoryLabel: "Qadoq Dizayni",
+      tags: ["Rash Milk", "Qadoq Dizayni", "Sut Mahsulotlari", "Sirok", "FMCG"],
+      coverImage: '/images/cms/portfolio/rashmilk/rashmilk-sut-1.jpg',
+      description: "Rash Milk kompaniyasi uchun sut va tvorogli sirok mahsulotlari qatoriga xalqaro standartlarga mos, rastada yaqqol ajralib turuvchi zamonaviy qadoq dizaynlari tizimi ishlab chiqildi.",
+      body: [
+        {
+                "heading": "Loyiha Maqsadi va Vazifa",
+                "paragraph": "Rash Milk — tabiiy sut mahsulotlari ishlab chiqaruvchi yetakchi korxonalardan biri. Mijoz yangi tvorogli siroklar va sut liniyasi uchun qadoq dizaynlarini noldan ishlab chiqish vazifasi bilan murojaat qildi."
+        },
+        {
+                "heading": "Dizayn Konsepsiyasi va Yechim",
+                "paragraph": "Jon Branding jamoasi tomonidan mahsulot liniyalari uchun maxsus ranglar va tipografiya uyg'unligi yaratildi. 110 gr va 200 gr o'lchamdagi choklar va shtrixkodlar to'liq ishlab chiqarish talablariga moslandi."
+        },
+        {
+                "heading": "Natija va FMCG Muvaffaqiyati",
+                "paragraph": "Tayyorlangan qadoq dizaynlari xaridorlarda ishonch uyg'otuvchi va do'kon javonlarida raqobatchilardan yaqqol ajralib turuvchi professional ko'rinishga ega bo'ldi."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/rashmilk/rashmilk-sut-2.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-3.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-4.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-5.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-6.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-7.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-8.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-9.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-1.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-2.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-3.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-4.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-5.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-6.jpg"],
+      order: 1
+    },
+
+    {
       _id: 'fallback-savod',
       slug: 'savod',
       title: "SAVOD — o‘quv markazi uchun rebrending keys",
