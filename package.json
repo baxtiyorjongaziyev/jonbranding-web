@@ -22,6 +22,8 @@
     "verify:fast": "node scripts/harness/verify.mjs --fast",
     "harness": "node scripts/harness/verify.mjs",
     "mock:lead": "node scripts/harness/mock-lead.mjs",
+    "portfolio:sync": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --once",
+    "portfolio:watch": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --watch",
     "prepare": "husky"
   },
   "engines": {
