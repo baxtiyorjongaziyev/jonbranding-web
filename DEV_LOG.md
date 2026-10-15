@@ -1,5 +1,16 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | Portfolio Galereyasi & Vercel Build Tuzatildi (Antigravity)
+- **Muammo:** 
+  1. Portfolioda (masalan, `/portfolio/shirona`, `/portfolio/savod`) faqat bitta muqova rasm ko'rinib, qolgan 14-20 ta rasm ko'rinmayotgan edi. Sababi: `src/lib/data/portfolio.ts` dagi GROQ query'da massivga `+ "?w=1200..."` qo'shilgani tufayli Sanity API har doim `galleryImages: null` qaytargan.
+  2. Kirillcha fayl nomlari (`Без имени-*.png`) Git escape bo'lib Vercel Linux containerida xatolik keltirib chiqargan.
+  3. `src/components/layout/mobile-nav-bar.tsx` da `isVisible` state yetishmay, Vercel buildida `TS2304: Cannot find name 'setIsVisible'` xatoligi chiqqan.
+- **Tuzatishlar:**
+  1. `src/lib/data/portfolio.ts` dagi GROQ query to'g'rilandi (`galleryImages[defined(asset)].asset->url`). Sanity'dan 20 va 14 ta to'liq rasm havolalari muvaffaqiyatli qaytmoqda.
+  2. `savod` papkasidagi kirillcha fayllar toza ASCII nomlarga o'zgartirildi va avtomatizatsiyaga `sanitize_filename` qo'shildi.
+  3. `src/components/layout/mobile-nav-bar.tsx` ga `isVisible` state va AnimatePresence render sharti to'liq kiritildi.
+  4. `npm run verify:fast` va `npx tsc --noEmit` 100% muvaffaqiyatli o'tdi (67 test fayli, 432 ta test yashil).
+
 ## 2026-10-15 | Contabo VPS 24/7 Portfolio Automation & Oisha-OS Barqarorlashtirish (Antigravity)
 - **Foydalanuvchi talabi:** "Hamma narsa contabo serverimizda 24/7 ishlasin".
 - **Bajarilgan ishlar:**
