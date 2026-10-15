@@ -41,7 +41,7 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
   }, { scope: stepsRef });
 
   return (
-    <section className="home-contrast py-16 md:py-24" id="process" style={{ background: 'var(--at-paper)' }}>
+    <section className="py-16 md:py-24 border-b border-[var(--at-line)]" id="process" style={{ background: 'var(--at-bg)' }}>
       <div className="max-w-[1320px] mx-auto px-8 sm:px-5">
         {/* Header */}
         <div className="mb-12">
@@ -50,7 +50,6 @@ export default function AtProcess({ lang = 'uz', onOpen }: Props) {
             style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}
           >
             <span className="at-pulse inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
-            <span style={{ color: 'var(--at-ink)', fontWeight: 500 }}>§ 08</span>
             <span>{l.sectionLabel}</span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">

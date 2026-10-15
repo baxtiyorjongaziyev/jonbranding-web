@@ -1,7 +1,6 @@
 'use client';
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
-import PriceOverview from '@/components/sales/price-overview';
 import { useMemo, useCallback } from 'react';
 import { selectHomePortfolioProjects, portfolioYear } from '@/lib/portfolio-presentation';
 
@@ -9,11 +8,9 @@ import { MotionConfig } from 'framer-motion';
 
 // ── Above-the-fold: SSR, no lazy-load ────────────────────────────────────────
 import AtHero from '@/components/sections/at-hero';
-import AtMarquee from '@/components/sections/at-marquee';
 import ClientLogos from '@/components/sections/client-logos';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
-import SeoAnswerHub from '@/components/sections/seo-answer-hub';
 
 // ── Skeleton placeholder ──────────────────────────────────────────────────────
 import SectionSkeleton from '@/components/ui/section-skeleton';
@@ -46,11 +43,6 @@ const AtProcess = dynamic(
 
 const Founder = dynamic(
   () => import('@/components/sections/founder'),
-  { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
-);
-
-const AtPricing = dynamic(
-  () => import('@/components/sections/at-pricing'),
   { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
@@ -121,11 +113,9 @@ const HomeComponent: FC<{
       >
       {/* ── Above-the-fold (SSR) ─── */}
       <AtHero onOpen={openCallback} lang={lang} portfolioImages={heroImages} dictionary={dictionary.atelier} />
-      <AtMarquee lang={lang} />
       <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
-      <PriceOverview lang={lang} />
 
       {/* ── Below-the-fold (lazy) ── */}
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>
@@ -137,8 +127,6 @@ const HomeComponent: FC<{
       <ProcessVideo dictionary={dictionary.processVideo} />
       <AtProcess lang={lang} onOpen={open} />
       <Founder lang={lang} dictionary={dictionary.founder} onOpen={open} />
-      <SeoAnswerHub lang={lang} {...dictionary.answerHub} />
-      <AtPricing onOpen={openConsultation} lang={lang} />
       <AtFaq lang={lang} onOpen={open} />
       <AtFinalCta onOpen={openConsultation} lang={lang} />
 

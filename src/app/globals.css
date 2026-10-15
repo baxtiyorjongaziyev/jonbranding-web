@@ -2,37 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Owner-approved homepage palette: white 60 / black 30 / blue 10.
-   Proportions describe visual balance; client artwork keeps its own colors. */
+/* Collins & Koto Obsidian Dark palette for Jon Branding agency homepage */
 .jon-home,
 .jon-home .atelier-theme {
-  --at-bg: #ffffff;
-  --at-bg-2: #f5f5f5;
-  --at-paper: #ffffff;
-  --at-ink: #101010;
-  --at-ink-2: #454545;
-  --at-muted: #626262;
-  --at-line: #dedede;
-  --at-accent: #1b4dff;
-  --at-green: #1b4dff;
-  --at-green-soft: #edf1ff;
-  --bg: #ffffff;
-  --bg-2: #f5f5f5;
-  --paper: #ffffff;
-  --ink: #101010;
-  --ink-2: #454545;
-  --muted: #626262;
-  --line: #dedede;
-  --line-2: #e8e8e8;
-  --accent: #1b4dff;
-  --terra: #1b4dff;
-  --terra-soft: #edf1ff;
-  --green: #1b4dff;
-  --green-soft: #edf1ff;
+  --at-bg: #08090C;
+  --at-bg-2: #0D0F16;
+  --at-paper: #121520;
+  --at-ink: #FFFFFF;
+  --at-ink-2: #A8ADB8;
+  --at-muted: #6B7280;
+  --at-line: #1F2433;
+  --at-line-2: #282E40;
+  --at-accent: #2554FF;
+  --at-accent-soft: #141B33;
+  --at-green: #2554FF;
+  --at-green-soft: #141B33;
+  --bg: #08090C;
+  --bg-2: #0D0F16;
+  --paper: #121520;
+  --ink: #FFFFFF;
+  --ink-2: #A8ADB8;
+  --muted: #6B7280;
+  --line: #1F2433;
+  --line-2: #282E40;
+  --accent: #2554FF;
+  --terra: #2554FF;
+  --terra-soft: #141B33;
+  --green: #2554FF;
+  --green-soft: #141B33;
 }
 
 body:has(.jon-home) {
-  background-color: #ffffff !important;
+  background-color: #08090C !important;
+  color: #FFFFFF !important;
 }
 
 .jon-home .home-contrast {
@@ -53,14 +55,81 @@ body:has(.jon-home) {
   line-height: 1.08 !important;
 }
 
-.jon-home #xizmat h2 span {
-  font-family: inherit;
-  font-style: normal;
-  font-weight: inherit;
-}
 
 .jon-home .home-hero-project {
-  border-radius: 4px;
+  border-radius: 24px;
+}
+
+/* Premium Collins & Koto Editorial Gallery */
+.jon-home .gal {
+  padding: 100px 0 120px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.jon-home .gal-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-auto-rows: auto !important;
+  gap: 32px !important;
+}
+
+@media (max-width: 860px) {
+  .jon-home .gal-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+.jon-home .gal-tile {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  position: relative !important;
+  aspect-ratio: 16 / 11 !important;
+  min-height: 400px !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #121520 !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.7) !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.6s ease !important;
+}
+
+@media (max-width: 640px) {
+  .jon-home .gal-tile {
+    aspect-ratio: 4 / 3 !important;
+    min-height: 280px !important;
+    border-radius: 20px !important;
+  }
+}
+
+.jon-home .gal-tile:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: rgba(37, 84, 255, 0.4) !important;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(37, 84, 255, 0.3) !important;
+}
+
+.jon-home .gal-tile .foot .name {
+  font-family: var(--font-hanken, 'Hanken Grotesk', sans-serif) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: clamp(24px, 2.2vw, 36px) !important;
+  letter-spacing: -0.03em !important;
+  color: #FFFFFF !important;
+}
+
+.jon-home .gal-tile .arr {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  color: #FFFFFF !important;
+}
+
+.jon-home .gal-tile:hover .arr {
+  background: #2554FF !important;
+  border-color: #2554FF !important;
+  color: #FFFFFF !important;
+  transform: rotate(-45deg) scale(1.1) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
