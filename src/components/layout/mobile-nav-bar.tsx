@@ -29,11 +29,16 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   // Panel scroll paytida yashirinmaydi: mobilda Oisha formasining doim ko'rinadigan
   // yagona kirish nuqtasi shu yerdagi `data-oisha-callback` tugma (vidjetning suzuvchi
   // tugmasi globals.css'da mobilda yashirilgan).
+  const [isVisible, setIsVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 60);
+    const previous = scrollY.getPrevious() || 0;
+    if (Math.abs(latest - previous) > 15) {
+      setIsVisible(true);
+    }
   });
 
   const labels = {
@@ -70,6 +75,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
 
   return (
     <AnimatePresence>
+      {isVisible && (
         <motion.div
           key="mobile-nav-bar"
           data-mobile-quick-actions=""
@@ -181,6 +187,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
             </button>
           </nav>
         </motion.div>
+      )}
     </AnimatePresence>
   );
 }
