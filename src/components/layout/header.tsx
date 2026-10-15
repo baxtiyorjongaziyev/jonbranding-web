@@ -107,10 +107,10 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/')) return null;
 
   const isAvansPage = pathnameWithoutLocale === '/avans';
-  // Bosh sahifa (Atelier) doim yorug' fonda — qorong'i rejimda ham logo qora qoladi.
-  // /portfolio, /blog, /pricing sahifalari qorong'i fonda (#05070f) — header oq matn/elementlar bilan chiqadi.
-  // /avans tizim qorong'i rejimiga moslashadi.
+  // Bosh sahifa (Atelier) endi Collins & Koto Obsidian Dark (#08090C) rejimida — header oq matn/elementlar bilan chiqadi.
   const isDarkPage =
+    pathnameWithoutLocale === '/' ||
+    pathnameWithoutLocale === '' ||
     pathnameWithoutLocale.startsWith('/portfolio') ||
     pathnameWithoutLocale.startsWith('/blog') ||
     pathnameWithoutLocale.startsWith('/pricing') ||

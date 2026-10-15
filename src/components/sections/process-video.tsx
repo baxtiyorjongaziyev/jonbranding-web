@@ -21,17 +21,17 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
   return (
     <section
       aria-labelledby="process-video-title"
-      className="bg-[#f7f4ee] py-16 sm:py-20 lg:py-24"
+      className="bg-[#08090C] py-16 sm:py-20 lg:py-24 border-b border-white/10"
     >
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-slate-600">
+          <div className="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md px-4 py-2 text-[11px] font-[family-name:var(--font-mono)] uppercase tracking-[0.24em] text-white/70">
             {dictionary.eyebrow}
           </div>
-          <h2 id="process-video-title" className="text-balance text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
+          <h2 id="process-video-title" className="text-balance text-3xl font-bold tracking-tight text-white sm:text-5xl">
             {dictionary.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">{dictionary.description}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">{dictionary.description}</p>
         </div>
 
         <div className="mx-auto mt-10 max-w-4xl">
@@ -76,12 +76,12 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
             </div>
           </div>
 
-          <div className="mt-4 flex flex-col items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/75 px-5 py-4 text-center sm:flex-row sm:text-left">
-            <p className="text-sm text-slate-600">{dictionary.fallbackHint}</p>
+          <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#121520] px-6 py-4 text-center sm:flex-row sm:text-left">
+            <p className="text-sm text-white/70">{dictionary.fallbackHint}</p>
             <a
               href="#process"
               data-testid="process-video-fallback"
-              className="shrink-0 text-sm font-bold text-blue-700 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700"
+              className="shrink-0 text-sm font-semibold text-[#2554FF] hover:text-blue-400 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
             >
               {dictionary.fallbackCta} →
             </a>

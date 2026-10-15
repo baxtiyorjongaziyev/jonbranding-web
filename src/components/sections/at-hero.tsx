@@ -138,48 +138,51 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
 
   return (
     <section
-      className="home-hero bg-[var(--at-bg)] pt-12 pb-12 md:pt-20 md:pb-20 relative overflow-hidden"
+      className="home-hero bg-[#08090C] pt-20 pb-16 md:pt-32 md:pb-24 relative overflow-hidden"
     >
+      {/* Subtle atmospheric ambient glows */}
+      <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[140px] pointer-events-none" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[130px] pointer-events-none" />
+
       <div className="max-w-[1400px] mx-auto px-5 md:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* LEFT — Text Copy */}
           <div className="flex-1 w-full max-w-[700px] z-20">
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <span className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[var(--at-muted)]">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-accent)]" />
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/25 bg-blue-500/10 px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
                 {l.tagline}
               </span>
-              <span className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest border border-[var(--at-line)] rounded-full px-3 py-1 text-[var(--at-ink-2)] bg-[var(--at-paper)]">
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-white/60">
                 {l.badge}
               </span>
             </div>
 
             <h1
-              className="font-bold text-[var(--at-ink)] mb-8"
+              className="font-bold text-white mb-6 text-4xl sm:text-6xl lg:text-7xl"
               style={{
-                fontSize: 'clamp(36px, 5vw, 72px)',
-                lineHeight: 1.04,
-                letterSpacing: '-0.03em',
+                lineHeight: 1.02,
+                letterSpacing: '-0.035em',
               }}
             >
               <span className="block">{l.h1a}</span>
-              <span className="block text-[var(--at-ink)]">
+              <span className="block font-[family-name:var(--font-serif)] italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-200 to-white">
                 {l.h1b}
               </span>
               <span className="block">{l.h1c}</span>
             </h1>
 
-            <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[480px] mb-8">
-              {l.desc.text}
-              <strong className="text-[var(--at-ink)]">{l.desc.bold}</strong>
+            <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-[500px] mb-8 font-normal">
+              {l.desc.text}{' '}
+              <strong className="text-white font-semibold">{l.desc.bold}</strong>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
               <button
                 data-testid="hero-audit-trigger"
                 data-oisha-callback=""
                 onClick={onOpen}
-                className="inline-flex items-center justify-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-7 py-4 font-semibold text-sm hover:-translate-y-0.5 transition-transform"
+                className="inline-flex items-center justify-center gap-2 bg-[#2554FF] hover:bg-[#1C46E6] text-white rounded-full px-8 py-4 font-semibold text-sm shadow-[0_12px_32px_-8px_rgba(37,84,255,0.5)] hover:-translate-y-0.5 transition-all"
               >
                 {l.cta1}
               </button>
@@ -187,59 +190,73 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                 onClick={() =>
                   document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="inline-flex items-center justify-center gap-2 border border-[var(--at-line)] rounded-full px-7 py-4 text-sm text-[var(--at-ink-2)] hover:text-[var(--at-ink)] hover:border-[var(--at-ink)] transition-colors bg-[var(--at-paper)]"
+                className="inline-flex items-center justify-center gap-2 border border-white/15 hover:border-white/35 rounded-full px-8 py-4 text-sm font-semibold text-white/80 hover:text-white transition-all bg-white/[0.04] backdrop-blur-md"
               >
                 {l.cta2}
               </button>
             </div>
+
+            {/* Quick credentials stat row */}
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10 max-w-md">
+              {[
+                ['9+ yil', 'bozorda'],
+                ['500+', 'mijoz'],
+                ['100%', 'patent kafolati'],
+              ].map(([val, label]) => (
+                <div key={label}>
+                  <div className="text-xl sm:text-2xl font-bold text-white tracking-tight">{val}</div>
+                  <div className="text-[11px] font-[family-name:var(--font-mono)] uppercase tracking-wider text-white/50">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* RIGHT — Single Image Slideshow */}
+          {/* RIGHT — Hero Visual Showcase */}
           <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex items-center justify-center">
             <a
               href="#ishlar"
               aria-label={`${l.portfolioBadge}: ${activeItem.name}`}
-              className="home-hero-project relative block w-full aspect-[4/3] lg:aspect-[5/6] overflow-hidden bg-[var(--at-ink)] group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] focus-visible:ring-offset-4"
+              className="home-hero-project relative block w-full aspect-[4/3] lg:aspect-[5/6] overflow-hidden rounded-3xl bg-[#121520] border border-white/10 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.9)] group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4"
             >
-                <div className="absolute inset-0">
-                  <Image
-                    src={activeItem.src}
-                    alt={activeItem.name}
-                    fill
-                    quality={75}
-                    sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1400px) 50vw, 800px"
-                    className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+              <div className="absolute inset-0">
+                <Image
+                  src={activeItem.src}
+                  alt={activeItem.name}
+                  fill
+                  quality={75}
+                  sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1400px) 50vw, 800px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
-                  <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
-                    <div>
-                      <h2 className="text-white font-bold text-3xl md:text-5xl mb-3 tracking-tight leading-tight drop-shadow-lg">
-                        {activeItem.name}
-                      </h2>
-                      <span className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full shadow-lg">
-                        {l.portfolioBadge}{activeItem.year ? ` · ${activeItem.year}` : ''}
-                      </span>
-                    </div>
+                <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
+                  <div>
+                    <h2 className="text-white font-bold text-3xl md:text-5xl mb-2 tracking-tight leading-tight drop-shadow-md">
+                      {activeItem.name}
+                    </h2>
+                    <span className="inline-block px-4 py-1.5 bg-black/60 backdrop-blur-md text-white/90 text-xs md:text-sm font-[family-name:var(--font-mono)] uppercase tracking-widest rounded-full border border-white/15">
+                      {l.portfolioBadge}{activeItem.year ? ` · ${activeItem.year}` : ''}
+                    </span>
+                  </div>
 
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-colors border border-white/20 group-hover:bg-white/20 shadow-lg">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-                      >
-                        <path d="M7 17L17 7M17 7H7M17 7V17" />
-                      </svg>
-                    </div>
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-all border border-white/20 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] shadow-lg">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                    >
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
                   </div>
                 </div>
+              </div>
             </a>
           </div>
         </div>

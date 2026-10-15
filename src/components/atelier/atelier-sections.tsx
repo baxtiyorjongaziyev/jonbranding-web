@@ -131,7 +131,6 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
           <div className="lede">
             <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
               <span className="dot" />
-              <span className="ix">§ 03</span>
               <span>{dictionary.gallery_label}</span>
             </span>
             <p>
@@ -184,8 +183,8 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                 />
               </div>
               <div className="head">
-                <span>№ {String(i + 1).padStart(2, '0')}</span>
-                <span>{t.city}</span>
+                <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-white/80">{t.cat}</span>
+                {t.city && <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-white/50">{t.city}</span>}
               </div>
               <div className="arr">↗</div>
               <div className="foot">
@@ -365,7 +364,6 @@ export const ATQuotes: FC<ATQuotesProps> = ({
         >
           <span className="eb" style={{ marginBottom: 14, display: 'inline-flex' }}>
             <span className="dot" />
-            <span className="ix">§ 06</span>
             <span>
               {dictionary?.footer_pages_title?.includes('Sharh')
                 ? dictionary.footer_pages_title

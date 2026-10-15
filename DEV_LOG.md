@@ -1,5 +1,29 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | Bosh Sahifa Collins & Koto Obsidian Dark Uslubida To'liq Yangilandi (Antigravity)
+- **Foydalanuvchi murojaati:** "home page Juda rasvo dizaynda umuman Premium branding agentlikka o'xshamaydi".
+- **Tanlangan yo'nalish:** Collins, Koto va Pentagram darajasidagi premium Obsidian Dark & Platinum palitrasi (`#08090C`), grand editorial tipografiya (`Instrument Serif` + tight modern grotesk), flagman keyslarning (Rash Milk, Shirona, Savod, Boyarin, Fidda) keng formatli vizual ko'rinishi va SaaS elementlari (narx jadvallari, chegirma bloklari, ortiqcha SEO matnlari)ni bosh sahifadan chiqarish.
+- **Kiritilgan asosiy o'zgarishlar:**
+  1. `src/app/globals.css`:
+     - `.jon-home`, `.jon-home .atelier-theme` va `body:has(.jon-home)` chuqur obsidian ranglar tizimiga ulandi (`#08090C` fon, `#121520` kartochkalar, `#1F2433` hoshiyalar, `#FFFFFF` va `#A8ADB8` matnlar).
+     - Flagman galereya (`.gal-grid`, `.gal-tile`) 12 ustunli tor katakchalardan 2 ustunli keng formatli (`aspect-ratio: 16/11`) zamonaviy editorial vitrinaga aylantirildi.
+     - Hover effektlari: silliq ko'tarilish (`translateY(-6px)`), ko'k neon aksent (`rgba(37,84,255,0.4)`), aylanuvchi burchakli strelka (`rotate(-45deg)`).
+  2. `src/components/layout/header.tsx` & `header.test.tsx`:
+     - Bosh sahifa (`/`) endi to'g'ridan-to'g'ri `liquid-glass-header dark-glass` va oq logotip (`logo-white.svg`) rejimini faollashtiradi.
+     - Vitest testi yangilandi (barcha 8 test yashil).
+  3. `src/components/sections/at-hero.tsx`:
+     - Fon yoritgichlari (`blur-[140px]`), editorial sarlavha, agentlik kreditsiali (9+ yil bozorda, 500+ mijoz, 100% patent kafolati) va Rash Milk/flagman loyihasi muqovasi bilan yangilandi.
+  4. `src/components/home-component.tsx`:
+     - Bosh sahifani arzonlashtirayotgan SaaS bloklari (`PriceOverview`, `AtPricing`, `SeoAnswerHub`, `AtMarquee`) olib tashlandi.
+     - Mantiqiy 10 bosqichli premium agentlik oqimi hosil qilindi: Hero → Ishonch bildirgan brendlar (500+) → Manifest → Xizmatlar → Tanlangan flagman ishlar → Avval/Keyin → Mijozlar sharhlari va video → Studiya jarayoni videosi → 4 bosqichli yo'l xaritasi → Asoschi (Baxtiyorjon Gaziyev) → FAQ → Grand Obsidian CTA.
+  5. `src/components/atelier/atelier-sections.tsx`:
+     - `ATGallery` va `ATQuotes` dan eskirgan `§ 03`, `§ 06` va `№ 01` kabi belgilashlar olib tashlanib, toza toifa chip'lari va zamonaviy tipografiyaga o'tkazildi.
+  6. `src/components/sections/at-services.tsx`, `at-process.tsx`, `process-video.tsx`, `at-final-cta.tsx`:
+     - Sahifalar orasidagi keskin oq-qora miltillashlar (strobe) butunlay yo'qotildi: `home-contrast` va `#f7f4ee` ranglar obsidian foniga moslashtirildi.
+- **Verifikatsiya:**
+  - `npm run verify:fast`: 68 test fayli, 440 ta test 100% yashil o'tdi.
+  - `npm run build`: 165 ta statik sahifa xatosiz muvaffaqiyatli generatsiya bo'ldi.
+
 ## 2026-10-15 | Rasmlarni 98% Gacha Kichraytirish, Preloading & Ultra-Tez Kesh (Antigravity)
 - **Foydalanuvchi shikoyati:** "Rasmlar juda sekin ochilyapti sekin yuklanyapti yoqimsiz holat bo'lyapti yoqmayapti".
 - **Asosiy sabablar:**
