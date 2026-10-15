@@ -17,9 +17,10 @@ const ServiceSections = dynamic(() => import('@/components/sections/service-sect
 interface BrandbookClientProps {
   lang: string;
   translations: any;
+  factsSlot?: React.ReactNode;
 }
 
-const BrandbookClient: FC<BrandbookClientProps> = ({ lang, translations }) => {
+const BrandbookClient: FC<BrandbookClientProps> = ({ lang, translations, factsSlot }) => {
   const handleOpenModal = () => {
     const contactEvent = new CustomEvent('openContactModal');
     window.dispatchEvent(contactEvent);
@@ -109,6 +110,8 @@ const BrandbookClient: FC<BrandbookClientProps> = ({ lang, translations }) => {
             subtitle={translations.process_subtitle}
             steps={processSteps}
         />
+
+        {factsSlot}
 
         <CtaBlock 
             title={translations.cta_title}
