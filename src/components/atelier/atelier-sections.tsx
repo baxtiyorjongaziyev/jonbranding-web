@@ -168,9 +168,12 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   src={t.img}
                   alt={t.name}
                   fill
-                  quality={85}
+                  quality={75}
+                  priority={i < 2}
+                  loading={i < 4 ? 'eager' : 'lazy'}
+                  unoptimized={t.img.startsWith('https://cdn.sanity.io/')}
                   className="object-cover transition-transform duration-500 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 100vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div
                   className="absolute inset-0 pointer-events-none"

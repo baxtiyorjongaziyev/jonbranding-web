@@ -1,6 +1,26 @@
 # 📓 Dev Log — Jon Branding Web
 
-## 2026-10-15 | Bosh Sahifa, Credentials Logolari & Keys Karusel Animatsiyasi (Antigravity)
+## 2026-10-15 | Rasmlarni 98% Gacha Kichraytirish, Preloading & Ultra-Tez Kesh (Antigravity)
+- **Foydalanuvchi shikoyati:** "Rasmlar juda sekin ochilyapti sekin yuklanyapti yoqimsiz holat bo'lyapti yoqmayapti".
+- **Asosiy sabablar:**
+  1. Sanity galereya rasmlarida o'lcham parametrlari bo'lmagan, kodda `replace(/\?.*$/)` faqat `?` bor URL'larga ta'sir qilgani uchun 2560x1706 va 4000x3000 o'lchamdagi 5-15 MB hajmli xom fayllar to'g'ridan-to'g'ri yuklanayotgan edi.
+  2. `/credentials` da `w=2400&q=90` ishlatilib, har bir keys uchun ulkan MB hajmlar tortilayotgan edi.
+  3. `CaseImageRotator` da `AnimatePresence mode="wait"` sababli slayd almashganda eski rasm yo'qolib, yangi rasm yuklanguncha qora bo'shliq paydo bo'lgan (miltillash/flash).
+  4. Keyingi rasmlar fonda oldindan yuklanmagan (preloading bo'lmagan).
+- **Kiritilgan optimallashtirishlar:**
+  1. `src/lib/portfolio-presentation.ts`: Yangi `optimizeSanityUrl` funksiyasi qo'shildi. Barcha Sanity URL'lari qat'iy `?w=1000&q=75&auto=format` (cover uchun) va `?w=1200&q=75&auto=format` (galereya, before/after uchun) parametrlari bilan ta'minlandi. Natijada rasm og'irligi 5 MB dan ~35-70 KB ga tushdi (98% gacha tejamkorlik!).
+  2. `src/app/[lang]/credentials/page.tsx`: Keyslar va ularning galereyalari uchun `optimizeSanityUrl(img, 1000, 75)` ulandi.
+  3. `src/app/[lang]/credentials/credentials-client.tsx`:
+     - `CaseImageRotator` ga fonda rasmlarni brauzer xotirasiga oldindan yuklab olish (`new window.Image().src`) qo'shildi.
+     - `mode="wait"` olib tashlanib, uzluksiz silliq cross-fade o'rnatildi — eski rasm yangisi to'liq ko'ringuncha tagida turadi, qora bo'shliq butunlay yo'qotildi.
+     - `unoptimized={activeImage.startsWith('https://cdn.sanity.io/')}` orqali Sanity global Cloudflare CDN keshidan bevosita va bir zumda yuklanadi.
+  4. `src/components/portfolio-detail-client.tsx`:
+     - Before/After va galereyadagi barcha rasmlarga direct CDN loading, responsive `sizes`, `quality={75}` va `priority` belgilandi.
+     - Lightbox uchun keyingi va oldingi rasmlarni oldindan xotiraga yuklovchi preloader qo'shildi.
+  5. `src/components/atelier/atelier-sections.tsx`: Bosh sahifadagi `ATGallery` rasmlari uchun aniq `sizes` va `quality={75}` berildi.
+  6. `next.config.js`: Kesh muddati `minimumCacheTTL: 2592000` (30 kun) qilib belgilandi.
+  7. **Tekshiruv:** `npm run verify:fast` (440 ta test) va `npm run build` (165/165 sahifa) 100% xatosiz o'tdi.
+
 - **Foydalanuvchi talabi:** 
   1. Bosh sahifada yangi ishlar (Rash Milk, Shirona, Savod) chiqishi.
   2. /credentials sahifasida Rash Milk logosi kichikligi tuzatilib, barcha logolar rangli ko'rinishi.

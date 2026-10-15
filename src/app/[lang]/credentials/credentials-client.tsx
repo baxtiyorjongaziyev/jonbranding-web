@@ -38,11 +38,22 @@ function CaseImageRotator({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Preload all case images in background so transitions are instant
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    images.forEach((src) => {
+      if (typeof window !== 'undefined' && src) {
+        const img = new window.Image();
+        img.src = src;
+      }
+    });
+  }, [images]);
+
   useEffect(() => {
     if (images.length <= 1 || isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 2800);
+    }, 3200);
     return () => clearInterval(timer);
   }, [images.length, isPaused]);
 
@@ -52,31 +63,34 @@ function CaseImageRotator({
     <motion.div
       variants={rise}
       className="relative order-first aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-last select-none group"
-      style={{ background: '#1a1a1c', boxShadow: '0 30px 80px -30px rgba(0,0,0,.8)' }}
+      style={{ background: '#141416', boxShadow: '0 30px 80px -30px rgba(0,0,0,.8)' }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0.3, scale: 1.02 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0.3 }}
-          transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="absolute inset-0 h-full w-full"
-        >
-          <Image
-            src={activeImage}
-            alt={`${title} - visual ${currentIndex + 1}`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 720px"
-            quality={85}
-            priority={priority && currentIndex === 0}
-            loading={priority ? 'eager' : 'lazy'}
-            className="object-cover"
-          />
-        </motion.div>
-      </AnimatePresence>
+      <div className="absolute inset-0 h-full w-full">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={activeImage + currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.55, ease: 'easeInOut' }}
+            className="absolute inset-0 h-full w-full"
+          >
+            <Image
+              src={activeImage}
+              alt={`${title} - visual ${currentIndex + 1}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 720px"
+              quality={75}
+              priority={priority && currentIndex === 0}
+              loading={currentIndex === 0 ? 'eager' : 'lazy'}
+              unoptimized={activeImage.startsWith('https://cdn.sanity.io/')}
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Subtle indicator bar when multiple images exist */}
       {images.length > 1 && (
