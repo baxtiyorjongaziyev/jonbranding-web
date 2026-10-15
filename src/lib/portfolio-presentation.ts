@@ -19,6 +19,9 @@ export function presentPortfolioProject<T extends PortfolioProject>(project: T):
 // A compact home selection using existing brand artwork. Category, description,
 // results and publication date always come from the actual project record.
 const HOME_WORKS = [
+  { slug: 'rashmilk', image: '/images/cms/portfolio/rashmilk/rashmilk-sut-1.jpg' },
+  { slug: 'shirona', image: '/images/cms/portfolio/shirona/shirona-cover.jpg' },
+  { slug: 'savod', image: '/images/cms/portfolio/savod/savod-cover.png' },
   { slug: 'den-aroma', image: '/images/cms/denaroma-hozir.webp' },
   { slug: 'fidda', image: '/images/cms/fidda-hozir.webp' },
   { slug: 'boyarin', image: '/images/cms/boyarin-hozir.webp' },
@@ -30,7 +33,7 @@ const HOME_WORKS = [
 export function selectHomePortfolioProjects<T extends { slug: string; coverImage: string }>(projects: T[]): T[] {
   return HOME_WORKS.flatMap(({ slug, image }) => {
     const project = projects.find((p) => p.slug === slug || p.slug.startsWith(`${slug}-`));
-    return project ? [{ ...project, coverImage: image }] : [];
+    return project ? [{ ...project, coverImage: image || project.coverImage }] : [];
   });
 }
 

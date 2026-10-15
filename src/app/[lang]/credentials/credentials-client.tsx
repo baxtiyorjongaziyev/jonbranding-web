@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GUARANTEES, JOBS, PACKAGES, PROCESS_STEPS, SERVICE_GROUPS } from '@/lib/sales-content';
 
 export type CredCase = {
@@ -11,6 +11,7 @@ export type CredCase = {
   client: string;
   categoryLabel: string;
   coverImage: string;
+  galleryImages?: string[];
   result?: { metric: string; value: string };
 };
 
@@ -24,6 +25,88 @@ type Props = {
 };
 
 import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, PAPER, rise, serif, Slide, stagger } from '@/components/credentials/deck';
+
+function CaseImageRotator({
+  images,
+  title,
+  priority,
+}: {
+  images: string[];
+  title: string;
+  priority?: boolean;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (images.length <= 1 || isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, [images.length, isPaused]);
+
+  const activeImage = images[currentIndex] || images[0];
+
+  return (
+    <motion.div
+      variants={rise}
+      className="relative order-first aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-last select-none group"
+      style={{ background: '#1a1a1c', boxShadow: '0 30px 80px -30px rgba(0,0,0,.8)' }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0.3, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0.3 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="absolute inset-0 h-full w-full"
+        >
+          <Image
+            src={activeImage}
+            alt={`${title} - visual ${currentIndex + 1}`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 720px"
+            quality={85}
+            priority={priority && currentIndex === 0}
+            loading={priority ? 'eager' : 'lazy'}
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Subtle indicator bar when multiple images exist */}
+      {images.length > 1 && (
+        <div className="cred-no-print absolute bottom-3 left-4 right-4 z-20 flex items-center justify-between pointer-events-auto">
+          <div className="flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 backdrop-blur-md border border-white/10">
+            {images.slice(0, 8).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setCurrentIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? 'w-5 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+            {images.length > 8 && (
+              <span className="text-[9px] font-mono text-white/60 ml-1">
+                +{images.length - 8}
+              </span>
+            )}
+          </div>
+          <span className="text-[10px] font-mono uppercase tracking-wider text-white/70 rounded-full bg-black/70 px-2.5 py-1 backdrop-blur-md border border-white/10">
+            {currentIndex + 1} / {images.length}
+          </span>
+        </div>
+      )}
+    </motion.div>
+  );
+}
 
 export default function CredentialsClient({ cases, quotes, logos }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -84,17 +167,20 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
           <Display>Bizga ishongan brendlar</Display>
           <motion.div
             variants={rise}
-            className="mt-12 grid grid-cols-3 gap-x-10 gap-y-10 sm:grid-cols-4 lg:grid-cols-6"
+            className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 sm:gap-4.5"
           >
             {logos.map((brand) => (
-              <div key={brand.name} className="flex items-center justify-center">
+              <div
+                key={brand.name}
+                className="group flex h-20 sm:h-22 items-center justify-center rounded-2xl bg-white p-3 shadow-xs border border-black/[0.06] transition-all duration-300 hover:shadow-md hover:scale-[1.03]"
+              >
                 <Image
                   src={brand.logo}
                   alt={brand.name}
-                  width={140}
-                  height={56}
+                  width={160}
+                  height={64}
                   loading="eager"
-                  className="max-h-10 w-auto object-contain opacity-45 mix-blend-multiply grayscale"
+                  className="max-h-12 sm:max-h-14 w-auto max-w-[130px] sm:max-w-[145px] object-contain transition-transform duration-300 group-hover:scale-105 filter-none"
                 />
               </div>
             ))}
@@ -162,25 +248,12 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
               paddingBottom: 'var(--cred-pb)',
             }}
           >
-            {/* Ish to'liq rangda va aniq ko'rinadi — xiralashtirilgan fon emas. */}
-            <motion.div
-              variants={rise}
-              className="relative order-first aspect-[4/3] w-full overflow-hidden rounded-2xl lg:order-last"
-              style={{ background: '#1a1a1c', boxShadow: '0 30px 80px -30px rgba(0,0,0,.8)' }}
-            >
-              <Image
-                src={item.coverImage}
-                alt={item.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 720px"
-                quality={85}
-                priority={index === 0}
-                // Chop etish nusxasi ekrandan tashqarida turadi, lazy rasm esa
-                // u yerda hech qachon yuklanmaydi va PDF qop-qora chiqadi.
-                loading="eager"
-                className="object-cover"
-              />
-            </motion.div>
+            {/* Ish to'liq rangda va animatsiya bilan almashib turadi */}
+            <CaseImageRotator
+              images={item.galleryImages && item.galleryImages.length > 0 ? item.galleryImages : [item.coverImage]}
+              title={item.title}
+              priority={index === 0}
+            />
             <div>
               <Eyebrow light>
                 Keys {String(index + 1).padStart(2, '0')}

@@ -1,5 +1,21 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-15 | Bosh Sahifa, Credentials Logolari & Keys Karusel Animatsiyasi (Antigravity)
+- **Foydalanuvchi talabi:** 
+  1. Bosh sahifada yangi ishlar (Rash Milk, Shirona, Savod) chiqishi.
+  2. /credentials sahifasida Rash Milk logosi kichikligi tuzatilib, barcha logolar rangli ko'rinishi.
+  3. Barcha 34+ ishonch bildirgan mijozlar logolari to'liq chiqishi.
+  4. /credentials sahifasida bitta keys ko'rsatilayotganda uning rasmlari avtomatik almashib turishi.
+- **Bajarilgan ishlar:**
+  1. `src/lib/portfolio-presentation.ts`: `HOME_WORKS` ro'yxatiga `rashmilk`, `shirona`, `savod` qo'shildi, endi bosh sahifadagi galereya va hero dinamik tarzda yangi ishlarni eng boshida ko'rsatadi.
+  2. `public/images/clients/rashmilk.svg`: Bo'sh chekka paddinglar (60%) olib tashlanib, viewBox `3150 2450 6400 3600` ga qirqildi — Rash Milk logosi 2.5 barobar kattalashdi.
+  3. `src/app/[lang]/credentials/page.tsx`: `.slice(0, 18)` cheklovi olib tashlandi, barcha 34+ mijoz brendlari to'liq ko'rinadigan bo'ldi. Har bir keysga to'liq galereya rasmlari uzatildi.
+  4. `src/app/[lang]/credentials/credentials-client.tsx`:
+     - Barcha logolar rangli ko'rinishga keltirildi (`filter-none`, `grayscale` va `mix-blend-multiply` olib tashlandi, har bir logoga elegant oq kartochka foni berildi).
+     - `CaseImageRotator` komponenti qo'shildi: slayd ko'rilayotganda bitta keysga tegishli barcha rasmlar avtomatik ravishda mayin cross-fade bilan almashib turadi, dots orqali qo'lda ham boshqarish mumkin.
+  5. `npm run verify:fast`: 68 test fayli, 440 ta test 100% yashil o'tdi.
+
+
 ## 2026-10-15 | Rash Milk Qadoq Dizayni Keysi Saytga Chiqarildi (Antigravity)
 - **Foydalanuvchi ko'rsatmasi:** "Hammasi joylasa bo'ladi rasmlar bo'lsa joylansin".
 - **Bajarilgan ishlar:**
