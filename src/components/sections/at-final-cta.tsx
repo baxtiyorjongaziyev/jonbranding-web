@@ -21,9 +21,6 @@ export default function AtFinalCta({ onOpen, lang = 'uz' }: Props) {
           <button onClick={onOpen} className="inline-flex items-center gap-2 font-semibold rounded-full px-8 py-4 text-base bg-[#2554FF] hover:bg-[#1C46E6] text-white shadow-[0_18px_40px_-10px_rgba(37,84,255,0.45)] transition-all hover:-translate-y-0.5">
             {l.cta}
           </button>
-          <a href="mailto:salom@jonbranding.uz" className="inline-flex items-center gap-2 font-semibold rounded-full px-8 py-4 text-base text-white/90 border border-white/20 hover:border-white/40 hover:bg-white/[0.04] transition-all">
-            salom@jonbranding.uz
-          </a>
         </div>
         <div className="flex flex-wrap gap-8 justify-center border-t border-white/10 pt-8">
           {l.stats.map((m, i) => (
