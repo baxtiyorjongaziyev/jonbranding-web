@@ -109,8 +109,8 @@ const translations = {
 
 const DEFAULT_IMAGES: PortfolioImage[] = [
   { src: '/images/cms/portfolio/rashmilk/rashmilk-sut-1.jpg', name: 'Rash Milk', year: '2026' },
-  { src: '/images/cms/portfolio/shirona/Brandbook_Page_45_Cafe_facade.jpeg', name: 'Shirona', year: '2026' },
-  { src: '/images/cms/portfolio/savod/savod-cover.png', name: 'Savod', year: '2025' },
+  { src: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg', name: 'Shirona', year: '2026' },
+  { src: '/images/cms/portfolio/savod/savod-signage.png', name: 'Savod', year: '2025' },
   { src: '/images/cms/denaroma-hozir.webp', name: 'Den Aroma', year: '2025' },
   { src: '/images/cms/boyarin-hozir.webp', name: 'Boyarin', year: '2026' },
   { src: '/images/cms/fidda-hozir.webp', name: 'Fidda', year: '2025' },
@@ -244,7 +244,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             <a
               href="#ishlar"
               aria-label={`${l.portfolioBadge}: ${activeItem.name}`}
-              className="home-hero-project relative block w-full aspect-[4/3] lg:aspect-[5/6] overflow-hidden rounded-3xl bg-[#0A0B0E] border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14)] group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF] focus-visible:ring-offset-4"
+              className="home-hero-project relative block w-full aspect-[4/3] lg:aspect-[4/3] xl:aspect-[5/4] overflow-hidden rounded-3xl bg-[#0A0B0E] border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14)] group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF] focus-visible:ring-offset-4"
             >
               <div className="absolute inset-0">
                 <Image
@@ -252,12 +252,12 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                   src={activeItem.src}
                   alt={activeItem.name}
                   fill
-                  quality={75}
-                  sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1400px) 50vw, 800px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1400px) 50vw, 1000px"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
                   <div>

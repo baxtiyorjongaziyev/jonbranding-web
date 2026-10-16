@@ -67,21 +67,19 @@ export default async function PortfolioPage(props: Props) {
   const projects: PortfolioProject[] = await fetchPortfolioList(safeLang);
 
   return (
-    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
-      {/* Ambient Mesh Glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 left-10 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-[110px] pointer-events-none z-0" />
-      <div className="absolute inset-0 noise-texture opacity-[0.02] pointer-events-none z-0" />
+    <div className="min-h-screen bg-white pt-32 pb-24 text-[#0A0B0E] relative overflow-hidden">
+      {/* Subtle Ambient Accent Glow */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#2554FF]/5 blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-[#2554FF]/5 blur-[140px] pointer-events-none z-0" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2554FF]/8 border border-[#2554FF]/20 text-[#2554FF] text-xs font-bold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse"></span>
             {safeLang === 'uz' ? 'Premium Portfolio' : safeLang === 'ru' ? 'Премиум Портфолио' : safeLang === 'zh' ? '高端作品集' : 'Premium Portfolio'}
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-none bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-none text-[#0A0B0E]">
             {safeLang === 'uz' 
               ? 'Bizneslarni Premium Darajaga Olib Chiqqan Loyihalarimiz' 
               : safeLang === 'ru' 
@@ -91,7 +89,7 @@ export default async function PortfolioPage(props: Props) {
                   : 'Projects That Elevate Businesses to Premium Level'}
           </h1>
           
-          <p className="text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto font-medium">
+          <p className="text-base md:text-lg text-[#4B5563] leading-relaxed max-w-2xl mx-auto font-medium">
             {safeLang === 'uz'
               ? '15 daqiqalik Brand Auditda sizning mahsulotingizni qanday premium qilishni rejalashtiramiz.'
               : safeLang === 'ru'

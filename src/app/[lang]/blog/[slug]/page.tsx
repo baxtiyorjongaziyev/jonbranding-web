@@ -216,24 +216,24 @@ export default async function BlogPostPage(props: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
+    <div className="min-h-screen bg-white pt-32 pb-24 text-[#0A0B0E] relative overflow-hidden border-b border-slate-100">
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none z-0" />
       <Script id="json-ld-breadcrumb-post" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
       <Script id="json-ld-article" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(articleJsonLd) }} />
 
       <article className="container mx-auto px-4 max-w-3xl relative z-10">
-        <Link href={`/${safeLang}/blog`} className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors mb-8">
+        <Link href={`/${safeLang}/blog`} className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-[#0A0B0E] transition-colors mb-8 font-medium">
           ← {safeLang === 'uz' ? 'Blogga qaytish' : safeLang === 'ru' ? 'Назад к блогу' : safeLang === 'zh' ? '返回博客' : 'Back to blog'}
         </Link>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-widest text-gray-500">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-widest text-slate-400">
           {post.publishedAt && (
             <time dateTime={post.publishedAt}>
               {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
           )}
           <span aria-hidden="true">·</span>
-          <Link href={`/${safeLang}/haqimizda`} rel="author" className="hover:text-white">
+          <Link href={`/${safeLang}/haqimizda`} rel="author" className="hover:text-[#0A0B0E] transition-colors">
             {post.author || 'Baxtiyorjon Gaziyev'}
           </Link>
           {post.updatedAt && post.updatedAt !== post.publishedAt && (
@@ -247,42 +247,42 @@ export default async function BlogPostPage(props: Props) {
           )}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mt-4 mb-6 leading-tight bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mt-4 mb-6 leading-tight text-[#0A0B0E]">
           {post.title}
         </h1>
 
         {post.description && (
-          <p className="text-lg text-gray-400 mb-10 leading-relaxed">{post.description}</p>
+          <p className="text-lg text-slate-600 mb-10 leading-relaxed">{post.description}</p>
         )}
 
         {coverImage && (
-          <div className="relative h-64 sm:h-96 rounded-2xl overflow-hidden mb-12 border border-white/5">
+          <div className="relative h-64 sm:h-96 rounded-2xl overflow-hidden mb-12 border border-slate-200 shadow-md">
             <Image src={coverImage} alt={post.title} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" priority />
           </div>
         )}
 
         {post.content && (
-          <div className="prose prose-invert prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-white [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-white [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-400 [&_li]:text-gray-300 [&_strong]:text-white">
+          <div className="prose prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-[#0A0B0E] [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[#0A0B0E] [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-[#2554FF] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-slate-600 [&_li]:text-slate-700 [&_strong]:text-[#0A0B0E] [&_a]:text-[#2554FF]">
             <PortableText value={post.content} />
           </div>
         )}
 
         {post.htmlContent && (
           <div
-            className="prose prose-invert prose-lg max-w-none [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-white [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-gray-300 [&_li]:text-gray-300 [&_strong]:text-white [&_a]:text-blue-400"
+            className="prose prose-lg max-w-none [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-[#0A0B0E] [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#0A0B0E] [&_p]:mb-4 [&_p]:leading-relaxed [&_p]:text-slate-700 [&_li]:text-slate-700 [&_strong]:text-[#0A0B0E] [&_a]:text-[#2554FF]"
             dangerouslySetInnerHTML={{ __html: post.htmlContent }}
           />
         )}
 
         {post.sources?.length > 0 && (
-          <aside className="mt-14 border-t border-white/10 pt-8" aria-labelledby="article-sources">
-            <h2 id="article-sources" className="text-xl font-bold">
+          <aside className="mt-14 border-t border-slate-200 pt-8" aria-labelledby="article-sources">
+            <h2 id="article-sources" className="text-xl font-bold text-[#0A0B0E]">
               {safeLang === 'uz' ? 'Manbalar' : safeLang === 'ru' ? 'Источники' : safeLang === 'zh' ? '来源' : 'Sources'}
             </h2>
-            <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-gray-400">
+            <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-slate-600">
               {post.sources.map((source: { title: string; url: string; publisher?: string }) => (
                 <li key={source.url}>
-                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">
+                  <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-[#2554FF] hover:underline">
                     {source.title}
                   </a>
                   {source.publisher ? ` — ${source.publisher}` : ''}
@@ -292,14 +292,14 @@ export default async function BlogPostPage(props: Props) {
           </aside>
         )}
 
-        <aside className="mt-14 border-t border-white/10 pt-8" aria-labelledby="related-services">
-          <h2 id="related-services" className="text-xl font-bold">
+        <aside className="mt-14 border-t border-slate-200 pt-8" aria-labelledby="related-services">
+          <h2 id="related-services" className="text-xl font-bold text-[#0A0B0E]">
             {dictionary.answerHub.title}
           </h2>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {dictionary.answerHub.items.slice(0, 4).map((item: { question: string; href: string }) => (
               <li key={item.href}>
-                <Link href={`/${safeLang}${item.href}`} className="text-sm text-blue-400 underline underline-offset-4 hover:text-blue-300">
+                <Link href={`/${safeLang}${item.href}`} className="text-sm text-[#2554FF] underline underline-offset-4 hover:opacity-80">
                   {item.question}
                 </Link>
               </li>

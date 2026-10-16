@@ -26,7 +26,7 @@ describe('AtHero LCP media', () => {
     expect(images).toHaveLength(1);
     expect(images[0]).toHaveAttribute('src', '/first.webp');
     expect(images[0]).toHaveAttribute('data-priority', 'true');
-    expect(images[0]).toHaveAttribute('data-quality', '75');
+    expect(images[0]).toHaveAttribute('data-quality', '85');
     expect(screen.getByRole('link', { name: /Premium brend: Birinchi/ })).toHaveAttribute('href', '#ishlar');
     expect(screen.getByText('aslida')).toBeInTheDocument();
     expect(screen.queryByText('aslida*')).not.toBeInTheDocument();
