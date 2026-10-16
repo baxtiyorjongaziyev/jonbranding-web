@@ -188,14 +188,23 @@ async def search_telegram_for_case(brand_name: str) -> Optional[str]:
             log(f"Warning searching @JonBranding: {e}")
 
         # 2. Global search across messages sent by Baxtiyorjon or in project groups
-        async for m in client.iter_messages(None, search=brand_name, limit=15):
-            if m.text and len(m.text) > 150:
-                if any(w in m.text.lower() for w in ["brend", "logo", "identika", "brandbook", "naming", "qadoq", "patent"]):
-                    chat = await m.get_chat()
-                    title = getattr(chat, 'title', 'Chat')
-                    log(f"✅ Found case text in [{title}] (msg ID: {m.id})")
-                    await client.disconnect()
-                    return m.text
+        INTERNAL_LEAK_KEYWORDS = [
+            "amocrm", "kommo", "qo'ng'iroq", "call intelligence", "lid:", "lead #",
+            "menejer:", "sdelka", "telefon:", "sifat bahosi", "sifat nazorati", "otziv"
+        ]
+        async for m in client.iter_messages(None, search=brand_name, limit=20):
+            if not m.text or len(m.text) <= 150:
+                continue
+            lower_text = m.text.lower()
+            # Mutlaqo CRM, qo'ng'iroq yoki bot xabarlarini o'tkazmaslik
+            if any(leak_kw in lower_text for leak_kw in INTERNAL_LEAK_KEYWORDS):
+                continue
+            if any(w in lower_text for w in ["brend", "logo", "identika", "brandbook", "naming", "qadoq"]):
+                chat = await m.get_chat()
+                title = getattr(chat, 'title', 'Chat')
+                log(f"✅ Found case text in [{title}] (msg ID: {m.id})")
+                await client.disconnect()
+                return m.text
 
         await client.disconnect()
     except Exception as e:

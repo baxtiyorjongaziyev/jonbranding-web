@@ -1,5 +1,30 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-16 | Ma'lumot Sizib Chiqishi (AmoCRM Lead Link & Call Intelligence) Auditi, To'liq Tozalanishi va Himoyasi (Antigravity)
+- **Foydalanuvchi murojaati:**
+  "tushunmadim bunaqa ma'lumot nima qilyapti saytimiz ichida, yana shunga o'xshash ma'lumotlar bormi saytimiz kodini ichida backend yoki frontend kodlarini ichida?"
+  (Foydalanuvchi `jonbranding.uz/uz/portfolio` dagi Arfadel kartochkasida `👤 Lid: [AmoCRM Lead #45365927](https://jonbranding.amocrm.ru/leads/detail/45365927)` chiqqanini skrinshot bilan ko'rsatdi).
+- **Tekshiruv va Ildiz Sababi (Root Cause Analysis):**
+  1. **Nega bu ma'lumot saytga tushib qolgan?**
+     - Bugun (2026-10-16) Google Drive dagi yangi brend fayllarini avtomatik saytga integratsiya qilish uchun yaratilgan `scripts/portfolio_drive_automation.py` skripti ishga tushgan.
+     - Skript Arfadel brendi bo'yicha Telegram xabarlarini global qidirganda, ichki Call Intelligence / AI qo'ng'iroq tahlili boti (`🎙 AI Qo'ng'iroq Tahlili...`) yozgan xabarni keys matni sifatida qabul qilib olgan.
+     - Ushbu ichki bot xabari ichida AmoCRM sdelka havolasi (`#45365927`), mijoz bilan bo'lgan suhbat tahlili va ichki telefon yozuvi bo'lgan. Skript buni to'g'ridan-to'g'ri Sanity CMS production bazasiga `portfolio-arfadel` hujjati sifatida yuklab yuborgan.
+  2. **Sayt kodi va CMS da yana shunga o'xshash ma'lumotlar bormi?**
+     - Sanity CMS dagi barcha 35 ta hujjat (`portfolio`, `post`, `comparison`) to'liq skanerlandi.
+     - **Natija:** Boshqa HECH QAYSI hujjatda AmoCRM havolasi, lid raqami yoki shaxsiy ma'lumot yo'q! Bu yagona (faqat `portfolio-arfadel` da) bo'lgan.
+     - Frontend va backend kodi (`src/app/api/`, `src/components/`, `src/locales/`, `src/posts/`, `public/`) to'liq tekshirildi. Barcha API marshrutlarida amoCRM faqat ichki serverless webhooklar uchun ishlatilgan, mijozlar yuziga hech qanday shaxsiy lid chiqmaydi.
+- **Kiritilgan O'zgarishlar va Yechimlar:**
+  1. **Sanity CMS Bazasini Tozalash:**
+     - `portfolio-arfadel` hujjati Sanity API orqali zudlik bilan yangilandi: ichki qo'ng'iroq matni va AmoCRM havolasi olib tashlanib, Arfadel parfyumeriya brendining asl rasmiy keys matni bilan almashtirildi. Sanity CMS da sizib chiqqan hujjatlar soni: **0**.
+  2. **Frontend va Ma'lumot Qatlamida Sanitizer Himoyasi:**
+     - `src/lib/sanitize-portfolio-content.ts` yaratildi va `src/lib/portfolio-presentation.ts` ga ulandi.
+     - Endilikda Sanity CMS dan yoki tashqi API dan qandaydir ichki CRM havolasi (`amocrm.ru`, `kommo.com`, `👤 Lid:`, telefon raqamlari, bot tahlillari) kelgan taqdirda ham, frontend taqdimot qatlamida avtomatik tarzda filtrlanadi va public saytga MUTLAQO chiqmaydi.
+     - Vitest unit testlari yozildi (`sanitize-portfolio-content.test.ts`), 5/5 test muvaffaqiyatli o'tdi.
+  3. **Portfolio Automation Skriptini Mustahkamlash:**
+     - `scripts/portfolio_drive_automation.py` ga ichki bot va CRM xabarlarini mutlaqo o'tkazmaydigan qat'iy qora ro'yxat (`INTERNAL_LEAK_KEYWORDS`: `amocrm`, `kommo`, `qo'ng'iroq`, `call intelligence`, `lid:`, `menejer:`, `sdelka`, `telefon:`) qo'shildi.
+- **Tekshiruv Natijasi:**
+  - `npm run verify:fast`: 69 test fayli, 445/445 test 100% yashil o'tdi.
+
 ## 2026-10-16 | Shavqatsiz Audit va Kritik Xatolar (CSS Specificity, Header Overlap, Mobile Price Wrap, WCAG) To'liq Tuzatildi (Antigravity)
 - **Foydalanuvchi talabi:** "Hammasini to'liq tuzat"
 - **Bartaraf etilgan Muammolar va Kiritilgan Yechimlar:**
