@@ -1,4 +1,5 @@
 import { publicPortfolioResults } from '@/lib/portfolio-evidence';
+import { sanitizePortfolioProject } from '@/lib/sanitize-portfolio-content';
 import type { PortfolioProject } from '@/lib/portfolio-fallbacks';
 
 // Existing project gallery, inspected 2026-10-10. Apply only to the unsuitable
@@ -13,11 +14,14 @@ export function optimizeSanityUrl(url?: string, width = 1200, quality = 75): str
 
 export function presentPortfolioProject<T extends PortfolioProject>(project: T): T {
   let modified = false;
-  let current = project;
+  let current = sanitizePortfolioProject(project);
+  if (current !== project) {
+    modified = true;
+  }
 
-  if (project.results?.length) {
-    const pubResults = publicPortfolioResults(project.results);
-    if (pubResults !== project.results) {
+  if (current.results?.length) {
+    const pubResults = publicPortfolioResults(current.results);
+    if (pubResults !== current.results) {
       current = { ...current, results: pubResults };
       modified = true;
     }
