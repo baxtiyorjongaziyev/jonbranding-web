@@ -57,6 +57,7 @@ src/components/
 6. **DEV_LOG.md** — push qilganda avtomatik yangilanadi
 7. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili hisoblanadi. Har qanday matn, xususiyat yoki o'zgarish birinchi navbatda o'zbek tilida (`uz.json` faylida) amalga oshiriladi, so'ngra boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) tarjima qilinadi. Har bir o'zgarish birinchi o'zbek tilida joriy etilishi shart.
 8. **Master Design & Anti-AI-Slop Qoidalari (.agents/skills/)** — UI/UX yoki frontend ishlaganda `design-taste-frontend`, `ui-craft`, `ui-craft-editorial`, `colorize`, `ui-animation` skill'lari majburiy. 60-30-10 tizimi: 60% fon oq `#FFFFFF`, 30% struktura to'q siyoh `#0A0B0E`, 10% elektr aksent `#2554FF` (hover `#1D4ED8`). `Instrument Serif` kursivida faux-bold taqiqlanadi. `node .agents/skills/impeccable/scripts/detect.mjs` har doim 0 ta anti-pattern ko'rsatishi shart.
+9. **Human-in-the-Loop & Kontent Xavfsizligi** — Hech qanday AI yoki skript Telegram/Drive'dan olingan ma'lumotlarni tekshiruvsiz va egasining tasdig'isiz to'g'ridan-to'g'ri Sanity production bazasiga e'lon qilishi taqiqlanadi. Ichki CRM havolalari, Call Intelligence va telefon raqamlari hech qachon public sahifalarga chiqmasligi shart.
 
 ## Sanity Schema
 
