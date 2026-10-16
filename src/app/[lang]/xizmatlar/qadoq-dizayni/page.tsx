@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import PackagingClient from './packaging-client';
+import ServiceLanding from '@/components/service-landing/service-landing';
+import { PACKAGING_PAGE } from '@/lib/service-pages/packaging';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { pageTitle } from '@/lib/seo';
 
@@ -32,7 +34,12 @@ export default async function Page(props: Props) {
         name={dictionary.header.packaging_design}
         description={dictionary.packagingPage.metadata.description}
       />
-      <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />
+      {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
+      {lang === 'uz' ? (
+        <ServiceLanding content={PACKAGING_PAGE} />
+      ) : (
+        <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />
+      )}
     </>
   );
 }
