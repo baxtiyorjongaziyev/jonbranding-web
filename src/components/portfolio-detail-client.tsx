@@ -61,14 +61,14 @@ function SpotlightCard({ children, className = '', ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
-      className={`relative overflow-hidden rounded-[2.25rem] border border-white/5 bg-[#0a0f1d]/40 backdrop-blur-2xl transition-all duration-500 hover:border-blue-500/20 shadow-2xl ${className}`}
+      className={`relative overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white transition-all duration-500 hover:border-blue-500/30 hover:shadow-xl shadow-sm ${className}`}
       {...props}
     >
       {isFocused && (
         <div
           className="pointer-events-none absolute -inset-px rounded-[2.25rem] opacity-100 transition-opacity duration-300 z-0"
           style={{
-            background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, rgba(59, 130, 246, 0.12), transparent 85%)`,
+            background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, rgba(37, 84, 255, 0.08), transparent 85%)`,
           }}
         />
       )}
@@ -131,12 +131,11 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
   };
 
   return (
-    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-white pt-32 pb-24 text-[#0A0B0E] relative overflow-hidden border-b border-slate-100">
       {/* 🌟 Dynamic Background Atmosphere */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[150px] pointer-events-none z-0" />
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[180px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 left-10 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none z-0" />
-      <div className="absolute inset-0 noise-texture opacity-[0.02] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[150px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/5 blur-[180px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 left-10 w-[450px] h-[450px] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none z-0" />
 
       <div className="container mx-auto px-4 max-w-5xl space-y-20 relative z-10">
         
@@ -145,7 +144,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
           <Button
             asChild
             variant="ghost"
-            className="rounded-full bg-white/5 hover:bg-white/10 border border-white/5 hover:text-white px-6 h-12 flex items-center gap-2 group transition-all duration-300"
+            className="rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0A0B0E] hover:text-[#0A0B0E] px-6 h-12 flex items-center gap-2 group transition-all duration-300"
           >
             <Link href={`/${lang}/portfolio`}>
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -153,25 +152,25 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             </Link>
           </Button>
           
-          <div className="text-xs font-bold text-gray-500 uppercase tracking-widest hidden sm:flex items-center gap-2">
+          <div className="text-xs font-bold text-slate-500 uppercase tracking-widest hidden sm:flex items-center gap-2">
             <span>Portfolio</span>
-            <span className="text-gray-700">/</span>
-            <span className="text-blue-400 font-extrabold">{project.client}</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-[#2554FF] font-extrabold">{project.client}</span>
           </div>
         </div>
 
         {/* Hero details showcase */}
         <div className="space-y-6 text-center sm:text-left max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-500/20 text-[#2554FF] text-xs font-bold uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{project.client}</span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-none bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-none text-[#0A0B0E]">
             {project.title}
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed font-medium">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed font-normal">
             {project.description}
           </p>
 
@@ -179,7 +178,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             {project.tags.map((tag, i) => (
               <span 
                 key={i}
-                className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-gray-400 uppercase tracking-wider"
+                className="px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 uppercase tracking-wider"
               >
                 {tag}
               </span>
@@ -188,7 +187,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         </div>
 
         {/* Cinematic Cover Widescreen Box */}
-        <div className="relative h-80 sm:h-[450px] md:h-[520px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 select-none">
+        <div className="relative h-80 sm:h-[450px] md:h-[520px] w-full rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200 select-none">
           <Image
             src={project.coverImage}
             alt={project.title}
@@ -197,17 +196,17 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             className="object-cover group-hover:scale-102 transition-transform duration-1000"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#05070f]/70 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
         </div>
 
         {/* Bento Results Cards Grid */}
         {project.results && project.results.length > 0 && (
           <div className="space-y-8">
             <div className="flex items-center gap-3 justify-center sm:justify-start">
-              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 border border-blue-500/25 flex items-center justify-center text-blue-400">
+              <div className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-500/20 flex items-center justify-center text-[#2554FF]">
                 <Trophy className="w-5 h-5" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider">
+              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-[#0A0B0E]">
                 {dictionary.resultsTitle}
               </h2>
             </div>
@@ -215,17 +214,17 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {project.results.map((res, i) => (
                 <SpotlightCard key={i} className="p-8 sm:p-10 text-center flex flex-col justify-center items-center space-y-3 group">
-                  <div className="absolute top-4 right-4 text-white/[0.02] group-hover:text-blue-500/5 transition-colors">
+                  <div className="absolute top-4 right-4 text-slate-100 group-hover:text-blue-500/10 transition-colors">
                     <Star className="w-16 h-16 fill-current" />
                   </div>
-                  <p className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight group-hover:scale-105 transition-transform duration-500">
+                  <p className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0A0B0E] leading-none tracking-tight group-hover:scale-105 transition-transform duration-500">
                     {res.value}
                   </p>
-                  <p className="text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-widest leading-relaxed max-w-[180px]">
+                  <p className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest leading-relaxed max-w-[180px]">
                     {res.metric}
                   </p>
-                  <p className="text-xs text-gray-300">{getSalesFlow(lang).period}: {res.period}</p>
-                  <a href={res.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 underline">{getSalesFlow(lang).source}</a>
+                  <p className="text-xs text-slate-500">{getSalesFlow(lang).period}: {res.period}</p>
+                  <a href={res.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-[#2554FF] underline font-medium">{getSalesFlow(lang).source}</a>
                 </SpotlightCard>
               ))}
             </div>
@@ -236,16 +235,16 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         {project.beforeImage && project.afterImage && (
           <div className="space-y-8">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 border border-blue-500/25 flex items-center justify-center text-blue-400">
+              <div className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-500/20 flex items-center justify-center text-[#2554FF]">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider">
+              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-[#0A0B0E]">
                 {dictionary.transformTitle}
               </h2>
             </div>
             
             <div 
-              className="relative h-72 sm:h-[450px] md:h-[500px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10 select-none cursor-ew-resize group"
+              className="relative h-72 sm:h-[450px] md:h-[500px] w-full rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-200 select-none cursor-ew-resize group"
               onMouseDown={() => setIsDragging(true)}
               onMouseUp={() => setIsDragging(false)}
               onMouseLeave={() => setIsDragging(false)}
@@ -267,7 +266,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   className="object-cover"
                   draggable={false}
                 />
-                <div className="absolute bottom-6 right-6 px-5 py-2.5 rounded-full bg-blue-600/85 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/20 z-25 shadow-lg">
+                <div className="absolute bottom-6 right-6 px-5 py-2.5 rounded-full bg-[#2554FF] text-white backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/20 z-25 shadow-lg">
                   {project.newHint || `${project.client || project.title} (${lang === 'uz' ? 'Yangi' : lang === 'ru' ? 'Новый' : 'New'})`}
                 </div>
               </div>
@@ -293,7 +292,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                     draggable={false}
                   />
                 </div>
-                <div className="absolute bottom-6 left-6 px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/10 z-25 shadow-lg whitespace-nowrap">
+                <div className="absolute bottom-6 left-6 px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-md text-xs font-black uppercase tracking-widest border border-white/10 z-25 shadow-lg whitespace-nowrap text-white">
                   {project.oldHint || (lang === 'uz' ? 'Avvalgi' : lang === 'ru' ? 'Ранее' : 'Before')}
                 </div>
               </div>
@@ -316,14 +315,14 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         {project.body && Array.isArray(project.body) && project.body.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pt-6">
             <div className="md:col-span-4 space-y-4">
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-blue-500" />
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5 text-[#2554FF]" />
                 {lang === 'uz' ? 'Loyiha yondashuvi' : lang === 'ru' ? 'Подход к проекту' : lang === 'zh' ? '项目方法' : 'Project Approach'}
               </span>
-              <h3 className="text-3xl font-black leading-tight text-white">
+              <h3 className="text-3xl font-black leading-tight text-[#0A0B0E]">
                 {lang === 'uz' ? 'Loyiha Tafsilotlari va Yechim' : lang === 'ru' ? 'Детали и Решение Проекта' : lang === 'zh' ? '项目细节与解决方案' : 'Project Details & Solution'}
               </h3>
-              <div className="h-1.5 w-16 bg-blue-600 rounded-full"></div>
+              <div className="h-1.5 w-16 bg-[#2554FF] rounded-full"></div>
             </div>
             
             <div className="md:col-span-8 space-y-6">
@@ -332,14 +331,14 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                 const isFallback = project.body.some((item: any) => item.heading || item.paragraph);
                 if (isFallback) {
                   return project.body.map((item: any, i: number) => (
-                    <div key={i} className="border-l-2 border-blue-600 pl-6 sm:pl-8 space-y-3">
+                    <div key={i} className="border-l-2 border-[#2554FF] pl-6 sm:pl-8 space-y-3">
                       {item.heading && (
-                        <h4 className="text-xl font-bold text-white tracking-tight">
+                        <h4 className="text-xl font-bold text-[#0A0B0E] tracking-tight">
                           {item.heading}
                         </h4>
                       )}
                       {item.paragraph && (
-                        <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed">
+                        <p className="text-sm sm:text-base text-slate-700 font-normal leading-relaxed">
                           {item.paragraph}
                         </p>
                       )}
@@ -355,8 +354,8 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                   if (block.style === 'h2' || block.style === 'h3') {
                     return (
                       <div key={i} className="pt-3 first:pt-0">
-                        <h4 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
+                        <h4 className="text-xl sm:text-2xl font-black text-[#0A0B0E] tracking-tight flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#2554FF] inline-block"></span>
                           {text}
                         </h4>
                       </div>
@@ -365,15 +364,15 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
 
                   if (block.style === 'blockquote') {
                     return (
-                      <blockquote key={i} className="border-l-4 border-blue-500 bg-blue-950/20 rounded-r-2xl p-4 italic text-gray-200 text-sm sm:text-base">
+                      <blockquote key={i} className="border-l-4 border-[#2554FF] bg-blue-50/60 rounded-r-2xl p-4 italic text-slate-800 text-sm sm:text-base">
                         "{text}"
                       </blockquote>
                     );
                   }
 
                   return (
-                    <div key={i} className="border-l-2 border-blue-600/40 pl-6 space-y-2">
-                      <p className="text-sm sm:text-base text-gray-300 font-medium leading-relaxed">
+                    <div key={i} className="border-l-2 border-blue-500/30 pl-6 space-y-2">
+                      <p className="text-sm sm:text-base text-slate-700 font-normal leading-relaxed">
                         {text}
                       </p>
                     </div>
@@ -389,10 +388,10 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         {project.galleryImages && project.galleryImages.length > 0 && (
           <div className="space-y-8">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-blue-600/10 border border-blue-500/25 flex items-center justify-center text-blue-400">
+              <div className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-500/20 flex items-center justify-center text-[#2554FF]">
                 <ZoomIn className="w-5 h-5" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider">
+              <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-[#0A0B0E]">
                 {lang === 'uz' ? 'Brend Vizual Materiallari' : lang === 'ru' ? 'Визуальные Материалы Бренда' : lang === 'zh' ? '品牌视觉材料设计展示' : 'Brand Visual Materials'}
               </h2>
             </div>
@@ -402,7 +401,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
                 <div 
                   key={i}
                   onClick={() => setLightboxIndex(i)}
-                  className="relative h-56 sm:h-72 rounded-[2rem] overflow-hidden shadow-lg border border-white/5 cursor-pointer group select-none"
+                  className="relative h-56 sm:h-72 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md border border-slate-200 cursor-pointer group select-none"
                 >
                   <Image
                     src={img}
@@ -506,7 +505,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
         </AnimatePresence>
 
         {/* 🌟 Immersive Lead Capture CTA Banner */}
-        <div className="relative overflow-hidden rounded-[2.5rem] p-8 sm:p-14 bg-gradient-to-br from-[#0c0f1d] to-[#04060b] border border-white/5 shadow-2xl text-center space-y-8 select-none group">
+        <div className="relative overflow-hidden rounded-[2.5rem] p-8 sm:p-14 bg-[#0A0B0E] border border-slate-200 shadow-2xl text-center space-y-8 select-none group text-white">
           {/* Animated Glowing blobs */}
           <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-blue-600/10 blur-[100px] pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
           <div className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-violet-500/10 blur-[100px] pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
@@ -525,7 +524,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             <Button
               onClick={triggerLeadModal}
               size="lg"
-              className="h-16 px-12 bg-blue-600 hover:bg-blue-700 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-900/30 hover:scale-[1.03] transition-all duration-300"
+              className="h-16 px-12 bg-[#2554FF] hover:bg-blue-600 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-500/30 hover:scale-[1.03] transition-all duration-300"
             >
               {getSalesFlow(lang).cta}
             </Button>

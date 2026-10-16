@@ -1,5 +1,33 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-16 | Hero Rasmlar Tiniqligi (Ultra-Sharp Quality) va Butun Sayt Bo'ylab 60-30-10 Dizayn Tizimi (Antigravity)
+- **Foydalanuvchi talablari:**
+  1. "60-30-10 nimaga unda qora bo'lib qoldi sayt?"
+  2. "Shirona juda xira ko'rinyapti heroda"
+  3. "umuman herodagi barcha rasmlar juda xira ko'rinyapti"
+- **Muammoning ildiz sabablari (Root Cause Analysis):**
+  1. **Sayt nima uchun qora bo'lib qolgan edi:**
+     - Eski commit'da `/portfolio`, `/portfolio/[slug]`, `/blog`, `/blog/[slug]` va `/pricing` sahifalarida hardcoded qora fon (`bg-[#05070f] text-white`) qolib ketgan edi.
+     - `header.tsx` dagi `isDarkPage` qoidasi ushbu sahifalarni qora deb hisoblab, oq logotip va oq menyu matnlarini chiqargan.
+  2. **Hero rasmlari nima uchun xira ko'rinayotgan edi:**
+     - **Ikkilamchi lossy siqilish:** Sanity CMS rasmlari `?w=1000&q=75` bilan siqilgan holda olinib, Next.js `<Image />` ularni yana bir bor `quality={75}` bilan ikkinchi marta siqayotgan edi (double JPEG compression).
+     - **Aspect Ratio va Sun'iy Zoom:** Hero kartochkasi tor vertikal `aspect-[5/6]` (0.83 nisbat) holatida bo'lib, 16:9 gorizontal brending rasmlari balandlikka sig'ishi uchun brauzer ularni 213% ga sun'iy "zoom" qilib, markaziga tortgan va chap/o'ng qismini kesib tashlagan edi.
+     - **CMS Low-Res Assetlar:** Sanity'dagi ba'zi loyihalar (masalan, Boyarin 800x450, Savod 720x1280) past rezolyutsiyada bo'lib, repo ichidagi mavjud 2K/3K original san'at asarlari (masalan, `boyarin-hozir.webp` 3213x1808, `shirona` 2559x1439, `savod-signage.png` 1280x720) o'rnini egallab olgan edi.
+     - **Xira gradient parda:** `from-black/85 via-black/20 to-transparent` gradienti rasmlarning o'rta va yuqori qismiga qora tuman tushirib turgan edi.
+- **Kiritilgan yechimlar:**
+  1. **Hero Rasmlari Tiniqligi (Ultra-Sharp 2K/3K Quality):**
+     - `src/lib/portfolio-presentation.ts`: `selectHomePortfolioProjects` funksiyasi endi bosh sahifa herosi va galereyasi uchun bevosita 1080px–3213px rezolyutsiyadagi eng sifatli original brend artwork'larini ustuvor qilib uzatadi (Rash Milk 1995x2560, Shirona 2559x1439 tashqi reklama posteri, Boyarin 3213x1808, Fidda 1080x1080, Den Aroma 1574x1180, Savod 3D signage, Arfadel 1600x899, Enros 1600x1600, Beyaz 1280x1280).
+     - `src/components/sections/at-hero.tsx`: Hero kartochkasi proporitsiyasi tor vertikaldan tabiiy `aspect-[4/3] lg:aspect-[4/3] xl:aspect-[5/4]` ga o'tkazildi. Natijada 16:9 rasmlar sun'iy 213% zoom qilinmasdan, 100% tabiiy, tiniq va to'liq ko'rinadigan bo'ldi.
+     - Next.js Image komponentida `quality={85}` va retina ekranlar uchun `sizes="... 1000px"` o'rnatildi.
+     - Gradient overlay `from-black/75 via-transparent to-transparent` ga o'zgartirilib, rasmlar ustidagi qora tuman olib tashlandi, faqat pastki matn uchun toza vinyetka qoldirildi.
+  2. **To'liq Sayt Bo'ylab 60-30-10 Dizayn Tizimi:**
+     - `/portfolio` va `/portfolio/[slug]` (`src/app/[lang]/portfolio/page.tsx`, `src/components/portfolio-list-client.tsx`, `src/components/portfolio-detail-client.tsx`): 60% oq fon (`bg-white`), 30% to'q qora struktura (`#0A0B0E`), 10% elektr ko'k aksent (`#2554FF`), oq Spotlight kartochkalar, nozik chegaralar.
+     - `/blog` va `/blog/[slug]` (`src/app/[lang]/blog/page.tsx`, `src/app/[lang]/blog/[slug]/page.tsx`): 60% oq fon, yuqori kontrastli qora sarlavhalar, professional o'qilishi oson blog tipografiyasi.
+     - `src/components/layout/header.tsx` va `src/components/layout/header.test.tsx`: Portfolio, blog va narxlar sahifalarida header endi oq fon ustida to'liq kontrastli qora logo (`logo-black.svg`) va qora menyu tugmalarini aks ettiradi.
+- **Sifat va Test Natijalari:**
+  - `npm run verify:fast`: 68 ta test fayli, 440 ta test 100% yashil o'tdi.
+  - `npm run build`: 165 ta statik sahifa muvaffaqiyatli va 0 xato bilan build bo'ldi.
+
 ## 2026-10-15 | 60-30-10 Dizayn Tizimi, Hero Rasm Rotatori va Shirona Keysi (Antigravity)
 - **Foydalanuvchi talablari:**
   1. "60% oq rang 30% qora 10% ko'k rang ishlatilishi kerak edi. Polniy sayt design system bo'yicha"
@@ -2275,3 +2303,11 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Parameter review: no blocks/action needed.
 - Confirmed 31 business custom events; confirmed total now 39, only TestEvent remains pending. Screenshot saved.
 - Offline auto-tracking persistence remains unresolved. No code changes or new server-event verification.
+
+## 2026-10-16 | Footer screenshot alignment
+- Owner requested the supplied dark footer reference: wide navigation columns and oversized white JON ending.
+- Updated footer.tsx spacing, responsive contact column, softer blue base glow and full-width cropped existing JON SVG with explicit dimensions.
+- Preserved existing routes, contact/cookie actions, translations and other agents' unrelated edits.
+- Validation: verify:fast passed; verify passed (TypeScript, 68 test files, 440 tests); git diff --check passed. Desktop localhost visually checked in browser against reference.
+- Local implementation only; not committed, pushed or deployed. Mobile layout uses two/three columns and full-row contact below 768px; mobile visual verification remains open.
+- Applied design-taste-frontend for reference-led spacing and brand preservation.

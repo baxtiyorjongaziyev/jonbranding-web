@@ -66,13 +66,12 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
 
   return (
     <footer className="relative overflow-hidden bg-[#0a0a10] text-white" suppressHydrationWarning>
-      <div className="relative bg-[#0a0a10] pt-24 pb-[calc(env(safe-area-inset-bottom)+6.5rem)] md:pb-0">
+      <div className="relative bg-[#0a0a10] pt-16 md:pt-24">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
           className="absolute bottom-0 left-[-20%] w-[140%] h-[35%] pointer-events-none overflow-hidden select-none"
           style={{
-            background: 'radial-gradient(ellipse 100% 100% at 50% 100%, rgba(44, 43, 245, 0.86) 0%, rgba(47, 107, 255, 0.34) 48%, rgba(10, 10, 16, 0) 85%)',
-            filter: 'blur(100px)',
+            background: 'radial-gradient(ellipse 80% 100% at 50% 100%, rgba(38, 60, 190, 0.28) 0%, rgba(10, 10, 16, 0) 80%)',
             opacity: 0.85
           }}
         />
@@ -92,9 +91,9 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_80%_110%,rgba(44,43,245,0.22),transparent_75%)]" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-[2400px] px-6 sm:px-10 lg:px-[9vw]">
         {/* Top Section: Multi-Column Grid (Finch.design style) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 mb-12 md:grid-cols-3 md:mb-16 lg:grid-cols-5 lg:gap-x-10 lg:mb-20">
           {/* Services */}
           <div className="space-y-6">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.services}</h3>
@@ -141,7 +140,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           </div>
 
           {/* Hire Us Section */}
-          <div className="space-y-8 lg:col-span-1">
+          <div className="col-span-2 space-y-8 md:col-span-1">
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">{copy.contact_us}</h3>
               <div className="space-y-4">
@@ -155,7 +154,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 </a>
                 <button type="button"
                   onClick={() => window.dispatchEvent(new CustomEvent('openContactModal', { detail: { source: 'footer_team', intent: 'project' } }))}
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:-translate-y-0.5 transition-all duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center whitespace-nowrap px-4 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> {flow.team}
                 </button>
@@ -221,12 +220,14 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
         </div>
 
-        <div className="relative z-10 select-none pointer-events-none mt-20 pb-6 md:pb-10 w-full px-4 md:px-8">
+        <div aria-hidden="true" className="relative z-10 select-none pointer-events-none mt-14 h-[24vw] w-full overflow-hidden px-[1vw] sm:mt-20 lg:mt-28">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logos/jon-white.svg"
-            alt="JON"
-            className="block w-full h-auto opacity-95"
+            alt=""
+            width={560}
+            height={159}
+            className="block h-auto w-full opacity-95"
             loading="lazy"
           />
         </div>

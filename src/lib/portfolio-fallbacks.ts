@@ -111,7 +111,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: "Firma uslubi va Identika",
       tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
-      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_45_Cafe_facade.jpeg',
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
       description: "Shirona Café & Bakery uchun Jon Branding Samarqand ruhini aks ettiruvchi noyob nom, logo, toʻliq firma uslubi va brendbook yaratdi. Loyiha brendning oʻziga xosligini taʼminlab, isteʼmolchilarning qalbidan joy olishga yordam beruvchi hissiy va esda qolarli identikani taqdim etdi. Natijada, Shirona nafaqat shirinliklar uyi, balki madaniy meʼros aksini topgan, tan olinadigan brendga aylandi.",
       body: [
         {
@@ -320,7 +320,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: "Firma uslubi va Identika",
       tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
-      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_45_Cafe_facade.jpeg',
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
       description: "Для Shirona Café & Bakery агентство Jon Branding создало уникальное имя, логотип, полный фирменный стиль и брендбук, отражающие дух Самарканда. Проект обеспечил подлинность бренда, предоставив эмоционально запоминающуюся идентичность, которая помогает завоевать сердца потребителей. В результате Shirona стала не просто кондитерской, а узнаваемым брендом, в котором нашло отражение культурное наследие.",
       body: [
         {
@@ -529,7 +529,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: "Firma uslubi va Identika",
       tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
-      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_45_Cafe_facade.jpeg',
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
       description: "For Shirona Café & Bakery, Jon Branding created a unique name, logo, comprehensive corporate style, and brandbook, reflecting the spirit of Samarkand. The project ensured the brand's authenticity by providing an emotionally memorable identity that helps win consumers' hearts. As a result, Shirona became not just a confectionery, but a recognizable brand that reflects cultural heritage.",
       body: [
         {
@@ -738,7 +738,7 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
       category: 'corporate-style',
       categoryLabel: "Firma uslubi va Identika",
       tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
-      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_45_Cafe_facade.jpeg',
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
       description: "Jon Branding 为 Shirona Café & Bakery 打造了独特的名称、标志、完整的企业风格和品牌手册，体现了撒马尔罕的精神。该项目通过提供情感上令人难忘的身份，确保了品牌的真实性，有助于赢得消费者之心。因此，Shirona 不仅成为一家甜品店，更是一个反映文化遗产、广为人知的品牌。",
       body: [
         {

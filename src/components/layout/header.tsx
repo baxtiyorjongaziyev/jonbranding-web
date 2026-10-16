@@ -107,15 +107,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   if (pathnameWithoutLocale === '/pro-preview' || pathnameWithoutLocale === '/credentials' || pathnameWithoutLocale.startsWith('/credentials/')) return null;
 
   const isAvansPage = pathnameWithoutLocale === '/avans';
-  const isDarkPage =
-    pathnameWithoutLocale.startsWith('/portfolio') ||
-    pathnameWithoutLocale.startsWith('/blog') ||
-    pathnameWithoutLocale.startsWith('/pricing') ||
-    pathname.includes('/portfolio') ||
-    pathname.includes('/blog') ||
-    pathname.includes('/pricing') ||
-    pathname.includes('/sotuvchi-kartochka') ||
-    (isAvansPage && isSystemDark);
+  const isDarkPage = isAvansPage && isSystemDark;
 
   const useDarkHeaderText = !isDarkPage;
 

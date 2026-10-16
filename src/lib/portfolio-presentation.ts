@@ -70,8 +70,8 @@ export function presentPortfolioProject<T extends PortfolioProject>(project: T):
 // results and publication date always come from the actual project record.
 const HOME_WORKS = [
   { slug: 'rashmilk', image: '/images/cms/portfolio/rashmilk/rashmilk-sut-1.jpg' },
-  { slug: 'shirona', image: '/images/cms/portfolio/shirona/shirona-cover.jpg' },
-  { slug: 'savod', image: '/images/cms/portfolio/savod/savod-cover.png' },
+  { slug: 'shirona', image: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg' },
+  { slug: 'savod', image: '/images/cms/portfolio/savod/savod-signage.png' },
   { slug: 'den-aroma', image: '/images/cms/denaroma-hozir.webp' },
   { slug: 'fidda', image: '/images/cms/fidda-hozir.webp' },
   { slug: 'boyarin', image: '/images/cms/boyarin-hozir.webp' },
@@ -84,7 +84,8 @@ export function selectHomePortfolioProjects<T extends { slug: string; coverImage
   return HOME_WORKS.flatMap(({ slug, image }) => {
     const project = projects.find((p) => p.slug === slug || p.slug.startsWith(`${slug}-`));
     if (!project) return [];
-    const coverImage = (project.coverImage?.startsWith('https://cdn.sanity.io/') ? project.coverImage : image) || project.coverImage;
+    // Prioritize high-resolution curated showcase artwork for the homepage hero & gallery (avoids low-res CMS downscales)
+    const coverImage = image || project.coverImage;
     return [{ ...project, coverImage }];
   });
 }

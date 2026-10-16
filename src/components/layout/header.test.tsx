@@ -71,39 +71,39 @@ describe('Header component — dark / light page contrast', () => {
     expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
-  it('renders white logo and inverted header on /portfolio', () => {
+  it('renders dark logo and crisp contrast on 60-30-10 /portfolio', () => {
     currentPathname = '/portfolio';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
-  it('renders white logo and inverted header on localized /uz/portfolio/fidda case study', () => {
+  it('renders dark logo and crisp contrast on localized /uz/portfolio/fidda case study', () => {
     currentPathname = '/uz/portfolio/fidda';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
-  it('renders white logo and inverted header on /blog', () => {
+  it('renders dark logo and crisp contrast on 60-30-10 /blog', () => {
     currentPathname = '/blog';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
-  it('renders white logo and inverted header on localized /uz/blog/rebrending-qachon-kerak', () => {
+  it('renders dark logo and crisp contrast on localized /uz/blog/rebrending-qachon-kerak', () => {
     currentPathname = '/uz/blog/rebrending-qachon-kerak';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
-  it('renders white logo and inverted header on /pricing', () => {
+  it('renders dark logo and crisp contrast on /pricing', () => {
     currentPathname = '/pricing';
     render(<Header lang="uz" dictionary={mockDictionary} />);
     const logoImg = screen.getByAltText('Jon Branding');
-    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-white.svg');
+    expect(logoImg.getAttribute('src')).toBe('/assets/logos/logo-black.svg');
   });
 
   it('renders dark logo on /avans when system dark mode is false', () => {

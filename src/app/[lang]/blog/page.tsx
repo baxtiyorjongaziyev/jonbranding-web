@@ -140,30 +140,30 @@ export default async function BlogPage(props: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070f] pt-32 pb-24 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-white pt-32 pb-24 text-[#0A0B0E] relative overflow-hidden border-b border-slate-100">
       <Script id="json-ld-breadcrumb-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(breadcrumbJsonLd) }} />
       <Script id="json-ld-blog" type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(blogJsonLd) }} />
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-indigo-500/5 blur-[150px] pointer-events-none z-0" />
 
       <div className="container mx-auto px-4 max-w-5xl relative z-10">
         <div className="mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-500/20 text-[#2554FF] text-xs font-bold uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse" />
             {l.label}
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-[#0A0B0E]">
             {l.title}
           </h1>
-          <p className="max-w-2xl text-base leading-7 text-gray-400">
+          <p className="max-w-2xl text-base leading-7 text-slate-600">
             {descs[safeLang]}
           </p>
         </div>
 
         {posts.length === 0 ? (
-          <div className="text-center py-20 text-gray-500">
+          <div className="text-center py-20 text-slate-400">
             <p>{l.empty}</p>
-            <Link href={`/${safeLang}`} className="mt-4 inline-block text-blue-400 hover:text-blue-300 text-sm font-medium">
+            <Link href={`/${safeLang}`} className="mt-4 inline-block text-[#2554FF] hover:underline text-sm font-semibold">
               {l.back} →
             </Link>
           </div>
@@ -171,21 +171,21 @@ export default async function BlogPage(props: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {posts.map((post) => (
               <Link key={post.slug} href={`/${safeLang}/blog/${post.slug}`} className="group block">
-                <div className="relative h-56 rounded-2xl overflow-hidden mb-4 border border-white/5">
+                <div className="relative h-56 rounded-2xl overflow-hidden mb-4 border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
                   {post.image ? (
                     <Image src={post.image} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-blue-600/20 to-violet-600/20" />
+                    <div className="w-full h-full bg-slate-100" />
                   )}
                 </div>
-                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
+                <h3 className="text-xl font-bold text-[#0A0B0E] group-hover:text-[#2554FF] transition-colors mb-2">
                   {post.title}
                 </h3>
                 {post.description && (
-                  <p className="text-sm text-gray-400 line-clamp-2">{post.description}</p>
+                  <p className="text-sm text-slate-600 line-clamp-2">{post.description}</p>
                 )}
                 {post.publishedAt && (
-                  <time className="text-xs text-gray-600 mt-2 block">
+                  <time className="text-xs text-slate-400 mt-2 block font-medium">
                     {new Date(post.publishedAt).toLocaleDateString(safeLang === 'uz' ? 'uz-UZ' : safeLang === 'ru' ? 'ru-RU' : safeLang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </time>
                 )}
