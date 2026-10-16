@@ -90,7 +90,6 @@ export function getSiteEntityGraph(locale: Locale) {
         logo: `${SITE_URL}/icon.svg`,
         image: `${SITE_URL}/images/cms/og-image.jpeg`,
         telephone: '+998792000097',
-        email: 'salom@jonbranding.uz',
         priceRange: '$$$',
         address: {
           '@type': 'PostalAddress',

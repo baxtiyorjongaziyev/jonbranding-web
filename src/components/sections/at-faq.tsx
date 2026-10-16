@@ -24,9 +24,6 @@ export default function AtFaq({ lang = 'uz', onOpen }: Props) {
               {l.heading}<br /><span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>{l.headingEm}</span>
             </h2>
             <p style={{ color: 'var(--at-ink-2)', fontSize: 15, lineHeight: 1.65, maxWidth: 280 }}>{l.note}</p>
-            <a href="mailto:salom@jonbranding.uz" className="inline-flex items-center gap-2 mt-6 font-semibold text-sm rounded-full px-4 py-3" style={{ border: '1px solid var(--at-line)', background: 'var(--at-paper)', color: 'var(--at-ink)' }}>
-              salom@jonbranding.uz <span style={{ color: 'var(--at-accent)' }}>↗</span>
-            </a>
           </div>
           <div className="flex flex-col" style={{ borderTop: '1px solid var(--at-line)' }}>
             {l.faqs.map((f, i) => (

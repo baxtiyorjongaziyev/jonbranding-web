@@ -2311,3 +2311,24 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Validation: verify:fast passed; verify passed (TypeScript, 68 test files, 440 tests); git diff --check passed. Desktop localhost visually checked in browser against reference.
 - Local implementation only; not committed, pushed or deployed. Mobile layout uses two/three columns and full-row contact below 768px; mobile visual verification remains open.
 - Applied design-taste-frontend for reference-led spacing and brand preservation.
+
+## 2026-10-16 | Consultation panel centered inside JON O
+- Owner requested the floating consultation pill align to the O center at the page ending.
+- Added a wordmark data anchor; sticky CTA uses existing SVG O coordinates and MotionValues to align both axes as the footer scrolls into view. Earlier page sections keep the existing fixed position.
+- Desktop localhost screenshot verified the pill centered inside O. No deploy.
+
+## 2026-10-16 | Stop page at O/pill alignment
+- Owner clarified the page itself must end at alignment. Previous implementation moved the pill vertically while additional scrolling remained.
+- Kept pill bottom position fixed; calculated desktop footer crop from SVG O center, actual pill half-height via ResizeObserver, and safe-area inset. Container-relative width avoids scrollbar-width drift. Mobile crop preserved.
+- Desktop browser End key and DOM measurement confirmed scroll exhausted at O/pill alignment. Full verify passed (TypeScript, 440 tests); diff check passed. Local only.
+
+## 2026-10-16 | Remove unused email contact channel
+- Owner stated email is not used, referencing the homepage salom address.
+- Removed email links from homepage FAQ/final CTA, info address from all four contact-page translations, and salom email from Organization structured data. Existing phone, Telegram and form actions remain.
+- Source search confirms neither address nor rendered mailto href remains in src; diff check passed. Local only; no deployment.
+
+## 2026-10-16 | Owner-authorized footer/email production release
+- Owner explicitly requested production deployment after checking Chrome live/local difference.
+- Reviewed the seven-file diff on main; origin/main was synchronized. Confirmed prior Vercel production deployment of origin SHA 559e9b2e under baxtiyorjons-projects/jonbranding-web via GitHub deployment/status APIs.
+- Release validation: full verify passed (1325 locale keys, TypeScript, 68 files / 440 tests); focused ESLint passed; optimized production build passed (165 static pages); diff check passed. Removed an unused ESLint suppression.
+- Release method: commit and push origin/main, existing Vercel Git integration. Rollback baseline: prior production SHA 559e9b2e / deployment 9TJmdcsSyERkDEERLShVwQkWoi4J. Live read-back pending after build.

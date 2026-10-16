@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValue, useMotionValueEvent } from 'framer-motion';
 
 import { getSalesFlow } from '@/lib/sales-flow';
 
@@ -17,17 +17,27 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
   const flow = getSalesFlow(lang);
   const { scrollY } = useScroll();
   const sectionOffsetsRef = useRef<Array<{ id: Stage; top: number }>>([]);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const left = useMotionValue('50%');
 
   const handleScroll = useCallback((y: number) => {
     if (typeof window === 'undefined') return;
     const h = window.innerHeight;
     setShow(y > h * 0.6);
+    const wordmark = document.querySelector<HTMLImageElement>('[data-footer-wordmark]');
+    const bounds = wordmark?.getBoundingClientRect();
+    // Existing SVG O center x: (355.9125 - 85) / 560.
+    if (bounds && bounds.top < h) {
+      left.set(`${bounds.left + bounds.width * (270.9125 / 560)}px`);
+    } else {
+      left.set('50%');
+    }
     let active: Stage = 'belgilar';
     for (const section of sectionOffsetsRef.current) {
       if (y + 200 >= section.top) active = section.id;
     }
     setStage(active);
-  }, []);
+  }, [left]);
 
   useMotionValueEvent(scrollY, "change", handleScroll);
 
@@ -44,18 +54,33 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
         const element = document.getElementById(id);
         return element ? [{ id: stage, top: element.offsetTop }] : [];
       });
+      handleScroll(window.scrollY);
     };
 
     updateOffsets();
     handleScroll(window.scrollY);
+    const frame = document.querySelector<HTMLElement>('[data-footer-wordmark-frame]');
+    const panel = panelRef.current;
+    const updateFooterEnd = () => {
+      if (panel && panel.offsetHeight > 0) {
+        frame?.style.setProperty('--footer-cta-half-height', `${panel.offsetHeight / 2}px`);
+      }
+    };
+    const observer = new ResizeObserver(updateFooterEnd);
+    if (panel) observer.observe(panel);
+    updateFooterEnd();
     window.addEventListener('resize', updateOffsets, { passive: true });
-    return () => window.removeEventListener('resize', updateOffsets);
+    return () => {
+      observer.disconnect();
+      frame?.style.removeProperty('--footer-cta-half-height');
+      window.removeEventListener('resize', updateOffsets);
+    };
   }, [handleScroll]);
 
   const v = { num: '20', text: flow.consultation, cta: flow.cta };
 
   return (
-    <div data-sticky-audit="" aria-hidden={!show} inert={!show ? true : undefined} className="hidden md:block fixed bottom-[calc(env(safe-area-inset-bottom)+4rem)] left-1/2 z-40 transition-[transform,opacity] duration-300 motion-reduce:transition-none" style={{ transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
+    <motion.div ref={panelRef} data-sticky-audit="" aria-hidden={!show} inert={!show ? true : undefined} className="hidden md:block fixed bottom-[calc(env(safe-area-inset-bottom)+4rem)] z-40 transition-[transform,opacity] duration-300 motion-reduce:transition-none" style={{ left, transform: `translateX(-50%) translateY(${show ? '0' : '80px'})`, opacity: show ? 1 : 0, pointerEvents: show ? 'auto' : 'none' }}>
       <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 rounded-full shadow-2xl max-w-[90vw] sm:max-w-none" style={{ background: 'var(--at-ink)', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px -10px rgba(14,16,21,0.5)' }}>
         <span className="text-xs font-semibold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: 'var(--at-accent)', letterSpacing: '0.06em' }}>{v.num}</span>
         <span className="text-[11px] sm:text-sm line-clamp-1 truncate flex-1 min-w-[100px]" style={{ color: 'rgba(244,241,232,.7)' }}>{v.text}</span>
@@ -64,6 +89,6 @@ export default function AtStickyCta({ onOpen, lang = 'uz' }: Props) {
           <span aria-hidden="true" className="absolute inset-0 rounded-full motion-safe:animate-ping opacity-20" style={{ background: 'var(--at-accent)' }}></span>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -65,7 +65,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#0a0a10] text-white" suppressHydrationWarning>
+    <footer className="relative overflow-hidden bg-[#0a0a10] text-white [container-type:inline-size]" suppressHydrationWarning>
       <div className="relative bg-[#0a0a10] pt-16 md:pt-24">
         {/* Finch-style Vivid Background Gradient - Anchored to very bottom */}
         <div 
@@ -220,10 +220,10 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
         </div>
         </div>
 
-        <div aria-hidden="true" className="relative z-10 select-none pointer-events-none mt-14 h-[24vw] w-full overflow-hidden px-[1vw] sm:mt-20 lg:mt-28">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+        <div data-footer-wordmark-frame="" aria-hidden="true" className="relative z-10 select-none pointer-events-none mt-14 h-[24vw] md:h-[calc(13.9265cqw+4rem+var(--footer-cta-half-height,35px)+env(safe-area-inset-bottom))] w-full overflow-hidden px-[1%] sm:mt-20 lg:mt-28">
           <img
             src="/assets/logos/jon-white.svg"
+            data-footer-wordmark=""
             alt=""
             width={560}
             height={159}
