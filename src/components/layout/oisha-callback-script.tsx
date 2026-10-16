@@ -52,6 +52,11 @@ export default function OishaPhoneSync() {
       callbackObserver.observe(root, { subtree: true, attributes: true, attributeFilter: ['class'] });
       syncCallback();
     };
+    const updateScrollState = () => {
+      document.body.dataset.scrolledPastHero = String(window.scrollY > 260);
+    };
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
     observeCallback();
     const observer = new MutationObserver((mutations) => {
       observeCallback();
@@ -65,9 +70,11 @@ export default function OishaPhoneSync() {
     });
     observer.observe(document.body, { childList: true, subtree: true });
     return () => {
+      window.removeEventListener('scroll', updateScrollState);
       observer.disconnect();
       callbackObserver?.disconnect();
       delete document.body.dataset.callbackOpen;
+      delete document.body.dataset.scrolledPastHero;
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);

@@ -33,7 +33,7 @@ const ChecklistItem: FC<{
               {item.title}
             </label>
             <p className="text-gray-600 mt-2">{item.description}</p>
-            <blockquote className="mt-3 border-l-4 border-green-500 pl-4 text-green-800 bg-green-50 p-2 rounded-r-lg">
+            <blockquote className="mt-3 border border-green-500/20 rounded-xl p-3 text-green-900 bg-green-50/80">
               {item.solution}
             </blockquote>
           </div>

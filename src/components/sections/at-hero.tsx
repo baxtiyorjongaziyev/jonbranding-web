@@ -177,9 +177,6 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse" />
                 {l.tagline}
               </span>
-              <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-slate-600">
-                {l.badge}
-              </span>
             </div>
 
             <h1
@@ -206,7 +203,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                 data-testid="hero-audit-trigger"
                 data-oisha-callback=""
                 onClick={onOpen}
-                className="inline-flex items-center justify-center gap-2 bg-[#2554FF] hover:bg-[#1B4DFF] text-white rounded-full px-8 py-4 font-semibold text-sm shadow-[0_12px_32px_-8px_rgba(37,84,255,0.4)] hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center justify-center gap-2 bg-[#2554FF] hover:bg-[#1D4ED8] text-white rounded-full px-8 py-4 font-semibold text-sm shadow-[0_12px_32px_-8px_rgba(37,84,255,0.4)] hover:-translate-y-0.5 transition-[background-color,transform,box-shadow]"
               >
                 {l.cta1}
               </button>
@@ -214,19 +211,38 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                 onClick={() =>
                   document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="inline-flex items-center justify-center gap-2 border border-slate-200 hover:border-slate-400 rounded-full px-8 py-4 text-sm font-semibold text-slate-800 hover:text-black transition-all bg-white shadow-sm"
+                className="inline-flex items-center justify-center gap-2 border border-slate-200 hover:border-slate-400 rounded-full px-8 py-4 text-sm font-semibold text-slate-800 hover:text-black transition-colors bg-white shadow-sm"
               >
                 {l.cta2}
               </button>
             </div>
 
             {/* Quick credentials stat row */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 max-w-md">
-              {[
-                ['9+ yil', 'bozorda'],
-                ['500+', 'mijoz'],
-                ['100%', 'patent kafolati'],
-              ].map(([val, label]) => (
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 max-w-md tabular-nums">
+              {(lang === 'ru'
+                ? [
+                    ['9+ лет', 'на рынке'],
+                    ['500+', 'клиентов'],
+                    ['240+', 'проектов'],
+                  ]
+                : lang === 'en'
+                  ? [
+                      ['9+ yrs', 'in market'],
+                      ['500+', 'clients'],
+                      ['240+', 'projects'],
+                    ]
+                  : lang === 'zh'
+                    ? [
+                        ['9+ 年', '市场经验'],
+                        ['500+', '服务客户'],
+                        ['240+', '完成项目'],
+                      ]
+                    : [
+                        ['9+ yil', 'bozorda'],
+                        ['500+', 'mijoz'],
+                        ['240+', 'loyiha'],
+                      ]
+              ).map(([val, label]) => (
                 <div key={label}>
                   <div className="text-xl sm:text-2xl font-bold text-[#0A0B0E] tracking-tight">{val}</div>
                   <div className="text-[11px] font-[family-name:var(--font-mono)] uppercase tracking-wider text-slate-500">{label}</div>
@@ -237,7 +253,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
 
           {/* RIGHT — Hero Rotating Visual Showcase */}
           <div
-            className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex flex-col items-center justify-center gap-4"
+            className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex flex-col items-center justify-center gap-2"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -269,7 +285,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                     </span>
                   </div>
 
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-all border border-white/30 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] shadow-lg">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-colors border border-white/30 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] shadow-lg">
                     <svg
                       width="24"
                       height="24"
@@ -288,22 +304,29 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
               </div>
             </a>
 
-            {/* Slide switcher indicators */}
-            <div className="flex items-center gap-2 pt-1" aria-label="Keyslar slayderi">
-              {pool.map((item, dotIdx) => (
-                <button
-                  key={item.src + dotIdx}
-                  type="button"
-                  onClick={(e) => { e.preventDefault(); setIndex(dotIdx); }}
-                  className={`h-2 transition-all duration-300 rounded-full ${
-                    index % pool.length === dotIdx
-                      ? 'w-7 bg-[#2554FF]'
-                      : 'w-2 bg-slate-300 hover:bg-slate-400'
-                  }`}
-                  aria-label={`${item.name} keysiga o'tish`}
-                  aria-current={index % pool.length === dotIdx ? 'true' : undefined}
-                />
-              ))}
+            {/* Slide switcher indicators (44px vertical touch target per WCAG 2.5.8) */}
+            <div className="flex items-center gap-0.5" aria-label="Keyslar slayderi">
+              {pool.map((item, dotIdx) => {
+                const isActive = index % pool.length === dotIdx;
+                return (
+                  <button
+                    key={item.src + dotIdx}
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); setIndex(dotIdx); }}
+                    className="group/dot flex min-h-[44px] min-w-[24px] items-center justify-center px-1 focus-visible:outline-none"
+                    aria-label={`${item.name} keysiga o'tish`}
+                    aria-current={isActive ? 'true' : undefined}
+                  >
+                    <span
+                      className={`h-2 rounded-full transition-[width,background-color] duration-300 ${
+                        isActive
+                          ? 'w-7 bg-[#2554FF]'
+                          : 'w-2 bg-slate-300 group-hover/dot:bg-slate-400'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

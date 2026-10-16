@@ -1,0 +1,29 @@
+# Jon Branding Web — Cursor Rules (UI/UX, Frontend & Anti-AI-Slop)
+
+## Project Context
+- **jonbranding.uz** — Central Asia's premier brand agency website.
+- **Tech Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Sanity CMS, Framer Motion.
+- **Primary Language:** Uzbek (`uz.json` first, then `ru.json`, `en.json`, `zh.json`).
+
+## Master Design & Anti-AI-Slop Protocol (Mandatory for all AI models)
+Whenever working on design, UI, UX, components, pages, or animations, you MUST follow these principles:
+
+1. **Anti-AI-Slop (No Template Look):**
+   - Reference skills: `.agents/skills/design-taste-frontend/SKILL.md` and `.agents/skills/impeccable/SKILL.md`.
+   - Never generate generic 3-card feature grids with purple gradients, bouncy hover scales, or bland AI aesthetics.
+   - Use luxury editorial design: high-contrast layout, intentional whitespace, distinctive typography (`var(--font-serif)` Instrument Serif and `var(--font-hanken)`).
+   - Zero synthetic/faux bold on italics: Never combine `font-bold` with `<em>` or italic serif.
+
+2. **60-30-10 Color Architecture:**
+   - 60% Canvas / Surface: Pure white `#FFFFFF` (`--at-bg`, `--paper`).
+   - 30% Ink / Structure: Obsidian dark ink `#0A0B0E` (`--at-ink`), neutral secondary `#4B5563`, subtle borders `#E5E7EB`.
+   - 10% Electric Accent: Electric Blue `#2554FF` (`--at-accent`), hover `#1D4ED8`.
+
+3. **Smooth 60fps Motion:**
+   - Use Framer Motion spring physics or GSAP ScrollTrigger.
+   - Strictly avoid layout transitions (`transition: all`, `width`, `height`); use only GPU `transform` and `opacity`.
+   - Floating widgets must not collide with or block key CTA text.
+
+4. **Verification Gates:**
+   - Run `node .agents/skills/impeccable/scripts/detect.mjs` — 0 anti-patterns allowed in production code.
+   - Run `npm run verify:fast` before concluding any feature.

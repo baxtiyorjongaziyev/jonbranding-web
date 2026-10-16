@@ -106,15 +106,15 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
 
   return (
     <div className="space-y-16">
-      <div className="relative flex flex-wrap p-1.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-full max-w-3xl mx-auto z-10 shadow-xs">
+      <div className="relative flex items-center justify-start sm:justify-center gap-1 p-1.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-full max-w-4xl mx-auto z-10 shadow-xs overflow-x-auto no-scrollbar">
         {filterOptions.map((opt) => {
           const isActive = selectedCategory === opt.value;
           return (
             <button
               key={opt.value}
               onClick={() => setSelectedCategory(opt.value)}
-              className={`relative z-10 flex-1 px-5 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest transition-colors duration-300 rounded-full ${
-                isActive ? 'text-white' : 'text-[#6B7280] hover:text-[#0A0B0E]'
+              className={`relative z-10 whitespace-nowrap px-4 py-2.5 sm:px-5 sm:py-3 text-xs font-bold uppercase tracking-widest transition-colors duration-300 rounded-full shrink-0 ${
+                isActive ? '!text-white' : 'text-[#6B7280] hover:text-[#0A0B0E]'
               }`}
             >
               {isActive && (

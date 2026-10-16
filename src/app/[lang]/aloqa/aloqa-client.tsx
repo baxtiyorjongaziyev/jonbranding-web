@@ -97,16 +97,15 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
   const tgHref = 'https://t.me/jonbranding';
 
   return (
-    <div style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
+    <div className="atelier-theme jon-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
       {/* Hero */}
-      <section className="pt-16 pb-0 md:pt-24 border-b border-[var(--at-line)]">
+      <section className="pt-32 pb-0 md:pt-40 lg:pt-44 border-b border-[var(--at-line)]">
         <div className="max-w-[1320px] mx-auto px-5 md:px-8 pb-16 md:pb-24">
-          <div className="flex items-center gap-2 mb-8" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-green)] animate-pulse" />
-            <span style={{ color: 'var(--at-ink)', fontWeight: 500 }}>{l.sectionN}</span>
+          <div className="inline-flex items-center gap-2 mb-6 rounded-full border border-blue-500/20 bg-blue-50/80 px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2554FF]">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse" />
             <span>{l.label}</span>
           </div>
-          <h1 className="font-bold text-[var(--at-ink)] mb-8 font-[family-name:var(--font-serif)] italic" style={{ fontSize: 'clamp(64px, 10vw, 160px)', lineHeight: 0.85, letterSpacing: '-0.04em' }}>
+          <h1 className="font-normal text-[var(--at-ink)] mb-6 font-[family-name:var(--font-serif)] italic" style={{ fontSize: 'clamp(48px, 7vw, 88px)', lineHeight: 1.02, letterSpacing: '-0.03em' }}>
             {l.heading}
           </h1>
           <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[520px]">{l.subtext}</p>
@@ -160,15 +159,15 @@ const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
             <div className="p-8 rounded-2xl" style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)', marginBottom: 16 }}>{l.briefLabel}</div>
               <p style={{ fontSize: 15, color: 'var(--at-ink-2)', lineHeight: 1.65, marginBottom: 24 }}>{l.briefText}</p>
-              <a href={briefHref} className="inline-flex items-center gap-2 bg-[var(--at-accent)] text-white rounded-full px-6 py-3.5 font-semibold text-sm hover:-translate-y-0.5 transition-transform">{l.briefBtn}</a>
+              <a href={briefHref} className="inline-flex items-center gap-2 bg-[#2554FF] hover:bg-[#1D4ED8] !text-white rounded-full px-6 py-3.5 font-semibold text-sm hover:-translate-y-0.5 transition-[background-color,transform]">{l.briefBtn}</a>
             </div>
             <div className="p-8 rounded-2xl flex flex-col justify-between" style={{ background: '#0E1015', border: '1px solid rgba(255,255,255,.08)', minHeight: 220 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)', marginBottom: 16 }}>{l.ctaLabel}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: 16 }}>{l.ctaLabel}</div>
               <div>
                 <div className="font-[family-name:var(--font-serif)] italic font-normal text-white" style={{ fontSize: 'clamp(32px, 4vw, 56px)', letterSpacing: '-0.03em', lineHeight: 0.9, marginBottom: 24 }}>@jonbranding</div>
                 <a href={tgHref} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border rounded-full px-6 py-3.5 font-semibold text-sm transition-colors hover:bg-white/10"
-                  style={{ borderColor: 'rgba(255,255,255,.2)', color: '#fff' }}
+                  className="inline-flex items-center gap-2 border rounded-full px-6 py-3.5 font-semibold text-sm transition-colors hover:bg-white/10 !text-white"
+                  style={{ borderColor: 'rgba(255,255,255,.3)' }}
                 >{l.ctaBtn}</a>
               </div>
             </div>

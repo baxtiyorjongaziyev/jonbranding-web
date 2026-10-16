@@ -156,20 +156,41 @@ body:has(.jon-home) {
   }
 }
 
-/* ── Jon Atelier Design Tokens ── */
+/* Prevent floating callback widget from covering Hero stats above the fold */
+body:not([data-scrolled-past-hero="true"]):not([data-callback-open="true"]) [data-oisha-callback-host] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 240ms cubic-bezier(0.22, 1, 0.36, 1), transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body[data-scrolled-past-hero="true"] [data-oisha-callback-host],
+body[data-callback-open="true"] [data-oisha-callback-host] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 240ms cubic-bezier(0.22, 1, 0.36, 1), transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Jon Atelier Design Tokens (60-30-10 Daylight-First System) ── */
 :root {
-  --at-bg:      #F4F5F7;   /* Cool light gray */
-  --at-bg-2:    #EAECF0;   /* Slightly darker gray */
+  --at-bg:      #FFFFFF;   /* 60% Pure White Canvas */
+  --at-bg-2:    #F8FAFC;   /* Soft Alabaster Secondary Surface */
+  --at-bg-dark: #0A0B0E;   /* 30% Deep Obsidian Ink Anchor */
   --at-paper:   #FFFFFF;   /* White card */
-  --at-ink:     #0E1015;   /* Charcoal ink */
-  --at-ink-2:   #3B3D45;   /* Secondary ink */
+  --at-ink:     #0A0B0E;   /* Primary Deep Ink */
+  --at-ink-2:   #4B5563;   /* Secondary Slate Ink */
+  --at-ink-3:   #6B7280;   /* Muted Neutral */
+  --at-ink-4:   #9CA3AF;   /* Subtle Caption */
   --at-muted:   #6B7280;   /* Cool muted */
-  --at-line:    #DDE0E6;   /* Hairline border */
-  --at-accent:  #1B4DFF;   /* Cobalt blue */
-  --at-terra:   #1B4DFF;   /* Cobalt blue (formerly Terracotta) */
-  --at-green:      #2C6E49;   /* Forest green */
-  --at-green-soft: rgba(44, 110, 73, 0.08);
-  --at-accent-soft: rgba(27,77,255,0.08);
+  --at-line:    #E5E7EB;   /* Crisp Hairline Border */
+  --at-line-strong: #0A0B0E;
+  --at-accent:  #2554FF;   /* 10% Electric Royal Blue */
+  --at-accent-2:#1D4ED8;   /* Hover Royal Blue */
+  --at-terra:   #2554FF;   /* Unified Brand Blue */
+  --at-green:      #2554FF;   /* Unified Brand Blue Accent */
+  --at-green-soft: rgba(37, 84, 255, 0.08);
+  --at-accent-soft: rgba(37, 84, 255, 0.08);
 }
 
 /* Marquee animation */
@@ -727,7 +748,7 @@ body:has(.jon-home) {
 
   /* App-like press effect for any element with this class */
   .press-effect {
-    transition: transform 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .press-effect:active {
     transform: scale(0.95);
@@ -961,16 +982,18 @@ body:has(.jon-home) {
   }
 }
 
-/* Gradient text helper */
+/* Brand accent text helper */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, #6366f1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--at-accent);
 }
 
-/* Accessibility and Line-Height fixes from Audit */
+/* Editorial heading line-height and italic weight discipline (prevents faux-bold on Instrument Serif) */
 .atelier-theme h1, .atelier-theme h2, .atelier-theme h3,
 h1, h2, h3 {
-  line-height: 1.15 !important;
+  line-height: 1.12;
+}
+
+.atelier-theme h1 em, .atelier-theme h2 em, .atelier-theme h3 em,
+h1 em, h2 em, h3 em {
+  font-weight: 400;
 }

@@ -35,7 +35,7 @@ const Section: FC<{ id?: string; children: ReactNode; className?: string; labell
 
 const Tag: FC<{ children: ReactNode; tone?: 'real' | 'hypo' }> = ({ children, tone = 'hypo' }) => (
   <span
-    className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${tone === 'real' ? 'bg-neutral-100 text-neutral-600' : 'bg-blue-50 text-blue-700'}`}
+    className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${tone === 'real' ? 'bg-neutral-100 text-neutral-600' : 'bg-slate-100 text-blue-700'}`}
     style={{ letterSpacing: '0.08em' }}
   >
     {children}

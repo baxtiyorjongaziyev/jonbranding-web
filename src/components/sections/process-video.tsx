@@ -21,21 +21,21 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
   return (
     <section
       aria-labelledby="process-video-title"
-      className="bg-[#08090C] py-16 sm:py-20 lg:py-24 border-b border-white/10"
+      className="bg-[var(--at-bg)] py-16 sm:py-20 lg:py-24 border-b border-[var(--at-line)]"
     >
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-4 inline-flex rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md px-4 py-2 text-[11px] font-[family-name:var(--font-mono)] uppercase tracking-[0.24em] text-white/70">
+          <div className="mb-3 font-[family-name:var(--font-mono)] text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2554FF]">
             {dictionary.eyebrow}
           </div>
-          <h2 id="process-video-title" className="text-balance text-3xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 id="process-video-title" className="text-balance text-3xl font-bold tracking-tight text-[#0A0B0E] sm:text-5xl">
             {dictionary.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">{dictionary.description}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#4B5563]">{dictionary.description}</p>
         </div>
 
         <div className="mx-auto mt-10 max-w-4xl">
-          <div className="relative overflow-hidden rounded-3xl bg-slate-900 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl border border-[#E5E7EB] bg-[#0A0B0E] shadow-[0_24px_60px_-16px_rgba(10,11,14,0.14)]">
             <div className="relative aspect-video w-full">
               {showVideo ? (
                 <iframe
@@ -55,7 +55,7 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
                   data-testid="process-video-play"
                   onClick={() => setShowVideo(true)}
                   aria-label={dictionary.play}
-                  className="group absolute inset-0 block h-full w-full overflow-hidden text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-white"
+                  className="group absolute inset-0 block h-full w-full overflow-hidden text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-[#2554FF]"
                 >
                   <Image
                     src="/images/cms/corporate-process.webp"
@@ -66,7 +66,7 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
                   />
                   <span className="absolute inset-0 bg-slate-950/45 transition-colors motion-reduce:transition-none group-hover:bg-slate-950/35" />
                   <span className="absolute inset-0 grid place-items-center">
-                    <span className="inline-flex items-center gap-3 rounded-full border border-white/40 bg-black/40 px-6 py-4 text-sm font-bold backdrop-blur-md transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 motion-reduce:group-hover:scale-100">
+                    <span className="inline-flex items-center gap-3 rounded-full border border-white/40 bg-black/50 px-6 py-4 text-sm font-bold backdrop-blur-md transition-transform duration-200 motion-reduce:transition-none group-hover:scale-105 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] motion-reduce:group-hover:scale-100">
                       <span aria-hidden="true" className="text-lg">▶</span>
                       {dictionary.play}
                     </span>
@@ -76,12 +76,12 @@ const ProcessVideo: FC<{ dictionary: ProcessVideoDictionary }> = ({ dictionary }
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#121520] px-6 py-4 text-center sm:flex-row sm:text-left">
-            <p className="text-sm text-white/70">{dictionary.fallbackHint}</p>
+          <div className="mt-6 flex flex-col items-center justify-between gap-3 rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-4 text-center sm:flex-row sm:text-left">
+            <p className="text-sm text-[#4B5563]">{dictionary.fallbackHint}</p>
             <a
               href="#process"
               data-testid="process-video-fallback"
-              className="shrink-0 text-sm font-semibold text-[#2554FF] hover:text-blue-400 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
+              className="shrink-0 text-sm font-semibold text-[#2554FF] hover:text-[#1D4ED8] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
             >
               {dictionary.fallbackCta} →
             </a>

@@ -303,7 +303,7 @@ function SalesTechniques() {
             <a
               key={id}
               href={'#' + id}
-              className="whitespace-nowrap rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+              className="whitespace-nowrap rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-[#0A0B0E] transition hover:border-[#2554FF]/40 hover:bg-slate-100 hover:text-[#2554FF]"
             >
               {label}
             </a>

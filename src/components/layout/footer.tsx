@@ -154,7 +154,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                 </a>
                 <button type="button"
                   onClick={() => window.dispatchEvent(new CustomEvent('openContactModal', { detail: { source: 'footer_team', intent: 'project' } }))}
-                  className="inline-flex items-center justify-center whitespace-nowrap px-4 py-3 bg-[linear-gradient(135deg,#3d3aff_0%,#1b18c2_100%)] rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center whitespace-nowrap px-4 py-3 bg-[#2554FF] rounded-full text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors duration-300 w-full gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Send size={16} /> {flow.team}
                 </button>
@@ -183,33 +183,33 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-[11px] text-gray-400 uppercase tracking-tight font-medium">
             <span>&copy; {currentYear} Jon.Branding Agency. {copy.all_rights_reserved}</span>
             <span className="text-white/10 px-1">/</span>
-            <Link href={getLocalizedPath('/privacy')} className="hover:text-white transition-colors">
+            <Link href={getLocalizedPath('/privacy')} className="hover:text-white transition-colors py-2 inline-flex items-center min-h-[44px]">
               {copy.privacy_policy_link}
             </Link>
             <span className="text-white/10 px-1">/</span>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
-              className="uppercase hover:text-white transition-colors"
+              className="uppercase hover:text-white transition-colors py-2 inline-flex items-center min-h-[44px]"
             >
               {lang === 'uz' ? 'Cookie sozlamalari' : lang === 'ru' ? 'Настройки cookie' : lang === 'zh' ? 'Cookie 设置' : 'Cookie settings'}
             </button>
             <span className="text-white/10 px-1">/</span>
-            <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">
+            <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors py-2 inline-flex items-center min-h-[44px]">
               {copy.terms_of_use_link}
             </Link>
           </div>
 
 
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-5">
-              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <a href="https://www.instagram.com/jon.branding/" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
+              <a href="https://t.me/JonBranding" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="Telegram Channel">
                 <Send size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all transform hover:scale-110 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/baxtiyorjongaziyev/" target="_blank" rel="noopener noreferrer" className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>

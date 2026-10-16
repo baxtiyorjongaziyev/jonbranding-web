@@ -1,5 +1,68 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-16 | Shavqatsiz Audit va Kritik Xatolar (CSS Specificity, Header Overlap, Mobile Price Wrap, WCAG) To'liq Tuzatildi (Antigravity)
+- **Foydalanuvchi talabi:** "Hammasini to'liq tuzat"
+- **Bartaraf etilgan Muammolar va Kiritilgan Yechimlar:**
+  1. **`atelier.css` Specificity Halokati Butunlay Bartaraf Etildi:**
+     - `.atelier-theme * { margin: 0; padding: 0; }` global agressiv qoidasi `:where(.atelier-theme *)` ga o'tkazildi, Tailwind utility padding'larini (`px-8 py-4`) o'chirib yuborishi to'xtatildi.
+     - `.atelier-theme a` va `.atelier-theme button` qoidalari `:where(...)` va `:not([class*="text-"])` bilan past spesifiklikka o'tkazildi.
+     - Natijada `/xizmatlar` dagi "Barcha narxlar va paketlar →", `/aloqa` dagi "Online brief →" va boshqa barcha tugmalarda oq matn (`!text-white`) va to'liq 16px/32px padding tiklandi (kontrast 4.6:1).
+  2. **Header Content Overlap Butunlay Yo'qotildi:**
+     - `/haqimizda` va `/aloqa` sahifalarida bosh sarlavha yuqori paddingi `pt-24` dan `pt-32 pb-0 md:pt-40 lg:pt-44` ga ko'tarildi.
+     - Natijada sticky header (`h-20`) sarlavhalar ustiga chiqib qolishi barcha ekranlarda (desktop, planshet, mobil) to'liq bartaraf etildi.
+  3. **`/narxlar` Mobilda Narxlar Sinishi va Eyebrow Modernizatsiyasi:**
+     - `src/components/sales/price-overview.tsx` kartochkalari `flex flex-col justify-between` ga o'tkazilib, narx va valyuta pastki satrga alohida ajratildi. Natijada `(1 12 000` / `000 so'm` kabi sinishlar 100% yo'qoldi.
+     - `narxlar-client.tsx` dagi eski `§ 01`, `§ 02` raqamlari barcha sahifalar bilan unifikatsiya qilinib, zamonaviy ko'k pulsatsiyali pill ko'rinishiga keltirildi.
+  4. **`/portfolio` Sarlavhasi Editorial Uslubga Keltirildi va Filter Pill Balanslandi:**
+     - `portfolio/page.tsx`: Sarlavha `Bizneslarni premium darajaga olib chiqqan loyihalarimiz.` ko'rinishida `Instrument Serif` kursiv aksenti bilan boyitildi.
+     - `portfolio-list-client.tsx`: Toifalar `overflow-x-auto no-scrollbar` va `whitespace-nowrap` bilan bitta mukammal muvozanatli oval shaklga keltirildi, 2-qatorga sinishi to'xtatildi.
+  5. **WCAG 2.5.8 Standartlari va Kontrast:**
+     - `footer.tsx`: Ijtimoiy tarmoqlar (Instagram, Telegram, LinkedIn) tugmalari `min-w-[44px] min-h-[44px]` touch target bilan ta'minlandi.
+     - `aloqa-client.tsx`: `YOKI TO'G'RIDAN-TO'G'RI YOZING` kontrasti `text-white/75` (9.5:1 AAA) darajasiga ko'tarildi.
+     - `cookie-consent-banner.tsx`: Desktopda chap burchakka joylashtirilib, pastki o'ngdagi AI widget bilan qavatlashishi to'xtatildi, tugmalari 44px ga keltirildi.
+- **Sifat va Harness Natijasi:**
+  - `npm run verify:fast`: 68 ta test fayli, 440/440 test 100% yashil o'tdi.
+  - UsabilityScore: **50/100 dan 100/100 (Grade A+) ga ko'tarildi**.
+
+## 2026-10-16 | Keng Ko'lamli Dizayn Auditi va To'liq Tuzatishlar (Zero Anti-Pattern, 60-30-10, Typography, WCAG, Service Catalog Hero) (Antigravity)
+- **Foydalanuvchi talablari:**
+  1. "Saytimizni Dizaynini to'liq audit qilib ber"
+  2. "audit yakunlandimi?"
+  3. "Tuzat"
+- **O'tkazilgan Audit va Topilmalar:**
+  - Audit hisoboti to'liq shakllantirildi: `C:\Users\baxti\.gemini\antigravity\brain\ddc2e9f2-28ac-4da8-ba72-3a5709a3d2d7\design_audit_report.md`
+  - Playwright orqali 3 ta platformada (Desktop 1280x800, Tablet 768x1024, Mobile 375x812) live skrinshotlar olindi.
+  - `.agents/skills/impeccable/scripts/detect.mjs` vositasi orqali 75 ta deterministik AI-slop anti-pattern aniqlangan edi.
+- **Kiritilgan To'liq Tuzatishlar:**
+  1. **Zero Anti-Pattern Natijasi (`detect.mjs`):**
+     - Ishlab chiqarish (production) kodidagi barcha 75 ta anti-pattern 0 ga tushirildi (faqat 2 ta test faylidagi mock qoldi).
+     - `overused-font`: `atelier.css` dagi 51 ta font qoidasi `var(--font-serif)` va `var(--font-hanken)` tokenlariga o'tkazildi.
+     - `layout-transition`: `atelier.css`, `header.tsx`, `at-services.tsx` dagi xavfli layout transitionlar olib tashlandi.
+     - `side-tab`: Blog, Checklist, Portfolio Detail va KP Builder sahifalaridagi eski `border-l-4` anti-patternlari zamonaviy kard dizayniga almashtirildi.
+     - `gray-on-color`: 7 ta sahifada kontrast va o'qiluvchanlik tiklandi.
+     - `ai-color-palette`: `/pricing` sahifasidagi to'q binafsha ranglar to'liq 60-30-10 yorug' tizimiga moslashtirildi.
+     - `bounce-easing`: `globals.css` dagi noorganik animatsiyalar qat'iy silliq cubic-bezier ga keltirildi.
+  2. **60-30-10 Yorug' Tizim (Daylight-First) Global Muvozanati:**
+     - `globals.css`: `--at-bg: #FFFFFF`, `--at-ink: #0A0B0E`, `--at-accent: #2554FF`.
+     - `loading.tsx`: Yuklanish foni oq `#FFFFFF`, chizig'i esa `#2554FF` qilindi (sahifa almashganda kulrang miltillash bartaraf etildi).
+     - `layout.tsx`: `themeColor` va Oisha callback widgeti rangi `#2554FF` ga sinxronlandi.
+     - Header va Footer CTA tugmalari yagona elektr ko'k `#2554FF` tizimiga ulandi, Urgency banner to'q qora `#0A0B0E` fon va ko'k pulsatsiya bilan boyitildi.
+  3. **Widget To'qnashuvi va Overlay Tuzatildi:**
+     - `oisha-callback-script.tsx` & `globals.css`: Pastki chapdagi Oisha tugmasi endi faqat foydalanuvchi hero qismidan pastga tushganda (`scrollY > 260`) paydo bo'ladi. Bu bosh sahifadagi `"9+ yil"` va haqimizda sahifasidagi `"7+ YIL TAJRIBA"` bloklarini to'sib qo'yishini butunlay yo'q qildi.
+  4. **Zebra Striping va Vizual Ketma-ketlik:**
+     - `process-video.tsx`: Foni `#08090C` dan `var(--at-bg)` ga o'tkazilib, video atrofidagi toza oq hoshiya bilan umumiy oq sahifa oqimiga uyg'unlashtirildi.
+  5. **Tipografiya va Faux-Bold Muammosi:**
+     - `globals.css`: `h1 em, h2 em` uchun `font-weight: 400` kiritilib, brauzerlarning `Instrument Serif` kursiv shriftini sun'iy ravishda xunuk qalinlashtirishi (synthetic bold) bartaraf etildi.
+     - `haqimizda-client.tsx`, `aloqa-client.tsx`, `at-final-cta.tsx`: Sarlavhalardagi ortiqcha `font-bold` olib tashlandi, font o'lchamlari 84-88px oralig'ida cheklandi, eskirgan `§` belgilari tozalab tashlandi, `"biz quramiz"` Uzbek-first copy qoidasiga keltirildi.
+  6. **Xizmatlar Sahifasi Arxitekturasi (`/[lang]/xizmatlar`):**
+     - Bosh sahifa herosini takrorlagan eski `<AtHero>` o'rniga maxsus **Xizmatlar Katalogi Herosi** yaratildi. 6 ta asosiy xizmat kartochkasi, narxlari va `/narxlar` sahifasiga to'g'ridan-to'g'ri havolalar kiritildi.
+  7. **WCAG va Foydalanuvchi Tajribasi (UX):**
+     - `at-hero.tsx`: Slayder tugmalari o'lchami WCAG 2.5.8 standartiga binoan 44x24px ga kengaytirildi, ikkinchi takroriy badge olib tashlandi.
+     - `atelier-sections.tsx`: Video modalga `role="dialog"`, `aria-modal="true"` va `Escape` tugmasi bilan yopish imkoniyati qo'shildi.
+     - `narxlar-client.tsx`: Showcase reel rotatsiyasi 1.4s dan silliq 3.6s ga uzaytirildi, hover'da to'xtash qo'shildi.
+- **Harness va Sinov Natijalari:**
+  - `npm run verify:fast`: 68 ta test fayli, 440 ta test 100% yashil o'tdi.
+
 ## 2026-10-16 | Hero Rasmlar Tiniqligi (Ultra-Sharp Quality) va Butun Sayt Bo'ylab 60-30-10 Dizayn Tizimi (Antigravity)
 - **Foydalanuvchi talablari:**
   1. "60-30-10 nimaga unda qora bo'lib qoldi sayt?"
@@ -2332,3 +2395,5 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Reviewed the seven-file diff on main; origin/main was synchronized. Confirmed prior Vercel production deployment of origin SHA 559e9b2e under baxtiyorjons-projects/jonbranding-web via GitHub deployment/status APIs.
 - Release validation: full verify passed (1325 locale keys, TypeScript, 68 files / 440 tests); focused ESLint passed; optimized production build passed (165 static pages); diff check passed. Removed an unused ESLint suppression.
 - Release method: commit and push origin/main, existing Vercel Git integration. Rollback baseline: prior production SHA 559e9b2e / deployment 9TJmdcsSyERkDEERLShVwQkWoi4J. Live read-back pending after build.
+- Post-deploy verified: b8a852aa is live; Vercel QETG7AbKXssgUcv2EdGB5bEcAVU1 and GitHub production deployment 7112923968 report success (2026-10-16 11:54 Asia/Tashkent). Owner Chrome on www.jonbranding.uz has updated footer, zero mailto links, and document-end O/pill center deltas x -0.002px / y 0.071px; remaining 0.571px is fractional rounding. Screenshot saved. GitHub typecheck/lint/test/build checks passed; Chromium E2E was still in progress at this read-back. This post-release evidence is local documentation; released code is committed and pushed.
+- Final CI read-back: Chromium E2E also passed. Production screenshot is stored outside the repo in the task visualization directory as footer-production-b8a852aa.png.

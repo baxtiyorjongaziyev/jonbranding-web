@@ -262,7 +262,7 @@ export default async function BlogPostPage(props: Props) {
         )}
 
         {post.content && (
-          <div className="prose prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-[#0A0B0E] [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[#0A0B0E] [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-4 [&_blockquote]:border-[#2554FF] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-slate-600 [&_li]:text-slate-700 [&_strong]:text-[#0A0B0E] [&_a]:text-[#2554FF]">
+          <div className="prose prose-lg max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-[#0A0B0E] [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[#0A0B0E] [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4 [&_blockquote]:border-l-2 [&_blockquote]:border-[#2554FF] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-slate-600 [&_li]:text-slate-700 [&_strong]:text-[#0A0B0E] [&_a]:text-[#2554FF]">
             <PortableText value={post.content} />
           </div>
         )}

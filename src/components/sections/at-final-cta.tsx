@@ -9,7 +9,7 @@ export default function AtFinalCta({ onOpen, lang = 'uz' }: Props) {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,84,255,0.2) 0%, transparent 70%)' }} />
       <div className="relative max-w-[1320px] mx-auto px-8 sm:px-5 text-center">
         <div className="inline-block mb-6 px-4 py-2 rounded-full text-xs tracking-widest uppercase font-[family-name:var(--font-mono)] text-white/50 border border-white/10">{l.badge}</div>
-        <h2 className="font-bold leading-none mb-8 text-white" style={{ fontSize: 'clamp(48px, 7vw, 112px)', letterSpacing: '-0.04em' }}>
+        <h2 className="font-bold leading-none mb-8 text-white" style={{ fontSize: 'clamp(40px, 5.5vw, 84px)', letterSpacing: '-0.035em' }}>
           {l.h2a}<br />
           <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, color: 'var(--at-accent)' }}>{l.h2b}</span>
         </h2>

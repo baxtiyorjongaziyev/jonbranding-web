@@ -212,7 +212,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
               <button
                 key={opt.value}
                 onClick={() => handleAnswer(opt.value)}
-                className="p-4 rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 text-left font-medium text-slate-900 transition-all"
+                className="p-4 rounded-xl border border-slate-200 hover:border-[#2554FF]/30 hover:bg-blue-50 hover:text-[#2554FF] text-left font-medium text-[#0A0B0E] transition-all"
               >
                 {opt.label}
               </button>

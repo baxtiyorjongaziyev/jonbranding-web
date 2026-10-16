@@ -41,15 +41,16 @@ type Props = {
 
 function ShowcaseReel({ images }: { images: string[] }) {
   const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (images.length < 2) return;
+    if (images.length < 2 || isPaused) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % images.length);
-    }, 1400);
+    }, 3600);
     return () => window.clearInterval(timer);
-  }, [images.length]);
+  }, [images.length, isPaused]);
 
   return (
     <div>
@@ -58,7 +59,7 @@ function ShowcaseReel({ images }: { images: string[] }) {
           <Image
             key={src}
             src={src}
-            alt=""
+            alt="Jon.Branding keys lavhasi"
             fill
             sizes="(max-width: 768px) 100vw, 45vw"
             priority={i === 0}
@@ -72,7 +73,7 @@ function ShowcaseReel({ images }: { images: string[] }) {
           <span
             key={src}
             className="h-0.5 flex-1 rounded-full transition-colors duration-300 motion-reduce:transition-none"
-            style={{ background: i === index ? '#000' : '#e5e5e5' }}
+            style={{ background: i === index ? '#2554FF' : '#e5e5e5' }}
           />
         ))}
       </div>
@@ -83,16 +84,12 @@ function ShowcaseReel({ images }: { images: string[] }) {
 const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace' } as const;
 const numerals = { fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' } as const;
 
-function Eyebrow({ index, label, muted }: { index: string; label: string; muted?: boolean }) {
+function Eyebrow({ label }: { index?: string; label: string; muted?: boolean }) {
   return (
-    <p
-      className="mb-5 flex items-center justify-center gap-2.5 text-[11px] font-medium uppercase"
-      style={{ ...mono, letterSpacing: '0.1em', color: muted ? 'rgba(255,255,255,.5)' : '#a3a3a3' }}
-    >
-      <span style={{ color: muted ? 'rgba(255,255,255,.85)' : '#000' }}>{index}</span>
-      <span aria-hidden="true" className="inline-block h-px w-5" style={{ background: 'currentColor' }} />
-      {label}
-    </p>
+    <div className="mb-5 inline-flex items-center justify-center gap-2 rounded-full border border-blue-500/20 bg-blue-50/80 px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2554FF]">
+      <span className="w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse" />
+      <span>{label}</span>
+    </div>
   );
 }
 

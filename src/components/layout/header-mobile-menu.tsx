@@ -183,11 +183,11 @@ export function MobileMenu({
                   }}
                   className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition-all duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/10 text-[#1B4DFF]">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2554FF]/10 text-[#2554FF]">
                     <Download className="h-4 w-4" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[13px] font-bold text-[#0E1015]">
+                    <div className="text-[13px] font-bold text-[#0A0B0E]">
                       {dictionary.install_app}
                     </div>
                     <div className="text-[11px] text-[#6B7280]">
@@ -199,14 +199,14 @@ export function MobileMenu({
             </motion.nav>
 
             {/* Sticky CTA at bottom */}
-            <div className="mt-auto p-4 border-t border-[#DDE0E6] bg-[#F4F5F7]">
+            <div className="mt-auto p-4 border-t border-[#E5E7EB] bg-[#F8FAFC]">
               <button
                 data-oisha-callback=""
                 onClick={() => {
                   onContactClick();
                   onOpenChange(false);
                 }}
-                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-[#1B4DFF] px-5 py-4 text-white shadow-lg shadow-[#1B4DFF]/25 transition-all duration-300 hover:bg-[#153ecf] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B4DFF]"
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-[#2554FF] px-5 py-4 text-white shadow-lg shadow-[#2554FF]/25 transition-all duration-300 hover:bg-[#1D4ED8] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
               >
                 <div className="flex flex-col">
                   <span className="text-[15px] font-bold">{dictionary.free_consultation}</span>
