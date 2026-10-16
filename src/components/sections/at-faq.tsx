@@ -17,7 +17,7 @@ export default function AtFaq({ lang = 'uz', onOpen }: Props) {
           <div>
             <span className="inline-flex items-center gap-2 mb-5" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}>
               <span className="at-pulse inline-block w-1.5 h-1.5 rounded-full" style={{ background: 'var(--at-green)' }} />
-              <span style={{ color: 'var(--at-ink)', fontWeight: 500 }}>{l.sectionN}</span>
+
               {l.label}
             </span>
             <h2 className="font-bold leading-none mb-5" style={{ fontSize: 'clamp(36px, 4.4vw, 64px)', letterSpacing: '-0.035em', color: 'var(--at-ink)' }}>

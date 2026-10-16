@@ -79,14 +79,36 @@ export default async function PortfolioPage(props: Props) {
             {safeLang === 'uz' ? 'Premium Portfolio' : safeLang === 'ru' ? 'Премиум Портфолио' : safeLang === 'zh' ? '高端作品集' : 'Premium Portfolio'}
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-none text-[#0A0B0E]">
-            {safeLang === 'uz' 
-              ? 'Bizneslarni Premium Darajaga Olib Chiqqan Loyihalarimiz' 
-              : safeLang === 'ru' 
-                ? 'Проекты, которые вывели бизнес на премиум уровень' 
-                : safeLang === 'zh'
-                  ? '助推企业跃升高端的标杆案例'
-                  : 'Projects That Elevate Businesses to Premium Level'}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0A0B0E]" style={{ lineHeight: 1.05, letterSpacing: '-0.035em' }}>
+            {safeLang === 'uz' ? (
+              <>
+                Bizneslarni premium darajaga olib chiqqan{' '}
+                <span className="font-[family-name:var(--font-serif)] italic font-normal text-[#2554FF]">
+                  loyihalarimiz.
+                </span>
+              </>
+            ) : safeLang === 'ru' ? (
+              <>
+                Проекты, выведшие бизнес на{' '}
+                <span className="font-[family-name:var(--font-serif)] italic font-normal text-[#2554FF]">
+                  премиум уровень.
+                </span>
+              </>
+            ) : safeLang === 'zh' ? (
+              <>
+                助推企业跃升高端的{' '}
+                <span className="font-[family-name:var(--font-serif)] italic font-normal text-[#2554FF]">
+                  标杆案例
+                </span>
+              </>
+            ) : (
+              <>
+                Projects that elevate businesses to{' '}
+                <span className="font-[family-name:var(--font-serif)] italic font-normal text-[#2554FF]">
+                  premium level.
+                </span>
+              </>
+            )}
           </h1>
           
           <p className="text-base md:text-lg text-[#4B5563] leading-relaxed max-w-2xl mx-auto font-medium">

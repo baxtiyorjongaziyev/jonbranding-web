@@ -134,36 +134,49 @@ Barcha AI agentlar (Claude, Gemini, ChatGPT va boshqalar) **JonBranding agentlig
 3. **Agent Roles**: Maxsus vazifalar (Sales, PM, Finance, Content) uchun `07_AI_Agent_Roles.md` dagi agent profillariga moslashing.
 4. Javoblar doimo **qisqa, amaliy, tadbirkor tilida** va **Baxtiyorjonni operatsiyadan chiqarish** hamda **$10K/oy, $300K/yil maqsadlariga xizmat qilish** tamoyillariga mos bo'lishi shart!
 
-## AI agent skills — majburiy foydalanish
+## AI agent skills — Barcha Agentlar Uchun Majburiy Foydalanish (Antigravity, Codex, Claude, Cursor)
 
-Repo ichidagi `.agents/skills/` barcha AI agentlar uchun umumiy skill manbasi
-hisoblanadi. Ish boshlashdan oldin agent vazifaga mos `SKILL.md` faylini to‘liq
-o‘qishi va undagi qoidalarga amal qilishi kerak.
+Repo ichidagi `.agents/skills/` va `.claude/skills/` barcha AI agentlar uchun umumiy skill manbasi hisoblanadi.
+Har qanday frontend, UI/UX, animatsiya, sahifa yoki komponent ustida ishlaganda har bir agent quyidagi **Master Design & Craftsmanship Protocol**ga qat'iy amal qilishi SHART:
 
-### Anti-AI-slop web workflow
+### 1. Vizual Uslub va Yo'nalish (Conception & Mood)
+- `.agents/skills/design-taste-frontend/SKILL.md` — Premium, brend xarakteriga ega va shablondan butunlay xoli frontend.
+- `.agents/skills/ui-craft/SKILL.md` — Discovery bosqichi, anti-slop qoidalari, proporsiyalar va qulay iyerarxiya.
+- `.agents/skills/ui-craft-editorial/SKILL.md` — **Jon Branding agentligi uchun asosiy uslub:** Jurnal estetikasi, nafis serif shriftlar, katta bo'shliqlar (whitespace) va yuqori darajadagi brending taqdimoti.
+- `.agents/skills/ui-craft-minimal/SKILL.md` — Linear/Notion uslubidagi toza monoxrom, nozik chegaralar (hairline borders).
+- `.agents/skills/ui-ux-pro-max/SKILL.md` — 50 ta uslub, 21 ta rang palitrasi va 50 ta font pairing intellekti.
 
-Web sahifa, UI, UX yoki kontent ustida ishlaganda quyidagi skill’lar vazifaga
-mos ravishda qo‘llanadi:
+### 2. 60-30-10 Rang va Tipografiya Arxitekturasi
+- `.agents/skills/colorize/SKILL.md` — Rang strategiyasi:
+  - **60% Fon:** Toza oq `#FFFFFF` (`--at-bg`, `--paper`).
+  - **30% Struktura:** To'q qora siyoh `#0A0B0E` (`--at-ink`), neytral matn `#4B5563`, nozik chegaralar `#E5E7EB`.
+  - **10% Elektr Aksent:** Elektr ko'k `#2554FF` (`--at-accent`), hover `#1D4ED8`. Boshqa ranglar bilan bulg'anmaslik.
+- `.agents/skills/tokens/SKILL.md` — 3 qatlamli tokenlar tizimi.
+- `.agents/skills/kinetic-typography/SKILL.md` — Display sarlavhalarga split-text va dinamik xarakter berish.
+- **Qat'iy Tipografiya Qoidasi:** `Instrument Serif` kursiv sarlavhalarida sun'iy qalinlashuv (synthetic/faux-bold) taqiqlanadi (`h1 em, h2 em { font-weight: 400; }`). Display shriftlar 72px–88px bilan cheklanadi.
 
-- `.agents/skills/impeccable/SKILL.md` — sun’iy, takroriy va generik AI dizaynini kamaytirish;
-- `.agents/skills/design-taste-frontend/SKILL.md` — premium, original va brendga mos frontend;
-- `.agents/skills/copy-editing/SKILL.md` — tabiiy, aniq va Uzbek-first copy;
-- `.agents/skills/web-quality-audit/SKILL.md` — yakuniy UX, accessibility, performance va sifat auditi.
+### 3. Animatsiya va Oqim (Motion & Interaction)
+- `.agents/skills/ui-animation/SKILL.md` — Framer Motion orqali 60fps tezlikdagi prujinali (spring) o'tishlar.
+- `.agents/skills/gsap-scrolltrigger/SKILL.md` va `.agents/skills/gsap-timeline/SKILL.md` — Skroll bilan sinxronlashgan AWWWARDS darajasidagi animatsiyalar, pinning va sekinlashtirilgan xarakterli rotatsiyalar (hover'da to'xtaydigan).
+- **Qat'iy Motion Qoidasi:** Layout siljishiga sabab bo'luvchi `transition: all`, `width`, `height` o'tishlari taqiqlanadi; faqat GPU `transform` va `opacity` ishlatiladi.
 
-Faqat kerakli skill’lar tanlanadi; bir xil qoidani takrorlaydigan skill’lar
-ortiqcha yuklanmaydi. Skill ishlatilgan bo‘lsa, yakuniy javobda qaysi skill’lar
-qo‘llangani va qanday ta’sir qilgani qisqa qayd etiladi.
+### 4. Anti-AI-Slop Filtrlash (Zero Tolerance)
+- `.agents/skills/impeccable/SKILL.md` — Sun'iy, shablon AI dizayn illatlarini yo'qotish.
+- Ish tugagach, har bir agent detektor skriptini ishga tushirishi shart:
+  ```bash
+  node .agents/skills/impeccable/scripts/detect.mjs
+  ```
+  Ishlab chiqarish kodida aniqlangan qoidabuzarliklar soni **0** bo'lishi shart!
 
-### Agent harness verification
-
-Har bir kod o‘zgarishidan keyin imkon qadar:
-
-```bash
-npm run verify:fast
-npm run verify
-```
-
-buyruqlari bajariladi. Faqat mos bo‘lmagan holatda sabab `DEV_LOG.md` ga yoziladi.
+### 5. Sifat Nazorati va Pre-Ship Gate
+- `.agents/skills/finalize/SKILL.md` — 10 bosqichli yakuniy sifat tekshiruvi.
+- `.agents/skills/heuristic/SKILL.md` — Nilsonning 10 ta UX qonuni asosidagi baholash.
+- `.agents/skills/responsive-design/SKILL.md` va `accessibility/` — Mobil (375px), Planshet (768px), Desktop (1280px+) va WCAG 2.5.8 (touch targets >= 44px) standartlari.
+- Har qanday o'zgarishdan keyin repo testlari yashil bo'lishi shart:
+  ```bash
+  npm run verify:fast
+  npm run verify
+  ```
 
 ## Obsidian "Ikkinchi Miya" Qoidalari (Barcha Agentlar Uchun!)
 

@@ -18,10 +18,19 @@ export default function PriceOverview({ lang, local = false }: { lang: string; l
       <h2 className="mb-6 text-2xl font-bold tracking-tight text-neutral-900">{flow.choose}</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {paths.map(({ label, item, anchor }) => (
-          <Link key={anchor} href={href(anchor)} className="rounded-2xl border border-neutral-300 bg-white p-5 text-neutral-900 transition-colors hover:border-blue-600 focus-visible:outline-2 focus-visible:outline-blue-600">
-            <span className="block text-sm text-neutral-600">{label}</span>
-            <span className="mt-2 block font-semibold">{item.name} ↗</span>
-            <span className="mt-3 block text-xl font-bold tabular-nums">{item.price} <span className="text-sm font-normal">{content.ui.currency}</span></span>
+          <Link
+            key={anchor}
+            href={href(anchor)}
+            className="flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-5 text-neutral-900 transition-[border-color,box-shadow,transform] hover:border-blue-600 hover:shadow-md focus-visible:outline-2 focus-visible:outline-blue-600"
+          >
+            <div>
+              <span className="block text-xs uppercase tracking-wider text-neutral-500 font-medium">{label}</span>
+              <span className="mt-2 block font-semibold text-base sm:text-lg text-neutral-900">{item.name} ↗</span>
+            </div>
+            <div className="mt-4 pt-3 border-t border-neutral-100 flex items-baseline justify-between">
+              <span className="text-xl font-bold tabular-nums text-neutral-900">{item.price}</span>
+              <span className="text-sm font-medium text-neutral-500">{content.ui.currency}</span>
+            </div>
           </Link>
         ))}
       </div>

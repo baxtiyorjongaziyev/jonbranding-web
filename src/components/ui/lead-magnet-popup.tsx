@@ -192,7 +192,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                       <button
                         key={key}
                         onClick={() => handleRoleSelect(key)}
-                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                        className="w-full h-14 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-blue-600 hover:border-blue-600 text-white/80 hover:text-white font-semibold transition-all duration-300 text-left flex items-center justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                       >
                         <span>{label}</span>
                         <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
@@ -296,7 +296,7 @@ const LeadMagnetPopup: React.FC<LeadMagnetPopupProps> = ({ dictionary }) => {
                     </p>
                   </div>
                   <div className="bg-white/5 p-6 rounded-3xl border border-white/10 space-y-4">
-                    <p className="text-xs text-gray-300 font-medium">
+                    <p className="text-xs text-slate-500 font-medium">
                       {dictionary.blocked.socialHint}
                     </p>
                     <Button asChild className="w-full h-14 bg-[#24A1DE] hover:bg-[#24A1DE]/80 text-white font-bold text-base rounded-2xl shadow-lg shadow-[#24A1DE]/20">

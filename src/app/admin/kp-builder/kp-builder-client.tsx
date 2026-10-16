@@ -118,7 +118,7 @@ export default function KpBuilderClient() {
           </label>
         </section>
 
-        <section className="border-l-4 border-blue-600 bg-neutral-50 p-6 sm:p-8 print:border-l-0 print:bg-white print:p-10" aria-label="Tijorat taklifi">
+        <section className="border border-blue-600/30 rounded-2xl bg-neutral-50 p-6 sm:p-8 print:border-0 print:bg-white print:p-10" aria-label="Tijorat taklifi">
           <div className="flex items-start justify-between border-b border-neutral-300 pb-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-blue-600">Tijorat taklifi</p>

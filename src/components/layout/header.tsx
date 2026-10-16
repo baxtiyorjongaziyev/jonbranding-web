@@ -133,14 +133,14 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     <>
       {dictionary.urgencyBadge && (
         <div
-          className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#ef4444] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
+          className="fixed top-0 left-0 right-0 z-50 h-10 w-full bg-[#0A0B0E] flex items-center justify-center overflow-hidden border-b border-white/10 group cursor-pointer"
           data-oisha-callback=""
           onClick={handleContactClick}
           style={{ top: visible ? (scrolled ? -40 : 0) : -40 }}
         >
           <div className="flex items-center justify-center gap-2 relative z-10 px-4">
-            <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
-            <p className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] uppercase text-white/95 group-hover:text-white transition-all duration-300">
+            <span className="flex h-2 w-2 rounded-full bg-[#2554FF] animate-pulse shadow-[0_0_10px_rgba(37,84,255,0.9)]" />
+            <p className="text-[10px] sm:text-[11px] font-black tracking-[0.2em] uppercase text-white/95 group-hover:text-white transition-colors duration-300">
               {dictionary.urgencyBadge}
             </p>
           </div>
@@ -150,7 +150,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
 
       <header
         className={cn(
-          'fixed left-0 right-0 z-50 flex flex-col items-center transition-[top] duration-300 ease-out'
+          'fixed left-0 right-0 z-50 flex flex-col items-center transition-transform duration-300 ease-out'
         )}
         style={{
           top: visible
@@ -165,7 +165,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
       >
         <div
           className={cn(
-            'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius,max-width,margin,padding] duration-500',
+            'flex h-16 w-full items-center justify-between transition-[background-color,border-color,box-shadow,border-radius] duration-500',
             scrolled
               ? cn('mx-auto mt-3 max-w-[95%] rounded-full liquid-glass-header px-5 py-2 lg:max-w-6xl lg:px-7', isDarkPage && 'dark-glass')
               : 'mx-auto max-w-[1240px] border-b border-transparent bg-transparent px-4 sm:px-6 lg:px-7'

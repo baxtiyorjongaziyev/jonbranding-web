@@ -15,16 +15,16 @@ const t = {
     label: 'Haqimizda',
     heading: 'Brendning',
     headingEm: 'kuchini',
-    headingEnd: 'biz yaratamiz.',
-    subtext: "2019 yildan Markaziy Osiyodagi premium brending agentligi. Biznes identifikatsiyasini yaratish — bu faqat dizayn emas, bu strategiya.",
+    headingEnd: 'biz quramiz.',
+    subtext: "Markaziy Osiyodagi premium brending agentligi. Biznes identifikatsiyasini ishlab chiqish — bu faqat dizayn emas, bu aniq strategiya.",
     stats: [
-      { n: '7+', l: 'Yil tajriba' },
-      { n: '120+', l: 'Brend yaratildi' },
+      { n: '9+', l: 'Yil bozorda' },
+      { n: '500+', l: 'Mijozlar' },
       { n: '240+', l: 'Loyiha tugallandi' },
       { n: '4', l: 'Til (uz/ru/en/zh)' },
     ],
     missionLabel: 'Missiyamiz',
-    mission: "Markaziy Osiyodagi har bir biznesga professional brend identifikatsiyasi yaratish imkonini berish. Bizning maqsadimiz — mijoz brendini uzoq muddatli biznes vositasiga aylantirish.",
+    mission: "Markaziy Osiyodagi har bir biznesga professional brend tizimini qurish imkonini berish. Bizning maqsadimiz — mijoz brendini uzoq muddatli biznes vositasiga aylantirish.",
     valuesLabel: 'Qadriyatlarimiz',
     values: [
       { n: '01', title: 'Sifat', text: "Har bir pixel, har bir qator matn maqsadli. Tasodifiy element yo'q." },
@@ -49,16 +49,16 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: 'Основатель и Главный Дизайнер',
     founderQuote: 'Бренд — это не просто внешний вид. Это то, о чём говорит ваш бизнес. Мы правильно формулируем эту речь.',
-    founderSince: 'С 2019 года',
+    founderSince: 'С 2017 года',
     sectionN: '§ 01',
     label: 'О нас',
     heading: 'Силу',
     headingEm: 'бренда',
-    headingEnd: 'создаём мы.',
-    subtext: 'Премиум брендинговое агентство Центральной Азии с 2019 года. Создание бренд-идентичности — это не просто дизайн, это стратегия.',
+    headingEnd: 'строим мы.',
+    subtext: 'Премиум брендинговое агентство Центральной Азии. Разработка бренд-идентичности — это не просто дизайн, это стратегия.',
     stats: [
-      { n: '7+', l: 'Лет опыта' },
-      { n: '120+', l: 'Создано брендов' },
+      { n: '9+', l: 'Лет на рынке' },
+      { n: '500+', l: 'Клиентов' },
       { n: '240+', l: 'Завершено проектов' },
       { n: '4', l: 'Языка (uz/ru/en/zh)' },
     ],
@@ -88,21 +88,21 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: 'Founder & Chief Designer',
     founderQuote: "A brand is not just about appearance. It's about what your business says. We shape that message right.",
-    founderSince: 'Since 2019',
+    founderSince: 'Since 2017',
     sectionN: '§ 01',
     label: 'About us',
     heading: 'Brand',
     headingEm: 'power',
     headingEnd: 'is what we build.',
-    subtext: "Central Asia's premium branding agency since 2019. Creating brand identity isn't just design — it's strategy.",
+    subtext: "Central Asia's premium branding agency. Building brand identity isn't just design — it's strategy.",
     stats: [
-      { n: '7+', l: 'Years experience' },
-      { n: '120+', l: 'Brands created' },
+      { n: '9+', l: 'Years in market' },
+      { n: '500+', l: 'Clients' },
       { n: '240+', l: 'Projects completed' },
       { n: '4', l: 'Languages (uz/ru/en/zh)' },
     ],
     missionLabel: 'Our mission',
-    mission: "To give every business in Central Asia the ability to create professional brand identity. Our goal is to turn the client's brand into a long-term business tool.",
+    mission: "To give every business in Central Asia the ability to build a professional brand identity. Our goal is to turn the client's brand into a long-term business tool.",
     valuesLabel: 'Our values',
     values: [
       { n: '01', title: 'Quality', text: 'Every pixel, every line of text is purposeful. No accidental elements.' },
@@ -127,16 +127,16 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: '创始人兼首席设计师',
     founderQuote: '品牌不仅仅是外观。它是您的企业在说什么。我们帮助您正确塑造这种表达。',
-    founderSince: '自2019年',
+    founderSince: '自2017年',
     sectionN: '§ 01',
     label: '关于我们',
     heading: '品牌',
     headingEm: '力量',
     headingEnd: '由我们打造。',
-    subtext: '中亚高端品牌机构，成立于2019年。打造品牌识别不仅仅是设计——更是战略。',
+    subtext: '中亚高端品牌机构。打造品牌识别不仅仅是设计——更是战略。',
     stats: [
-      { n: '7+', l: '年经验' },
-      { n: '120+', l: '品牌创建' },
+      { n: '9+', l: '年市场经验' },
+      { n: '500+', l: '服务客户' },
       { n: '240+', l: '完成项目' },
       { n: '4', l: '种语言 (uz/ru/en/zh)' },
     ],
@@ -170,18 +170,17 @@ const HaqimizClient: FC<Props> = ({ lang = 'uz' }) => {
   const quizHref = lang === 'uz' ? '/quiz' : `/${lang}/quiz`;
 
   return (
-    <div style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
+    <div className="atelier-theme jon-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
       {/* Hero */}
-      <section className="pt-16 pb-0 md:pt-24 border-b border-[var(--at-line)]">
+      <section className="pt-32 pb-0 md:pt-40 lg:pt-44 border-b border-[var(--at-line)]">
         <div className="max-w-[1320px] mx-auto px-5 md:px-8 pb-16 md:pb-24">
-          <div className="flex items-center gap-2 mb-8" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--at-muted)' }}>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--at-green)] animate-pulse" />
-            <span style={{ color: 'var(--at-ink)', fontWeight: 500 }}>{l.sectionN}</span>
+          <div className="inline-flex items-center gap-2 mb-6 rounded-full border border-blue-500/20 bg-blue-50/80 px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2554FF]">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse" />
             <span>{l.label}</span>
           </div>
-          <h1 className="font-bold text-[var(--at-ink)] mb-8" style={{ fontSize: 'clamp(52px, 8.5vw, 120px)', lineHeight: 0.9, letterSpacing: '-0.04em' }}>
+          <h1 className="font-bold text-[var(--at-ink)] mb-8" style={{ fontSize: 'clamp(44px, 6.8vw, 88px)', lineHeight: 1.02, letterSpacing: '-0.035em' }}>
             <span className="block">{l.heading}</span>
-            <span className="block text-[var(--at-accent)] font-[family-name:var(--font-serif)] italic">{l.headingEm}</span>
+            <span className="block text-[var(--at-accent)] font-[family-name:var(--font-serif)] italic font-normal">{l.headingEm}</span>
             <span className="block">{l.headingEnd}</span>
           </h1>
           <p className="text-[var(--at-ink-2)] text-base md:text-lg leading-relaxed max-w-[600px]">{l.subtext}</p>
@@ -189,7 +188,7 @@ const HaqimizClient: FC<Props> = ({ lang = 'uz' }) => {
       </section>
 
       {/* Stats */}
-      <div className="py-7 border-b border-[var(--at-line)] bg-[var(--at-bg)]">
+      <div className="py-8 border-b border-[var(--at-line)] bg-[var(--at-bg)] tabular-nums">
         <div className="max-w-[1320px] mx-auto px-5 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {l.stats.map((s, i) => (

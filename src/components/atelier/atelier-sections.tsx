@@ -345,6 +345,15 @@ export const ATQuotes: FC<ATQuotesProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (!activeVideo) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveVideo(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeVideo]);
+
   return (
     <section className="sec wrap" id="sharhlar">
       <div
@@ -744,10 +753,17 @@ export const ATQuotes: FC<ATQuotesProps> = ({
 
       {activeVideo && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${activeVideo.name} video`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setActiveVideo(null)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setActiveVideo(null);
+          }}
+          tabIndex={-1}
           style={{
             position: 'fixed',
             inset: 0,

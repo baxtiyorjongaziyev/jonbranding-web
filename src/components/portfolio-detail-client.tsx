@@ -364,7 +364,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
 
                   if (block.style === 'blockquote') {
                     return (
-                      <blockquote key={i} className="border-l-4 border-[#2554FF] bg-blue-50/60 rounded-r-2xl p-4 italic text-slate-800 text-sm sm:text-base">
+                      <blockquote key={i} className="border border-[#2554FF]/20 bg-blue-50/60 rounded-2xl p-4 italic text-blue-950 text-sm sm:text-base">
                         "{text}"
                       </blockquote>
                     );
