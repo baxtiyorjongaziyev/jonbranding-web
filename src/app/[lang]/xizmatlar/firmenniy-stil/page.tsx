@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import CorporateClient from './corporate-client';
+import ServiceLanding from '@/components/service-landing/service-landing';
+import { VISUAL_IDENTITY_PAGE } from '@/lib/service-pages/visual-identity';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { pageTitle } from '@/lib/seo';
 
@@ -32,7 +34,12 @@ export default async function Page(props: Props) {
         name={dictionary.header.corporate_style}
         description={dictionary.corporateStylePage.metadata.description}
       />
-      <CorporateClient lang={lang as Locale} translations={dictionary.corporateStylePage} />
+      {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
+      {lang === 'uz' ? (
+        <ServiceLanding content={VISUAL_IDENTITY_PAGE} />
+      ) : (
+        <CorporateClient lang={lang as Locale} translations={dictionary.corporateStylePage} />
+      )}
     </>
   );
 }
