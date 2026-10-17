@@ -1,5 +1,33 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-18 | Dependabot Xavfsizlik Zaifliklari (smol-toml, proxy-addr, @fastify/busboy, postcss-selector-parser, @modelcontextprotocol/sdk) Tuzatildi va PR lar Tahlil Qilindi (Antigravity)
+- **Foydalanuvchi murojaati:**
+  1. `https://github.com/baxtiyorjongaziyev/jonbranding-web/security/dependabot`
+  2. `https://github.com/baxtiyorjongaziyev/jonbranding-web/pulls`
+- **Holat tahlili (Security & Dependabot Alerts Audit):**
+  - Repozitoriyda 7 ta ochiq Dependabot ogohlantirishi bor edi:
+    1. #238: `smol-toml` (medium) — Quadratic-time parse() CPU exhaustion
+    2. #237: `proxy-addr` (critical) — IP spoofing via IPv4-mapped IPv6 trust subnet
+    3. #236: `postcss-selector-parser` (medium) — Quadratic complexity flat selector parsing
+    4. #235: `@fastify/busboy` (medium) — CRLF injection multipart Content-Disposition
+    5. #234: `@modelcontextprotocol/sdk` (high, `mcp-server`) — OAuth client credential leak
+    6. #233: `proxy-addr` (critical, `mcp-server`) — IP spoofing
+    7. #220: `braces` (high) — DoS via deeply nested patterns (`first_patched_version: null`, upstream 3.x versiyada patch chiqmagan, faqat tailwindcss@4 breaking change bilan yo'qoladi)
+  - Dependabot tomonidan ochilgan 2 ta PR mavjud edi:
+    - PR #370 (`mcp-server`): `@modelcontextprotocol/sdk` va `proxy-addr` ni yangilash (CI yashil).
+    - PR #371 (`root`): `@fastify/busboy` va `proxy-addr` ni yangilash (CI qizil bo'lgan, chunki eski shoxchada `main` dan orqada qolgan).
+- **Amalga oshirilgan ishlar:**
+  1. `package.json` va `mcp-server/package.json` dagi `overrides` va `pnpm.overrides` yangilandi:
+     - `smol-toml` -> `^1.9.1`
+     - `proxy-addr` -> `^2.0.8`
+     - `@fastify/busboy` -> `^3.2.3`
+     - `postcss-selector-parser` -> `^7.1.6`
+     - `@modelcontextprotocol/sdk` -> `^1.32.1`
+  2. Barcha paketlar o'rnatildi (`npm install`) va `package-lock.json` yangilandi.
+  3. `mcp-server` TypeScript build qilindi (`tsc`), 0 xatolik bilan muvaffaqiyatli yakunlandi.
+- **Sifat va Harness Natijasi:**
+  - `npm run verify:fast`: 69 test fayli, 445/445 test 100% yashil o'tdi.
+
 ## 2026-10-16 | Xizmat Sahifalari (Firma Uslubi, Brendbuk, Qadoq Dizayni) Yangi Yuqori Konversiyali ServiceLanding Standartiga O'tkazildi (Antigravity)
 - **Foydalanuvchi talabi:**
   1. "Naming, logo, patent, brand strategiya xizmatlarimiz sahifalarini o'rganib chiq va boshqa xizmatlarimiz sahifalarini ko'rib chiq"
