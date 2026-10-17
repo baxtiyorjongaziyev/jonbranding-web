@@ -141,7 +141,7 @@
     "@vercel/frameworks": {
       ".": "$@vercel/frameworks",
       "js-yaml": "$js-yaml",
-      "smol-toml": "^1.8.0"
+      "smol-toml": "^1.9.1"
     },
     "esbuild": "^0.28.1",
     "postcss": "$postcss",
@@ -157,18 +157,21 @@
     "dompurify": "^3.4.16",
     "ws": "^8.21.0",
     "json-2-csv": "5.5.11",
-    "smol-toml": "^1.8.0",
+    "smol-toml": "^1.9.1",
     "valibot": "1.4.2",
     "nanoid": "^3.3.18",
     "ip-address": ">=10.4.0",
     "qs": "^6.16.0",
-    "browserslist": "^4.28.9"
+    "browserslist": "^4.28.9",
+    "proxy-addr": "^2.0.8",
+    "@fastify/busboy": "^3.2.3",
+    "postcss-selector-parser": "^7.1.6"
   },
   "pnpm": {
     "overrides": {
       "adm-zip@<=0.6.0": ">=0.6.1",
       "js-yaml@<3.15.2": "3.15.2",
-      "smol-toml@<=1.7.0": ">=1.8.0",
+      "smol-toml@<=1.8.0": ">=1.9.1",
       "qs@<6.16.0": ">=6.16.0",
       "browserslist@<=4.28.6": ">=4.28.7",
       "undici@<7.29.1": ">=7.29.1",
@@ -178,7 +181,10 @@
       "markdown-it@<14.3.1": ">=14.3.1",
       "next@>=16.2.0 <16.3.6": ">=16.3.6",
       "@grpc/grpc-js@>=1.14.0 <1.14.5": ">=1.14.5",
-      "dompurify@>=3.4.13 <3.4.16": ">=3.4.16"
+      "dompurify@>=3.4.13 <3.4.16": ">=3.4.16",
+      "proxy-addr@<2.0.8": ">=2.0.8",
+      "@fastify/busboy@<3.2.2": ">=3.2.3",
+      "postcss-selector-parser@<7.1.6": ">=7.1.6"
     }
   }
 }
