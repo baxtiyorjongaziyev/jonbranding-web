@@ -49,6 +49,16 @@ except ImportError:
         return text or "portfolio-item"
 import requests
 
+# Try loading environment variables from .env / .env.local if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+    if "__file__" in globals():
+        load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+        load_dotenv(Path(__file__).resolve().parent.parent / ".env.local")
+except ImportError:
+    pass
+
 # Google Drive API
 try:
     from google.oauth2 import service_account
@@ -82,21 +92,24 @@ LOCAL_CANDIDATE_DIRS = [
     Path("./portfolio_inbox"),
 ]
 
-# Telegram API credentials
-TG_API_ID = 30643078
-TG_API_HASH = "e5850001c1d86ac0fb439fbd8319cb7f"
-TG_SESSION = "1ApWapzMBu1aY9VN4lKnpfegWbWWRK1p59pZVnB3ZWnw8Ry-YzrSN5uE935sEYZcVIuemyqDX3uNEKDLBkgBWZeRC5sVUC-4Fw_mFJTOQxEvJ6rEIzgCsVZ6VaYwlEvOmTCvw8GNSXcMbZqLL2s5yFCgoiWm9xAq4v5Wbk1OOs6P0IDr7kI8nWHZxR4pevbwgdK-HfQDrOJEMAc0ZWmXFm2053ivfgBaNeZYigCtCLPnXdtI0ync0-F8lMizVE3fndOXje9uCr3UBu95XcIO21c03jhn24ewnddIp0QY3CYzB2Kau6UtPPvIN4_abPsUEOD462vmvozOWjvr42onh_T4D6IZfu1E="
-TG_NOTIFY_CHAT_ID = 150074828
+# Telegram API credentials (strictly loaded from environment variables)
+TG_API_ID_RAW = os.environ.get("TG_API_ID", "")
+TG_API_ID = int(TG_API_ID_RAW) if TG_API_ID_RAW.isdigit() else 0
+TG_API_HASH = os.environ.get("TG_API_HASH", "")
+TG_SESSION = os.environ.get("TG_SESSION", "")
+TG_NOTIFY_CHAT_ID_RAW = os.environ.get("TG_NOTIFY_CHAT_ID", "150074828")
+TG_NOTIFY_CHAT_ID = int(TG_NOTIFY_CHAT_ID_RAW) if TG_NOTIFY_CHAT_ID_RAW.lstrip("-").isdigit() else 150074828
 
-# Sanity CMS credentials
-SANITY_PROJECT_ID = "h6ymmj0v"
-SANITY_DATASET = "production"
-SANITY_TOKEN = "REDACTED_REVOKED_SANITY_TOKEN"
+# Sanity CMS credentials (strictly loaded from environment variables)
+SANITY_PROJECT_ID = os.environ.get("SANITY_PROJECT_ID", "h6ymmj0v")
+SANITY_DATASET = os.environ.get("SANITY_DATASET", "production")
+SANITY_TOKEN = os.environ.get("SANITY_TOKEN", "")
 SANITY_SESSION = requests.Session()
-SANITY_SESSION.headers.update({"Authorization": f"Bearer {SANITY_TOKEN}"})
+if SANITY_TOKEN:
+    SANITY_SESSION.headers.update({"Authorization": f"Bearer {SANITY_TOKEN}"})
 
-# Gemini API credentials
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "REDACTED_REVOKED_GEMINI_KEY")
+# Gemini API credentials (strictly loaded from environment variables)
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 
 def log(msg: str):
@@ -167,6 +180,9 @@ def fetch_sanity_portfolios() -> List[Dict[str, Any]]:
 
 async def search_telegram_for_case(brand_name: str) -> Optional[str]:
     """Search Telegram channels and messages for the brand case description"""
+    if not (TG_SESSION and TG_API_ID and TG_API_HASH):
+        log("⚠️ Telegram credentials not configured in environment (TG_SESSION, TG_API_ID, TG_API_HASH). Skipping Telegram search.")
+        return None
     log(f"🔍 Searching Telegram for case study text: '{brand_name}'...")
     try:
         client = TelegramClient(StringSession(TG_SESSION), TG_API_ID, TG_API_HASH)
@@ -299,6 +315,9 @@ def parse_case_fallback(brand_name: str, raw_text: str, image_names: List[str]) 
 
 def parse_case_with_gemini(brand_name: str, raw_text: str, image_names: List[str]) -> Dict[str, Any]:
     """Structure case study data with Gemini 2.5 Flash adhering to zero-hallucination rules."""
+    if not GEMINI_API_KEY:
+        log("⚠️ GEMINI_API_KEY not configured in environment. Falling back to authentic text parser...")
+        return parse_case_fallback(brand_name, raw_text, image_names)
     log(f"🤖 Structuring case with Gemini 2.5 Flash for: {brand_name}...")
     try:
         ai_client = genai.Client(api_key=GEMINI_API_KEY)
@@ -373,6 +392,9 @@ Faqat valid JSON qaytaring, ortiqcha belgilarsiz.
 
 def upload_image_to_sanity(file_path: Path) -> Optional[Dict[str, Any]]:
     """Upload an image to Sanity CMS asset store using requests with timeout"""
+    if not SANITY_TOKEN:
+        log("❌ SANITY_TOKEN not configured in environment. Skipping Sanity upload.")
+        return None
     mime = "image/jpeg"
     ext = file_path.suffix.lower()
     if ext == ".png":
@@ -398,6 +420,9 @@ def upload_image_to_sanity(file_path: Path) -> Optional[Dict[str, Any]]:
 
 def create_sanity_portfolio_doc(slug: str, parsed: Dict[str, Any], cover_asset_id: str, gallery_asset_ids: List[str]) -> str:
     """Create or update portfolio document in Sanity CMS"""
+    if not SANITY_TOKEN:
+        log("❌ SANITY_TOKEN not configured in environment. Skipping Sanity document creation.")
+        return ""
     url = f"https://{SANITY_PROJECT_ID}.api.sanity.io/v2024-04-14/data/mutate/{SANITY_DATASET}"
     
     body_blocks = []
@@ -535,6 +560,9 @@ def sync_to_local_fallbacks(slug: str, parsed: Dict[str, Any], cover_local_rel: 
 
 async def send_telegram_alert(brand_name: str, slug: str, sanity_id: str, image_count: int):
     """Notify Baxtiyorjon that new case study is published on the site"""
+    if not (TG_SESSION and TG_API_ID and TG_API_HASH):
+        log("⚠️ Telegram credentials not configured in environment (TG_SESSION, TG_API_ID, TG_API_HASH). Skipping Telegram alert.")
+        return
     try:
         client = TelegramClient(StringSession(TG_SESSION), TG_API_ID, TG_API_HASH)
         await client.connect()
