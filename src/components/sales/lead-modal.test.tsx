@@ -29,4 +29,17 @@ describe('contextual lead form', () => {
     await screen.findByRole('alert');
     expect(screen.getByRole('button', { name: getSalesFlow('uz').submit })).toBeEnabled();
   });
+  it('allows selecting multiple services via checkboxes and sends combined services', async () => {
+    const fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+    vi.stubGlobal('fetch', fetch);
+    render(<LeadModal open onClose={() => {}} presetService="Naming" source="test" />);
+    const patentCheckbox = screen.getByRole('checkbox', { name: /patent/i });
+    fireEvent.click(patentCheckbox);
+    expect(screen.getByLabelText('Xizmat')).toHaveValue('Naming, Patent');
+    fireEvent.change(screen.getByLabelText('Telefon *'), { target: { value: '+998901234567' } });
+    fireEvent.click(screen.getByRole('button', { name: getSalesFlow('uz').submit }));
+    await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
+    const body = JSON.parse(fetch.mock.calls[0][1].body);
+    expect(body.role).toBe('Naming, Patent');
+  });
 });

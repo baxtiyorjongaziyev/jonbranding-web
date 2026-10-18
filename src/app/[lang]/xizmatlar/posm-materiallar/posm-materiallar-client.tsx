@@ -110,10 +110,10 @@ function HeroSection({ t }: { t: PosmPageTranslations }) {
           <Tag className="h-4 w-4" aria-hidden="true" />
           {t.hero.eyebrow}
         </div>
-        <h1 className="text-balance text-4xl font-black leading-tight tracking-normal text-blue-950 sm:text-5xl lg:text-6xl">
+        <h1 className="text-balance text-4xl font-black leading-tight tracking-normal text-[#0A0B0E] sm:text-5xl lg:text-6xl">
           {t.hero.title}
         </h1>
-        <p className="mx-auto mt-4 max-w-3xl text-pretty text-xl font-bold leading-8 text-brand-cyan sm:text-2xl">
+        <p className="mx-auto mt-4 max-w-3xl text-pretty text-xl font-bold leading-8 text-[#2554FF] sm:text-2xl">
           {t.hero.subtitle}
         </p>
         <p className="mx-auto mt-5 max-w-3xl text-pretty text-base leading-8 text-slate-600 sm:text-lg">
@@ -124,7 +124,7 @@ function HeroSection({ t }: { t: PosmPageTranslations }) {
             type="button"
             size="lg"
             data-oisha-callback="" onClick={openContactModal}
-            className="group h-14 rounded-full bg-blue-950 px-7 text-base font-black text-white shadow-[0_18px_46px_-22px_rgba(15,23,42,0.85)] hover:bg-brand-blue sm:h-16"
+            className="group h-14 rounded-full bg-[#0A0B0E] px-7 text-base font-black text-white shadow-[0_18px_46px_-22px_rgba(15,23,42,0.85)] hover:bg-[#1D4ED8] sm:h-16"
           >
             {t.hero.primaryCta}
             <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -133,7 +133,7 @@ function HeroSection({ t }: { t: PosmPageTranslations }) {
             asChild
             variant="outline"
             size="lg"
-            className="h-14 rounded-full border-slate-200 bg-white px-7 text-base font-black text-blue-950 hover:bg-slate-100 sm:h-16"
+            className="h-14 rounded-full border-slate-200 bg-white px-7 text-base font-black text-[#0A0B0E] hover:bg-slate-100 sm:h-16"
           >
             <Link href="#posm-tariffs">{t.hero.secondaryCta}</Link>
           </Button>
@@ -151,29 +151,29 @@ function PricingSection({ pricing, primaryCta }: { pricing: PosmPageTranslations
           <div className="mx-auto mb-4 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-blue">
             {pricing.eyebrow}
           </div>
-          <h2 className="text-balance text-3xl font-black tracking-normal text-blue-950 sm:text-5xl">{pricing.title}</h2>
+          <h2 className="text-balance text-3xl font-black tracking-normal text-[#0A0B0E] sm:text-5xl">{pricing.title}</h2>
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {pricing.tiers.map((tier, index) => (
             <article
               key={tier.name}
-              className={`flex min-h-[520px] flex-col rounded-2xl p-7 shadow-lg ${index === 1 ? 'bg-blue-950 text-white ring-4 ring-brand-cyan/70' : 'border border-slate-200 bg-white text-slate-900'}`}
+              className={`flex min-h-[520px] flex-col rounded-2xl p-7 shadow-lg ${index === 1 ? 'bg-[#0A0B0E] text-white ring-4 ring-[#2554FF]/40' : 'border border-slate-200 bg-white text-slate-900'}`}
             >
               {index === 1 && (
                 <div className="mb-4 text-center">
-                  <span className="inline-flex rounded-full bg-brand-cyan px-3 py-1 text-xs font-black text-blue-950">
+                  <span className="inline-flex rounded-full bg-[#2554FF] px-3 py-1 text-xs font-black text-[#0A0B0E]">
                     Tavsiya etiladi
                   </span>
                 </div>
               )}
-              <h3 className={`text-center text-2xl font-black ${index === 1 ? 'text-white' : 'text-blue-950'}`}>{tier.name}</h3>
-              <p className={`mt-5 text-center text-4xl font-black ${index === 1 ? 'text-brand-lime' : 'text-blue-950'}`}>
+              <h3 className={`text-center text-2xl font-black ${index === 1 ? 'text-white' : 'text-[#0A0B0E]'}`}>{tier.name}</h3>
+              <p className={`mt-5 text-center text-4xl font-black ${index === 1 ? 'text-[#2554FF]' : 'text-[#0A0B0E]'}`}>
                 {tier.price}
               </p>
               <ul className={`mt-7 flex-grow space-y-3 border-t pt-6 ${index === 1 ? 'border-blue-800' : 'border-slate-200'}`}>
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm font-bold leading-6">
-                    <CheckCircle2 className={index === 1 ? 'mt-1 h-4 w-4 shrink-0 text-brand-lime' : 'mt-1 h-4 w-4 shrink-0 text-brand-cyan'} aria-hidden="true" />
+                    <CheckCircle2 className={index === 1 ? 'mt-1 h-4 w-4 shrink-0 text-[#2554FF]' : 'mt-1 h-4 w-4 shrink-0 text-[#2554FF]'} aria-hidden="true" />
                     <span className={index === 1 ? 'text-blue-100' : 'text-slate-600'}>{feature}</span>
                   </li>
                 ))}
@@ -181,7 +181,7 @@ function PricingSection({ pricing, primaryCta }: { pricing: PosmPageTranslations
               <Button
                 type="button"
                 data-oisha-callback="" onClick={openContactModal}
-                className={index === 1 ? 'mt-8 h-12 rounded-full bg-white text-blue-950 hover:bg-brand-lime' : 'mt-8 h-12 rounded-full bg-blue-950 text-white hover:bg-brand-blue'}
+                className={index === 1 ? 'mt-8 h-12 rounded-full bg-white text-[#0A0B0E] hover:bg-[#1D4ED8] hover:text-white' : 'mt-8 h-12 rounded-full bg-[#0A0B0E] text-white hover:bg-[#1D4ED8]'}
               >
                 {primaryCta}
               </Button>
@@ -206,8 +206,8 @@ function ProblemSolutionSection({ problem, solution }: { problem: TextItem; solu
 
 function ArticlePanel({ title, description, tone }: { title: string; description?: string; tone: 'light' | 'dark' }) {
   return (
-    <article className={tone === 'dark' ? 'rounded-2xl bg-blue-950 p-7 text-white shadow-lg' : 'rounded-2xl border border-slate-200 bg-slate-50 p-7 text-slate-900'}>
-      <h2 className={tone === 'dark' ? 'text-2xl font-black text-white sm:text-3xl' : 'text-2xl font-black text-blue-950 sm:text-3xl'}>{title}</h2>
+    <article className={tone === 'dark' ? 'rounded-2xl bg-[#0A0B0E] p-7 text-white shadow-lg' : 'rounded-2xl border border-slate-200 bg-slate-50 p-7 text-slate-900'}>
+      <h2 className={tone === 'dark' ? 'text-2xl font-black text-white sm:text-3xl' : 'text-2xl font-black text-[#0A0B0E] sm:text-3xl'}>{title}</h2>
       <p className={tone === 'dark' ? 'mt-4 text-base leading-8 text-blue-100' : 'mt-4 text-base leading-8 text-slate-600'}>{description}</p>
     </article>
   );
@@ -221,17 +221,17 @@ function IncludedSection({ included }: { included: PosmPageTranslations['include
           <div className="mb-4 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-blue">
             {included.eyebrow}
           </div>
-          <h2 className="text-balance text-3xl font-black tracking-normal text-blue-950 sm:text-5xl">{included.title}</h2>
+          <h2 className="text-balance text-3xl font-black tracking-normal text-[#0A0B0E] sm:text-5xl">{included.title}</h2>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {included.items.map((item, index) => {
             const Icon = includedIcons[index % includedIcons.length];
             return (
               <article key={item} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#2554FF]/10 text-[#2554FF]">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <h3 className="text-pretty text-base font-black leading-6 text-blue-950">{item}</h3>
+                <h3 className="text-pretty text-base font-black leading-6 text-[#0A0B0E]">{item}</h3>
               </article>
             );
           })}
@@ -252,13 +252,13 @@ function BenefitsAudienceSection({
     <section className="border-y border-slate-200 bg-white py-16 sm:py-20">
       <div className="container mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
-          <h2 className="text-balance text-3xl font-black tracking-normal text-blue-950 sm:text-5xl">{benefits.title}</h2>
+          <h2 className="text-balance text-3xl font-black tracking-normal text-[#0A0B0E] sm:text-5xl">{benefits.title}</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {benefits.items.map((item, index) => {
               const Icon = benefitIcons[index % benefitIcons.length];
               return (
                 <div key={item} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <Icon className="mt-1 h-5 w-5 shrink-0 text-brand-cyan" aria-hidden="true" />
+                  <Icon className="mt-1 h-5 w-5 shrink-0 text-[#2554FF]" aria-hidden="true" />
                   <p className="text-sm font-bold leading-6 text-slate-700">{item}</p>
                 </div>
               );
@@ -267,11 +267,11 @@ function BenefitsAudienceSection({
         </div>
 
         <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-7 shadow-sm">
-          <h2 className="text-balance text-3xl font-black tracking-normal text-blue-950">{audience.title}</h2>
+          <h2 className="text-balance text-3xl font-black tracking-normal text-[#0A0B0E]">{audience.title}</h2>
           <div className="mt-6 grid gap-2">
             {audience.items.map((item) => (
               <div key={item} className="flex items-center gap-3 border-t border-slate-200 py-3 first:border-t-0 first:pt-0">
-                <span className="h-2 w-2 rounded-full bg-brand-cyan" aria-hidden="true" />
+                <span className="h-2 w-2 rounded-full bg-[#2554FF]" aria-hidden="true" />
                 <p className="text-sm font-bold leading-6 text-slate-600">{item}</p>
               </div>
             ))}
@@ -284,13 +284,13 @@ function BenefitsAudienceSection({
 
 function ProcessSection({ process }: { process: PosmPageTranslations['process'] }) {
   return (
-    <section className="bg-blue-950 py-16 text-white sm:py-20">
+    <section className="bg-[#0A0B0E] py-16 text-white sm:py-20">
       <div className="container mx-auto max-w-6xl px-4">
         <h2 className="text-balance text-3xl font-black tracking-normal text-white sm:text-5xl">{process.title}</h2>
         <div className="mt-10 grid gap-3">
           {process.steps.map((step, index) => (
             <article key={step} className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-5 sm:grid-cols-[100px_1fr] sm:items-center">
-              <div className="font-mono text-sm font-black text-brand-lime">{String(index + 1).padStart(2, '0')}</div>
+              <div className="font-mono text-sm font-black text-[#2554FF]">{String(index + 1).padStart(2, '0')}</div>
               <p className="text-base font-bold leading-7 text-blue-100 sm:text-lg">{step}</p>
             </article>
           ))}
@@ -304,17 +304,17 @@ function FinalCta({ cta }: { cta: PosmPageTranslations['cta'] }) {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
-        <div className="rounded-3xl bg-blue-950 px-6 py-12 text-white shadow-[0_30px_90px_-45px_rgba(15,23,42,0.8)] sm:px-10">
+        <div className="rounded-3xl bg-[#0A0B0E] px-6 py-12 text-white shadow-[0_30px_90px_-45px_rgba(15,23,42,0.8)] sm:px-10">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-normal text-brand-lime">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-normal text-[#2554FF]">
                 <Package className="h-4 w-4" aria-hidden="true" />
                 {cta.brandLabel}
               </div>
               <h2 className="max-w-4xl text-balance text-3xl font-black tracking-normal text-white sm:text-5xl">{cta.title}</h2>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-blue-100 sm:text-lg">{cta.description}</p>
             </div>
-            <Button type="button" size="lg" data-oisha-callback="" onClick={openContactModal} className="group h-14 rounded-full bg-white px-8 text-base font-black text-blue-950 hover:bg-brand-lime sm:h-16">
+            <Button type="button" size="lg" data-oisha-callback="" onClick={openContactModal} className="group h-14 rounded-full bg-white px-8 text-base font-black text-[#0A0B0E] hover:bg-[#1D4ED8] hover:text-white sm:h-16">
               {cta.button}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Button>
@@ -329,11 +329,11 @@ function FaqSection({ faq }: { faq: PosmPageTranslations['faq'] }) {
   return (
     <section className="pb-20 sm:pb-28">
       <div className="container mx-auto max-w-4xl px-4">
-        <h2 className="text-balance text-center text-3xl font-black tracking-normal text-blue-950 sm:text-4xl">{faq.title}</h2>
+        <h2 className="text-balance text-center text-3xl font-black tracking-normal text-[#0A0B0E] sm:text-4xl">{faq.title}</h2>
         <Accordion type="single" collapsible defaultValue="item-0" className="mt-8 space-y-3">
           {faq.items.map((item, index) => (
             <AccordionItem key={item.question} value={`item-${index}`} className="rounded-xl border border-slate-200 bg-white px-5 shadow-sm">
-              <AccordionTrigger className="text-left text-base font-black text-blue-950 hover:no-underline">
+              <AccordionTrigger className="text-left text-base font-black text-[#0A0B0E] hover:no-underline">
                 {item.question}
               </AccordionTrigger>
               <AccordionContent className="text-base leading-7 text-slate-600">{item.answer}</AccordionContent>

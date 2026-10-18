@@ -61,7 +61,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   viewportFit: 'cover',
   interactiveWidget: 'resizes-content',
-  themeColor: '#2c2bf5',
+  themeColor: '#2554FF',
 };
 
 const ogLocales = {
@@ -302,7 +302,7 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
             qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
         <script
           src="https://oisha.jonbranding.uz/api/callback-widget.js"
-          data-color="#1B4DFF"
+          data-color="#2554FF"
           data-lang={lang === 'uz' ? 'uz' : 'ru'}
           data-call-tracking="1"
           data-position="left"

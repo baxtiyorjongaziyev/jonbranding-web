@@ -10,8 +10,8 @@ import Image from 'next/image';
 export default function Loading() {
   return (
     <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ background: '#F4F5F7' }}
+      className="flex min-h-screen items-center justify-center bg-white"
+      style={{ background: '#FFFFFF' }}
       role="status"
       aria-label="Yuklanmoqda"
     >
@@ -38,12 +38,12 @@ export default function Loading() {
           width: 120px;
           height: 1px;
           overflow: hidden;
-          background: rgba(14, 16, 21, 0.12);
+          background: rgba(10, 11, 14, 0.12);
         }
         .jb-load-bar {
           width: 40%;
           height: 100%;
-          background: #0E1015;
+          background: #2554FF;
           animation: jb-sweep 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
         @keyframes jb-fade {

@@ -28,6 +28,110 @@ export interface PortfolioProject {
 export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
   uz: [
     {
+      _id: 'fallback-rashmilk-uz',
+      slug: 'rashmilk',
+      title: "Rash Milk: Sut va Sirok mahsulotlari qadoq dizayni",
+      client: "Rash Milk",
+      category: 'packaging',
+      categoryLabel: "Qadoq Dizayni",
+      tags: ["Rash Milk", "Qadoq Dizayni", "Sut Mahsulotlari", "Sirok", "FMCG"],
+      coverImage: '/images/cms/portfolio/rashmilk/rashmilk-sut-1.jpg',
+      description: "Rash Milk kompaniyasi uchun sut va tvorogli sirok mahsulotlari qatoriga xalqaro standartlarga mos, rastada yaqqol ajralib turuvchi zamonaviy qadoq dizaynlari tizimi ishlab chiqildi.",
+      body: [
+        {
+                "heading": "Loyiha Maqsadi va Vazifa",
+                "paragraph": "Rash Milk — tabiiy sut mahsulotlari ishlab chiqaruvchi yetakchi korxonalardan biri. Mijoz yangi tvorogli siroklar va sut liniyasi uchun qadoq dizaynlarini noldan ishlab chiqish vazifasi bilan murojaat qildi."
+        },
+        {
+                "heading": "Dizayn Konsepsiyasi va Yechim",
+                "paragraph": "Jon Branding jamoasi tomonidan mahsulot liniyalari uchun maxsus ranglar va tipografiya uyg'unligi yaratildi. 110 gr va 200 gr o'lchamdagi choklar va shtrixkodlar to'liq ishlab chiqarish talablariga moslandi."
+        },
+        {
+                "heading": "Natija va FMCG Muvaffaqiyati",
+                "paragraph": "Tayyorlangan qadoq dizaynlari xaridorlarda ishonch uyg'otuvchi va do'kon javonlarida raqobatchilardan yaqqol ajralib turuvchi professional ko'rinishga ega bo'ldi."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/rashmilk/rashmilk-sut-2.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-3.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-4.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-5.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-6.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-7.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-8.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sut-9.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-1.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-2.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-3.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-4.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-5.jpg", "/images/cms/portfolio/rashmilk/rashmilk-sirok-6.jpg"],
+      order: 1
+    },
+
+    {
+      _id: 'fallback-savod',
+      slug: 'savod',
+      title: "SAVOD — o‘quv markazi uchun rebrending keys",
+      client: "Savod",
+      category: 'brandbook',
+      categoryLabel: "Rebrending va Identika",
+      tags: ["Savod", "Rebrending", "Identika", "Logotip", "Brandbook"],
+      coverImage: '/images/cms/portfolio/savod/savod-cover.png',
+      description: "Iyman Academy bizga murojaat qildi. Yangi qonunchilik talablariga ko‘ra diniy so‘zlar ishlatilgan nomlardan foydalanib reklama qilish mumkin emas edi. Eski nom esa endi ishlamaydigan bo‘ldi.",
+      body: [
+        {
+                "heading": "Loyiha haqida",
+                "paragraph": "SAVOD — o‘quv markazi uchun rebrending keys"
+        },
+        {
+                "heading": "Vazifa va Muammo",
+                "paragraph": "Iyman Academy bizga murojaat qildi. Yangi qonunchilik talablariga ko‘ra diniy so‘zlar ishlatilgan nomlardan foydalanib reklama qilish mumkin emas edi. Eski nom esa endi ishlamaydigan bo‘ldi."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Shu sababli loyihani Namingdan boshladik."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Biz tanlagan nom — SAVOD. Oddiy, xalq tilida tez qabul qilinadigan, ta’lim markazining mohiyatini aniq ifodalovchi so‘z. Eng muhimi — patentga topshirish mumkin, domenlar va ijtimoiy tarmoqlarda bo‘sh edi."
+        },
+        {
+                "heading": "Naming va Konseptsiya",
+                "paragraph": "Nom asosida logotip va firma uslubini ishlab chiqdik. Ochiq kitob shaklidan ilhomlanib, logotipni o‘zgaruvchan va moslashuvchan qildik. Har bir yo‘nalish uchun alohida rang palettasi ishlab chiqdik: Arabic, English, Russkiy, Medicine va boshqalar."
+        },
+        {
+                "heading": "Logotip va Vizual Identika",
+                "paragraph": "Bozorni tahlil qilib, ta’lim sohasida kam ishlatiladigan binafsha rangni asosiy brend rangi sifatida tanladik. Tipografiyada esa o‘qishga oson sans serif shriftlar qo‘lladik. Keyin bu uslubni to‘liq tizimga aylantirdik."
+        },
+        {
+                "heading": "Natija va Brand Tizimi",
+                "paragraph": "Billboardlar, ichki bannerlar, flaglar, kitoblar, ID-kartalar, merch — barchasi yagona vizual identifikatsiya asosida bir butun ko‘rinish oldi."
+        },
+        {
+                "heading": "Natija va Brand Tizimi",
+                "paragraph": "Shunday qilib, Savod brendi nafaqat yangi nom, balki to‘liq yangilangan ovoz va qiyofaga ega bo‘ldi."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/savod/savod-identity-8.png", "/images/cms/portfolio/savod/savod-identity-1.png", "/images/cms/portfolio/savod/savod-identity-9.png", "/images/cms/portfolio/savod/savod-identity-2.png", "/images/cms/portfolio/savod/savod-signage.png", "/images/cms/portfolio/savod/savod-identity-3.png"],
+      order: 1
+    },
+
+    {
+      _id: 'fallback-shirona',
+      slug: 'shirona',
+      title: "Shirona Café & Bakery: Samarqand xarakterida pishgan brend",
+      client: "Shirona Café & Bakery",
+      category: 'corporate-style',
+      categoryLabel: "Firma uslubi va Identika",
+      tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
+      description: "Shirona Café & Bakery uchun Jon Branding Samarqand ruhini aks ettiruvchi noyob nom, logo, toʻliq firma uslubi va brendbook yaratdi. Loyiha brendning oʻziga xosligini taʼminlab, isteʼmolchilarning qalbidan joy olishga yordam beruvchi hissiy va esda qolarli identikani taqdim etdi. Natijada, Shirona nafaqat shirinliklar uyi, balki madaniy meʼros aksini topgan, tan olinadigan brendga aylandi.",
+      body: [
+        {
+                "heading": "Vazifa va Muammo",
+                "paragraph": "Samarqanddagi ko'plab shirinliklar uylari orasida Shirona boshqalaridan ajralib turadigan, bir ko'rishda esda qoladigan va 'o'zimizniki' degan hisni beruvchi noyob identikaga muhtoj edi. Bozorda raqobat kuchli bo'lib, brendlar o'rtasida o'ziga xos farq sezilmasligi asosiy muammo hisoblanardi."
+        },
+        {
+                "heading": "Konseptsiya va Yechim",
+                "paragraph": "Ushbu vazifani hal qilish maqsadida, Jon Branding jamoasi Shirona brendining asosiga Samarqandning madaniy merosi, xususan, Registon me'morchiligini yashirdi. Logotipdagi 'n' harfi va ustidagi chiziq Registon madrasasining peshtoqini eslatib, brendga chuqur ma'no bag'ishladi. Milliy naqshlar piksel uslubida qayta chizilib, zamonaviy va milliy uyg'unlik yaratildi. Kruassan, shokolad, qaymoq ranglari brendga ishtahani ochuvchi joziba berdi. 'Har bir shirinlikda mehr bor!' shiori esa brendning asosiy falsafasiga aylandi."
+        },
+        {
+                "heading": "Natija va Tatbiq",
+                "paragraph": "Natijada, Shirona bitta logotip bilan cheklanmasdan, to'liq brend tizimiga ega bo'ldi: nomlash, logotip, firma uslubi, brandbook va tovar belgisi patenti. Bunga naqshlar, ranglar, qadoq dizayni, merch, poligrafiya mahsulotlari va hatto kafel fasadi ham kirdi. Bu har tomonlama yondashuv Shironani Samarqandning o'ziga xos ruhini aks ettiruvchi, esda qolarli va iste'molchilar uchun qadrli brendga aylantirdi."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/shirona/Brandbook_Page_34_Business_card_stone.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_35_Business_card_wood.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_36_Coffee_cup_and_carrier.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_37_Coffee_and_Registon.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_38_Bakery_menu_design.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_39_Paper_bag_angled.jpeg"],
+      order: 1
+    },
+
+    {
       _id: 'fallback-den-aroma',
       slug: 'den-aroma',
       title: 'Den Aroma Premium Parfyumeriya',
@@ -208,6 +312,34 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     }
   ],
   ru: [
+    {
+      _id: 'fallback-shirona-ru',
+      slug: 'shirona',
+      title: "Shirona Café & Bakery: Бренд, испеченный в характере Самарканда",
+      client: "Shirona Café & Bakery",
+      category: 'corporate-style',
+      categoryLabel: "Firma uslubi va Identika",
+      tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
+      description: "Для Shirona Café & Bakery агентство Jon Branding создало уникальное имя, логотип, полный фирменный стиль и брендбук, отражающие дух Самарканда. Проект обеспечил подлинность бренда, предоставив эмоционально запоминающуюся идентичность, которая помогает завоевать сердца потребителей. В результате Shirona стала не просто кондитерской, а узнаваемым брендом, в котором нашло отражение культурное наследие.",
+      body: [
+        {
+                "heading": "Задача и Проблема",
+                "paragraph": "Среди множества кондитерских Самарканда Shirona нуждалась в уникальной идентичности, которая выделяла бы ее, была бы запоминающейся с первого взгляда и вызывала ощущение 'своего'. Сильная конкуренция на рынке и отсутствие ярких отличий между брендами были основной проблемой."
+        },
+        {
+                "heading": "Концепция и Решение",
+                "paragraph": "Для решения этой задачи команда Jon Branding заложила в основу бренда Shirona культурное наследие Самарканда, в частности архитектуру Регистана. Буква 'н' и линия над ней в логотипе напоминают портал медресе Регистан, придавая бренду глубокий смысл. Национальные узоры были перерисованы в пиксельном стиле, создавая современную и национальную гармонию. Цвета круассана, шоколада и сливок придали бренду аппетитное очарование. Девиз 'В каждой сладости есть душа!' стал основной философией бренда."
+        },
+        {
+                "heading": "Результат и Реализация",
+                "paragraph": "В результате Shirona не ограничилась одним логотипом, а получила полноценную систему бренда: нейминг, логотип, фирменный стиль, брендбук и патент на товарный знак. Это включало узоры, цвета, дизайн упаковки, мерч, полиграфическую продукцию и даже фасад кафе. Такой всесторонний подход превратил Shirona в узнаваемый и ценный для потребителей бренд, отражающий уникальный дух Самарканда."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/shirona/Brandbook_Page_34_Business_card_stone.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_35_Business_card_wood.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_36_Coffee_cup_and_carrier.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_37_Coffee_and_Registon.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_38_Bakery_menu_design.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_39_Paper_bag_angled.jpeg"],
+      order: 1
+    },
+
     {
       _id: 'fallback-den-aroma',
       slug: 'den-aroma',
@@ -390,6 +522,34 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
   ],
   en: [
     {
+      _id: 'fallback-shirona-en',
+      slug: 'shirona',
+      title: "Shirona Café & Bakery: A Brand Baked in the Character of Samarkand",
+      client: "Shirona Café & Bakery",
+      category: 'corporate-style',
+      categoryLabel: "Firma uslubi va Identika",
+      tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
+      description: "For Shirona Café & Bakery, Jon Branding created a unique name, logo, comprehensive corporate style, and brandbook, reflecting the spirit of Samarkand. The project ensured the brand's authenticity by providing an emotionally memorable identity that helps win consumers' hearts. As a result, Shirona became not just a confectionery, but a recognizable brand that reflects cultural heritage.",
+      body: [
+        {
+                "heading": "Task and Problem",
+                "paragraph": "Among the many confectionery houses in Samarkand, Shirona needed a unique identity that would stand out, be memorable at first glance, and evoke a sense of 'ours'. Strong competition in the market and a lack of distinctive differences between brands were the main issues."
+        },
+        {
+                "heading": "Concept and Solution",
+                "paragraph": "To solve this task, the Jon Branding team embedded the cultural heritage of Samarkand, specifically the architecture of Registan, into the core of the Shirona brand. The letter 'n' and the line above it in the logo evoke the portal of the Registan madrasah, giving the brand deep meaning. National patterns were redrawn in pixel style, creating a modern yet national harmony. The colors of croissants, chocolate, and cream gave the brand an appetizing charm. The slogan 'There is warmth in every sweet!' became the core philosophy of the brand."
+        },
+        {
+                "heading": "Result and Implementation",
+                "paragraph": "As a result, Shirona did not stop at just one logo, but acquired a complete brand system: naming, logo, corporate style, brandbook, and trademark patent. This included patterns, colors, packaging design, merchandise, printed materials, and even the cafe facade. This comprehensive approach transformed Shirona into a recognizable and cherished brand for consumers, reflecting the unique spirit of Samarkand."
+        }
+],
+      galleryImages: ["/images/cms/portfolio/shirona/Brandbook_Page_34_Business_card_stone.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_35_Business_card_wood.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_36_Coffee_cup_and_carrier.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_37_Coffee_and_Registon.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_38_Bakery_menu_design.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_39_Paper_bag_angled.jpeg"],
+      order: 1
+    },
+
+    {
       _id: 'fallback-den-aroma',
       slug: 'den-aroma',
       title: 'Selective Perfumery Den Aroma',
@@ -570,6 +730,34 @@ export const FALLBACK_PORTFOLIO: Record<string, PortfolioProject[]> = {
     }
   ],
   zh: [
+    {
+      _id: 'fallback-shirona-zh',
+      slug: 'shirona',
+      title: "Shirona Café & Bakery: 撒马尔罕风情烘焙的品牌",
+      client: "Shirona Café & Bakery",
+      category: 'corporate-style',
+      categoryLabel: "Firma uslubi va Identika",
+      tags: ["Samarqand", "Kafe", "Shirinliklar uyi", "Brending", "Firma uslubi", "Brandbook", "Qadoq dizayni", "Logo dizayn", "Patent"],
+      coverImage: '/images/cms/portfolio/shirona/Brandbook_Page_44_Outdoor_advertisement.jpeg',
+      description: "Jon Branding 为 Shirona Café & Bakery 打造了独特的名称、标志、完整的企业风格和品牌手册，体现了撒马尔罕的精神。该项目通过提供情感上令人难忘的身份，确保了品牌的真实性，有助于赢得消费者之心。因此，Shirona 不仅成为一家甜品店，更是一个反映文化遗产、广为人知的品牌。",
+      body: [
+        {
+                "heading": "任务与问题",
+                "paragraph": "在撒马尔罕众多的甜品店中，Shirona 需要一个独特的身份，使其脱颖而出，一目了然且能唤起“我们自己的”感觉。市场上激烈的竞争以及品牌之间缺乏明显的区别是主要问题。"
+        },
+        {
+                "heading": "概念与解决方案",
+                "paragraph": "为了解决这一任务，Jon Branding 团队将撒马尔罕的文化遗产，特别是雷吉斯坦的建筑，融入了 Shirona 品牌的核心。标志中的字母“n”及其上方的线条让人联想到雷吉斯坦伊斯兰学院的拱门，赋予品牌深刻的意义。民族图案以像素风格重新绘制，创造了现代与民族的和谐。羊角面包、巧克力和奶油的颜色赋予品牌诱人的魅力。口号“每份甜点都饱含爱意！”成为了品牌的核心理念。"
+        },
+        {
+                "heading": "结果与实施",
+                "paragraph": "最终，Shirona 不仅仅只有一个标志，而是拥有了一整套品牌系统：命名、标志、企业风格、品牌手册和商标专利。这包括了图案、颜色、包装设计、周边商品、印刷品甚至咖啡馆的外立面。这种全面的方法使 Shirona 成为一个反映撒马尔罕独特精神、广为人知且深受消费者喜爱的品牌。"
+        }
+],
+      galleryImages: ["/images/cms/portfolio/shirona/Brandbook_Page_34_Business_card_stone.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_35_Business_card_wood.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_36_Coffee_cup_and_carrier.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_37_Coffee_and_Registon.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_38_Bakery_menu_design.jpeg", "/images/cms/portfolio/shirona/Brandbook_Page_39_Paper_bag_angled.jpeg"],
+      order: 1
+    },
+
     {
       _id: 'fallback-den-aroma',
       slug: 'den-aroma',

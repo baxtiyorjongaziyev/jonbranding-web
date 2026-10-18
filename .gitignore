@@ -25,6 +25,7 @@ node_modules/
 *.pem
 *.swp
 *.swo
+temp_portfolio/
 
 # debug & logs
 npm-debug.log*

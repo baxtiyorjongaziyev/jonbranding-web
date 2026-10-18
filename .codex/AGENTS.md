@@ -2,10 +2,17 @@
 
 This supplements the root `AGENTS.md` with a repo-local ECC baseline.
 
-## Repo Skill
+## Repo Skills & Design System (Mandatory)
 
 - Repo-generated Codex skill: `.agents/skills/jonbranding-web/SKILL.md`
 - Claude-facing companion skill: `.claude/skills/jonbranding-web/SKILL.md`
+- **Master Design & Anti-AI-Slop Skills (`.agents/skills/`):**
+  - When working on any UI/UX or frontend code, Codex must adhere to:
+    - `design-taste-frontend`, `ui-craft`, `ui-craft-editorial` (luxury Central Asian brand agency aesthetic)
+    - `colorize` (60% `#FFFFFF`, 30% `#0A0B0E`, 10% `#2554FF`)
+    - `ui-animation` & `gsap-scrolltrigger` (smooth spring physics, no layout-shifting `transition: all`)
+    - `impeccable`: run `node .agents/skills/impeccable/scripts/detect.mjs` — zero anti-patterns permitted
+    - `finalize` & harness: run `npm run verify:fast` before concluding
 - Keep user-specific credentials and private MCPs in `~/.codex/config.toml`, not in this repo.
 
 ## MCP Baseline

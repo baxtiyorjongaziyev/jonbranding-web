@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
+import { optimizeSanityUrl } from '@/lib/portfolio-presentation';
 import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchBrands } from '@/lib/data/brands';
 import CredentialsClient from './credentials-client';
@@ -42,16 +43,22 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
 
   const cases: CredCase[] = projects
     .filter((project) => project.coverImage)
-    .slice(0, 6)
-    .map((project) => ({
-      slug: project.slug,
-      title: project.title,
-      client: project.client,
-      categoryLabel: project.categoryLabel,
-      // Ro'yxat so'rovi kichik (w=800) rasm beradi — slayd butun ekranni egallaydi.
-      coverImage: project.coverImage.replace(/\?.*$/, '?w=2400&q=90&auto=format'),
-      result: project.results?.[0],
-    }));
+    .slice(0, 8)
+    .map((project) => {
+      const cover = optimizeSanityUrl(project.coverImage, 1000, 75);
+      const gallery = (project.galleryImages && project.galleryImages.length > 0)
+        ? project.galleryImages.map((img: string) => optimizeSanityUrl(img, 1000, 75))
+        : [cover];
+      return {
+        slug: project.slug,
+        title: project.title,
+        client: project.client,
+        categoryLabel: project.categoryLabel,
+        coverImage: cover,
+        galleryImages: gallery,
+        result: project.results?.[0],
+      };
+    });
 
   const quotes: CredQuote[] = testimonials
     .filter((item) => !item.videoUrl && !item.videoFileUrl && item.quote && item.quote.length > 60)
@@ -59,8 +66,7 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
     .map((item) => ({ name: item.name, company: item.company, quote: item.quote }));
 
   const logos: CredLogo[] = brands
-    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []))
-    .slice(0, 18);
+    .flatMap((brand) => (brand.logo ? [{ name: brand.name, logo: brand.logo }] : []));
 
   return (
     <div className="flex-grow">

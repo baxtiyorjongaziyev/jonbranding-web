@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Layers, Image as ImageIcon, ArrowRight } from 'lucide-react';
+import { Layers, ArrowRight } from 'lucide-react';
 import { FC } from 'react';
 
 type PricingClientProps = {
@@ -20,11 +20,6 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
       desc: "Neyming, logo, firma uslubi, brandbook, qadoq va POSM. Har bir paket biznesingizni bir xil va premium ko‘rsatish uchun yig‘ilgan.",
       cta: 'Paketlarni ko‘rish',
     },
-    marketplaceServices: {
-      title: 'Sotuvchi kartochka dizayni',
-      desc: "Uzum, Wildberries, Ozon va Yandex Market uchun sotuvchi vizual tizim. A/B variantlar, tezkor ishlab chiqarish va qo‘shimcha xizmatlar bor.",
-      cta: 'Kartochka tariflarini ko‘rish',
-    },
   };
 
   const getLocalizedPath = (path: string) => {
@@ -33,45 +28,41 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#05070f] text-white overflow-hidden py-24 sm:py-32 flex flex-col justify-center items-center">
-      {/* Background glow effects */}
+    <div className="atelier-theme jon-home relative min-h-screen bg-white text-[#0A0B0E] overflow-hidden py-24 sm:py-32 flex flex-col justify-center items-center">
+      {/* Background subtle ambient glows */}
       <div
         className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] pointer-events-none overflow-hidden select-none"
         style={{
-          background:
-            'radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 10, 16, 0) 70%)',
+          background: 'radial-gradient(ellipse at 30% 30%, rgba(37, 84, 255, 0.06) 0%, transparent 70%)',
           filter: 'blur(120px)',
         }}
       />
       <div
         className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] pointer-events-none overflow-hidden select-none"
         style={{
-          background:
-            'radial-gradient(ellipse at 70% 70%, rgba(245, 158, 11, 0.1) 0%, rgba(10, 10, 16, 0) 70%)',
+          background: 'radial-gradient(ellipse at 70% 70%, rgba(37, 84, 255, 0.04) 0%, transparent 70%)',
           filter: 'blur(120px)',
         }}
       />
 
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 uppercase tracking-[0.2em] mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-[#2554FF] border border-blue-500/20 uppercase tracking-[0.16em] mb-4"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-            Pricing machine
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2554FF] animate-pulse"></span>
+            Shaffof narxlar
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white uppercase mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0A0B0E] mb-6"
+            style={{ lineHeight: 1.05 }}
           >
             {t.title}
           </motion.h1>
@@ -79,34 +70,30 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-slate-400 leading-relaxed font-medium"
+            className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
           >
             {t.subtitle}
           </motion.p>
         </div>
 
-        {/* Pricing options Cards Grid */}
+        {/* Pricing card */}
         <div className="max-w-xl mx-auto">
-          {/* Card 1: Core Branding Services */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="group relative flex flex-col justify-between p-8 sm:p-10 bg-[#0c0f18]/60 backdrop-blur-xl border border-white/5 hover:border-indigo-500/30 rounded-3xl transition-all duration-300 shadow-2xl overflow-hidden"
+            className="group relative flex flex-col justify-between p-8 sm:p-10 bg-[#F8FAFC] border border-[#E5E7EB] hover:border-[#2554FF]/40 rounded-3xl transition-all duration-300 shadow-xl overflow-hidden"
           >
-            {/* Hover spotlight background */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/0 via-indigo-500/0 to-indigo-500/[0.03] group-hover:to-indigo-500/[0.08] transition-all duration-300 pointer-events-none" />
-
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-500/20 flex items-center justify-center text-[#2554FF] mb-6">
                 <Layers className="w-6 h-6" />
               </div>
 
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
+              <h2 className="text-2xl font-bold text-[#0A0B0E] tracking-tight mb-4">
                 {t.brandServices?.title}
               </h2>
 
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">
                 {t.brandServices?.desc}
               </p>
             </div>
@@ -114,7 +101,7 @@ const PricingClient: FC<PricingClientProps> = ({ lang, dictionary }) => {
             <div>
               <Link
                 href={getLocalizedPath('/narxlar')}
-                className="inline-flex items-center justify-center w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-indigo-600/20 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
+                className="inline-flex items-center justify-center w-full px-6 py-4 bg-[#2554FF] hover:bg-[#1D4ED8] text-white font-semibold rounded-full transition-all duration-300 shadow-lg shadow-[#2554FF]/25 gap-2 active:scale-[0.98] text-sm uppercase tracking-wider"
               >
                 {t.brandServices?.cta}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

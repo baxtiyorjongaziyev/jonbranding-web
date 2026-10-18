@@ -30,10 +30,15 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
 ## Qoidalar
 1. Matnlar — `src/locales/uz.json` (va boshqa tillar). Dictionary pattern: `dictionary.section.key`
 2. Rasmlar — `next/image`, CDN: `cdn.sanity.io` yoki `public/`
-3. Animatsiyalar — `framer-motion` (`motion.div`, `whileInView`)
+3. Animatsiyalar — `framer-motion` (`motion.div`, `whileInView`) yoki GSAP (`gsap-scrolltrigger`). Layout transitionlar (`transition: all`) qat'iyan man etiladi, faqat GPU transform/opacity.
 4. Yangi section — `src/components/sections/` + `export default FC<Props>`
 5. TypeScript: `FC<Props>` pattern, `ignoreBuildErrors: false` (tip xatosi build'ni to'xtatadi). Server log uchun `console.log` emas, `logger` (`src/lib/logger.ts`)
 6. **Uzbek-first Policy** — O'zbek tili saytimizning asosiy tili. Har qanday matn yoki o'zgarish birinchi navbatda o'zbek tilida (uz.json da) amalga oshiriladi, so'ngra boshqa 3 ta tilga tarjima qilinadi.
+7. **Master Design & Anti-AI-Slop Qoidalari (.claude/skills/ va .agents/skills/)**:
+   - Har qanday UI/UX yoki sahifa yaratish/tahrirlashda `design-taste-frontend`, `ui-craft`, `ui-craft-editorial`, `colorize`, `kinetic-typography` skill'lariga amal qilinadi.
+   - **60-30-10 tizimi:** 60% fon oq `#FFFFFF`, 30% struktura to'q siyoh `#0A0B0E`, 10% elektr aksent `#2554FF` (hover `#1D4ED8`).
+   - `Instrument Serif` kursivida sun'iy qalinlashuv (faux/synthetic bold) taqiqlanadi.
+   - O'zgarishlardan keyin `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) va `npm run verify:fast` tekshirilishi shart.
 
 ## Muhim ogohlantirishlar
 - `git push` → HTTP 403 (local proxy bloklaydi). MCP `mcp__github__push_files` ishlatish

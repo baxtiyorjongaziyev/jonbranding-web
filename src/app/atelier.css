@@ -2,7 +2,7 @@
    Scoped to .atelier-home so embedded .atelier-theme sections on other pages
    (e.g. narxlar testimonials) don't repaint the whole body. */
 body:has(.atelier-home) {
-  background-color: #F4F5F7 !important;
+  background-color: #FFFFFF !important;
 }
 html[data-theme="dark"] body:has(.atelier-home) {
   background-color: #0B0C10 !important;
@@ -10,22 +10,22 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
 .atelier-theme {
 
-  /* cool neutral system */
-  --bg: #F4F5F7;
-  --bg-2: #EAECF0;
+  /* Jon Branding 60-30-10 Design System: 60% White (canvas), 30% Black (ink), 10% Electric Blue (accent) */
+  --bg: #FFFFFF;
+  --bg-2: #F8F9FB;
   --paper: #FFFFFF;
-  --ink: #0E1015;
-  --ink-2: #3B3D45;
-  --muted: #5F6571; /* WCAG AA: bg, bg-2, paper ustida ≥4.9:1 */
-  --line: #DDE0E6;
-  --line-2: #E8EAEE;
-  --accent: #1B4DFF;
-  --accent-soft: #E6EBFF;
-  --terra: #C2552A;
-  --terra-soft: #F3E3D6;
-  --green: #2C6E49;
-  --green-soft: #DBE9DE;
-  --red: #B33A2C;
+  --ink: #0A0B0E;
+  --ink-2: #4B5563;
+  --muted: #6B7280;
+  --line: #E5E7EB;
+  --line-2: #D1D5DB;
+  --accent: #2554FF;
+  --accent-soft: rgba(37, 84, 255, 0.08);
+  --terra: #2554FF;
+  --terra-soft: rgba(37, 84, 255, 0.08);
+  --green: #2554FF;
+  --green-soft: rgba(37, 84, 255, 0.08);
+  --red: #EF4444;
 }
 .atelier-theme[data-theme="dark"] {
 
@@ -45,16 +45,16 @@ html[data-theme="dark"] body:has(.atelier-home) {
   --green-soft: #142A1F;
 }
 .atelier-theme[data-accent="terra"] {
- --accent: #C2552A; --accent-soft: var(--terra-soft); }
+ --accent: #2554FF; --accent-soft: var(--terra-soft); }
 .atelier-theme[data-accent="ink"] {
  --accent: #0E1015; --accent-soft: var(--bg-2); }
-.atelier-theme * {
- box-sizing: border-box; margin: 0; padding: 0; }
+:where(.atelier-theme *) {
+ box-sizing: border-box; }
 .atelier-theme, .atelier-theme {
 
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   line-height: 1.5;
@@ -63,9 +63,11 @@ html[data-theme="dark"] body:has(.atelier-home) {
   transition: background .35s, color .35s;
   overflow-x: hidden;
 }
-.atelier-theme a {
- color: inherit; text-decoration: none; }
-.atelier-theme button {
+:where(.atelier-theme) a {
+ text-decoration: none; }
+:where(.atelier-theme) a:not([class*="text-"]) {
+ color: inherit; }
+:where(.atelier-theme) button:not([class*="text-"]):not([class*="bg-"]) {
  font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
 .atelier-theme ::selection {
  background: var(--ink); color: var(--bg); }
@@ -84,7 +86,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme[data-theme="dark"] body.grain::before {
  mix-blend-mode: screen; opacity: 0.25; }
 .atelier-theme .serif {
- font-family: 'Instrument Serif', var(--font-serif-cyrillic), 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
+ font-family: var(--font-serif), var(--font-serif-cyrillic), 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
 .atelier-theme .mono {
  font-family: 'JetBrains Mono', monospace; font-weight: 400; }
 .atelier-theme .wrap {
@@ -229,7 +231,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   font-weight: 700; font-size: 22px; letter-spacing: -0.035em;
 }
 .atelier-theme .brand .dot {
- color: var(--accent); font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 28px; line-height: .8; }
+ color: var(--accent); font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; font-size: 28px; line-height: .8; }
 .atelier-theme .nav-links {
  display: flex; gap: 2px; justify-content: center; padding: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; }
 .atelier-theme .nav-link.on {
@@ -304,7 +306,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .hero-title {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: clamp(32px, 9.5vw, 156px);
   line-height: 1.12;
@@ -313,7 +315,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .hero-title .it {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.015em;
@@ -382,7 +384,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .hero-meta .v .s {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic; font-weight: 400;
   color: var(--accent);
 }
@@ -430,7 +432,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .sc-card .name {
 
   position: absolute; top: 12px; left: 12px; right: 12px;
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 16px;
   color: rgba(255,255,255,.95);
@@ -508,7 +510,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   text-wrap: balance;
 }
 .atelier-theme .bsys-side h2 .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--accent); }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: var(--accent); }
 .atelier-theme .bsys-side p {
  color: var(--ink-2); font-size: 16px; line-height: 1.65; max-width: 360px; }
 .atelier-theme .bsys-grid-r {
@@ -559,7 +561,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .bs-type .big {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 64px;
   line-height: 0.9;
@@ -568,7 +570,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .bs-type .big.sans {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-style: normal;
   font-weight: 700;
   color: var(--ink);
@@ -583,14 +585,14 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .bs-mark .glyph {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 56px;
   letter-spacing: -0.04em;
   display: inline-flex; align-items: baseline; gap: 1px;
 }
 .atelier-theme .bs-mark .glyph .d {
- color: var(--accent); font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 70px; line-height: .7; }
+ color: var(--accent); font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; font-size: 70px; line-height: .7; }
 .atelier-theme .bs-mark .lbl {
  position: absolute; top: 14px; left: 14px; }
 .atelier-theme .bs-mark .val {
@@ -608,7 +610,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
  color: rgba(244,241,232,.45); position: absolute; bottom: 14px; right: 14px; }
 .atelier-theme .bs-lock .lock {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 36px;
   color: var(--bg);
@@ -699,7 +701,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .gal-tile .foot .name {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: clamp(20px, 2vw, 32px);
   line-height: 1;
@@ -810,7 +812,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .audit-ix {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 42px;
   color: var(--accent);
@@ -930,7 +932,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .audit-deliv-n {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   font-size: 36px;
@@ -1025,7 +1027,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   aspect-ratio: 1/1.414;
   padding: 26px 24px;
   display: flex; flex-direction: column;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-size: 11px;
   color: var(--ink);
   overflow: hidden;
@@ -1079,7 +1081,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .rp-h1 {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 38px;
   letter-spacing: -0.035em;
@@ -1087,7 +1089,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .rp-h1 em {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
@@ -1101,7 +1103,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .rp-grade-n {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 36px;
   letter-spacing: -0.04em;
@@ -1218,7 +1220,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   width: 38px; height: 38px;
   border-radius: 50%;
   display: grid; place-items: center;
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 18px;
   color: #fff;
@@ -1275,7 +1277,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   margin: 14px 0 18px;
 }
 .atelier-theme .calc-left h2 .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #E0744A; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: #E0744A; }
 .atelier-theme .calc-left p {
  color: rgba(244,241,232,.7); font-size: 16px; line-height: 1.6; max-width: 380px; }
 .atelier-theme .calc-eb {
@@ -1380,7 +1382,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   font-feature-settings: "tnum";
 }
 .atelier-theme .calc-out .n .s {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; }
 .atelier-theme .calc-out .pl {
 
   font-family: 'JetBrains Mono', monospace;
@@ -1456,7 +1458,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
   max-height: 0;
   overflow: hidden;
-  transition: max-height .4s cubic-bezier(.2,.8,.3,1);
+  transition: opacity .3s ease, transform .3s ease;
   margin-top: 0;
 }
 .atelier-theme .proc-col.open .reveal {
@@ -1474,7 +1476,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .proc-col .reveal-inner em {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   color: var(--accent);
   font-size: 14px;
@@ -1516,7 +1518,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   color: var(--bg);
 }
 .atelier-theme .foot-cta-text .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--accent); }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: var(--accent); }
 .atelier-theme .foot-cta-btns {
 
   display: flex; gap: 10px; flex-wrap: wrap;
@@ -1562,7 +1564,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   height: 100%;
   background: var(--accent);
   border-radius: 2px;
-  transition: width .35s cubic-bezier(.2,.8,.3,1);
+  transition: transform .3s cubic-bezier(.2,.8,.3,1);
 }
 .atelier-theme .mdl-back {
 
@@ -1615,7 +1617,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   transform: translateY(-4px);
   transition: opacity .25s, transform .25s;
   z-index: 10;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   letter-spacing: -0.01em;
 }
 .atelier-theme .stat-tip::before {
@@ -1655,7 +1657,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .marquee-item {
 
   display: flex; align-items: center; gap: 56px;
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   font-size: clamp(28px, 4vw, 56px);
@@ -1672,7 +1674,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .marquee-item .res {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 0.5em;
@@ -1721,7 +1723,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .manifesto-text .it {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
@@ -1750,7 +1752,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .ledger-label .n {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 28px;
   color: var(--accent);
@@ -1765,7 +1767,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .ledger-logo {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-size: 22px;
   font-weight: 400;
   color: var(--ink-2);
@@ -1815,7 +1817,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   font-feature-settings: "ss01", "tnum";
 }
 .atelier-theme .stat .n .s {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--accent); }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: var(--accent); }
 .atelier-theme .stat .l {
 
   font-family: 'JetBrains Mono', monospace;
@@ -1854,7 +1856,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   text-wrap: balance;
 }
 .atelier-theme .sec-head h2 .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--accent); }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: var(--accent); }
 .atelier-theme .sec-head .lede {
  color: var(--ink-2); font-size: 16px; line-height: 1.65; max-width: 420px; }
 .atelier-theme .sec-head .lede strong {
@@ -1950,7 +1952,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   border-bottom: 1px solid var(--line);
   align-items: center;
   cursor: pointer;
-  transition: padding .25s cubic-bezier(.2,.8,.3,1), background .25s;
+  transition: background .25s ease;
   position: relative;
 }
 .atelier-theme .svc-row:hover {
@@ -1961,7 +1963,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .svc-row .num {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   font-size: 36px;
@@ -2086,7 +2088,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   font-weight: 700;
 }
 .atelier-theme .feat-title .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #E0744A; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: #E0744A; }
 .atelier-theme .feat-story {
 
   font-size: 17px;
@@ -2116,7 +2118,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   letter-spacing: -0.03em;
   font-weight: 700;
   line-height: 1;
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   color: #E0744A;
@@ -2140,7 +2142,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   border-bottom: 1px solid var(--line);
   align-items: center;
   cursor: pointer;
-  transition: background .2s, padding .2s;
+  transition: background .2s ease;
 }
 .atelier-theme .idx-row.head {
 
@@ -2166,7 +2168,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .idx-row .client {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-size: 28px;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -2243,7 +2245,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .proc-col .num {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   font-size: 108px;
@@ -2427,7 +2429,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .price-card.featured .price-num {
  color: var(--accent); }
 .atelier-theme .price-card.featured .price-num .s {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; }
 .atelier-theme .price-unit {
 
   font-size: 13px;
@@ -2512,7 +2514,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .quote .mark {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-size: 80px;
   line-height: 0.3;
@@ -2521,7 +2523,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .quote-text {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   font-size: clamp(20px, 1.9vw, 26px);
@@ -2572,7 +2574,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
   border-bottom: 1px solid var(--line);
   cursor: pointer;
-  transition: padding .2s;
+  transition: background-color .2s ease;
 }
 .atelier-theme .faq-q {
 
@@ -2615,7 +2617,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 
   max-height: 0;
   overflow: hidden;
-  transition: max-height .4s cubic-bezier(.2,.8,.3,1), padding-bottom .3s;
+  transition: opacity .3s ease, transform .3s ease;
   font-size: 15px;
   line-height: 1.65;
   color: var(--ink-2);
@@ -2670,7 +2672,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   text-wrap: balance;
 }
 .atelier-theme .final h2 .it {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #5B7CFF; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: #5B7CFF; }
 .atelier-theme .final p {
 
   color: rgba(244,241,232,.7);
@@ -2716,7 +2718,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .final-meta .v .s {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   color: #5B7CFF;
@@ -2873,11 +2875,11 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .stamp {
  display: inline-block; padding: 6px 12px; border: 2px solid var(--terra); color: var(--terra); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; transform: rotate(-3deg); border-radius: 6px; background: rgba(194,85,42,0.04); }
 .atelier-theme .watermark {
- position: absolute; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(180px, 22vw, 360px); color: var(--ink); opacity: 0.04; line-height: 0.8; pointer-events: none; z-index: 0; letter-spacing: -0.03em; }
+ position: absolute; font-family: var(--font-serif), serif; font-style: italic; font-size: clamp(180px, 22vw, 360px); color: var(--ink); opacity: 0.04; line-height: 0.8; pointer-events: none; z-index: 0; letter-spacing: -0.03em; }
 .atelier-theme .asterisk {
  display: inline-block; font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 700; animation: spin-slow 18s linear infinite; transform-origin: center; font-size: 0.5em; vertical-align: super; }
 .atelier-theme .bignum-bg {
- position: absolute; font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: clamp(180px, 24vw, 380px); letter-spacing: -0.06em; line-height: 0.85; color: var(--ink); opacity: 0.04; pointer-events: none; z-index: 0; }
+ position: absolute; font-family: var(--font-hanken), sans-serif; font-weight: 800; font-size: clamp(180px, 24vw, 380px); letter-spacing: -0.06em; line-height: 0.85; color: var(--ink); opacity: 0.04; pointer-events: none; z-index: 0; }
 /* Audit visual: 12 chip ring */.atelier-theme .audit-meter {
 
   position: relative;
@@ -2908,7 +2910,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .audit-meter-n {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 96px;
   letter-spacing: -0.05em;
@@ -2916,7 +2918,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   color: var(--ink);
 }
 .atelier-theme .audit-meter-n .s {
- font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--accent); font-size: 64px; }
+ font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; color: var(--accent); font-size: 64px; }
 .atelier-theme .audit-meter-l {
 
   font-family: 'JetBrains Mono', monospace;
@@ -2973,7 +2975,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
  color: var(--terra); font-weight: 700; }
 .atelier-theme .hero-report-float .title {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 22px;
   letter-spacing: -0.03em;
@@ -2982,7 +2984,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .hero-report-float .title em {
 
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
@@ -3008,7 +3010,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .hero-report-float .score-n {
 
-  font-family: 'Inter Tight', sans-serif;
+  font-family: var(--font-hanken), sans-serif;
   font-weight: 700;
   font-size: 32px;
   letter-spacing: -0.04em;
@@ -3030,7 +3032,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .hero-report-float .bar {
  display: grid; grid-template-columns: 36px 1fr 18px; gap: 6px; font-size: 8px; align-items: center; }
 .atelier-theme .hero-report-float .bar-l {
- color: var(--ink-2); font-family: 'Inter Tight', sans-serif; }
+ color: var(--ink-2); font-family: var(--font-hanken), sans-serif; }
 .atelier-theme .hero-report-float .bar-t {
  background: var(--bg-2); height: 4px; border-radius: 2px; overflow: hidden; }
 .atelier-theme .hero-report-float .bar-f {

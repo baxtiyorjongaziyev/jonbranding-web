@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import { Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { HoneypotField } from '@/components/ui/honeypot-field';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
@@ -19,10 +21,140 @@ type LeadModalProps = {
   intent?: 'consultation' | 'project';
 };
 
-export default function LeadModal({ open, onClose, presetService, source = 'narxlar', lang = 'uz', intent = 'project' }: LeadModalProps) {
+export type ServiceOption = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+function getCoreOptions(lang: string = 'uz'): { primary: ServiceOption[]; secondary: ServiceOption[] } {
+  if (lang === 'ru') {
+    return {
+      primary: [
+        { id: 'naming', label: 'Naming', value: 'Нейминг' },
+        { id: 'logo', label: 'Logo', value: 'Логотип' },
+        { id: 'patent', label: 'Patent', value: 'Патент' },
+      ],
+      secondary: [
+        { id: 'packaging', label: 'Упаковка', value: 'Qadoq dizayni' },
+        { id: 'consultation', label: 'Консультация', value: 'Не уверен — нужна консультация' },
+      ],
+    };
+  }
+  if (lang === 'en') {
+    return {
+      primary: [
+        { id: 'naming', label: 'Naming', value: 'Naming' },
+        { id: 'logo', label: 'Logo', value: 'Logo' },
+        { id: 'patent', label: 'Patent', value: 'Patent' },
+      ],
+      secondary: [
+        { id: 'packaging', label: 'Packaging', value: 'Packaging design' },
+        { id: 'consultation', label: 'Need advice', value: 'Not sure — I need advice' },
+      ],
+    };
+  }
+  if (lang === 'zh') {
+    return {
+      primary: [
+        { id: 'naming', label: 'Naming', value: '命名' },
+        { id: 'logo', label: 'Logo', value: '标志' },
+        { id: 'patent', label: 'Patent', value: '专利' },
+      ],
+      secondary: [
+        { id: 'packaging', label: 'Packaging', value: '包装设计' },
+        { id: 'consultation', label: '咨询', value: '还不确定——需要咨询' },
+      ],
+    };
+  }
+  // uz (default)
+  return {
+    primary: [
+      { id: 'naming', label: 'Naming', value: 'Naming' },
+      { id: 'logo', label: 'Logo', value: 'Logo' },
+      { id: 'patent', label: 'Patent', value: 'Patent' },
+    ],
+    secondary: [
+      { id: 'packaging', label: 'Qadoq dizayni', value: 'Qadoq dizayni' },
+      { id: 'consultation', label: 'Maslahat kerak', value: 'Aniq emas — maslahat kerak' },
+    ],
+  };
+}
+
+function parseInitialServices(preset: string, allOptions: ServiceOption[], notSureValue: string): string[] {
+  if (!preset) return ['Naming'];
+  const pLower = preset.toLowerCase();
+
+  if (
+    pLower.includes('maslahat') ||
+    pLower.includes('aniq emas') ||
+    pLower.includes('not sure') ||
+    pLower.includes('не уверен')
+  ) {
+    return [notSureValue];
+  }
+
+  // Package presets
+  if (pLower.includes('standart')) {
+    return allOptions.filter((o) => ['naming', 'logo', 'patent'].includes(o.id)).map((o) => o.label);
+  }
+  if (pLower.includes('premium') || pLower.includes('vip')) {
+    return allOptions.filter((o) => ['naming', 'logo', 'patent', 'packaging'].includes(o.id)).map((o) => o.label);
+  }
+
+  // Check if preset matches one of our options
+  if (pLower.includes('logo')) return [preset];
+  if (pLower.includes('neyming') || pLower.includes('naming')) return [preset];
+  if (pLower.includes('patent')) return [preset];
+  if (pLower.includes('qadoq') || pLower.includes('packaging')) return [preset];
+
+  return [preset];
+}
+
+function isOptionChecked(opt: ServiceOption, selected: string[]): boolean {
+  return selected.some((s) => {
+    const sLower = s.toLowerCase();
+    if (sLower === opt.value.toLowerCase() || sLower === opt.id.toLowerCase() || sLower === opt.label.toLowerCase()) {
+      return true;
+    }
+    if (opt.id === 'logo' && sLower.includes('logo')) return true;
+    if (opt.id === 'naming' && (sLower.includes('naming') || sLower.includes('neyming') || sLower.includes('nom'))) {
+      return true;
+    }
+    if (opt.id === 'patent' && sLower.includes('patent')) return true;
+    if (opt.id === 'packaging' && (sLower.includes('qadoq') || sLower.includes('packaging'))) return true;
+    if (
+      opt.id === 'consultation' &&
+      (sLower.includes('maslahat') || sLower.includes('aniq emas') || sLower.includes('advice') || sLower.includes('consultation'))
+    ) {
+      return true;
+    }
+    return false;
+  });
+}
+
+export default function LeadModal({
+  open,
+  onClose,
+  presetService,
+  source = 'narxlar',
+  lang = 'uz',
+  intent = 'project',
+}: LeadModalProps) {
+  const content = getSalesContent(lang);
+  const t = content.ui.modal;
+  const flow = getSalesFlow(lang);
+
+  const { primary: primaryOptions, secondary: secondaryOptions, all: allCoreOptions } = useMemo(() => {
+    const opts = getCoreOptions(lang);
+    return { ...opts, all: [...opts.primary, ...opts.secondary] };
+  }, [lang]);
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [service, setService] = useState(presetService);
+  const [selectedServices, setSelectedServices] = useState<string[]>(() =>
+    parseInitialServices(presetService, allCoreOptions, content.ui.notSure)
+  );
   const [phoneErr, setPhoneErr] = useState('');
   const [submitErr, setSubmitErr] = useState('');
   const [sending, setSending] = useState(false);
@@ -34,22 +166,64 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
     if (open) {
       setName('');
       setPhone('');
-      setService(presetService);
+      setSelectedServices(parseInitialServices(presetService, allCoreOptions, content.ui.notSure));
       setPhoneErr('');
       setSubmitErr('');
       setSending(false);
       setDone(false);
       trackEvent({ action: 'modal_open', category: 'Lead Form', label: source, source: `${source}_modal` });
     }
-  }, [open, presetService, source]);
+  }, [open, presetService, source, content.ui.notSure, allCoreOptions]);
 
-  const content = getSalesContent(lang);
-  const t = content.ui.modal;
-  const flow = getSalesFlow(lang);
-  const allServices = content.serviceGroups.flatMap((group) =>
-    group.items.map((item) => item.name)
-  );
-  const packageOptions = content.packages.map((pkg) => `${pkg.name} ${t.packageSuffix}`);
+  const toggleOption = (opt: ServiceOption) => {
+    setSelectedServices((prev) => {
+      const isCurrentlyChecked = isOptionChecked(opt, prev);
+
+      // If selecting consultation/not_sure, clear other specific services
+      if (opt.id === 'consultation') {
+        return isCurrentlyChecked ? ['Naming'] : [opt.value];
+      }
+
+      // If selecting a specific service, remove consultation
+      const withoutConsultation = prev.filter((s) => {
+        const sLower = s.toLowerCase();
+        return (
+          !sLower.includes('maslahat') &&
+          !sLower.includes('aniq emas') &&
+          !sLower.includes('consultation') &&
+          !sLower.includes('advice')
+        );
+      });
+
+      if (isCurrentlyChecked) {
+        // Remove this option
+        const filtered = withoutConsultation.filter((s) => {
+          const sLower = s.toLowerCase();
+          if (opt.id === 'logo' && sLower.includes('logo')) return false;
+          if (opt.id === 'naming' && (sLower.includes('naming') || sLower.includes('neyming') || sLower.includes('nom'))) {
+            return false;
+          }
+          if (opt.id === 'patent' && sLower.includes('patent')) return false;
+          if (opt.id === 'packaging' && (sLower.includes('qadoq') || sLower.includes('packaging'))) return false;
+          return sLower !== opt.value.toLowerCase() && sLower !== opt.label.toLowerCase();
+        });
+        return filtered;
+      } else {
+        // Add this option
+        return [...withoutConsultation, opt.label];
+      }
+    });
+  };
+
+  const finalServiceString =
+    selectedServices.length > 0 ? selectedServices.join(', ') : content.ui.notSure;
+
+  // Check if preset is a custom service not covered in core options
+  const isPresetCustom =
+    Boolean(presetService) &&
+    !allCoreOptions.some((o) => isOptionChecked(o, [presetService])) &&
+    !presetService.toLowerCase().includes('maslahat') &&
+    !presetService.toLowerCase().includes('aniq emas');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,7 +262,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
         body: JSON.stringify({
           fullName: name || 'Mijoz',
           phone: normalizedPhone,
-          role: intent === 'consultation' ? `${flow.consultation} — ${service}` : service,
+          role: intent === 'consultation' ? `${flow.consultation} — ${finalServiceString}` : finalServiceString,
           source: `${source}_modal`,
           lang,
           eventId,
@@ -99,7 +273,6 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
         }),
       });
       result = await res.json().catch(() => ({}));
-      // Success faqat server arizani saqlaganini tasdiqlasa (ok:true).
       if (!res.ok || (result as { ok?: boolean }).ok !== true) {
         setSubmitErr(t.submitError);
         setSending(false);
@@ -118,7 +291,7 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
       eventId: result.eventId || eventId,
       serverTracked: true,
       gaClientId,
-      service,
+      service: finalServiceString,
       form_name: `${source}_page`,
       cta_source: `${source}_modal`,
     });
@@ -179,29 +352,109 @@ export default function LeadModal({ open, onClose, presetService, source = 'narx
                 />
                 {phoneErr && <span role="alert" className="text-xs text-red-600">{phoneErr}</span>}
               </div>
-              <div className="flex flex-col gap-1">
-                <label htmlFor="tariflar-service" className="text-sm font-medium text-neutral-700">{t.service}</label>
-                <select
+
+              {/* MODERN MULTI-SELECT CHECKBOXES */}
+              <div className="flex flex-col gap-2 pt-1">
+                <div className="flex items-center justify-between">
+                  <label id="tariflar-service-label" className="text-sm font-medium text-neutral-700">
+                    {lang === 'uz' ? 'Qaysi xizmatlar kerak?' : t.service}
+                  </label>
+                  <span className="text-[11px] text-neutral-400">
+                    {lang === 'uz' ? 'Bir nechtasini tanlash mumkin' : 'Multiple options allowed'}
+                  </span>
+                </div>
+
+                {/* Primary 3 Options: Naming, Logo, Patent */}
+                <div role="group" aria-labelledby="tariflar-service-label" className="grid grid-cols-3 gap-2">
+                  {primaryOptions.map((opt) => {
+                    const checked = isOptionChecked(opt, selectedServices);
+                    return (
+                      <label
+                        key={opt.id}
+                        className={cn(
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-3 text-xs sm:text-sm font-bold transition-all duration-200 select-none text-center',
+                          checked
+                            ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
+                            : 'border-neutral-200 bg-neutral-50/70 text-neutral-800 hover:border-neutral-300 hover:bg-neutral-100'
+                        )}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleOption(opt)}
+                          className="sr-only"
+                        />
+                        <div
+                          className={cn(
+                            'flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors',
+                            checked ? 'border-white bg-white text-black' : 'border-neutral-300 bg-white'
+                          )}
+                        >
+                          {checked && <Check className="h-3 w-3 stroke-[3]" />}
+                        </div>
+                        <span className="truncate">{opt.label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {/* Secondary Options: Packaging & Consultation + Optional Custom Preset */}
+                <div className="grid grid-cols-2 gap-2 mt-1">
+                  {isPresetCustom && (
+                    <div className="col-span-2 flex items-center justify-between rounded-xl border border-black/80 bg-neutral-900 px-3.5 py-2.5 text-xs font-semibold text-white">
+                      <span className="truncate">Tanlangan: {presetService}</span>
+                      <Check className="h-4 w-4 text-[#2ccc5a]" />
+                    </div>
+                  )}
+
+                  {secondaryOptions.map((opt) => {
+                    const checked = isOptionChecked(opt, selectedServices);
+                    return (
+                      <label
+                        key={opt.id}
+                        className={cn(
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition-all duration-200 select-none text-center',
+                          checked
+                            ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
+                            : 'border-neutral-200 bg-neutral-50/70 text-neutral-600 hover:border-neutral-300 hover:bg-neutral-100'
+                        )}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleOption(opt)}
+                          className="sr-only"
+                        />
+                        <div
+                          className={cn(
+                            'flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border transition-colors',
+                            checked ? 'border-white bg-white text-black' : 'border-neutral-300 bg-white'
+                          )}
+                        >
+                          {checked && <Check className="h-2.5 w-2.5 stroke-[3]" />}
+                        </div>
+                        <span className="truncate">{opt.label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {/* Hidden input to maintain accessible name and compatibility for forms and tests */}
+                <input
+                  type="hidden"
                   id="tariflar-service"
-                  value={service}
-                  onChange={(e) => setService(e.target.value)}
-                  className="rounded-xl border border-neutral-200 px-3 py-3 text-base md:text-sm outline-none focus-visible:ring-2 focus-visible:ring-black"
-                >
-                  {allServices.map((item) => (
-                    <option key={item}>{item}</option>
-                  ))}
-                  {packageOptions.map((item) => (
-                    <option key={item}>{item}</option>
-                  ))}
-                  <option>{content.ui.notSure}</option>
-                </select>
+                  aria-label={t.service}
+                  value={finalServiceString}
+                  readOnly
+                />
               </div>
+
               {submitErr && <p role="alert" className="text-xs text-red-600 text-center">{submitErr}</p>}
               <button
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60"
+                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60 transition-all hover:bg-neutral-800"
               >
                 {sending ? t.sending : flow.submit}
               </button>

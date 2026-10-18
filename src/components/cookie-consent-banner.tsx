@@ -87,11 +87,11 @@ const CookieConsentBanner: FC = () => {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie"
-      className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-xl rounded-2xl border border-black/10 bg-white p-4 text-[#0E1015] shadow-2xl sm:p-5"
+      className="fixed inset-x-4 bottom-4 sm:inset-x-auto sm:left-6 sm:bottom-6 z-[60] sm:max-w-md rounded-2xl border border-black/10 bg-white p-4 sm:p-5 text-[#0A0B0E] shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
     >
-      <p className="text-sm leading-relaxed">
+      <p className="text-xs sm:text-sm leading-relaxed text-[#4B5563]">
         {t.text}{' '}
-        <a href={privacyHref} className="underline underline-offset-2">
+        <a href={privacyHref} className="underline underline-offset-2 font-medium text-[#0A0B0E] hover:text-[#2554FF] transition-colors">
           {t.more}
         </a>
       </p>
@@ -99,14 +99,14 @@ const CookieConsentBanner: FC = () => {
         <button
           type="button"
           onClick={() => choose('false')}
-          className="rounded-full border border-black/15 px-5 py-2 text-sm font-semibold hover:bg-black/5"
+          className="rounded-full border border-black/15 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold hover:bg-black/5 min-h-[40px] text-[#0A0B0E] transition-colors"
         >
           {t.reject}
         </button>
         <button
           type="button"
           onClick={() => choose('true')}
-          className="rounded-full bg-[#1B4DFF] px-5 py-2 text-sm font-semibold text-white hover:bg-[#1640d6]"
+          className="rounded-full bg-[#2554FF] hover:bg-[#1D4ED8] px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold !text-white transition-colors min-h-[40px]"
         >
           {t.accept}
         </button>

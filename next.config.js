@@ -148,8 +148,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : undefined,
-  allowedDevOrigins: ['127.0.0.1'],
+  output: 'standalone',
+  allowedDevOrigins: ['127.0.0.1', 'localhost', '*.run.app', '*.google.com'],
   async redirects() {
     return [
       // Narxlar sahifasi `/narxlar` da. `/tariflar` bir muddat uni ko'rsatgan,
@@ -190,6 +190,7 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85],
+    minimumCacheTTL: 2592000,
     remotePatterns: [
       {
         protocol: 'https',

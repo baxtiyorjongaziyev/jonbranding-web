@@ -13,10 +13,10 @@ interface Props { onOpen: () => void; lang?: string; dictionary?: any; }
 interface ServiceItem { num: string; name: string; desc: string; time: string; }
 
 const HEADING: Record<string, { h: string; italic: string; sub: string; desc: string }> = {
-  uz: { h: 'Brend — boshidan', italic: 'oxirigacha.', sub: '§ 04 Xizmatlar', desc: "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi." },
-  ru: { h: 'Бренд — с начала', italic: 'до конца.', sub: '§ 04 Услуги', desc: 'Нейминг, айдентика, упаковка, товарный знак и digital-присутствие — в одном месте, одна команда, одна цена. Каждая услуга заказывается отдельно.' },
-  en: { h: 'Brand — from start', italic: 'to finish.', sub: '§ 04 Services', desc: 'Naming, identity, packaging, trademark and digital presence — one place, one team, one price. Each service can be ordered separately.' },
-  zh: { h: '品牌——从开始', italic: '到结束。', sub: '§ 04 服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
+  uz: { h: 'Brend — boshidan', italic: 'oxirigacha.', sub: 'Xizmatlar', desc: "Neyming, aydentika, qadoq, tovar belgisi va raqamli ko'rinish — bir joyda, bir jamoa, bir narxda. Har biri alohida ham buyurtma qilinadi." },
+  ru: { h: 'Бренд — с начала', italic: 'до конца.', sub: 'Услуги', desc: 'Нейминг, айдентика, упаковка, товарный знак и digital-присутствие — в одном месте, одна команда, одна цена. Каждая услуга заказывается отдельно.' },
+  en: { h: 'Brand — from start', italic: 'to finish.', sub: 'Services', desc: 'Naming, identity, packaging, trademark and digital presence — one place, one team, one price. Each service can be ordered separately.' },
+  zh: { h: '品牌——从开始', italic: '到结束。', sub: '服务', desc: '命名、视觉识别、包装、商标注册和数字形象——一站式，一个团队，一个价格。每项服务均可单独订购。' },
 };
 
 const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
@@ -58,7 +58,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
   }, { scope: listRef });
 
   return (
-  <section className="home-contrast py-20 md:py-[120px] relative z-[2]" id="xizmat">
+  <section className="py-20 md:py-[120px] relative z-[2] border-b border-[var(--at-line)]" id="xizmat">
     <div className="max-w-[1320px] mx-auto px-5 md:px-8">
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 mb-16">
         <h2
@@ -86,7 +86,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
             className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-[background-color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >
             <div
-              className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-3 px-2 py-6 transition-[padding] duration-300 group-hover:px-3 md:grid-cols-[90px_minmax(0,1.4fr)_minmax(0,2fr)_minmax(0,.8fr)_80px] md:gap-6 md:py-8 md:group-hover:px-6 motion-reduce:transition-none"
+              className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-3 px-2 py-6 md:grid-cols-[90px_minmax(0,1.4fr)_minmax(0,2fr)_minmax(0,.8fr)_80px] md:gap-6 md:py-8 md:px-4"
             >
               <div
                 className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--at-muted)] leading-none group-hover:text-[var(--at-accent)] transition-colors"
