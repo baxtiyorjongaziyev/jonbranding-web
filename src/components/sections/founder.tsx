@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useState, type FC } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { renderHeadline } from '@/components/ui/headline-renderer';
+import { renderHeadline } from '@/lib/headline';
 import { sanitizeRichText } from '@/lib/sanitize-html';
 import type { FounderDictionary } from '@/lib/types/dictionary';
 import { getSalesFlow } from '@/lib/sales-flow';

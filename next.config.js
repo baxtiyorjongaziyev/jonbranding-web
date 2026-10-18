@@ -135,7 +135,7 @@ const cspDirectives = {
   'object-src': ["'none'"],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
-  'frame-ancestors': ["'self'"],
+  'frame-ancestors': ["'self'", 'https://*.google.com', 'https://*.run.app'],
 };
 
 const contentSecurityPolicy = [
@@ -148,8 +148,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  output: process.env.NEXT_STANDALONE === 'true' ? 'standalone' : undefined,
-  allowedDevOrigins: ['127.0.0.1'],
+  output: 'standalone',
+  allowedDevOrigins: ['127.0.0.1', 'localhost', '*.run.app', '*.google.com'],
   async redirects() {
     return [
       // Narxlar sahifasi `/narxlar` da. `/tariflar` bir muddat uni ko'rsatgan,
@@ -232,10 +232,6 @@ const nextConfig = {
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
           },
           {
             key: 'X-Content-Type-Options',
