@@ -1,5 +1,20 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-18 | LeadModal: 14 talik Uzuq-Yuluq Dropdown O‘rniga Zamonaviy Multi-Select Checkboxlar (Naming, Logo, Patent) O‘rnatildi (Antigravity)
+- **Foydalanuvchi murojaati:**
+  - "formada tanlaydigan qismi hunuk ishlangan va juda ko'p xizmatlar ko'rsatilgan bittasini emas chek box qilsa bo'ladimi? Naming Logo Patent"
+- **Muammo tahlili:**
+  - Avval `LeadModal` da bitta tanlovli `<select>` dropdown bo‘lib, unda 14 ta uzun xizmat va paketlar ro‘yxati ko‘rsatilardi (mobil va desktopda noqulay, xunuk va faqat 1 tasini tanlashga majbur qilardi).
+- **Amalga oshirilgan yechim:**
+  1. `src/components/sales/lead-modal.tsx`:
+     - Eskirgan `<select>` butunlay olib tashlandi.
+     - Asosiy 3 ta ustunli qatorga **Naming**, **Logo**, **Patent** interaktiv checkbox kartochkalari joylashtirildi.
+     - 2-qatorga qo‘shimcha **Qadoq dizayni** va **Maslahat kerak** joylandi (agar sahifadan maxsus xizmat tanlangan bo‘lsa, u ham dinamik saqlanadi).
+     - Bir nechta xizmatni bir vaqtda tanlash imkoniyati (`Naming + Logo`, `Naming + Logo + Patent` va hokazo) yaratildi.
+     - Tanlangan xizmatlar avtomatik tarzda birlashtirilib serverga jo‘natiladi.
+  2. `src/components/sales/lead-modal.test.tsx`:
+     - Ko‘p tanlovli checkboxlarni tekshirish uchun yangi unit test qo‘shildi. Barcha 3 ta test 100% yashil o‘tdi.
+
 ## 2026-10-18 | Dependabot Xavfsizlik Zaifliklari (smol-toml, proxy-addr, @fastify/busboy, postcss-selector-parser, @modelcontextprotocol/sdk) Tuzatildi va PR lar Tahlil Qilindi (Antigravity)
 - **Foydalanuvchi murojaati:**
   1. `https://github.com/baxtiyorjongaziyev/jonbranding-web/security/dependabot`
