@@ -46,9 +46,11 @@
     ".kilo",
     "node_modules",
     "services",
-    "src/scripts",
+    "services/**/*",
+    "scripts",
+    "scripts/**/*",
     "mcp-server",
-    "archive",
+    "mcp-server/**/*",
     "playwright-report",
     "test-results"
   ]
