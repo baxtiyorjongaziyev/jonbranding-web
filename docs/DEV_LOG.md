@@ -4,9 +4,10 @@
 - **Foydalanuvchi murojaati:**
   - "githubdagi kodlar tartibi senior dasturchini ishiga o'xshaydimi? shavqatsiz tanqid qilib ber" va to'liq detox rejasini tasdiqlash ("Ha").
 - **Amalga oshirilgan katta tozalash va refaktoring:**
-  1. **O'lik kodlar va ortiqcha paketlar:**
+  1. **O'lik kodlar va Sanity bog'liqliklari tekshiruvi:**
      - `archive/` papkasi (9 ta eskirgan fayl) va `.modified` vaqtinchalik fayli o'chirildi.
-     - `styled-components` paketi (src ichida 0 marta ishlatilgan 7 ta paket) `package.json` dan chiqarib tashlandi (`npm uninstall`).
+     - `styled-components` tekshirildi: `src/` ichida ishlatilmasa-da, Sanity Studio (`/admin/[[...index]]`) webpack orqali to'liq kompilatsiya bo'lishi uchun peer-dependency sifatida talab qilinishi aniqlandi va Sanity xavfsizligi uchun o'z joyida saqlandi.
+     - `tsconfig.json` da `scripts` va `services` to'g'ri exclude qilinishi sozlandi.
   2. **Skriptlar tartibi:**
      - `scripts/` ichidagi 31 ta bir martalik, eskirgan scratch skriptlar o'chirildi; faqat ishlab turgan harness va avtomatizatsiyalar qoldirildi.
      - `src/scripts/ai-portfolio-sync/` asosiy `scripts/ai-portfolio-sync/` ga ko'chirildi (`src/scripts/` butunlay yo'q qilindi).
@@ -24,6 +25,7 @@
   - `npm run lint`: 0 ta xato, 0 ta ogohlantirish.
   - `npm run typecheck`: 0 ta TypeScript xatoligi.
   - `npm run verify:fast`: barcha 69 ta test fayli, 446/446 ta Vitest testi 100% yashil o'tdi!
+  - `npm run build`: barcha 165 ta statik/dinamik sahifalar va API'lar xatosiz, muvaffaqiyatli build bo'ldi!
 
 ## 2026-10-18 | Google AI Studio Master System Instruction va Antigravity Bridge Skilli Sozlandi (Antigravity)
 - **Foydalanuvchi murojaati:**
