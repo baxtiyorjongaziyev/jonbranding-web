@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import { DesktopNav } from './header-desktop-nav';
 import { MobileMenu } from './header-mobile-menu';
-import { useMainSiteOrigin } from '@/lib/use-main-site-origin';
+import { useMainSiteOrigin } from '@/hooks/use-main-site-origin';
 
 type Dictionary = {
   portfolio: string;

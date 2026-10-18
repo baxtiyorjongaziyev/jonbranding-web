@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
-import { renderHeadline } from '@/lib/headline';
+import { renderHeadline } from '@/components/ui/headline-renderer';
 
 interface CtaBlockProps {
   title: string;
