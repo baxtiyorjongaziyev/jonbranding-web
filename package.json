@@ -15,7 +15,7 @@
     "start": "node .next/standalone/server.js",
     "start:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 node --max-semi-space-size=64 .next/standalone/server.js",
     "lint": "cross-env NODE_OPTIONS=--max-old-space-size=4096 eslint .",
-    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+    "typecheck": "cross-env NODE_OPTIONS=--max-old-space-size=4096 tsc --noEmit -p tsconfig.typecheck.json",
     "test": "vitest run",
     "test:e2e": "playwright test --project=chromium",
     "verify": "node scripts/harness/verify.mjs",
