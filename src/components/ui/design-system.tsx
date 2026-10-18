@@ -1,6 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { renderHeadline } from '@/components/ui/headline-renderer';
 
 export function BrandSection({
   className,
@@ -24,6 +23,7 @@ export function BrandSection({
   );
 }
 
+import { renderHeadline } from '@/lib/headline';
 
 export function SectionIntro({
   eyebrow,

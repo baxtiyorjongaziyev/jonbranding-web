@@ -7,13 +7,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'server-only': path.resolve(__dirname, './tests/setup/server-only-mock.ts'),
+      'server-only': path.resolve(__dirname, './test/server-only-mock.ts'),
     },
   },
   test: {
     exclude: [...configDefaults.exclude, 'tests/**', '.claude/**', '.kilo/**'],
     environment: 'jsdom',
     globals: true,
-    setupFiles: './tests/setup/setup.ts',
+    setupFiles: './test/setup.ts',
   },
 })

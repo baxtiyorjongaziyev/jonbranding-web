@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Instagram, Linkedin, Send } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { FC } from 'react';
-import { useMainSiteOrigin } from '@/hooks/use-main-site-origin';
+import { useMainSiteOrigin } from '@/lib/use-main-site-origin';
 import { getSalesFlow } from '@/lib/sales-flow';
 import { trackContactClick } from '@/lib/analytics';
 

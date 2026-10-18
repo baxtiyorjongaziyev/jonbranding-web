@@ -3,8 +3,8 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack -p 9002 -H 0.0.0.0",
-    "dev:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 next dev --webpack -p 9002 -H 0.0.0.0",
+    "dev": "next dev --webpack -p 3000 -H 0.0.0.0",
+    "dev:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 next dev --webpack -p 3000 -H 0.0.0.0",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build --webpack",
     "build:cloudflare": "opennextjs-cloudflare build",
     "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
@@ -22,9 +22,8 @@
     "verify:fast": "node scripts/harness/verify.mjs --fast",
     "harness": "node scripts/harness/verify.mjs",
     "mock:lead": "node scripts/harness/mock-lead.mjs",
-    "portfolio:sync": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --once",
-    "portfolio:watch": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --watch",
-    "prepare": "husky"
+    "portfolio:sync": "scripts/portfolio_drive_automation.py --once",
+    "portfolio:watch": "scripts/portfolio_drive_automation.py --watch"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -90,6 +89,7 @@
     "sanity": "^6.4.0",
     "server-only": "^0.0.1",
     "sharp": "^0.35.5",
+    "styled-components": "^6.4.2",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.4.3"
@@ -165,25 +165,6 @@
     "proxy-addr": "^2.0.8",
     "@fastify/busboy": "^3.2.3",
     "postcss-selector-parser": "^7.1.6"
-  },
-  "pnpm": {
-    "overrides": {
-      "adm-zip@<=0.6.0": ">=0.6.1",
-      "js-yaml@<3.15.2": "3.15.2",
-      "smol-toml@<=1.8.0": ">=1.9.1",
-      "qs@<6.16.0": ">=6.16.0",
-      "browserslist@<=4.28.6": ">=4.28.7",
-      "undici@<7.29.1": ">=7.29.1",
-      "brace-expansion@<1.1.21": "1.1.21",
-      "brace-expansion@>=2.0.0 <2.1.7": "2.1.7",
-      "brace-expansion@>=4.0.0 <5.0.12": ">=5.0.12",
-      "markdown-it@<14.3.1": ">=14.3.1",
-      "next@>=16.2.0 <16.3.6": ">=16.3.6",
-      "@grpc/grpc-js@>=1.14.0 <1.14.5": ">=1.14.5",
-      "dompurify@>=3.4.13 <3.4.16": ">=3.4.16",
-      "proxy-addr@<2.0.8": ">=2.0.8",
-      "@fastify/busboy@<3.2.2": ">=3.2.3",
-      "postcss-selector-parser@<7.1.6": ">=7.1.6"
-    }
   }
 }
+
