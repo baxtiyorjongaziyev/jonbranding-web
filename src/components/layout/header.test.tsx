@@ -10,7 +10,7 @@ vi.mock('next/navigation', () => ({
   useSearchParams: () => null,
 }));
 
-vi.mock('@/lib/use-main-site-origin', () => ({
+vi.mock('@/hooks/use-main-site-origin', () => ({
   useMainSiteOrigin: () => '',
 }));
 

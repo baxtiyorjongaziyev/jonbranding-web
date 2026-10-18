@@ -15,8 +15,7 @@
     "playwright-report",
     "test-results",
     "services",
-    "src/scripts",
-    "mcp-server",
-    "archive"
+    "scripts",
+    "mcp-server"
   ]
 }

@@ -1,5 +1,30 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-18 | Senior/Staff Codebase Detox & Refaktoring: O'lik Kodlar, 31 ta Skript, Monolitlar va Papkalar Tartibga Keltirildi (Antigravity)
+- **Foydalanuvchi murojaati:**
+  - "githubdagi kodlar tartibi senior dasturchini ishiga o'xshaydimi? shavqatsiz tanqid qilib ber" va to'liq detox rejasini tasdiqlash ("Ha").
+- **Amalga oshirilgan katta tozalash va refaktoring:**
+  1. **O'lik kodlar va ortiqcha paketlar:**
+     - `archive/` papkasi (9 ta eskirgan fayl) va `.modified` vaqtinchalik fayli o'chirildi.
+     - `styled-components` paketi (src ichida 0 marta ishlatilgan 7 ta paket) `package.json` dan chiqarib tashlandi (`npm uninstall`).
+  2. **Skriptlar tartibi:**
+     - `scripts/` ichidagi 31 ta bir martalik, eskirgan scratch skriptlar o'chirildi; faqat ishlab turgan harness va avtomatizatsiyalar qoldirildi.
+     - `src/scripts/ai-portfolio-sync/` asosiy `scripts/ai-portfolio-sync/` ga ko'chirildi (`src/scripts/` butunlay yo'q qilindi).
+  3. **Arxitektura qatlamlarini to'g'rilash:**
+     - `src/lib/headline.tsx` UI komponenti `src/components/ui/headline-renderer.tsx` ga ko'chirildi.
+     - `src/lib/use-main-site-origin.ts` custom hooki `src/hooks/use-main-site-origin.ts` ga ko'chirildi.
+     - Ildizdagi `test/` (vitest setup) va `tests/` (playwright) bitta `tests/setup/` ga birlashtirildi, `vitest.config.ts` moslashtirildi.
+  4. **Monolitlarni dekompozitsiya qilish:**
+     - 880 qatorlik `src/components/atelier/atelier-sections.tsx` ikkita mustaqil komponentga ajratildi:
+       - `src/components/atelier/at-gallery.tsx`
+       - `src/components/atelier/at-quotes.tsx`
+       - `atelier-sections.tsx` faqat toza re-export barrel sifatida qoldirildi (backwards compatibility).
+     - `home-component.tsx` da dinamik importlar alohida chunklarga ajratilib, dastlabki yuklanish hajmi optimallashtirildi.
+- **Verifikatsiya natijalari:**
+  - `npm run lint`: 0 ta xato, 0 ta ogohlantirish.
+  - `npm run typecheck`: 0 ta TypeScript xatoligi.
+  - `npm run verify:fast`: barcha 69 ta test fayli, 446/446 ta Vitest testi 100% yashil o'tdi!
+
 ## 2026-10-18 | Google AI Studio Master System Instruction va Antigravity Bridge Skilli Sozlandi (Antigravity)
 - **Foydalanuvchi murojaati:**
   - AI Studio va Antigravity'ni birgalikda samarali ishlatish bo'yicha so'rov va "Shuni sozlab ber" (Master Context va ko'prik sozlamasi tanlandi).

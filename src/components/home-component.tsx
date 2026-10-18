@@ -17,7 +17,7 @@ import SectionSkeleton from '@/components/ui/section-skeleton';
 
 // ── Below-the-fold: lazy-loaded to reduce initial JS bundle ──────────────────
 const ATGallery = dynamic(
-  () => import('@/components/atelier/atelier-sections').then((m) => m.ATGallery),
+  () => import('@/components/atelier/at-gallery').then((m) => m.ATGallery),
   { loading: () => <SectionSkeleton minHeight="min-h-[500px]" /> }
 );
 
@@ -27,7 +27,7 @@ const BeforeAfter = dynamic(
 );
 
 const ATQuotes = dynamic(
-  () => import('@/components/atelier/atelier-sections').then((m) => m.ATQuotes),
+  () => import('@/components/atelier/at-quotes').then((m) => m.ATQuotes),
   { loading: () => <SectionSkeleton minHeight="min-h-[400px]" /> }
 );
 
