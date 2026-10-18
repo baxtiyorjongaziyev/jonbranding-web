@@ -1,5 +1,20 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-18 | Google AI Studio Master System Instruction va Antigravity Bridge Skilli Sozlandi (Antigravity)
+- **Foydalanuvchi murojaati:**
+  - AI Studio va Antigravity'ni birgalikda samarali ishlatish bo'yicha so'rov va "Shuni sozlab ber" (Master Context va ko'prik sozlamasi tanlandi).
+- **Yaratilgan va Yangilangan Tizimlar:**
+  1. `docs/AI_STUDIO_SYSTEM_INSTRUCTION.md`:
+     - Google AI Studio "System Instructions" maydoni uchun tayyorlangan to'liq Master Context.
+     - Jon Branding xizmatlari va rasmiy narxlari (Neyming 10M, Logo 14M, Firma uslubi 18M, Brendbuk 24M, Qadoq 12M, STANDART 28M, PREMIUM 45M, VIP 75M).
+     - 60-30-10 ranglar (Oq `#FFFFFF`, Siyoh `#0A0B0E`, Elektr ko'k `#2554FF`), Instrument Serif, Next.js 16/React 19/Tailwind/Lucide standartlari.
+     - Antigravity Hand-off protokoli (AI Studio har bir javobida tayyor import blokini generatsiya qiladi).
+  2. `.agents/skills/ai-studio-bridge/SKILL.md` (va `.claude/skills/ai-studio-bridge/SKILL.md`):
+     - Antigravity uchun maxsus ko'prik skilli.
+     - AI Studio'dan kelgan har qanday App, UI prototip yoki kodni avtomatik ravishda modullarga (Components, i18n, Types) ajratish, anti-slop va xavfsizlik (Honeypot, Turnstile) qo'shish va `npm run verify:fast` orqali productionga kiritishni boshqaradi.
+  3. `GEMINI.md`:
+     - Yangi Master System Instruction va ko'prik skilliga to'g'ridan-to'g'ri havolalar bilan boyitildi.
+
 ## 2026-10-18 | CI Typecheck OOM (Exit code 134) va Vercel Blocked Deploy Tuzatildi (Antigravity)
 - **Sabab:**
   - `git push origin main` qilinganda GitHub Actions'dagi `npm run typecheck` Node default 2GB xotira chegarasiga urilib `FATAL ERROR: JavaScript heap out of memory` (exit code 134) bilan qulagan.
