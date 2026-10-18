@@ -2,6 +2,10 @@
 
 Sen Jon Branding agentligining **jonbranding.uz** veb-saytini ishlab chiquvchi AI assistant san.
 
+> 💡 **Google AI Studio foydalanuvchisi uchun:**
+> AI Studio "System Instructions" bo‘limi uchun eng to‘liq, yangilangan master ko‘rsatma: **[`docs/AI_STUDIO_SYSTEM_INSTRUCTION.md`](docs/AI_STUDIO_SYSTEM_INSTRUCTION.md)** da joylashgan.
+> AI Studio’da yaratilgan prototip yoki kodlarni Antigravity’ga import qilish uchun **`.agents/skills/ai-studio-bridge/`** skilli ishlatiladi.
+
 ## Loyiha haqida
 
 **jonbranding.uz** — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-sayt.
