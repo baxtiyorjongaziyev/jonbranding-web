@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -145,8 +145,10 @@ export default function LeadModal({
   const t = content.ui.modal;
   const flow = getSalesFlow(lang);
 
-  const { primary: primaryOptions, secondary: secondaryOptions } = getCoreOptions(lang);
-  const allCoreOptions = [...primaryOptions, ...secondaryOptions];
+  const { primary: primaryOptions, secondary: secondaryOptions, all: allCoreOptions } = useMemo(() => {
+    const opts = getCoreOptions(lang);
+    return { ...opts, all: [...opts.primary, ...opts.secondary] };
+  }, [lang]);
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -171,7 +173,7 @@ export default function LeadModal({
       setDone(false);
       trackEvent({ action: 'modal_open', category: 'Lead Form', label: source, source: `${source}_modal` });
     }
-  }, [open, presetService, source, content.ui.notSure]);
+  }, [open, presetService, source, content.ui.notSure, allCoreOptions]);
 
   const toggleOption = (opt: ServiceOption) => {
     setSelectedServices((prev) => {
