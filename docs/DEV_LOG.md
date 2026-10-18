@@ -1,5 +1,14 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-18 | CI Typecheck OOM (Exit code 134) va Vercel Blocked Deploy Tuzatildi (Antigravity)
+- **Sabab:**
+  - `git push origin main` qilinganda GitHub Actions'dagi `npm run typecheck` Node default 2GB xotira chegarasiga urilib `FATAL ERROR: JavaScript heap out of memory` (exit code 134) bilan qulagan.
+  - Branch protection `checks` qulagani tufayli Vercel deploy'ni bloklagan (`Deployment was blocked`). Natijada real sayt yangilanmay eski versiyada qolgan.
+- **Yechim:**
+  - `package.json` va `.github/workflows/test.yml` da `typecheck` ga `cross-env NODE_OPTIONS=--max-old-space-size=4096` qo‘shildi.
+  - Mahalliy va CI typecheck 16 soniyada 0 xatolik bilan muvaffaqiyatli o‘tdi.
+  - Vercel qayta push qilingach avtomatik yangi production buildni ishga tushiradi.
+
 ## 2026-10-18 | LeadModal: 14 talik Uzuq-Yuluq Dropdown O‘rniga Zamonaviy Multi-Select Checkboxlar (Naming, Logo, Patent) O‘rnatildi (Antigravity)
 - **Foydalanuvchi murojaati:**
   - "formada tanlaydigan qismi hunuk ishlangan va juda ko'p xizmatlar ko'rsatilgan bittasini emas chek box qilsa bo'ladimi? Naming Logo Patent"
