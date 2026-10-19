@@ -4,6 +4,7 @@ import { CaseReel, caseReelDuration, type CaseReelProps } from './CaseReel';
 
 // Studio'da ko'rish uchun namunaviy ma'lumot. Haqiqiy render `npm run render -- <slug>` orqali Sanity'dan oladi.
 const sample: CaseReelProps = {
+  lang: 'uz',
   client: 'Mijoz nomi',
   title: 'Brend transformatsiyasi',
   category: 'Logo · Brandbook',

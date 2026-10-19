@@ -17,7 +17,8 @@ Davomiylik keysdagi ma'lumotga qarab o'zgaradi (taxminan 7–20 s).
 cd services/case-reels
 npm install
 npm run studio                 # brauzerda ko'rish va tahrirlash
-npm run render -- den-aroma    # out/den-aroma.mp4
+npm run render -- den-aroma       # out/den-aroma-uz.mp4
+npm run render -- den-aroma ru    # out/den-aroma-ru.mp4 (uz | ru | en | zh)
 ```
 
 Litsenziya: Remotion 3 kishigacha bo'lgan jamoaga bepul. Undan katta bo'lsa, remotion.pro'dan kompaniya litsenziyasi kerak.

@@ -11,9 +11,10 @@ import { loadFont as loadInter } from '@remotion/google-fonts/InterTight';
 import { loadFont as loadSerif } from '@remotion/google-fonts/InstrumentSerif';
 import { loadFont as loadMono } from '@remotion/google-fonts/JetBrainsMono';
 
-const inter = loadInter().fontFamily;
-const serif = loadSerif().fontFamily;
-const mono = loadMono().fontFamily;
+// Faqat ishlatilgan uslub va subsetlar yuklanadi — render tez, font timeout xavfi kam.
+const inter = loadInter('normal', { weights: ['400', '600'], subsets: ['latin', 'latin-ext', 'cyrillic'] }).fontFamily;
+const serif = `${loadSerif('italic', { weights: ['400'], subsets: ['latin', 'latin-ext'] }).fontFamily}, Georgia, serif`; // kirill/xitoy uchun zaxira
+const mono = loadMono('normal', { weights: ['400'], subsets: ['latin', 'latin-ext', 'cyrillic'] }).fontFamily;
 
 // Atelier tokenlari (src/app/atelier.css) bilan bir xil — video sayt bilan bir brendda ko'rinadi.
 const C = {
@@ -28,7 +29,18 @@ const C = {
 // Emil Kowalski: kirishda kuchli ease-out, chiqishda tez va qisqa.
 const easeOut = Easing.bezier(0.23, 1, 0.32, 1);
 
+export type ReelLang = 'uz' | 'ru' | 'en' | 'zh';
+
+// Videodagi doimiy yozuvlar — saytning 4 tilli siyosatiga mos.
+const LABELS: Record<ReelLang, { before: string; after: string; cta: string }> = {
+  uz: { before: 'OLDIN', after: 'KEYIN', cta: 'Sizning brendingiz navbatda.' },
+  ru: { before: 'ДО', after: 'ПОСЛЕ', cta: 'Ваш бренд — следующий.' },
+  en: { before: 'BEFORE', after: 'AFTER', cta: 'Your brand is next.' },
+  zh: { before: '之前', after: '之后', cta: '下一个就是您的品牌。' },
+};
+
 export type CaseReelProps = {
+  lang: ReelLang;
   client: string;
   title: string;
   category: string;
@@ -138,7 +150,7 @@ const Hook: FC<CaseReelProps> = ({ client, title, category }) => (
 );
 
 /** "Oldin" rasmi ustidan "Keyin" rasmi chapdan o'ngga ochiladi. */
-const BeforeAfter: FC<{ before: string; after: string }> = ({ before, after }) => {
+const BeforeAfter: FC<{ before: string; after: string; lang: ReelLang }> = ({ before, after, lang }) => {
   const frame = useCurrentFrame();
   const reveal = interpolate(frame, [30, 75], [0, 100], {
     easing: easeOut,
@@ -159,10 +171,10 @@ const BeforeAfter: FC<{ before: string; after: string }> = ({ before, after }) =
   return (
     <AbsoluteFill style={{ background: C.ink }}>
       <Img src={before} style={img} />
-      <div style={{ ...tag, background: C.paper, color: C.ink }}>OLDIN</div>
+      <div style={{ ...tag, background: C.paper, color: C.ink }}>{LABELS[lang].before}</div>
       <AbsoluteFill style={{ clipPath: `inset(0 ${100 - reveal}% 0 0)` }}>
         <Img src={after} style={img} />
-        <div style={{ ...tag, background: C.accent, color: C.paper }}>KEYIN</div>
+        <div style={{ ...tag, background: C.accent, color: C.paper }}>{LABELS[lang].after}</div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -198,11 +210,11 @@ const Result: FC<{ metric: string; value: string }> = ({ metric, value }) => (
   </AbsoluteFill>
 );
 
-const Cta: FC = () => (
+const Cta: FC<{ lang: ReelLang }> = ({ lang }) => (
   <AbsoluteFill style={{ background: C.ink, padding: 90, justifyContent: 'center' }}>
     <Rise>
       <div style={{ fontFamily: serif, fontStyle: 'italic', fontSize: 110, lineHeight: 1.05, color: C.paper }}>
-        Sizning brendingiz navbatda.
+        {LABELS[lang].cta}
       </div>
     </Rise>
     <Rise delay={10}>
@@ -240,7 +252,7 @@ export const CaseReel: FC<CaseReelProps> = (props) => {
       </Sequence>
       {hasBeforeAfter(props) && (
         <Sequence {...at(BEFORE_AFTER)}>
-          <BeforeAfter before={props.beforeImage!} after={props.afterImage!} />
+          <BeforeAfter before={props.beforeImage!} after={props.afterImage!} lang={props.lang} />
         </Sequence>
       )}
       {gallery.map((src) => (
@@ -254,7 +266,7 @@ export const CaseReel: FC<CaseReelProps> = (props) => {
         </Sequence>
       )}
       <Sequence {...at(CTA)}>
-        <Cta />
+        <Cta lang={props.lang} />
       </Sequence>
     </AbsoluteFill>
   );
