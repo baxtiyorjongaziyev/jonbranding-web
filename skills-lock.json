@@ -61,6 +61,12 @@
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
     },
+    "harness-creator": {
+      "source": "walkinglabs/learn-harness-engineering",
+      "sourceType": "github",
+      "skillPath": "skills/harness-creator/SKILL.md",
+      "computedHash": "703331a042d7cbfc0f80409703c998e414b5a1da29fa67602e0d173c45abf573"
+    },
     "hyperframes": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
