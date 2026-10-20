@@ -102,7 +102,7 @@ Haftalik hisobot (qamrov, saqlash, lid)
 
 ## 10. Ochiq savollar (egasining qarori kerak)
 
-- Q1: Telegram preview qaysi chatga boradi? (Taklif: Marketing/SMM bo'limi yopiq guruhi, tasdiqlash huquqi faqat egada.) — **ochiq**
+- ~~Q1~~ **Qaror (2026-10-20):** preview Marketing bo'limining yopiq Telegram guruhiga boradi (`TELEGRAM_REELS_CHAT_ID`). Tasdiqlash/rad tugmasini faqat egasi bosa oladi (`TELEGRAM_OWNER_USER_ID` tekshiriladi); bo'lim xodimlari ko'radi va izoh qoldiradi. Instagram Business akkaunt Facebook sahifaga bog'langan — tasdiqlandi.
 - ~~Q2~~ **Qaror (2026-10-20):** Meta Graph API (Instagram Content Publishing) to'g'ridan-to'g'ri. Talab: Instagram Business akkaunt + Facebook sahifa + Meta app (`instagram_content_publish`). Limit 50 post/24 soat — yetarli.
-- ~~Q3~~ **Qaror:** kuniga 3 ta post. Aniq soatlar: taklif 09:00 / 13:00 / 19:00 (Toshkent) — egasi tasdiqlaydi. Eslatma: tasdiqlangan portfolio keyslari soni cheklangan, shuning uchun bir keysdan 4 til + har xil formatlar (F-09 shablonlari) aylantiriladi; keys takrori orasida kamida 14 kun.
+- ~~Q3~~ **Qaror:** kuniga 3 ta post. Aniq soatlar: 09:00 / 13:00 / 19:00 (Toshkent) — taklif, egasi alohida tasdiqlamagan. Eslatma: tasdiqlangan portfolio keyslari soni cheklangan, shuning uchun bir keysdan 4 til + har xil formatlar (F-09 shablonlari) aylantiriladi; keys takrori orasida kamida 14 kun.
 - ~~Q4~~ **Qaror:** faqat bepul musiqa. Meta API Instagram kutubxonasi musiqasini qo'sha olmaydi, shuning uchun trek render paytida videoga tikiladi. Manba: tijoriy foydalanishga ruxsat beruvchi royalty-free (masalan Pixabay Music, YouTube Audio Library "attribution not required"). Har trek litsenziyasi `services/case-reels/music/LICENSES.md` da yoziladi.
