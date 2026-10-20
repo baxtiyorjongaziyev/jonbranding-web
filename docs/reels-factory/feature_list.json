@@ -59,7 +59,7 @@
       "id": "F-04",
       "title": "Sanity schema: reel holati",
       "owner": "claude",
-      "status": "in_progress",
+      "status": "review",
       "deps": [],
       "files": [
         "src/sanity/schemaTypes/portfolio*.ts"
@@ -70,7 +70,7 @@
         "Mavjud keyslar buzilmaydi (optional maydonlar)"
       ],
       "note": "Shared fayl — PR'da ochiq aytilsin (CONTRIBUTING-agents.md)",
-      "lockedBy": "claude@2026-10-20"
+      "evidence": "portfolio.reel object (status none|draft|approved|scheduled|published|rejected, videos{uz,ru,en,zh}, renderedAt, scheduledAt, postUrl, note). vitest src/sanity 3/3 ✅, typecheck ✅, verify.sh ✅ (2026-10-20)"
     },
     {
       "id": "F-05",

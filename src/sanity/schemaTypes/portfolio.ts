@@ -1,5 +1,17 @@
 import { defineType, defineField } from 'sanity'
 
+export const REEL_LANGS = ['uz', 'ru', 'en', 'zh'] as const
+export const REEL_STATUSES = ['none', 'draft', 'approved', 'scheduled', 'published', 'rejected'] as const
+export type ReelStatus = (typeof REEL_STATUSES)[number]
+const REEL_STATUS_TITLES: Record<ReelStatus, string> = {
+  none: "Yo'q",
+  draft: 'Render qilindi — tasdiq kutilmoqda',
+  approved: 'Egasi tasdiqladi',
+  scheduled: 'Rejalashtirildi',
+  published: 'Chiqarildi',
+  rejected: 'Rad etildi',
+}
+
 export const portfolio = defineType({
   name: 'portfolio',
   title: 'Portfolio Loyihalar',
@@ -159,6 +171,35 @@ export const portfolio = defineType({
       name: 'publishedAt',
       title: 'Chiqarilgan sana',
       type: 'datetime',
+    }),    // Reels Zavodi (docs/reels-factory/PRD.md, F-04). Ixtiyoriy — mavjud keyslarga ta'sir qilmaydi.
+    // Holatni faqat egasi "approved"ga o'tkazadi; avtomatika faqat draft yozadi.
+    defineField({
+      name: 'reel',
+      title: 'Reels (avtomat video)',
+      type: 'object',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        {
+          name: 'status',
+          title: 'Holat',
+          type: 'string',
+          initialValue: 'none',
+          options: {
+            list: REEL_STATUSES.map((value) => ({ value, title: REEL_STATUS_TITLES[value] })),
+            layout: 'radio',
+          },
+        },
+        {
+          name: 'videos',
+          title: 'Render qilingan videolar',
+          type: 'object',
+          fields: REEL_LANGS.map((lang) => ({ name: lang, title: lang.toUpperCase(), type: 'url' })),
+        },
+        { name: 'renderedAt', title: 'Render sanasi', type: 'datetime', readOnly: true },
+        { name: 'scheduledAt', title: 'Rejadagi chiqish vaqti', type: 'datetime' },
+        { name: 'postUrl', title: 'Instagram post havolasi', type: 'url' },
+        { name: 'note', title: 'Izoh (masalan, "Qayta" sababi)', type: 'text', rows: 2 },
+      ],
     }),
   ],
   orderings: [
