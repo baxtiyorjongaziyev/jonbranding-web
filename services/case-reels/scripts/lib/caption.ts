@@ -67,14 +67,18 @@ export function numbersIn(text: string): string[] {
   return [...arabic, ...(t.match(CJK_NUMERAL) ?? [])];
 }
 
+const FACT_KEYS: readonly FactKey[] = ['client', 'title', 'category', 'city', 'industry', 'description', 'result'];
+
 function factText(facts: CaptionFacts, key: FactKey): string | undefined {
+  // LLM qaytargan kalit allowlist'da va o'z maydoni bo'lishi shart ("toString" kabi meros a'zolar emas).
+  if (!FACT_KEYS.includes(key) || !Object.prototype.hasOwnProperty.call(facts, key)) return undefined;
   const v = facts[key];
   if (!v) return undefined;
   return typeof v === 'string' ? v : `${v.metric} ${v.value} ${v.period}`;
 }
 
 export function buildPrompt(facts: CaptionFacts, lang: ReelLang): string {
-  const keys = (['client', 'title', 'category', 'city', 'industry', 'description', 'result'] as FactKey[]).filter((k) =>
+  const keys = FACT_KEYS.filter((k) =>
     factText(facts, k),
   );
   return [

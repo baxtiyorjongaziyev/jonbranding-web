@@ -35,6 +35,13 @@ describe('numbersIn', () => {
 });
 
 describe('validateDraft', () => {
+  it('rejects inherited prototype keys as fact sources', () => {
+    for (const fact of ['toString', 'constructor', '__proto__']) {
+      const d = { hook: 'Yangi brend', sentences: [{ text: 'Bu bozordagi eng yirik tarmoq.', fact }] } as unknown as Draft;
+      expect(validateDraft(d, facts).ok).toBe(false);
+    }
+  });
+
   it('faktga bog\'langan to\'g\'ri draft o\'tadi', () => {
     expect(validateDraft(good, facts)).toEqual({ ok: true });
   });
