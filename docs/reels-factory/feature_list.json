@@ -76,19 +76,21 @@
       "id": "F-05",
       "title": "Caption generator (4 til, brend ovozi)",
       "owner": "claude",
-      "status": "in_progress",
+      "status": "review",
       "deps": [
         "F-01"
       ],
       "files": [
-        "services/case-reels/scripts/caption.ts"
+        "services/case-reels/scripts/caption.ts",
+        "services/case-reels/scripts/lib/caption.ts",
+        "services/case-reels/scripts/lib/sanity.ts"
       ],
       "acceptance": [
         "Faqat Sanity faktlari promptga beriladi",
         "Test: chiqishda Sanity'da yo'q raqam bo'lsa rad etiladi",
         "BAXTIYOR_TONE_OF_VOICE.md qoidalari"
       ],
-      "lockedBy": "claude@2026-10-20"
+      "evidence": "lib/caption.ts: buildPrompt/validateCaption/makeCaption/hashtagsFor; to'qilgan raqam rad etiladi, 2 urinishdan keyin shablon. vitest 10/10 ✅, tsc ✅, verify.sh ✅ (2026-10-20). Haqiqiy Sanity/Gemini bilan ishga tushirilmadi (sandbox tarmog'i bloklangan)."
     },
     {
       "id": "F-06",

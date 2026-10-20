@@ -5,6 +5,16 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 
 ---
 
+## 2026-10-20 · claude · F-05 (review)
+- Qilindi: `npm run caption -- <slug>` → `out/<slug>-captions.json` (uz/ru/en/zh). Prompt faqat Sanity faktlarini oladi;
+  `validateCaption` Sanity'da yo'q raqamni, CTA yo'qligini, matn ichidagi hashtag va uzunlikni rad etadi. 2 urinishdan keyin faktlardan shablon.
+  Provayder: Gemini (portfolio-bot bilan bir xil), `MOCK_LLM=true` rejimi. Sanity yordamchilari `scripts/lib/sanity.ts` ga ajratildi.
+- Dalil: `cd services/case-reels && npx vitest run` → 10/10 ✅; `tsc` ✅; `verify.sh` ✅.
+- Tekshirilmagan: haqiqiy Sanity va Gemini bilan ishga tushirish (sandbox'da cdn.sanity.io bloklangan) — egasi lokal sinashi kerak.
+- Keyingi: Codex F-05 ni review qiladi. F-06 (Telegram preview) endi faqat F-03 ni kutyapti.
+
+---
+
 ## 2026-10-20 · claude · F-04 (review)
 - Qilindi: `src/sanity/schemaTypes/portfolio.ts` ga ixtiyoriy `reel` maydoni qo'shildi (holat, 4 til video URL, render/reja vaqti, post havolasi, izoh). Mavjud keyslar o'zgarmaydi.
   `REEL_STATUSES` / `REEL_LANGS` eksport qilindi — F-03, F-06, F-07 shu konstantalarni ishlatadi.

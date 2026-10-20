@@ -22,3 +22,11 @@ npm run render -- den-aroma ru    # out/den-aroma-ru.mp4 (uz | ru | en | zh)
 ```
 
 Litsenziya: Remotion 3 kishigacha bo'lgan jamoaga bepul. Undan katta bo'lsa, remotion.pro'dan kompaniya litsenziyasi kerak.
+
+## Caption (F-05)
+```bash
+npm run caption -- den-aroma   # out/den-aroma-captions.json (uz, ru, en, zh)
+```
+Caption faqat Sanity faktlaridan yoziladi. LLM (Gemini, `GEMINI_API_KEY`) Sanity'da yo'q raqam qo'shsa,
+javob rad etiladi va bir marta qayta so'raladi; yana xato bo'lsa, faktlardan tuzilgan shablon caption ishlatiladi.
+Kalit bo'lmasa yoki `MOCK_LLM=true` bo'lsa — darhol shablon.

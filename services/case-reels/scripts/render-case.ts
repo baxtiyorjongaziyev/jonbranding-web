@@ -5,10 +5,9 @@
  */
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { createClient } from '@sanity/client';
+import { approvedResult, sanity } from './lib/sanity';
 import type { CaseReelProps, ReelLang } from '../src/CaseReel';
 
-type Result = { metric?: string; value?: string; sourceUrl?: string; period?: string; approved?: boolean };
 
 const slug = process.argv[2];
 const LANGS: ReelLang[] = ['uz', 'ru', 'en', 'zh'];
@@ -23,12 +22,7 @@ if (!slug) {
   process.exit(1);
 }
 
-const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? 'h6ymmj0v',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
-  apiVersion: '2024-01-01',
-  useCdn: true,
-});
+
 
 const QUERY = `*[_type == "portfolio" && slug.current == $slug][0] {
   client, title, category,
@@ -38,18 +32,9 @@ const QUERY = `*[_type == "portfolio" && slug.current == $slug][0] {
   results
 }`;
 
-// Saytdagi qoida bilan bir xil (src/lib/portfolio-evidence.ts): faqat tasdiqlangan, manbali natija.
-const approvedResult = (results?: Result[]) =>
-  (results ?? []).find((r) => {
-    if (!r?.approved || !r.metric?.trim() || !r.value?.trim() || !r.period?.trim()) return false;
-    try {
-      return ['https:', 'http:'].includes(new URL(r.sourceUrl ?? '').protocol);
-    } catch {
-      return false;
-    }
-  });
 
-const doc = await client.fetch(QUERY, { slug });
+
+const doc = await sanity.fetch(QUERY, { slug });
 if (!doc) {
   console.error(`Keys topilmadi: ${slug}`);
   process.exit(1);
