@@ -102,7 +102,7 @@ Haftalik hisobot (qamrov, saqlash, lid)
 
 ## 10. Ochiq savollar (egasining qarori kerak)
 
-- Q1: Telegram preview qaysi chatga boradi? Shaxsiy chatmi yoki yopiq guruhmi?
-- Q2: Postiz akkaunti bormi, yoki o'rniga Meta Graph API'ni to'g'ridan-to'g'ri ishlatamizmi?
-- Q3: Kuniga nechta post chiqadi va soat nechada?
-- Q4: Musiqa: o'z kutubxonangiz bormi, yoki Epidemic/Artlist kabi xizmatmi?
+- Q1: Telegram preview qaysi chatga boradi? (Taklif: Marketing/SMM bo'limi yopiq guruhi, tasdiqlash huquqi faqat egada.) — **ochiq**
+- ~~Q2~~ **Qaror (2026-10-20):** Meta Graph API (Instagram Content Publishing) to'g'ridan-to'g'ri. Talab: Instagram Business akkaunt + Facebook sahifa + Meta app (`instagram_content_publish`). Limit 50 post/24 soat — yetarli.
+- ~~Q3~~ **Qaror:** kuniga 3 ta post. Aniq soatlar: taklif 09:00 / 13:00 / 19:00 (Toshkent) — egasi tasdiqlaydi. Eslatma: tasdiqlangan portfolio keyslari soni cheklangan, shuning uchun bir keysdan 4 til + har xil formatlar (F-09 shablonlari) aylantiriladi; keys takrori orasida kamida 14 kun.
+- ~~Q4~~ **Qaror:** faqat bepul musiqa. Meta API Instagram kutubxonasi musiqasini qo'sha olmaydi, shuning uchun trek render paytida videoga tikiladi. Manba: tijoriy foydalanishga ruxsat beruvchi royalty-free (masalan Pixabay Music, YouTube Audio Library "attribution not required"). Har trek litsenziyasi `services/case-reels/music/LICENSES.md` da yoziladi.
