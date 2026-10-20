@@ -4,57 +4,205 @@
   "verify": "bash scripts/reels-factory/verify.sh",
   "rules": "Bitta agent = bitta in_progress vazifa. Boshlashda owner/lockedBy yoziladi. Done faqat evidence bilan.",
   "features": [
-    { "id": "F-01", "title": "Bitta keysdan 4 tilda render", "owner": "claude", "status": "done", "deps": [],
-      "files": ["services/case-reels/**"],
-      "acceptance": ["npm run render -- <slug> uz|ru|en|zh MP4 beradi", "Natija sahnasi faqat tasdiqlangan natijada"],
-      "evidence": "PR #381, commit 474157b; ruscha CTA kadri render qilingan" },
-
-    { "id": "F-02", "title": "Sifat darvozasi (quality gate)", "owner": "codex", "status": "todo", "deps": ["F-01"],
-      "files": ["services/case-reels/scripts/quality-gate.ts", "services/case-reels/scripts/*.test.ts"],
-      "acceptance": ["ffprobe: 1080x1920, 30fps, 7-20s", "Galereyada 2 tadan kam rasm bo'lsa keys rad etiladi", "Unit testlar: chegaraviy holatlar"],
-      "verify": "cd services/case-reels && npx tsc --noEmit && npx vitest run" },
-
-    { "id": "F-03", "title": "Batch: Reels'i yo'q keyslarni navbat bilan render", "owner": "codex", "status": "todo", "deps": ["F-02"],
-      "files": ["services/case-reels/scripts/batch.ts"],
-      "acceptance": ["--dry-run ro'yxatni chiqaradi, hech narsa render qilmaydi", "Bir keys xato bersa qolganlari davom etadi", "out/manifest.json yoziladi"] },
-
-    { "id": "F-04", "title": "Sanity schema: reel holati", "owner": "claude", "status": "todo", "deps": [],
-      "files": ["src/sanity/schemaTypes/portfolio*.ts"],
-      "acceptance": ["reelStatus: draft|approved|scheduled|published", "reelUrls {uz,ru,en,zh}", "Mavjud keyslar buzilmaydi (optional maydonlar)"],
-      "note": "Shared fayl — PR'da ochiq aytilsin (CONTRIBUTING-agents.md)" },
-
-    { "id": "F-05", "title": "Caption generator (4 til, brend ovozi)", "owner": "claude", "status": "todo", "deps": ["F-01"],
-      "files": ["services/case-reels/scripts/caption.ts"],
-      "acceptance": ["Faqat Sanity faktlari promptga beriladi", "Test: chiqishda Sanity'da yo'q raqam bo'lsa rad etiladi", "BAXTIYOR_TONE_OF_VOICE.md qoidalari"] },
-
-    { "id": "F-06", "title": "Telegram preview + tasdiq tugmalari", "owner": "codex", "status": "todo", "deps": ["F-03", "F-05"],
-      "files": ["services/case-reels/scripts/telegram-review.ts"],
-      "acceptance": ["MOCK_TELEGRAM=true da tashqariga hech narsa ketmaydi", "Chiqar/Qayta/O'tkazib yubor callback'lari holatni yozadi"],
-      "blockedBy": "PRD Q1 (qaysi chat)" },
-
-    { "id": "F-07", "title": "Postiz orqali rejalashtirish", "owner": "antigravity", "status": "todo", "deps": ["F-06", "F-04"],
-      "files": ["services/case-reels/scripts/publish.ts"],
-      "acceptance": ["Faqat reelStatus=approved bo'lsa chiqaradi", "MOCK_POSTIZ=true rejimi", "Muvaffaqiyatda Sanity'ga scheduled + postUrl"],
-      "blockedBy": "PRD Q2, Q3" },
-
-    { "id": "F-08", "title": "Vizual QA: 4 til x 3 sahna screenshot to'plami", "owner": "antigravity", "status": "todo", "deps": ["F-01"],
-      "files": ["services/case-reels/qa/**"],
-      "acceptance": ["remotion still bilan 12 kadr", "Kirill va xitoy matni kadrdan chiqmaydi", "Natija progress.md ga rasm havolasi bilan"] },
-
-    { "id": "F-09", "title": "Shablon variantlari (Jarayon, Raqam)", "owner": "claude", "status": "todo", "deps": ["F-02"],
-      "files": ["services/case-reels/src/**"],
-      "acceptance": ["Keys maydonlariga qarab avtomatik tanlov", "Har biri uchun F-08 QA o'tadi"] },
-
-    { "id": "F-10", "title": "Haftalik hisobot (qamrov, saqlash, lid)", "owner": "codex", "status": "todo", "deps": ["F-07"],
-      "files": ["services/case-reels/scripts/report.ts"],
-      "acceptance": ["Faqat haqiqiy API ma'lumoti, taxmin yo'q", "Telegram'ga dushanba 09:00"] },
-
-    { "id": "F-11", "title": "Fon musiqasi (litsenziyasi toza)", "owner": "antigravity", "status": "todo", "deps": ["F-01"],
-      "files": ["services/case-reels/public/music/**", "services/case-reels/MUSIC_LICENSES.md"],
-      "acceptance": ["Har trek uchun litsenziya manbasi yozilgan", "So'kinishsiz", "Ovoz -14 LUFS"],
-      "blockedBy": "PRD Q4" },
-
-    { "id": "F-12", "title": "Remotion litsenziyasini tekshirish", "owner": "human", "status": "todo", "deps": [],
-      "acceptance": ["Jamoa hajmi bo'yicha bepul yoki Company litsenziya qarori"] }
+    {
+      "id": "F-01",
+      "title": "Bitta keysdan 4 tilda render",
+      "owner": "claude",
+      "status": "done",
+      "deps": [],
+      "files": [
+        "services/case-reels/**"
+      ],
+      "acceptance": [
+        "npm run render -- <slug> uz|ru|en|zh MP4 beradi",
+        "Natija sahnasi faqat tasdiqlangan natijada"
+      ],
+      "evidence": "PR #381, commit 474157b; ruscha CTA kadri render qilingan"
+    },
+    {
+      "id": "F-02",
+      "title": "Sifat darvozasi (quality gate)",
+      "owner": "codex",
+      "status": "todo",
+      "deps": [
+        "F-01"
+      ],
+      "files": [
+        "services/case-reels/scripts/quality-gate.ts",
+        "services/case-reels/scripts/*.test.ts"
+      ],
+      "acceptance": [
+        "ffprobe: 1080x1920, 30fps, 7-20s",
+        "Galereyada 2 tadan kam rasm bo'lsa keys rad etiladi",
+        "Unit testlar: chegaraviy holatlar"
+      ],
+      "verify": "cd services/case-reels && npx tsc --noEmit && npx vitest run"
+    },
+    {
+      "id": "F-03",
+      "title": "Batch: Reels'i yo'q keyslarni navbat bilan render",
+      "owner": "codex",
+      "status": "todo",
+      "deps": [
+        "F-02"
+      ],
+      "files": [
+        "services/case-reels/scripts/batch.ts"
+      ],
+      "acceptance": [
+        "--dry-run ro'yxatni chiqaradi, hech narsa render qilmaydi",
+        "Bir keys xato bersa qolganlari davom etadi",
+        "out/manifest.json yoziladi"
+      ]
+    },
+    {
+      "id": "F-04",
+      "title": "Sanity schema: reel holati",
+      "owner": "claude",
+      "status": "in_progress",
+      "deps": [],
+      "files": [
+        "src/sanity/schemaTypes/portfolio*.ts"
+      ],
+      "acceptance": [
+        "reelStatus: draft|approved|scheduled|published",
+        "reelUrls {uz,ru,en,zh}",
+        "Mavjud keyslar buzilmaydi (optional maydonlar)"
+      ],
+      "note": "Shared fayl — PR'da ochiq aytilsin (CONTRIBUTING-agents.md)",
+      "lockedBy": "claude@2026-10-20"
+    },
+    {
+      "id": "F-05",
+      "title": "Caption generator (4 til, brend ovozi)",
+      "owner": "claude",
+      "status": "todo",
+      "deps": [
+        "F-01"
+      ],
+      "files": [
+        "services/case-reels/scripts/caption.ts"
+      ],
+      "acceptance": [
+        "Faqat Sanity faktlari promptga beriladi",
+        "Test: chiqishda Sanity'da yo'q raqam bo'lsa rad etiladi",
+        "BAXTIYOR_TONE_OF_VOICE.md qoidalari"
+      ]
+    },
+    {
+      "id": "F-06",
+      "title": "Telegram preview + tasdiq tugmalari",
+      "owner": "codex",
+      "status": "todo",
+      "deps": [
+        "F-03",
+        "F-05"
+      ],
+      "files": [
+        "services/case-reels/scripts/telegram-review.ts"
+      ],
+      "acceptance": [
+        "MOCK_TELEGRAM=true da tashqariga hech narsa ketmaydi",
+        "Chiqar/Qayta/O'tkazib yubor callback'lari holatni yozadi"
+      ],
+      "blockedBy": "PRD Q1 (qaysi chat)"
+    },
+    {
+      "id": "F-07",
+      "title": "Postiz orqali rejalashtirish",
+      "owner": "antigravity",
+      "status": "todo",
+      "deps": [
+        "F-06",
+        "F-04"
+      ],
+      "files": [
+        "services/case-reels/scripts/publish.ts"
+      ],
+      "acceptance": [
+        "Faqat reelStatus=approved bo'lsa chiqaradi",
+        "MOCK_POSTIZ=true rejimi",
+        "Muvaffaqiyatda Sanity'ga scheduled + postUrl"
+      ],
+      "blockedBy": "PRD Q2, Q3"
+    },
+    {
+      "id": "F-08",
+      "title": "Vizual QA: 4 til x 3 sahna screenshot to'plami",
+      "owner": "antigravity",
+      "status": "todo",
+      "deps": [
+        "F-01"
+      ],
+      "files": [
+        "services/case-reels/qa/**"
+      ],
+      "acceptance": [
+        "remotion still bilan 12 kadr",
+        "Kirill va xitoy matni kadrdan chiqmaydi",
+        "Natija progress.md ga rasm havolasi bilan"
+      ]
+    },
+    {
+      "id": "F-09",
+      "title": "Shablon variantlari (Jarayon, Raqam)",
+      "owner": "claude",
+      "status": "todo",
+      "deps": [
+        "F-02"
+      ],
+      "files": [
+        "services/case-reels/src/**"
+      ],
+      "acceptance": [
+        "Keys maydonlariga qarab avtomatik tanlov",
+        "Har biri uchun F-08 QA o'tadi"
+      ]
+    },
+    {
+      "id": "F-10",
+      "title": "Haftalik hisobot (qamrov, saqlash, lid)",
+      "owner": "codex",
+      "status": "todo",
+      "deps": [
+        "F-07"
+      ],
+      "files": [
+        "services/case-reels/scripts/report.ts"
+      ],
+      "acceptance": [
+        "Faqat haqiqiy API ma'lumoti, taxmin yo'q",
+        "Telegram'ga dushanba 09:00"
+      ]
+    },
+    {
+      "id": "F-11",
+      "title": "Fon musiqasi (litsenziyasi toza)",
+      "owner": "antigravity",
+      "status": "todo",
+      "deps": [
+        "F-01"
+      ],
+      "files": [
+        "services/case-reels/public/music/**",
+        "services/case-reels/MUSIC_LICENSES.md"
+      ],
+      "acceptance": [
+        "Har trek uchun litsenziya manbasi yozilgan",
+        "So'kinishsiz",
+        "Ovoz -14 LUFS"
+      ],
+      "blockedBy": "PRD Q4"
+    },
+    {
+      "id": "F-12",
+      "title": "Remotion litsenziyasini tekshirish",
+      "owner": "human",
+      "status": "todo",
+      "deps": [],
+      "acceptance": [
+        "Jamoa hajmi bo'yicha bepul yoki Company litsenziya qarori"
+      ]
+    }
   ]
 }
