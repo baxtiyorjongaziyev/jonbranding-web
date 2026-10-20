@@ -46,6 +46,7 @@ Barcha agentlar bir xil prompt bilan ishga tushiriladi, faqat `<AGENT>` o'zgarad
 
 - **Claude Code:** repoda shu promptni yozing. `/loop` bilan doimiy aylanishga qo'yish mumkin.
 - **Codex:** ChatGPT Codex → repo → shu prompt. Yoki PR izohida `@codex` + prompt.
+  Joriy topshiriq: [briefs/codex-F02-F03-F06.md](briefs/codex-F02-F03-F06.md).
 - **Antigravity:** workspace'da repo ochiladi, Agent Manager'ga shu prompt beriladi.
 
 ## Konflikt bo'lsa
