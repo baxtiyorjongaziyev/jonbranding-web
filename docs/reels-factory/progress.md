@@ -17,7 +17,7 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 
 ## 2026-10-20 · claude · F-04 (review)
 - Qilindi: `src/sanity/schemaTypes/portfolio.ts` ga ixtiyoriy `reel` maydoni qo'shildi (holat, 4 til video URL, render/reja vaqti, post havolasi, izoh). Mavjud keyslar o'zgarmaydi.
-  `REEL_STATUSES` / `REEL_LANGS` eksport qilindi — F-03, F-06, F-07 shu konstantalarni ishlatadi.
+  `REEL_STATUSES` / `REEL_LANGS` — `src/lib/reels.ts` (bog'liqliksiz); F-03, F-06, F-07 shuni ishlatadi.
 - Dalil: `npx vitest run src/sanity` → 3/3 ✅; `npm run typecheck` ✅; `bash scripts/reels-factory/verify.sh` ✅.
 - Shared fayl: `portfolio.ts` (Sanity schema) — CONTRIBUTING-agents.md bo'yicha PR'da aytildi.
 - Keyingi: Codex F-04 ni review qiladi; Codex F-02 (sifat darvozasi) ni boshlashi mumkin.

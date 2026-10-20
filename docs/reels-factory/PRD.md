@@ -53,7 +53,7 @@ Caption generator (brend ovozi, 4 til, CTA, hashtag)
    │  3. Telegram'ga preview → egasi tasdig'i
    ▼
 Postiz (reja) ──► Instagram Reels / Telegram kanal
-   │  4. Holat Sanity'ga yoziladi: reelStatus, publishedAt, postUrl
+   │  4. Holat Sanity'ga yoziladi: reel.status, reel.publishedAt, reel.postUrl
    ▼
 Haftalik hisobot (qamrov, saqlash, lid)
 ```
@@ -70,7 +70,7 @@ Haftalik hisobot (qamrov, saqlash, lid)
 | FR-6 | Caption: 4 tilda, `docs/BAXTIYOR_TONE_OF_VOICE.md` uslubida, CTA va 5–8 hashtag | P0 |
 | FR-7 | Telegram preview: video, caption va "Chiqar / Qayta / O'tkazib yubor" tugmalari | P0 |
 | FR-8 | Faqat tasdiqdan keyin Postiz'ga reja qo'shiladi | P0 |
-| FR-9 | Sanity'da `reel` holati saqlanadi: draft → approved → scheduled → published | P1 |
+| FR-9 | Sanity: `portfolio.reel.status` (draft → approved → scheduled → published), `reel.videos.<til>`, `reel.publishedAt`; konstantalar `src/lib/reels.ts` | P1 |
 | FR-10 | Fon musiqasi: litsenziyasi toza kutubxonadan, so'kinishsiz, beat'ga mos kesish | P2 |
 | FR-11 | Shablon variantlari: "Oldin/Keyin", "Jarayon", "Raqam" — keysga qarab avtomatik tanlanadi | P2 |
 

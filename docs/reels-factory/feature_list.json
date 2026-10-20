@@ -62,15 +62,17 @@
       "status": "review",
       "deps": [],
       "files": [
-        "src/sanity/schemaTypes/portfolio*.ts"
+        "src/sanity/schemaTypes/portfolio.ts",
+        "src/lib/reels.ts"
       ],
       "acceptance": [
-        "reelStatus: draft|approved|scheduled|published",
-        "reelUrls {uz,ru,en,zh}",
+        "reel.status: none|draft|approved|scheduled|published|rejected",
+        "reel.videos {uz,ru,en,zh}, reel.publishedAt, reel.postUrl",
+        "Konstantalar src/lib/reels.ts (bog'liqliksiz)",
         "Mavjud keyslar buzilmaydi (optional maydonlar)"
       ],
       "note": "Shared fayl — PR'da ochiq aytilsin (CONTRIBUTING-agents.md)",
-      "evidence": "portfolio.reel object (status none|draft|approved|scheduled|published|rejected, videos{uz,ru,en,zh}, renderedAt, scheduledAt, postUrl, note). vitest src/sanity 3/3 ✅, typecheck ✅, verify.sh ✅ (2026-10-20)"
+      "evidence": "portfolio.reel object (status none|draft|approved|scheduled|published|rejected, videos{uz,ru,en,zh}, renderedAt, scheduledAt, postUrl, note). vitest src/sanity 3/3 ✅, typecheck ✅, verify.sh ✅ (2026-10-20) | Codex review (3 topilma) tuzatildi: reel.publishedAt, konstantalar src/lib/reels.ts, hujjat kontrakti reel.* ga moslandi."
     },
     {
       "id": "F-05",
@@ -123,9 +125,9 @@
         "services/case-reels/scripts/publish.ts"
       ],
       "acceptance": [
-        "Faqat reelStatus=approved bo'lsa chiqaradi",
+        "Faqat reel.status=approved bo'lsa chiqaradi",
         "MOCK_POSTIZ=true rejimi",
-        "Muvaffaqiyatda Sanity'ga scheduled + postUrl"
+        "Muvaffaqiyatda reel.status=scheduled + reel.postUrl; chiqqanda reel.publishedAt"
       ],
       "blockedBy": "PRD Q2, Q3"
     },
