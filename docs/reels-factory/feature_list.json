@@ -76,7 +76,7 @@
       "id": "F-05",
       "title": "Caption generator (4 til, brend ovozi)",
       "owner": "claude",
-      "status": "todo",
+      "status": "in_progress",
       "deps": [
         "F-01"
       ],
@@ -87,7 +87,8 @@
         "Faqat Sanity faktlari promptga beriladi",
         "Test: chiqishda Sanity'da yo'q raqam bo'lsa rad etiladi",
         "BAXTIYOR_TONE_OF_VOICE.md qoidalari"
-      ]
+      ],
+      "lockedBy": "claude@2026-10-20"
     },
     {
       "id": "F-06",
