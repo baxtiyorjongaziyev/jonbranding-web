@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { buildPrompt, hashtagsFor, makeCaption, numbersIn, templateCaption, validateCaption, type CaptionFacts } from './caption';
+import {
+  CTA, MAX_CAPTION_CHARS, assemble, buildPrompt, hashtagsFor, makeCaption, numbersIn, parseDraft,
+  templateCaption, validateDraft, type CaptionFacts, type Draft,
+} from './caption';
 
 const facts: CaptionFacts = {
   client: 'Den Aroma',
@@ -10,59 +13,104 @@ const facts: CaptionFacts = {
   result: { metric: 'Sotuv', value: '+40%', period: '2025 Q1' },
   url: 'https://jonbranding.uz/uz/portfolio/den-aroma',
 };
-const cta = "Brendingiz ham shunday bo'lishini xohlaysizmi? Bepul audit — havola profilda";
+const good: Draft = {
+  hook: "Qahva do'koni qanday qilib esda qoladigan bo'ladi?",
+  sentences: [
+    { text: 'Den Aroma bilan brendni yangiladik.', fact: 'client' },
+    { text: "Sotuv 2025 Q1 da +40% o'sdi.", fact: 'result' },
+  ],
+};
+const json = (d: unknown) => JSON.stringify(d);
 
 describe('numbersIn', () => {
-  it('bo\'shliq va vergulli raqamlarni normallashtiradi', () => {
-    expect(numbersIn('1 200 mijoz, 40% o\'sish, 3.5 oy')).toEqual(['1200', '40', '3.5']);
+  it('guruhlash va o\'nlikni ajratadi', () => {
+    expect(numbersIn('1 200 va 1,200')).toEqual(['1200', '1200']);
+    expect(numbersIn('3,5% va 3.5%')).toEqual(['3.5', '3.5']);
+    expect(numbersIn('3,5%')).not.toContain('35');
+  });
+  it('to\'liq kenglik va xitoycha raqamlarni ko\'radi', () => {
+    expect(numbersIn('５００家')).toEqual(['500']);
+    expect(numbersIn('五百家门店')).toEqual(['五百']);
   });
 });
 
-describe('validateCaption', () => {
-  it('faktdagi raqam va CTA bo\'lsa o\'tadi', () => {
-    expect(validateCaption(`Den Aroma sotuvi +40% oshdi (2025 Q1).\n\n${cta}`, facts, 'uz')).toEqual({ ok: true });
+describe('validateDraft', () => {
+  it('faktga bog\'langan to\'g\'ri draft o\'tadi', () => {
+    expect(validateDraft(good, facts)).toEqual({ ok: true });
   });
-  it('to\'qilgan raqamni rad etadi', () => {
-    const r = validateCaption(`500 dan ortiq mijoz bilan ishladik.\n\n${cta}`, facts, 'uz');
-    expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.reasons[0]).toContain('500');
+  it('boshqa faktdagi raqamni qayta ishlatishni rad etadi (40% → "40 filial")', () => {
+    const d: Draft = { hook: 'Salom', sentences: [{ text: '40 ta filial ochildi.', fact: 'client' }] };
+    expect(validateDraft(d, facts).ok).toBe(false);
   });
-  it('CTA yo\'q bo\'lsa rad etadi', () => {
-    expect(validateCaption('Den Aroma uchun ish.', facts, 'uz').ok).toBe(false);
+  it('xitoycha to\'qilgan raqamni rad etadi', () => {
+    const d: Draft = { hook: '你好', sentences: [{ text: '五百家门店。', fact: 'client' }] };
+    expect(validateDraft(d, facts).ok).toBe(false);
   });
-  it('matn ichidagi hashtagni rad etadi', () => {
-    expect(validateCaption(`Ish #logo\n\n${cta}`, facts, 'uz').ok).toBe(false);
+  it('mavjud bo\'lmagan faktga bog\'langan jumlani rad etadi', () => {
+    const noCity = { ...facts, city: undefined };
+    const d: Draft = { hook: 'Salom', sentences: [{ text: 'Toshkentda.', fact: 'city' }] };
+    expect(validateDraft(d, noCity).ok).toBe(false);
+  });
+  it('ilmoqdagi raqam, kirill/xitoy hashtag va ko\'p jumlani rad etadi', () => {
+    expect(validateDraft({ ...good, hook: '500 mijoz!' }, facts).ok).toBe(false);
+    expect(validateDraft({ ...good, hook: 'Бренд #брендинг' }, facts).ok).toBe(false);
+    expect(validateDraft({ ...good, hook: '品牌 #品牌' }, facts).ok).toBe(false);
+    expect(validateDraft({ ...good, sentences: [...good.sentences, good.sentences[0]] }, facts).ok).toBe(false);
   });
 });
 
 describe('makeCaption', () => {
-  it('LLM to\'qisa — shablonga qaytadi, 2 marta urinadi', async () => {
+  it('to\'g\'ri JSON → llm, CTA bilan', async () => {
+    const c = await makeCaption(facts, 'uz', async () => json(good));
+    expect(c.source).toBe('llm');
+    expect(c.text.endsWith(CTA.uz)).toBe(true);
+    expect(c.text).toBe(assemble(good, 'uz'));
+  });
+  it('to\'qilgan javob → 2 urinish → shablon', async () => {
     let calls = 0;
-    const c = await makeCaption(facts, 'uz', async () => { calls++; return `1000% o'sish!\n\n${cta}`; });
+    const c = await makeCaption(facts, 'uz', async () => { calls++; return json({ hook: '1000% o\'sish', sentences: [] }); });
     expect(calls).toBe(2);
     expect(c.source).toBe('template');
-    expect(validateCaption(c.text, facts, 'uz')).toEqual({ ok: true });
   });
-  it('to\'g\'ri LLM javobini qabul qiladi', async () => {
-    const c = await makeCaption(facts, 'uz', async () => `Den Aroma yangi ko'rinishda.\n\n${cta}`);
-    expect(c.source).toBe('llm');
+  it('provayder xatosi CLI\'ni yiqitmaydi — shablonga qaytadi', async () => {
+    const c = await makeCaption(facts, 'uz', async () => { throw new Error('Gemini 429'); });
+    expect(c.source).toBe('template');
+    expect(c.errors.join()).toContain('429');
   });
-  it('generatorsiz shablon 4 tilda ham tekshiruvdan o\'tadi', () => {
-    for (const lang of ['uz', 'ru', 'en', 'zh'] as const) {
-      expect(validateCaption(templateCaption(facts, lang), facts, lang)).toEqual({ ok: true });
-    }
+  it('JSON bo\'lmagan javob → shablon', async () => {
+    expect((await makeCaption(facts, 'uz', async () => 'oddiy matn')).source).toBe('template');
   });
 });
 
-describe('hashtagsFor / buildPrompt', () => {
-  it('8 tadan oshmaydi va soha/shaharni qo\'shadi', () => {
-    const tags = hashtagsFor(facts);
-    expect(tags.length).toBeLessThanOrEqual(8);
-    expect(tags).toEqual(expect.arrayContaining(['#jonbranding', '#qahva', '#toshkent']));
+describe('templateCaption', () => {
+  it('category bo\'lmasa uni to\'qimaydi', () => {
+    expect(templateCaption({ ...facts, category: undefined }, 'uz').text).not.toContain('Branding');
   });
-  it('prompt faktlarni va taqiqni o\'z ichiga oladi', () => {
-    const p = buildPrompt(facts, 'ru');
-    expect(p).toContain('Den Aroma');
-    expect(p).toContain("QO'SHMA");
+  it('uz\'dan boshqa tillarda tarjima qilinmagan faktlar belgilanadi', () => {
+    expect(templateCaption(facts, 'uz').needsReview).toEqual([]);
+    expect(templateCaption(facts, 'ru').needsReview).toContain('template-untranslated-facts');
+    expect(templateCaption(facts, 'ru').text).toContain('Проект:');
+  });
+  it('juda uzun faktlarda ham limitdan oshmaydi va CTA saqlanadi', () => {
+    const long = { ...facts, title: 'x'.repeat(5000), client: 'y'.repeat(5000) };
+    const t = templateCaption(long, 'uz').text;
+    expect(t.length).toBeLessThanOrEqual(MAX_CAPTION_CHARS);
+    expect(t.endsWith(CTA.uz)).toBe(true);
+  });
+});
+
+describe('hashtagsFor / parseDraft / buildPrompt', () => {
+  it('ixtiyoriy maydonlar bo\'lmasa ham 5–8 hashtag', () => {
+    const t = hashtagsFor({ ...facts, city: undefined, industry: undefined });
+    expect(t.length).toBeGreaterThanOrEqual(5);
+    expect(hashtagsFor(facts).length).toBeLessThanOrEqual(8);
+  });
+  it('```json``` o\'ramini ochadi', () => {
+    expect(parseDraft('```json\n' + json(good) + '\n```')).toEqual(good);
+  });
+  it('promptda faqat mavjud fakt kalitlari', () => {
+    const p = buildPrompt({ ...facts, city: undefined }, 'ru');
+    expect(p).toContain('"client"');
+    expect(p).not.toContain('"city" |');
   });
 });

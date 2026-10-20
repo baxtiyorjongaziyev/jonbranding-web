@@ -92,7 +92,7 @@
         "Test: chiqishda Sanity'da yo'q raqam bo'lsa rad etiladi",
         "BAXTIYOR_TONE_OF_VOICE.md qoidalari"
       ],
-      "evidence": "lib/caption.ts: buildPrompt/validateCaption/makeCaption/hashtagsFor; to'qilgan raqam rad etiladi, 2 urinishdan keyin shablon. vitest 10/10 ✅, tsc ✅, verify.sh ✅ (2026-10-20). Haqiqiy Sanity/Gemini bilan ishga tushirilmadi (sandbox tarmog'i bloklangan)."
+      "evidence": "Codex review (9 topilma) tuzatildi: JSON draft (hook + ≤2 faktga bog'langan jumla), jumla raqamlari faqat o'z faktidan, CJK/to'liq kenglik raqamlar, o'nlik/minglik ajratish, unicode hashtag, provayder xatosida shablon, category to'qilmaydi, ≥5 hashtag, shablon uzunligi chegaralangan, tarjima qilinmagan shablon needsReview. vitest 17/17 ✅, tsc ✅ (2026-10-20)."
     },
     {
       "id": "F-06",

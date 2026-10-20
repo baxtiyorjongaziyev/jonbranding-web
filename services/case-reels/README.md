@@ -27,6 +27,8 @@ Litsenziya: Remotion 3 kishigacha bo'lgan jamoaga bepul. Undan katta bo'lsa, rem
 ```bash
 npm run caption -- den-aroma   # out/den-aroma-captions.json (uz, ru, en, zh)
 ```
-Caption faqat Sanity faktlaridan yoziladi. LLM (Gemini, `GEMINI_API_KEY`) Sanity'da yo'q raqam qo'shsa,
-javob rad etiladi va bir marta qayta so'raladi; yana xato bo'lsa, faktlardan tuzilgan shablon caption ishlatiladi.
-Kalit bo'lmasa yoki `MOCK_LLM=true` bo'lsa — darhol shablon.
+LLM (Gemini, `GEMINI_API_KEY`) erkin matn emas, JSON qaytaradi: ilmoq (raqamsiz) + ko'pi bilan 2 jumla,
+har biri bitta Sanity faktiga bog'langan. Jumladagi raqam o'sha faktda bo'lmasa (xitoycha va to'liq kenglikdagi
+raqamlar ham), javob rad etiladi; 2 urinishdan keyin yoki provayder xatosida — faktlardan shablon.
+Shablon uz'dan boshqa tillarda faktlarni tarjima qilmaydi va `needsReview` bilan belgilanadi.
+**Har qanday caption — draft.** Egasi Telegram'da tasdiqlamaguncha chiqmaydi (F-06).

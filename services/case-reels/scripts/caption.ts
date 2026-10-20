@@ -28,7 +28,7 @@ const r = approvedResult(doc.results);
 const facts: CaptionFacts = {
   client: doc.client ?? doc.title,
   title: doc.title,
-  category: doc.category ?? 'Branding',
+  category: doc.category ?? undefined,
   city: doc.city ?? undefined,
   industry: doc.industry ?? undefined,
   description: typeof doc.description === 'string' ? doc.description.slice(0, 600) : undefined,
@@ -46,5 +46,9 @@ for (const lang of langs) captions.push(await makeCaption(facts, lang, generate)
 
 mkdirSync('out', { recursive: true });
 writeFileSync(`out/${slug}-captions.json`, JSON.stringify({ slug, facts, captions }, null, 2));
-for (const c of captions) console.log(`[${c.lang}] ${c.source}`);
+for (const c of captions) {
+  const flags = [...c.needsReview, ...c.errors].join('; ');
+  console.log(`[${c.lang}] ${c.source}${flags ? ` — ${flags}` : ''}`);
+}
+console.log('ℹ️  Bu draft. Egasi tasdiqlamaguncha hech narsa chiqmaydi (F-06).');
 console.log(`Tayyor: out/${slug}-captions.json`);
