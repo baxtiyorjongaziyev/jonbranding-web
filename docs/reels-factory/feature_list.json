@@ -78,7 +78,7 @@
       "id": "F-05",
       "title": "Caption generator (4 til, brend ovozi)",
       "owner": "claude",
-      "status": "review",
+      "status": "done",
       "deps": [
         "F-01"
       ],

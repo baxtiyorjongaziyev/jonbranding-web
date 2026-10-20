@@ -30,3 +30,9 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 - Dalil: `npx tsc --noEmit` ✅; ruscha CTA kadri `remotion still` bilan render qilindi; PR #381 CI yashil (CodeQL repo sozlamasi sababli qizil).
 - Keyingi: F-02 (codex) va F-04 (claude) parallel boshlanishi mumkin, chunki ular bir-biriga bog'liq emas.
 - Bloklar: PRD §10 dagi Q1–Q4 egasidan javob kutyapti.
+
+## 2026-10-20 — F-05 done
+- Codex review: 9 + 1 topilma tuzatildi (137e189, 7113f40). Oxirgi review (7113f40): "no major issues".
+- CI 7e7d90f da yashil (typecheck, lint, test, build, npm audit, GitGuardian).
+- CodeQL workflow egasi qarori bilan olib tashlandi (private repoda code scanning yo'q).
+- Keyingi: F-09 (Claude, F-02 dan keyin), F-02/F-03 (Codex), F-06 egasi qarorlarini kutadi (PRD §10).
