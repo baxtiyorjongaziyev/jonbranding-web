@@ -121,7 +121,7 @@
     "postcss": "8.5.23",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
-    "vite": "^8.0.16",
+    "vite": "^8.2.4",
     "vitest": "^5.0.0",
     "wrangler": "^4.131.1"
   },
@@ -152,7 +152,7 @@
     "brace-expansion@^1.0.0": "^1.1.21",
     "brace-expansion@^2.0.0": "^2.1.7",
     "brace-expansion@^5.0.0": "^5.0.12",
-    "markdown-it": "^14.3.1",
+    "markdown-it": "^14.3.3",
     "@grpc/grpc-js": "^1.14.5",
     "dompurify": "^3.4.16",
     "ws": "^8.21.0",

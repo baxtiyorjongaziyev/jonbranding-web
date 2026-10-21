@@ -663,7 +663,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 @media (max-width: 600px) {
   .atelier-theme .gal-grid {
- grid-template-columns: repeat(2, 1fr);   }
+ grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px;   }
 }
 .atelier-theme .gal-tile {
 
@@ -677,8 +677,11 @@ html[data-theme="dark"] body:has(.atelier-home) {
 }
 .atelier-theme .gal-tile:hover {
  transform: translateY(-4px); }
+/* Rasm yuqorida, nom va natija pastdagi alohida qatorda — matn rasmni to'smaydi. */
+.atelier-theme .gal-tile {
+ display: flex; flex-direction: column; }
 .atelier-theme .gal-tile .body {
- position: absolute; inset: 0; }
+ position: relative; flex: 1 1 auto; min-height: 0; }
 .atelier-theme .gal-tile .head {
 
   position: absolute;
@@ -695,19 +698,23 @@ html[data-theme="dark"] body:has(.atelier-home) {
  color: rgba(14,16,21,.55); }
 .atelier-theme .gal-tile .foot {
 
-  position: absolute;
-  left: 16px; right: 16px; bottom: 16px;
+  position: relative;
+  flex: 0 0 auto;
+  padding: 12px 16px 14px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
   z-index: 3;
 }
 .atelier-theme .gal-tile .foot .name {
 
   font-family: var(--font-serif), serif;
   font-style: italic;
-  font-size: clamp(20px, 2vw, 32px);
-  line-height: 1;
-  color: rgba(255,255,255,.96);
-  text-shadow: 0 2px 6px rgba(0,0,0,.25);
-  margin-bottom: 6px;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.1;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .atelier-theme .gal-tile .foot.dark .name {
  color: var(--ink); text-shadow: none; }
@@ -717,17 +724,17 @@ html[data-theme="dark"] body:has(.atelier-home) {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: rgba(255,255,255,.7);
-  border-top: 1px solid rgba(255,255,255,.18);
-  padding-top: 10px;
-  margin-top: 10px;
+  color: var(--ink-2);
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  margin-top: 8px;
 }
 .atelier-theme .gal-tile .foot.dark .meta {
  color: var(--ink-2); border-top-color: var(--line); }
 .atelier-theme .gal-tile .foot .meta .res {
 
   font-weight: 600;
-  color: #fff;
+  color: var(--accent);
 }
 .atelier-theme .gal-tile .foot.dark .meta .res {
  color: var(--accent); }

@@ -158,6 +158,9 @@ const nextConfig = {
       { source: '/:lang(ru|en|zh)/tariflar', destination: '/:lang/narxlar', permanent: true },
       // Eski slaydli taqdimot `/credentials` bilan almashtirildi.
       { source: '/presentation', destination: '/credentials', permanent: true },
+      // Patent kalkulyatoriga qisqa manzillar (reklama, Telegram, QR uchun).
+      { source: '/:uz(uz)?/:slug(patent-kalkulyator|kalkulyator|calculator)', destination: '/xizmatlar/patent-kalkulyatori', permanent: true },
+      { source: '/:lang(ru|en|zh)/:slug(patent-kalkulyator|kalkulyator|calculator)', destination: '/:lang/xizmatlar/patent-kalkulyatori', permanent: true },
       { source: '/:uz(uz)?/patent-narxi-hisoblagich', destination: '/xizmatlar/patent-kalkulyatori', permanent: true },
       { source: '/:lang(ru|en|zh)/patent-narxi-hisoblagich', destination: '/:lang/xizmatlar/patent-kalkulyatori', permanent: true },
       { source: '/:lang(ru|en|zh)/presentation', destination: '/:lang/credentials', permanent: true },

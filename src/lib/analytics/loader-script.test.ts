@@ -18,6 +18,15 @@ const reset = () => {
 beforeEach(reset);
 afterEach(reset);
 
+const isFacebookPixel = (src: string | null) => {
+  if (!src) return false;
+  try {
+    return new URL(src, 'https://jonbranding.uz').hostname === 'connect.facebook.net';
+  } catch {
+    return false;
+  }
+};
+
 describe('analytics loader script', () => {
   it('loads nothing before consent', () => {
     run();
@@ -62,7 +71,7 @@ describe('analytics loader script', () => {
     const nonProdSrcs = Array.from(document.head.querySelectorAll('script[src]'), (s) =>
       s.getAttribute('src'),
     );
-    expect(nonProdSrcs.some((src) => src?.includes('connect.facebook.net'))).toBe(false);
+    expect(nonProdSrcs.some((src) => isFacebookPixel(src))).toBe(false);
     expect(typeof window.fbq).toBe('function'); // safe noop
 
     // Production host
@@ -78,6 +87,6 @@ describe('analytics loader script', () => {
     const prodSrcs = Array.from(document.head.querySelectorAll('script[src]'), (s) =>
       s.getAttribute('src'),
     );
-    expect(prodSrcs.some((src) => src?.includes('connect.facebook.net'))).toBe(true);
+    expect(prodSrcs.some((src) => isFacebookPixel(src))).toBe(true);
   });
 });

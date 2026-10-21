@@ -60,6 +60,12 @@ Eski manzillar `/tariflar` va `/presentation` 308 bilan yo'naltiriladi.
 **Tegishdan oldin `docs/NARXLAR.md` ni o'qing** — barcha narxlar, paket tarkibi,
 kafolatlar va egasining uslub talablari o'sha yerda.
 
+## Agentlik raqamlari
+
+Yil (2018-yil 27-noyabrdan), tajriba, mijoz (600+) va loyiha (1200+) soni — faqat
+`src/lib/company-facts.ts` dan. Lug'atda `{{years}}`, `{{clients}}`, `{{projects}}`, `{{founded}}`.
+**Batafsil: `docs/FAKTLAR.md`.**
+
 ## Arxitektura qarorlari (sessiya xotirasi)
 Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 

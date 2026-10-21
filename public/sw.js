@@ -56,7 +56,8 @@ self.addEventListener('fetch', (event) => {
   if (
     !url.protocol.startsWith('http') ||
     url.pathname.startsWith('/api/') ||
-    url.hostname.includes('sanity.io') ||
+    url.hostname === 'sanity.io' ||
+    url.hostname.endsWith('.sanity.io') ||
     url.hostname.includes('google') ||
     url.hostname.includes('amplitude') ||
     url.hostname.includes('yandex') ||

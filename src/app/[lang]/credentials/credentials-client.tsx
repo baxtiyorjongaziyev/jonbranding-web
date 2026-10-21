@@ -25,6 +25,7 @@ type Props = {
 };
 
 import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, PAPER, rise, serif, Slide, stagger } from '@/components/credentials/deck';
+import { clientsLabel, projectsLabel } from '@/lib/company-facts';
 
 function CaseImageRotator({
   images,
@@ -154,8 +155,8 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
         <motion.div variants={rise} className="mt-14 flex flex-wrap gap-x-14 gap-y-7">
           {[
             ['9', 'yil bozorda'],
-            ['500+', 'mijoz'],
-            ['1000+', 'loyiha'],
+            [clientsLabel, 'mijoz'],
+            [projectsLabel, 'loyiha'],
           ].map(([value, label]) => (
             <div key={label}>
               <p className="text-4xl sm:text-5xl" style={{ ...serif, ...nums, color: '#fff', fontWeight: 400 }}>

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import Image from 'next/image';
 import AtRatings from '@/components/sections/at-ratings';
+import { FOUNDED_YEAR, clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
@@ -10,7 +11,7 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: 'Asoschi va Bosh Dizayner',
     founderQuote: "Brend — bu faqat ko'rinish emas. Bu biznesingiz nima haqida gapirishi. Biz shu gapni to'g'ri shakllantiramiz.",
-    founderSince: '2019 yildan',
+    founderSince: `${FOUNDED_YEAR} yildan`,
     sectionN: '§ 01',
     label: 'Haqimizda',
     heading: 'Brendning',
@@ -18,9 +19,9 @@ const t = {
     headingEnd: 'biz quramiz.',
     subtext: "Markaziy Osiyodagi premium brending agentligi. Biznes identifikatsiyasini ishlab chiqish — bu faqat dizayn emas, bu aniq strategiya.",
     stats: [
-      { n: '9+', l: 'Yil bozorda' },
-      { n: '500+', l: 'Mijozlar' },
-      { n: '240+', l: 'Loyiha tugallandi' },
+      { n: yearsLabel(), l: 'Yil bozorda' },
+      { n: clientsLabel, l: 'Mijozlar' },
+      { n: projectsLabel, l: 'Loyiha tugallandi' },
       { n: '4', l: 'Til (uz/ru/en/zh)' },
     ],
     missionLabel: 'Missiyamiz',
@@ -49,7 +50,7 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: 'Основатель и Главный Дизайнер',
     founderQuote: 'Бренд — это не просто внешний вид. Это то, о чём говорит ваш бизнес. Мы правильно формулируем эту речь.',
-    founderSince: 'С 2017 года',
+    founderSince: `С ${FOUNDED_YEAR} года`,
     sectionN: '§ 01',
     label: 'О нас',
     heading: 'Силу',
@@ -57,9 +58,9 @@ const t = {
     headingEnd: 'строим мы.',
     subtext: 'Премиум брендинговое агентство Центральной Азии. Разработка бренд-идентичности — это не просто дизайн, это стратегия.',
     stats: [
-      { n: '9+', l: 'Лет на рынке' },
-      { n: '500+', l: 'Клиентов' },
-      { n: '240+', l: 'Завершено проектов' },
+      { n: yearsLabel(), l: 'Лет на рынке' },
+      { n: clientsLabel, l: 'Клиентов' },
+      { n: projectsLabel, l: 'Завершено проектов' },
       { n: '4', l: 'Языка (uz/ru/en/zh)' },
     ],
     missionLabel: 'Наша миссия',
@@ -88,7 +89,7 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: 'Founder & Chief Designer',
     founderQuote: "A brand is not just about appearance. It's about what your business says. We shape that message right.",
-    founderSince: 'Since 2017',
+    founderSince: `Since ${FOUNDED_YEAR}`,
     sectionN: '§ 01',
     label: 'About us',
     heading: 'Brand',
@@ -96,9 +97,9 @@ const t = {
     headingEnd: 'is what we build.',
     subtext: "Central Asia's premium branding agency. Building brand identity isn't just design — it's strategy.",
     stats: [
-      { n: '9+', l: 'Years in market' },
-      { n: '500+', l: 'Clients' },
-      { n: '240+', l: 'Projects completed' },
+      { n: yearsLabel(), l: 'Years in market' },
+      { n: clientsLabel, l: 'Clients' },
+      { n: projectsLabel, l: 'Projects completed' },
       { n: '4', l: 'Languages (uz/ru/en/zh)' },
     ],
     missionLabel: 'Our mission',
@@ -127,7 +128,7 @@ const t = {
     founderName: 'Baxtiyorjon Gaziyev',
     founderTitle: '创始人兼首席设计师',
     founderQuote: '品牌不仅仅是外观。它是您的企业在说什么。我们帮助您正确塑造这种表达。',
-    founderSince: '自2017年',
+    founderSince: `自${FOUNDED_YEAR}年`,
     sectionN: '§ 01',
     label: '关于我们',
     heading: '品牌',
@@ -135,9 +136,9 @@ const t = {
     headingEnd: '由我们打造。',
     subtext: '中亚高端品牌机构。打造品牌识别不仅仅是设计——更是战略。',
     stats: [
-      { n: '9+', l: '年市场经验' },
-      { n: '500+', l: '服务客户' },
-      { n: '240+', l: '完成项目' },
+      { n: yearsLabel(), l: '年市场经验' },
+      { n: clientsLabel, l: '服务客户' },
+      { n: projectsLabel, l: '完成项目' },
       { n: '4', l: '种语言 (uz/ru/en/zh)' },
     ],
     missionLabel: '我们的使命',
