@@ -150,7 +150,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
             >
               <div
                 className="body"
-                style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}
+                style={{ overflow: 'hidden' }}
               >
                 <Image
                   src={t.img}
@@ -167,7 +167,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      'linear-gradient(to bottom, rgba(5,7,15,0.5) 0%, transparent 30%, transparent 60%, rgba(5,7,15,0.7) 100%)',
+                      'linear-gradient(to bottom, rgba(5,7,15,0.45) 0%, transparent 30%)',
                   }}
                 />
               </div>

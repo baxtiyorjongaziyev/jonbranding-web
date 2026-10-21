@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import styles from './pro-preview.module.css';
+import { clientsLabel, yearsLabel } from '@/lib/company-facts';
 
 type Props = {
   params: Promise<{ lang: string }>;
 };
 
 const stats = [
-  { value: '120+', label: 'tadbirkor brendini tartibga keltirdi' },
+  { value: clientsLabel, label: 'tadbirkor brendini tartibga keltirdi' },
   { value: '38', label: 'sohada nom, logo va strategiya ishlari' },
   { value: '24 soat', label: "ichida audit bo'yicha javob" },
-  { value: '6 yil', label: 'bozor va xaridor psixologiyasi tajribasi' },
+  { value: `${yearsLabel()} yil`, label: 'bozor va xaridor psixologiyasi tajribasi' },
 ];
 
 const painPoints = [

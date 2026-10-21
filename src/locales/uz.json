@@ -23,6 +23,8 @@
     "packaging_design_desc": "Mahsulotni javonda ajratib turadigan jozibali dizayn.",
     "patent": "Patent",
     "patent_desc": "Brend nomingizni tovar belgisi sifatida ro‘yxatdan o‘tkazamiz.",
+    "patent_calculator": "Patent kalkulyatori",
+    "patent_calculator_desc": "Patent narxini 30 soniyada bepul hisoblang.",
     "packaging_design_simple": "Mahsulot qadoqini sotishi kerak shunchalik chiroyli qilish.",
     "services_and_prices": "Xizmatlar va narxlar",
     "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
@@ -50,7 +52,7 @@
   },
   "homeSeo": {
     "title": "Logotip va firma uslubi — Jon.Branding | Toshkent",
-    "description": "Logotip, brendbuk va qadoq dizayni. 150+ brend, 6 yil tajriba. Brendingiz hamma joyda bir xil va ishonarli ko'rinadi.",
+    "description": "Logotip, brendbuk va qadoq dizayni. {{clients}} mijoz, {{years}} yil tajriba. Brendingiz hamma joyda bir xil va ishonarli ko'rinadi.",
     "keywords": [
       "logotip dizayni Toshkent",
       "firma uslubi",
@@ -549,9 +551,9 @@
     "clients": "Mamnun mijozlar",
     "recommend": "Tavsiya qilishadi",
     "detail": "Har bir loyiha biz uchun shunchaki dizayn emas, balki biznes o'sishi uchun quroldir.",
-    "projects_val": "1000+",
+    "projects_val": "{{projects}}",
     "experience_val": "9+",
-    "clients_val": "500+",
+    "clients_val": "{{clients}}",
     "recommend_val": "90%"
   },
   "trustedBy": {
@@ -562,11 +564,11 @@
     "subtitle": "Mahalliy brendlar Jon.Branding bilan bozorda qimmatroq, tushunarliroq va tanlashga osonroq ko'rinish uchun ishlaydi.",
     "metrics": [
       {
-        "value": "150+",
+        "value": "{{projects}}",
         "label": "Loyiha"
       },
       {
-        "value": "9 yil",
+        "value": "{{years}} yil",
         "label": "Tajriba"
       },
       {
@@ -655,7 +657,7 @@
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ brend tizimi va vizual loyiha"
+        "text": "{{projects}} brend tizimi va vizual loyiha"
       },
       {
         "icon": "Globe",
@@ -1722,6 +1724,12 @@
     "title": "Jon.Branding | Professional Brending Agentligi",
     "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
   },
+  "patentCta": {
+    "eyebrow": "Patent · Bepul hisoblagich",
+    "title": "Brendingiz himoyalanganmi?",
+    "sub": "Nomingizni boshqa birov ro‘yxatdan o‘tkazib qo‘ymasidan oldin patent narxini 30 soniyada bilib oling.",
+    "button": "Narxni hisoblash"
+  },
   "atelier": {
     "nav": [
       {
@@ -1787,7 +1795,7 @@
       {
         "n": "240",
         "s": "+",
-        "l": "Tashxis o'tkazildi · 2019—2026"
+        "l": "Tashxis o'tkazildi · {{founded}}—2026"
       },
       {
         "n": "3.2",
@@ -2031,10 +2039,10 @@
       },
       {
         "q": "To'lov qanday va kafolat bormi?",
-        "a": "To'lov: Payme, Click yoki bank o'tkazmasi. To'liq tashxis uchun 50% boshida, 50% prezentatsiyada. Yuridik shaxs uchun shartnoma. Kafolat: agar hisobotda hech qanday foydali tavsiya topmasangiz — 100% pulni qaytaramiz. 6 yilda 0 ta holat."
+        "a": "To'lov: Payme, Click yoki bank o'tkazmasi. To'liq tashxis uchun 50% boshida, 50% prezentatsiyada. Yuridik shaxs uchun shartnoma. Kafolat: agar hisobotda hech qanday foydali tavsiya topmasangiz — 100% pulni qaytaramiz. {{years}} yilda 0 ta holat."
       }
     ],
-    "hero_eyebrow": "Markaziy Osiyo · Brand atelier · Est. 2019",
+    "hero_eyebrow": "Markaziy Osiyo · Brand atelier · Est. {{founded}}",
     "hero_pill": "Yangi paketlar endi mavjud",
     "hero_title": "Brendingiz haqiqatan\nmijozlarni",
     "hero_title_alt": "ozip boratyapti?",
@@ -2138,7 +2146,7 @@
     "footer_ask": "Sahifa oxirigacha tushdingiz —\nsavol bormi?",
     "footer_write_tg": "Telegram'da yozish →",
     "footer_call_phone": "Qo'ng'iroq qilish",
-    "footer_about": "Markaziy Osiyo brending atelyesi. 2019-yildan beri biznesni mijoz xayolida qoldiramiz.",
+    "footer_about": "Markaziy Osiyo brending atelyesi. {{founded}}-yildan beri biznesni mijoz xayolida qoldiramiz.",
     "footer_pages_title": "Sahifalar",
     "footer_contact_title": "Aloqa",
     "footer_office_title": "Ofis",
@@ -2164,7 +2172,7 @@
     "pricing_guarantee_3_lbl": "Hujjat",
     "pricing_guarantee_3_val": "30—50 betlik PDF",
     "pricing_guarantee_4_lbl": "Tajriba",
-    "pricing_guarantee_4_val": "6 yil · 240+ tashxis",
+    "pricing_guarantee_4_val": "{{years}} yil · 240+ tashxis",
     "pricing_featured_badge": "87% mijoz tanlaydi",
     "pricing_cta_featured": "Hozir boshlash",
     "pricing_cta_standard": "Tanlash",

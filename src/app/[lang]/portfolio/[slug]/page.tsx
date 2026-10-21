@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { fetchPortfolioBySlug, findSupersedingSlug } from '@/lib/data/portfolio';
-import { getLocalizedPath } from '@/lib/i18n/locale';
+import { getLocalizedAbsoluteUrl, getLocalizedPath } from '@/lib/i18n/locale';
+import { safeJsonStringify } from '@/lib/security';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { presentPortfolioProject } from '@/lib/portfolio-presentation';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
-import { getPageAlternates, pageTitle } from '@/lib/seo';
+import { getPageAlternates, pageTitle, ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
 
 export const revalidate = 60;
 
@@ -89,11 +90,46 @@ export default async function PortfolioDetailPage(props: Props) {
   const ctaDesc = dict.ctaDesc || (safeLang === 'uz' ? 'Biz bilan bog\'laning va brendingiz bozorda qanchalik kuchli ekanini tekshirish uchun Bepul Brand Audit band qiling.' : safeLang === 'ru' ? 'Свяжитесь с нами и запишитесь на бесплатный аудит бренда, чтобы узнать его истинный потенциал.' : safeLang === 'zh' ? '与我们联系并预订免费的品牌审计，以测试您的品牌在市场上的实力。' : 'Get in touch with us and book a Free Brand Audit to discover your brand\'s true potential in the market.');
   const ctaBtn = dict.ctaBtn || (safeLang === 'uz' ? 'Bepul Brand Audit Olish' : safeLang === 'ru' ? 'Получить Бесплатный Аудит' : safeLang === 'zh' ? '获取免费品牌审计' : 'Get Free Brand Audit');
 
+  // Keys Google va AI qidiruvlarga "agentlik bajargan loyiha" sifatida tanilishi uchun.
+  const url = getLocalizedAbsoluteUrl(SITE_URL, safeLang, `/portfolio/${slug}`);
+  const image = project.coverImage?.startsWith('/') ? `${SITE_URL}${project.coverImage}` : project.coverImage;
+  const portfolioLabel = safeLang === 'ru' ? 'Портфолио' : safeLang === 'en' ? 'Portfolio' : safeLang === 'zh' ? '作品集' : 'Portfolio';
+  const homeLabel = safeLang === 'ru' ? 'Главная' : safeLang === 'en' ? 'Home' : safeLang === 'zh' ? '首页' : 'Bosh sahifa';
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      '@id': `${url}#case`,
+      name: project.metaTitle || project.title,
+      headline: project.title,
+      description: project.metaDescription || project.description,
+      url,
+      inLanguage: safeLang,
+      ...(image ? { image } : {}),
+      genre: project.categoryLabel,
+      keywords: project.seoKeywords?.length ? project.seoKeywords.join(', ') : project.tags?.join(', '),
+      creator: { '@id': ORGANIZATION_ID },
+      ...(project.client ? { sourceOrganization: { '@type': 'Organization', name: project.client } } : {}),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: homeLabel, item: getLocalizedAbsoluteUrl(SITE_URL, safeLang) },
+        { '@type': 'ListItem', position: 2, name: portfolioLabel, item: getLocalizedAbsoluteUrl(SITE_URL, safeLang, '/portfolio') },
+        { '@type': 'ListItem', position: 3, name: project.title, item: url },
+      ],
+    },
+  ];
+
   return (
-    <PortfolioDetailClient 
-      project={presentPortfolioProject(project)} 
-      lang={safeLang} 
-      dictionary={{ backBtn, resultsTitle, transformTitle, ctaTitle, ctaDesc, ctaBtn }}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(jsonLd) }} />
+      <PortfolioDetailClient
+        project={presentPortfolioProject(project)}
+        lang={safeLang}
+        dictionary={{ backBtn, resultsTitle, transformTitle, ctaTitle, ctaDesc, ctaBtn }}
+      />
+    </>
   );
 }

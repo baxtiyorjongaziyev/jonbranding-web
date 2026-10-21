@@ -26,6 +26,8 @@ type Dictionary = {
   logo_design_desc: string;
   patent?: string;
   patent_desc?: string;
+  patent_calculator?: string;
+  patent_calculator_desc?: string;
   brandbook: string;
   brandbook_desc: string;
   corporate_style: string;
@@ -125,6 +127,9 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
     { title: dictionary.packaging_design, href: getLocalizedPath('/xizmatlar/qadoq-dizayni'), description: dictionary.packaging_design_desc },
     ...(dictionary.patent
       ? [{ title: dictionary.patent, href: getLocalizedPath('/xizmatlar/patent'), description: dictionary.patent_desc ?? '' }]
+      : []),
+    ...(dictionary.patent_calculator
+      ? [{ title: dictionary.patent_calculator, href: getLocalizedPath('/xizmatlar/patent-kalkulyatori'), description: dictionary.patent_calculator_desc ?? '' }]
       : []),
     { title: dictionary.services_and_prices, href: getLocalizedPath('/narxlar'), description: dictionary.services_and_prices_desc },
   ];

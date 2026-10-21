@@ -23,6 +23,8 @@
     "packaging_design_desc": "Attractive design making you stand out.",
     "patent": "Trademark",
     "patent_desc": "We register your brand name as a trademark.",
+    "patent_calculator": "Patent calculator",
+    "patent_calculator_desc": "Estimate your trademark cost in 30 seconds, free.",
     "packaging_design_simple": "Attractive packaging design that sells products on shelves.",
     "services_and_prices": "Services & Prices",
     "services_and_prices_desc": "Build your package and get a price instantly.",
@@ -50,7 +52,7 @@
   },
   "homeSeo": {
     "title": "Logo and Corporate Identity — Jon.Branding | Tashkent",
-    "description": "Logo, brand guidelines and packaging design. 150+ brands and 6 years of experience creating consistent, credible business identities.",
+    "description": "Logo, brand guidelines and packaging design. {{clients}} clients and {{years}} years of experience creating consistent, credible business identities.",
     "keywords": [
       "logo design Tashkent",
       "corporate identity",
@@ -547,9 +549,9 @@
     "clients": "Happy clients",
     "recommend": "Recommend us",
     "detail": "Every project for us is more than just design; it is a tool for business growth.",
-    "projects_val": "1000+",
+    "projects_val": "{{projects}}",
     "experience_val": "9+",
-    "clients_val": "500+",
+    "clients_val": "{{clients}}",
     "recommend_val": "90%"
   },
   "trustedBy": {
@@ -560,11 +562,11 @@
     "subtitle": "Local businesses work with us to look professional and trustworthy to buyers.",
     "metrics": [
       {
-        "value": "150+",
+        "value": "{{projects}}",
         "label": "Projects"
       },
       {
-        "value": "9 yrs",
+        "value": "{{years}} yrs",
         "label": "Experience"
       },
       {
@@ -653,7 +655,7 @@
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ brand and visual projects"
+        "text": "{{projects}} brand and visual projects"
       },
       {
         "icon": "Globe",
@@ -1539,6 +1541,12 @@
     "title": "Jon.Branding | Professional Branding Agency",
     "description": "Naming, logo design and brandbook for your business — Jon.Branding."
   },
+  "patentCta": {
+    "eyebrow": "Trademark · Free calculator",
+    "title": "Is your brand protected?",
+    "sub": "Find out your trademark registration cost in 30 seconds — before someone else registers your name.",
+    "button": "Calculate the cost"
+  },
   "atelier": {
     "nav": [
       {
@@ -1604,7 +1612,7 @@
       {
         "n": "240",
         "s": "+",
-        "l": "Diagnostics conducted · 2019—2026"
+        "l": "Diagnostics conducted · {{founded}}—2026"
       },
       {
         "n": "3.2",
@@ -1848,10 +1856,10 @@
       },
       {
         "q": "How is payment made, and is there a guarantee?",
-        "a": "Payment: Payme, Click, or bank transfer. For the full diagnosis, 50% upfront, 50% upon presentation. Contract for legal entities. Guarantee: if you find no useful recommendations in the report — we refund 100% of the money. 0 cases in 6 years."
+        "a": "Payment: Payme, Click, or bank transfer. For the full diagnosis, 50% upfront, 50% upon presentation. Contract for legal entities. Guarantee: if you find no useful recommendations in the report — we refund 100% of the money. 0 cases in {{years}} years."
       }
     ],
-    "hero_eyebrow": "Central Asia · Brand atelier · Est. 2019",
+    "hero_eyebrow": "Central Asia · Brand atelier · Est. {{founded}}",
     "hero_pill": "New packages now available",
     "hero_title": "How much is your brand\nactually\nlosing?",
     "hero_title_alt": "losing?",
@@ -1955,7 +1963,7 @@
     "footer_ask": "You've reached the end of the page —\nhave a question?",
     "footer_write_tg": "Write on Telegram →",
     "footer_call_phone": "Call us",
-    "footer_about": "Central Asian branding atelier. Since 2019, we've been making businesses memorable for clients.",
+    "footer_about": "Central Asian branding atelier. Since {{founded}}, we've been making businesses memorable for clients.",
     "footer_pages_title": "Pages",
     "footer_contact_title": "Contact",
     "footer_office_title": "Office",
@@ -1981,7 +1989,7 @@
     "pricing_guarantee_3_lbl": "Deliverable",
     "pricing_guarantee_3_val": "30—50 page PDF",
     "pricing_guarantee_4_lbl": "Experience",
-    "pricing_guarantee_4_val": "6 years · 240+ diagnoses",
+    "pricing_guarantee_4_val": "{{years}} years · 240+ diagnoses",
     "pricing_featured_badge": "Chosen by 87% of clients",
     "pricing_cta_featured": "Begin Now",
     "pricing_cta_standard": "Select",
