@@ -24,7 +24,7 @@
     "patent": "Patent",
     "patent_desc": "Brend nomingizni tovar belgisi sifatida ro‘yxatdan o‘tkazamiz.",
     "patent_calculator": "Patent kalkulyatori",
-    "patent_calculator_desc": "Patent narxini 1 daqiqada bepul hisoblang.",
+    "patent_calculator_desc": "Patent narxini 30 soniyada bepul hisoblang.",
     "packaging_design_simple": "Mahsulot qadoqini sotishi kerak shunchalik chiroyli qilish.",
     "services_and_prices": "Xizmatlar va narxlar",
     "services_and_prices_desc": "O'z paketingizni yig'ing va narxni darhol biling.",
@@ -1727,7 +1727,7 @@
   "patentCta": {
     "eyebrow": "Patent · Bepul hisoblagich",
     "title": "Brendingiz himoyalanganmi?",
-    "sub": "Nomingizni boshqa birov ro‘yxatdan o‘tkazib qo‘ymasidan oldin patent narxini 1 daqiqada bilib oling.",
+    "sub": "Nomingizni boshqa birov ro‘yxatdan o‘tkazib qo‘ymasidan oldin patent narxini 30 soniyada bilib oling.",
     "button": "Narxni hisoblash"
   },
   "atelier": {

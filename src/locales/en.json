@@ -24,7 +24,7 @@
     "patent": "Trademark",
     "patent_desc": "We register your brand name as a trademark.",
     "patent_calculator": "Patent calculator",
-    "patent_calculator_desc": "Estimate your trademark cost in 1 minute, free.",
+    "patent_calculator_desc": "Estimate your trademark cost in 30 seconds, free.",
     "packaging_design_simple": "Attractive packaging design that sells products on shelves.",
     "services_and_prices": "Services & Prices",
     "services_and_prices_desc": "Build your package and get a price instantly.",
@@ -1544,7 +1544,7 @@
   "patentCta": {
     "eyebrow": "Trademark · Free calculator",
     "title": "Is your brand protected?",
-    "sub": "Find out your trademark registration cost in 1 minute — before someone else registers your name.",
+    "sub": "Find out your trademark registration cost in 30 seconds — before someone else registers your name.",
     "button": "Calculate the cost"
   },
   "atelier": {
