@@ -1724,6 +1724,12 @@
     "title": "Jon.Branding | Professional Brending Agentligi",
     "description": "Biznesingiz uchun neyming, logotip va brendbuk dizayni — Jon.Branding."
   },
+  "patentCta": {
+    "eyebrow": "Patent · Bepul hisoblagich",
+    "title": "Brendingiz himoyalanganmi?",
+    "sub": "Nomingizni boshqa birov ro‘yxatdan o‘tkazib qo‘ymasidan oldin patent narxini 1 daqiqada bilib oling.",
+    "button": "Narxni hisoblash"
+  },
   "atelier": {
     "nav": [
       {

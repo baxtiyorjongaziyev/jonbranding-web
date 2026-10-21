@@ -1549,6 +1549,12 @@
     "title": "Jon.Branding | 专业品牌设计机构",
     "description": "为您的企业提供命名、标志设计和品牌手册 — Jon.Branding。"
   },
+  "patentCta": {
+    "eyebrow": "商标 · 免费计算器",
+    "title": "您的品牌受保护了吗？",
+    "sub": "在别人抢先注册您的名称之前，1分钟了解商标注册费用。",
+    "button": "计算费用"
+  },
   "atelier": {
     "nav": [
       {

@@ -11,6 +11,7 @@ import AtHero from '@/components/sections/at-hero';
 import ClientLogos from '@/components/sections/client-logos';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
+import AtPatentCta from '@/components/sections/at-patent-cta';
 
 // ── Skeleton placeholder ──────────────────────────────────────────────────────
 import SectionSkeleton from '@/components/ui/section-skeleton';
@@ -116,6 +117,7 @@ const HomeComponent: FC<{
       <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
+      <AtPatentCta lang={lang} dictionary={dictionary.patentCta} />
 
       {/* ── Below-the-fold (lazy) ── */}
       <div className="atelier-theme atelier-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)' }}>

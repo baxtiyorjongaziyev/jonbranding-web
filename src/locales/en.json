@@ -1541,6 +1541,12 @@
     "title": "Jon.Branding | Professional Branding Agency",
     "description": "Naming, logo design and brandbook for your business — Jon.Branding."
   },
+  "patentCta": {
+    "eyebrow": "Trademark · Free calculator",
+    "title": "Is your brand protected?",
+    "sub": "Find out your trademark registration cost in 1 minute — before someone else registers your name.",
+    "button": "Calculate the cost"
+  },
   "atelier": {
     "nav": [
       {
