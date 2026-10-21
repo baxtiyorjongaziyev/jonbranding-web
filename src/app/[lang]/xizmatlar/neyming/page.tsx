@@ -3,6 +3,7 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import NamingClient from './naming-client';
 import ServiceLanding from '@/components/service-landing/service-landing';
 import { NAMING_PAGE } from '@/lib/service-pages/naming';
+import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { pageTitle } from '@/lib/seo';
 
 type Props = {
@@ -25,7 +26,20 @@ export default async function Page(props: Props) {
   const { lang } = await props.params;
   // Uzbek-first: batafsil sahifa avval o'zbekchada; tarjimalar tayyor bo'lguncha
   // boshqa tillar eski sahifani ko'rsatadi.
-  if (lang === 'uz') return <ServiceLanding content={NAMING_PAGE} />;
+  if (lang === 'uz') {
+    return (
+      <>
+        <ServiceJsonLd
+          lang="uz"
+          path="/xizmatlar/neyming"
+          name="Neyming — brend nomini yaratish"
+          description={NAMING_PAGE.hero.lead}
+          faqs={NAMING_PAGE.faqs}
+        />
+        <ServiceLanding content={NAMING_PAGE} />
+      </>
+    );
+  }
 
   const dictionary = await getDictionary(lang as Locale);
 
