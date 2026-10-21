@@ -2,6 +2,7 @@
 import { getSalesFlow } from '@/lib/sales-flow';
 import { type FC, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { FOUNDED_YEAR, clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
 
 interface PortfolioImage {
   src: string;
@@ -42,7 +43,7 @@ const translations = {
     cta1: 'Bepul Brand Audit olish ↗',
     cta2: "Xizmatlarni ko'rish →",
     stats: [
-      { label: 'Yillar', value: '2018+' },
+      { label: 'Yillar', value: `${FOUNDED_YEAR}+` },
       { label: "O'zgarishlar", value: 'Doimiy' },
       { label: 'Sifat', value: 'Premium' },
     ],
@@ -61,7 +62,7 @@ const translations = {
     cta1: 'Получить Бесплатный Аудит ↗',
     cta2: 'Посмотреть услуги →',
     stats: [
-      { label: 'Годы', value: '2018+' },
+      { label: 'Годы', value: `${FOUNDED_YEAR}+` },
       { label: 'Изменения', value: 'Постоянно' },
       { label: 'Качество', value: 'Премиум' },
     ],
@@ -80,7 +81,7 @@ const translations = {
     cta1: 'Get Free Brand Audit ↗',
     cta2: 'View services →',
     stats: [
-      { label: 'Years', value: '2018+' },
+      { label: 'Years', value: `${FOUNDED_YEAR}+` },
       { label: 'Changes', value: 'Constant' },
       { label: 'Quality', value: 'Premium' },
     ],
@@ -99,7 +100,7 @@ const translations = {
     cta1: '获取免费品牌诊断 ↗',
     cta2: '查看服务 →',
     stats: [
-      { label: '年份', value: '2018+' },
+      { label: '年份', value: `${FOUNDED_YEAR}+` },
       { label: '变化', value: '持续' },
       { label: '质量', value: '高端' },
     ],
@@ -221,26 +222,26 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 max-w-md tabular-nums">
               {(lang === 'ru'
                 ? [
-                    ['7+ лет', 'на рынке'],
-                    ['500+', 'клиентов'],
-                    ['240+', 'проектов'],
+                    [`${yearsLabel()} лет`, 'на рынке'],
+                    [clientsLabel, 'клиентов'],
+                    [projectsLabel, 'проектов'],
                   ]
                 : lang === 'en'
                   ? [
-                      ['7+ yrs', 'in market'],
-                      ['500+', 'clients'],
-                      ['240+', 'projects'],
+                      [`${yearsLabel()} yrs`, 'in market'],
+                      [clientsLabel, 'clients'],
+                      [projectsLabel, 'projects'],
                     ]
                   : lang === 'zh'
                     ? [
-                        ['7+ 年', '市场经验'],
-                        ['500+', '服务客户'],
-                        ['240+', '完成项目'],
+                        [`${yearsLabel()} 年`, '市场经验'],
+                        [clientsLabel, '服务客户'],
+                        [projectsLabel, '完成项目'],
                       ]
                     : [
-                        ['7+ yil', 'bozorda'],
-                        ['500+', 'mijoz'],
-                        ['240+', 'loyiha'],
+                        [`${yearsLabel()} yil`, 'bozorda'],
+                        [clientsLabel, 'mijoz'],
+                        [projectsLabel, 'loyiha'],
                       ]
               ).map(([val, label]) => (
                 <div key={label}>

@@ -4,6 +4,7 @@ import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale'
 import HaqimizClient from './haqimizda-client';
 import { safeJsonStringify } from '@/lib/security';
 import { ORGANIZATION_ID, FOUNDER_ID } from '@/lib/seo';
+import { FOUNDED_YEAR, clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -11,19 +12,19 @@ const BASE_URL = 'https://www.jonbranding.uz';
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   uz: {
     title: 'Haqimizda — Jon.Branding | Markaziy Osiyo Premium Brend Atelye',
-    description: 'Jon.Branding — 2018 yildan Markaziy Osiyodagi premium brending agentligi. 120+ brend, 240+ loyiha, 7+ yil tajriba.',
+    description: `Jon.Branding — ${FOUNDED_YEAR} yildan Markaziy Osiyodagi premium brending agentligi. ${clientsLabel} mijoz, ${projectsLabel} loyiha, ${yearsLabel()} yil tajriba.`,
   },
   ru: {
     title: 'О нас — Jon.Branding | Премиум брендинговое агентство Центральной Азии',
-    description: 'Jon.Branding — премиум брендинговое агентство Центральной Азии с 2018 года. 120+ брендов, 240+ проектов, 7+ лет опыта.',
+    description: `Jon.Branding — премиум брендинговое агентство Центральной Азии с ${FOUNDED_YEAR} года. ${clientsLabel} клиентов, ${projectsLabel} проектов, ${yearsLabel()} лет опыта.`,
   },
   en: {
     title: 'About Us — Jon.Branding | Central Asia Premium Brand Atelier',
-    description: 'Jon.Branding — Central Asia premium branding agency since 2018. 120+ brands, 240+ projects, 7+ years of experience.',
+    description: `Jon.Branding — Central Asia premium branding agency since ${FOUNDED_YEAR}. ${clientsLabel} clients, ${projectsLabel} projects, ${yearsLabel()} years of experience.`,
   },
   zh: {
     title: '关于我们 — Jon.Branding | 中亚高端品牌工坊',
-    description: 'Jon.Branding — 中亚高端品牌机构，成立于2018年。120+品牌，240+项目，7+年经验。',
+    description: `Jon.Branding — 中亚高端品牌机构，成立于${FOUNDED_YEAR}年。${clientsLabel}客户，${projectsLabel}项目，${yearsLabel()}年经验。`,
   },
 };
 

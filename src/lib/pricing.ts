@@ -1,3 +1,4 @@
+import { yearsLabel } from '@/lib/company-facts';
 const USD_TO_UZS_RATE = 12700;
 
 export const VALID_PROMO_CODES: readonly string[] = ['RAMAZON', 'PCG', 'TEZNATIJA', 'KURSDOSH', 'SALOM', 'ISTISNO'];
@@ -76,10 +77,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 60 daqiqa" : "⏱ 60 minutes",
             features: isUz ? ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"] : ["Problem analysis", "Branding strategy", "Q&A", "Roadmap"],
             benefits: isUz ? [
-                { icon: "MessageSquare", title: "Ekspert fikri", description: "7+ yillik tajribaga ega mutaxassisdan shaxsiy maslahat." },
+                { icon: "MessageSquare", title: "Ekspert fikri", description: `${yearsLabel()} yillik tajribaga ega mutaxassisdan shaxsiy maslahat.` },
                 { icon: "Target", title: "Aniq maqsad", description: "Biznesingiz uchun qaysi brending bosqichi kerakligini aniqlaysiz." }
             ] : [
-                { icon: "MessageSquare", title: "Expert opinion", description: "7+ years of field experience." },
+                { icon: "MessageSquare", title: "Expert opinion", description: `${yearsLabel()} years of field experience.` },
                 { icon: "Target", title: "Clear Goal", description: "Define your next branding steps." }
             ]
         },

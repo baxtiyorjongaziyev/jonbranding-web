@@ -52,7 +52,7 @@
   },
   "homeSeo": {
     "title": "标志与企业形象设计 — Jon.Branding | 塔什干",
-    "description": "标志、品牌手册与包装设计。服务150多个品牌，拥有7年以上经验，为企业打造统一且可信的品牌形象。",
+    "description": "标志、品牌手册与包装设计。服务{{clients}}客户，拥有{{years}}年经验，为企业打造统一且可信的品牌形象。",
     "keywords": [
       "塔什干标志设计",
       "企业形象设计",
@@ -557,9 +557,9 @@
     "clients": "满意的客户",
     "recommend": "客户推荐我们",
     "detail": "Jon.Branding 团队不仅仅是设计师。我们汇集了**市场营销和心理学**领域的专家。每个项目都经过三阶段质量控制。",
-    "projects_val": "1000+",
+    "projects_val": "{{projects}}",
     "experience_val": "9+",
-    "clients_val": "500+",
+    "clients_val": "{{clients}}",
     "recommend_val": "90%"
   },
   "trustedBy": {
@@ -570,11 +570,11 @@
     "subtitle": "我们帮助品牌看起来更有价值、更清晰、更易于被选择。",
     "metrics": [
       {
-        "value": "150+",
+        "value": "{{projects}}",
         "label": "项目"
       },
       {
-        "value": "7年以上",
+        "value": "{{years}}年",
         "label": "经验"
       },
       {
@@ -663,7 +663,7 @@
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ 个品牌和视觉项目"
+        "text": "{{projects}} 个品牌和视觉项目"
       },
       {
         "icon": "Globe",
@@ -1620,7 +1620,7 @@
       {
         "n": "240",
         "s": "+",
-        "l": "已完成诊断 · 2018—2026"
+        "l": "已完成诊断 · {{founded}}—2026"
       },
       {
         "n": "3.2",
@@ -1867,7 +1867,7 @@
         "a": "付款方式：Payme、Click或银行转账。全面诊断费用：50%预付，50%在演示时支付。法人实体将签订合同。保证：如果报告中未发现任何有益建议 — 我们将100%退款。7年多来零案例。"
       }
     ],
-    "hero_eyebrow": "中亚 · 品牌工作室 · 成立于 2018 年",
+    "hero_eyebrow": "中亚 · 品牌工作室 · 成立于 {{founded}} 年",
     "hero_pill": "新套餐现已推出",
     "hero_title": "您的品牌\n实际上\n正在损失多少？",
     "hero_title_alt": "正在损失多少？",
@@ -1971,7 +1971,7 @@
     "footer_ask": "您已浏览至页面底部——\n有疑问吗？",
     "footer_write_tg": "在 Telegram 上留言 →",
     "footer_call_phone": "致电",
-    "footer_about": "中亚品牌工作室。自 2018 年以来，我们致力于在客户心中留下深刻的业务印象。",
+    "footer_about": "中亚品牌工作室。自 {{founded}} 年以来，我们致力于在客户心中留下深刻的业务印象。",
     "footer_pages_title": "页面",
     "footer_contact_title": "联系方式",
     "footer_office_title": "办公室",

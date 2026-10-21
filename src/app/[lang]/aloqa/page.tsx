@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import AloqaClient from './aloqa-client';
+import { projectsLabel, yearsLabel } from '@/lib/company-facts';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -9,19 +10,19 @@ const BASE_URL = 'https://www.jonbranding.uz';
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   uz: {
     title: "Aloqa — Jon.Branding | Toshkent Brending Agentligi",
-    description: 'Jon.Branding bilan bog\'laning: +998 79 200 00 97, Telegram, Instagram. Online brifing, brend tashxisi va konsultatsiya. 7+ yillik tajriba, 240+ loyiha.',
+    description: `Jon.Branding bilan bog'laning: +998 79 200 00 97, Telegram, Instagram. Online brifing, brend tashxisi va konsultatsiya. ${yearsLabel()} yillik tajriba, ${projectsLabel} loyiha.`,
   },
   ru: {
     title: 'Контакты — Jon.Branding | Брендинговое агентство Ташкент',
-    description: 'Свяжитесь с Jon.Branding — Телефон: +998 79 200 00 97, Telegram, Instagram. Онлайн брифинг, бренд-диагностика и консультация. 7+ лет опыта, 240+ проектов.',
+    description: `Свяжитесь с Jon.Branding — Телефон: +998 79 200 00 97, Telegram, Instagram. Онлайн брифинг, бренд-диагностика и консультация. ${yearsLabel()} лет опыта, ${projectsLabel} проектов.`,
   },
   en: {
     title: 'Contact — Jon.Branding | Branding Agency Tashkent',
-    description: 'Contact Jon.Branding — Phone: +998 79 200 00 97, Telegram, Instagram. Online briefing, brand audit and consultation. 7+ years of experience, 240+ projects.',
+    description: `Contact Jon.Branding — Phone: +998 79 200 00 97, Telegram, Instagram. Online briefing, brand audit and consultation. ${yearsLabel()} years of experience, ${projectsLabel} projects.`,
   },
   zh: {
     title: '联系我们 — Jon.Branding | 塔什干品牌机构',
-    description: '联系 Jon.Branding — 电话：+998 79 200 00 97，Telegram，Instagram。提供在线简报、品牌诊断和咨询。7年以上经验，240+项目。',
+    description: `联系 Jon.Branding — 电话：+998 79 200 00 97，Telegram，Instagram。提供在线简报、品牌诊断和咨询。${yearsLabel()}年经验，${projectsLabel}项目。`,
   },
 };
 
