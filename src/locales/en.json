@@ -1181,6 +1181,31 @@
     "calculator_cta_button": "Go to Patent Calculator"
   },
   "patentCalculatorPage": {
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "How much does trademark registration cost?",
+          "a": "The search costs {check} UZS (1 class, each additional class {addon}). Registration: {standard} UZS in the standard procedure, {express} UZS in the expedited one. State fees are not included and are paid separately. The calculator above gives the exact amount for your number of classes."
+        },
+        {
+          "q": "How long does it take to get the certificate?",
+          "a": "About {standardDuration} in the standard procedure and {expressDuration} in the expedited one. Of the {count} certificates we have obtained for clients, the fastest took {fastest} days."
+        },
+        {
+          "q": "Are state fees included in the price?",
+          "a": "No. State fees are paid separately according to the Ministry of Justice tariffs. The calculator adds them to the estimated total, while our service fee is shown separately."
+        },
+        {
+          "q": "What is a class and how many do I need?",
+          "a": "A trademark is protected in the classes you choose out of the 45 classes of the international Nice Classification: for example, clothing is class 25, cafés and restaurants are class 43. We decide together during the search how many classes your business needs."
+        },
+        {
+          "q": "How long is the certificate valid?",
+          "a": "10 years from the filing date, and it can then be renewed for another 10 years."
+        }
+      ]
+    },
     "seoTitle": "Free Trademark Cost Calculator | Jon.Branding",
     "seoDescription": "Calculate your trademark registration cost in 30 seconds. State fees + service — exact numbers.",
     "metadata": {

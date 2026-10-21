@@ -1191,6 +1191,31 @@
     "calculator_cta_button": "Patent kalkulyatoriga o'tish"
   },
   "patentCalculatorPage": {
+    "faq": {
+      "title": "Ko‘p beriladigan savollar",
+      "items": [
+        {
+          "q": "Tovar belgisini ro‘yxatdan o‘tkazish qancha turadi?",
+          "a": "Tekshiruv — {check} so‘m (1 sinf, har qo‘shimcha sinf {addon}). Ro‘yxatdan o‘tkazish: oddiy tartibda {standard} so‘m, tezkor tartibda {express} so‘m. Davlat bojlari bu narxga kirmaydi va alohida to‘lanadi. Aniq summani yuqoridagi kalkulyator sinflar soni bo‘yicha hisoblaydi."
+        },
+        {
+          "q": "Guvohnoma qancha vaqtda chiqadi?",
+          "a": "Oddiy tartibda taxminan {standardDuration}, tezkor tartibda {expressDuration}. Mijozlarimizga olib bergan {count} ta guvohnoma ichida eng tezi {fastest} kunda chiqqan."
+        },
+        {
+          "q": "Davlat boji narxga kiradimi?",
+          "a": "Yo‘q. Davlat bojlari Adliya vazirligi tariflari bo‘yicha alohida to‘lanadi. Kalkulyator ularni taxminiy umumiy qiymatga qo‘shib ko‘rsatadi, xizmat haqimiz esa alohida yoziladi."
+        },
+        {
+          "q": "Sinf nima va menga nechta kerak?",
+          "a": "Tovar belgisi xalqaro tasnif (MKTU) bo‘yicha 45 ta sinfdan siz tanlaganlarida himoyalanadi: masalan, kiyim — 25-sinf, kafe va restoran — 43-sinf. Nechta sinf kerakligini tekshiruvda biznesingizga qarab birga aniqlaymiz."
+        },
+        {
+          "q": "Guvohnoma necha yil amal qiladi?",
+          "a": "Talabnoma topshirilgan kundan boshlab 10 yil. Keyin yana 10 yilga uzaytirish mumkin."
+        }
+      ]
+    },
     "seoTitle": "Patent Narxi Hisoblagich — Bepul va Tez | Jon.Branding",
     "seoDescription": "Tovar belgisini roʻyxatdan oʻtkazish narxini 30 soniyada hisoblang. Davlat boji + xizmat haqi — aniq raqamlar.",
     "metadata": {
