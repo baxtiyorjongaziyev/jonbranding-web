@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Locale } from '@/lib/dictionaries';
 import { getLocalizedAbsoluteUrl, getLocaleAlternates } from '@/lib/i18n/locale';
 import HaqimizClient from './haqimizda-client';
+import { safeJsonStringify } from '@/lib/security';
+import { ORGANIZATION_ID, FOUNDER_ID } from '@/lib/seo';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -49,5 +51,24 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const safeLang = VALID_LOCALES.includes(lang as Locale) ? (lang as Locale) : 'uz';
-  return <HaqimizClient lang={safeLang} />;
+  const url = getLocalizedAbsoluteUrl(BASE_URL, safeLang, '/haqimizda');
+  // Agentlik va asoschi tugunlari layout'dagi umumiy grafda; bu sahifa ularga bog'lanadi.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${url}#about`,
+    url,
+    name: metaByLang[safeLang].title,
+    description: metaByLang[safeLang].description,
+    inLanguage: safeLang,
+    about: { '@id': ORGANIZATION_ID },
+    mainEntity: { '@id': ORGANIZATION_ID },
+    mentions: { '@id': FOUNDER_ID },
+  };
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonStringify(jsonLd) }} />
+      <HaqimizClient lang={safeLang} />
+    </>
+  );
 }
