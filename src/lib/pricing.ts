@@ -76,10 +76,10 @@ export const getServiceDetails = (lang: string = 'uz') => {
             timeline: isUz ? "⏱ 60 daqiqa" : "⏱ 60 minutes",
             features: isUz ? ["Muammolarni tahlil qilish", "Brending strategiyasi", "Savollarga javoblar", "Yo'l xaritasi tuzish"] : ["Problem analysis", "Branding strategy", "Q&A", "Roadmap"],
             benefits: isUz ? [
-                { icon: "MessageSquare", title: "Ekspert fikri", description: "9 yillik tajribaga ega mutaxassisdan shaxsiy maslahat." },
+                { icon: "MessageSquare", title: "Ekspert fikri", description: "7+ yillik tajribaga ega mutaxassisdan shaxsiy maslahat." },
                 { icon: "Target", title: "Aniq maqsad", description: "Biznesingiz uchun qaysi brending bosqichi kerakligini aniqlaysiz." }
             ] : [
-                { icon: "MessageSquare", title: "Expert opinion", description: "9 years of field experience." },
+                { icon: "MessageSquare", title: "Expert opinion", description: "7+ years of field experience." },
                 { icon: "Target", title: "Clear Goal", description: "Define your next branding steps." }
             ]
         },

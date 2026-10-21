@@ -42,7 +42,7 @@ const translations = {
     cta1: 'Bepul Brand Audit olish ↗',
     cta2: "Xizmatlarni ko'rish →",
     stats: [
-      { label: 'Yillar', value: '2019+' },
+      { label: 'Yillar', value: '2018+' },
       { label: "O'zgarishlar", value: 'Doimiy' },
       { label: 'Sifat', value: 'Premium' },
     ],
@@ -61,7 +61,7 @@ const translations = {
     cta1: 'Получить Бесплатный Аудит ↗',
     cta2: 'Посмотреть услуги →',
     stats: [
-      { label: 'Годы', value: '2019+' },
+      { label: 'Годы', value: '2018+' },
       { label: 'Изменения', value: 'Постоянно' },
       { label: 'Качество', value: 'Премиум' },
     ],
@@ -80,7 +80,7 @@ const translations = {
     cta1: 'Get Free Brand Audit ↗',
     cta2: 'View services →',
     stats: [
-      { label: 'Years', value: '2019+' },
+      { label: 'Years', value: '2018+' },
       { label: 'Changes', value: 'Constant' },
       { label: 'Quality', value: 'Premium' },
     ],
@@ -99,7 +99,7 @@ const translations = {
     cta1: '获取免费品牌诊断 ↗',
     cta2: '查看服务 →',
     stats: [
-      { label: '年份', value: '2019+' },
+      { label: '年份', value: '2018+' },
       { label: '变化', value: '持续' },
       { label: '质量', value: '高端' },
     ],
@@ -221,24 +221,24 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 max-w-md tabular-nums">
               {(lang === 'ru'
                 ? [
-                    ['9+ лет', 'на рынке'],
+                    ['7+ лет', 'на рынке'],
                     ['500+', 'клиентов'],
                     ['240+', 'проектов'],
                   ]
                 : lang === 'en'
                   ? [
-                      ['9+ yrs', 'in market'],
+                      ['7+ yrs', 'in market'],
                       ['500+', 'clients'],
                       ['240+', 'projects'],
                     ]
                   : lang === 'zh'
                     ? [
-                        ['9+ 年', '市场经验'],
+                        ['7+ 年', '市场经验'],
                         ['500+', '服务客户'],
                         ['240+', '完成项目'],
                       ]
                     : [
-                        ['9+ yil', 'bozorda'],
+                        ['7+ yil', 'bozorda'],
                         ['500+', 'mijoz'],
                         ['240+', 'loyiha'],
                       ]

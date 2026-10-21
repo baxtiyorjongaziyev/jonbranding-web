@@ -11,19 +11,19 @@ const BASE_URL = 'https://www.jonbranding.uz';
 const metaByLang: Record<Locale, { title: string; description: string }> = {
   uz: {
     title: 'Haqimizda — Jon.Branding | Markaziy Osiyo Premium Brend Atelye',
-    description: 'Jon.Branding — 2019 yildan Markaziy Osiyodagi premium brending agentligi. 120+ brend, 240+ loyiha, 7 yil tajriba.',
+    description: 'Jon.Branding — 2018 yildan Markaziy Osiyodagi premium brending agentligi. 120+ brend, 240+ loyiha, 7+ yil tajriba.',
   },
   ru: {
     title: 'О нас — Jon.Branding | Премиум брендинговое агентство Центральной Азии',
-    description: 'Jon.Branding — премиум брендинговое агентство Центральной Азии с 2019 года. 120+ брендов, 240+ проектов, 7 лет опыта.',
+    description: 'Jon.Branding — премиум брендинговое агентство Центральной Азии с 2018 года. 120+ брендов, 240+ проектов, 7+ лет опыта.',
   },
   en: {
     title: 'About Us — Jon.Branding | Central Asia Premium Brand Atelier',
-    description: 'Jon.Branding — Central Asia premium branding agency since 2019. 120+ brands, 240+ projects, 7 years of experience.',
+    description: 'Jon.Branding — Central Asia premium branding agency since 2018. 120+ brands, 240+ projects, 7+ years of experience.',
   },
   zh: {
     title: '关于我们 — Jon.Branding | 中亚高端品牌工坊',
-    description: 'Jon.Branding — 中亚高端品牌机构，成立于2019年。120+品牌，240+项目，7年经验。',
+    description: 'Jon.Branding — 中亚高端品牌机构，成立于2018年。120+品牌，240+项目，7+年经验。',
   },
 };
 
