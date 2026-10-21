@@ -112,9 +112,11 @@ body:has(.jon-home) {
   font-family: var(--font-hanken, 'Hanken Grotesk', sans-serif) !important;
   font-style: normal !important;
   font-weight: 700 !important;
-  font-size: clamp(24px, 2.2vw, 36px) !important;
+  font-size: clamp(20px, 1.8vw, 28px) !important;
   letter-spacing: -0.03em !important;
-  color: #FFFFFF !important;
+  /* Nom rasm ostidagi oq qatorda turadi (atelier.css .gal-tile .foot) — to'q rang. */
+  color: #0A0B0E !important;
+  text-shadow: none !important;
 }
 
 .jon-home .gal-tile .arr {
