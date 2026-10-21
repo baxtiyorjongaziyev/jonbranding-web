@@ -30,7 +30,7 @@ export default async function PatentPage(props: Props) {
 
   return (
     <>
-      <ServiceJsonLd lang={lang as Locale} path="/xizmatlar/patent" name="Patent — tovar belgisini ro‘yxatdan o‘tkazish" description={DESCRIPTION} />
+      <ServiceJsonLd lang={lang as Locale} path="/xizmatlar/patent" name="Patent — tovar belgisini ro‘yxatdan o‘tkazish" description={DESCRIPTION} faqs={PATENT_PAGE.faqs} />
       <ServiceLanding content={PATENT_PAGE}>
         <section className="border-b border-neutral-200/80 bg-neutral-50 px-5 py-20 sm:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
