@@ -33,6 +33,7 @@ export default async function Page(props: Props) {
         path="/xizmatlar/logo-dizayni"
         name={dictionary.header.logo_design}
         description={dictionary.logoDesignPage.metadata.description}
+        faqs={lang === 'uz' ? LOGO_PAGE.faqs : undefined}
       />
       {/* Uzbek-first: batafsil sahifa avval o'zbekchada. */}
       {lang === 'uz' ? (

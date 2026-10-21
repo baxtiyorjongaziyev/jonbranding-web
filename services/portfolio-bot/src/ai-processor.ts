@@ -48,7 +48,7 @@ ${text}
 Qaytarish formati (faqat JSON, hech qanday izohsiz):
 {
   "title": "Loyiha nomi (qisqa, aniq, 2-5 so'z)",
-  "client": "Mijoz/kompaniya nomi",
+  "client": "Brend nomi — logotipda qanday yozilsa shunday (MChJ, ООО, LLC kabi yuridik shaklsiz)",
   "category": "logo-design | naming | brandbook | corporate-style | packaging | brand-strategy",
   "description": "1-2 jumlada qisqa tavsif (mijozga nima qilindi)",
   "detailedDescription": "3-5 jumlada batafsil tavsif (loyiha haqida to'liq)",
@@ -235,7 +235,7 @@ DRIVE PAPKA NOMI: "${folderName}"
 FAQAT quyidagi JSON formatda javob ber (boshqa hech narsa yozma):
 {
   "title": "loyiha nomi (qisqa, aniq, 2-5 so'z)",
-  "client": "mijoz/kompaniya nomi",
+  "client": "Brend nomi — logotipda qanday yozilsa shunday (MChJ, ООО, LLC kabi yuridik shaklsiz)",
   "category": "logo-design | naming | brandbook | corporate-style | packaging | brand-strategy",
   "description": "1-2 jumlada qisqa tavsif (mijozga nima qilindi)",
   "detailedDescription": "3-5 jumlada batafsil tavsif (loyiha haqida to'liq)",

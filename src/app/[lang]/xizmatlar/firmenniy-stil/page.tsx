@@ -33,6 +33,7 @@ export default async function Page(props: Props) {
         path="/xizmatlar/firmenniy-stil"
         name={dictionary.header.corporate_style}
         description={dictionary.corporateStylePage.metadata.description}
+        faqs={lang === 'uz' ? VISUAL_IDENTITY_PAGE.faqs : undefined}
       />
       {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
       {lang === 'uz' ? (

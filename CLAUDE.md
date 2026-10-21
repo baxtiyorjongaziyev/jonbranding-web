@@ -66,6 +66,11 @@ Yil (2018-yil 27-noyabrdan), tajriba, mijoz (600+) va loyiha (1200+) soni — fa
 `src/lib/company-facts.ts` dan. Lug'atda `{{years}}`, `{{clients}}`, `{{projects}}`, `{{founded}}`.
 **Batafsil: `docs/FAKTLAR.md`.**
 
+## Keys nomlari
+
+Format: `{Brend} — {ish turi}` (masalan `Rash Milk — qadoq dizayni`), kod `src/lib/case-naming.ts`.
+**Batafsil: `docs/KEYS-NOMLARI.md`.**
+
 ## Arxitektura qarorlari (sessiya xotirasi)
 Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 
