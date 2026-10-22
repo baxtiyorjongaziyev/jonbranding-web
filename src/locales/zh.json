@@ -1286,6 +1286,7 @@
       "managerClientLabel": "客户姓名（可选）",
       "managerBrandLabel": "品牌名称（可选）",
       "downloadImageButton": "下载为图片",
+      "shareImageButton": "发送给客户",
       "imageTitle": "商标注册 — 费用估算",
       "imageClientLabel": "客户",
       "imageBrandLabel": "品牌",

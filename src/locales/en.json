@@ -1278,6 +1278,7 @@
       "managerClientLabel": "Client name (optional)",
       "managerBrandLabel": "Brand name (optional)",
       "downloadImageButton": "Download as image",
+      "shareImageButton": "Send to client",
       "imageTitle": "Trademark registration — estimate",
       "imageClientLabel": "Client",
       "imageBrandLabel": "Brand",
