@@ -22,8 +22,8 @@
     {
       "id": "F-02",
       "title": "Sifat darvozasi (quality gate)",
-      "owner": "codex",
-      "status": "todo",
+      "owner": "claude",
+      "status": "review",
       "deps": [
         "F-01"
       ],
@@ -36,7 +36,9 @@
         "Galereyada 2 tadan kam rasm bo'lsa keys rad etiladi",
         "Unit testlar: chegaraviy holatlar"
       ],
-      "verify": "cd services/case-reels && npx tsc --noEmit && npx vitest run"
+      "verify": "cd services/case-reels && npx tsc --noEmit && npx vitest run",
+      "note": "Codex yechimi o'z sandbox'ida qoldi (branch push qilinmadi); Claude qayta yozdi, Codex review qiladi.",
+      "evidence": "scripts/lib/quality-gate.ts (checkCase, checkVideo, injeksiya qilinadigan ffprobe), CLI npm run quality-gate; vitest: 6.9s/20.1s/1080x1919/29.97fps/1 rasm/chegaralar/probe xatosi ✅; tsc ✅ (2026-10-22)."
     },
     {
       "id": "F-03",
