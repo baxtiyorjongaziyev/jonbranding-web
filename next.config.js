@@ -158,6 +158,9 @@ const nextConfig = {
       { source: '/:lang(ru|en|zh)/tariflar', destination: '/:lang/narxlar', permanent: true },
       // Eski slaydli taqdimot `/credentials` bilan almashtirildi.
       { source: '/presentation', destination: '/credentials', permanent: true },
+      // Menejerlar uchun kalkulyator (raqamlar formasiz ochiq): jonbranding.uz/menejer.
+      { source: '/:uz(uz)?/menejer', destination: '/patent-menejer', permanent: false },
+      { source: '/:lang(ru|en|zh)/menejer', destination: '/:lang/patent-menejer', permanent: false },
       // Patent kalkulyatoriga qisqa manzillar (reklama, Telegram, QR uchun).
       { source: '/:uz(uz)?/:slug(patent-kalkulyator|kalkulyator|calculator)', destination: '/xizmatlar/patent-kalkulyatori', permanent: true },
       { source: '/:lang(ru|en|zh)/:slug(patent-kalkulyator|kalkulyator|calculator)', destination: '/:lang/xizmatlar/patent-kalkulyatori', permanent: true },

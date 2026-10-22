@@ -1278,6 +1278,7 @@
       "managerClientLabel": "Имя клиента (необязательно)",
       "managerBrandLabel": "Название бренда (необязательно)",
       "downloadImageButton": "Скачать как изображение",
+      "shareImageButton": "Отправить клиенту",
       "imageTitle": "Регистрация товарного знака — расчёт",
       "imageClientLabel": "Клиент",
       "imageBrandLabel": "Бренд",
