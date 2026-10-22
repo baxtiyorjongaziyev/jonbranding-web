@@ -137,25 +137,51 @@ function draw(ctx: CanvasRenderingContext2D | null, d: EstimateImageData): numbe
   return y + PAD;
 }
 
-export function downloadEstimateImage(d: EstimateImageData) {
+function renderBlob(d: EstimateImageData): Promise<Blob | null> {
   const height = draw(null, d);
   const scale = 2;
   const canvas = document.createElement('canvas');
   canvas.width = W * scale;
   canvas.height = height * scale;
   const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  if (!ctx) return Promise.resolve(null);
   ctx.scale(scale, scale);
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, W, height);
   draw(ctx, d);
-  canvas.toBlob((blob) => {
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = d.fileName;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }, 'image/png');
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+}
+
+function saveBlob(blob: Blob, fileName: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export async function downloadEstimateImage(d: EstimateImageData) {
+  const blob = await renderBlob(d);
+  if (blob) saveBlob(blob, d.fileName);
+}
+
+/**
+ * Telefonda tizimning "Ulashish" oynasini ochadi (Telegram, WhatsApp...) — rasm
+ * to'g'ridan-to'g'ri mijozga ketadi. Ulashish qo'llanmasa (kompyuter) — yuklab oladi.
+ */
+export async function shareEstimateImage(d: EstimateImageData): Promise<'shared' | 'downloaded' | 'cancelled'> {
+  const blob = await renderBlob(d);
+  if (!blob) return 'cancelled';
+  const file = new File([blob], d.fileName, { type: 'image/png' });
+  if (typeof navigator !== 'undefined' && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: d.title, text: `${d.totalTitle}: ${d.total}` });
+      return 'shared';
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') return 'cancelled';
+    }
+  }
+  saveBlob(blob, d.fileName);
+  return 'downloaded';
 }

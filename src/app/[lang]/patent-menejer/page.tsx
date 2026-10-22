@@ -1,36 +1,20 @@
-'use client';
-
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { ShieldCheck, Clock, Users } from 'lucide-react';
 import TrademarkCalculator from '@/components/sections/trademark-calculator';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { Skeleton } from '@/components/ui/skeleton';
 
-const PatentManagerPage: FC = () => {
-  const params = useParams();
-  const lang = params.lang as string;
-  const [translations, setTranslations] = useState<any>(null);
+type Props = { params: Promise<{ lang: string }> };
 
-  useEffect(() => {
-    if (lang) {
-      getDictionary(lang as Locale).then((dict) => setTranslations(dict.patentCalculatorPage));
-    }
-  }, [lang]);
-
-  if (!translations) {
-    return (
-      <div className="min-h-screen pt-16">
-        <Skeleton className="w-full h-screen" />
-      </div>
-    );
-  }
-
+// Server komponent: menejer telefonda ochganda matn va kalkulyator darhol HTML'da keladi
+// (avval lug'at brauzerda yuklanib, sekin internetda bo'sh skelet ko'rinardi).
+export default async function PatentManagerPage({ params }: Props) {
+  const { lang } = await params;
+  const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
+  const translations = (await getDictionary(safeLang)).patentCalculatorPage;
   const landing = translations.landing || {};
 
   return (
     <div className="min-h-screen pt-16 pb-24 bg-secondary/40">
-      <section className="py-14 sm:py-20">
+      <section className="py-10 sm:py-20">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-blue">
             {landing.title || translations.title}
@@ -61,6 +45,4 @@ const PatentManagerPage: FC = () => {
       </section>
     </div>
   );
-};
-
-export default PatentManagerPage;
+}
