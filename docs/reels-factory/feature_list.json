@@ -102,7 +102,7 @@
       "id": "F-06",
       "title": "Telegram preview + tasdiq tugmalari",
       "owner": "claude",
-      "status": "review",
+      "status": "done",
       "deps": [
         "F-03",
         "F-05"
@@ -114,7 +114,7 @@
         "MOCK_TELEGRAM=true da tashqariga hech narsa ketmaydi",
         "Chiqar/Qayta/O'tkazib yubor callback'lari holatni yozadi"
       ],
-      "evidence": "scripts/telegram-review.ts (send/listen) + lib/telegram.ts: faqat barcha tillari o'tgan keyslar, faqat egasi bosadi, faqat draft'dan o'zgaradi (ifRevisionId), ikkinchi bosish no-op, MOCK_TELEGRAM tarmoqqa chiqmaydi. vitest 53/53 ✅, tsc ✅, mock send/listen ✅ (2026-10-26). Haqiqiy Telegram sinovi egasining bot tokeni bilan kerak."
+      "evidence": "scripts/telegram-review.ts (send/listen) + lib/telegram.ts: faqat barcha tillari o'tgan keyslar, faqat egasi bosadi, faqat draft'dan o'zgaradi (ifRevisionId), ikkinchi bosish no-op, MOCK_TELEGRAM tarmoqqa chiqmaydi. vitest 53/53 ✅, tsc ✅, mock send/listen ✅ (2026-10-26). Haqiqiy Telegram sinovi egasining bot tokeni bilan kerak. | Codex review 3 bosqich (6+3+3 topilma) tuzatildi: barcha tillar + to'liq caption preview'da, qisqa callback ID, haqiqiy yozuvsiz tasdiq yo'q, .env yuklash, getUpdates retry, ledger poygasi, to'qima kategoriya yo'q. Yakuniy review (c2ac171): 'no major issues'. vitest 59/59 ✅."
     },
     {
       "id": "F-07",

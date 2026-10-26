@@ -48,3 +48,8 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 - F-06: `npm run review -- send|listen`. Preview Marketing guruhiga, tugma faqat egada, holat faqat draft'dan.
 - Egasidan kerak: BotFather token, guruh chat ID, o'z Telegram user ID, Sanity write token → `.env`.
 - Keyingi: F-07 (Meta Graph API, Antigravity yoki Claude), F-09 shablonlar.
+
+## 2026-10-26 — F-06 done
+- Codex yakuniy review (c2ac171): no major issues. 59/59 test.
+- Haqiqiy ishga tushirish egasining kalitlarini kutadi: TELEGRAM_BOT_TOKEN, TELEGRAM_REELS_CHAT_ID, TELEGRAM_OWNER_USER_ID, SANITY_WRITE_TOKEN (`.env`).
+- Keyingi: F-07 (Meta Graph API joylash, 09/13/19), F-09 shablonlar, F-11 musiqa.
