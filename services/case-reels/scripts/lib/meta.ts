@@ -40,10 +40,14 @@ export type PublishDeps = {
   sleep: (ms: number) => Promise<void>;
   /** Kutish chegarasi: Instagram videoni qayta ishlashi bir necha daqiqa olishi mumkin. */
   maxPolls?: number;
+  /** media_publish'dan OLDIN: keys hali ham bizga band qilinganmi (egasi rad etmaganmi)? false bo'lsa chiqarilmaydi. */
+  stillClaimed: () => Promise<boolean>;
+  /** media_publish muvaffaqiyatli bo'lishi bilan darhol (permalink'dan oldin) — takroriy post bo'lmasligi uchun. */
+  onPublished: (mediaId: string) => Promise<void>;
 };
 
-/** Ommaviy video URL va caption'dan Reel chiqaradi; permalink qaytaradi. Xato bo'lsa throw. */
-export async function publishReel(videoUrl: string, caption: string, deps: PublishDeps): Promise<{ mediaId: string; permalink: string }> {
+/** Ommaviy video URL va caption'dan Reel chiqaradi. permalink topilmasa null (post baribir chiqqan va yozilgan). */
+export async function publishReel(videoUrl: string, caption: string, deps: PublishDeps): Promise<{ mediaId: string; permalink: string | null }> {
   const container = await deps.graph('POST', `${deps.igUserId}/media`, {
     media_type: 'REELS',
     video_url: videoUrl,
@@ -58,9 +62,15 @@ export async function publishReel(videoUrl: string, caption: string, deps: Publi
     if (i + 1 >= maxPolls) throw new Error('Instagram video tayyor bo\'lmadi (timeout)');
     await deps.sleep(10_000);
   }
+  if (!(await deps.stillClaimed())) throw new Error("Keys holati o'zgargan (masalan rad etilgan) — chiqarilmadi");
   const published = await deps.graph('POST', `${deps.igUserId}/media_publish`, { creation_id: container.id });
-  const { permalink } = await deps.graph('GET', published.id, { fields: 'permalink' });
-  return { mediaId: published.id, permalink };
+  await deps.onPublished(published.id);
+  try {
+    const { permalink } = await deps.graph('GET', published.id, { fields: 'permalink' });
+    return { mediaId: published.id, permalink: permalink ?? null };
+  } catch {
+    return { mediaId: published.id, permalink: null };
+  }
 }
 
 /** Caption + hashtaglar; Instagram limiti 2200 belgi. */
@@ -70,15 +80,11 @@ export function igCaption(text: string, hashtags: string[]): string {
   return full;
 }
 
-/** Bugungi slotlar (Toshkent, UTC+5) bo'yicha: shu soatda yana post chiqmagan bo'lsa true. */
-export function slotOpen(now: Date, lastPublishedAt: string | null, slotsHour: number[] = [9, 13, 19]): boolean {
-  const tashkentHour = (now.getUTCHours() + 5) % 24;
-  const slot = [...slotsHour].reverse().find((h) => tashkentHour >= h);
-  if (slot === undefined) return false;
-  if (!lastPublishedAt) return true;
-  // Shu slot boshlanishidan keyin allaqachon chiqarilgan bo'lsa — yopiq (kuniga 3 tadan oshmaydi).
-  const slotStart = new Date(now);
-  slotStart.setUTCHours(slot - 5, 0, 0, 0);
-  if (slot - 5 < 0) slotStart.setUTCDate(slotStart.getUTCDate() - 1);
-  return new Date(lastPublishedAt) < slotStart;
+/** Joriy slot kaliti (Toshkent, UTC+5), masalan "2026-10-26T09". Birinchi slotdan oldin — null. */
+export function slotKey(now: Date, slotsHour: number[] = [9, 13, 19]): string | null {
+  const local = new Date(now.getTime() + 5 * 3600_000);
+  const hour = local.getUTCHours();
+  const slot = [...slotsHour].reverse().find((h) => hour >= h);
+  if (slot === undefined) return null;
+  return `${local.toISOString().slice(0, 10)}T${String(slot).padStart(2, '0')}`;
 }

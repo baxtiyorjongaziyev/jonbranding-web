@@ -1,89 +1,137 @@
 /**
  * F-07 — egasi tasdiqlagan (reel.status=approved) keyslardan bittasini Instagram Reels'ga chiqaradi.
- *   npm run ig-publish            # faqat ochiq slot bo'lsa (09:00 / 13:00 / 19:00 Toshkent), bitta keys
- *   npm run ig-publish -- --now   # slotni kutmasdan (qo'lda sinov)
+ *   npm run ig-publish            # faqat ochiq slotda (09:00 / 13:00 / 19:00 Toshkent), har slotda bitta
+ *   npm run ig-publish -- --now   # slotni kutmasdan (qo'lda sinov) — baribir slot band qilinadi
  * Cron (server UTC): `0 4,8,14 * * * cd services/case-reels && npm run ig-publish`
  *
  * .env: META_IG_USER_ID, META_ACCESS_TOKEN, SANITY_WRITE_TOKEN, PUBLISH_LANG (default uz)
- * MOCK_META=true — Instagram'ga chiqmaydi; MOCK_SANITY_WRITE=true — Sanity'ga yozilmaydi.
- * Faqat approved holat chiqariladi — tasdiqsiz chiqarish yo'q (AGENTS.md, Human-in-the-loop).
+ * MOCK_META=true — to'liq sinov: Sanity'ga ham, Instagram'ga ham hech narsa yozilmaydi/yuklanmaydi, faqat lokal manifest.
+ *
+ * Xavfsizlik (AGENTS.md, Human-in-the-loop):
+ *  1. Slot qulfi — `reelsPublishLock` hujjati ifRevisionId bilan band qilinadi: ikki parallel ishga tushirish bitta slotda ikki post chiqarmaydi.
+ *  2. Keys band qilinadi — approved → scheduled (ifRevisionId). Faqat shu jarayon chiqara oladi.
+ *  3. media_publish'dan oldin keys hali scheduled ekani qayta tekshiriladi (egasi rad etgan bo'lsa — chiqmaydi).
+ *  4. media_publish muvaffaqiyatli bo'lishi bilan darhol published yoziladi (permalink keyin, ixtiyoriy).
  */
 import './lib/env';
 import { createReadStream, existsSync, readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import type { ManifestEntry } from './lib/batch';
-import { graphApi, igCaption, mockGraph, publishReel, slotOpen } from './lib/meta';
+import { graphApi, igCaption, mockGraph, publishReel, slotKey } from './lib/meta';
 import { sanity } from './lib/sanity';
 import type { CaptionFile } from './lib/telegram';
 
 const force = process.argv.includes('--now');
 const lang = process.env.PUBLISH_LANG?.trim() || 'uz';
-const mockMeta = process.env.MOCK_META === 'true';
-const mockWrite = process.env.MOCK_SANITY_WRITE === 'true';
+const mock = process.env.MOCK_META === 'true';
+
+const manifest: ManifestEntry[] = existsSync('out/manifest.json') ? JSON.parse(readFileSync('out/manifest.json', 'utf8')) : [];
+const assetsFor = (slug: string) => {
+  const e = manifest.find((m) => m.slug === slug && m.lang === lang && m.gate.ok && !m.error && m.file && m.captionFile);
+  return e && existsSync(e.file!) && existsSync(e.captionFile!) ? { file: e.file!, captionFile: e.captionFile! } : null;
+};
+
+if (mock) {
+  // To'liq sinov: tarmoqqa umuman chiqmaydi.
+  const slug = manifest.find((m) => assetsFor(m.slug))?.slug;
+  if (!slug) {
+    console.log(`[mock] manifestda ${lang} uchun tayyor video yo'q.`);
+    process.exit(0);
+  }
+  const a = assetsFor(slug)!;
+  const cap = JSON.parse(readFileSync(a.captionFile, 'utf8')) as CaptionFile;
+  const r = await publishReel(`https://cdn.sanity.io/mock/${basename(a.file)}`, igCaption(cap.text, cap.hashtags), {
+    graph: mockGraph(console.log),
+    igUserId: 'mock',
+    sleep: async () => {},
+    stillClaimed: async () => true,
+    onPublished: async (id) => console.log(`[mock] ${slug}: published (media ${id})`),
+  });
+  console.log(`[mock] ✅ ${slug}: ${r.permalink}`);
+  process.exit(0);
+}
+
 const igUserId = process.env.META_IG_USER_ID;
 const metaToken = process.env.META_ACCESS_TOKEN;
 const writeToken = process.env.SANITY_WRITE_TOKEN;
-
-if (!mockMeta && (!igUserId || !metaToken)) {
-  console.error('META_IG_USER_ID va META_ACCESS_TOKEN kerak (yoki MOCK_META=true).');
+if (!igUserId || !metaToken || !writeToken) {
+  console.error('META_IG_USER_ID, META_ACCESS_TOKEN va SANITY_WRITE_TOKEN kerak (yoki to\'liq sinov uchun MOCK_META=true).');
   process.exit(1);
 }
-// Haqiqiy chiqarishda Sanity'ga yozish shart: aks holda bir keys qayta-qayta chiqib ketadi.
-if (!mockMeta && !writeToken) {
-  console.error('SANITY_WRITE_TOKEN kerak — chiqarilgan keys "published" deb belgilanishi shart.');
-  process.exit(1);
+const db = sanity.withConfig({ token: writeToken, useCdn: false });
+
+// 1. Slot qulfi.
+const now = new Date();
+const slot = slotKey(now) ?? (force ? `manual-${now.toISOString()}` : null);
+if (!slot) {
+  console.log("⏸  Hozir ochiq slot yo'q (09:00 / 13:00 / 19:00 Toshkent).");
+  process.exit(0);
 }
-
-const reader = sanity.withConfig({ useCdn: false });
-const writer = writeToken ? sanity.withConfig({ token: writeToken, useCdn: false }) : null;
-
-const lastPublishedAt = await reader.fetch<string | null>(
-  `*[_type == "portfolio" && defined(reel.publishedAt)] | order(reel.publishedAt desc)[0].reel.publishedAt`,
-);
-if (!force && !slotOpen(new Date(), lastPublishedAt)) {
-  console.log('⏸  Hozir ochiq slot yo\'q (09:00 / 13:00 / 19:00 Toshkent, har slotda bitta).');
+const LOCK_ID = 'reelsPublishLock';
+await db.createIfNotExists({ _id: LOCK_ID, _type: 'reelsPublishLock', slot: '' });
+const lock = await db.getDocument<{ _rev: string; slot?: string }>(LOCK_ID);
+if (lock?.slot === slot) {
+  console.log(`⏸  ${slot} sloti band — bu slotda allaqachon chiqarilgan.`);
+  process.exit(0);
+}
+try {
+  await db.patch(LOCK_ID).ifRevisionId(lock!._rev).set({ slot, at: now.toISOString() }).commit();
+} catch {
+  console.log('⏸  Slotni boshqa jarayon band qildi.');
   process.exit(0);
 }
 
-const next = await reader.fetch<{ _id: string; _rev: string; slug: string } | null>(
-  `*[_type == "portfolio" && !(_id in path("drafts.**")) && reel.status == "approved"] | order(_updatedAt asc)[0]{ _id, _rev, "slug": slug.current }`,
+// 2. Shu tilda tayyor video'si bor eng eski approved keysni band qilish.
+const approved = await db.fetch<{ _id: string; _rev: string; slug: string }[]>(
+  `*[_type == "portfolio" && !(_id in path("drafts.**")) && reel.status == "approved"] | order(_updatedAt asc){ _id, _rev, "slug": slug.current }`,
 );
-if (!next) {
-  console.log("Tasdiqlangan reel yo'q.");
+let picked: { _id: string; slug: string; file: string; captionFile: string } | null = null;
+for (const doc of approved) {
+  const a = assetsFor(doc.slug);
+  if (!a) {
+    console.warn(`↷ ${doc.slug}: ${lang} uchun video/caption yo'q — o'tkazib yuborildi`);
+    continue;
+  }
+  try {
+    await db.patch(doc._id).ifRevisionId(doc._rev).set({ 'reel.status': 'scheduled', 'reel.scheduledAt': now.toISOString() }).commit();
+    picked = { _id: doc._id, slug: doc.slug, ...a };
+    break;
+  } catch {
+    console.warn(`↷ ${doc.slug}: boshqa jarayon band qildi yoki holat o'zgardi`);
+  }
+}
+if (!picked) {
+  console.log(`Chiqarishga tayyor approved reel yo'q (${lang}).`);
   process.exit(0);
 }
 
-const manifest: ManifestEntry[] = existsSync('out/manifest.json') ? JSON.parse(readFileSync('out/manifest.json', 'utf8')) : [];
-const entry = manifest.find((e) => e.slug === next.slug && e.lang === lang && e.gate.ok && e.file && e.captionFile);
-if (!entry || !existsSync(entry.file!) || !existsSync(entry.captionFile!)) {
-  console.error(`❌ ${next.slug} [${lang}]: video yoki caption topilmadi (out/manifest.json). Avval: npm run batch`);
+const release = (note: string) =>
+  db.patch(picked!._id).set({ 'reel.status': 'approved', 'reel.note': note }).commit().catch(() => {});
+
+try {
+  const cap = JSON.parse(readFileSync(picked.captionFile, 'utf8')) as CaptionFile;
+  const caption = igCaption(cap.text, cap.hashtags);
+  // Instagram videoni ommaviy URL'dan oladi — Sanity CDN'ga yuklanadi.
+  const asset = await db.assets.upload('file', createReadStream(picked.file), { filename: basename(picked.file), contentType: 'video/mp4' });
+
+  const { mediaId, permalink } = await publishReel(asset.url, caption, {
+    graph: graphApi(metaToken),
+    igUserId,
+    sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
+    stillClaimed: async () => (await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: picked!._id })) === 'scheduled',
+    onPublished: async (id) => {
+      await db
+        .patch(picked!._id)
+        .set({ 'reel.status': 'published', 'reel.publishedAt': new Date().toISOString(), [`reel.videos.${lang}`]: asset.url, 'reel.note': `Instagram media ${id}` })
+        .commit();
+    },
+  });
+  if (permalink) await db.patch(picked._id).set({ 'reel.postUrl': permalink }).commit().catch(() => {});
+  console.log(`✅ ${picked.slug} chiqarildi: ${permalink ?? `media ${mediaId} (havola keyinroq)`}`);
+} catch (e) {
+  const status = await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: picked._id });
+  // Chiqarilmagan bo'lsa — navbatga qaytariladi (egasi rad etgan bo'lsa, uning qarori o'zgartirilmaydi).
+  if (status === 'scheduled') await release(`Chiqarishda xato: ${(e as Error).message}`);
+  console.error(`❌ ${picked.slug}: ${(e as Error).message}`);
   process.exit(1);
 }
-const captionFile = JSON.parse(readFileSync(entry.captionFile!, 'utf8')) as CaptionFile;
-const caption = igCaption(captionFile.text, captionFile.hashtags);
-
-// Instagram videoni ommaviy URL'dan oladi — Sanity CDN'ga yuklanadi va reel.videos.<til> ga yoziladi.
-let videoUrl: string;
-if (writer && !mockWrite) {
-  const asset = await writer.assets.upload('file', createReadStream(entry.file!), { filename: basename(entry.file!), contentType: 'video/mp4' });
-  videoUrl = asset.url;
-} else {
-  videoUrl = `https://cdn.sanity.io/mock/${basename(entry.file!)}`;
-  console.log(`[mock] video yuklanmadi: ${videoUrl}`);
-}
-
-const graph = mockMeta ? mockGraph(console.log) : graphApi(metaToken!);
-const { permalink } = await publishReel(videoUrl, caption, {
-  graph,
-  igUserId: igUserId ?? 'mock-ig-user',
-  sleep: (ms) => new Promise((r) => setTimeout(r, mockMeta ? 0 : ms)),
-});
-
-const patch = { 'reel.status': 'published', 'reel.publishedAt': new Date().toISOString(), 'reel.postUrl': permalink, [`reel.videos.${lang}`]: videoUrl };
-if (writer && !mockWrite) {
-  // ifRevisionId: tanlangandan keyin holat o'zgargan bo'lsa (masalan rad etilgan) — yozuv rad etiladi va xato ko'rinadi.
-  await writer.patch(next._id).ifRevisionId(next._rev).setIfMissing({ reel: {} }).set(patch).commit();
-} else {
-  console.log(`[mock] ${next.slug}: ${JSON.stringify(patch)}`);
-}
-console.log(`✅ ${next.slug} chiqarildi: ${permalink}`);

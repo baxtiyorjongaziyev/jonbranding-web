@@ -51,5 +51,5 @@ npm run ig-publish -- --now   # qo'lda: bitta approved keysni hozir chiqaradi
 npm run ig-publish            # cron uchun: faqat ochiq slotda (09/13/19 Toshkent), har slotda bitta
 # server cron (UTC): 0 4,8,14 * * * cd /path/services/case-reels && npm run ig-publish
 ```
-Faqat `reel.status=approved` chiqariladi. Video Sanity CDN'ga yuklanadi (Instagram ommaviy URL talab qiladi),
+Faqat `reel.status=approved` chiqariladi. Slot qulfi (`reelsPublishLock`) va keysni `scheduled` deb band qilish parallel ishga tushirishda ikki post chiqishiga yo'l qo'ymaydi; egasi oxirgi daqiqada rad etsa, post chiqmaydi.
 so'ng `reel.status=published`, `reel.publishedAt`, `reel.postUrl`, `reel.videos.<til>` yoziladi.
