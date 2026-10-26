@@ -27,10 +27,24 @@ try {
 // (egasi ko'rib tasdiqlagan versiya chiqariladigan fayl bilan bir xil qolishi shart). 6 soatdan eski qulf — o'lik.
 const LOCK = 'out/batch.lock';
 mkdirSync('out', { recursive: true });
-if (!opts.dryRun) {
-  if (existsSync(LOCK) && Date.now() - statSync(LOCK).mtimeMs > 6 * 3600_000) unlinkSync(LOCK);
+const alive = (pid: number) => {
   try {
-    closeSync(openSync(LOCK, 'wx'));
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+};
+if (!opts.dryRun) {
+  // Qulf egasining PID'i yoziladi: jarayon o'lgan (Ctrl+C, crash) yoki qulf 6 soatdan eski bo'lsa — qulf olib tashlanadi.
+  if (existsSync(LOCK)) {
+    const pid = Number(readFileSync(LOCK, 'utf8'));
+    if (!pid || !alive(pid) || Date.now() - statSync(LOCK).mtimeMs > 6 * 3600_000) unlinkSync(LOCK);
+  }
+  try {
+    const fd = openSync(LOCK, 'wx');
+    writeFileSync(fd, String(process.pid));
+    closeSync(fd);
   } catch {
     console.error(`Boshqa batch ishlayapti (${LOCK}). Tugashini kuting.`);
     process.exit(1);
@@ -40,6 +54,8 @@ if (!opts.dryRun) {
       unlinkSync(LOCK);
     } catch {}
   });
+  // Ctrl+C / SIGTERM'da 'exit' hodisasi chiqishi uchun.
+  for (const sig of ['SIGINT', 'SIGTERM'] as const) process.on(sig, () => process.exit(130));
 }
 
 const token = process.env.SANITY_WRITE_TOKEN;
