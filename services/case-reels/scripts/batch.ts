@@ -6,7 +6,7 @@
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
 import './lib/env';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
 import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';
 import { geminiGenerator, makeCaption } from './lib/caption';
@@ -21,6 +21,25 @@ try {
   console.error((e as Error).message);
   console.error('Foydalanish: npm run batch -- [--dry-run] [--langs uz,ru,en,zh] [--limit N]');
   process.exit(1);
+}
+
+// Bir vaqtda faqat bitta batch: ikki jarayon bir keysning video/caption fayllarini bir-birining ustidan yozmasin
+// (egasi ko'rib tasdiqlagan versiya chiqariladigan fayl bilan bir xil qolishi shart). 6 soatdan eski qulf — o'lik.
+const LOCK = 'out/batch.lock';
+mkdirSync('out', { recursive: true });
+if (!opts.dryRun) {
+  if (existsSync(LOCK) && Date.now() - statSync(LOCK).mtimeMs > 6 * 3600_000) unlinkSync(LOCK);
+  try {
+    closeSync(openSync(LOCK, 'wx'));
+  } catch {
+    console.error(`Boshqa batch ishlayapti (${LOCK}). Tugashini kuting.`);
+    process.exit(1);
+  }
+  process.on('exit', () => {
+    try {
+      unlinkSync(LOCK);
+    } catch {}
+  });
 }
 
 const token = process.env.SANITY_WRITE_TOKEN;
