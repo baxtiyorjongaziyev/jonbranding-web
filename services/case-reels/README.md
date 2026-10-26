@@ -32,3 +32,15 @@ har biri bitta Sanity faktiga bog'langan. Jumladagi raqam o'sha faktda bo'lmasa 
 raqamlar ham), javob rad etiladi; 2 urinishdan keyin yoki provayder xatosida — faktlardan shablon.
 Shablon uz'dan boshqa tillarda faktlarni tarjima qilmaydi va `needsReview` bilan belgilanadi.
 **Har qanday caption — draft.** Egasi Telegram'da tasdiqlamaguncha chiqmaydi (F-06).
+
+## Zavod buyruqlari (F-02 → F-06)
+
+```bash
+npm run batch -- --dry-run              # Reels'i yo'q keyslar ro'yxati
+npm run batch -- --langs uz,ru --limit 3 # render + sifat tekshiruvi + caption → out/manifest.json, Sanity: reel.status=draft
+npm run review -- send                  # tayyor draftlarni Marketing Telegram guruhiga yuboradi
+npm run review -- listen                # ✅ approved / ✏️ draft+note / ⏭ rejected — faqat TELEGRAM_OWNER_USER_ID bosa oladi
+```
+
+Kalitlar `.env` da (`.env.example` ga qarang). `MOCK_TELEGRAM=true` / `MOCK_SANITY_WRITE=true` — tashqariga hech narsa ketmaydi.
+Holat faqat `draft` dan o'zgaradi; `approved` dan keyingi chiqarish — F-07 (Meta API).

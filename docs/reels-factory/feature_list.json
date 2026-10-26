@@ -23,7 +23,7 @@
       "id": "F-02",
       "title": "Sifat darvozasi (quality gate)",
       "owner": "claude",
-      "status": "review",
+      "status": "done",
       "deps": [
         "F-01"
       ],
@@ -38,13 +38,13 @@
       ],
       "verify": "cd services/case-reels && npx tsc --noEmit && npx vitest run",
       "note": "Codex yechimi o'z sandbox'ida qoldi (branch push qilinmadi); Claude qayta yozdi, Codex review qiladi.",
-      "evidence": "scripts/lib/quality-gate.ts (checkCase, checkVideo, injeksiya qilinadigan ffprobe), CLI npm run quality-gate; vitest: 6.9s/20.1s/1080x1919/29.97fps/1 rasm/chegaralar/probe xatosi ✅; tsc ✅ (2026-10-22)."
+      "evidence": "scripts/lib/quality-gate.ts (checkCase, checkVideo, injeksiya qilinadigan ffprobe), CLI npm run quality-gate; vitest: 6.9s/20.1s/1080x1919/29.97fps/1 rasm/chegaralar/probe xatosi ✅; tsc ✅ (2026-10-22). | Codex review: F-03 5 topilma (manifest birlashtirish, limit, ifRevisionId, ESM, manifest-before-draft) tuzatildi (f98d351, bd7aa73); dry-run haqiqiy Sanity bilan ishladi. Egasi: 'o'zing hal qil' (2026-10-26)."
     },
     {
       "id": "F-03",
       "title": "Batch: Reels'i yo'q keyslarni navbat bilan render",
       "owner": "claude",
-      "status": "review",
+      "status": "done",
       "deps": [
         "F-02"
       ],
@@ -57,7 +57,7 @@
         "out/manifest.json yoziladi"
       ],
       "note": "Codex branch'i push qilinmagani uchun Claude yozdi; Codex review qiladi.",
-      "evidence": "scripts/batch.ts + lib/batch.ts (injeksiya qilinadigan deps), lib/case-data.ts (render/caption/batch umumiy), lib/render.ts; dry-run hech narsa chaqirmaydi, bitta keys xatosi qolganlarni to'xtatmaydi, gallery<2 skip, gate xatosida caption/draft yo'q, manifest formati, Sanity xatosi log, --limit, parseArgs. vitest 38/38 ✅, tsc ✅ (2026-10-26)."
+      "evidence": "scripts/batch.ts + lib/batch.ts (injeksiya qilinadigan deps), lib/case-data.ts (render/caption/batch umumiy), lib/render.ts; dry-run hech narsa chaqirmaydi, bitta keys xatosi qolganlarni to'xtatmaydi, gallery<2 skip, gate xatosida caption/draft yo'q, manifest formati, Sanity xatosi log, --limit, parseArgs. vitest 38/38 ✅, tsc ✅ (2026-10-26). | Codex review: F-03 5 topilma (manifest birlashtirish, limit, ifRevisionId, ESM, manifest-before-draft) tuzatildi (f98d351, bd7aa73); dry-run haqiqiy Sanity bilan ishladi. Egasi: 'o'zing hal qil' (2026-10-26)."
     },
     {
       "id": "F-04",
@@ -101,8 +101,8 @@
     {
       "id": "F-06",
       "title": "Telegram preview + tasdiq tugmalari",
-      "owner": "codex",
-      "status": "todo",
+      "owner": "claude",
+      "status": "review",
       "deps": [
         "F-03",
         "F-05"
@@ -114,7 +114,7 @@
         "MOCK_TELEGRAM=true da tashqariga hech narsa ketmaydi",
         "Chiqar/Qayta/O'tkazib yubor callback'lari holatni yozadi"
       ],
-      "blockedBy": "F-03 (Q1 hal qilindi: Marketing guruhi, tasdiq faqat egada)"
+      "evidence": "scripts/telegram-review.ts (send/listen) + lib/telegram.ts: faqat barcha tillari o'tgan keyslar, faqat egasi bosadi, faqat draft'dan o'zgaradi (ifRevisionId), ikkinchi bosish no-op, MOCK_TELEGRAM tarmoqqa chiqmaydi. vitest 53/53 ✅, tsc ✅, mock send/listen ✅ (2026-10-26). Haqiqiy Telegram sinovi egasining bot tokeni bilan kerak."
     },
     {
       "id": "F-07",

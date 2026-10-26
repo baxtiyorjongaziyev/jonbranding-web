@@ -42,3 +42,9 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 - F-03: `npm run batch -- [--dry-run] [--langs ...] [--limit N]`; Sanity'ga faqat `reel.status=draft` (+renderedAt), token bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa mock.
 - Dalil: case-reels tsc ✅, vitest 38/38 ✅, verify.sh ✅.
 - Keyingi: Codex review (F-02, F-03) → F-06 Telegram tasdiq.
+
+## 2026-10-26 — F-02, F-03 done; F-06 review (Claude)
+- F-03 Codex review'dagi 5 topilma tuzatildi; ESM tuzatilgach `npm run batch -- --dry-run` haqiqiy Sanity bilan ishladi.
+- F-06: `npm run review -- send|listen`. Preview Marketing guruhiga, tugma faqat egada, holat faqat draft'dan.
+- Egasidan kerak: BotFather token, guruh chat ID, o'z Telegram user ID, Sanity write token → `.env`.
+- Keyingi: F-07 (Meta Graph API, Antigravity yoki Claude), F-09 shablonlar.

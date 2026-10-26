@@ -10,6 +10,7 @@
     "caption": "tsx scripts/caption.ts",
     "quality-gate": "tsx scripts/quality-gate.ts",
     "batch": "tsx scripts/batch.ts",
+    "review": "tsx scripts/telegram-review.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
