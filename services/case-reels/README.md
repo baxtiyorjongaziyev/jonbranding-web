@@ -44,3 +44,12 @@ npm run review -- listen                # ✅ approved / ✏️ draft+note / ⏭
 
 Kalitlar `services/case-reels/.env` yoki repo ildizidagi `.env` da (`.env.example` ga qarang) — CLI o'zi yuklaydi. `MOCK_TELEGRAM=true` / `MOCK_SANITY_WRITE=true` — tashqariga hech narsa ketmaydi.
 Holat faqat `draft` dan o'zgaradi; `approved` dan keyingi chiqarish — F-07 (Meta API).
+
+### F-07 — Instagram'ga chiqarish
+```bash
+npm run ig-publish -- --now   # qo'lda: bitta approved keysni hozir chiqaradi
+npm run ig-publish            # cron uchun: faqat ochiq slotda (09/13/19 Toshkent), har slotda bitta
+# server cron (UTC): 0 4,8,14 * * * cd /path/services/case-reels && npm run ig-publish
+```
+Faqat `reel.status=approved` chiqariladi. Video Sanity CDN'ga yuklanadi (Instagram ommaviy URL talab qiladi),
+so'ng `reel.status=published`, `reel.publishedAt`, `reel.postUrl`, `reel.videos.<til>` yoziladi.

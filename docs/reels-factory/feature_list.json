@@ -118,22 +118,24 @@
     },
     {
       "id": "F-07",
-      "title": "Postiz orqali rejalashtirish",
-      "owner": "antigravity",
-      "status": "todo",
+      "title": "Instagram Reels — Meta Graph API (09/13/19)",
+      "owner": "claude",
+      "status": "review",
       "deps": [
         "F-06",
         "F-04"
       ],
       "files": [
-        "services/case-reels/scripts/publish.ts"
+        "services/case-reels/scripts/publish.ts",
+        "services/case-reels/scripts/lib/meta.ts"
       ],
       "acceptance": [
-        "Faqat reel.status=approved bo'lsa chiqaradi",
-        "MOCK_POSTIZ=true rejimi",
-        "Muvaffaqiyatda reel.status=scheduled + reel.postUrl; chiqqanda reel.publishedAt"
+        "Faqat reel.status=approved chiqariladi",
+        "MOCK_META=true rejimi",
+        "Kuniga 3 slot (09/13/19 Toshkent), har slotda bitta",
+        "Muvaffaqiyatda reel.status=published + publishedAt + postUrl + videos.<til>"
       ],
-      "blockedBy": "PRD Q2, Q3"
+      "evidence": "scripts/publish.ts + lib/meta.ts: REELS container → FINISHED poll → media_publish → permalink; ERROR/timeout'da chiqarilmaydi; slotOpen; ifRevisionId. vitest 70/70 ✅, tsc ✅, MOCK_META haqiqiy Sanity o'qish bilan ishladi (2026-10-26). Haqiqiy sinov egasining Meta tokeni bilan."
     },
     {
       "id": "F-08",

@@ -11,6 +11,7 @@
     "quality-gate": "tsx scripts/quality-gate.ts",
     "batch": "tsx scripts/batch.ts",
     "review": "tsx scripts/telegram-review.ts",
+    "ig-publish": "tsx scripts/publish.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
