@@ -5,7 +5,7 @@ import { approvedResult, type Result } from './sanity';
 
 export const IMG = '?w=1080&h=1920&fit=crop&auto=format';
 
-export const CASE_FIELDS = `_id, "slug": slug.current, client, title, category, city, industry, description,
+export const CASE_FIELDS = `_id, _rev, "slug": slug.current, client, title, category, city, industry, description,
   "beforeImage": beforeImage.asset->url + "${IMG}",
   "afterImage": afterImage.asset->url + "${IMG}",
   "gallery": galleryImages[defined(asset)].asset->url,
@@ -13,6 +13,7 @@ export const CASE_FIELDS = `_id, "slug": slug.current, client, title, category, 
 
 export type CaseDoc = {
   _id: string;
+  _rev?: string;
   slug: string;
   client?: string | null;
   title: string;

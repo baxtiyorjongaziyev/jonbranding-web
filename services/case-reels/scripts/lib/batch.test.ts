@@ -12,6 +12,7 @@ function deps(cases: CaseDoc[], over: Partial<BatchDeps> = {}) {
     gate: vi.fn(async () => ({ ok: true, reasons: [] })),
     caption: vi.fn(async (_c: CaseDoc, lang) => ({ lang, text: 't', hashtags: [], needsReview: [], source: 'template', errors: [] })),
     writeJson: vi.fn(),
+    readManifest: vi.fn(() => []),
     markDraft: vi.fn(async () => {}),
     log: vi.fn(),
     ...over,
@@ -70,6 +71,20 @@ describe('runBatch', () => {
     const d = deps([doc('a')], { markDraft: vi.fn(async () => { throw new Error('403'); }) });
     await expect(runBatch({ dryRun: false, langs: ['uz'] }, d)).resolves.toHaveLength(1);
     expect(d.log).toHaveBeenCalledWith(expect.stringContaining('403'));
+  });
+
+  it('applies --limit to eligible cases only', async () => {
+    const d = deps([doc('thin', ['a']), doc('ok')]);
+    await runBatch({ dryRun: false, langs: ['uz'], limit: 1 }, d);
+    expect(d.render).toHaveBeenCalledWith(expect.objectContaining({ slug: 'ok' }), 'uz');
+  });
+
+  it('keeps earlier manifest entries and replaces re-processed slugs', async () => {
+    const old = { slug: 'prev', lang: 'uz' as const, file: 'out/prev-uz.mp4', captionFile: 'c', gate: { ok: true, reasons: [] } };
+    const stale = { ...old, slug: 'a', file: 'old' };
+    const d = deps([doc('a')], { readManifest: vi.fn(() => [old, stale]) });
+    const m = await runBatch({ dryRun: false, langs: ['uz'] }, d);
+    expect(m.map((e) => [e.slug, e.file])).toEqual([['prev', 'out/prev-uz.mp4'], ['a', 'out/a-uz.mp4']]);
   });
 
   it('respects --limit', async () => {

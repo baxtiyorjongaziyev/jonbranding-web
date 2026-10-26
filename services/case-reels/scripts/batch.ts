@@ -5,9 +5,9 @@
  * Sanity: muvaffaqiyatli keysga faqat reel.status="draft" + reel.renderedAt.
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
-import { parseArgs, runBatch } from './lib/batch';
+import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';
 import { geminiGenerator, makeCaption } from './lib/caption';
 import { checkRendered } from './lib/quality-gate';
 import { renderCase } from './lib/render';
@@ -33,7 +33,8 @@ const QUERY = `*[_type == "portfolio" && !(_id in path("drafts.**")) && defined(
   && (!defined(reel.status) || reel.status == "none")] | order(publishedAt desc) { ${CASE_FIELDS} }`;
 
 await runBatch(opts, {
-  listCases: () => sanity.fetch<CaseDoc[]>(QUERY),
+  // CDN emas: holat filtri eng yangi ma'lumotga qarashi kerak.
+  listCases: () => sanity.withConfig({ useCdn: false }).fetch<CaseDoc[]>(QUERY),
   render: async (doc, lang) => renderCase(doc, lang),
   gate: (file) => checkRendered(file),
   caption: (doc, lang) => makeCaption(toFacts(doc), lang, generate),
@@ -41,13 +42,22 @@ await runBatch(opts, {
     mkdirSync('out', { recursive: true });
     writeFileSync(file, JSON.stringify(data, null, 2));
   },
+  readManifest: () =>
+    existsSync('out/manifest.json') ? (JSON.parse(readFileSync('out/manifest.json', 'utf8')) as ManifestEntry[]) : [],
   markDraft: async (doc) => {
     const renderedAt = new Date().toISOString();
     if (mockWrite || !writer) {
       console.log(`[mock] ${doc.slug}: reel.status=draft, reel.renderedAt=${renderedAt}`);
       return;
     }
-    await writer.patch(doc._id).setIfMissing({ reel: {} }).set({ 'reel.status': 'draft', 'reel.renderedAt': renderedAt }).commit();
+    // ifRevisionId: render paytida egasi holatni o'zgartirgan bo'lsa, yozuv rad etiladi (uning qarori ustidan yozilmaydi).
+    if (!doc._rev) throw new Error('_rev yo\'q — xavfsiz yozib bo\'lmaydi');
+    await writer
+      .patch(doc._id)
+      .ifRevisionId(doc._rev)
+      .setIfMissing({ reel: {} })
+      .set({ 'reel.status': 'draft', 'reel.renderedAt': renderedAt })
+      .commit();
   },
   log: console.log,
 });

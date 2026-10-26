@@ -22,6 +22,8 @@ export type BatchDeps = {
   gate: (file: string) => Promise<GateResult>;
   caption: (doc: CaseDoc, lang: ReelLang) => Promise<unknown>;
   writeJson: (file: string, data: unknown) => void;
+  /** Oldingi out/manifest.json (yo'q bo'lsa []). F-06 ko'rmagan draftlar yo'qolmasligi uchun. */
+  readManifest: () => ManifestEntry[];
   markDraft: (doc: CaseDoc) => Promise<void>;
   log: (msg: string) => void;
 };
@@ -29,16 +31,19 @@ export type BatchDeps = {
 const errMsg = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
 export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<ManifestEntry[]> {
-  const cases = (await deps.listCases()).slice(0, opts.limit ?? Infinity);
   const manifest: ManifestEntry[] = [];
-
-  for (const doc of cases) {
+  const eligible: CaseDoc[] = [];
+  // Avval galereya tekshiruvi, keyin --limit: aks holda yaroqsiz keys navbatni abadiy to'sib qo'yadi.
+  for (const doc of await deps.listCases()) {
     const pre = checkCase(doc);
-    if (!pre.ok) {
+    if (pre.ok) eligible.push(doc);
+    else {
       manifest.push({ slug: doc.slug, lang: null, file: null, captionFile: null, gate: pre });
       deps.log(`⏭  ${doc.slug}: ${pre.reasons.join(', ')}`);
-      continue;
     }
+  }
+
+  for (const doc of eligible.slice(0, opts.limit ?? Infinity)) {
     if (opts.dryRun) {
       deps.log(`• ${doc.slug} → ${opts.langs.join(', ')}`);
       continue;
@@ -72,8 +77,12 @@ export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<Man
     }
   }
 
-  if (!opts.dryRun) deps.writeJson('out/manifest.json', manifest);
-  return manifest;
+  if (opts.dryRun) return manifest;
+  // Oldingi ishga tushirishlardagi yozuvlar saqlanadi; shu safar ishlangan keyslarniki yangilanadi.
+  const touched = new Set(manifest.map((e) => e.slug));
+  const merged = [...deps.readManifest().filter((e) => !touched.has(e.slug)), ...manifest];
+  deps.writeJson('out/manifest.json', merged);
+  return merged;
 }
 
 export function parseArgs(argv: string[], allLangs: readonly ReelLang[]): BatchOptions {
