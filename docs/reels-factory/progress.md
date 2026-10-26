@@ -36,3 +36,9 @@ Format: sana · agent · vazifa · nima qilindi · dalil (buyruq + natija) · ke
 - CI 7e7d90f da yashil (typecheck, lint, test, build, npm audit, GitGuardian).
 - CodeQL workflow egasi qarori bilan olib tashlandi (private repoda code scanning yo'q).
 - Keyingi: F-09 (Claude, F-02 dan keyin), F-02/F-03 (Codex), F-06 egasi qarorlarini kutadi (PRD §10).
+
+## 2026-10-26 — F-02, F-03 review'da (Claude)
+- Codex F-02 ni o'z sandbox'ida yozdi, lekin branch GitHub'ga push qilinmadi → Claude brief bo'yicha qayta yozdi (0c1f494).
+- F-03: `npm run batch -- [--dry-run] [--langs ...] [--limit N]`; Sanity'ga faqat `reel.status=draft` (+renderedAt), token bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa mock.
+- Dalil: case-reels tsc ✅, vitest 38/38 ✅, verify.sh ✅.
+- Keyingi: Codex review (F-02, F-03) → F-06 Telegram tasdiq.

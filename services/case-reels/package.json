@@ -8,6 +8,7 @@
     "render": "tsx scripts/render-case.ts",
     "caption": "tsx scripts/caption.ts",
     "quality-gate": "tsx scripts/quality-gate.ts",
+    "batch": "tsx scripts/batch.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

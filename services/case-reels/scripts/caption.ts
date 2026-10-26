@@ -6,8 +6,9 @@
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
-import { geminiGenerator, makeCaption, type CaptionFacts } from './lib/caption';
-import { approvedResult, sanity } from './lib/sanity';
+import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
+import { geminiGenerator, makeCaption } from './lib/caption';
+import { sanity } from './lib/sanity';
 
 const slug = process.argv[2];
 if (!slug) {
@@ -15,26 +16,12 @@ if (!slug) {
   process.exit(1);
 }
 
-const doc = await sanity.fetch(
-  `*[_type == "portfolio" && slug.current == $slug][0]{ client, title, category, city, industry, description, results }`,
-  { slug },
-);
+const doc = await sanity.fetch<CaseDoc | null>(`*[_type == "portfolio" && slug.current == $slug][0]{ ${CASE_FIELDS} }`, { slug });
 if (!doc) {
   console.error(`Keys topilmadi: ${slug}`);
   process.exit(1);
 }
-
-const r = approvedResult(doc.results);
-const facts: CaptionFacts = {
-  client: doc.client ?? doc.title,
-  title: doc.title,
-  category: doc.category ?? undefined,
-  city: doc.city ?? undefined,
-  industry: doc.industry ?? undefined,
-  description: typeof doc.description === 'string' ? doc.description.slice(0, 600) : undefined,
-  result: r ? { metric: r.metric!, value: r.value!, period: r.period! } : null,
-  url: `https://jonbranding.uz/uz/portfolio/${slug}`,
-};
+const facts = toFacts(doc);
 
 const key = process.env.GEMINI_API_KEY;
 const generate = key && process.env.MOCK_LLM !== 'true' ? geminiGenerator(key) : undefined;

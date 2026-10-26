@@ -43,8 +43,8 @@
     {
       "id": "F-03",
       "title": "Batch: Reels'i yo'q keyslarni navbat bilan render",
-      "owner": "codex",
-      "status": "todo",
+      "owner": "claude",
+      "status": "review",
       "deps": [
         "F-02"
       ],
@@ -55,7 +55,9 @@
         "--dry-run ro'yxatni chiqaradi, hech narsa render qilmaydi",
         "Bir keys xato bersa qolganlari davom etadi",
         "out/manifest.json yoziladi"
-      ]
+      ],
+      "note": "Codex branch'i push qilinmagani uchun Claude yozdi; Codex review qiladi.",
+      "evidence": "scripts/batch.ts + lib/batch.ts (injeksiya qilinadigan deps), lib/case-data.ts (render/caption/batch umumiy), lib/render.ts; dry-run hech narsa chaqirmaydi, bitta keys xatosi qolganlarni to'xtatmaydi, gallery<2 skip, gate xatosida caption/draft yo'q, manifest formati, Sanity xatosi log, --limit, parseArgs. vitest 38/38 ✅, tsc ✅ (2026-10-26)."
     },
     {
       "id": "F-04",
