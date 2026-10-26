@@ -32,6 +32,14 @@ const errMsg = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
 export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<ManifestEntry[]> {
   const manifest: ManifestEntry[] = [];
+  const previous = opts.dryRun ? [] : deps.readManifest();
+  // Oldingi ishga tushirishlardagi yozuvlar saqlanadi; shu safar ishlangan keyslarniki yangilanadi.
+  const persist = () => {
+    const touched = new Set(manifest.map((e) => e.slug));
+    const merged = [...previous.filter((e) => !touched.has(e.slug)), ...manifest];
+    deps.writeJson('out/manifest.json', merged);
+    return merged;
+  };
   const eligible: CaseDoc[] = [];
   // Avval galereya tekshiruvi, keyin --limit: aks holda yaroqsiz keys navbatni abadiy to'sib qo'yadi.
   for (const doc of await deps.listCases()) {
@@ -68,6 +76,8 @@ export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<Man
     }
 
     // Sanity'ga faqat "draft" yoziladi va faqat barcha tillar o'tganda. approved/published — faqat egasi (F-06).
+    // Draft belgisidan OLDIN manifest diskka yoziladi: batch to'xtasa ham tayyor ish F-06 uchun yo'qolmaydi.
+    persist();
     if (allOk) {
       try {
         await deps.markDraft(doc);
@@ -77,12 +87,7 @@ export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<Man
     }
   }
 
-  if (opts.dryRun) return manifest;
-  // Oldingi ishga tushirishlardagi yozuvlar saqlanadi; shu safar ishlangan keyslarniki yangilanadi.
-  const touched = new Set(manifest.map((e) => e.slug));
-  const merged = [...deps.readManifest().filter((e) => !touched.has(e.slug)), ...manifest];
-  deps.writeJson('out/manifest.json', merged);
-  return merged;
+  return opts.dryRun ? manifest : persist();
 }
 
 export function parseArgs(argv: string[], allLangs: readonly ReelLang[]): BatchOptions {

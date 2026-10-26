@@ -87,6 +87,16 @@ describe('runBatch', () => {
     expect(m.map((e) => [e.slug, e.file])).toEqual([['prev', 'out/prev-uz.mp4'], ['a', 'out/a-uz.mp4']]);
   });
 
+  it('writes the manifest before marking a case as draft', async () => {
+    const order: string[] = [];
+    const d = deps([doc('a')], {
+      writeJson: vi.fn((f: string) => { if (f === 'out/manifest.json') order.push('manifest'); }),
+      markDraft: vi.fn(async () => { order.push('draft'); }),
+    });
+    await runBatch({ dryRun: false, langs: ['uz'] }, d);
+    expect(order.slice(0, 2)).toEqual(['manifest', 'draft']);
+  });
+
   it('respects --limit', async () => {
     const d = deps([doc('a'), doc('b'), doc('c')]);
     await runBatch({ dryRun: false, langs: ['uz'], limit: 2 }, d);
