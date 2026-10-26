@@ -74,12 +74,16 @@ if (lock?.slot === slot) {
   console.log(`⏸  ${slot} sloti band — bu slotda allaqachon chiqarilgan.`);
   process.exit(0);
 }
+let lockRev: string;
 try {
-  await db.patch(LOCK_ID).ifRevisionId(lock!._rev).set({ slot, at: now.toISOString() }).commit();
+  lockRev = (await db.patch(LOCK_ID).ifRevisionId(lock!._rev).set({ slot, at: now.toISOString() }).commit())._rev;
 } catch {
   console.log('⏸  Slotni boshqa jarayon band qildi.');
   process.exit(0);
 }
+// Hech narsa chiqmagani aniq bo'lsa slot qaytariladi (faqat o'zimiz band qilgan holatda).
+const releaseSlot = () =>
+  db.patch(LOCK_ID).ifRevisionId(lockRev).set({ slot: lock?.slot ?? '' }).commit().then(() => {}, () => {});
 
 // 2. Shu tilda tayyor video'si bor eng eski approved keysni band qilish.
 const approved = await db.fetch<{ _id: string; _rev: string; slug: string }[]>(
@@ -101,37 +105,74 @@ for (const doc of approved) {
   }
 }
 if (!picked) {
+  await releaseSlot();
   console.log(`Chiqarishga tayyor approved reel yo'q (${lang}).`);
   process.exit(0);
 }
 
-const release = (note: string) =>
-  db.patch(picked!._id).set({ 'reel.status': 'approved', 'reel.note': note }).commit().catch(() => {});
+type Stage = 'pre' | 'attempted' | 'published';
+let stage = 'pre' as Stage; // callback'lar ichida o'zgaradi
+let mediaId: string | null = null;
+const publishedPatch = (id: string, url: string) => ({
+  'reel.status': 'published',
+  'reel.publishedAt': new Date().toISOString(),
+  [`reel.videos.${lang}`]: url,
+  'reel.note': `Instagram media ${id}`,
+});
+let videoUrl = '';
 
 try {
   const cap = JSON.parse(readFileSync(picked.captionFile, 'utf8')) as CaptionFile;
   const caption = igCaption(cap.text, cap.hashtags);
   // Instagram videoni ommaviy URL'dan oladi — Sanity CDN'ga yuklanadi.
   const asset = await db.assets.upload('file', createReadStream(picked.file), { filename: basename(picked.file), contentType: 'video/mp4' });
+  videoUrl = asset.url;
 
-  const { mediaId, permalink } = await publishReel(asset.url, caption, {
+  const { permalink } = await publishReel(asset.url, caption, {
     graph: graphApi(metaToken),
     igUserId,
     sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
     stillClaimed: async () => (await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: picked!._id })) === 'scheduled',
+    onPublishAttempt: () => {
+      stage = 'attempted';
+    },
     onPublished: async (id) => {
-      await db
-        .patch(picked!._id)
-        .set({ 'reel.status': 'published', 'reel.publishedAt': new Date().toISOString(), [`reel.videos.${lang}`]: asset.url, 'reel.note': `Instagram media ${id}` })
-        .commit();
+      // Avval xotirada: Sanity yozuvi muvaffaqiyatsiz bo'lsa ham post chiqqani unutilmaydi.
+      stage = 'published';
+      mediaId = id;
+      await db.patch(picked!._id).set(publishedPatch(id, asset.url)).commit();
     },
   });
   if (permalink) await db.patch(picked._id).set({ 'reel.postUrl': permalink }).commit().catch(() => {});
   console.log(`✅ ${picked.slug} chiqarildi: ${permalink ?? `media ${mediaId} (havola keyinroq)`}`);
 } catch (e) {
-  const status = await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: picked._id });
-  // Chiqarilmagan bo'lsa — navbatga qaytariladi (egasi rad etgan bo'lsa, uning qarori o'zgartirilmaydi).
-  if (status === 'scheduled') await release(`Chiqarishda xato: ${(e as Error).message}`);
-  console.error(`❌ ${picked.slug}: ${(e as Error).message}`);
+  const msg = (e as Error).message;
+  if ((stage as Stage) === 'published') {
+    // Post Instagram'da BOR — hech qachon navbatga qaytarilmaydi. Yozuv qayta urinib ko'riladi, slot band qoladi.
+    for (let i = 0; i < 3; i++) {
+      try {
+        await db.patch(picked._id).set(publishedPatch(mediaId!, videoUrl)).commit();
+        console.error(`⚠️  ${picked.slug}: chiqarildi (media ${mediaId}), Sanity yozuvi qayta urinishda saqlandi.`);
+        process.exit(0);
+      } catch {
+        await new Promise((r) => setTimeout(r, 2000 * 2 ** i));
+      }
+    }
+    console.error(`🚨 ${picked.slug}: Instagram'da CHIQDI (media ${mediaId}), lekin Sanity'ga yozilmadi. Holat "scheduled" qoldi — qo'lda published qiling.`);
+    process.exit(1);
+  }
+  if ((stage as Stage) === 'attempted') {
+    // Natija noaniq (media_publish javobi kelmadi): takroriy post xavfi — keys ham, slot ham band qoladi.
+    await db.patch(picked._id).set({ 'reel.note': `Natija noaniq: ${msg} — Instagram'ni tekshiring` }).commit().catch(() => {});
+    console.error(`🚨 ${picked.slug}: media_publish natijasi noaniq (${msg}). Instagram'ni tekshiring; keys "scheduled" qoldi.`);
+    process.exit(1);
+  }
+  // Chiqarilmagani aniq: keys navbatga qaytadi (faqat hali biz band qilgan revision bo'lsa), slot bo'shatiladi.
+  const cur = await db.fetch<{ _rev: string; status?: string } | null>(`*[_id == $id][0]{ _rev, "status": reel.status }`, { id: picked._id });
+  if (cur?.status === 'scheduled') {
+    await db.patch(picked._id).ifRevisionId(cur._rev).set({ 'reel.status': 'approved', 'reel.note': `Chiqarishda xato: ${msg}` }).commit().catch(() => {});
+  }
+  await releaseSlot();
+  console.error(`❌ ${picked.slug}: ${msg}`);
   process.exit(1);
 }

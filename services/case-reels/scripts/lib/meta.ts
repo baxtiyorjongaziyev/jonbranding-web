@@ -42,6 +42,8 @@ export type PublishDeps = {
   maxPolls?: number;
   /** media_publish'dan OLDIN: keys hali ham bizga band qilinganmi (egasi rad etmaganmi)? false bo'lsa chiqarilmaydi. */
   stillClaimed: () => Promise<boolean>;
+  /** media_publish so'rovi yuborilishidan oldin — shundan keyingi xato "natija noaniq" hisoblanadi. */
+  onPublishAttempt?: () => void;
   /** media_publish muvaffaqiyatli bo'lishi bilan darhol (permalink'dan oldin) — takroriy post bo'lmasligi uchun. */
   onPublished: (mediaId: string) => Promise<void>;
 };
@@ -63,6 +65,7 @@ export async function publishReel(videoUrl: string, caption: string, deps: Publi
     await deps.sleep(10_000);
   }
   if (!(await deps.stillClaimed())) throw new Error("Keys holati o'zgargan (masalan rad etilgan) — chiqarilmadi");
+  deps.onPublishAttempt?.();
   const published = await deps.graph('POST', `${deps.igUserId}/media_publish`, { creation_id: container.id });
   await deps.onPublished(published.id);
   try {
