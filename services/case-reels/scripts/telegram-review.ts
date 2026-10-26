@@ -12,8 +12,8 @@ import { basename } from 'node:path';
 import type { ManifestEntry } from './lib/batch';
 import { sanity } from './lib/sanity';
 import {
-  handleCallback, keyboard, mockTelegram, previewText, readyItems, telegramApi,
-  type CallbackQuery, type CaptionFile, type TargetStatus,
+  decisionText, handleCallback, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
+  type CallbackQuery, type CaptionFile, type SetResult, type TargetStatus,
 } from './lib/telegram';
 
 const mode = process.argv[2];
@@ -34,43 +34,63 @@ const tg = mock ? mockTelegram(console.log) : telegramApi(token!);
 
 const readJson = <T>(file: string, fallback: T): T => (existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')) as T) : fallback);
 const SENT = 'out/review-sent.json';
+const INDEX = 'out/review-index.json'; // qisqa ID → slug
 const OFFSET = 'out/review-offset.json';
+const saveJson = (file: string, data: unknown) => writeFileSync(file, JSON.stringify(data, null, 2));
 
 if (mode === 'send') {
   const manifest = readJson<ManifestEntry[]>('out/manifest.json', []);
   const sent = new Set(readJson<string[]>(SENT, []));
+  const index = readJson<Record<string, string>>(INDEX, {});
   const items = readyItems(manifest, (f) => readJson<CaptionFile>(f, { lang: '?', text: '', hashtags: [] })).filter(
     (i) => !sent.has(i.slug),
   );
+
+  const sendVideo = async (video: string, caption: string) => {
+    if (mock) return tg('sendVideo', { chat_id: chatId, video, caption });
+    // Lokal faylni yuklash uchun multipart (JSON API fayl qabul qilmaydi).
+    const form = new FormData();
+    form.set('chat_id', chatId!);
+    form.set('caption', caption);
+    form.set('parse_mode', 'HTML');
+    form.set('video', new Blob([readFileSync(video)], { type: 'video/mp4' }), basename(video));
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendVideo`, { method: 'POST', body: form });
+    const json = (await res.json()) as { ok: boolean; description?: string };
+    if (!json.ok) throw new Error(json.description ?? String(res.status));
+  };
+
+  let count = 0;
   for (const item of items) {
-    if (mock) {
-      await tg('sendVideo', { chat_id: chatId, video: item.video, caption: previewText(item), reply_markup: keyboard(item.slug) });
-    } else {
-      // Lokal faylni yuklash uchun multipart (JSON API fayl qabul qilmaydi).
-      const form = new FormData();
-      form.set('chat_id', chatId!);
-      form.set('caption', previewText(item));
-      form.set('parse_mode', 'HTML');
-      form.set('reply_markup', JSON.stringify(keyboard(item.slug)));
-      form.set('video', new Blob([readFileSync(item.video)], { type: 'video/mp4' }), basename(item.video));
-      const res = await fetch(`https://api.telegram.org/bot${token}/sendVideo`, { method: 'POST', body: form });
-      const json = (await res.json()) as { ok: boolean; description?: string };
-      if (!json.ok) {
-        console.error(`❌ ${item.slug}: ${json.description}`);
-        continue;
-      }
+    try {
+      // Har bir til alohida: egasi tasdiqlashdan oldin barcha variantlarni ko'radi.
+      for (const v of item.variants) await sendVideo(v.video, variantText(item.slug, v.caption));
+      await tg('sendMessage', { chat_id: chatId, text: decisionText(item), parse_mode: 'HTML', reply_markup: keyboard(item.slug) });
+    } catch (e) {
+      console.error(`❌ ${item.slug}: ${(e as Error).message}`);
+      continue;
     }
-    sent.add(item.slug);
-    writeFileSync(SENT, JSON.stringify([...sent], null, 2));
-    console.log(`📤 ${item.slug} yuborildi`);
+    count++;
+    index[shortId(item.slug)] = item.slug;
+    saveJson(INDEX, index);
+    // Sinov rejimida "yuborilgan" ro'yxatiga yozilmaydi — keyin haqiqiy yuborish to'silmasin.
+    if (!mock) {
+      sent.add(item.slug);
+      saveJson(SENT, [...sent]);
+    }
+    console.log(`📤 ${item.slug} yuborildi (${item.langs.join(', ')})`);
   }
-  console.log(items.length ? `Yuborildi: ${items.length}` : "Yangi tayyor draft yo'q.");
+  console.log(count ? `Yuborildi: ${count}` : "Yangi tayyor draft yo'q.");
 } else {
   const writeToken = process.env.SANITY_WRITE_TOKEN;
-  const mockWrite = process.env.MOCK_SANITY_WRITE === 'true' || !writeToken;
+  // Sinov yozuvi faqat aniq so'ralganda; haqiqiy tinglovchi tokensiz ishga tushmaydi (qaror "yozildi" deb ko'rinib, yo'qolmasin).
+  const mockWrite = process.env.MOCK_SANITY_WRITE === 'true';
+  if (!mockWrite && !writeToken) {
+    console.error("SANITY_WRITE_TOKEN kerak (yoki sinov uchun MOCK_SANITY_WRITE=true).");
+    process.exit(1);
+  }
   const writer = writeToken ? sanity.withConfig({ token: writeToken, useCdn: false }) : null;
 
-  const setStatus = async (slug: string, status: TargetStatus, note: string): Promise<boolean> => {
+  const setStatus = async (slug: string, status: TargetStatus, note: string): Promise<SetResult> => {
     const doc = await sanity
       .withConfig({ useCdn: false })
       .fetch<{ _id: string; _rev: string; status?: string } | null>(
@@ -78,14 +98,16 @@ if (mode === 'send') {
         { slug },
       );
     // Faqat draft holatidan o'zgartiriladi: ikkinchi bosish yoki boshqa holat — hech narsa qilinmaydi.
-    if (!doc || doc.status !== 'draft') return false;
+    if (!doc || doc.status !== 'draft') return 'unchanged';
     if (mockWrite || !writer) {
       console.log(`[mock] ${slug}: reel.status=${status}, reel.note="${note}"`);
-      return true;
+      return 'simulated';
     }
     await writer.patch(doc._id).ifRevisionId(doc._rev).set({ 'reel.status': status, 'reel.note': note }).commit();
-    return true;
+    return 'changed';
   };
+  const index = () => readJson<Record<string, string>>(INDEX, {});
+  const onRework = (slug: string) => saveJson(SENT, readJson<string[]>(SENT, []).filter((s) => s !== slug));
 
   let offset = readJson<number>(OFFSET, 0);
   console.log(`👂 Tinglanmoqda${mock ? ' (mock)' : ''}... To'xtatish: Ctrl+C`);
@@ -100,7 +122,9 @@ if (mode === 'send') {
       try {
         const outcome = await handleCallback(u.callback_query, {
           ownerId,
+          resolve: (id) => index()[id],
           setStatus,
+          onRework,
           answer: (id, text) => tg('answerCallbackQuery', { callback_query_id: id, text }),
           markMessage: (q, text) =>
             q.message

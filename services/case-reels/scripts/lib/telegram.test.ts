@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { ManifestEntry } from './batch';
 import {
-  callbackData, handleCallback, keyboard, mockTelegram, parseCallback, previewText, readyItems,
+  callbackData, decisionText, handleCallback, keyboard, mockTelegram, parseCallback, readyItems, shortId, variantText,
   type CallbackQuery, type ReviewDeps,
 } from './telegram';
 
@@ -18,37 +18,46 @@ describe('readyItems', () => {
       caption,
     );
     expect(items.map((i) => i.slug)).toEqual(['a']);
-    expect(items[0]).toMatchObject({ video: 'out/a-uz.mp4', langs: ['uz', 'ru'] });
+    expect(items[0].langs).toEqual(['uz', 'ru']);
+    expect(items[0].variants.map((v) => v.video)).toEqual(['out/a-uz.mp4', 'out/a-ru.mp4']);
   });
 });
 
 describe('callback data', () => {
-  it('round-trips', () => expect(parseCallback(callbackData('ok', 'den-aroma'))).toEqual({ action: 'ok', slug: 'den-aroma' }));
-  it('rejects foreign data and overlong slugs', () => {
+  it('round-trips via a compact id', () => expect(parseCallback(callbackData('ok', 'den-aroma'))).toEqual({ action: 'ok', id: shortId('den-aroma') }));
+  it('stays within 64 bytes for 96-char slugs', () => {
+    for (const a of ['ok', 'redo', 'skip'] as const) expect(Buffer.byteLength(callbackData(a, 'x'.repeat(96)))).toBeLessThanOrEqual(64);
+  });
+  it('rejects foreign data', () => {
     expect(parseCallback('hack:ok:x')).toBeNull();
     expect(parseCallback(undefined)).toBeNull();
-    expect(() => callbackData('ok', 'x'.repeat(70))).toThrow();
   });
   it('keyboard has three buttons', () => expect(keyboard('a').inline_keyboard[0]).toHaveLength(3));
 });
 
-describe('previewText', () => {
-  it('escapes HTML, shows review flags and fits 1024 chars', () => {
-    const t = previewText({
-      slug: 'a', video: 'v', langs: ['uz', 'ru'],
-      captions: [{ lang: 'uz', text: 'x'.repeat(2000) + '<', hashtags: [], needsReview: [] }, { lang: 'ru', text: 'y', hashtags: [], needsReview: ['template-untranslated-facts'] }],
+describe('preview texts', () => {
+  it('truncates plain text before escaping, so no entity is split', () => {
+    const t = variantText('a', { lang: 'uz', text: '&'.repeat(1500), hashtags: [] });
+    expect(t).not.toMatch(/&(?!amp;)[a-z]*…/);
+    expect(t.replace(/&amp;/g, '&').replace(/<[^>]+>/g, '').length).toBeLessThanOrEqual(1024);
+  });
+  it('decision message lists every language and review flag', () => {
+    const t = decisionText({
+      slug: 'a', langs: ['uz', 'ru'], variants: [],
+      captions: [{ lang: 'uz', text: '', hashtags: [] }, { lang: 'ru', text: '', hashtags: [], needsReview: ['template-untranslated-facts'] }],
     });
-    expect(t.length).toBeLessThanOrEqual(1024);
+    expect(t).toContain('uz, ru');
     expect(t).toContain('ru: template-untranslated-facts');
-    expect(t).not.toContain('<b>Reel draft</b>x<');
   });
 });
 
 describe('handleCallback', () => {
-  const q = (fromId: number, data = 'rv:ok:den'): CallbackQuery => ({ id: 'q1', from: { id: fromId }, data, message: { chat: { id: -1 }, message_id: 5 } });
+  const q = (fromId: number, data = callbackData('ok', 'den')): CallbackQuery => ({ id: 'q1', from: { id: fromId }, data, message: { chat: { id: -1 }, message_id: 5 } });
   const deps = (over: Partial<ReviewDeps> = {}) => ({
     ownerId: 42,
-    setStatus: vi.fn(async () => true),
+    resolve: vi.fn((id: string) => (id === shortId('den') ? 'den' : undefined)),
+    setStatus: vi.fn(async () => 'changed' as const),
+    onRework: vi.fn(),
     answer: vi.fn(async () => {}),
     markMessage: vi.fn(async () => {}),
     ...over,
@@ -62,18 +71,36 @@ describe('handleCallback', () => {
   });
 
   it.each([
-    ['rv:ok:den', 'approved'],
-    ['rv:redo:den', 'draft'],
-    ['rv:skip:den', 'rejected'],
-  ])('%s → %s', async (data, status) => {
+    ['ok', 'approved'],
+    ['redo', 'draft'],
+    ['skip', 'rejected'],
+  ] as const)('%s → %s', async (action, status) => {
     const d = deps();
-    expect(await handleCallback(q(42, data), d)).toBe('applied');
+    expect(await handleCallback(q(42, callbackData(action, 'den')), d)).toBe('applied');
     expect(d.setStatus).toHaveBeenCalledWith('den', status, expect.stringContaining('Telegram'));
     expect(d.markMessage).toHaveBeenCalled();
   });
 
+  it('redo re-opens the case for a new preview', async () => {
+    const d = deps();
+    await handleCallback(q(42, callbackData('redo', 'den')), d);
+    expect(d.onRework).toHaveBeenCalledWith('den');
+  });
+
+  it('simulated write keeps the buttons', async () => {
+    const d = deps({ setStatus: vi.fn(async () => 'simulated' as const) });
+    expect(await handleCallback(q(42), d)).toBe('simulated');
+    expect(d.markMessage).not.toHaveBeenCalled();
+  });
+
+  it('unknown id changes nothing', async () => {
+    const d = deps();
+    expect(await handleCallback(q(42, callbackData('ok', 'other')), d)).toBe('unknown');
+    expect(d.setStatus).not.toHaveBeenCalled();
+  });
+
   it('second press is a no-op (idempotent)', async () => {
-    const d = deps({ setStatus: vi.fn(async () => false) });
+    const d = deps({ setStatus: vi.fn(async () => 'unchanged' as const) });
     expect(await handleCallback(q(42), d)).toBe('unchanged');
     expect(d.markMessage).not.toHaveBeenCalled();
   });
