@@ -1189,6 +1189,10 @@
           "a": "The search costs {check} UZS (1 class, each additional class {addon}). Registration: {standard} UZS in the standard procedure, {express} UZS in the expedited one. State fees are not included and are paid separately. The calculator above gives the exact amount for your number of classes."
         },
         {
+          "q": "Is a patent the same as a trademark?",
+          "a": "When people ask about a patent for a brand, they usually mean trademark registration of a name or logo. A patent for an invention is a different procedure. This calculator estimates the cost of trademark protection, i.e. your brand name and logo."
+        },
+        {
           "q": "How long does it take to get the certificate?",
           "a": "About {standardDuration} in the standard procedure and {expressDuration} in the expedited one. Of the {count} certificates we have obtained for clients, the fastest took {fastest} days."
         },
@@ -1206,8 +1210,8 @@
         }
       ]
     },
-    "seoTitle": "Free Trademark Cost Calculator | Jon.Branding",
-    "seoDescription": "Calculate your trademark registration cost in 30 seconds. State fees + service — exact numbers.",
+    "seoTitle": "Patent Cost Calculator: Trademark Registration in Uzbekistan | Jon.Branding",
+    "seoDescription": "Patent cost calculator for trademark registration in Uzbekistan. Get the cost in 30 seconds: state fees and our service fee shown separately, no hidden charges.",
     "metadata": {
       "title": "Trademark Calculator",
       "description": "Calculate estimated costs (state fees and services) for trademark registration in Uzbekistan."
@@ -1215,7 +1219,7 @@
     "title": "Trademark Registration Calculator",
     "subtitle": "Naming is creative, patenting is legal. Calculate estimated registration costs here.",
     "landing": {
-      "title": "Find Your Trademark Cost in 30 Seconds",
+      "title": "Patent Cost Calculator: Find Your Trademark Cost in 30 Seconds",
       "subtitle": "Protect your brand from competitors. Exact state fee and service calculation — no hidden charges.",
       "trustSpeed": "Results in 30 seconds",
       "trustAccuracy": "Accurate state fee calculation",
