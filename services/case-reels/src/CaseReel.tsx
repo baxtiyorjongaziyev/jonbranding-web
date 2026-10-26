@@ -43,7 +43,7 @@ export type CaseReelProps = {
   lang: ReelLang;
   client: string;
   title: string;
-  category: string;
+  category?: string | null;
   beforeImage: string | null;
   afterImage: string | null;
   gallery: string[];
@@ -124,7 +124,7 @@ const Footer: FC = () => (
 const Hook: FC<CaseReelProps> = ({ client, title, category }) => (
   <AbsoluteFill style={{ background: C.bg, padding: 90, justifyContent: 'center' }}>
     <Rise>
-      <Label>{category}</Label>
+      {category ? <Label>{category}</Label> : null}
     </Rise>
     <Rise delay={6}>
       <div

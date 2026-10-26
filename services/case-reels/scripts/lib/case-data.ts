@@ -33,7 +33,8 @@ export function toProps(doc: CaseDoc, lang: ReelLang): CaseReelProps {
     lang,
     client: doc.client ?? doc.title,
     title: doc.title,
-    category: doc.category ?? 'Branding',
+    // Sanity'da bo'lmasa yorliq ko'rsatilmaydi — to'qima kategoriya yo'q.
+    category: doc.category ?? null,
     beforeImage: doc.beforeImage ?? null,
     afterImage: doc.afterImage ?? null,
     gallery: (doc.gallery ?? []).filter((u): u is string => Boolean(u)).map((u) => `${u}${IMG}`),

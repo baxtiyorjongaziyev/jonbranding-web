@@ -79,8 +79,10 @@ if (mode === 'send') {
     saveJson(INDEX, index);
     // Sinov rejimida "yuborilgan" ro'yxatiga yozilmaydi — keyin haqiqiy yuborish to'silmasin.
     if (!mock) {
-      sent.add(item.slug);
-      saveJson(SENT, [...sent]);
+      // Diskdan qayta o'qiladi: parallel `listen` ✏️ Qayta bilan chiqargan slug'larni qayta tiklamaslik uchun.
+      const fresh = new Set(readJson<string[]>(SENT, []));
+      fresh.add(item.slug);
+      saveJson(SENT, [...fresh]);
     }
     console.log(`📤 ${item.slug} yuborildi (${item.langs.join(', ')})`);
   }
