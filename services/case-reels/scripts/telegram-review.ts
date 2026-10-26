@@ -7,12 +7,13 @@
  * MOCK_TELEGRAM=true — tashqariga hech narsa ketmaydi; MOCK_SANITY_WRITE=true — Sanity'ga yozilmaydi.
  * Holat faqat "draft" dan o'zgaradi; tugmani faqat TELEGRAM_OWNER_USER_ID bosa oladi.
  */
+import './lib/env';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import type { ManifestEntry } from './lib/batch';
 import { sanity } from './lib/sanity';
 import {
-  decisionText, handleCallback, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
+  decisionText, fullCaptionChunks, handleCallback, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
   type CallbackQuery, type CaptionFile, type SetResult, type TargetStatus,
 } from './lib/telegram';
 
@@ -63,7 +64,11 @@ if (mode === 'send') {
   for (const item of items) {
     try {
       // Har bir til alohida: egasi tasdiqlashdan oldin barcha variantlarni ko'radi.
-      for (const v of item.variants) await sendVideo(v.video, variantText(item.slug, v.caption));
+      for (const v of item.variants) {
+        await sendVideo(v.video, variantText(item.slug, v.caption));
+        // Video izohi 1024 belgi bilan cheklangan — to'liq matn alohida xabar(lar)da.
+        for (const text of fullCaptionChunks(item.slug, v.caption)) await tg('sendMessage', { chat_id: chatId, text });
+      }
       await tg('sendMessage', { chat_id: chatId, text: decisionText(item), parse_mode: 'HTML', reply_markup: keyboard(item.slug) });
     } catch (e) {
       console.error(`❌ ${item.slug}: ${(e as Error).message}`);
@@ -111,11 +116,19 @@ if (mode === 'send') {
 
   let offset = readJson<number>(OFFSET, 0);
   console.log(`👂 Tinglanmoqda${mock ? ' (mock)' : ''}... To'xtatish: Ctrl+C`);
+  let failures = 0;
   for (;;) {
-    const updates = (await tg('getUpdates', { offset, timeout: 50, allowed_updates: ['callback_query'] })) as {
-      update_id: number;
-      callback_query?: CallbackQuery;
-    }[];
+    let updates: { update_id: number; callback_query?: CallbackQuery }[];
+    try {
+      updates = await tg('getUpdates', { offset, timeout: 50, allowed_updates: ['callback_query'] });
+      failures = 0;
+    } catch (e) {
+      // Tarmoq/timeout/5xx — tinglovchi to'xtamaydi, offset saqlanadi, kutish 2s → 60s gacha o'sadi.
+      const wait = Math.min(60_000, 2_000 * 2 ** failures++);
+      console.error(`⚠️  getUpdates: ${(e as Error).message} — ${wait / 1000}s dan keyin qayta`);
+      await new Promise((r) => setTimeout(r, wait));
+      continue;
+    }
     for (const u of updates) {
       offset = u.update_id + 1;
       if (!u.callback_query) continue;

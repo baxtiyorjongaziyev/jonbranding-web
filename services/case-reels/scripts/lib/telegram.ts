@@ -51,6 +51,14 @@ export function variantText(slug: string, c: CaptionFile): string {
   return `<b>[${escapeHtml(c.lang)}]</b> <code>${escapeHtml(slug)}</code>\n${escapeHtml(flags)}${escapeHtml(plain)}`;
 }
 
+/** To'liq caption matni (oddiy matn, ≤ 4096 belgili bo'laklarda) — video izohi qisqartirilsa ham egasi hammasini o'qiydi. */
+export function fullCaptionChunks(slug: string, c: CaptionFile, max = 4000): string[] {
+  const full = `[${c.lang}] ${slug} — to'liq caption:\n\n${c.text}\n\n${c.hashtags.join(' ')}`;
+  const chunks: string[] = [];
+  for (let i = 0; i < full.length; i += max) chunks.push(full.slice(i, i + max));
+  return chunks;
+}
+
 /** Tugmalar bilan yakuniy xabar: barcha variantlar yuqorida yuborilgandan keyin. */
 export function decisionText(item: ReviewItem): string {
   const flags = [...new Set(item.captions.flatMap((c) => (c.needsReview ?? []).map((f) => `${c.lang}: ${f}`)))];

@@ -5,6 +5,7 @@
  * Sanity: muvaffaqiyatli keysga faqat reel.status="draft" + reel.renderedAt.
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
+import './lib/env';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
 import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';

@@ -4,6 +4,7 @@
  * Natija: out/<slug>-captions.json
  * GEMINI_API_KEY bo'lmasa yoki MOCK_LLM=true bo'lsa — LLM'siz shablon caption.
  */
+import './lib/env';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';

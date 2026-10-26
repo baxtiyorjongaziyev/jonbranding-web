@@ -3,6 +3,7 @@
  *   npm run render -- <slug> [uz|ru|en|zh]
  * Natija: out/<slug>-<til>.mp4
  */
+import './lib/env';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, type CaseDoc } from './lib/case-data';
 import { renderCase } from './lib/render';

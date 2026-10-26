@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { ManifestEntry } from './batch';
 import {
-  callbackData, decisionText, handleCallback, keyboard, mockTelegram, parseCallback, readyItems, shortId, variantText,
+  callbackData, decisionText, fullCaptionChunks, handleCallback, keyboard, mockTelegram, parseCallback, readyItems, shortId, variantText,
   type CallbackQuery, type ReviewDeps,
 } from './telegram';
 
@@ -40,6 +40,13 @@ describe('preview texts', () => {
     const t = variantText('a', { lang: 'uz', text: '&'.repeat(1500), hashtags: [] });
     expect(t).not.toMatch(/&(?!amp;)[a-z]*…/);
     expect(t.replace(/&amp;/g, '&').replace(/<[^>]+>/g, '').length).toBeLessThanOrEqual(1024);
+  });
+  it('full caption is delivered in chunks without losing text', () => {
+    const text = 'z'.repeat(9000);
+    const chunks = fullCaptionChunks('a', { lang: 'uz', text, hashtags: ['#x'] }, 4000);
+    expect(chunks.every((c) => c.length <= 4000)).toBe(true);
+    expect(chunks.join('')).toContain(text);
+    expect(chunks.join('')).toContain('#x');
   });
   it('decision message lists every language and review flag', () => {
     const t = decisionText({

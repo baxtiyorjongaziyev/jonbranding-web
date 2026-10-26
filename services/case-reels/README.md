@@ -42,5 +42,5 @@ npm run review -- send                  # tayyor draftlarni Marketing Telegram g
 npm run review -- listen                # ✅ approved / ✏️ draft+note / ⏭ rejected — faqat TELEGRAM_OWNER_USER_ID bosa oladi
 ```
 
-Kalitlar `.env` da (`.env.example` ga qarang). `MOCK_TELEGRAM=true` / `MOCK_SANITY_WRITE=true` — tashqariga hech narsa ketmaydi.
+Kalitlar `services/case-reels/.env` yoki repo ildizidagi `.env` da (`.env.example` ga qarang) — CLI o'zi yuklaydi. `MOCK_TELEGRAM=true` / `MOCK_SANITY_WRITE=true` — tashqariga hech narsa ketmaydi.
 Holat faqat `draft` dan o'zgaradi; `approved` dan keyingi chiqarish — F-07 (Meta API).
