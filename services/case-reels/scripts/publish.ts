@@ -175,9 +175,13 @@ try {
     process.exit(1);
   }
   // Chiqarilmagani aniq: keys navbatga qaytadi (faqat hali biz band qilgan revision bo'lsa), slot bo'shatiladi.
-  const cur = await db.fetch<{ _rev: string; status?: string } | null>(`*[_id == $id][0]{ _rev, "status": reel.status }`, { id: picked._id });
-  if (cur?.status === 'scheduled') {
-    await db.patch(picked._id).ifRevisionId(cur._rev).set({ 'reel.status': 'approved', 'reel.note': `Chiqarishda xato: ${msg}` }).commit().catch(() => {});
+  try {
+    const cur = await db.fetch<{ _rev: string; status?: string } | null>(`*[_id == $id][0]{ _rev, "status": reel.status }`, { id: picked._id });
+    if (cur?.status === 'scheduled') {
+      await db.patch(picked._id).ifRevisionId(cur._rev).set({ 'reel.status': 'approved', 'reel.note': `Chiqarishda xato: ${msg}` }).commit();
+    }
+  } catch (e2) {
+    console.error(`⚠️  ${picked.slug}: holatni approved ga qaytarib bo'lmadi (${(e2 as Error).message}) — Studio'da "scheduled" ni qo'lda "approved" qiling. Instagram'ga hech narsa chiqmagan.`);
   }
   await releaseSlot();
   console.error(`❌ ${picked.slug}: ${msg}`);
