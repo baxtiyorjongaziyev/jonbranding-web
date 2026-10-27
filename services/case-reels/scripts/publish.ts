@@ -86,23 +86,30 @@ const releaseSlot = () =>
   db.patch(LOCK_ID).ifRevisionId(lockRev).set({ slot: lock?.slot ?? '' }).commit().then(() => {}, () => {});
 
 // 2. Shu tilda tayyor video'si bor eng eski approved keysni band qilish.
-const approved = await db.fetch<{ _id: string; _rev: string; slug: string }[]>(
-  `*[_type == "portfolio" && !(_id in path("drafts.**")) && reel.status == "approved"] | order(_updatedAt asc){ _id, _rev, "slug": slug.current }`,
-);
 let picked: { _id: string; slug: string; file: string; captionFile: string } | null = null;
-for (const doc of approved) {
-  const a = assetsFor(doc.slug);
-  if (!a) {
-    console.warn(`↷ ${doc.slug}: ${lang} uchun video/caption yo'q — o'tkazib yuborildi`);
-    continue;
+try {
+  const approved = await db.fetch<{ _id: string; _rev: string; slug: string }[]>(
+    `*[_type == "portfolio" && !(_id in path("drafts.**")) && reel.status == "approved"] | order(_updatedAt asc){ _id, _rev, "slug": slug.current }`,
+  );
+  for (const doc of approved) {
+    const a = assetsFor(doc.slug);
+    if (!a) {
+      console.warn(`↷ ${doc.slug}: ${lang} uchun video/caption yo'q — o'tkazib yuborildi`);
+      continue;
+    }
+    try {
+      await db.patch(doc._id).ifRevisionId(doc._rev).set({ 'reel.status': 'scheduled', 'reel.scheduledAt': now.toISOString() }).commit();
+      picked = { _id: doc._id, slug: doc.slug, ...a };
+      break;
+    } catch {
+      console.warn(`↷ ${doc.slug}: boshqa jarayon band qildi yoki holat o'zgardi`);
+    }
   }
-  try {
-    await db.patch(doc._id).ifRevisionId(doc._rev).set({ 'reel.status': 'scheduled', 'reel.scheduledAt': now.toISOString() }).commit();
-    picked = { _id: doc._id, slug: doc.slug, ...a };
-    break;
-  } catch {
-    console.warn(`↷ ${doc.slug}: boshqa jarayon band qildi yoki holat o'zgardi`);
-  }
+} catch (e) {
+  // Navbatni o'qib bo'lmadi — hech narsa chiqmagan, slot bo'shatiladi.
+  await releaseSlot();
+  console.error(`❌ Approved navbatni o'qishda xato: ${(e as Error).message}`);
+  process.exit(1);
 }
 if (!picked) {
   await releaseSlot();
