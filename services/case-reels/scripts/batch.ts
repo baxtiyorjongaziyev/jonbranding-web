@@ -6,7 +6,7 @@
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
 import './lib/env';
-import { closeSync, existsSync, mkdirSync, openSync, readFileSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
+import { closeSync, existsSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
 import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';
 import { geminiGenerator, makeCaption } from './lib/caption';
@@ -24,7 +24,7 @@ try {
 }
 
 // Bir vaqtda faqat bitta batch: ikki jarayon bir keysning video/caption fayllarini bir-birining ustidan yozmasin
-// (egasi ko'rib tasdiqlagan versiya chiqariladigan fayl bilan bir xil qolishi shart). 6 soatdan eski qulf — o'lik.
+// (egasi ko'rib tasdiqlagan versiya chiqariladigan fayl bilan bir xil qolishi shart).
 const LOCK = 'out/batch.lock';
 mkdirSync('out', { recursive: true });
 const alive = (pid: number) => {
@@ -36,10 +36,10 @@ const alive = (pid: number) => {
   }
 };
 if (!opts.dryRun) {
-  // Qulf egasining PID'i yoziladi: jarayon o'lgan (Ctrl+C, crash) yoki qulf 6 soatdan eski bo'lsa — qulf olib tashlanadi.
+  // Qulf egasining PID'i yoziladi: faqat egasi o'lgan bo'lsa (Ctrl+C, crash) qulf olib tashlanadi — yoshi muhim emas.
   if (existsSync(LOCK)) {
     const pid = Number(readFileSync(LOCK, 'utf8'));
-    if (!pid || !alive(pid) || Date.now() - statSync(LOCK).mtimeMs > 6 * 3600_000) unlinkSync(LOCK);
+    if (!pid || !alive(pid)) unlinkSync(LOCK);
   }
   try {
     const fd = openSync(LOCK, 'wx');
@@ -49,9 +49,10 @@ if (!opts.dryRun) {
     console.error(`Boshqa batch ishlayapti (${LOCK}). Tugashini kuting.`);
     process.exit(1);
   }
+  // Faqat o'zimizning qulfni o'chiramiz.
   process.on('exit', () => {
     try {
-      unlinkSync(LOCK);
+      if (Number(readFileSync(LOCK, 'utf8')) === process.pid) unlinkSync(LOCK);
     } catch {}
   });
   // Ctrl+C / SIGTERM'da 'exit' hodisasi chiqishi uchun.
