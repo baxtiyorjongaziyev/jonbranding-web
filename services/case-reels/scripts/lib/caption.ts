@@ -149,7 +149,9 @@ export function templateCaption(facts: CaptionFacts, lang: ReelLang): { text: st
   const lines = [`${L.project}: ${clip(facts.client, 80)} — ${clip(facts.title, 160)}`];
   if (facts.category) lines.push(clip(facts.category, 80));
   if (facts.result) lines.push(`${L.result}: ${clip(facts.result.metric, 80)} ${clip(facts.result.value, 40)} (${clip(facts.result.period, 40)})`);
-  const text = clip(`${lines.join('\n')}\n\n${CTA[lang]}`, MAX_CAPTION_CHARS);
+  // CTA hech qachon kesilmaydi — faqat fakt qismi qisqartiriladi.
+  const cta = `\n\n${CTA[lang]}`;
+  const text = clip(lines.join('\n'), MAX_CAPTION_CHARS - cta.length) + cta;
   return { text, needsReview: lang === 'uz' ? [] : ['template-untranslated-facts'] };
 }
 

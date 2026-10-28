@@ -121,3 +121,12 @@ describe('hashtagsFor / parseDraft / buildPrompt', () => {
     expect(p).not.toContain('"city" |');
   });
 });
+
+describe('templateCaption CTA', () => {
+  it('keeps the CTA intact when facts are very long', async () => {
+    const { templateCaption, CTA } = await import('./caption');
+    const long = 'x'.repeat(5000);
+    const { text } = templateCaption({ client: long, title: long, category: long, result: null, url: 'u' } as never, 'uz');
+    expect(text.endsWith(CTA.uz)).toBe(true);
+  });
+});
