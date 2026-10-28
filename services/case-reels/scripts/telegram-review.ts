@@ -137,7 +137,10 @@ if (mode === 'send') {
       try {
         const outcome = await handleCallback(u.callback_query, {
           ownerId,
-          resolve: (id) => index()[id],
+          resolve: (id) => {
+            const idx = index();
+            return Object.hasOwn(idx, id) ? idx[id] : undefined;
+          },
           setStatus,
           onRework,
           answer: (id, text) => tg('answerCallbackQuery', { callback_query_id: id, text }),

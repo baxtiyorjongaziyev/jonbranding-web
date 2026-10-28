@@ -192,9 +192,11 @@ export async function makeCaption(
 /** Gemini REST (portfolio-bot bilan bir xil provayder); JSON rejimida, 20 s timeout. */
 export function geminiGenerator(apiKey: string, model = process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash-lite'): Generate {
   return async (prompt) => {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+    // Kalit URL'da emas, sarlavhada (loglarga tushmaydi); model nomi qat'iy formatda.
+    if (!/^[a-z0-9.-]+$/.test(model)) throw new Error(`Noto'g'ri GEMINI_MODEL: ${model}`);
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
       signal: AbortSignal.timeout(20_000),
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],

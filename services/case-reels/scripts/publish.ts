@@ -70,13 +70,17 @@ if (!slot) {
 const LOCK_ID = 'reelsPublishLock';
 await db.createIfNotExists({ _id: LOCK_ID, _type: 'reelsPublishLock', slot: '' });
 const lock = await db.getDocument<{ _rev: string; slot?: string }>(LOCK_ID);
+if (!lock?._rev) {
+  console.error("Slot qulfi hujjatini o'qib bo'lmadi — chiqarish to'xtatildi.");
+  process.exit(1);
+}
 if (lock?.slot === slot) {
   console.log(`⏸  ${slot} sloti band — bu slotda allaqachon chiqarilgan.`);
   process.exit(0);
 }
 let lockRev: string;
 try {
-  lockRev = (await db.patch(LOCK_ID).ifRevisionId(lock!._rev).set({ slot, at: now.toISOString() }).commit())._rev;
+  lockRev = (await db.patch(LOCK_ID).ifRevisionId(lock._rev).set({ slot, at: now.toISOString() }).commit())._rev;
 } catch {
   console.log('⏸  Slotni boshqa jarayon band qildi.');
   process.exit(0);
