@@ -1,5 +1,28 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-10-31 | Oisha AI Assistant Belgisi FoxUI Orb Dizayniga To'liq O'tkazildi (Antigravity)
+- **Foydalanuvchi talabi:**
+  - `https://foxui.dev/design-system/orb/ oisha belgisini shu dizaynda qilib ber.`
+- **Bajarilgan ishlar va arxitektura:**
+  1. **Yangi FoxUI Orb Komponenti Yaratildi (`src/components/ui/oisha-orb.tsx`):**
+     - Siri-dan ilhomlangan abstrakt shar yuzi: to'q yadro, uchta harakatlanuvchi rang toʻlqini (`.fx-orb__wave`), shishasimon yaltiroq qoplama va ichki Siri lentalari (`.fx-orb__lines` 2D canvas, sinus * chetga soʻnish toʻlqinlari).
+     - Holatlar (`data-state`): `idle` (sekin nafas), `thinking` (to'lqinlar tezlashadi va buraladi), `talking` (amplituda oshib gapirish effekti), `handoff` (bir martalik chaqnash).
+     - O'lchamlar (`data-size`): `sm` (22px), `md` (36px), `lg` (56px), `xl` (112px).
+     - Maxsus rang tizimi: brend rangi `#2554FF` va toifa ranglari (`coral`, `pink`, `blue`, `green`, `yellow`, `purple`) oklch hisoblash bilan.
+     - Xavfsizlik va a11y: `prefers-reduced-motion` qo'llab-quvvatlandi, SSR/jsdom canvas context xatolari xavfsiz boshqarildi, `role="img"`, `aria-label` va `aria-hidden` to'liq kiritildi.
+  2. **Globals CSS ga FoxUI Orb Uslublari Qo'shildi (`src/app/globals.css`):**
+     - `.fx-orb`, `.fx-orb__wave`, `.fx-orb__lines`, keyframelar (`fx-orb-breath`, `fx-orb-spin`, `fx-orb-talk`, `fx-orb-flash`), `clip-path: circle(50%)` va GPU kompozitsiyasi.
+  3. **OishaWidget Integratsiyasi (`src/components/oisha-widget.tsx`):**
+     - Suzuvchi ochish tugmasidagi eski `<Sparkles />` o'rniga `OishaOrb` (size `lg`) ulandi.
+     - Chat oynasining tepa sarlavhasidagi `<Bot />` o'rniga `OishaOrb` (size `md`) ulandi.
+     - Holat dinamik bog'landi: Oisha o'ylaganda (`isLoading`) -> `thinking`, javob berganda yoki yangi xabar kelganda -> `talking`, qolgan vaqtda -> `idle`.
+  4. **Mobil Navigatsiya Integratsiyasi (`src/components/layout/mobile-nav-bar.tsx`):**
+     - Mobil pastki panelidagi AI tugmasiga `OishaOrb` (size `sm`) o'rnatildi.
+  5. **Testlar va Sifat Nazorati:**
+     - `src/components/oisha-widget.test.tsx` yangilandi va kengaytirildi.
+     - `npm run verify:fast`: 69 test fayli, 448/448 test 100% yashil o'tdi.
+     - `npm run build`: 165 ta statik sahifa 0 xato bilan to'liq muvaffaqiyatli qurildi.
+
 ## 2026-10-18 | Senior/Staff Codebase Detox & Refaktoring: O'lik Kodlar, 31 ta Skript, Monolitlar va Papkalar Tartibga Keltirildi (Antigravity)
 - **Foydalanuvchi murojaati:**
   - "githubdagi kodlar tartibi senior dasturchini ishiga o'xshaydimi? shavqatsiz tanqid qilib ber" va to'liq detox rejasini tasdiqlash ("Ha").
@@ -2534,3 +2557,40 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Release method: commit and push origin/main, existing Vercel Git integration. Rollback baseline: prior production SHA 559e9b2e / deployment 9TJmdcsSyERkDEERLShVwQkWoi4J. Live read-back pending after build.
 - Post-deploy verified: b8a852aa is live; Vercel QETG7AbKXssgUcv2EdGB5bEcAVU1 and GitHub production deployment 7112923968 report success (2026-10-16 11:54 Asia/Tashkent). Owner Chrome on www.jonbranding.uz has updated footer, zero mailto links, and document-end O/pill center deltas x -0.002px / y 0.071px; remaining 0.571px is fractional rounding. Screenshot saved. GitHub typecheck/lint/test/build checks passed; Chromium E2E was still in progress at this read-back. This post-release evidence is local documentation; released code is committed and pushed.
 - Final CI read-back: Chromium E2E also passed. Production screenshot is stored outside the repo in the task visualization directory as footer-production-b8a852aa.png.
+
+
+## 2026-10-17 | Rash Milk / Miro sirok portfolio video (Codex)
+- Owner requested an actual Instagram Reels 9:16 case video. Confirmed scope: packaging concept, adaptation to four flavors, print-ready handoff. Rash Milk/Miro logos were client-supplied; no logo authorship claimed.
+- Created six-scene Uzbek montage from six verified original local artwork files. Added direct packaging-service CTA. Original package colors, lettering and logos preserved; no fabricated business outcomes or physical production claims.
+- Final local file: C:/Users/baxti/.codex/visualizations/2026/10/16/01a14509-f2fd-7561-a53a-3d6fd418ef8f/rashmilk-miro-case/renders/Rash-Milk-Miro-Sirok-Keys.mp4
+- Verified: H.264, 1080x1920, 30 fps, 30.000 seconds, 900 frames, 13487615 bytes, silent. Full video decoded without errors. HyperFrames runtime/layout/motion checks passed; 24/24 contrast checks passed. Final caption reviewed in a fresh snapshot after copy correction.
+- Supporting brief, storyboard, editable scenes and DELIVERY-QA.json reside in the same output project. Website application source and production CMS were not edited or published; no commit/push. Website build/test suite is not a validation of this standalone media artifact; focused video checks were used.
+
+## 2026-10-19 | Taqdimot (/credentials) Sahifasida Nomlash (Neyming) Ishlari Qo'shildi, Katta Shriftlar Joriy Qilindi va Uzun Sarlavhalar Qisqartirildi (Antigravity)
+- **Foydalanuvchi talabi:**
+  1. "Presentation sahifamizda nom bo'yicha qilgan ishlarimiz ham bo'lsin."
+  2. "Keyin kichik yozuvlar bo'lmasin ma'lumotlar katta katta bo'lsin."
+  3. "Dizayn bo'yciah qilgan ishlarimizni bazilarini sarlavhasi juda uzun bo'lib ketgan"
+- **Kiritilgan O'zgarishlar va Yechimlar:**
+  1. **Taqdimotda Neyming (Nom Bo'yicha Qilgan Ishlarimiz) Alohida Slaydi Yaratildi:**
+     - `src/app/[lang]/credentials/credentials-client.tsx` da maxsus `neyming` slaydi qo'shildi: *"Bozorga kiritgan va patentlangan nomlarimiz"*.
+     - Jon Branding tomonidan ishlab chiqilgan 19 ta real, tasdiqlangan brend nomlari (Savod, Shirona, Fidda, Revo, Petron, Zayyan, Geonest, Rutera, Sofmir, Arfadel, Enros, Belif, Unvan, Parfino, Estem, Mercato, Melamus, Polentra, Viton) o'z sohalari bilan kartochkalarda ko'rgazmali tarzda joylashtirildi.
+     - 100% patent kafolati (IMA bazasi), domenlar (.uz / .com) va 10 kunlik muddat ko'rsatkichlari katta raqamlarda bo'rttirib berildi.
+     - `src/app/[lang]/credentials/page.tsx` da keyslar saralashida Neyming yetakchi loyihalari (Savod, Shirona, Enros, Geonest) flagman qilib belgilandi va takrorlanishlar (deduplication) olib tashlandi.
+  2. **Katta Shriftlar va Yirik Taqdimot Standarti (No Small Text):**
+     - Slaydlardagi mayda `text-[10px]`, `text-[9px]`, `text-xs` yozuvlar butunlay bartaraf etildi.
+     - `deck.tsx` da Display clamp kattalashtirildi: `cred-display-lg` (2.1rem-4.5rem), `cred-display-xl` (2.5rem-6rem).
+     - `Eyebrow` yorliqlari `text-xs sm:text-sm font-semibold tracking-[0.2em]` ga oshirildi.
+     - Muqovadagi raqamlar `text-5xl sm:text-7xl` ga, matnlar `text-lg sm:text-2xl` ga ko'tarildi.
+     - Mijoz logotiplari panjarasi 2-5 ustunli, yirik va qulay kartochkalarga aylantirildi (`h-24 sm:h-28`, logotiplar `max-h-16`).
+     - Keyslar, xizmat narxlari (`text-2xl sm:text-4xl`), natijalar (`text-4xl sm:text-6xl`), paketlar va kafolatlardagi barcha asosiy matnlar 18px-24px+ o'lchamga o'tkazildi.
+     - Pastki boshqaruv paneli (slayd indeksi, PDF tugmasi, strelkalar) kattalashtirildi.
+  3. **Dizayn Ishlaridagi Uzun va Buzilgan Sarlavhalar Tozalandi:**
+     - `src/lib/portfolio-presentation.ts` da `cleanPortfolioTitle` funksiyasi joriy etildi.
+     - Sanity'dagi tabrik matnlari (masalan, Yasiradagi 170+ belgili post matni), uzun tushuntirishlar ("SAT tayyorloviga ixtisoslashgan online platforma uchun ishlab chiqilgan logo dizayn"), emojilar (🧈) va qo'shimchalar tozalab, ixcham brend nomlariga (`Yasira`, `Feel It`, `Enros`, `Geonest Engineering`, `Sarmilk`, `Shirona Café & Bakery`, `SAVOD`, `Rash Milk`, `Boyarin`, `Petron Polymer`, `Zayyan`) keltirildi.
+     - Sanity loyihalari uchun tushib qolgan `categoryLabel` avtomatik ravishda `Firma uslubi`, `Brendbuk`, `Qadoq dizayni`, `Neyming` sifatida to'ldirildi.
+  4. **Testlar va Tekshiruv:**
+     - `src/lib/portfolio-presentation.test.ts` da yangi tozalash va kategoriya testlari yozildi.
+     - `npm run verify:fast`: 69 ta test fayli, 447/447 ta test 100% yashil o'tdi.
+     - `npm run build`: Barcha 165 ta sahifa 0 xato bilan muvaffaqiyatli build bo'ldi.
+
