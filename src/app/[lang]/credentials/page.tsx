@@ -41,9 +41,45 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
     fetchBrands(),
   ]);
 
-  const cases: CredCase[] = projects
-    .filter((project) => project.coverImage)
-    .slice(0, 8)
+  // Taqdimot uchun eng kuchli keyslarni tartib bilan saralash (Neyming, Qadoq, Firma uslubi, Brendbuk)
+  const FLAGSHIP_PRIORITY = [
+    'savod',
+    'shirona',
+    'rashmilk',
+    'boyarin',
+    'fidda-by-sevara-kumush-brendi',
+    'fidda',
+    'revo',
+    'enros',
+    'arfadel',
+    'geonest',
+    'yasira',
+    'den-aroma-brend-transformatsiyasi',
+    'den-aroma',
+  ];
+
+  const withCovers = projects.filter((project) => project.coverImage);
+  const sortedProjects = [...withCovers].sort((a, b) => {
+    const aIndex = FLAGSHIP_PRIORITY.findIndex((s) => a.slug === s || a.slug.startsWith(`${s}-`));
+    const bIndex = FLAGSHIP_PRIORITY.findIndex((s) => b.slug === s || b.slug.startsWith(`${s}-`));
+    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return 0;
+  });
+
+  const seenTitles = new Set<string>();
+  const uniqueProjects: typeof sortedProjects = [];
+  for (const p of sortedProjects) {
+    const key = (p.title || p.slug).toLowerCase().trim();
+    if (!seenTitles.has(key)) {
+      seenTitles.add(key);
+      uniqueProjects.push(p);
+    }
+  }
+
+  const cases: CredCase[] = uniqueProjects
+    .slice(0, 10)
     .map((project) => {
       const cover = optimizeSanityUrl(project.coverImage, 1000, 75);
       const gallery = (project.galleryImages && project.galleryImages.length > 0)
@@ -52,8 +88,8 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
       return {
         slug: project.slug,
         title: project.title,
-        client: project.client,
-        categoryLabel: project.categoryLabel,
+        client: project.client || project.title,
+        categoryLabel: project.categoryLabel || 'Brending',
         coverImage: cover,
         galleryImages: gallery,
         result: project.results?.[0],

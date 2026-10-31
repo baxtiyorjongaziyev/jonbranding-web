@@ -12,10 +12,113 @@ export function optimizeSanityUrl(url?: string, width = 1200, quality = 75): str
   return `${base}?w=${width}&q=${quality}&auto=format`;
 }
 
+const CANONICAL_SHORT_TITLES: Record<string, string> = {
+  'yasira': 'Yasira',
+  'yasira-gozallik-va-tozalik': 'Yasira',
+  'feel-it': 'Feel It',
+  'feel-it-sat-uchun-logo': 'Feel It',
+  'enros': 'Enros',
+  'geonest': 'Geonest Engineering',
+  'sarmilk': 'Sarmilk',
+  'sarmilk-brend-identikasini-yaratish': 'Sarmilk',
+  'shirona': 'Shirona Café & Bakery',
+  'revo': 'Revo',
+  'savod': 'SAVOD',
+  'savod-rebrending-keys': 'SAVOD',
+  'rashmilk': 'Rash Milk',
+  'boyarin': 'Boyarin',
+  'petron-polymer-brendini-yaratish': 'Petron Polymer',
+  'bekmarket-zayyan-naming-branding': 'Zayyan',
+  'arfadel': 'Arfadel',
+  'fidda': 'FIDDA by Sevara',
+  'fidda-by-sevara-kumush-brendi': 'FIDDA by Sevara',
+  'den-aroma': 'Den Aroma',
+  'den-aroma-brend-transformatsiyasi': 'Den Aroma',
+  'jafiko-light-brend-identifikatsiyasi': 'Jafiko Light',
+  'prime-fit-brend-identikasi': 'Prime Fit',
+  'bodomchi-brend-aydentikasi': 'Bodomchi',
+  'rutera-brending-va-patent': 'Rutera',
+  'sofmir-mebel-aksessuarlari-brendingi': 'Sofmir',
+  'velzo-brend-tizimi': 'Velzo',
+  'r-studio-brend-logotipi': 'R Studio',
+  'perfona-logotip-va-brending': 'Perfona',
+  'beyaz': 'Beyaz',
+  'diletta': 'Diletta',
+};
+
+export const CATEGORY_LABEL_MAP: Record<string, string> = {
+  'brand-strategy': 'Brend-strategiya',
+  'logo-design': 'Logotip dizayni',
+  'brandbook': 'Brendbuk',
+  'corporate-style': 'Firma uslubi',
+  'packaging': 'Qadoq dizayni',
+  'naming': 'Neyming',
+};
+
+export function cleanPortfolioTitle(title?: string, client?: string, slug?: string): string {
+  if (!title) return client || '';
+
+  if (slug) {
+    const canonical = CANONICAL_SHORT_TITLES[slug] || Object.entries(CANONICAL_SHORT_TITLES).find(([key]) => slug === key || slug.startsWith(`${key}-`))?.[1];
+    if (canonical && (title.toLowerCase().includes(canonical.toLowerCase()) || title.length > 40)) {
+      return canonical;
+    }
+  }
+
+  // 1. Emojilarni tozalash
+  let clean = title.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+
+  // 2. Ijtimoiy tarmoq minnatdorchilik xabari yoki uzun matnlar (masalan Yasira keysi)
+  if (clean.length > 45 && (clean.toLowerCase().includes('katta sharaf') || clean.toLowerCase().includes('muvaffaqiyatli rivojlanishini'))) {
+    return client ? client.replace(/^['"]|['"]$/g, '').trim() : 'Yasira';
+  }
+
+  // 3. Agar " — ", " - ", ": " ajratgichlari bo'lsa va keyingi qism uzun tavsif bo'lsa
+  const delimiterMatch = clean.match(/^([A-Za-z0-9\s'&]+?)\s*(?:—|–|-|:)\s*(.+)$/);
+  if (delimiterMatch) {
+    const brandPart = delimiterMatch[1].trim();
+    const restPart = delimiterMatch[2].trim();
+    if (
+      restPart.toLowerCase().includes('haqida') ||
+      restPart.toLowerCase().includes('keys') ||
+      restPart.toLowerCase().includes('nom, logo') ||
+      restPart.toLowerCase().includes('ingliz tilida') ||
+      restPart.toLowerCase().includes('ishlab chiqilgan') ||
+      restPart.toLowerCase().includes('brendini yaratish') ||
+      restPart.toLowerCase().includes('murakkab sohalar') ||
+      brandPart.length <= 25
+    ) {
+      return brandPart.replace(/:\s*$/, '').trim();
+    }
+  }
+
+  // 4. Standart qo'shimchalarni olib tashlash
+  clean = clean
+    .replace(/\s*loyihasi haqida$/i, '')
+    .replace(/\s*brendini yaratish$/i, '')
+    .replace(/\s*rebrending keysi?$/i, '')
+    .trim();
+
+  return clean || client || '';
+}
+
 export function presentPortfolioProject<T extends PortfolioProject>(project: T): T {
   let modified = false;
   let current = sanitizePortfolioProject(project);
   if (current !== project) {
+    modified = true;
+  }
+
+  // Sarlavhani ixcham va taqdimotbop holatga keltirish
+  const shortTitle = cleanPortfolioTitle(current.title, current.client, current.slug);
+  if (shortTitle && shortTitle !== current.title) {
+    current = { ...current, title: shortTitle };
+    modified = true;
+  }
+
+  // Kategoriya yorlig'ini to'ldirish
+  if (!current.categoryLabel && current.category && CATEGORY_LABEL_MAP[current.category]) {
+    current = { ...current, categoryLabel: CATEGORY_LABEL_MAP[current.category] };
     modified = true;
   }
 

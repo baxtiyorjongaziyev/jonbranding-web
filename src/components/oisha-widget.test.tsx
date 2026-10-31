@@ -16,6 +16,12 @@ afterEach(() => {
 });
 
 describe('OishaWidget proactive message', () => {
+  it('renders the FoxUI Orb on launcher and chat header', async () => {
+    const { container } = render(<OishaWidget lang="uz" chatRequest={1} />);
+    const orbs = container.querySelectorAll('.fx-orb');
+    expect(orbs.length).toBeGreaterThanOrEqual(2);
+    expect(orbs[0]?.querySelectorAll('.fx-orb__wave').length).toBe(3);
+  });
   it('replays a chat request captured before mount and reopens after closing', async () => {
     const view = render(<OishaWidget lang="uz" chatRequest={1} />);
     expect(screen.getByRole('textbox', { name: 'Xabar yozing...' })).toBeTruthy();

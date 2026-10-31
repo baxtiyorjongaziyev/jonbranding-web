@@ -999,3 +999,115 @@ h1, h2, h3 {
 h1 em, h2 em, h3 em {
   font-weight: 400;
 }
+
+
+/* ── FoxUI Orb (Oisha AI Assistant Abstract Face) ── */
+.fx-orb {
+  --fx-bg-brand-solid: #2554FF;
+  --fx-bg-category-coral: #F4A688;
+  --fx-bg-category-pink: #F3BBD4;
+  --fx-bg-category-blue: #AECBF2;
+  --fx-bg-category-green: #BEDDB2;
+  --fx-bg-category-yellow: #F5D77E;
+  --fx-bg-category-purple: #CFC0F3;
+  --fx-bg-static-light: #FAFAFC;
+  --fx-size-avatar-sm: 22px;
+  --fx-size-avatar-md: 36px;
+  --fx-size-avatar-lg: 56px;
+  --fx-radius-circle: 9999px;
+  --fx-duration-pulse: 1600ms;
+  --fx-duration-slower: 500ms;
+  --fx-motion-slow: 360ms;
+  --fx-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --_o: var(--fx-bg-brand-solid);
+  --_t: 1;
+  position: relative;
+  display: inline-block;
+  flex: none;
+  inline-size: var(--fx-size-avatar-md);
+  aspect-ratio: 1;
+  container-type: inline-size;
+  border-radius: var(--fx-radius-circle);
+  overflow: hidden;
+  isolation: isolate;
+  clip-path: circle(50%);
+  --_w1: oklch(from var(--_o) 0.78 max(c, 0.2) h);
+  --_w2: oklch(from var(--_o) 0.72 max(c, 0.24) calc(h - 35));
+  --_w3: oklch(from var(--_o) 0.74 max(c, 0.22) calc(h - 70));
+  --_k1: oklch(from var(--_o) 0.42 max(c, 0.16) calc(h - 35));
+  --_k2: oklch(from var(--_o) 0.2 max(c, 0.1) calc(h - 50));
+  background: radial-gradient(circle at 50% 50%, var(--_k1, #1e3a8a), var(--_k2, #0f172a) 78%);
+  animation: fx-orb-breath calc(var(--fx-duration-pulse) * 2.5 * var(--_t)) var(--fx-ease-standard) infinite;
+}
+.fx-orb[data-color="coral"] { --_o: var(--fx-bg-category-coral); }
+.fx-orb[data-color="pink"] { --_o: var(--fx-bg-category-pink); }
+.fx-orb[data-color="blue"] { --_o: var(--fx-bg-category-blue); }
+.fx-orb[data-color="green"] { --_o: var(--fx-bg-category-green); }
+.fx-orb[data-color="yellow"] { --_o: var(--fx-bg-category-yellow); }
+.fx-orb[data-color="purple"] { --_o: var(--fx-bg-category-purple); }
+.fx-orb[data-size="sm"] { inline-size: var(--fx-size-avatar-sm); }
+.fx-orb[data-size="lg"] { inline-size: var(--fx-size-avatar-lg); }
+.fx-orb[data-size="xl"] { inline-size: calc(var(--fx-size-avatar-lg) * 2); }
+.fx-orb__wave {
+  position: absolute;
+  inset: -20%;
+  border-radius: var(--fx-radius-circle);
+  filter: blur(7cqi);
+  mix-blend-mode: screen;
+  animation: fx-orb-spin calc(var(--fx-duration-pulse) * 5 * var(--_t)) linear infinite;
+}
+.fx-orb__wave:nth-child(1) {
+  background: radial-gradient(ellipse 60% 44% at 32% 36%, var(--_w1, #60a5fa) 0 18%, transparent 62%);
+}
+.fx-orb__wave:nth-child(2) {
+  background: radial-gradient(ellipse 46% 58% at 68% 56%, var(--_w2, #38bdf8) 0 16%, transparent 62%);
+  animation-duration: calc(var(--fx-duration-pulse) * 7 * var(--_t));
+  animation-direction: reverse;
+}
+.fx-orb__wave:nth-child(3) {
+  background: radial-gradient(ellipse 54% 40% at 46% 74%, var(--_w3, #818cf8) 0 14%, transparent 60%);
+  animation-duration: calc(var(--fx-duration-pulse) * 9 * var(--_t));
+}
+.fx-orb__lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+  mix-blend-mode: screen;
+}
+.fx-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 60%, color-mix(in oklab, var(--_w1, #60a5fa) 30%, transparent) 70%, transparent 74%),
+    radial-gradient(circle at 36% 28%, color-mix(in oklab, var(--fx-bg-static-light) 28%, transparent) 0 6%, transparent 26%);
+  pointer-events: none;
+}
+.fx-orb[data-state="thinking"] { --_t: 0.35; }
+.fx-orb[data-state="thinking"] .fx-orb__wave {
+  scale: 0.8;
+  transition: scale var(--fx-motion-slow) var(--fx-ease-standard);
+}
+.fx-orb[data-state="talking"] {
+  --_t: 0.6;
+  animation: fx-orb-talk calc(var(--fx-duration-pulse) / 4) var(--fx-ease-standard) 4;
+}
+.fx-orb[data-state="handoff"] {
+  animation: fx-orb-flash var(--fx-duration-slower) var(--fx-ease-standard) 1;
+}
+@keyframes fx-orb-spin { to { rotate: 1turn; } }
+@keyframes fx-orb-breath { 50% { scale: 1.04; } }
+@keyframes fx-orb-talk { 50% { scale: 1.08; } }
+@keyframes fx-orb-flash { 40% { filter: brightness(1.6) saturate(1.3); scale: 1.08; } }
+@media (prefers-reduced-motion: reduce) {
+  .fx-orb, .fx-orb__wave { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .fx-orb { background: CanvasText; }
+  .fx-orb__wave, .fx-orb::after { display: none; }
+}
