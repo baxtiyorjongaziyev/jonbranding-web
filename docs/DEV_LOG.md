@@ -1,5 +1,35 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-03 | /credentials taqdimoti 4 tilli qilindi, raqam va nomlar yagona manbaga ulandi (OpenCode)
+
+- **Foydalanuvchi talabi:**
+  - `/credentials` sahifasini o'rganib chiqish va topilgan 3 ta muammoni tuzatish: i18n yo'qligi, qattiq yozilgan "9 yil", neyming ro'yxatining ikki joyda takrorlanishi.
+- **Bajarilgan ishlar:**
+  1. **Yangi `src/lib/credentials-content/` moduli (`types.ts`, `uz.ts`, `ru.ts`, `en.ts`, `zh.ts`, `index.ts`):**
+     - Slayd sarlavhalari, eyebrow, CTA va neyming sohalari 4 tilga chiqarildi.
+     - `getCredentialsCopy(lang)` — noma'lum til uchun o'zbekcha fallback.
+  2. **Server-side til tanlash (`src/app/[lang]/credentials/page.tsx`):**
+     - `getSalesContent(safeLang)` va `getCredentialsCopy(safeLang)` serverda chaqiriladi.
+     - Client'ga faqat kerakli qism (`serviceGroups`, `packages`, `guarantees`, `jobs`, `processSteps`, valyuta/to'lov matnlari) uzatiladi — 4 tilli modul client bundle'ga tushmaydi.
+     - Metadata (title/description) ham tilga moslashdi.
+     - `Deck`ga `lang` prop qo'shildi, `LeadModal` endi tanlangan tilda ochiladi.
+  3. **Raqamlar yagona manbadan:**
+     - Muqovadagi qattiq yozilgan `9` o'rniga `yearsLabel()` (`src/lib/company-facts.ts`) — bugun `7+`, 27-noyabrdan avtomatik `8+`.
+  4. **Neyming ro'yxati bitta manbada:**
+     - `credentials-client.tsx` dagi 19 ta hardcode kartochka olib tashlandi.
+     - Nomlar `sales-content/uz.ts` dagi naming `proof.items` dan, sohalar `credentials-content` dagi `naming.fields` dan olinadi.
+     - Tasdiqlangan ro'yxatga moslashtirildi: `Naf` → `Enros` (4 ta sales-content faylida).
+  5. **Lead modal i18n:**
+     - `parseInitialServices` endi `notSure` qiymatini to'liq moslashtiradi va xitoycha `不确定/咨询` variantlarini taniydi.
+  6. **Testlar:**
+     - `src/lib/credentials-content.test.ts`: 4 tilda naming field kalitlari bir xil, har bir field mavjud nomga ishora qiladi, har bir tasdiqlangan nomning sohasi bor.
+- **Tekshiruv:**
+  - `npm run typecheck` — 0 xato
+  - `npm run verify:fast` — 73 fayl, 464/464 test yashil
+  - `npm run build` — 165 sahifa, 0 xato
+  - Runtime: `/ru/credentials` ruscha ochiladi, o'zbekcha matn qolmagan; muqovada `7+` ko'rinadi.
+- **Eslatma:** "100% patentdan o'tadi" da'vosi o'zgartirilmadi — hozircha egasi tasdiqlagan matn. Kelgusida `docs/FAKTLAR.md` bilan tekshirish tavsiya etiladi.
+
 ## 2026-10-31 | Oisha AI Assistant Belgisi FoxUI Orb Dizayniga To'liq O'tkazildi (Antigravity)
 - **Foydalanuvchi talabi:**
   - `https://foxui.dev/design-system/orb/ oisha belgisini shu dizaynda qilib ber.`

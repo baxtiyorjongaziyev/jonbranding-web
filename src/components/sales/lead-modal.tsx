@@ -86,10 +86,13 @@ function parseInitialServices(preset: string, allOptions: ServiceOption[], notSu
   const pLower = preset.toLowerCase();
 
   if (
+    pLower === notSureValue.toLowerCase() ||
     pLower.includes('maslahat') ||
     pLower.includes('aniq emas') ||
     pLower.includes('not sure') ||
-    pLower.includes('не уверен')
+    pLower.includes('не уверен') ||
+    pLower.includes('不确定') ||
+    pLower.includes('咨询')
   ) {
     return [notSureValue];
   }
@@ -191,7 +194,9 @@ export default function LeadModal({
           !sLower.includes('maslahat') &&
           !sLower.includes('aniq emas') &&
           !sLower.includes('consultation') &&
-          !sLower.includes('advice')
+          !sLower.includes('advice') &&
+          !sLower.includes('不确定') &&
+          !sLower.includes('咨询')
         );
       });
 
