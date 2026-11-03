@@ -98,9 +98,12 @@ export function Deck({
   setModalOpen,
   presetService,
   source = 'credentials',
+  lang = 'uz',
 }: {
   slides: DeckSlide[];
   source?: string;
+  /** Ariza oynasi shu tilda ochiladi. */
+  lang?: string;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
   presetService: string;
@@ -380,6 +383,7 @@ export function Deck({
         onClose={() => setModalOpen(false)}
         presetService={presetService}
         source={source}
+        lang={lang}
       />
     </div>
   );

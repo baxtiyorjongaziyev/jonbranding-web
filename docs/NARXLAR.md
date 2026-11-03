@@ -24,6 +24,10 @@
 bo'lmasligi kerak. `/narxlar` va `/credentials` ikkalasi shu moduldan o'qiydi,
 shuning uchun bir joyda o'zgartirish ikkala sahifada ham aks etadi.
 
+`/credentials` ning faqat slayd sarlavhalari, eyebrow va neyming sohalari
+`src/lib/credentials-content/` da (4 til). Nomlar baribir `sales-content` dagi
+naming `proof.items` dan olinadi — ikkinchi ro'yxat yo'q.
+
 Eski manzillar: `/tariflar` → `/narxlar`, `/presentation` → `/credentials`
 (`next.config.js` dagi 308 redirect).
 

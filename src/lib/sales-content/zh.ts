@@ -50,7 +50,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
         proof: {
           label: '我们创作的名称',
           items: [
-            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Naf', 'Revo', 'Petron', 'Estem',
+            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Enros', 'Revo', 'Petron', 'Estem',
             'Zayyan', 'Mercato', 'Geonest', 'Rutera', 'Sofmir', 'Arfadel', 'Melamus', 'Polentra', 'Viton',
           ],
         },

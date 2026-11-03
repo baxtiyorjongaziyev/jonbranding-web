@@ -1,9 +1,12 @@
 'use client';
 
-import { useCallback, useState, useEffect } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GUARANTEES, JOBS, PACKAGES, PROCESS_STEPS, SERVICE_GROUPS } from '@/lib/sales-content';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, rise, serif, Slide, stagger } from '@/components/credentials/deck';
+import { clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
+import type { CredentialsCopy } from '@/lib/credentials-content';
+import type { Job, Package, ProcessStep, ServiceGroup } from '@/lib/sales-content/types';
 
 export type CredCase = {
   slug: string;
@@ -18,14 +21,31 @@ export type CredCase = {
 export type CredQuote = { name: string; company: string; quote: string };
 export type CredLogo = { name: string; logo: string };
 
+/**
+ * Serverda til bo'yicha tanlangan sotuv kontenti. Client butun
+ * `sales-content` modulini emas, faqat shu qismni oladi.
+ */
+export type CredentialsSales = {
+  serviceGroups: ServiceGroup[];
+  packages: Package[];
+  guarantees: string[];
+  jobs: Job[];
+  processSteps: ProcessStep[];
+  currency: string;
+  payment: { contract: string; delivery: string };
+  packageSeparate: { pre: string; mid: string; suf: string };
+  packageSuffix: string;
+  notSure: string;
+};
+
 type Props = {
   cases: CredCase[];
   quotes: CredQuote[];
   logos: CredLogo[];
+  sales: CredentialsSales;
+  copy: CredentialsCopy;
+  lang: string;
 };
-
-import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, PAPER, rise, serif, Slide, stagger } from '@/components/credentials/deck';
-import { clientsLabel, projectsLabel } from '@/lib/company-facts';
 
 function CaseImageRotator({
   images,
@@ -123,39 +143,50 @@ function CaseImageRotator({
   );
 }
 
-export default function CredentialsClient({ cases, quotes, logos }: Props) {
+export default function CredentialsClient({ cases, quotes, logos, sales, copy, lang }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [presetService, setPresetService] = useState('Aniq emas — maslahat kerak');
+  const [presetService, setPresetService] = useState(sales.notSure);
   const openModal = useCallback((service: string) => {
     setPresetService(service);
     setModalOpen(true);
   }, []);
 
+  // Nomlar `sales-content` dagi naming proof'dan olinadi — ikkinchi ro'yxat yo'q.
+  const namingService = sales.serviceGroups
+    .flatMap((group) => group.items)
+    .find((item) => item.id === 'naming');
+  const namingNames = (namingService?.proof?.items ?? []).map((name) => ({
+    name,
+    field: copy.naming.fields[name.toUpperCase()] ?? '',
+  }));
+
   const slides: DeckSlide[] = [];
 
   slides.push({
     id: 'muqova',
-    label: 'Muqova',
+    label: copy.nav.cover,
     render: () => (
       <Slide bg={INK}>
-        <Eyebrow light>Jon Branding — Taqdimot</Eyebrow>
+        <Eyebrow light>{copy.cover.eyebrow}</Eyebrow>
         <Display light size="xl">
-          Brend — bu ko‘rinish emas.
-          <br />
-          Bu sotuv vositasi.
+          {copy.cover.title.map((line, i) => (
+            <Fragment key={line}>
+              {i > 0 ? <br /> : null}
+              {line}
+            </Fragment>
+          ))}
         </Display>
         <motion.p
           variants={rise}
           className="mt-8 max-w-2xl text-lg sm:text-2xl font-light leading-relaxed text-white/70"
         >
-          Nom, logo, aydentika, brandbook, qadoq va patent — bitta jamoa, bitta shartnoma.
-          Ishni boshlaymiz, guvohnomani qo‘lingizga beramiz.
+          {copy.cover.subtitle}
         </motion.p>
         <motion.div variants={rise} className="mt-14 flex flex-wrap gap-x-16 gap-y-8">
           {[
-            ['9', 'yil bozorda'],
-            [clientsLabel, 'mijoz'],
-            [projectsLabel, 'loyiha'],
+            [yearsLabel(), copy.cover.stats.years],
+            [clientsLabel, copy.cover.stats.clients],
+            [projectsLabel, copy.cover.stats.projects],
           ].map(([value, label]) => (
             <div key={label}>
               <p className="text-5xl sm:text-7xl font-normal text-white" style={{ ...serif, ...nums }}>
@@ -174,11 +205,11 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
   if (logos.length > 0) {
     slides.push({
       id: 'mijozlar',
-      label: 'Mijozlar',
+      label: copy.nav.clients,
       render: () => (
         <Slide>
-          <Eyebrow>Kimlar bilan ishladik</Eyebrow>
-          <Display>Bizga ishongan brendlar</Display>
+          <Eyebrow>{copy.clients.eyebrow}</Eyebrow>
+          <Display>{copy.clients.title}</Display>
           <motion.div
             variants={rise}
             className="mt-10 grid grid-cols-2 gap-3.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-5"
@@ -206,13 +237,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'muammo',
-    label: 'Muammo',
+    label: copy.nav.problem,
     render: () => (
       <Slide bg={INK}>
-        <Eyebrow light>Tanish holat</Eyebrow>
-        <Display light>Mahsulotingiz yaxshi. Lekin buni hech kim bilmaydi.</Display>
+        <Eyebrow light>{copy.problem.eyebrow}</Eyebrow>
+        <Display light>{copy.problem.title}</Display>
         <motion.ul variants={rise} className="mt-14 grid gap-8 sm:grid-cols-2">
-          {JOBS.map((job) => (
+          {sales.jobs.map((job) => (
             <li key={job.pain} className="border-l-2 pl-6 sm:pl-8" style={{ borderColor: 'rgba(255,255,255,.25)' }}>
               <p className="text-lg sm:text-2xl font-light leading-relaxed text-white/75">
                 {job.pain}
@@ -226,13 +257,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'yechim',
-    label: 'Yechim',
+    label: copy.nav.solution,
     render: () => (
       <Slide>
-        <Eyebrow>Biz bilan ishlagandan keyin</Eyebrow>
-        <Display>Nima o‘zgaradi</Display>
+        <Eyebrow>{copy.solution.eyebrow}</Eyebrow>
+        <Display>{copy.solution.title}</Display>
         <motion.ul variants={rise} className="mt-14 grid gap-8 sm:grid-cols-2">
-          {JOBS.map((job) => (
+          {sales.jobs.map((job) => (
             <li key={job.gain} className="border-l-2 pl-6 sm:pl-8" style={{ borderColor: 'rgba(11,11,12,.25)' }}>
               <p className="text-lg sm:text-2xl font-medium leading-relaxed" style={{ color: INK }}>
                 {job.gain}
@@ -246,46 +277,24 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'neyming',
-    label: 'Nomlash ishlari',
+    label: copy.nav.naming,
     render: () => (
       <Slide bg={INK}>
-        <Eyebrow light>Neyming · Nom ishlab chiqish</Eyebrow>
-        <Display light>
-          Bozorga kiritgan va patentlangan nomlarimiz
-        </Display>
+        <Eyebrow light>{copy.naming.eyebrow}</Eyebrow>
+        <Display light>{copy.naming.title}</Display>
         <motion.p
           variants={rise}
           className="mt-6 max-w-3xl text-lg sm:text-2xl font-light leading-relaxed text-white/75"
         >
-          Nom — brendning bir umrlik poydevori. Biz ishlab chiqqan har bir nom 100% patentdan o‘tadi, xaridor ongida esda qoladi va sotuvga xizmat qiladi.
+          {copy.naming.intro}
         </motion.p>
 
-        {/* 19 ta nom kartochkalari — katta va o'qilishi oson */}
+        {/* Nom kartochkalari — nomlar va sohalar bitta manbadan */}
         <motion.div
           variants={rise}
           className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-4"
         >
-          {[
-            { name: 'SAVOD', field: 'Ta’lim & O‘quv markazi' },
-            { name: 'SHIRONA', field: 'Kafe & Novvoyxona' },
-            { name: 'FIDDA', field: 'Zargarlik brendi' },
-            { name: 'REVO', field: 'Fintex & Biznes' },
-            { name: 'PETRON', field: 'Polimer & Sanoat' },
-            { name: 'ZAYYAN', field: 'Savdo & Distribyutsiya' },
-            { name: 'GEONEST', field: 'Muhandislik & Geodeziya' },
-            { name: 'RUTERA', field: 'Logistika & Transport' },
-            { name: 'SOFMIR', field: 'Mebel aksessuarlari' },
-            { name: 'ARFADEL', field: 'Selektiv parfyumeriya' },
-            { name: 'ENROS', field: 'Texnologik servis' },
-            { name: 'BELIF', field: 'Kosmetika & Go‘zallik' },
-            { name: 'UNVAN', field: 'Yuridik konsalting' },
-            { name: 'PARFINO', field: 'Parfyumeriya tarmog‘i' },
-            { name: 'ESTEM', field: 'Stomatologiya & Tibbiyot' },
-            { name: 'MERCATO', field: 'Chakana savdo' },
-            { name: 'MELAMUS', field: 'Qandolat mahsulotlari' },
-            { name: 'POLENTRA', field: 'Ishlab chiqarish' },
-            { name: 'VITON', field: 'Farmatsevtika' },
-          ].map((item) => (
+          {namingNames.map((item) => (
             <div
               key={item.name}
               className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
@@ -296,11 +305,11 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
               >
                 {item.name}
               </p>
-              <p
-                className="mt-1.5 text-xs sm:text-sm leading-snug text-white/55"
-              >
-                {item.field}
-              </p>
+              {item.field ? (
+                <p className="mt-1.5 text-xs sm:text-sm leading-snug text-white/55">
+                  {item.field}
+                </p>
+              ) : null}
             </div>
           ))}
         </motion.div>
@@ -310,18 +319,12 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
           variants={rise}
           className="mt-9 flex flex-wrap items-center gap-x-12 gap-y-4 border-t border-white/10 pt-6"
         >
-          <div className="flex items-center gap-3">
-            <span className="text-3xl sm:text-5xl font-bold text-white" style={{ ...serif, ...nums }}>100%</span>
-            <span className="text-sm sm:text-base text-white/75">Patentga toza tekshiruv (IMA bazasi)</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-3xl sm:text-5xl font-bold text-white" style={{ ...serif, ...nums }}>.uz / .com</span>
-            <span className="text-sm sm:text-base text-white/75">Domen va username mavjudligi</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-3xl sm:text-5xl font-bold text-white" style={{ ...serif, ...nums }}>10 kun</span>
-            <span className="text-sm sm:text-base text-white/75">Nom ishlab chiqish va taqdimot muddati</span>
-          </div>
+          {copy.naming.facts.map((fact) => (
+            <div key={fact.label} className="flex items-center gap-3">
+              <span className="text-3xl sm:text-5xl font-bold text-white" style={{ ...serif, ...nums }}>{fact.value}</span>
+              <span className="text-sm sm:text-base text-white/75">{fact.label}</span>
+            </div>
+          ))}
         </motion.div>
       </Slide>
     ),
@@ -353,7 +356,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
             />
             <div>
               <Eyebrow light>
-                Keys {String(index + 1).padStart(2, '0')}
+                {copy.cases.eyebrow} {String(index + 1).padStart(2, '0')}
                 {item.categoryLabel ? ` · ${item.categoryLabel}` : ''}
               </Eyebrow>
               <Display light>{item.title}</Display>
@@ -373,13 +376,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
     });
   });
 
-  SERVICE_GROUPS.forEach((group) => {
+  sales.serviceGroups.forEach((group) => {
     slides.push({
       id: `xizmat-${group.title}`,
       label: group.title,
       render: () => (
         <Slide>
-          <Eyebrow>Xizmatlar — narxlarimiz ochiq</Eyebrow>
+          <Eyebrow>{copy.services.eyebrow}</Eyebrow>
           <Display>{group.title}</Display>
           <motion.p variants={rise} className="mt-6 max-w-3xl text-lg sm:text-2xl font-light leading-relaxed text-black/65">
             {group.intro}
@@ -397,7 +400,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
                 </div>
                 <div className="shrink-0 sm:text-right">
                   <p className="text-2xl sm:text-4xl font-normal" style={{ ...nums, color: INK }}>
-                    {item.price} <span className="text-sm sm:text-base font-medium text-black/50">so‘m</span>
+                    {item.price} <span className="text-sm sm:text-base font-medium text-black/50">{sales.currency}</span>
                   </p>
                   <p className="mt-1 text-xs sm:text-sm font-bold font-mono tracking-wider uppercase text-black/50">
                     {item.duration}
@@ -413,13 +416,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'paketlar',
-    label: 'Paketlar',
+    label: copy.nav.packages,
     render: () => (
       <Slide bg={INK}>
-        <Eyebrow light>Paketlar</Eyebrow>
-        <Display light>Birga olinsa arzonroq</Display>
+        <Eyebrow light>{copy.packages.eyebrow}</Eyebrow>
+        <Display light>{copy.packages.title}</Display>
         <motion.div variants={rise} className="mt-11 grid gap-6 lg:grid-cols-3">
-          {PACKAGES.map((pack) => (
+          {sales.packages.map((pack) => (
             <div
               key={pack.name}
               className="flex flex-col rounded-2xl p-7 sm:p-8"
@@ -444,10 +447,11 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
               </div>
               <p className="mt-6 text-4xl sm:text-5xl lg:text-6xl" style={{ ...serif, ...nums }}>
                 {pack.price}
-                <span className="ml-2 text-base sm:text-lg font-light opacity-60">so‘m</span>
+                <span className="ml-2 text-base sm:text-lg font-light opacity-60">{sales.currency}</span>
               </p>
               <p className="mt-2 text-sm sm:text-base opacity-70">
-                Alohida olinsa <span style={nums}>{pack.separate}</span> — <span style={nums}>{pack.saving}</span> tejaysiz
+                {sales.packageSeparate.pre} <span style={nums}>{pack.separate}</span> {sales.packageSeparate.mid}{' '}
+                <span style={nums}>{pack.saving}</span> {sales.packageSeparate.suf}
               </p>
               <ul className="mt-6 space-y-2.5 text-base sm:text-lg">
                 {pack.features.map((feature) => (
@@ -462,20 +466,20 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
               </p>
               <button
                 type="button"
-                onClick={() => openModal(`${pack.name} paket`)}
+                onClick={() => openModal(`${pack.name} ${sales.packageSuffix}`)}
                 className="cred-no-print mt-5 w-full rounded-full px-6 py-3.5 text-sm sm:text-base font-semibold transition-opacity hover:opacity-85"
                 style={{
                   background: pack.featured ? INK : '#fff',
                   color: pack.featured ? '#fff' : INK,
                 }}
               >
-                Shu paketni tanlash
+                {copy.packages.cta}
               </button>
             </div>
           ))}
         </motion.div>
         <motion.p variants={rise} className="mt-8 text-sm sm:text-base text-white/50">
-          Muddatlar dizayn ishlariga tegishli. Patent guvohnomasi alohida: oddiy tartibda 7 oy, tezkorda 20–40 kun.
+          {copy.packages.note}
         </motion.p>
       </Slide>
     ),
@@ -483,13 +487,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'jarayon',
-    label: 'Jarayon',
+    label: copy.nav.process,
     render: () => (
       <Slide>
-        <Eyebrow>Qanday ishlaymiz</Eyebrow>
-        <Display>To‘rt bosqich. Har birida siz tasdiqlaysiz.</Display>
+        <Eyebrow>{copy.process.eyebrow}</Eyebrow>
+        <Display>{copy.process.title}</Display>
         <motion.div variants={rise} className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {PROCESS_STEPS.map((step, index) => (
+          {sales.processSteps.map((step, index) => (
             <div key={step.title} className="border-t-2 pt-5 border-black/15">
               <p className="text-2xl sm:text-4xl font-mono font-bold text-black/35" style={nums}>
                 0{index + 1}
@@ -504,9 +508,9 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
           className="mt-14 flex flex-wrap items-baseline gap-x-14 gap-y-4 border-t-2 pt-7 border-black/15"
         >
           <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-black/60" style={mono}>
-            To‘lov bosqichma-bosqich:
+            {copy.process.paymentLabel}
           </p>
-          {[['50%', 'shartnomada'], ['50%', 'topshirishda']].map(([pct, when]) => (
+          {[['50%', sales.payment.contract], ['50%', sales.payment.delivery]].map(([pct, when]) => (
             <p key={when} className="text-base sm:text-lg text-black">
               <span className="text-2xl sm:text-4xl font-normal mr-2" style={{ ...serif, ...nums }}>{pct}</span>{' '}
               <span className="text-black/60">{when}</span>
@@ -519,13 +523,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'kafolat',
-    label: 'Kafolatlar',
+    label: copy.nav.guarantees,
     render: () => (
       <Slide>
-        <Eyebrow>Shartnomada yoziladi</Eyebrow>
-        <Display>Xavfni o‘zimiz olamiz</Display>
+        <Eyebrow>{copy.guarantees.eyebrow}</Eyebrow>
+        <Display>{copy.guarantees.title}</Display>
         <motion.ul variants={rise} className="mt-14 space-y-6">
-          {GUARANTEES.map((item, index) => (
+          {sales.guarantees.map((item, index) => (
             <li key={item} className="flex items-baseline gap-6 border-t-2 pt-6 border-black/10">
               <span className="text-lg sm:text-2xl font-mono font-bold text-black/40" style={nums}>
                 0{index + 1}
@@ -545,7 +549,7 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
         label: quote.company || quote.name,
         render: () => (
           <Slide bg={INK}>
-            <Eyebrow light>Mijoz fikri</Eyebrow>
+            <Eyebrow light>{copy.quote.eyebrow}</Eyebrow>
             <motion.blockquote
               variants={rise}
               className="mt-8 max-w-5xl text-2xl sm:text-4xl lg:text-5xl font-normal leading-snug text-white"
@@ -567,27 +571,28 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
 
   slides.push({
     id: 'cta',
-    label: 'Keyingi qadam',
+    label: copy.nav.cta,
     render: () => (
       <Slide bg={INK}>
-        <Eyebrow light>Keyingi qadam</Eyebrow>
+        <Eyebrow light>{copy.cta.eyebrow}</Eyebrow>
         <Display light size="xl">
-          Qaysi paket sizga
-          <br />
-          to‘g‘ri kelishini
-          <br />
-          birga aniqlaymiz
+          {copy.cta.title.map((line, i) => (
+            <Fragment key={line}>
+              {i > 0 ? <br /> : null}
+              {line}
+            </Fragment>
+          ))}
         </Display>
         <motion.p variants={rise} className="mt-8 max-w-2xl text-lg sm:text-2xl font-light leading-relaxed text-white/70">
-          Qisqa suhbat: biznesingizni so‘raymiz, nima kerakligini va qancha turishini aytamiz. Majburiyatsiz.
+          {copy.cta.subtitle}
         </motion.p>
         <motion.div variants={rise} className="mt-12 flex flex-wrap items-center gap-4">
           <button
             type="button"
-            onClick={() => openModal('Aniq emas — maslahat kerak')}
+            onClick={() => openModal(sales.notSure)}
             className="cred-no-print rounded-full bg-white px-8 py-4 text-base sm:text-lg font-semibold transition-opacity hover:opacity-85 text-[#0b0b0c]"
           >
-            Ariza qoldirish
+            {copy.cta.button}
           </button>
           <a
             data-oisha-phone=""
@@ -609,5 +614,13 @@ export default function CredentialsClient({ cases, quotes, logos }: Props) {
     ),
   });
 
-  return <Deck slides={slides} modalOpen={modalOpen} setModalOpen={setModalOpen} presetService={presetService} />;
+  return (
+    <Deck
+      slides={slides}
+      modalOpen={modalOpen}
+      setModalOpen={setModalOpen}
+      presetService={presetService}
+      lang={lang}
+    />
+  );
 }

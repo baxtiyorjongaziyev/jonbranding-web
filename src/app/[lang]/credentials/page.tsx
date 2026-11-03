@@ -6,30 +6,28 @@ import { fetchTestimonials } from '@/lib/data/testimonials';
 import { fetchBrands } from '@/lib/data/brands';
 import CredentialsClient from './credentials-client';
 import { getPageAlternates } from '@/lib/seo';
+import { getSalesContent } from '@/lib/sales-content';
+import { getCredentialsCopy } from '@/lib/credentials-content';
 import type { CredCase, CredLogo, CredQuote } from './credentials-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
-
-const TITLE = 'Credentials';
-const DESCRIPTION =
-  'Jon Branding agentligi taqdimoti: ishlar, xizmatlar, narxlar va ish jarayoni bitta sahifada.';
 
 /**
  * Sotuvchi uchun taqdimot sahifasi. Link bilan ochiq, lekin qidiruv tizimlari
  * indekslamaydi — narxlar ochiq turgani uchun sahifa faqat suhbat davomida beriladi.
  */
-export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
-  const safeLang: Locale = (['uz', 'ru', 'en', 'zh'] as const).includes(lang as Locale) ? (lang as Locale) : 'uz';
+  const safeLang: Locale = VALID_LOCALES.includes(lang) ? lang : 'uz';
+  const copy = getCredentialsCopy(safeLang);
   const alternates = await getPageAlternates(safeLang, '/credentials');
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title: copy.meta.title,
+    description: copy.meta.description,
     robots: { index: false, follow: false, nocache: true },
     alternates,
   } as Metadata;
 }
-
 
 const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await props.params;
@@ -40,6 +38,27 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
     fetchTestimonials(safeLang),
     fetchBrands(),
   ]);
+
+  const content = getSalesContent(safeLang);
+  const copy = getCredentialsCopy(safeLang);
+
+  /**
+   * Sotuv kontenti til bo'yicha serverda tanlanadi va client'ga faqat
+   * kerakli qismi uzatiladi. Ilgari client `sales-content` barrel'idan
+   * o'zbekcha konstantalarni import qilardi — /ru, /en, /zh ham o'zbekcha chiqardi.
+   */
+  const sales = {
+    serviceGroups: content.serviceGroups,
+    packages: content.packages,
+    guarantees: content.guarantees,
+    jobs: content.jobs,
+    processSteps: content.processSteps,
+    currency: content.ui.currency,
+    payment: content.ui.payment,
+    packageSeparate: content.ui.packages.separate,
+    packageSuffix: content.ui.modal.packageSuffix,
+    notSure: content.ui.notSure,
+  };
 
   // Taqdimot uchun eng kuchli keyslarni tartib bilan saralash (Neyming, Qadoq, Firma uslubi, Brendbuk)
   const FLAGSHIP_PRIORITY = [
@@ -89,7 +108,7 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
         slug: project.slug,
         title: project.title,
         client: project.client || project.title,
-        categoryLabel: project.categoryLabel || 'Brending',
+        categoryLabel: project.categoryLabel || copy.cases.fallbackCategory,
         coverImage: cover,
         galleryImages: gallery,
         result: project.results?.[0],
@@ -106,7 +125,14 @@ const CredentialsPage = async (props: { params: Promise<{ lang: Locale }> }) => 
 
   return (
     <div className="flex-grow">
-      <CredentialsClient cases={cases} quotes={quotes} logos={logos} />
+      <CredentialsClient
+        cases={cases}
+        quotes={quotes}
+        logos={logos}
+        sales={sales}
+        copy={copy}
+        lang={safeLang}
+      />
     </div>
   );
 };

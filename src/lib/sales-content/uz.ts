@@ -50,7 +50,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
         proof: {
           label: 'Biz ishlab chiqqan nomlar',
           items: [
-            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Naf', 'Revo', 'Petron', 'Estem',
+            'Savod', 'Fidda', 'Shirona', 'Belif', 'Unvan', 'Parfino', 'Enros', 'Revo', 'Petron', 'Estem',
             'Zayyan', 'Mercato', 'Geonest', 'Rutera', 'Sofmir', 'Arfadel', 'Melamus', 'Polentra', 'Viton',
           ],
         },
