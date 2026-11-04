@@ -15,11 +15,9 @@ export const en: CredentialsCopy = {
     problem: 'Problem',
     solution: 'Solution',
     naming: 'Naming',
-    services: 'Services',
     packages: 'Packages',
     process: 'Process',
     guarantees: 'Guarantees',
-    quote: 'Quotes',
     cta: 'Next step',
   },
   cover: {

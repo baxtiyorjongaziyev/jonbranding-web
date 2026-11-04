@@ -300,7 +300,7 @@ export default function CredentialsClient({ cases, quotes, logos, sales, copy, l
               className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
             >
               <p
-                className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors"
+                className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-blue-400 transition-colors"
                 style={{ ...serif, fontWeight: 400 }}
               >
                 {item.name}

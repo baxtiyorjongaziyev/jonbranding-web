@@ -15,11 +15,9 @@ export const zh: CredentialsCopy = {
     problem: '问题',
     solution: '方案',
     naming: '命名',
-    services: '服务',
     packages: '套餐',
     process: '流程',
     guarantees: '保障',
-    quote: '评价',
     cta: '下一步',
   },
   cover: {
