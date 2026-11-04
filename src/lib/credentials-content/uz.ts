@@ -16,11 +16,9 @@ export const uz: CredentialsCopy = {
     problem: 'Muammo',
     solution: 'Yechim',
     naming: 'Nomlash',
-    services: 'Xizmatlar',
     packages: 'Paketlar',
     process: 'Jarayon',
     guarantees: 'Kafolatlar',
-    quote: 'Fikrlar',
     cta: 'Keyingi qadam',
   },
   cover: {

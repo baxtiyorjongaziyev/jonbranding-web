@@ -15,11 +15,9 @@ export const ru: CredentialsCopy = {
     problem: 'Проблема',
     solution: 'Решение',
     naming: 'Нейминг',
-    services: 'Услуги',
     packages: 'Пакеты',
     process: 'Процесс',
     guarantees: 'Гарантии',
-    quote: 'Отзывы',
     cta: 'Далее',
   },
   cover: {

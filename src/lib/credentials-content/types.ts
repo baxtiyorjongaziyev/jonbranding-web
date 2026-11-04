@@ -18,11 +18,9 @@ export type CredentialsCopy = {
     problem: string;
     solution: string;
     naming: string;
-    services: string;
     packages: string;
     process: string;
     guarantees: string;
-    quote: string;
     cta: string;
   };
   cover: {

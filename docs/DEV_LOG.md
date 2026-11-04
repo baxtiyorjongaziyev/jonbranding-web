@@ -1,5 +1,15 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-04 | /credentials: neyming kartochkalari registri va ishlatilmayotgan nav maydonlari (OpenCode)
+
+- **Sabab:** 2026-11-03 dagi commitdan keyin ikki kichik nuqson topildi.
+  1. Neyming kartochkalari `proof.items` dan olinganligi uchun `SAVOD` o'rniga `Savod` chiqardi — eski dizayn katta harfda edi.
+  2. `nav.services` va `nav.quote` hech qayerda ishlatilmasdi (xizmat slaydi `group.title`, fikr slaydi `quote.company` ishlatadi).
+- **Tuzatish:**
+  - Nom kartochkasiga `uppercase` klassi qo'shildi — manba bitta bo'lib qoladi, ko'rinish eskisidek.
+  - `nav.services` va `nav.quote` `types.ts` va 4 ta til faylidan olib tashlandi.
+- **Tekshiruv:** `npm run typecheck` 0 xato, `npm run verify:fast` 464/464, `npm run build` 165 sahifa.
+
 ## 2026-11-03 | /credentials taqdimoti 4 tilli qilindi, raqam va nomlar yagona manbaga ulandi (OpenCode)
 
 - **Foydalanuvchi talabi:**
