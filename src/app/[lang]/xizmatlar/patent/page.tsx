@@ -9,29 +9,32 @@ import { PATENT_PAGE } from '@/lib/service-pages/patent';
 
 type Props = { params: Promise<{ lang: string }> };
 
+// Guvohnomalar soni sayt ma'lumotidan olinadi (`PATENT_CERTIFICATES`) — qo'lda yozilmaydi.
+const CERT_COUNT = PATENT_CERTIFICATES.length;
+
 const DESCRIPTION =
-  'Brend nomi va logotipini O‘zbekistonda tovar belgisi sifatida ro‘yxatdan o‘tkazish: tekshiruv 880 000 so‘mdan, oddiy ~7 oy yoki tezkor 20–40 kun. 13 ta guvohnoma olib berganmiz.';
+  `Brend nomi va logotipini O‘zbekistonda tovar belgisi sifatida ro‘yxatdan o‘tkazish: tekshiruv 880 000 so‘mdan, oddiy ~7 oy yoki tezkor 20–40 kun. ${CERT_COUNT} ta guvohnoma olib berganmiz.`;
 
 const META: Record<Locale, { title: string; description: string }> = {
   uz: {
     title: 'Tovar belgisini ro‘yxatdan o‘tkazish narxi — patent 5 000 000 so‘mdan',
     description:
-      'Tovar belgisini ro‘yxatdan o‘tkazish narxi: tekshiruv 880 000, oddiy patent 5 000 000 (~7 oy), tezkor 7 000 000 so‘m (20–40 kun). 13 ta guvohnoma olib berganmiz.',
+      `Tovar belgisini ro‘yxatdan o‘tkazish narxi: tekshiruv 880 000, oddiy patent 5 000 000 (~7 oy), tezkor 7 000 000 so‘m (20–40 kun). ${CERT_COUNT} ta guvohnoma olib berganmiz.`,
   },
   ru: {
     title: 'Сколько стоит патент на товарный знак в Узбекистане — от 5 000 000 сум',
     description:
-      'Регистрация товарного знака в Узбекистане: проверка 880 000 сум, обычный патент 5 000 000 (~7 месяцев), срочный 7 000 000 сум (20–40 дней). Получили 13 свидетельств для клиентов.',
+      `Регистрация товарного знака в Узбекистане: проверка 880 000 сум, обычный патент 5 000 000 (~7 месяцев), срочный 7 000 000 сум (20–40 дней). Получили ${CERT_COUNT} свидетельств для клиентов.`,
   },
   en: {
     title: 'Trademark Registration Cost in Uzbekistan — from 5,000,000 UZS',
     description:
-      'Trademark registration in Uzbekistan: expert check 880,000 UZS, standard filing 5,000,000 (~7 months), fast-track 7,000,000 UZS (20–40 days). 13 certificates obtained for clients.',
+      `Trademark registration in Uzbekistan: expert check 880,000 UZS, standard filing 5,000,000 (~7 months), fast-track 7,000,000 UZS (20–40 days). ${CERT_COUNT} certificates obtained for clients.`,
   },
   zh: {
     title: '乌兹别克斯坦商标注册费用 — 5,000,000 苏姆起',
     description:
-      '乌兹别克斯坦商标注册：检索880,000苏姆，普通注册5,000,000（约7个月），加急7,000,000苏姆（20–40天）。已为客户取得13份证书。',
+      `乌兹别克斯坦商标注册：检索880,000苏姆，普通注册5,000,000（约7个月），加急7,000,000苏姆（20–40天）。已为客户取得${CERT_COUNT}份证书。`,
   },
 };
 
