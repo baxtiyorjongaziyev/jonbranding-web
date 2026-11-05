@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "jonbranding-web",
   "main": ".open-next/worker.js",
+  "workers_dev": true,
+  "images": { "binding": "IMAGES" },
   "compatibility_date": "2026-05-10",
   "compatibility_flags": [
     "nodejs_compat",
@@ -16,6 +18,11 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "jonbranding-web"
     }
+  ],
+  "routes": [
+    { "pattern": "jonbranding.uz", "custom_domain": true },
+    { "pattern": "www.jonbranding.uz", "custom_domain": true },
+    { "pattern": "patent.jonbranding.uz", "custom_domain": true }
   ],
   "observability": {
     "enabled": true
