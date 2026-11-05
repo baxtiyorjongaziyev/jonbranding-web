@@ -3,6 +3,12 @@
 2026-11-05: Vercel `402 DEPLOYMENT_DISABLED` sabab sayt o'chdi, production Cloudflare Workers'ga
 ko'chirildi. Shu tajriba asosida hujjat: keyingi ko'chish soatlarda, tunda emas.
 
+## Muhim holat (2026-11-05)
+- Vercel Hobby: "Fast Origin Transfer" limiti oshgani uchun **2026-12-04 gacha** pauza. Qaytsangiz ham Cloudflare'ni oldida qoldiring (trafik kamayadi).
+- Cloudflare **Free** tarif (10 ms CPU, `limits.cpu_ms` mumkin emas). **Next 16.4.1 Worker'ni CPU chegarasidan oshiradi (500)** — Next `16.3.8`da qoladi. Shu sabab `npm audit` Next bo'yicha critical (RCE/DoS) ko'rsatadi; to'liq yechim — Workers Paid ($5/oy) yoki Vercel'ga qaytgach yangilash.
+- Production versiyasini `npx wrangler versions deploy <id>@100% --name jonbranding-web --message "..." -y` bilan almashtirish/qaytarish mumkin; yangi build'ni avval `npx wrangler versions upload` (preview URL) bilan sinang.
+- `open-next.config.ts`dagi static-assets keshi sinaldi, foydasi isbotlanmadi va Sanity kontentini muzlatadi — yoqilmagan.
+
 ## Hozirgi holat
 - Hosting: Cloudflare Worker `jonbranding-web` (OpenNext adapter), hisob `e29fda2e66e08927a6423c2d8d7320ce`.
 - Domenlar: `jonbranding.uz`, `www`, `patent` — `wrangler.jsonc` ichidagi `routes` (custom domain).
