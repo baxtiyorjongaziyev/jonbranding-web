@@ -1,8 +1,13 @@
-import { cert, getApps, initializeApp } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
+import type { Firestore } from 'firebase-admin/firestore';
 import { logger } from '@/lib/logger';
 
-export function getDb() {
+export function getDb(): Firestore {
+  // Lazy require: firebase-admin pulls protobufjs, which uses eval and crashes
+  // at module load on Cloudflare Workers even when Firestore is never used.
+  /* eslint-disable @typescript-eslint/no-require-imports */
+  const { cert, getApps, initializeApp } = require('firebase-admin/app') as typeof import('firebase-admin/app');
+  const { getFirestore } = require('firebase-admin/firestore') as typeof import('firebase-admin/firestore');
+  /* eslint-enable @typescript-eslint/no-require-imports */
   let app;
   if (!getApps().length) {
     let saJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
