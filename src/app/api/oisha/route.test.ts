@@ -13,9 +13,12 @@ vi.mock('next/server', async (importOriginal) => ({
   after: (task: () => unknown) => task(),
 }));
 
-const fetchMock = vi.fn<typeof fetch>(async () => new Response(JSON.stringify({ ok: true }), { status: 200 }));
+const defaultFetch = async () => new Response(JSON.stringify({ ok: true }), { status: 200 });
+const fetchMock = vi.fn<typeof fetch>(defaultFetch);
 
 beforeEach(() => {
+  fetchMock.mockReset();
+  fetchMock.mockImplementation(defaultFetch);
   delete process.env.OISHA_API_URL;
   delete process.env.OISHA_SECRET_KEY;
   process.env.TELEGRAM_BOT_TOKEN = 'bot-token';

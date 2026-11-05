@@ -3,6 +3,7 @@
   "name": "jonbranding-web",
   "main": ".open-next/worker.js",
   "workers_dev": true,
+  "vars": { "TRUSTED_PROXY": "cloudflare" },
   "images": { "binding": "IMAGES" },
   "compatibility_date": "2026-05-10",
   "compatibility_flags": [
