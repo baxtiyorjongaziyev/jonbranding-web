@@ -1,0 +1,46 @@
+name: Deploy — Cloudflare Workers
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cloudflare
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Skip if Cloudflare secrets are missing
+        id: gate
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secret'lari yo'q — deploy o'tkazib yuborildi (docs/KOCHISH.md)."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+        if: steps.gate.outputs.run == 'true'
+      - name: Build (OpenNext)
+        if: steps.gate.outputs.run == 'true'
+        run: npm run build:cloudflare
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: h6ymmj0v
+          NEXT_PUBLIC_SANITY_DATASET: production
+      - name: Deploy
+        if: steps.gate.outputs.run == 'true'
+        run: npx wrangler deploy

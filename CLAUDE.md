@@ -40,6 +40,12 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
    - `Instrument Serif` kursivida sun'iy qalinlashuv (faux/synthetic bold) taqiqlanadi.
    - O'zgarishlardan keyin `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) va `npm run verify:fast` tekshirilishi shart.
 
+## Hosting
+
+Production — **Cloudflare Workers** (Vercel 2026-11-05'dan to'xtatilgan, `402`). Deploy: `npx wrangler deploy`.
+**Ko'chish/deploy'dan oldin `docs/KOCHISH.md` ni o'qing** (secret'lar, DNS tartibi, tuzoqlar). `src/lib/portability.test.ts` qo'riqchisi
+`firebase-admin` static import, `proxy.ts` va `@libsql/client` (non-web)ni taqiqlaydi.
+
 ## Muhim ogohlantirishlar
 - `git push` → HTTP 403 (local proxy bloklaydi). MCP `mcp__github__push_files` ishlatish
 - `src/locales/uz.json` 74KB — to'liq o'qima, `grep` ishlat
