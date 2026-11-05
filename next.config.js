@@ -149,6 +149,11 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   output: 'standalone',
+  // Cloudflare resolves workerd exports after Next's Node.js dependency trace.
+  // Preserve the web transport files as well as the Node entry points.
+  outputFileTracingIncludes: {
+    '/*': ['node_modules/@libsql/**/*'],
+  },
   allowedDevOrigins: ['127.0.0.1', 'localhost', '*.run.app', '*.google.com'],
   async redirects() {
     return [

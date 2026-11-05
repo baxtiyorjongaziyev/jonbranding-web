@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import { isIP } from 'node:net';
-import { getDb } from '@/lib/firebase-admin';
 import { getTursoClient, isTursoConfigured } from '@/lib/turso';
 import { logger } from '@/lib/logger';
 
@@ -85,6 +84,8 @@ export async function rateLimit(
   }
 
   try {
+    // Lazy: firebase-admin pulls protobufjs, which uses eval and crashes at import on Cloudflare Workers.
+    const { getDb } = await import('@/lib/firebase-admin');
     const db = getDb();
     const bucketId = createHash('sha256').update(key).digest('hex');
     const bucketRef = db.collection('_rate_limits').doc(bucketId);

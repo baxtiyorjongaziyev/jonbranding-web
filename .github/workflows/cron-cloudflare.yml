@@ -1,0 +1,31 @@
+name: Cron — Cloudflare endpoints
+
+# vercel.json cron'lari Cloudflare Workers'da ishlamaydi (docs/KOCHISH.md).
+# CRON_SECRET GitHub secret'i va Worker'dagi CRON_SECRET bir xil bo'lishi kerak.
+on:
+  schedule:
+    - cron: '0 1 * * *'   # content-agent
+    - cron: '0 4 * * *'   # lead-retry
+    - cron: '0 9 * * *'   # portfolio-telegram
+  workflow_dispatch:
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call cron endpoint
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::notice::CRON_SECRET secret'i yo'q — cron chaqirilmadi (docs/KOCHISH.md)."
+            exit 0
+          fi
+          case "$SCHEDULE" in
+            "0 1 * * *") path=/api/content-agent ;;
+            "0 4 * * *") path=/api/cron/lead-retry ;;
+            "0 9 * * *") path=/api/portfolio-telegram ;;
+            *) echo "Qo'lda ishga tushirildi — endpoint tanlanmagan."; exit 0 ;;
+          esac
+          curl -fsS -H "Authorization: Bearer $CRON_SECRET" "https://www.jonbranding.uz$path"

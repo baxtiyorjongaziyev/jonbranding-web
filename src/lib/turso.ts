@@ -1,4 +1,4 @@
-import { createClient, type Client, type InStatement, type ResultSet } from '@libsql/client';
+import { createClient, type Client, type InStatement, type ResultSet } from '@libsql/client/web';
 import { logger } from '@/lib/logger';
 
 let tursoClientInstance: Client | null = null;

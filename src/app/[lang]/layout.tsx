@@ -296,17 +296,18 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
           </div>
         </noscript>
         </MainLayout>
-        {/* Oisha "Sizga qo'ng'iroq qilamiz" vidjeti + call tracking. Server HTML'iga
-            bir marta yoziladi (data-* atributlari bilan); layout sahifa almashganda
+        {/* Oisha "Sizga qo'ng'iroq qilamiz" vidjeti + call tracking. Hydration'dan
+            keyin yuklanadi: vidjet qo'shgan DOM React tomonidan o'chirilmasin. Layout sahifa almashganda
             qayta chizilmaydi. Rang — brend Cobalt (#1B4DFF); vidjet faqat uz/ru tillarini
             qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
-        <script
+        <Script
+          id="oisha-callback-widget"
+          strategy="afterInteractive"
           src="https://oisha.jonbranding.uz/api/callback-widget.js"
           data-color="#2554FF"
           data-lang={lang === 'uz' ? 'uz' : 'ru'}
           data-call-tracking="1"
           data-position="left"
-          defer
         />
         <Suspense fallback={null}>
           <OishaPhoneSync />
