@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { isTursoConfigured, getTursoClient, executeTurso } from './turso';
 
-vi.mock('@libsql/client', () => {
+vi.mock('@libsql/client/web', () => {
   return {
     createClient: vi.fn(() => ({
       execute: vi.fn(async (stmt: unknown) => {
