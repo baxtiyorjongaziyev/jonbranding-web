@@ -43,4 +43,4 @@ jobs:
           NEXT_PUBLIC_SANITY_DATASET: production
       - name: Deploy
         if: steps.gate.outputs.run == 'true'
-        run: npx wrangler deploy
+        run: npx opennextjs-cloudflare deploy

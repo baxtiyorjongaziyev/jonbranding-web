@@ -2634,3 +2634,69 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
      - `npm run verify:fast`: 69 ta test fayli, 447/447 ta test 100% yashil o'tdi.
      - `npm run build`: Barcha 165 ta sahifa 0 xato bilan muvaffaqiyatli build bo'ldi.
 
+
+
+## 2026-11-05 - Cloudflare staging integration setup (Codex)
+
+- Owner authorized secret transfer, a labeled CRM test lead, and conditional production DNS cutover after staging verification. Owner separately approved limited Wrangler OAuth permissions.
+- Local main is a7cec03f. Existing package.json/package-lock.json edits preserved.
+- Vercel env exports contain empty integration values; existing local Turso/Oisha configuration used without printing secret values.
+- Read-only validation: both amocrm and website_tokens entries in shared Turso returned amoCRM account HTTP 200. No token refresh, rotation, or OAuth data changes.
+- Uploaded 7 encrypted runtime settings to jonbranding-web-staging: Turso URL/auth, Oisha API URL/secret, Oisha CAPI URL/ingest secret, AMOCRM_SUBDOMAIN. Live staging version: 5889a1de-93e3-4e51-8df0-730ac5ada18a.
+- Existing jonbranding-web production Worker is old (2026-05-10); do not route production to it without replacing and testing its code.
+- Cloudflare Access OTP login requested; Gmail connector withholds OTP. Owner login pending. No test lead submitted; no production DNS changes.
+- Observed rollback records (DNS-only, TTL Auto): apex A 76.76.21.21; www CNAME cname.vercel-dns-0.com; patent CNAME 1fbdd199420878b6.vercel-dns-017.com. Zoho/crm/oisha/n8n records untouched.
+- Next: owner completes staging login, verify actual form submission and CRM record, then cut over only verified Worker version with rollback records retained.
+
+### Cloudflare integration verification and compatibility fixes
+
+- Owner completed staging Access login. Actual consultation form submitted one clearly labeled technical test using the agency public phone. Independently verified amoCRM lead 54228765, contact 60015171, matching phone, source homepage_consultation_modal and UZ note.
+- Added Telegram runtime configuration after read-only Bot API confirmed access to the configured supergroup. No separate manual Telegram message sent.
+- Found hero/header callback failure: widget global survives while its host is absent after React hydration error 418. Changed external callback script to next/script afterInteractive.
+- Oisha chat global service boundary requires Authorization Bearer; X-Secret-Key alone returns 401. Added Bearer header for history/send and two regression tests (failed before fix, passed after). Live server credential validated HTTP 200 and transferred directly to Cloudflare without displaying/persisting its value.
+- Cloudflare adapter rejects Node proxy.ts. Routing implementation moved to Edge middleware.ts with unchanged behavior; existing routing tests pass. The Next.js middleware deprecation is an explicit temporary adapter compatibility tradeoff.
+- Cloudflare bundler could not resolve Turso workerd entry from Node-only traces. Switched to supported @libsql/client/web; live SELECT 1 succeeds.
+- Repaired incomplete local cloudflare 4.5.0 and @smithy/core 3.33.0 package contents from exact registry packages without changing dependency versions.
+- Focused tests: 28 passed. Earlier full verify/verify:fast: 464 tests passed before these fixes; final verification pending. Production DNS remains unchanged while replacement build is verified.
+
+### 2026-11-05 14:25 Asia/Tashkent - Live state supersedes earlier checkpoint
+
+- A concurrent external deployment changed production during this task. Current Cloudflare Worker jonbranding-web version a7d90551-e2a3-4c14-a16a-5f0d43816194 was created at 08:23:59 UTC. This Codex task did not perform that production deploy or DNS cutover and did not overwrite it.
+- Direct live checks: apex, www, /narxlar, /portfolio and patent subdomain all HTTP 200 from Cloudflare. Browser hero opens the callback dialog.
+- Actual live consultation form created CRM lead 54241893; independently verified the agency phone matches. Browser displayed Rahmat / ariza qabul qilindi. Screenshot saved as live-form-confirmed.jpg in this task artifact directory.
+- Callback technical test reached CRM lead 54241693, but browser automation mis-entered the masked phone. Added an explicit non-customer/no-call note and completed its two generated test tasks 50155869 and 50155957 (HTTP 200). Do not use that test to claim exact phone fidelity.
+- Local additional hardening: signed HttpOnly visitor cookie prevents caller-selected Telegram recipient/chat-history IDs; four isolation regression tests added. This hardening and local Cloudflare compatibility changes are NOT committed, pushed or deployed. Preserve concurrent production changes; reconcile before any deployment.
+- Local validation final: Cloudflare bundle built successfully; verify:fast and verify passed serially, 470/470 tests, clean TypeScript; detector and git diff --check passed. Earlier parallel runs hit unrelated 5-second test timeouts under build load; serial reruns passed without weakening tests.
+- Live Oisha history endpoint returned HTTP 200 with an empty history and no session cookie. This does not verify AI response delivery or deployment of the local session-isolation patch. No claim of complete AI-chat certification.
+- Existing package.json/package-lock.json edits preserved; main is two dependency-only commits behind origin/main. No push or production mutation by this task.
+
+### 2026-11-05 - Read-only live quality audit
+
+- Owner asked whether the site is ideal. Audited public Chrome layouts at 1280x800, 768x1024, 375x812 and 320x812; saved screenshots/report under this chat artifact audit directory. No application or production configuration changes.
+- React error 418 observed in both Chrome and independent in-app browser. Root cause not established by this audit.
+- Callback keyboard test: Tab leaves the open dialog to BODY and then the background skip link. Button-close restores focus correctly. Close hit area is 32x32.
+- At 320px Chrome viewport (305px client width), menu button bounds x281/right325 clip 20px. No document-wide horizontal scroll. 375px initial visible main targets meet 44px.
+- Computed styles show 11 render-visible transition-all elements; 13 internal /uz links cause canonical redirects. Ten portfolio paths return final HTTP 200. No completed broken images found in observed state.
+- PageSpeed API returned 429; no speed/CWV score invented. Cross-browser, reduced-motion, full video accessibility and AI-chat privacy certification remain incomplete.
+- Audit report prioritizes hydration, modal focus and deployed chat isolation before small-screen/polish work. No new lead or staff message sent. Prior local tests/build results are not represented as new live certification.
+
+
+### 2026-11-05 — Audit remediation (in progress)
+- External Oisha callback: added shadow-DOM focus loop, background inert/restore, Escape and focus return bridge; 44px close target. Added behavioral regression tests.
+- 320px header: compact logo/language controls and nonshrinking menu; Chrome measured right edge 289px within 305px content area.
+- Homepage canonical links and explicit transitions cleaned up. Hero reduced-motion stops auto-advance; preload restricted to next slide; indicators now 44px and wrap.
+- verify:fast passed: 75 files / 472 tests. Full verify/build and production status pending. Existing unrelated dependency edits preserved.
+
+- Cloudflare staging incident: current 1f5bb237 returned 1101. Wrangler tail identified Unexpected loadManifest(/.next/server/preview-props.json). Official OpenNext #1356 / 1.20.12 release fixes this for Next 16.4. Upgraded adapter to 1.20.16 and Wrangler to 4.157.0 (within compatible declared ranges); rebuilding before any deployment. Existing security dependency edits retained.
+- Added global MotionConfig reducedMotion=user and disabled Lenis smoothWheel for reduced motion.
+
+- Owner explicitly selected Free hosting with static public pages and redeploy-based CMS publication (2026-11-05 chat). Added locale generateStaticParams; public blog/portfolio unknown slugs return 404 until next build. Authenticated dynamic routes retain cookie checks. OpenNext static-assets incremental cache + cache interception selected, with no new storage or billing service.
+
+### 2026-11-05 — Backlog website acceptance and release preparation (Codex)
+- Reconciled origin/main Cloudflare migration into the existing local audit work without switching the shared branch. Retained current Next/OpenNext dependency upgrades and signed visitor sessions; included Firebase lazy loading, routes/proxy settings and portability guards from main.
+- Corrected the testimonials test contract: missing snapshot still fetches with blocked storage; a supplied snapshot does not request the Worker. Preserved main's fetch-mock reset. Portability tests read each source once instead of repeating disk scans inside test deadlines; assertions remain intact.
+- Public home/blog/portfolio/reviews/sitemap and testimonial fetches now keep the build snapshot until redeploy. Removed time revalidation incompatible with the read-only static cache. Dynamic API/authenticated routes were not forced static. The deploy workflow now uses OpenNext deploy so the built static cache is populated before upload (official https://opennext.js.org/cloudflare/caching).
+- Local checks: full verify passed 478 tests/TypeScript/4 locales; final verify:fast 478 passed, full ESLint zero errors (one inherited unused suppression warning), detector exit0. Load-overlap runs hit test deadlines; serial runs passed without raising timeouts or weakening assertions.
+- Final Cloudflare build passed, 325 pages. Local cache population succeeded. Wrangler dry run passed: 35576.32 KiB uncompressed, gzip7190.17 KiB. Current Cloudflare limit is64MiB uncompressed on both plans, not the former3MiB gzip limit: https://developers.cloudflare.com/changelog/post/2026-09-04-increased-worker-size-limit/ . No paid plan selected.
+- Local Worker browser: no console errors in fresh final context; callback eight Tab presses remain inside dialog, Escape closes, close target44px; 320px document/scroll width320, menu right291/width44. Local history GET200 issues a signed HttpOnly/SameSite=Strict visitor cookie. No chat message, form lead or staff message sent. Cached HTML response uses s-maxage31536000 after population.
+- Production remains unchanged at this checkpoint. Commit/PR/deployment result must be appended separately; local browser success is not live certification. Build/log/temp/browser artifacts are excluded from the release snapshot.

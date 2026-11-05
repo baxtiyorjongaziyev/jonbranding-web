@@ -783,7 +783,7 @@ body[data-callback-open="true"] [data-oisha-callback-host] {
     inset 0 -1px 1px rgba(255, 255, 255, 0.15) !important;
   position: relative;
   isolation: isolate;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
 }
 
 .liquid-glass-header.dark-glass {
@@ -1110,4 +1110,15 @@ h1 em, h2 em, h3 em {
 @media (forced-colors: active) {
   .fx-orb { background: CanvasText; }
   .fx-orb__wave, .fx-orb::after { display: none; }
+}
+
+/* Keep controls usable without decorative motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

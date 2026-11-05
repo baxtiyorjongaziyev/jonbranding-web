@@ -82,7 +82,7 @@ const AtServices: FC<Props> = ({ lang = 'uz', dictionary }) => {
         {SERVICES.map((s, i) => (
           <Link
             key={s.num}
-            href={`/${lang}/narxlar#service-${['visual-identity', 'brandbook', 'packaging'][i]}`}
+            href={`${lang === 'uz' ? '' : `/${lang}`}/narxlar#service-${['visual-identity', 'brandbook', 'packaging'][i]}`}
             className="service-row group block w-full border-b border-[var(--at-line)] cursor-pointer text-left hover:bg-[var(--at-paper)] transition-[background-color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--at-accent)]"
           >
             <div

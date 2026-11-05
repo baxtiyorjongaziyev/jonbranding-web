@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { bindCallbackAccessibility } from '@/lib/callback-accessibility';
 
 declare global {
   interface Window {
@@ -22,8 +23,8 @@ function containsPhone(node: Node): boolean {
 /**
  * Oisha call tracking: SPA'da raqamlarni qayta almashtirish.
  *
- * Vidjet skriptining o'zi `[lang]/layout.tsx`da server HTML'iga yoziladi (bir marta,
- * layout sahifa almashganda qayta chizilmaydi). Bu komponent faqat sahifa almashganda
+ * Vidjet skripti `[lang]/layout.tsx`da hydration'dan keyin bir marta yuklanadi.
+ * Bu komponent sahifa almashganda
  * va kechikib chiziladigan elementlar (mobil nav, menyu, popup) paydo bo'lganda
  * `applyPhones()` ni chaqiradi.
  */
@@ -37,20 +38,19 @@ export default function OishaPhoneSync() {
 
   useEffect(() => {
     let frame = 0;
-    let callbackObserver: MutationObserver | undefined;
+    let releaseCallback: (() => void) | undefined;
     let observedHost: Element | null = null;
     const observeCallback = () => {
       const host = document.querySelector('[data-oisha-callback-host]');
-      if (!host || host === observedHost) return;
-      callbackObserver?.disconnect();
+      if (host === observedHost) return;
+      releaseCallback?.();
+      releaseCallback = undefined;
       observedHost = host;
-      const root = host.shadowRoot || host;
-      const syncCallback = () => {
-        document.body.dataset.callbackOpen = String(!!root.querySelector('.wrap.open'));
-      };
-      callbackObserver = new MutationObserver(syncCallback);
-      callbackObserver.observe(root, { subtree: true, attributes: true, attributeFilter: ['class'] });
-      syncCallback();
+      if (!host) {
+        document.body.dataset.callbackOpen = 'false';
+        return;
+      }
+      releaseCallback = bindCallbackAccessibility(host as HTMLElement);
     };
     const updateScrollState = () => {
       document.body.dataset.scrolledPastHero = String(window.scrollY > 260);
@@ -72,7 +72,7 @@ export default function OishaPhoneSync() {
     return () => {
       window.removeEventListener('scroll', updateScrollState);
       observer.disconnect();
-      callbackObserver?.disconnect();
+      releaseCallback?.();
       delete document.body.dataset.callbackOpen;
       delete document.body.dataset.scrolledPastHero;
       if (frame) window.cancelAnimationFrame(frame);

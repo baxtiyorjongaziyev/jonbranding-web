@@ -3,6 +3,7 @@ import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { logger } from '@/lib/logger';
 import { containsContact } from '@/lib/oisha';
+import { getOishaSession } from '@/lib/oisha-session';
 
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
@@ -88,21 +89,21 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const { searchParams } = new URL(request.url);
-    const userId = normalizeUserId(searchParams.get('user_id'));
-    if (!userId) {
+    if (!normalizeUserId(searchParams.get('user_id'))) {
         return NextResponse.json({ error: 'valid user_id required' }, { status: 400 });
     }
     const { url, secret } = oishaConfig();
+    const session = getOishaSession(request, secret);
     if (!url || !secret) {
         return NextResponse.json({ history: [] }, { status: 200 });
     }
     try {
         const res = await fetch(
-            `${url}/api/chat/history/${userId}`,
+            `${url}/api/chat/history/${session.userId}`,
             { headers: { 'X-Secret-Key': secret, Authorization: `Bearer ${secret}` }, signal: AbortSignal.timeout(10_000) }
         );
         const data = await res.json();
-        return NextResponse.json(data, { status: res.ok ? 200 : res.status });
+        return session.attach(NextResponse.json(data, { status: res.ok ? 200 : res.status }));
     } catch {
         return NextResponse.json({ history: [] }, { status: 200 });
     }
@@ -127,8 +128,9 @@ export async function POST(request: Request) {
     const cleanText = text.trim().slice(0, MAX_TEXT_LENGTH);
 
     const { url, secret } = oishaConfig();
+    const session = getOishaSession(request, secret);
     if (!url || !secret || Date.now() < backendDownUntil) {
-        return offlineReply(user_id, cleanText, lang);
+        return session.attach(await offlineReply(session.userId, cleanText, lang));
     }
     try {
         const res = await fetch(`${url}/api/chat/send`, {
@@ -138,17 +140,17 @@ export async function POST(request: Request) {
                 'X-Secret-Key': secret,
                 Authorization: `Bearer ${secret}`,
             },
-            body: JSON.stringify({ user_id, text: cleanText }),
+            body: JSON.stringify({ user_id: session.userId, text: cleanText }),
             signal: AbortSignal.timeout(10_000),
         });
         if (res.status >= 500) throw new Error(`Oisha backend ${res.status}`);
         const data = await res.json();
-        return NextResponse.json(data, { status: res.ok ? 200 : res.status });
+        return session.attach(NextResponse.json(data, { status: res.ok ? 200 : res.status }));
     } catch (err) {
         backendDownUntil = Date.now() + BACKEND_COOLDOWN_MS;
         logger.error('Oisha backend unavailable, using offline reply', {
             reason: err instanceof Error ? err.message : String(err),
         });
-        return offlineReply(user_id, cleanText, lang);
+        return session.attach(await offlineReply(session.userId, cleanText, lang));
     }
 }

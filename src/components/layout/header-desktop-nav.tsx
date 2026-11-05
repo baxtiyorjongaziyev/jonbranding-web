@@ -138,7 +138,7 @@ export function DesktopNav({
   return (
     <div
       className={cn(
-        'hidden lg:flex items-center transition-all duration-500 flex-1',
+        'hidden lg:flex items-center transition-[color,background-color,border-color,box-shadow,opacity,transform] duration-500 flex-1',
         scrolled ? 'lg:ml-4 lg:mr-2 xl:ml-12 xl:mr-8' : 'lg:ml-8'
       )}
     >

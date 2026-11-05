@@ -196,4 +196,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [...staticPages, ...uzOnlyPages, ...uniqueBlogEntries, ...(await getPortfolioEntries())];
 }
 
-export const revalidate = 300;
+export const revalidate = false;

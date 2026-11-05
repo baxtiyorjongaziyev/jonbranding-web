@@ -83,7 +83,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary; onOpen?: () => 
                       <button
                         type="button"
                         onClick={() => { setShowVideo(true); setUnmuted(true); }}
-                        className="group inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-5 text-sm font-semibold transition-all hover:opacity-90"
+                        className="group inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-5 text-sm font-semibold transition-[color,background-color,border-color,box-shadow,opacity,transform] hover:opacity-90"
                         style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
                       >
                         <span
@@ -109,7 +109,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary; onOpen?: () => 
                     <button
                       type="button"
                       onClick={() => setUnmuted(!unmuted)}
-                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-all hover:opacity-80"
+                      className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full transition-[color,background-color,border-color,box-shadow,opacity,transform] hover:opacity-80"
                       style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', border: '1px solid var(--at-line)' }}
                       aria-label={unmuted ? "Ovozni o'chirish" : "Ovozni yoqish"}
                     >
@@ -146,7 +146,7 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary; onOpen?: () => 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Baxtiyorjon Gaziyev LinkedIn"
-                className="mt-1 flex-shrink-0 rounded-full p-2 transition-all hover:opacity-80"
+                className="mt-1 flex-shrink-0 rounded-full p-2 transition-[color,background-color,border-color,box-shadow,opacity,transform] hover:opacity-80"
                 style={{ border: '1px solid var(--at-line)', color: 'var(--at-ink-2)' }}
               >
                 <Linkedin size={15} aria-hidden="true" />
@@ -196,14 +196,14 @@ const Founder: FC<{ lang: string; dictionary: FounderDictionary; onOpen?: () => 
               <button
                 type="button"
                 onClick={onOpen || (() => window.dispatchEvent(new CustomEvent('openContactModal', { detail: {source:'founder',intent:'project'} })))}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-[color,background-color,border-color,box-shadow,opacity,transform] hover:opacity-90"
                 style={{ background: 'var(--at-accent)', color: '#fff' }}
               >
                 {flow.team}
               </button>
               <Link
-                href={`/${lang}/narxlar`}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90"
+                href={lang === 'uz' ? '/narxlar' : `/${lang}/narxlar`}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-[color,background-color,border-color,box-shadow,opacity,transform] hover:opacity-90"
                 style={{ background: 'var(--at-paper)', border: '1px solid var(--at-line)', color: 'var(--at-ink)' }}
               >
                 {flow.prices}

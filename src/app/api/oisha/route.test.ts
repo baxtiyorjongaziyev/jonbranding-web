@@ -50,6 +50,20 @@ describe('Oisha service authentication', () => {
     expect(response.status).toBe(200);
     expect((await response.json()).history).toEqual([]);
   });
+
+  it('never forwards a caller-selected Telegram recipient to the backend', async () => {
+    await send({ user_id: '123456789', text: 'Salom' });
+    const [, init] = fetchMock.mock.calls[0];
+    const body = JSON.parse(String(init?.body));
+    expect(body.user_id).toMatch(/^web_[0-9a-f-]{36}$/);
+    expect(body.user_id).not.toBe('123456789');
+  });
+
+  it('never reads history for the caller-selected identity', async () => {
+    const { GET } = await import('./route');
+    await GET(new Request('https://example.com/api/oisha?user_id=123456789'));
+    expect(String(fetchMock.mock.calls[0][0])).toMatch(/\/api\/chat\/history\/web_[0-9a-f-]{36}$/);
+  });
 });
 afterEach(() => {
   delete process.env.TELEGRAM_BOT_TOKEN;

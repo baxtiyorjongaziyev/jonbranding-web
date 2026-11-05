@@ -148,7 +148,7 @@ const Footer: FC<{ lang: string, dictionary: Dictionary }> = ({ lang = 'uz', dic
                   data-oisha-phone=""
                   href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'footer')}
-                  className="inline-flex items-center justify-center whitespace-nowrap px-3 sm:px-6 py-3 border border-white/20 rounded-full text-xs sm:text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-all duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center justify-center whitespace-nowrap px-3 sm:px-6 py-3 border border-white/20 rounded-full text-xs sm:text-sm font-medium hover:bg-white hover:text-[#0a0a10] transition-[color,background-color,border-color,box-shadow,opacity,transform] duration-300 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   +998 79 200 00 97
                 </a>

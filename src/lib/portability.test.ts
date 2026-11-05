@@ -14,7 +14,8 @@ function sourceFiles(dir: string): string[] {
 }
 
 const files = sourceFiles('src');
-const read = (f: string) => readFileSync(f, 'utf8');
+const source = new Map(files.map((file) => [file, readFileSync(file, 'utf8')]));
+const read = (f: string) => source.get(f) ?? readFileSync(f, 'utf8');
 
 describe('hosting portability', () => {
   it('firebase-admin faqat lazy require orqali yuklanadi (Workers eval)', () => {
