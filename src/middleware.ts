@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { defaultLocale, getLocale, locales } from '@/lib/i18n/locale';
 
-export function proxy(request: NextRequest) {
+// Cloudflare's OpenNext adapter currently requires Edge Middleware; Next.js 16
+// proxy.ts always uses Node.js. Keep routing behavior shared with Vercel.
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Xavfsizlik header'lari faqat next.config.js'da (bitta manba). Bu yerda
