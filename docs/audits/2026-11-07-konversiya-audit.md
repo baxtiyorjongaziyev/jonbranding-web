@@ -214,7 +214,7 @@ Har kartochkada bu tugma ikki marta takrorlanadi. "Menga ham shunday kerak" dega
 - `/checklist` (sitemap'da bor) `leadMagnet.magnets` matnidan foydalanadi: "Secret Blueprint (PDF)",
   "Raqobatchilarni 'Nokaut' qilish", "7 ta shafqatsiz xato". Lug'atda yana "Godfather Offer sirlari" va
   "Video-Masterclass" bor (`href: "#video"` — sahifalarda `id="video"` yo'q).
-- `LeadMagnetPopup` faqat `leadMagnet.roleSelection` bo'lsa chiqadi. Bu kalit 4 tilning hech birida yo'q,
+- `LeadMagnetPopup` faqat unga uzatilgan lug'atda (`leadMagnetPopup`) `roleSelection` bo'lsa chiqadi. Bu kalit 4 tilning hech birida yo'q,
   ya'ni popup **hech qachon ko'rinmaydi**. Ichidagi PDF havolasi `/downloads/jonbranding-checklist.pdf`
   ham mavjud emas (fayllar `public/checklists/` ichida).
 
@@ -238,6 +238,29 @@ oradagi ~7 000 px'da (muammo, nimalar topshiriladi, sharhlar, jarayon, FAQ) CTA 
 **Yechim:**
 - Hero'ning o'ng tomoniga 2–3 ta logo ishi (portfolio'dan).
 - Sharhlar bo'limidan keyin bitta "Logotip bo'yicha maslahat" tugmasi.
+
+---
+
+### K-10 (P0). "Telegram'da yozing" tugmalari yozib bo'lmaydigan kanalga olib boradi
+
+*B bosqichda topildi.*
+
+**Dalil:** `t.me/jonbranding` — **kanal** ("Jon.Branding Agency | Portfolio", 79 obunachi, "Preview channel").
+Kanalga xabar yozib bo'lmaydi. Unga olib boradigan joylar:
+- **"Aloqa" sahifasi** — Telegram kontakti va tugma;
+- **mobil pastki panel** — "Telegram orqali";
+- **kontakt formasi** — online-brief, quiz, uslub-test;
+- **diagnostika natijasi**.
+
+Xizmat sahifalari va taqdimotlar esa allaqachon yoziladigan `t.me/baxtiyorjongaziyev`ni ishlatadi.
+Sozlamalarda ham bu ikkisi ajratilgan: `telegramPersonal` va `telegramChannel` (`src/lib/data/settings.ts`).
+
+**Biznesga ta'siri:** "Telegram orqali yozaman" degan mijoz kanalga tushadi, yoza olmaydi va chiqib ketadi.
+O'zbekistonda Telegram — eng ko'p ishlatiladigan aloqa kanali.
+
+**Yechim (bajarildi):** kontakt tugmalari `src/lib/contacts.ts` → `TELEGRAM_CONTACT_URL`ga o'tkazildi.
+Kanal faqat "kuzatish" joylarida qoldi: footer ikonkasi va `sameAs`. Qaytib qolmasligi uchun
+`src/lib/contacts.test.ts` qo'riqchi testi bor.
 
 ---
 
@@ -267,3 +290,20 @@ oradagi ~7 000 px'da (muammo, nimalar topshiriladi, sharhlar, jarayon, FAQ) CTA 
 2. Consent Mode v2 yoqiladimi?
 3. Amplitude ulanadimi yoki olib tashlanadimi?
 4. Hero tugmasi: Oisha vidjeti qoladimi (uz/ru) yoki hammasi sayt formasiga o'tadimi?
+
+
+### B bosqich bajarildi (2026-11-07)
+
+| Topilma | Nima qilindi | Tekshiruv |
+|---|---|---|
+| K-1 PWA | "Ilovani o'rnating" taklifi avtomatik chiqmaydi, faqat menyudagi "Ilovani o'rnatish" orqali ochiladi | Testlar eski kodda yiqiladi; mobil skrinshot 16-soniyada PWA yo'q |
+| K-1 Cookie | Mobilda bitta ixcham qator (189 → 79 px), pastki panel ustida turadi va hech narsani yopmaydi. Qatlam formadan pastda | Skrinshot: "Loyihani muhokama qilish" ko'rinadi |
+| K-7 Forma | Tugma "Maslahatga yozilish". Yuborilgandan keyin "Telegram'da yozish" tugmasi (yoziladigan akkaunt), 4 tilda | Unit test; mobil skrinshot |
+| K-8 `/checklist` | "Secret Blueprint (PDF) / Nokaut / shafqatsiz" → "Brending chek-listi: 7 ta keng tarqalgan xato". 4 tilda "PDF" olib tashlandi (sahifa interaktiv) | Skrinshot |
+| K-8 Popup | Hech qachon chiqmaydigan `LeadMagnetPopup` va uning prop zanjiri o'chirildi | Typecheck, testlar |
+| K-6 Portfolio | 9-keysdan keyin va oxirida "20 daqiqalik bepul maslahat" CTA (kamida 6 keys bo'lsa), 4 tilda | 3 ta test; desktop skrinshot |
+| K-10 Telegram | Kontakt tugmalari kanal o'rniga yoziladigan akkauntga | Qo'riqchi test; lokal tekshiruv |
+
+Natija: typecheck ✅, lint ✅, testlar 492 → 502 ✅, build ✅, E2E 12/12 ✅.
+
+**Hali ochiq:** formadagi javob vaqti va'dasi (`[X] daqiqa`) — egasi raqam bersa qo'shiladi.
