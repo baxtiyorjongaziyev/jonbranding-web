@@ -183,6 +183,13 @@ Test qizil bo'lsa ham kod production'ga chiqadi (faqat build yiqilsa to'xtaydi).
 
 **Yechim:** `workflow_run` (test.yml muvaffaqiyatli bo'lganda) yoki `needs` bilan bog'lash; versiyalarni bir xil qilish.
 
+**Qo'shimcha (2026-11-07 tekshiruvi):**
+- GitHub'da `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` secret'lari yo'q — 2026-11-05 dagi deploy
+  6 soniyada "muvaffaqiyatli" tugagan, aslida o'tkazib yuborilgan. Hozir deploy faqat qo'lda (`npx wrangler deploy`).
+- `main`dagi CI kamida 2026-10-21 dan beri **har push'da qizil**. Oxirgi (2026-11-05) yiqilishning sababi bitta E2E test:
+  `tests/p0-p1-regression.spec.ts:88` (Oisha vidjeti ishlamaganda inglizcha hero tugmasi zaxira lead formasini
+  ochishi kerak, lekin formada `Service` maydoni topilmaydi). Typecheck, lint, unit test va build yashil.
+
 ### P1-4. Free tarif cron va integratsiyalarni ham cheklaydi
 
 Free'da bitta so'rovga **50 ta subrequest**. `content-agent` (Instagram + Telegram + Gemini + Sanity) va
@@ -193,9 +200,9 @@ ta'sir qilmaydi (Vercel sozlamasi).
 
 - `/otzivlar` (mijozlar sharhlari) indekslanadi, lekin sitemap'da **yo'q** (`src/app/sitemap.ts:14`). Sharhlar —
   ishonch sahifasi, qidiruvda chiqishi kerak.
-- `/pricing/sotuvchi-kartochka` sitemap'da 4 tilda (`src/app/sitemap.ts:27`), lekin sahifa butunlay
-  `'use client'`: matn faqat o'zbekcha, `metadata` yo'q, narxlar JSX'da qattiq yozilgan
-  (`CLAUDE.md` qoidasiga zid). ru/en/zh URL'lar o'zbekcha matnning dublikati bo'lib qoladi.
+- `/pricing/sotuvchi-kartochka` sitemap'da 4 tilda (`src/app/sitemap.ts:27`). Sarlavha va description
+  `layout.tsx`da 4 tilga tarjima qilingan, lekin sahifa matni (`'use client'`) faqat o'zbekcha, narxlar esa
+  JSX'da qattiq yozilgan (`CLAUDE.md` qoidasiga zid). ru/en/zh URL'lar o'zbekcha matnning dublikati bo'lib qoladi.
   **Yechim:** sitemap'da faqat `uz` qoldirish yoki sahifani tarjima qilish; narxlarni `sales-content.ts`ga ko'chirish.
 - `src/app/[lang]/layout.tsx:155` hamma sahifaga `<meta name="robots" content="index, follow">` qo'shadi.
   `noindex` sahifalarda ikkita qarama-qarshi teg chiqadi. Google qattiqrog'ini oladi, lekin signal chalkash.
@@ -259,3 +266,15 @@ ta'sir qilmaydi (Vercel sozlamasi).
 | **3. Qaror** | Workers Paid ($5/oy) | Egasi | — |
 | **4. Paid'dan keyin** | Next 16.4.5, R2 kesh + `generateStaticParams` (P1-1), shriftlar (P1-2) | Kod (Claude) | 1–2 PR |
 | **5. Tozalash** | O'lik kod, keraksiz paketlar, `transition-all`, `.env.example`, hujjatlar | Kod (Claude) | 1 PR |
+
+### 2-bosqich bajarildi (2026-11-07)
+
+| Topilma | Nima qilindi | Tekshiruv |
+|---|---|---|
+| P0-4 Oisha proxy | Proxy faqat `web_<UUID>`ni qabul qiladi (`src/lib/oisha.ts` → `isOishaWebUserId`). Vidjet eski/buzilgan ID'ni yangisiga almashtiradi | 12 ta yangi test; ular eski kodda yiqiladi. Lokal server: begona ID → 400, vidjet ID → 200 |
+| P0-3 Next tuzog'i | `next` aniq `16.3.8`; Dependabot `next >=16.4.0`ni taklif qilmaydi; `portability.test.ts` `^`/`~` qaytishini ushlaydi | Lockfile'da 1 qator o'zgardi |
+| P1-3 Deploy | `deploy-cloudflare.yml` endi CI tugagach ishlaydi va faqat "Typecheck, lint, test, build" yashil bo'lsa deploy qiladi. Eski commit yangisini bosib ketmaydi. Node 22, `@v7/@v6` | Gate skripti 6 stsenariyda sinaldi |
+| P1-5 SEO | `/otzivlar` sitemap'da; `sotuvchi-kartochka` faqat uz (boshqa tillarda `noindex` + uz canonical); layout'dagi qattiq `robots` meta olib tashlandi | Build + lokal HTML: `noindex` sahifada bitta robots teg |
+| P2 Lead origin | `patent.` va `staging.jonbranding.uz` ishonchli. `*.vercel.app` qoldirildi (faqat log belgisi, Vercel qaytishi mumkin) | Yangi testlar, look-alike domenlar ishonchsiz |
+
+Natija: typecheck ✅, lint ✅ (oldindan bor 1 ogohlantirish), testlar 470 → 488 ✅, build ✅.
