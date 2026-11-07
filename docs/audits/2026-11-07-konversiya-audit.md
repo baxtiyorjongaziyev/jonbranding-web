@@ -365,3 +365,7 @@ sahifani kengaytirmaydi. Haqiqiy sabab — **CSS animatsiya nomi to'qnashuvi**:
 **Tuzatish:** atelier animatsiyasi `at-dot-pulse` deb qayta nomlandi (5 ta nuqta o'zgarishsiz ishlaydi).
 `src/app/css-keyframes.test.ts` loyihadagi CSS fayllarda Tailwind nomlari (`spin`, `ping`, `pulse`, `bounce`)
 qayta e'lon qilinishini taqiqlaydi.
+
+**Tekshiruv (lokal production build, 320×900, `/en`):**
+- Bitta build'da A/B: tuzatilgan variant **0/60** yiqildi; eski `@keyframes pulse` sahifaga qaytarilganda **8/60**.
+- Playwright: to'liq to'plam 12/12, "320px services stay inside the viewport" `--repeat-each 30` → 30/30.
