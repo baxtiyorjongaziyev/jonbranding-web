@@ -275,6 +275,7 @@ ta'sir qilmaydi (Vercel sozlamasi).
 | P0-3 Next tuzog'i | `next` aniq `16.3.8`; Dependabot `next >=16.4.0`ni taklif qilmaydi; `portability.test.ts` `^`/`~` qaytishini ushlaydi | Lockfile'da 1 qator o'zgardi |
 | P1-3 Deploy | `deploy-cloudflare.yml` endi CI tugagach ishlaydi va faqat "Typecheck, lint, test, build" yashil bo'lsa deploy qiladi. Eski commit yangisini bosib ketmaydi. Node 22, `@v7/@v6` | Gate skripti 6 stsenariyda sinaldi |
 | P1-5 SEO | `/otzivlar` sitemap'da; `sotuvchi-kartochka` faqat uz (boshqa tillarda `noindex` + uz canonical); layout'dagi qattiq `robots` meta olib tashlandi | Build + lokal HTML: `noindex` sahifada bitta robots teg |
+| P1-3 E2E qizil | Test eskirgan edi: `238d9bd` Service dropdown'ini checkbox'larga almashtirgan. Test endi "Need advice" belgilangani va CRM'ga `Not sure — I need advice` ketishini tekshiradi | Eski test CI xatosini takrorladi; to'liq E2E 12/12 (chromium) |
 | P2 Lead origin | `patent.` va `staging.jonbranding.uz` ishonchli. `*.vercel.app` qoldirildi (faqat log belgisi, Vercel qaytishi mumkin) | Yangi testlar, look-alike domenlar ishonchsiz |
 
 Natija: typecheck ✅, lint ✅ (oldindan bor 1 ogohlantirish), testlar 470 → 488 ✅, build ✅.
