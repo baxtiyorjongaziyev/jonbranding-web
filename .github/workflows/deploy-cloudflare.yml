@@ -66,24 +66,36 @@ jobs:
           fi
 
           echo "run=true" >> "$GITHUB_OUTPUT"
+      # `ref:` ataylab berilmaydi: workflow_run'da tashqi (PR) commit'ni secret'lar
+      # bilan checkout qilish xavfli naqsh. Repo'ning o'z main'i olinadi va u CI
+      # tasdiqlagan commit bilan aynan bir xil ekani keyingi qadamda tekshiriladi.
       - uses: actions/checkout@v7
         if: steps.gate.outputs.run == 'true'
-        with:
-          ref: ${{ env.DEPLOY_SHA }}
-      - uses: actions/setup-node@v6
+      - name: Verify checked-out commit is the CI-verified one
+        id: verify
         if: steps.gate.outputs.run == 'true'
+        run: |
+          head=$(git rev-parse HEAD)
+          if [ "$head" != "$DEPLOY_SHA" ]; then
+            echo "::notice::Checkout $head, CI tasdiqlagani $DEPLOY_SHA — deploy keyingi CI'ga qoldirildi."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.verify.outputs.run == 'true'
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
-        if: steps.gate.outputs.run == 'true'
+        if: steps.verify.outputs.run == 'true'
       - name: Build (OpenNext)
-        if: steps.gate.outputs.run == 'true'
+        if: steps.verify.outputs.run == 'true'
         run: npm run build:cloudflare
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: h6ymmj0v
           NEXT_PUBLIC_SANITY_DATASET: production
           NEXT_TELEMETRY_DISABLED: '1'
       - name: Deploy
-        if: steps.gate.outputs.run == 'true'
+        if: steps.verify.outputs.run == 'true'
         run: npx wrangler deploy
