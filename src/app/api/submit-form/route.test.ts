@@ -95,6 +95,53 @@ describe('POST /api/submit-form', () => {
     });
   });
 
+  // K-2: reklama manbasi amoCRM'gacha yetib borsin — haftalik "manba → lid → sotuv" jadvali shunga tayanadi.
+  it('records where the visitor came from in the AmoCRM note and Telegram alert', async () => {
+    const fetchMock = vi.fn((input: string | URL | Request, _init?: RequestInit) => {
+      const url = String(input);
+      if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
+      if (url.endsWith('/api/v4/leads/complex')) {
+        return Promise.resolve(apiResponse([{ id: 101, contact_id: 202, merged: false }]));
+      }
+      if (url.endsWith('/api/v4/leads/101/notes')) return Promise.resolve(apiResponse({ ok: true }));
+      throw new Error(`Unexpected fetch: ${url}`);
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    // O'z IP'si bilan: fayldagi boshqa testlar bilan 5/min cheklovini bo'lishmasin.
+    process.env.TRUSTED_PROXY = 'cloudflare';
+
+    const response = await POST(new Request('http://localhost/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
+      body: JSON.stringify({
+        fullName: 'Sardor',
+        phone: '90 123 45 67',
+        source: 'narxlar_modal',
+        utmSource: 'google',
+        utmMedium: 'cpc',
+        utmCampaign: 'logo',
+        referrer: 'https://www.google.com',
+        landingPage: '/narxlar',
+      }),
+    }));
+    expect(response.status).toBe(200);
+
+    await vi.waitFor(() => {
+      expect(fetchMock.mock.calls.some(([url]) => String(url).endsWith('/api/v4/leads/101/notes'))).toBe(true);
+    });
+    const noteCall = fetchMock.mock.calls.find(([url]) => String(url).endsWith('/api/v4/leads/101/notes'));
+    const noteText = String(JSON.parse(String(noteCall?.[1]?.body))[0].params.text);
+    expect(noteText).toContain('UTM source: google');
+    expect(noteText).toContain('UTM campaign: logo');
+    expect(noteText).toContain('Referrer: https://www.google.com');
+    expect(noteText).toContain('Kirish sahifasi: /narxlar');
+
+    const telegramCall = fetchMock.mock.calls.find(([url]) => String(url).startsWith('https://api.telegram.org/'));
+    const telegramText = String(JSON.parse(String(telegramCall?.[1]?.body)).text);
+    expect(telegramText).toContain('google / cpc / logo');
+    expect(telegramText).toContain('Kirish sahifasi:</b> /narxlar');
+  });
+
   it('creates a referral when promoCode matches an affiliate', async () => {
     const { findAffiliateByPromoCode, createReferral } = await import('@/lib/affiliate/store');
     const storeMock = await import('@/lib/affiliate/store');

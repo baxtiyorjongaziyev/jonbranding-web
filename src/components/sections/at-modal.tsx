@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { HoneypotField } from '@/components/ui/honeypot-field';
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import {
   isValidPhone,
   isValidTelegramUsername,
@@ -80,10 +81,6 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
     const gaClientId = getGaClientId();
     const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
     const pagePath = typeof window !== 'undefined' ? window.location.pathname : undefined;
-    const referrer = typeof document !== 'undefined' ? document.referrer || undefined : undefined;
-    const searchParams = typeof window !== 'undefined'
-      ? new URLSearchParams(window.location.search)
-      : null;
 
     trackEvent({
       action: 'lead_form_submitted',
@@ -101,6 +98,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name.trim() || 'Mijoz',
           phone: normalizedPhone,
           telegram: hasTelegram ? telegramUsername : undefined,
@@ -113,15 +111,9 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           pageLocation,
           ctaSource: 'at_modal',
           pagePath,
-          referrer,
           section: 'lead_modal',
           offerType: 'brand_audit',
           ctaLabel: dictionary?.buttons?.submit || 'Bepul Brand Audit olish',
-          utmSource: searchParams?.get('utm_source') || undefined,
-          utmMedium: searchParams?.get('utm_medium') || undefined,
-          utmCampaign: searchParams?.get('utm_campaign') || undefined,
-          utmContent: searchParams?.get('utm_content') || undefined,
-          utmTerm: searchParams?.get('utm_term') || undefined,
           companyWebsite: honeypot,
           promoCode: typeof window !== 'undefined'
             ? (localStorage.getItem('promoCode') || '').replace(/"/g, '')

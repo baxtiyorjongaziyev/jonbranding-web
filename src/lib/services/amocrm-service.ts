@@ -138,6 +138,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
     data.offerType ? `Offer: ${data.offerType}` : '',
     data.ctaLabel ? `CTA matni: ${data.ctaLabel}` : '',
     data.referrer ? `Referrer: ${data.referrer}` : '',
+    data.landingPage ? `Kirish sahifasi: ${data.landingPage}` : '',
     data.utmSource ? `UTM source: ${data.utmSource}` : '',
     data.utmMedium ? `UTM medium: ${data.utmMedium}` : '',
     data.utmCampaign ? `UTM campaign: ${data.utmCampaign}` : '',

@@ -1,5 +1,6 @@
 'use client'
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getLocalizedPath, type Locale } from '@/lib/i18n/locale'
@@ -77,6 +78,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: contact.fullName,
           phone: contact.phone,
           source: 'navigator_diagnostic',

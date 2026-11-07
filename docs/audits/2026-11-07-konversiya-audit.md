@@ -369,3 +369,22 @@ qayta e'lon qilinishini taqiqlaydi.
 **Tekshiruv (lokal production build, 320×900, `/en`):**
 - Bitta build'da A/B: tuzatilgan variant **0/60** yiqildi; eski `@keyframes pulse` sahifaga qaytarilganda **8/60**.
 - Playwright: to'liq to'plam 12/12, "320px services stay inside the viewport" `--repeat-each 30` → 30/30.
+
+### A bosqich — kod qismi bajarildi (2026-11-07)
+
+K-2 ning 4-bandi ("manba → lid → amoCRM"). Server UTM'ni amoCRM eslatmasiga yozardi, lekin uni faqat
+`at-modal` yuborardi — u ham faqat joriy sahifa URL'idan. Reklamadan kelgan mehmon `/narxlar` yoki
+portfolio'ga o'tib yozsa, manba yo'qolardi. Asosiy formalar (LeadModal, ContactModal, xizmat sahifalari,
+patent kalkulyatori, brand strategy, ekspert tekshiruv, navigator) umuman yubormasdi.
+
+| Nima | Qanday |
+|---|---|
+| Kirishda saqlash | `src/lib/lead-attribution.ts` + layout'dagi `LeadAttributionCapture`: UTM (5 ta), tashqi sayt (faqat origin + yo'l, so'rov qismisiz) va kirish sahifasi `localStorage`ga, 30 kun. Yangi reklama kirishi eskisining ustidan yoziladi; to'g'ridan-to'g'ri va sayt ichidan o'tish yozmaydi |
+| Formalar | 8 ta forma `...getLeadAttribution()` ni so'rovga qo'shadi |
+| amoCRM / Telegram | Eslatmaga "Kirish sahifasi" qo'shildi (UTM va Referrer avval ham yozilardi); Telegram xabarida "Qayerdan" va "Kirish sahifasi" |
+| Saqlanmaydi | gclid, fbclid va boshqa click ID — Consent Mode qaroridan keyin |
+
+Tekshiruv: 11 ta yangi test (modul, LeadModal so'rovi, amoCRM eslatmasi + Telegram); o'zgarishsiz kodda yangi
+integratsion testlar yiqiladi. Testlar 527 → 538.
+
+**Egasining qarori kutilmoqda:** `GA_API_SECRET`, Consent Mode v2, Amplitude (K-2 ning 1–3-bandlari).

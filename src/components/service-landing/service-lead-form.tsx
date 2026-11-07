@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import React, { FC, useRef, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { HoneypotField } from '@/components/ui/honeypot-field';
@@ -55,6 +56,7 @@ export const ServiceLeadForm: FC<{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name.trim(),
           phone: normalizePhone(phone),
           role: serviceName,

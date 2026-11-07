@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Check, Send } from 'lucide-react';
@@ -266,6 +267,7 @@ export default function LeadModal({
         signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name || 'Mijoz',
           phone: normalizedPhone,
           role: intent === 'consultation' ? `${flow.consultation} — ${finalServiceString}` : finalServiceString,

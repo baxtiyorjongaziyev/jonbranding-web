@@ -21,6 +21,22 @@ describe('contextual lead form', () => {
     expect(body).toMatchObject({ role: name, source: 'home_logo_modal', phone: '+998901234567' });
     expect(fetch.mock.calls[0][1].signal).toBeInstanceOf(AbortSignal);
   });
+  // K-2: reklamadan kelgan mehmon boshqa sahifada yozsa ham manba amoCRM'ga borsin.
+  it('sends the stored campaign source with the lead', async () => {
+    const fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+    vi.stubGlobal('fetch', fetch);
+    window.localStorage.setItem('jb_lead_attribution_v1', JSON.stringify({
+      utmSource: 'google', utmCampaign: 'logo', referrer: 'https://www.google.com', landingPage: '/narxlar', capturedAt: Date.now(),
+    }));
+    render(<LeadModal open onClose={() => {}} presetService="Logotip" source="narxlar" />);
+    fireEvent.change(screen.getByLabelText('Telefon *'), { target: { value: '+998901234567' } });
+    fireEvent.click(screen.getByRole('button', { name: getSalesFlow('uz').submit }));
+    await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
+    expect(JSON.parse(fetch.mock.calls[0][1].body)).toMatchObject({
+      utmSource: 'google', utmCampaign: 'logo', referrer: 'https://www.google.com', landingPage: '/narxlar', source: 'narxlar_modal',
+    });
+    window.localStorage.clear();
+  });
   it('distinguishes consultation intent and keeps retry available after failure', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network unavailable')));
     render(<LeadModal open onClose={() => {}} presetService={getSalesContent('uz').ui.notSure} intent="consultation" />);

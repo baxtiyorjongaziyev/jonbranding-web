@@ -108,6 +108,8 @@ ${data.pagePath ? `<b>Sahifa:</b> ${escapeTelegramHtml(data.pagePath)}\n` : ''}
 ${data.section ? `<b>Section:</b> ${escapeTelegramHtml(data.section)}\n` : ''}
 ${data.offerType ? `<b>Offer:</b> ${escapeTelegramHtml(data.offerType)}\n` : ''}
 ${data.utmSource ? `<b>UTM:</b> ${escapeTelegramHtml([data.utmSource, data.utmMedium, data.utmCampaign].filter(Boolean).join(' / '))}\n` : ''}
+${data.referrer ? `<b>Qayerdan:</b> ${escapeTelegramHtml(data.referrer)}\n` : ''}
+${data.landingPage ? `<b>Kirish sahifasi:</b> ${escapeTelegramHtml(data.landingPage)}\n` : ''}
 ${data.eventId ? `<b>Event ID:</b> ${escapeTelegramHtml(data.eventId)}\n` : ''}
 ${packageSummary ? `\n<b>Paket:</b> ${packageSummary}` : ''}
 ${totalPrice ? `\n<b>Narx:</b> ${escapeTelegramHtml(totalPrice.toLocaleString('fr-FR'))} som` : ''}

@@ -13,6 +13,7 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
 import OishaPhoneSync from '@/components/layout/oisha-callback-script';
+import LeadAttributionCapture from '@/components/layout/lead-attribution-capture';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -257,6 +258,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         />
       </head>
       <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
+        <LeadAttributionCapture />
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>

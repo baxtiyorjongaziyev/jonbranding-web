@@ -1,3 +1,4 @@
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import React, { FC, useRef, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { HoneypotField } from '@/components/ui/honeypot-field';
@@ -126,6 +127,7 @@ export const BrandStrategyForm: FC<{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: f.name.trim(),
           phone: normalizedPhone,
           role: BRAND_STRATEGY_SERVICE.name,

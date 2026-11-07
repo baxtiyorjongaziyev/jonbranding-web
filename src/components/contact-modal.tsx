@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useForm, useWatch, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -180,6 +181,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           ...data,
           turnstileToken,
           packageSummary,
