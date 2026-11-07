@@ -34,6 +34,14 @@ describe('hosting portability', () => {
     expect(existsSync('src/middleware.ts')).toBe(true);
   });
 
+  // Free tarifda Next 16.4.x Worker'ni 10 ms CPU limitidan oshiradi (500). `^` bilan
+  // `npm install` yoki Dependabot jimgina yangi versiyani olib kelib production'ni
+  // yiqitardi. Yangilash — Workers Paid'dan keyin, ongli qaror bilan (docs/KOCHISH.md).
+  it("next aniq versiyada mahkamlangan (^ yoki ~ yo'q)", () => {
+    const pkg = JSON.parse(read('package.json'));
+    expect(pkg.dependencies.next).toMatch(/^\d+\.\d+\.\d+$/);
+  });
+
   it('wrangler.jsonc: rasm binding, domenlar va worker nomi', () => {
     const w = read('wrangler.jsonc');
     expect(w).toContain('"IMAGES"');

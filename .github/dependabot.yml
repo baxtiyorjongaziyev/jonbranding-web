@@ -18,6 +18,12 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+    # Next 16.4+ Cloudflare Free tarifida Worker'ni 10 ms CPU limitidan oshiradi
+    # (production 500). Merge bo'lsa deploy avtomatik chiqadi — shu sabab to'xtatilgan.
+    # Workers Paid'ga o'tilgach shu blokni olib tashlang (docs/KOCHISH.md).
+    ignore:
+      - dependency-name: "next"
+        versions: [">=16.4.0"]
 
   - package-ecosystem: github-actions
     directory: /
