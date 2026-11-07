@@ -6,19 +6,20 @@
 - Desktop screenshot:
 - Mobile screenshot:
 
-## Verification
-- [ ] `npm run typecheck`
-- [ ] `npm run lint`
-- [ ] `npm run test`
-- [ ] `npm run build`
-- [ ] Checked mobile layout
-- [ ] Checked contact modal / primary CTA
+## Verification Checklist
+- [ ] `npm run verify:fast` (i18n parity, clean architecture, Vitest)
+- [ ] `npm run typecheck` (zero TypeScript errors)
+- [ ] `npm run lint` (zero ESLint errors)
+- [ ] `npm run build` (successful production build)
+- [ ] Checked mobile layout & touch targets (>= 44px)
+- [ ] Checked contact modal / primary CTA submission flow
+- [ ] Verified copy in all 4 languages (uz, ru, en, zh)
 
-## Conversion / UX impact
-- Primary offer affected:
-- Expected user behavior change:
-- Risk / rollback note:
+## Conversion / Business Impact
+- **Primary offer affected**:
+- **Expected user behavior change**:
+- **Risk / rollback note**:
 
-## Deployment
-- [ ] Safe to deploy to `jonbranding.uz`
+## Deployment Readiness
+- [ ] Safe to deploy to production (`jonbranding.uz`)
 - [ ] Requires env var or secret change
