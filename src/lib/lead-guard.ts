@@ -16,6 +16,9 @@ export const HONEYPOT_FIELD = 'companyWebsite';
 const ALLOWED_ORIGIN_HOSTS = [
   'jonbranding.uz',
   'www.jonbranding.uz',
+  // Menejer patent kalkulyatori (src/middleware.ts) va Cloudflare staging.
+  'patent.jonbranding.uz',
+  'staging.jonbranding.uz',
   'localhost',
   '127.0.0.1',
 ];
