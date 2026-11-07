@@ -3,8 +3,9 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import LeadModal from './lead-modal';
 import { getSalesContent } from '@/lib/sales-content';
 import { getSalesFlow } from '@/lib/sales-flow';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
-vi.mock('@/lib/analytics', () => ({ trackEvent: vi.fn(), trackLead: vi.fn(), generateEventId: () => 'test-event', getGaClientId: () => undefined }));
+vi.mock('@/lib/analytics', () => ({ trackEvent: vi.fn(), trackLead: vi.fn(), trackContactClick: vi.fn(), generateEventId: () => 'test-event', getGaClientId: () => undefined }));
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 describe('contextual lead form', () => {
   it('preserves the selected service and source in the server request', async () => {
@@ -43,6 +44,16 @@ describe('contextual lead form', () => {
     if (lang === 'ru' || lang === 'zh') {
       expect(screen.queryByText('Multiple options allowed')).toBeNull();
     }
+  });
+  // Yuborilgandan keyin mijozga darhol qadam: kanalga emas, yoziladigan akkauntga.
+  it('offers an immediate Telegram next step after a successful submit', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) }));
+    render(<LeadModal open onClose={() => {}} presetService="Naming" source="test" />);
+    fireEvent.change(screen.getByLabelText('Telefon *'), { target: { value: '+998901234567' } });
+    fireEvent.click(screen.getByRole('button', { name: getSalesFlow('uz').submit }));
+    const telegram = await screen.findByRole('link', { name: getSalesFlow('uz').doneTelegram });
+    expect(telegram).toHaveAttribute('href', TELEGRAM_CONTACT_URL);
+    expect(screen.getByText(getSalesFlow('uz').done)).toBeInTheDocument();
   });
   it('allows selecting multiple services via checkboxes and sends combined services', async () => {
     const fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });

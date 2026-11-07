@@ -270,7 +270,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
 
         
         <MainLayout
-          leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
           headerDictionary={dictionary.header}
           pwaDictionary={(dictionary as any).pwa}
           lang={lang}

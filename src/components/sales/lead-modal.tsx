@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Check } from 'lucide-react';
+import { Check, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { HoneypotField } from '@/components/ui/honeypot-field';
-import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
+import { generateEventId, getGaClientId, trackContactClick, trackEvent, trackLead } from '@/lib/analytics';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
 import { getSalesContent } from '@/lib/sales-content';
 import { getSalesFlow } from '@/lib/sales-flow';
@@ -326,7 +327,21 @@ export default function LeadModal({
           </Dialog.Close>
 
           {done ? (
-            <button onClick={onClose} className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm">{t.close}</button>
+            // Ariza yuborilgandan keyin darhol qilinadigan qadam: kutishni xohlamagan
+            // mijoz Telegram'da yozadi (konversiya auditi, K-7).
+            <div className="flex flex-col gap-3">
+              <a
+                href={TELEGRAM_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackContactClick('telegram', `${source}_lead_done`)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#2554FF] hover:bg-[#1D4ED8] text-white font-semibold py-4 text-sm transition-colors"
+              >
+                <Send className="h-4 w-4" aria-hidden="true" />
+                {flow.doneTelegram}
+              </a>
+              <button onClick={onClose} className="flex w-full items-center justify-center rounded-full border border-neutral-200 text-black font-semibold py-4 text-sm hover:bg-neutral-50 transition-colors">{t.close}</button>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <HoneypotField value={honeypot} onChange={setHoneypot} />

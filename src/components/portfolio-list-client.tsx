@@ -33,7 +33,46 @@ interface PortfolioListClientProps {
     naming: string;
     viewCase: string;
     resultsTitle: string;
+    ctaTitle: string;
+    ctaText: string;
+    ctaButton: string;
   };
+}
+
+/** Kamida shuncha keys ko'rsatilganda CTA chiqadi — bitta-ikkita keysli filtrda ortiqcha. */
+const CTA_MIN_PROJECTS = 6;
+/** Grid ichidagi CTA shuncha keysdan keyin qo'yiladi (3 ustunli 3 qator). */
+const CTA_AFTER = 9;
+
+// Portfolio ko'rayotgan mehmon eng "issiq" — unga keyingi qadamni taklif qilamiz
+// (docs/audits/2026-11-07-konversiya-audit.md, K-6).
+function PortfolioCta({ title, text, button, position }: { title: string; text: string; button: string; position: 'grid' | 'end' }) {
+  const open = () => {
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', {
+        detail: { section: `portfolio_list_${position}`, source: 'portfolio_list', intent: 'consultation' },
+      }),
+    );
+  };
+  return (
+    <div
+      data-portfolio-cta={position}
+      className="flex flex-col gap-5 rounded-2xl bg-[#0A0B0E] p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8"
+    >
+      <div className="max-w-xl">
+        <p className="text-lg font-black leading-tight sm:text-xl">{title}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">{text}</p>
+      </div>
+      <button
+        type="button"
+        onClick={open}
+        className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-[#2554FF] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+      >
+        {button}
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </button>
+    </div>
+  );
 }
 
 function SpotlightCard({ children, className = '', ...props }: any) {
@@ -205,9 +244,9 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
               {filteredProjects.length > 1 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredProjects.slice(1).map((project, index) => (
+                    <React.Fragment key={project._id}>
                     <motion.div
                       layout
-                      key={project._id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
@@ -244,8 +283,18 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                         </div>
                       </SpotlightCard>
                     </motion.div>
+                    {index + 1 === CTA_AFTER && filteredProjects.length - 1 > CTA_AFTER && (
+                      <div className="sm:col-span-2 lg:col-span-3">
+                        <PortfolioCta title={dictionary.ctaTitle} text={dictionary.ctaText} button={dictionary.ctaButton} position="grid" />
+                      </div>
+                    )}
+                    </React.Fragment>
                   ))}
                 </div>
+              )}
+
+              {filteredProjects.length >= CTA_MIN_PROJECTS && (
+                <PortfolioCta title={dictionary.ctaTitle} text={dictionary.ctaText} button={dictionary.ctaButton} position="end" />
               )}
             </div>
           )}

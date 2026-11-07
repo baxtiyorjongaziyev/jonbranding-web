@@ -754,10 +754,10 @@
     "magnets": [
       {
         "id": "pdf",
-        "title": "Secret Blueprint (PDF)",
-        "subtitle": "Raqobatchilarni 'Nokaut' qilish",
-        "description": "Bozordagi 90% bizneslar yo'l qo'yadigan va millionlab so'm zarar keltiradigan 7 ta shafqatsiz xato.",
-        "cta": "Blueprintni Yuklash",
+        "title": "Brending chek-listi: 7 ta keng tarqalgan xato",
+        "subtitle": "Belgilab chiqing — brendingizda qaysi xatolar borligini 2 daqiqada bilasiz.",
+        "description": "Bizneslar ko‘p yo‘l qo‘yadigan va pulga tushadigan 7 ta xato. 2 daqiqada tekshirib chiqasiz.",
+        "cta": "Chek-listni ochish",
         "href": "/{lang}/checklist"
       },
       {
@@ -2570,14 +2570,17 @@
   },
   "salesFlow": {
     "consultation": "20 daqiqalik bepul maslahat",
+    "portfolioCtaTitle": "Biznesingizga ham shunday ko‘rinish kerakmi?",
+    "portfolioCtaText": "20 daqiqada vaziyatingizni ko‘rib chiqamiz va qaysi xizmat kerakligini aytamiz. Bepul.",
     "cta": "Maslahatga yozilish",
     "prices": "Xizmatlar va narxlar",
     "team": "Jamoa bilan bog‘lanish",
     "privacy": "Raqamingiz faqat siz bilan bog‘lanish uchun ishlatiladi.",
     "consultationDesc": "Ehtiyojingizni muhokama qilamiz va mos xizmatni tanlashga yordam beramiz. Jamoamiz telefon orqali suhbat vaqtini kelishadi.",
     "projectDesc": "Tanlangan xizmat va ehtiyojingiz bo‘yicha jamoamiz siz bilan bog‘lanadi. Hajm, narx va muddat ish boshlanishidan oldin kelishiladi.",
-    "submit": "Bog‘lanishni so‘rash",
-    "done": "Arizangiz qabul qilindi. Jamoamiz suhbat vaqtini kelishish uchun bog‘lanadi.",
+    "submit": "Maslahatga yozilish",
+    "done": "Arizangiz qabul qilindi. Jamoamiz telefon orqali bog‘lanib, suhbat vaqtini kelishadi. Kutishni xohlamasangiz, hoziroq Telegram’da yozing.",
+    "doneTelegram": "Telegram’da yozish",
     "manifest": {
       "label": "— Yondashuv",
       "sub": "Yangi biznes yoki rebrending: avval ehtiyoj, keyin dizayn.",

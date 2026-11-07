@@ -6,7 +6,6 @@ import ScrollDepthTracker from '@/components/layout/scroll-depth-tracker';
 
 interface MainLayoutProps {
   children: ReactNode;
-  leadMagnetDictionary?: any;
   headerDictionary?: any;
   pwaDictionary?: any;
   lang?: string;
@@ -16,7 +15,6 @@ interface MainLayoutProps {
 
 const MainLayout: FC<MainLayoutProps> = ({
   children,
-  leadMagnetDictionary,
   headerDictionary,
   pwaDictionary,
   lang,
@@ -29,7 +27,6 @@ const MainLayout: FC<MainLayoutProps> = ({
       <ScrollDepthTracker />
       <AiReferralAnalytics />
       <ClientEnhancementsLoader
-        leadMagnetDictionary={leadMagnetDictionary}
         headerDictionary={headerDictionary}
         pwaDictionary={pwaDictionary}
         lang={lang}

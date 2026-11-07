@@ -760,8 +760,8 @@
     "magnets": [
       {
         "id": "pdf",
-        "title": "免费 PDF 清单",
-        "subtitle": "品牌塑造中的 7 个最大错误",
+        "title": "品牌清单：7 个常见错误",
+        "subtitle": "逐项勾选——2 分钟了解您的品牌存在哪些错误。",
         "description": "了解在您的业务中应避免哪些错误，并获得分析您的品牌的实用指南。",
         "cta": "查看清单",
         "href": "/{lang}/checklist"
@@ -2564,14 +2564,17 @@
   },
   "salesFlow": {
     "consultation": "免费20分钟咨询",
+    "portfolioCtaTitle": "您的企业也需要这样的形象吗？",
+    "portfolioCtaText": "我们用 20 分钟了解您的情况，并告诉您需要哪项服务。免费。",
     "cta": "预约咨询",
     "prices": "服务与价格",
     "team": "联系团队",
     "privacy": "您的电话号码仅用于联系您。",
     "consultationDesc": "讨论您的需求并选择合适的服务。团队将联系您安排时间。",
     "projectDesc": "团队将就所选服务与您联系。工作开始前确认范围、价格和时间。",
-    "submit": "请求联系",
-    "done": "申请已收到。团队将联系您安排沟通时间。",
+    "submit": "预约咨询",
+    "done": "申请已收到。我们会致电与您约定沟通时间。不想等待？现在就在 Telegram 上给我们留言。",
+    "doneTelegram": "在 Telegram 上留言",
     "manifest": {
       "label": "— 方法",
       "sub": "新业务或品牌更新：先了解需求，再进行设计。",
