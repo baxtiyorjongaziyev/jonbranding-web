@@ -94,8 +94,16 @@ test('English hero CTA falls back to the site lead form when the Oisha widget is
   await expect.poll(() => trigger.evaluate((element) => Object.keys(element).some((key) => key.startsWith('__reactProps')))).toBe(true);
   await trigger.click();
 
-  await expect(page.getByRole('dialog')).toHaveCount(1);
-  await expect(page.getByRole('combobox', { name: 'Service', exact: true })).toHaveValue('Not sure — I need advice');
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveCount(1);
+  // LeadModal'da xizmat tanlovi dropdown emas, checkbox'lar (238d9bd). Vidjetsiz
+  // ochilganda "maslahat kerak" tanlangan bo'lishi va CRM'ga aynan shu qiymat
+  // ketishi kerak — mijozga tasodifiy xizmat belgilanib qolmasin.
+  await expect(dialog.getByRole('checkbox', { name: 'Need advice', exact: true })).toBeChecked();
+  for (const service of ['Naming', 'Logo', 'Patent', 'Packaging']) {
+    await expect(dialog.getByRole('checkbox', { name: service, exact: true })).not.toBeChecked();
+  }
+  await expect(dialog.locator('#tariflar-service')).toHaveValue('Not sure — I need advice');
   await expect(page.getByRole('dialog', { name: /Free Brand Audit/i })).toHaveCount(0);
 });
 
