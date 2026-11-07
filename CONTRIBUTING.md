@@ -1,35 +1,116 @@
-# Contribution Guidelines for jonbranding-web
+# 🤝 Hissa Qo'shish Qo'llanmasi (Contribution Guidelines)
 
-Thank you for your interest in contributing to the **jonbranding-web** project! These guidelines are designed to ensure a smooth and efficient collaboration.
+`jonbranding-web` — Markaziy Osiyo brend-agentligi uchun premium "Sales Machine" veb-platformasi. Loyiha ustida ishlovchi har bir muhandis va AI agent (Antigravity, Codex, Claude, Cursor) quyidagi standartlarga qat'iy amal qilishi shart.
 
-## Getting Started
-1. **Fork the repository**: Click on the "Fork" button on the repository’s page.
-2. **Clone your fork**: Use the command `git clone https://github.com/<your-username>/jonbranding-web.git`. Replace `<your-username>` with your GitHub username.
-3. **Create a new branch**: It’s best practice to create a new branch for your changes. Use the command `git checkout -b your-branch-name`.
+---
 
-## Making Changes
-- Follow the project's coding style and conventions.
-- Update relevant documentation as needed.
-- Write clear, concise commit messages (e.g., "Fix typo in installation instructions").
-- Ensure your changes work well with existing functionality.
+## 🚀 Ishni Boshlash (Getting Started)
 
-## Running the Project Locally
-To run the project locally:
-1. Install the dependencies: `npm install` or `yarn install`.
-2. Start the development server: `npm run dev` or `yarn dev`.
+1. **Reponi klonlash va o'rnatish:**
+   ```bash
+   git clone https://github.com/baxtiyorjongaziyev/jonbranding-web.git
+   cd jonbranding-web
+   npm install
+   ```
 
-Visit `http://localhost:3000` to view the project in your web browser.
+2. **Lokal muhitni ishga tushirish:**
+   ```bash
+   # Standart port: http://localhost:9002
+   npm run dev
+   ```
 
-## Testing Your Changes
-- If applicable, add unit tests to cover your changes and ensure everything works as intended.
-- Run the tests using `npm test` or `yarn test` to confirm.
+3. **Muhit o'zgaruvchilari (`.env.local`):**
+   - `.env.example` faylidan nusxa olib `.env.local` yarating.
+   - Hech qachon shaxsiy kalitlar, AmoCRM tokenlari yoki xizmat akkauntlarini gitga commit qilmang.
 
-## Submitting Your Changes
-1. **Push your changes**: Use `git push origin your-branch-name` to push your changes to your fork.
-2. **Create a Pull Request**: Go to the original repository and click on the "Pull Requests" tab. Click the "New Pull Request" button and choose your branch.
-3. **Fill out the Pull Request Template**: If applicable, fill in any required information to help the maintainers review your changes swiftly.
+---
 
-## Code of Conduct
-We expect all contributors to abide by our [Code of Conduct](CODE_OF_CONDUCT.md). Please read it to understand the expected behavior.
+## 🌿 Branch Naming Konvensiyasi
 
-Thank you for your contributions! We appreciate your help in improving the **jonbranding-web** project!
+Yangi vazifa yoki muammoni hal qilishda quyidagi shablonlardan foydalaning:
+
+- `feat/<vazifa-nomi>` — Yangi imkoniyat, komponent yoki sahifa
+- `fix/<xato-nomi>` — Xatolik yoki regresiyani tuzatish
+- `chore/<ish-nomi>` — Qaramliklarni yangilash, konfiguratsiya yoki refaktoring
+- `perf/<maqsad>` — Tezlik, animatsiya yoki resurslarni optimallashtirish
+- `docs/<mavzu>` — Hujjatlar va qo'llanmalarni yangilash
+
+---
+
+## 📝 Commit Xabarlari (Conventional Commits)
+
+Barcha commitlar xalqaro Conventional Commits formatida yozilishi shart:
+
+```bash
+feat(credentials): add 4-language presentation deck
+fix(oisha): resolve dynamic state hydration in FoxUI Orb
+perf(assets): optimize image loading and webp conversions
+chore(deps): bump next to 16.4.5 and patch security advisories
+docs(readme): overhaul architecture diagram and installation guide
+```
+
+---
+
+## 🇺🇿 Uzbek-First Policy (Majburiy!)
+
+- O'zbek tili saytimizning **asosiy tili** hisoblanadi.
+- Har qanday yangi matn, kalit yoki o'zgarish avval `src/locales/uz.json` ga kiritiladi.
+- Shundan so'ng boshqa 3 ta tilga (`ru.json`, `en.json`, `zh.json`) to'liq sinxronlashtiriladi.
+- Har 4 ta tilda kalitlar soni va iyerarxiyasi 100% bir xil bo'lishi shart (`npm run verify:fast` buni tekshiradi).
+
+---
+
+## 🛡️ Sifat Nazorati va Pre-Push Gate
+
+Har qanday o'zgarishni commit yoki push qilishdan oldin lokal testlar to'liq **yashil** bo'lishi shart:
+
+```bash
+# 1. Tezkor tekshiruv (i18n sinxronligi + kod arxitekturasi + Vitest)
+npm run verify:fast
+
+# 2. To'liq tip tekshiruvi (TypeScript strict)
+npm run typecheck
+
+# 3. Linter tekshiruvi
+npm run lint
+
+# 4. Ishlab chiqarish build tekshiruvi
+npm run build
+
+# 5. Xavfsizlik auditi (0 ta yuqori/kritik zaiflik)
+npm audit --audit-level=high --omit=dev
+```
+
+---
+
+## 🎨 Master Design & Anti-AI-Slop Qoidalari
+
+1. **60-30-10 Rang qoidasi:**
+   - 60% Fon: Toza oq `#FFFFFF` (`--at-bg`, `--paper`)
+   - 30% Struktura: To'q qora siyoh `#0A0B0E` (`--at-ink`), neytral matn `#4B5563`, nozik chegaralar `#E5E7EB`
+   - 10% Elektr aksent: Elektr ko'k `#2554FF` (`--at-accent`), hover `#1D4ED8`
+2. **Tipografiya:**
+   - `Instrument Serif` kursiv sarlavhalarida sun'iy qalinlashuv (faux-bold) taqiqlanadi (`font-weight: 400`).
+3. **Anti-Slop detektori:**
+   ```bash
+   node .agents/skills/impeccable/scripts/detect.mjs
+   ```
+   Aniqlangan anti-patternlar soni **0** bo'lishi shart.
+4. **Touch Targets:** WCAG 2.5.8 bo'yicha barcha bosiladigan elementlar mobil qurilmalarda $\ge 44 \times 44\text{px}$.
+
+---
+
+## 🚫 Zero Hallucination & Ma'lumot Xavfsizligi
+
+- Soxta, to'qima (simulated/fictional) mijozlar, keyslar, dialoglar, narxlar yoki statistika qo'shish **QAT'IYAN TAQIQLANADI**.
+- Ichki CRM havolalari, Call Intelligence va mijoz telefon raqamlari hech qachon public sahifalarga yoki gitga chiqmasligi shart.
+- Har qanday o'zgarish `docs/DEV_LOG.md` da hujjatlashtirilishi zarur.
+
+---
+
+## 📬 Pull Request Jarayoni
+
+1. Yangi branch yarating va o'zgarishlarni kiriting.
+2. Yuqoridagi barcha sifat tekshiruvlaridan muvaffaqiyatli o'ting.
+3. PR ochayotganda `.github/pull_request_template.md` shablonidagi barcha katakchalarni to'ldiring.
+4. CI pipeline (`Typecheck, lint, test, build` va `Security Audit`) yashil bo'lgach, kod ko'rib chiqiladi va birlashtiriladi.

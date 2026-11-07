@@ -1,5 +1,41 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-07 | GitHub Repositoriyani Ideal Darajaga Keltirish (Antigravity)
+- **Foydalanuvchi talabi:**
+  - "github ideal darajaga keltir"
+- **Bajarilgan ishlar va arxitektura yaxshilanishlari:**
+  1. **Git daraxti va sinxronizatsiya:**
+     - Lokal `main` tarmog'i `origin/main` bilan to'liq tenglashtirildi (`git pull --ff-only`).
+     - Dependabot xavfsizlik yangilanishi (PR #395) `--squash` orqali muvaffaqiyatli birlashtirildi (`next@16.4.5` va `qs@6.17.1`).
+  2. **Xavfsizlik va npm audit:**
+     - `next@16.4.5` yangilanishi orqali `GHSA-2464-fhr4-w9xw`, `GHSA-p3m5-59mp-jv5r`, `GHSA-673q-mjm6-r5xr` kritik va yuqori darajadagi zaifliklari to'liq yopildi.
+     - `npm audit --audit-level=high --omit=dev`: 0 high, 0 critical, 0 blocking.
+     - `scripts/check-audit.mjs` skripti har qanday platforma (Windows UTF-16 LE, Linux UTF-8, macOS) fayl kodirovkalarini avtomatik taniy oladigan va BOM xatolarini to'g'rilaydigan qilib yaxshilandi.
+  3. **GitHub Metama'lumotlari (`gh repo edit`):**
+     - Homepage URL: `https://jonbranding.uz` ga to'g'rilandi (eski vercel.app olib tashlandi).
+     - Tavsif: "⚡ Jon.Branding — Markaziy Osiyo brend-agentligi uchun premium Sales Machine platformasi (Next.js 16, React 19, TypeScript, Tailwind, Sanity CMS & Cloudflare Workers)".
+     - Mavzular (Topics): `nextjs`, `react`, `typescript`, `tailwind`, `sanity-cms`, `branding`, `sales-machine`, `marketing`, `uzbekistan`, `tashkent`, `cloudflare-workers`, `vitest`.
+     - `delete-branch-on-merge` yoqildi (birlashtirilgan feature branchlar avtomatik tozalanadi).
+  4. **Standart Hujjatlar:**
+     - `LICENSE`: Jon Branding rasmiy xususiy mulk (proprietary) litsenziya fayli yaratildi.
+     - `README.md`: Jon Branding editorial uslubida, jonli GitHub Actions badge'lari (`CI`, `CodeQL`, `Security Audit`, `Lighthouse 100/100`), to'liq Mermaid tizim arxitekturasi diagrammasi, imkoniyatlar tahlili, o'rnatish va sifat nazorati bo'yicha mukammal holatga keltirildi.
+     - `CONTRIBUTING.md`: Standart port 9002, Conventional Commits, branch konvensiyasi, Uzbek-first qoidasi, 60-30-10 dizayn tokenlari va sifat nazorati bosqichlari bilan to'liq qayta yozildi.
+     - `CODE_OF_CONDUCT.md`: Chala qolgan matn o'rniga to'liq Contributor Covenant v2.1 kiritildi.
+     - `SECURITY.md`: Qo'llab-quvvatlanadigan versiyalar va zaifliklarni xavfsiz bildirish protokoli yangilandi.
+     - `.github/ISSUE_TEMPLATE/feature_request.yml`: Yangi g'oyalar va takliflar uchun maxsus YAML forma qo'shildi.
+     - `.github/pull_request_template.md`: Sifat va verifikatsiya tekshiruvlari ro'yxati yangilandi.
+  5. **CI/CD va Kod Tozaligi:**
+     - `.github/workflows/deploy-cloudflare.yml`: Node.js versiyasi `22` (LTS) ga muvofiqlashtirildi.
+     - `src/lib/integrations/firebase.ts`: Ishlatilmayotgan ESLint disable direktivasi tozalandi (linter 0 warning, 0 error).
+     - `.gitignore`: `npm-audit.json` kiritildi.
+- **Verifikatsiya:**
+  - `npm run verify:fast`: 74 ta test fayli, 470/470 ta test yashil, 1336 ta lug'at kaliti sinxron (58.2s).
+  - `npm run typecheck`: 0 xato (Strict mode).
+  - `npm run lint`: 0 xato, 0 ogohlantirish.
+  - `npm run build`: 165 ta statik va dinamik sahifalar 100% xatosiz build bo'ldi.
+  - `node scripts/check-audit.mjs`: Blocking 0 ta, xavfsizlik darajasi ideal.
+
+
 ## 2026-11-04 | /credentials: neyming kartochkalari registri va ishlatilmayotgan nav maydonlari (OpenCode)
 
 - **Sabab:** 2026-11-03 dagi commitdan keyin ikki kichik nuqson topildi.

@@ -1,0 +1,39 @@
+name: Feature proposal
+description: Suggest an idea, new section, or architectural enhancement.
+title: "Feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Proposal summary
+      description: What is the proposed feature or enhancement?
+      placeholder: "Example: Add an interactive ROI calculator for rebranding investments."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Business or user problem
+      description: What challenge or user need does this solve?
+      placeholder: "Explain who this benefits and how it impacts conversion or agency operations."
+    validations:
+      required: true
+  - type: textarea
+    id: design_spec
+    attributes:
+      label: Visual and architectural considerations
+      description: 60-30-10 palette alignment, i18n considerations (UZ/RU/EN/ZH), or responsive behavior.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Target scope
+      options:
+        - Frontend / UI Component
+        - Localization / i18n
+        - Integrations (AmoCRM, CAPI, Oisha, Turso)
+        - Performance & SEO
+        - Infrastructure / CI/CD
+    validations:
+      required: true
