@@ -30,8 +30,8 @@ describe('canonical ownership', () => {
   });
 
   it('root [lang] layout does not hardcode a robots meta that contradicts page-level noindex', () => {
-    const source = readFileSync(path.join(LANG_DIR, 'layout.tsx'), 'utf8');
-    expect(source).not.toMatch(/<meta\s+name=["']robots["']/);
+    // ownMetadataSource('') = [lang]/layout.tsx + [lang]/page.tsx (bosh sahifa).
+    expect(ownMetadataSource('')).not.toMatch(/<meta\s+name=["']robots["']/);
   });
 
   it('uz-only pages are not listed in all four locales', () => {
