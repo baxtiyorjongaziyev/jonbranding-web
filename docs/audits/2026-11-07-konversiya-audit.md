@@ -386,5 +386,8 @@ patent kalkulyatori, brand strategy, ekspert tekshiruv, navigator) umuman yuborm
 
 Tekshiruv: 11 ta yangi test (modul, LeadModal so'rovi, amoCRM eslatmasi + Telegram); o'zgarishsiz kodda yangi
 integratsion testlar yiqiladi. Testlar 527 → 538.
+Brauzerda (production build, iPhone 13): Instagram reklama havolasi bilan bosh sahifaga kirish → `/narxlar`ga o'tish →
+"Logotip bo'yicha maslahat" yuborilganda so'rovda `utm_*`, `referrer: https://l.instagram.com` (so'rov qismisiz) va
+`landingPage: /` bor (so'rov ushlab qolingan, haqiqiy lid yuborilmagan).
 
 **Egasining qarori kutilmoqda:** `GA_API_SECRET`, Consent Mode v2, Amplitude (K-2 ning 1–3-bandlari).

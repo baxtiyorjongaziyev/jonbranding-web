@@ -97,7 +97,7 @@ describe('POST /api/submit-form', () => {
 
   // K-2: reklama manbasi amoCRM'gacha yetib borsin — haftalik "manba → lid → sotuv" jadvali shunga tayanadi.
   it('records where the visitor came from in the AmoCRM note and Telegram alert', async () => {
-    const fetchMock = vi.fn((input: string | URL | Request, _init?: RequestInit) => {
+    const fetchMock = vi.fn((input: string | URL | Request) => {
       const url = String(input);
       if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
       if (url.endsWith('/api/v4/leads/complex')) {
@@ -107,12 +107,11 @@ describe('POST /api/submit-form', () => {
       throw new Error(`Unexpected fetch: ${url}`);
     });
     vi.stubGlobal('fetch', fetchMock);
-    // O'z IP'si bilan: fayldagi boshqa testlar bilan 5/min cheklovini bo'lishmasin.
-    process.env.TRUSTED_PROXY = 'cloudflare';
+    // Boshqa brauzer belgisi bilan: fayldagi boshqa testlar bilan 5/min cheklovini bo'lishmasin.
 
     const response = await POST(new Request('http://localhost/api/submit-form', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
+      headers: { 'Content-Type': 'application/json', 'user-agent': 'attribution-test' },
       body: JSON.stringify({
         fullName: 'Sardor',
         phone: '90 123 45 67',
