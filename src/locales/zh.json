@@ -1923,7 +1923,7 @@
     "hero_title_end": "统一为一个系统。",
     "hero_description": "从名片到包装，从社交媒体到广告，您的品牌始终统一且可信。",
     "hero_description_bold": "我们先明确需求，再建立一套可落地的视觉系统。",
-    "hero_primary_cta": "讨论项目",
+    "hero_primary_cta": "20分钟免费咨询",
     "hero_secondary_cta": "查看案例",
     "services_title": "真正有效的\n视觉识别。",
     "services_lede": "标志、视觉系统、品牌手册和包装。选择所需服务；命名和商标注册可以单独添加。",
@@ -2591,7 +2591,7 @@
       "headingEm": "到交付文件。",
       "subtitle": "合同中确认范围、时间和交付内容。",
       "exampleLabel": "阶段成果",
-      "cta": "讨论项目",
+      "cta": "20分钟免费咨询",
       "note": "签约支付50% · 交付支付50%",
       "steps": [
         {
@@ -2718,5 +2718,10 @@
     "identityPath": "统一视觉系统",
     "packagingPath": "产品包装",
     "newPath": "新业务"
+  },
+  "priceStrip": {
+    "eyebrow": "价格公开",
+    "title": "价格和工期提前透明",
+    "link": "查看全部价格与套餐"
   }
 }

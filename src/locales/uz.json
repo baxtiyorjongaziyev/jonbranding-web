@@ -2098,7 +2098,7 @@
     "hero_title_end": "bitta uslubda.",
     "hero_description": "Vizitkadan qadoqqacha, Instagramdan bannergacha brendingiz bir xil va ishonarli ko'rinadi. ",
     "hero_description_bold": "Avval ehtiyojingizni aniqlaymiz, keyin bitta ishlaydigan vizual tizim quramiz.",
-    "hero_primary_cta": "Loyihani muhokama qilish",
+    "hero_primary_cta": "20 daqiqalik bepul maslahat",
     "hero_secondary_cta": "Ishlarni ko'rish",
     "services_title": "Biznesingiz uchun\nyagona ko'rinish.",
     "services_lede": "Logotip, firma uslubi, brendbuk va qadoq. Kerakli xizmatlarni tanlaymiz; neyming va tovar belgisini ro‘yxatdan o‘tkazish alohida qo‘shilishi mumkin.",
@@ -2597,7 +2597,7 @@
       "headingEm": "tayyor faylgacha.",
       "subtitle": "Hajm, muddat va topshiriladigan materiallar shartnomada kelishiladi.",
       "exampleLabel": "Topshiriladigan natija",
-      "cta": "Loyihani muhokama qilish",
+      "cta": "20 daqiqalik bepul maslahat",
       "note": "50% shartnomada · 50% topshirilganda",
       "steps": [
         {
@@ -2724,5 +2724,10 @@
     "identityPath": "Firma uslubini tartibga solish",
     "packagingPath": "Mahsulot qadoqlari",
     "newPath": "Yangi biznes uchun"
+  },
+  "priceStrip": {
+    "eyebrow": "Narxlar ochiq",
+    "title": "Narx va muddat oldindan ma’lum",
+    "link": "Barcha narxlar va paketlar"
   }
 }

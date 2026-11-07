@@ -307,3 +307,18 @@ Kanal faqat "kuzatish" joylarida qoldi: footer ikonkasi va `sameAs`. Qaytib qolm
 Natija: typecheck ✅, lint ✅, testlar 492 → 502 ✅, build ✅, E2E 12/12 ✅.
 
 **Hali ochiq:** formadagi javob vaqti va'dasi (`[X] daqiqa`) — egasi raqam bersa qo'shiladi.
+
+### C bosqich bajarildi (2026-11-07)
+
+| Topilma | Nima qilindi | Tekshiruv |
+|---|---|---|
+| K-3 Oisha tili | Oisha vidjeti skripti faqat `uz`/`ru` sahifalarda yuklanadi. `en`/`zh`da header, hero va mobil panel tugmalari o'z tilidagi sayt formasini ochadi (mavjud zaxira yo'li) | E2E: `/ru` — Oisha, `/en` — skript yo'q, forma "Free 20-minute consultation" |
+| K-3 Bitta taklif | Hero va "Jarayon" tugmasi headerdagi "20 daqiqalik bepul maslahat" bilan bir xil (4 tilda). Bosh sahifadagi barcha sayt formasi tugmalari maslahat formasini ochadi (avval "Maslahatga yozilish" "Ariza qoldirish" formasini ochardi) | Lokal: en hero → maslahat formasi |
+| K-4 Narx qatori | "Xizmatlar"dan keyin: Logotip, Firma uslubi, Qadoq dizayni va eng arzon paket. Narx, valyuta, muddat va nom `sales-content`dan olinadi (qo'lda yozilmagan), har karta `/narxlar`ning o'z bo'limiga olib boradi | 7 ta test (4 tilda); desktop + mobil skrinshot |
+| Shrift | Bosh sahifa ildizida shrift ro'yxatiga umumiy `sans-serif` zaxira qo'shildi. Hanken'da kirill/xitoy harflari yo'q, Arial bo'lmagan qurilmada ular serif'ga tushardi | Mobil `ru` skrinshot |
+
+Natija: typecheck ✅, lint ✅, testlar 502 → 509 ✅, build ✅, E2E 12/12 ✅.
+
+**Alohida topildi:** E2E "320px services stay inside the viewport" testi 20–40 tadan bitta yugurishda yiqiladi. Sabab — galereya
+filtr tugmalari (`ind-pill`) lazy bo'lim CSS'i yuklanguncha sahifani ~1 px kengaytiradi. Bu C bosqichdan oldin ham bo'lgan:
+narx qatorisiz 2/40, u bilan 1/40; eski shrift ro'yxati bilan 6/30, yangisi bilan 1/30. Alohida tuzatish kerak.

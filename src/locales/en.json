@@ -1915,7 +1915,7 @@
     "hero_title_end": "in one system.",
     "hero_description": "From business cards to packaging, from Instagram to banners, your brand looks consistent and credible. ",
     "hero_description_bold": "We define the need first, then build one practical visual system.",
-    "hero_primary_cta": "Discuss the project",
+    "hero_primary_cta": "Free 20-minute consultation",
     "hero_secondary_cta": "View our work",
     "services_title": "A visual identity\nthat works.",
     "services_lede": "Logo, identity, brandbook and packaging. We choose the services you need; naming and trademark registration can be added separately.",
@@ -2583,7 +2583,7 @@
       "headingEm": "to ready files.",
       "subtitle": "Scope, timeline and deliverables are agreed in the contract.",
       "exampleLabel": "Stage outcome",
-      "cta": "Discuss your project",
+      "cta": "Free 20-minute consultation",
       "note": "50% at contract · 50% at delivery",
       "steps": [
         {
@@ -2710,5 +2710,10 @@
     "identityPath": "A consistent identity",
     "packagingPath": "Product packaging",
     "newPath": "For a new business"
+  },
+  "priceStrip": {
+    "eyebrow": "Open pricing",
+    "title": "Price and timeline known upfront",
+    "link": "All prices and packages"
   }
 }

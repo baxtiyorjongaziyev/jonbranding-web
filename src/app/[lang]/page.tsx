@@ -86,6 +86,7 @@ export default async function Page(props: Props) {
     founder: dictionary.founder,
     answerHub: dictionary.answerHub,
     contactModal: dictionary.contactModal,
+    priceStrip: dictionary.priceStrip,
   };
 
   const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : 'uz';

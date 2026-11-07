@@ -55,7 +55,8 @@ test('language routes expose one main landmark and one skip target', async ({ pa
   }
 });
 
-test('English hero CTA opens the Oisha callback form, not a second site form', async ({ page }) => {
+// Oisha vidjeti faqat uz/ru tillarini biladi, shuning uchun u faqat shu sahifalarda yuklanadi.
+test('Russian hero CTA opens the Oisha callback form, not a second site form', async ({ page }) => {
   // Haqiqiy vidjet tashqi serverdan keladi; stub faqat saytdagi bog'lanishni tekshiradi.
   await page.route('https://oisha.jonbranding.uz/**', (route) =>
     route.fulfill({
@@ -66,7 +67,7 @@ test('English hero CTA opens the Oisha callback form, not a second site form', a
       });`,
     })
   );
-  await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${baseUrl}/ru`, { waitUntil: 'domcontentloaded' });
 
   const script = page.locator('script[src="https://oisha.jonbranding.uz/api/callback-widget.js"]');
   await expect(script).toHaveCount(1, { timeout: 15_000 });
@@ -85,9 +86,11 @@ test('English hero CTA opens the Oisha callback form, not a second site form', a
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
-test('English hero CTA falls back to the site lead form when the Oisha widget is unavailable', async ({ page }) => {
+// Inglizcha mehmonga ruscha vidjet emas, o'z tilidagi sayt formasi (konversiya auditi, K-3).
+test('English hero CTA opens the site lead form in English, without the Oisha widget', async ({ page }) => {
   await page.route('https://oisha.jonbranding.uz/**', (route) => route.fulfill({ status: 404, body: '' }));
   await page.goto(`${baseUrl}/en`, { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('script[src*="oisha.jonbranding.uz/api/callback-widget.js"]')).toHaveCount(0);
 
   const trigger = page.getByTestId('hero-audit-trigger');
   await expect(trigger).toBeVisible({ timeout: 15_000 });
@@ -96,6 +99,7 @@ test('English hero CTA falls back to the site lead form when the Oisha widget is
 
   const dialog = page.getByRole('dialog');
   await expect(dialog).toHaveCount(1);
+  await expect(dialog).toHaveAccessibleName('Free 20-minute consultation');
   // LeadModal'da xizmat tanlovi dropdown emas, checkbox'lar (238d9bd). Vidjetsiz
   // ochilganda "maslahat kerak" tanlangan bo'lishi va CRM'ga aynan shu qiymat
   // ketishi kerak — mijozga tasodifiy xizmat belgilanib qolmasin.

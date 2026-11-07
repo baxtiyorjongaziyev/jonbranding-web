@@ -298,15 +298,20 @@ if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i
             keyin yuklanadi: vidjet qo'shgan DOM React tomonidan o'chirilmasin. Layout sahifa almashganda
             qayta chizilmaydi. Rang — brend Cobalt (#1B4DFF); vidjet faqat uz/ru tillarini
             qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
-        <Script
-          id="oisha-callback-widget"
-          strategy="afterInteractive"
-          src="https://oisha.jonbranding.uz/api/callback-widget.js"
-          data-color="#2554FF"
-          data-lang={lang === 'uz' ? 'uz' : 'ru'}
-          data-call-tracking="1"
-          data-position="left"
-        />
+        {/* Vidjet faqat uz/ru tillarini biladi: en/zh mehmonga ruscha forma ochilardi.
+            U yerda skript yuklanmaydi va `data-oisha-callback` tugmalar o'z tilidagi sayt
+            formasini ochadi (client-enhancements zaxira yo'li; konversiya auditi, K-3). */}
+        {(lang === 'uz' || lang === 'ru') && (
+          <Script
+            id="oisha-callback-widget"
+            strategy="afterInteractive"
+            src="https://oisha.jonbranding.uz/api/callback-widget.js"
+            data-color="#2554FF"
+            data-lang={lang}
+            data-call-tracking="1"
+            data-position="left"
+          />
+        )}
         <Suspense fallback={null}>
           <OishaPhoneSync />
         </Suspense>
