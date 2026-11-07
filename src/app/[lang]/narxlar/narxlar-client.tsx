@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
-import { getSalesContent, SERVICE_CATEGORIES } from '@/lib/sales-content';
+import { getSalesContent, serviceCategories } from '@/lib/sales-content';
 import type { SalesUi, Service, ServiceId } from '@/lib/sales-content';
 import PriceOverview from '@/components/sales/price-overview';
 import LeadModal from '@/components/sales/lead-modal';
@@ -102,7 +102,8 @@ function Label({ children }: { children: string }) {
 function useOpenServiceFromHash() {
   useEffect(() => {
     const openFromHash = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
+      // Xizmat id'lari ASCII: dekodlash shart emas (noto'g'ri `%` URIError tashlardi).
+      const id = window.location.hash.slice(1);
       if (!id.startsWith('service-')) return;
       const target = document.getElementById(id);
       if (target instanceof HTMLDetailsElement) target.open = true;
@@ -204,7 +205,7 @@ function ServiceRow({ service, number, ui, cases, showcase, onCta }: ServiceRowP
           <button
             type="button"
             onClick={() => onCta(service.name)}
-            className="mt-8 w-full rounded-full bg-black px-8 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
+            className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90 sm:w-auto"
           >
             {service.cta}
           </button>
@@ -315,12 +316,14 @@ export default function NarxlarClient({ lang, cases, quotes, clientLogoLabels, s
   };
 
   const casesFor = (serviceId: ServiceId) => {
-    const categories = SERVICE_CATEGORIES[serviceId];
-    if (!categories) return [];
     const seen = new Set<string>();
-    return categories
+    return serviceCategories(serviceId)
       .flatMap((category) => cases.filter((item) => item.category === category))
-      .filter((item) => (seen.has(item.slug) ? false : seen.add(item.slug)))
+      .filter((item) => {
+        if (seen.has(item.slug)) return false;
+        seen.add(item.slug);
+        return true;
+      })
       .slice(0, 2);
   };
 
@@ -453,7 +456,7 @@ export default function NarxlarClient({ lang, cases, quotes, clientLogoLabels, s
               <button
                 type="button"
                 onClick={() => openModal(`${pkg.name} ${ui.modal.packageSuffix}`)}
-                className={`w-full rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
+                className={`inline-flex w-full items-center justify-center rounded-full py-4 text-sm font-semibold transition-opacity hover:opacity-90 ${pkg.featured ? 'bg-white text-black' : 'bg-black text-white'}`}
               >{ui.packages.cta}</button>
             </motion.div>
           ))}

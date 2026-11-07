@@ -322,3 +322,31 @@ Natija: typecheck ✅, lint ✅, testlar 502 → 509 ✅, build ✅, E2E 12/12 �
 **Alohida topildi:** E2E "320px services stay inside the viewport" testi 20–40 tadan bitta yugurishda yiqiladi. Sabab — galereya
 filtr tugmalari (`ind-pill`) lazy bo'lim CSS'i yuklanguncha sahifani ~1 px kengaytiradi. Bu C bosqichdan oldin ham bo'lgan:
 narx qatorisiz 2/40, u bilan 1/40; eski shrift ro'yxati bilan 6/30, yangisi bilan 1/30. Alohida tuzatish kerak.
+
+### D bosqich bajarildi (2026-11-07)
+
+| Topilma | Nima qilindi | Tekshiruv |
+|---|---|---|
+| K-5 Tartib | `/narxlar`: sarlavha + tez tanlov → **paketlar** → **"Nega arzon dizayner emas"** + kafolatlar → xizmatlar → vazifa → ishonch → jarayon → omillar → FAQ → suhbat | Unit test (DOM tartibi); o'lchov pastda |
+| K-5 Xizmatlar | Har xizmat 100svh ekran emas, yig'iladigan qator: yopiqligida nom, narx, muddat. Ochilganda lead, foyda, kimga, tarkib, dalil, keyslar. Matn DOM'da qoladi (SEO, sahifa ichida qidiruv) | Skrinshot desktop + mobil |
+| K-5 Havolalar | `/narxlar#service-logo` qatorni ochadi: bosh sahifa narx qatori va tez tanlov (sahifa ichida oddiy `<a>`, `hashchange`) | Brauzer: bosh sahifa → logo ochiq; tez tanlov → qadoq ochiq; 2 ta unit test |
+| K-5 Tugmalar | "Ariza qoldirish" (10 marta) o'rniga xizmatga bog'langan matn: "Logotip bo'yicha maslahat", "Patent bo'yicha maslahat"…, paketlarda "Paket bo'yicha maslahat". 4 tilda (`Service.cta`). Barcha tugmalar maslahat formasini ochadi, xizmat oldindan belgilangan | Unit test 4 tilda; mobil: oyna "20 daqiqalik bepul maslahat" |
+| i18n | JSX'dagi o'zbekcha "Kimga" va "Muddat:" yorliqlari ru/en/zh'ga chiqardi — tarjimaga o'tdi | Unit test |
+| K-9 Ish namunasi | 5 ta xizmat sahifasi (logo, firma uslubi, qadoq, brendbuk, neyming): birinchi ekranda portfolio'dagi 3 ta tasdiqlangan ish, keysga havola. Desktop: o'ng ustun; mobil: tugmalardan keyin 3 ta kichik kartochka. Patentda portfolio kategoriyasi yo'q — o'zgarmagan | Brauzer: 5 sahifada 3 tadan, gorizontal toshish 0 |
+| K-9 Tugma | Sharhlar bo'limidan keyin xizmat maslahati tugmasi (6 sahifa, patent ham) | Brauzer; unit test |
+| Bitta so'z | Xizmat sahifalarida "konsultatsiya" → "maslahat", forma tugmasi "Ariza qoldirish" → "Maslahatga yozilish" (K-3 bilan bir xil) | — |
+
+**O'lchov (lokal production build):**
+
+| | Oldin | Keyin |
+|---|---|---|
+| `/narxlar` desktop balandligi | 20 380 px | **10 463 px** (−49%) |
+| `/narxlar` mobil (iPhone 13) | ~33 ekran | **16 ekran** |
+| Paketlar chuqurligi | 74% | **12%** |
+| "Nega arzon dizayner emas" | 85% | **24%** (mobil 29%) |
+| Bir xil "Ariza qoldirish" tugmasi | 10 + 3 | **0** |
+
+Natija: typecheck ✅, lint ✅, testlar 509 → 525 ✅, build ✅.
+
+**Egasi ko'rib chiqsin (dizayn):** JTBD bo'limi ("Biz aslida nimani hal qilamiz") xizmatlardan keyinga tushdi.
+Audit tartibida u yo'q edi; olib tashlash biznes qarori bo'lgani uchun saqlab qolindi.
