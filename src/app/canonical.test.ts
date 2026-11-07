@@ -29,6 +29,16 @@ describe('canonical ownership', () => {
     expect(source).not.toMatch(/languages\s*:/);
   });
 
+  it('root [lang] layout does not hardcode a robots meta that contradicts page-level noindex', () => {
+    const source = readFileSync(path.join(LANG_DIR, 'layout.tsx'), 'utf8');
+    expect(source).not.toMatch(/<meta\s+name=["']robots["']/);
+  });
+
+  it('uz-only pages are not listed in all four locales', () => {
+    const uzOnly = ['/expert-tekshiruv', '/brand-strategy', '/pricing/sotuvchi-kartochka'];
+    expect(sitemapStaticRoutes().filter((route) => uzOnly.includes(route))).toEqual([]);
+  });
+
   it('home page declares its own canonical', () => {
     expect(ownMetadataSource('')).toMatch(/canonical\s*[:,]/);
   });
