@@ -6,6 +6,7 @@ import { MessageSquare, Phone, Send } from 'lucide-react';
 import { OishaOrb } from '@/components/ui/oisha-orb';
 import { cn } from '@/lib/utils';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
 interface MobileNavBarProps {
   lang: string;
@@ -123,7 +124,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
 
             {/* Telegram */}
             <a
-              href="https://t.me/jonbranding"
+              href={TELEGRAM_CONTACT_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={labels.telegram}

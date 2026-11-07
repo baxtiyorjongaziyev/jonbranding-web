@@ -22,6 +22,7 @@ import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/ana
 import { getDictionary } from '@/lib/dictionaries';
 import Magnetic from '@/components/ui/magnetic';
 import { Turnstile } from '@marsidev/react-turnstile';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -329,7 +330,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 mt-6 sm:mt-12 flex flex-col gap-4 sm:gap-6 hidden sm:flex">
               <div className="flex gap-4">
-                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
+                <a href={TELEGRAM_CONTACT_URL} target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
@@ -504,7 +505,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                     <div className="flex flex-col gap-4 w-full max-w-sm">
                       <Button asChild className="h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 group">
-                        <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer">
+                        <a href={TELEGRAM_CONTACT_URL} target="_blank" rel="noopener noreferrer">
                           {translations?.successStep?.telegramButton || 'Open Telegram'}
                           <ExternalLink className="ml-2 w-4 h-4 opacity-70 group-hover:opacity-100" />
                         </a>

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { TELEGRAM_CONTACT_HANDLE, TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
 type Lang = 'uz' | 'ru' | 'en' | 'zh';
 
@@ -11,7 +12,7 @@ const t = {
     contactsLabel: "Bog'lanish",
     contacts: [
       { label: 'Telefon', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
-      { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
+      { label: 'Telegram', value: TELEGRAM_CONTACT_HANDLE, href: TELEGRAM_CONTACT_URL },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
     ],
     addressLabel: 'Manzil',
@@ -32,7 +33,7 @@ const t = {
     contactsLabel: 'Связаться',
     contacts: [
       { label: 'Телефон', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
-      { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
+      { label: 'Telegram', value: TELEGRAM_CONTACT_HANDLE, href: TELEGRAM_CONTACT_URL },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
     ],
     addressLabel: 'Адрес',
@@ -53,7 +54,7 @@ const t = {
     contactsLabel: 'Get in touch',
     contacts: [
       { label: 'Phone', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
-      { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
+      { label: 'Telegram', value: TELEGRAM_CONTACT_HANDLE, href: TELEGRAM_CONTACT_URL },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
     ],
     addressLabel: 'Address',
@@ -74,7 +75,7 @@ const t = {
     contactsLabel: '联系方式',
     contacts: [
       { label: '电话', value: '+998 79 200 00 97', href: 'tel:+998792000097' },
-      { label: 'Telegram', value: '@jonbranding', href: 'https://t.me/jonbranding' },
+      { label: 'Telegram', value: TELEGRAM_CONTACT_HANDLE, href: TELEGRAM_CONTACT_URL },
       { label: 'Instagram', value: '@jonbranding.uz', href: 'https://www.instagram.com/jon.branding/' },
     ],
     addressLabel: '地址',
@@ -94,7 +95,7 @@ interface Props { lang: string; }
 const AloqaClient: FC<Props> = ({ lang = 'uz' }) => {
   const l = t[(lang as Lang) in t ? (lang as Lang) : 'uz'];
   const briefHref = lang === 'uz' ? '/online-brief' : `/${lang}/online-brief`;
-  const tgHref = 'https://t.me/jonbranding';
+  const tgHref = TELEGRAM_CONTACT_URL;
 
   return (
     <div className="atelier-theme jon-home" style={{ background: 'var(--at-bg)', color: 'var(--at-ink)', minHeight: '100vh' }}>
