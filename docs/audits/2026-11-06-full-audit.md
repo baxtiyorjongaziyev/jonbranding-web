@@ -276,6 +276,7 @@ ta'sir qilmaydi (Vercel sozlamasi).
 | P1-3 Deploy | `deploy-cloudflare.yml` endi CI tugagach ishlaydi va faqat "Typecheck, lint, test, build" yashil bo'lsa deploy qiladi. Eski commit yangisini bosib ketmaydi. Node 22, `@v7/@v6` | Gate skripti 6 stsenariyda sinaldi |
 | P1-5 SEO | `/otzivlar` sitemap'da; `sotuvchi-kartochka` faqat uz (boshqa tillarda `noindex` + uz canonical); layout'dagi qattiq `robots` meta olib tashlandi | Build + lokal HTML: `noindex` sahifada bitta robots teg |
 | P1-3 E2E qizil | Test eskirgan edi: `238d9bd` Service dropdown'ini checkbox'larga almashtirgan. Test endi "Need advice" belgilangani va CRM'ga `Not sure — I need advice` ketishini tekshiradi | Eski test CI xatosini takrorladi; to'liq E2E 12/12 (chromium) |
+| LeadModal i18n | Xizmat tanlovi sarlavhasi, "bir nechtasini tanlash mumkin" izohi va "Tanlangan:" `sales-content`ga ko'chirildi (`servicesLabel`, `multiSelectHint`, `selectedPrefix`). Avval ru/zh'da inglizcha izoh, barcha tillarda o'zbekcha "Tanlangan:" chiqardi | 4 tilda test; eski komponentda ru/en/zh yiqiladi |
 | P2 Lead origin | `patent.` va `staging.jonbranding.uz` ishonchli. `*.vercel.app` qoldirildi (faqat log belgisi, Vercel qaytishi mumkin) | Yangi testlar, look-alike domenlar ishonchsiz |
 
-Natija: typecheck ✅, lint ✅ (oldindan bor 1 ogohlantirish), testlar 470 → 488 ✅, build ✅.
+Natija: typecheck ✅, lint ✅ (oldindan bor 1 ogohlantirish), testlar 470 → 492 ✅, build ✅, E2E 12/12 ✅.

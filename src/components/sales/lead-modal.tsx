@@ -362,10 +362,10 @@ export default function LeadModal({
               <div className="flex flex-col gap-2 pt-1">
                 <div className="flex items-center justify-between">
                   <label id="tariflar-service-label" className="text-sm font-medium text-neutral-700">
-                    {lang === 'uz' ? 'Qaysi xizmatlar kerak?' : t.service}
+                    {t.servicesLabel}
                   </label>
                   <span className="text-[11px] text-neutral-400">
-                    {lang === 'uz' ? 'Bir nechtasini tanlash mumkin' : 'Multiple options allowed'}
+                    {t.multiSelectHint}
                   </span>
                 </div>
 
@@ -407,7 +407,7 @@ export default function LeadModal({
                 <div className="grid grid-cols-2 gap-2 mt-1">
                   {isPresetCustom && (
                     <div className="col-span-2 flex items-center justify-between rounded-xl border border-black/80 bg-neutral-900 px-3.5 py-2.5 text-xs font-semibold text-white">
-                      <span className="truncate">Tanlangan: {presetService}</span>
+                      <span className="truncate">{t.selectedPrefix}: {presetService}</span>
                       <Check className="h-4 w-4 text-[#2ccc5a]" />
                     </div>
                   )}

@@ -29,6 +29,21 @@ describe('contextual lead form', () => {
     await screen.findByRole('alert');
     expect(screen.getByRole('button', { name: getSalesFlow('uz').submit })).toBeEnabled();
   });
+  // Xizmat tanlovi matnlari JSX'da qattiq yozilgan edi: ru/zh'da inglizcha izoh,
+  // barcha tillarda o'zbekcha "Tanlangan:" chiqardi.
+  it.each(['uz', 'ru', 'en', 'zh'] as const)('shows the service picker texts in %s', (lang) => {
+    const modal = getSalesContent(lang).ui.modal;
+    render(<LeadModal open onClose={() => {}} presetService="Brendbuk" lang={lang} />);
+    expect(screen.getByText(modal.servicesLabel)).toBeInTheDocument();
+    expect(screen.getByText(modal.multiSelectHint)).toBeInTheDocument();
+    expect(screen.getByText(`${modal.selectedPrefix}: Brendbuk`)).toBeInTheDocument();
+    if (lang !== 'uz') {
+      expect(screen.queryByText(/Tanlangan|Bir nechtasini|Qaysi xizmatlar/)).toBeNull();
+    }
+    if (lang === 'ru' || lang === 'zh') {
+      expect(screen.queryByText('Multiple options allowed')).toBeNull();
+    }
+  });
   it('allows selecting multiple services via checkboxes and sends combined services', async () => {
     const fetch = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
     vi.stubGlobal('fetch', fetch);

@@ -111,6 +111,12 @@ export type SalesUi = {
     phone: string;
     phonePlaceholder: string;
     service: string;
+    /** Xizmat checkbox'lari ustidagi sarlavha. */
+    servicesLabel: string;
+    /** "Bir nechtasini tanlash mumkin" izohi. */
+    multiSelectHint: string;
+    /** Ro'yxatda yo'q, oldindan berilgan xizmat oldidagi so'z ("Tanlangan: ..."). */
+    selectedPrefix: string;
     submit: string;
     sending: string;
     phoneError: string;
