@@ -1,7 +1,12 @@
 name: Deploy — Cloudflare Workers
 
+# Production faqat CI'ning asosiy tekshiruvi ("Typecheck, lint, test, build")
+# yashil bo'lgan commit'dan chiqadi. Oldin deploy har push'da testlarni kutmasdan
+# ishlardi. E2E natijasi deploy'ni to'xtatmaydi (u alohida kuzatiladi).
 on:
-  push:
+  workflow_run:
+    workflows: ["CI - JonBranding-Web"]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -9,29 +14,66 @@ concurrency:
   group: deploy-cloudflare
   cancel-in-progress: false
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   deploy:
     name: Build and deploy
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.event == 'push'
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      GH_TOKEN: ${{ github.token }}
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:
-      - name: Skip if Cloudflare secrets are missing
+      - name: Require CI gate, latest commit and Cloudflare secrets
         id: gate
+        env:
+          EVENT: ${{ github.event_name }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          REPO: ${{ github.repository }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
             echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secret'lari yo'q — deploy o'tkazib yuborildi (docs/KOCHISH.md)."
             echo "run=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
-      - uses: actions/checkout@v4
-        if: steps.gate.outputs.run == 'true'
-      - uses: actions/setup-node@v4
+
+          if [ "$EVENT" = "workflow_run" ]; then
+            gate=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" \
+              --jq '.jobs[] | select(.name == "Typecheck, lint, test, build") | .conclusion')
+            case "$gate" in
+              success) ;;
+              cancelled|skipped|"")
+                echo "::notice::CI asosiy tekshiruvi '$gate' — deploy o'tkazib yuborildi."
+                echo "run=false" >> "$GITHUB_OUTPUT"
+                exit 0 ;;
+              *)
+                echo "::error::CI asosiy tekshiruvi '$gate' ($DEPLOY_SHA) — production'ga chiqarilmadi."
+                exit 1 ;;
+            esac
+
+            # Eski commit'ning CI'si kechroq tugasa, u yangi versiyani bosib ketmasin.
+            tip=$(gh api "repos/$REPO/commits/main" --jq .sha)
+            if [ "$tip" != "$DEPLOY_SHA" ]; then
+              echo "::notice::main allaqachon $tip da — eski $DEPLOY_SHA deploy qilinmaydi."
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          echo "run=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v7
         if: steps.gate.outputs.run == 'true'
         with:
-          node-version: 24
+          ref: ${{ env.DEPLOY_SHA }}
+      - uses: actions/setup-node@v6
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: '22'
           cache: npm
       - run: npm ci
         if: steps.gate.outputs.run == 'true'
@@ -41,6 +83,7 @@ jobs:
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: h6ymmj0v
           NEXT_PUBLIC_SANITY_DATASET: production
+          NEXT_TELEMETRY_DISABLED: '1'
       - name: Deploy
         if: steps.gate.outputs.run == 'true'
         run: npx wrangler deploy
