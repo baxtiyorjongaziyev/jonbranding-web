@@ -114,7 +114,7 @@ export const ServiceLeadForm: FC<{
       <p className="text-[11px] uppercase text-neutral-400" style={mono}>
         {serviceName} · {price} so‘m{content.priceFrom ? 'dan' : ''}
       </p>
-      <p className="mt-2 text-lg font-bold">Bepul konsultatsiyaga yoziling</p>
+      <p className="mt-2 text-lg font-bold">Bepul maslahatga yoziling</p>
       <form onSubmit={handleSubmit} onChange={onStart} className="mt-6 space-y-3" noValidate>
         <HoneypotField value={honeypot} onChange={setHoneypot} />
         <div>
@@ -142,7 +142,7 @@ export const ServiceLeadForm: FC<{
           disabled={sending}
           className="inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 disabled:opacity-60"
         >
-          {sending ? 'Yuborilmoqda…' : 'Ariza qoldirish'}
+          {sending ? 'Yuborilmoqda…' : 'Maslahatga yozilish'}
           {!sending ? <ArrowRight className="h-4 w-4" /> : null}
         </button>
         <p className="text-center text-[11px] text-neutral-400">Majburiyatsiz. 20 daqiqalik suhbat.</p>

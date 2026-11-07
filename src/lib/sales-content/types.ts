@@ -17,6 +17,8 @@ export type ServiceId =
 export type Service = {
   /** Tildan mustaqil barqaror kalit. Kategoriya va shartlarda shu ishlatiladi. */
   id: ServiceId;
+  /** `/narxlar` dagi tugma: "Logotip bo‘yicha maslahat". Xizmatga bog‘langan, umumiy "Ariza qoldirish" emas. */
+  cta: string;
   name: string;
   price: string;
   duration?: string;
@@ -82,7 +84,10 @@ export type SalesUi = {
     cases: string;
     price: string;
     duration: string;
-    cta: string;
+    /** "Kimga" — xizmat kimga mosligi yonidagi yorliq. */
+    audience: string;
+    /** Yig‘iladigan xizmat qatoridagi "Batafsil" yozuvi. */
+    details: string;
     deliverables: string;
     benefit: string;
   };

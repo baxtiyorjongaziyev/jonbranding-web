@@ -14,6 +14,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
+        cta: '品牌战略咨询',
         name: "品牌战略",
         price: '48 000 000',
         lead: '厘清您的品牌应在市场中占据的位置。服务谁、以何取胜、说什么——统一为一套战略体系。',
@@ -32,6 +33,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
+        cta: '命名咨询',
         name: "品牌命名",
         price: '10 000 000',
         duration: '10 天',
@@ -57,6 +59,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
+        cta: '标志设计咨询',
         name: "标志设计",
         price: '8 000 000',
         duration: '7 天',
@@ -73,6 +76,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'visual-identity',
+        cta: '视觉识别咨询',
         name: "视觉识别系统",
         price: '18 000 000',
         duration: '10 天',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'brandbook',
+        cta: '品牌手册咨询',
         name: "品牌手册 — 使用规范",
         price: '24 000 000',
         duration: '7 天',
@@ -112,6 +117,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
+        cta: '包装设计咨询',
         name: "包装设计（1种产品）",
         price: '12 000 000',
         duration: '7 天',
@@ -128,6 +134,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'packaging-extra',
+        cta: '包装设计咨询',
         name: "每增加一种产品",
         price: '4 000 000 起',
         duration: '+3 天',
@@ -149,6 +156,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'trademark-search',
+        cta: '商标咨询',
         name: '商标检索',
         price: '880 000',
         duration: '2 天',
@@ -166,6 +174,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-standard',
+        cta: '商标咨询',
         name: '商标注册（常规）',
         price: '5 000 000',
         duration: '7 个月',
@@ -181,6 +190,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-express',
+        cta: '商标咨询',
         name: '商标注册（加急）',
         price: '7 000 000',
         duration: '20–40 天',
@@ -336,7 +346,7 @@ export const zh: SalesContent = {
       sub: '不必一次全部做齐。现在需要什么就选什么——每项服务都是一份完整的工作，最后交付成品文件。',
       note: '价格仅含服务费用，官方规费另行缴纳。',
       showcase: '我们品牌手册的片段', cases: '该服务的案例',
-      price: '价格', duration: '周期', cta: '提交需求',
+      price: '价格', duration: '周期', audience: '适合谁', details: '详情',
       deliverables: '您将获得', benefit: '这能带来什么',
     },
     process: { pre: '我们如何', hi: '开展工作', paymentTitle: '付款阶段' },
@@ -345,7 +355,7 @@ export const zh: SalesContent = {
       pre: '需要多项？套餐', hi: '更划算',
       sub: '比逐项单买更便宜，而且所有内容作为一个整体来打造。',
       separate: { pre: '单项合计', mid: '—— 节省', suf: '' },
-      cta: '提交需求',
+      cta: '套餐咨询',
       note: '周期指设计工作。商标证书按官方程序另行核发。',
     },
     trust: { pre: '他们与我们', hi: '合作过' },

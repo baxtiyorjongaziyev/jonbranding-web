@@ -14,6 +14,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
+        cta: 'Strategiya bo‘yicha maslahat',
         name: "Brend strategiyasi",
         price: '48 000 000',
         lead: 'Brendingiz bozorda qaysi joyni egallashi kerakligini aniqlaymiz. Kim uchun ishlaysiz, nimasi bilan farqlanasiz va nima deysiz — bitta strategik tizimga keltiramiz.',
@@ -32,6 +33,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
+        cta: 'Neyming bo‘yicha maslahat',
         name: "Neyming — nom ishlab chiqish",
         price: '10 000 000',
         duration: '10 kun',
@@ -57,6 +59,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
+        cta: 'Logotip bo‘yicha maslahat',
         name: "Logotip",
         price: '8 000 000',
         duration: '7 kun',
@@ -73,6 +76,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'visual-identity',
+        cta: 'Firma uslubi bo‘yicha maslahat',
         name: "Firma uslubi",
         price: '18 000 000',
         duration: '10 kun',
@@ -89,6 +93,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'brandbook',
+        cta: 'Brendbuk bo‘yicha maslahat',
         name: "Brendbuk — qo‘llash qoidalari",
         price: '24 000 000',
         duration: '7 kun',
@@ -112,6 +117,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
+        cta: 'Qadoq bo‘yicha maslahat',
         name: "Qadoq dizayni (1 mahsulot turi)",
         price: '12 000 000',
         duration: '7 kun',
@@ -128,6 +134,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'packaging-extra',
+        cta: 'Qadoq bo‘yicha maslahat',
         name: "Har qo‘shimcha mahsulot turi",
         price: '4 000 000 dan',
         duration: '+3 kun',
@@ -149,6 +156,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'trademark-search',
+        cta: 'Patent bo‘yicha maslahat',
         name: 'Patent tekshiruvi',
         price: '880 000',
         duration: '1 ish kuni',
@@ -166,6 +174,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-standard',
+        cta: 'Patent bo‘yicha maslahat',
         name: 'Patent (oddiy)',
         price: '5 000 000',
         duration: '7 oy',
@@ -181,6 +190,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-express',
+        cta: 'Patent bo‘yicha maslahat',
         name: 'Patent (tezkor)',
         price: '7 000 000',
         duration: '20–40 kun',
@@ -358,7 +368,7 @@ export const uz: SalesContent = {
       sub: 'Hammasi birdan kerak emas. Hozir nima kerak bo‘lsa, shuni olasiz — har bir xizmat o‘zicha to‘liq ish va oxirida sizga tayyor fayllar topshiriladi.',
       note: 'Narxlar xizmat uchun. Davlat bojlari alohida to‘lanadi.',
       showcase: 'Brendbuklarimizdan lavhalar', cases: 'Shu xizmat bo‘yicha ishlarimiz',
-      price: 'Narx', duration: 'Muddat', cta: 'Ariza qoldirish',
+      price: 'Narx', duration: 'Muddat', audience: 'Kimga', details: 'Batafsil',
       deliverables: 'Nima olasiz', benefit: 'Bu sizga nima beradi',
     },
     process: { pre: 'Qanday', hi: 'ishlaymiz', paymentTitle: 'To‘lov bosqichlari' },
@@ -367,7 +377,7 @@ export const uz: SalesContent = {
       pre: 'Bir nechtasi kerakmi? Paket', hi: 'arzonroq',
       sub: 'Xizmatlarni alohida-alohida olgandan ko‘ra paket bilan olsangiz, ham arzonroq chiqadi, ham hammasi bitta tizim bo‘lib ishlanadi.',
       separate: { pre: 'Alohida olinsa', mid: '—', suf: 'tejaysiz' },
-      cta: 'Ariza qoldirish',
+      cta: 'Paket bo‘yicha maslahat',
       note: 'Muddat dizayn ishlari uchun. Patent guvohnomasi rasmiy tartibda alohida muddatda chiqadi.',
     },
     trust: { pre: 'Biz bilan', hi: 'ishlaganlar' },

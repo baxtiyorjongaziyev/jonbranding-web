@@ -1,6 +1,9 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
+import type { ComponentProps } from 'react';
 import { getSalesContent } from '@/lib/sales-content';
 import { getSalesFlow } from '@/lib/sales-flow';
+
+const PlainLink = (props: ComponentProps<'a'>) => <a {...props} />;
 
 export default function PriceOverview({ lang, local = false }: { lang: string; local?: boolean }) {
   const content = getSalesContent(lang);
@@ -13,6 +16,8 @@ export default function PriceOverview({ lang, local = false }: { lang: string; l
     { label: flow.newPath, item: content.packages[2], anchor: 'packages' },
   ];
   const href = (anchor: string) => `${local ? '' : `/${lang}/narxlar`}#${anchor}`;
+  // Sahifa ichida oddiy <a>: brauzer `hashchange` chiqaradi va /narxlar tanlangan xizmat qatorini ochadi.
+  const Link = local ? PlainLink : NextLink;
   return (
     <section aria-label={flow.choose} className="mx-auto max-w-5xl px-5 py-12 text-left sm:px-8">
       <h2 className="mb-6 text-2xl font-bold tracking-tight text-neutral-900">{flow.choose}</h2>

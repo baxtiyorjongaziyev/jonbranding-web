@@ -14,6 +14,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
+        cta: 'Консультация по стратегии',
         name: "Бренд-стратегия",
         price: '48 000 000',
         lead: 'Определяем, какое место ваш бренд должен занять на рынке. Для кого вы работаете, чем отличаетесь и что говорите — сводим в единую стратегическую систему.',
@@ -32,6 +33,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
+        cta: 'Консультация по неймингу',
         name: "Нейминг — название",
         price: '10 000 000',
         duration: '10 дней',
@@ -57,6 +59,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
+        cta: 'Консультация по логотипу',
         name: "Логотип",
         price: '8 000 000',
         duration: '7 дней',
@@ -73,6 +76,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'visual-identity',
+        cta: 'Консультация по фирменному стилю',
         name: "Фирменный стиль",
         price: '18 000 000',
         duration: '10 дней',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'brandbook',
+        cta: 'Консультация по брендбуку',
         name: "Брендбук — правила применения",
         price: '24 000 000',
         duration: '7 дней',
@@ -112,6 +117,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
+        cta: 'Консультация по упаковке',
         name: "Дизайн упаковки (1 вид продукта)",
         price: '12 000 000',
         duration: '7 дней',
@@ -128,6 +134,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'packaging-extra',
+        cta: 'Консультация по упаковке',
         name: "Каждый дополнительный вид продукта",
         price: 'от 4 000 000',
         duration: '+3 дня',
@@ -149,6 +156,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'trademark-search',
+        cta: 'Консультация по товарному знаку',
         name: 'Патентная проверка',
         price: '880 000',
         duration: '2 дня',
@@ -166,6 +174,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-standard',
+        cta: 'Консультация по товарному знаку',
         name: 'Патент (обычный)',
         price: '5 000 000',
         duration: '7 месяцев',
@@ -181,6 +190,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-express',
+        cta: 'Консультация по товарному знаку',
         name: 'Патент (ускоренный)',
         price: '7 000 000',
         duration: '20–40 дней',
@@ -336,7 +346,7 @@ export const ru: SalesContent = {
       sub: 'Всё сразу не обязательно. Берёте то, что нужно сейчас — каждая услуга это законченная работа с готовыми файлами на выходе.',
       note: 'Цены за услугу. Госпошлины оплачиваются отдельно.',
       showcase: 'Фрагменты наших брендбуков', cases: 'Наши работы по этой услуге',
-      price: 'Цена', duration: 'Срок', cta: 'Оставить заявку',
+      price: 'Цена', duration: 'Срок', audience: 'Кому подходит', details: 'Подробнее',
       deliverables: 'Что вы получите', benefit: 'Что это вам даёт',
     },
     process: { pre: 'Как мы', hi: 'работаем', paymentTitle: 'Этапы оплаты' },
@@ -345,7 +355,7 @@ export const ru: SalesContent = {
       pre: 'Нужно несколько? Пакетом', hi: 'дешевле',
       sub: 'Пакетом выходит дешевле, чем по отдельности, и всё делается как единая система.',
       separate: { pre: 'По отдельности', mid: '— экономия', suf: '' },
-      cta: 'Оставить заявку',
+      cta: 'Консультация по пакету',
       note: 'Срок указан для дизайн-работ. Свидетельство на товарный знак выдаётся в отдельные сроки по официальной процедуре.',
     },
     trust: { pre: 'Они работали', hi: 'с нами' },

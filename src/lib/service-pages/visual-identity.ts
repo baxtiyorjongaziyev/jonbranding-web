@@ -18,7 +18,7 @@ export const VISUAL_IDENTITY_PAGE: ServicePageContent = {
     lead: 'Logotip — faqat imzo. Firma uslubi — ranglar, shriftlar, grafik elementlar va 10 dan ortiq tashuvchi maketlarining yaxlit tizim sifatida ishlashi.',
     format: 'Brif → vizual yo‘nalish → rang va shrift tizimi → 10+ maket → bosmaga tayyor fayllar',
     note: 'Mijoz brendingizni bitta belgi orqali emas, har bir nuqtadagi (vizitka, peshlavha, forma, Instagram) yagona professional intizom orqali taniydi va ishonadi.',
-    primaryCta: 'Firma uslubi bo‘yicha konsultatsiya',
+    primaryCta: 'Firma uslubi bo‘yicha maslahat',
   },
 
   problem: {
