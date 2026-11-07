@@ -20,8 +20,9 @@ describe('home price strip', () => {
       'packages',
     ]);
     for (const id of ['logo', 'visual-identity', 'packaging']) {
-      const service = services.find((s) => s.id === id)!;
-      expect(items.find((i) => i.key === id)).toMatchObject({ name: service.name, price: service.price });
+      const service = services.find((s) => s.id === id);
+      expect(service).toBeDefined();
+      expect(items.find((i) => i.key === id)).toMatchObject({ name: service?.name, price: service?.price });
     }
     // Eng arzon paket — kirish nuqtasi.
     const cheapest = Math.min(...content.packages.map((p) => Number(p.price.replace(/\D/g, ''))));
@@ -32,7 +33,7 @@ describe('home price strip', () => {
     render(<AtPriceStrip lang="ru" dictionary={dictionary} />);
     expect(screen.getByRole('link', { name: /Barcha narxlar/ })).toHaveAttribute('href', '/ru/narxlar');
     const logo = getPriceStripItems('ru')[0];
-    expect(screen.getByRole('link', { name: new RegExp(logo.name) })).toHaveAttribute('href', '/ru/narxlar#service-logo');
+    expect(screen.getByRole('link', { name: (accessibleName) => accessibleName.startsWith(logo.name) })).toHaveAttribute('href', '/ru/narxlar#service-logo');
   });
 
   it('uses the root pricing path for Uzbek', () => {
