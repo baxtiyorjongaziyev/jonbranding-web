@@ -626,7 +626,7 @@ export default function NarxlarClient({ lang, cases, quotes, clientLogoLabels, s
 
       {/* IJTIMOIY ISBOT */}
       <section className="border-t border-neutral-200 py-10 md:py-14">
-        <ClientLogos {...clientLogoLabels} />
+        <ClientLogos title={clientLogoLabels.title} pauseLabel={clientLogoLabels.pauseLabel} resumeLabel={clientLogoLabels.resumeLabel} />
         <div className="mx-auto max-w-5xl px-5 sm:px-8">
           {quotes.length > 0 && (
             <div className="grid gap-5 md:grid-cols-3">

@@ -36,7 +36,7 @@ function serviceById(lang: string, id: string): Service {
 }
 
 beforeEach(() => {
-  vi.stubGlobal('IntersectionObserver', class { observe() {} unobserve() {} disconnect() {} });
+  vi.stubGlobal('IntersectionObserver', class { observe = vi.fn(); unobserve = vi.fn(); disconnect = vi.fn(); });
 });
 
 afterEach(() => {
