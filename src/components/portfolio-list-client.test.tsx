@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import PortfolioListClient from './portfolio-list-client';
@@ -16,13 +17,16 @@ const dictionary = {
   ctaButton: '20 daqiqalik bepul maslahat',
 };
 
-const projects = (count: number) =>
+type Projects = ComponentProps<typeof PortfolioListClient>['projects'];
+
+const projects = (count: number): Projects =>
   Array.from({ length: count }, (_, i) => ({
     _id: `p${i}`,
     title: `Keys ${i}`,
     slug: `keys-${i}`,
     client: `Mijoz ${i}`,
     category: 'logo-design',
+    tags: [],
     coverImage: '/images/cover.jpg',
     description: 'Tavsif',
   }));
@@ -31,20 +35,20 @@ afterEach(cleanup);
 
 describe('portfolio list call to action', () => {
   it('offers a consultation inside a long list and at its end', () => {
-    const { container } = render(<PortfolioListClient projects={projects(14) as any} lang="uz" dictionary={dictionary} />);
+    const { container } = render(<PortfolioListClient projects={projects(14)} lang="uz" dictionary={dictionary} />);
     expect(container.querySelector('[data-portfolio-cta="grid"]')).not.toBeNull();
     expect(container.querySelector('[data-portfolio-cta="end"]')).not.toBeNull();
   });
 
   it('stays out of the way for a short filtered list', () => {
-    const { container } = render(<PortfolioListClient projects={projects(3) as any} lang="uz" dictionary={dictionary} />);
+    const { container } = render(<PortfolioListClient projects={projects(3)} lang="uz" dictionary={dictionary} />);
     expect(container.querySelector('[data-portfolio-cta]')).toBeNull();
   });
 
   it('opens the consultation form with the portfolio as the source', () => {
     const listener = vi.fn();
     window.addEventListener('openContactModal', listener);
-    render(<PortfolioListClient projects={projects(7) as any} lang="uz" dictionary={dictionary} />);
+    render(<PortfolioListClient projects={projects(7)} lang="uz" dictionary={dictionary} />);
     fireEvent.click(screen.getByRole('button', { name: dictionary.ctaButton }));
     expect(listener).toHaveBeenCalledTimes(1);
     expect((listener.mock.calls[0][0] as CustomEvent).detail).toMatchObject({
