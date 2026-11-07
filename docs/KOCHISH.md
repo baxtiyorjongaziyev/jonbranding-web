@@ -52,7 +52,7 @@ Cloudflare Worker secret'larini O'QIB bo'lmaydi — qiymatlarni parol menejerida
 - `/`, `/ru`, `/en`, `/zh`, `/narxlar`, `/portfolio`, `/blog`, `sitemap.xml`, `robots.txt` — 200
 - `patent.` bosh sahifa menejer kalkulyatori, boshqa yo'llar `www`ga yo'naladi
 - Rasmlar (`/_next/image`) — brauzerda `naturalWidth > 0`
-- `/api/oisha?user_id=web_check_1` — 200
+- `/api/oisha?user_id=web_00000000-0000-4000-8000-000000000001` — 200 (proxy faqat `web_<UUID>` qabul qiladi)
 - Forma → amoCRM + Telegram (test lid: `TEXNIK TEST ...`, keyin CRM'dan o'chirish)
 - Konsolda React #418 yo'q
 
