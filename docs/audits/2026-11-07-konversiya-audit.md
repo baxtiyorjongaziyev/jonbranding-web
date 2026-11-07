@@ -350,3 +350,18 @@ Natija: typecheck ✅, lint ✅, testlar 509 → 525 ✅, build ✅.
 
 **Egasi ko'rib chiqsin (dizayn):** JTBD bo'limi ("Biz aslida nimani hal qilamiz") xizmatlardan keyinga tushdi.
 Audit tartibida u yo'q edi; olib tashlash biznes qarori bo'lgani uchun saqlab qolindi.
+
+### 320px E2E testi — sabab topildi va tuzatildi (2026-11-07)
+
+Avvalgi taxmin (galereya filtr tugmalari) noto'g'ri edi: `ind-pill`lar o'zining `overflow-x: auto` konteynerida,
+sahifani kengaytirmaydi. Haqiqiy sabab — **CSS animatsiya nomi to'qnashuvi**:
+
+- `atelier.css` global `@keyframes pulse` e'lon qilardi (kichik yashil nuqtalar uchun, `scale(1.35)` bilan).
+- U Tailwind'ning `animate-pulse` animatsiyasini (faqat opacity) bosib ketardi.
+- Natijada bosh sahifadagi lazy bo'limlar skeletoni (`SectionSkeleton`, `w-full`) yuklanish paytida 1.35 marta
+  kattalashib-kichrayib turardi. Shu payt o'lchansa sahifa kengligi 321 px chiqardi. Sayt bo'ylab yana 17 ta
+  faylda `animate-pulse` bor edi — hammasi so'nish o'rniga "nafas olardi".
+
+**Tuzatish:** atelier animatsiyasi `at-dot-pulse` deb qayta nomlandi (5 ta nuqta o'zgarishsiz ishlaydi).
+`src/app/css-keyframes.test.ts` loyihadagi CSS fayllarda Tailwind nomlari (`spin`, `ping`, `pulse`, `bounce`)
+qayta e'lon qilinishini taqiqlaydi.
