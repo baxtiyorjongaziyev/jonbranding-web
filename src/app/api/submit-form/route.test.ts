@@ -97,7 +97,7 @@ describe('POST /api/submit-form', () => {
 
   // K-2: reklama manbasi amoCRM'gacha yetib borsin — haftalik "manba → lid → sotuv" jadvali shunga tayanadi.
   it('records where the visitor came from in the AmoCRM note and Telegram alert', async () => {
-    const fetchMock = vi.fn((input: string | URL | Request) => {
+    const fetchMock = vi.fn<(input: string | URL | Request, init?: RequestInit) => Promise<Response>>((input) => {
       const url = String(input);
       if (url.startsWith('https://api.telegram.org/')) return Promise.resolve(apiResponse({ ok: true }));
       if (url.endsWith('/api/v4/leads/complex')) {
