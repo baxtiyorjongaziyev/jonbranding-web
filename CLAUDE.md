@@ -1,13 +1,13 @@
 # jonbranding-web
 
-**jonbranding.uz** — Markaziy Osiyo brend-agentligi. Next.js 16, TypeScript, Tailwind, Sanity, Vercel.
+**jonbranding.uz** — Markaziy Osiyo brend-agentligi. Next.js 16, TypeScript, Tailwind, Sanity, Cloudflare Workers (OpenNext).
 **GitHub**: `baxtiyorjongaziyev/jonbranding-web`
 
 ## Buyruqlar
 ```bash
 npm run dev        # localhost:9002
 npm run build
-git push origin main  # → Vercel auto-deploy
+git push origin main  # → CI; Cloudflare deploy faqat CI yashil va GitHub secret'lari bo'lsa (aks holda: npx wrangler deploy)
 ```
 
 ## Stack
@@ -38,7 +38,7 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
    - Har qanday UI/UX yoki sahifa yaratish/tahrirlashda `design-taste-frontend`, `ui-craft`, `ui-craft-editorial`, `colorize`, `kinetic-typography` skill'lariga amal qilinadi.
    - **60-30-10 tizimi:** 60% fon oq `#FFFFFF`, 30% struktura to'q siyoh `#0A0B0E`, 10% elektr aksent `#2554FF` (hover `#1D4ED8`).
    - `Instrument Serif` kursivida sun'iy qalinlashuv (faux/synthetic bold) taqiqlanadi.
-   - O'zgarishlardan keyin `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) va `npm run verify:fast` tekshirilishi shart.
+   - O'zgarishlardan keyin `npm run verify:fast` tekshirilishi shart. `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) — faqat skript mavjud bo'lsa: `.agents/` repoda yo'q (`.gitignore`), CI uni ishlata olmaydi.
 
 ## Hosting
 
@@ -90,7 +90,7 @@ Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:
 - **framer-motion 12**: `Variants` obyektlariga aniq `: Variants` tipi shart (`type: 'spring'` literal xatosi).
 - **vitest**: `tests/` katalogi exclude qilingan (Playwright testlari), faqat `src/**/*.test.ts`.
 - **Affiliate tizimi**: `src/lib/affiliate/*` + Supabase 3 jadval (`affiliates`/`referrals`/`payouts`, RLS to'liq deny, faqat service-role). Ro'yxat: `/[lang]/hamkor/qoshilish`. Hamkor kabineti: `/[lang]/hamkor/[token]` (login yo'q, maxfiy token). Admin: `/admin/hamkorlar` (`ADMIN_SECRET`, HMAC cookie). Attribution — `submit-form` promokod bo'yicha; bonus — `amocrm-webhook` `AMOCRM_WON_STATUS_ID` bo'yicha, idempotent. Bonuslar konstanta: `src/lib/affiliate/payouts.ts`.
-- **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; Vercel preview. CI `npm ci` ishlatadi — `package-lock.json` asosiy lockfile.
+- **CI**: GitHub Actions (`test.yml`) typecheck+lint+test+build; deploy — `deploy-cloudflare.yml` (CI yashil bo'lgandan keyin). Vercel preview 2026-12-04 gacha to'xtatilgan. CI `npm ci` ishlatadi — `package-lock.json` asosiy lockfile.
 - **Sandbox cheklovlari**: jonbranding.uz, cdn.sanity.io, instagram tarmoqdan bloklangan — lokal testda Sanity rasm xatolari soxta signal. Dev server tez-tez o'chadi, birinchi kompilyatsiya 1-3 daqiqa.
 
 <!-- BRAIN-CAPTURE -->
