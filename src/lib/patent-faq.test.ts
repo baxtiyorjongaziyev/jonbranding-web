@@ -6,7 +6,7 @@ describe('patent kalkulyatori savol-javoblari', () => {
   it.each(['uz', 'ru', 'en', 'zh'] as Locale[])('%s: barcha belgilar to‘ldiriladi', async (lang) => {
     const items = (await getDictionary(lang)).patentCalculatorPage.faq.items;
     const faqs = patentFaqs(lang, items);
-    expect(faqs).toHaveLength(5);
+    expect(faqs).toHaveLength(6);
     for (const f of faqs) {
       expect(f.a).not.toMatch(/\{\w+\}/);
     }
