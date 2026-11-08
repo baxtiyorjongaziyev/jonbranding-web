@@ -60,6 +60,36 @@ describe('capture and read back across pages', () => {
     });
   });
 
+  // Codex review: Next.js ichki o'tishida document.referrer tashqi sayt bo'lib qoladi.
+  it('keeps the campaign after client-side navigation with the original referrer', () => {
+    visit('/?utm_source=meta&utm_campaign=reels', 'https://l.instagram.com/');
+    captureLeadAttribution();
+    window.history.pushState(null, '', '/narxlar');
+    expect(getLeadAttribution()).toEqual({
+      utmSource: 'meta',
+      utmCampaign: 'reels',
+      referrer: 'https://l.instagram.com',
+      landingPage: '/',
+    });
+  });
+
+  it('keeps the campaign when the visitor reloads a later page', () => {
+    visit('/?utm_source=meta', 'https://l.instagram.com/');
+    captureLeadAttribution();
+    visit('/narxlar', 'https://l.instagram.com/');
+    captureLeadAttribution();
+    expect(getLeadAttribution()).toMatchObject({ utmSource: 'meta', landingPage: '/' });
+  });
+
+  it('records a later visit from a different site', () => {
+    visit('/?utm_source=meta', 'https://l.instagram.com/');
+    captureLeadAttribution();
+    visit('/aloqa', 'https://www.google.com/');
+    captureLeadAttribution();
+    visit('/aloqa', 'http://localhost:3000/');
+    expect(getLeadAttribution()).toEqual({ referrer: 'https://www.google.com', landingPage: '/aloqa' });
+  });
+
   it('lets a newer campaign visit replace the older one', () => {
     visit('/?utm_source=google');
     captureLeadAttribution();

@@ -41,7 +41,11 @@ interface PortfolioListClientProps {
 
 /** Kamida shuncha keys ko'rsatilganda CTA chiqadi — bitta-ikkita keysli filtrda ortiqcha. */
 const CTA_MIN_PROJECTS = 6;
-/** Grid ichidagi CTA shuncha keysdan keyin qo'yiladi (3 ustunli 3 qator). */
+/**
+ * Grid ichidagi CTA shuncha grid kartasidan keyin qo'yiladi: desktop'da 3 ustunli 3 to'liq qator.
+ * Birinchi keys (spotlight) grid'dan tashqarida, alohida qatorda — u hisobga kirmaydi, aks holda
+ * CTA uchinchi qatorni yarim qoldirardi.
+ */
 const CTA_AFTER = 9;
 
 // Portfolio ko'rayotgan mehmon eng "issiq" — unga keyingi qadamni taklif qilamiz

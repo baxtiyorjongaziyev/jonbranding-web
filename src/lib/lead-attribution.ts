@@ -89,10 +89,17 @@ function readStored(now: number): LeadAttribution {
   }
 }
 
-/** Har sahifa yuklanishida chaqiriladi: yangi manba bo'lsa, eskisining o'rniga yoziladi. */
+const hasUtm = (a: LeadAttribution) => Boolean(a.utmSource || a.utmMedium || a.utmCampaign || a.utmContent || a.utmTerm);
+
+/**
+ * Har sahifa yuklanishida chaqiriladi: yangi manba bo'lsa, eskisining o'rniga yoziladi.
+ * Sahifa yangilanganda (F5) `document.referrer` o'sha tashqi sayt bo'lib qoladi — UTM'siz shunday
+ * "tashrif" saqlangan kampaniyani o'chirmaydi. Boshqa tashqi saytdan yangi kirish esa yozadi.
+ */
 export function captureLeadAttribution(now = Date.now()): void {
   const visit = attributionFromVisit(window.location.href, document.referrer);
   if (!visit) return;
+  if (!hasUtm(visit) && readStored(now).referrer === visit.referrer) return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...visit, capturedAt: now } satisfies Stored));
   } catch {
@@ -100,8 +107,16 @@ export function captureLeadAttribution(now = Date.now()): void {
   }
 }
 
-/** Formaga qo'shiladigan manba: joriy kirish ustun, bo'lmasa saqlangani. */
+/**
+ * Formaga qo'shiladigan manba. URL'da UTM bo'lsa — joriy kirish; aks holda saqlangani.
+ * Next.js ichki o'tishida `document.referrer` kirishdagi tashqi sayt bo'lib qoladi, shuning uchun
+ * UTM'siz joriy "tashrif" saqlangan kampaniyadan ustun qo'yilmaydi.
+ */
 export function getLeadAttribution(now = Date.now()): LeadAttribution {
   if (typeof window === 'undefined') return {};
-  return attributionFromVisit(window.location.href, document.referrer) ?? readStored(now);
+  const visit = attributionFromVisit(window.location.href, document.referrer);
+  if (visit && hasUtm(visit)) return visit;
+  const stored = readStored(now);
+  if (Object.keys(stored).length > 0) return stored;
+  return visit ?? {};
 }
