@@ -284,3 +284,18 @@ ta'sir qilmaydi (Vercel sozlamasi).
 | P2 Lead origin | `patent.` va `staging.jonbranding.uz` ishonchli. `*.vercel.app` qoldirildi (faqat log belgisi, Vercel qaytishi mumkin) | Yangi testlar, look-alike domenlar ishonchsiz |
 
 Natija: typecheck ✅, lint ✅ (oldindan bor 1 ogohlantirish), testlar 470 → 492 ✅, build ✅, E2E 12/12 ✅.
+
+### 5-bosqich (Tozalash) bajarildi (2026-11-08)
+
+| Topilma | Nima qilindi | Tekshiruv |
+|---|---|---|
+| O'lik kod | 17 fayl olib tashlandi (pricing-client, exit-intent-popup, scroll-depth-trigger, contact-trigger-button, at-pricing, seo-answer-hub, lib/data/settings, ui/ dan 10 ta). `sections/testimonials.tsx` CLAUDE.md'da zaxira — qoldi | Har biri import bo'yicha tekshirildi; build ✅ |
+| Paketlar | 6 tasi butunlay (`@radix-ui/react-{alert-dialog,collapsible,popover,switch,tabs}`, `react-day-picker`); `date-fns`, `node-fetch`, `@vercel/frameworks` to'g'ridan-to'g'ri bog'liqlikdan (boshqa paketlar orqali qoladi); `@sanity/cli` → devDependencies. Amplitude — egasi qarori kutilmoqda | `npm audit --omit=dev`: moderate soni o'zgarmadi (14) — manbasi boshqa paketlar |
+| `.env.example` | 44 ta yetishmayotgan o'zgaruvchi qo'shildi, guruhlangan va izohli | `env-example.test.ts`: kod o'qiydigan har bir o'zgaruvchi ro'yxatda, maxfiy kalitlarga qiymat yo'q |
+| Yandex `<noscript>` | Rozilikni chetlab o'tadigan piksel olib tashlandi | `consent-pixels.test.ts` |
+| `console.*` (qoida 5) | Server kodidagi 8 ta → `logger` | `server-logging.test.ts` |
+| `transition-all` (qoida 3) | 89 ta → `transition`; 3 progress bar `transform` bilan; header'dagi `transition: all` (scroll'da max-width/padding animatsiyasi) cheklandi | `no-layout-transitions.test.ts`; brauzer: header, `/uslub-test`, `/avans`, mobil toshish 0 |
+| Hujjatlar | CLAUDE.md: Vercel auto-deploy va `detect.mjs` qatorlari Cloudflare holatiga | — |
+
+**Qoldirilgan (qaror kerak):** Amplitude paketi; `vercel.json` va `deploy.yml` (Vercel 2026-12-04 da qaytishi mumkin);
+`lighthouse.yml` production'ni o'lchamaydi; 150 ta `any`; AI ko'rsatmalari 4 joyda (`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`).
