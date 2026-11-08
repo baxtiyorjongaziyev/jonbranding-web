@@ -6,6 +6,13 @@ import { createHash } from 'node:crypto';
 import type { ManifestEntry } from './batch';
 
 export type ReviewAction = 'ok' | 'redo' | 'skip';
+
+/** Preview versiyasi: yuborilgan videolarning hash'i. Fayl almashsa, eski tugmalar eskirgan bo'ladi. */
+export function itemVersion(videos: Buffer[]): string {
+  const h = createHash('sha256');
+  for (const v of videos) h.update(v);
+  return h.digest('hex').slice(0, 8);
+}
 export type TargetStatus = 'approved' | 'draft' | 'rejected';
 
 export const ACTION_STATUS: Record<ReviewAction, TargetStatus> = { ok: 'approved', redo: 'draft', skip: 'rejected' };
@@ -33,11 +40,12 @@ export function readyItems(manifest: ManifestEntry[], readCaption: (file: string
   return items;
 }
 
-export const callbackData = (action: ReviewAction, slug: string) => `rv:${action}:${shortId(slug)}`;
+export const callbackData = (action: ReviewAction, slug: string, ver: string) => `rv:${action}:${shortId(slug)}:${ver}`;
 
-export function parseCallback(data: string | undefined): { action: ReviewAction; id: string } | null {
-  const m = /^rv:(ok|redo|skip):([0-9a-f]{12})$/.exec(data ?? '');
-  return m ? { action: m[1] as ReviewAction, id: m[2] } : null;
+/** `ver` yo'q bo'lsa (versiyasiz eski tugma) — tugma eskirgan hisoblanadi. */
+export function parseCallback(data: string | undefined): { action: ReviewAction; id: string; ver?: string } | null {
+  const m = /^rv:(ok|redo|skip):([0-9a-f]{12})(?::([0-9a-f]{8}))?$/.exec(data ?? '');
+  return m ? { action: m[1] as ReviewAction, id: m[2], ver: m[3] } : null;
 }
 
 const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -70,9 +78,9 @@ export function decisionText(item: ReviewItem): string {
   ].filter(Boolean).join('\n');
 }
 
-export function keyboard(slug: string) {
+export function keyboard(slug: string, ver: string) {
   return {
-    inline_keyboard: [(['ok', 'redo', 'skip'] as ReviewAction[]).map((a) => ({ text: ACTION_LABEL[a], callback_data: callbackData(a, slug) }))],
+    inline_keyboard: [(['ok', 'redo', 'skip'] as ReviewAction[]).map((a) => ({ text: ACTION_LABEL[a], callback_data: callbackData(a, slug, ver) }))],
   };
 }
 
@@ -93,11 +101,13 @@ export type ReviewDeps = {
   setStatus: (slug: string, status: TargetStatus, note: string) => Promise<SetResult>;
   /** ✏️ Qayta: tuzatilgan draft qayta yuborilishi uchun "yuborilgan" ro'yxatidan chiqariladi. */
   onRework: (slug: string) => void;
+  /** Hozir diskdagi videolar versiyasi (yo'q bo'lsa undefined). Tugma shu bilan solishtiriladi. */
+  currentVersion: (slug: string) => string | undefined;
   answer: (callbackId: string, text: string) => Promise<void>;
   markMessage: (q: CallbackQuery, text: string) => Promise<void>;
 };
 
-export type CallbackOutcome = 'ignored' | 'forbidden' | 'unknown' | 'applied' | 'unchanged' | 'simulated';
+export type CallbackOutcome = 'ignored' | 'forbidden' | 'unknown' | 'stale' | 'applied' | 'unchanged' | 'simulated';
 
 export async function handleCallback(q: CallbackQuery, deps: ReviewDeps): Promise<CallbackOutcome> {
   const parsed = parseCallback(q.data);
@@ -110,6 +120,11 @@ export async function handleCallback(q: CallbackQuery, deps: ReviewDeps): Promis
   if (!slug) {
     await deps.answer(q.id, "Bu preview topilmadi (indeks yo'q).");
     return 'unknown';
+  }
+  // Video almashgan (qayta render) yoki versiyasiz eski tugma: egasi ko'rmagan faylni tasdiqlab bo'lmaydi.
+  if (parsed.ver === undefined || deps.currentVersion(slug) !== parsed.ver) {
+    await deps.answer(q.id, "Bu preview eskirgan — video o'zgargan. Yangi preview'ni kuting.");
+    return 'stale';
   }
   const status = ACTION_STATUS[parsed.action];
   const note = `Telegram: ${parsed.action} (${new Date().toISOString()})`;

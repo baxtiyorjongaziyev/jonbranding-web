@@ -14,7 +14,7 @@ import type { ManifestEntry } from './lib/batch';
 import { inOut } from './lib/paths';
 import { sanity } from './lib/sanity';
 import {
-  decisionText, fullCaptionChunks, handleCallback, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
+  decisionText, fullCaptionChunks, handleCallback, itemVersion, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
   type CallbackQuery, type CaptionFile, type SetResult, type TargetStatus,
 } from './lib/telegram';
 
@@ -39,6 +39,13 @@ const SENT = 'out/review-sent.json';
 const INDEX = 'out/review-index.json'; // qisqa ID → slug
 const OFFSET = 'out/review-offset.json';
 const saveJson = (file: string, data: unknown) => writeFileSync(file, JSON.stringify(data, null, 2));
+
+/** Slug videolarining versiyasi: send va tugma tekshiruvi bir xil manifest tartibidan o'qiydi. */
+const versionOf = (manifest: ManifestEntry[], slug: string): string | undefined => {
+  const files = manifest.filter((e) => e.slug === slug && e.file && e.gate.ok && !e.error).map((e) => e.file!);
+  if (!files.length) return undefined;
+  return itemVersion(files.map((f) => (existsSync(f) ? readFileSync(f) : Buffer.alloc(0))));
+};
 
 if (mode === 'send') {
   const manifest = readJson<ManifestEntry[]>('out/manifest.json', []);
@@ -70,7 +77,8 @@ if (mode === 'send') {
         // Video izohi 1024 belgi bilan cheklangan — to'liq matn alohida xabar(lar)da.
         for (const text of fullCaptionChunks(item.slug, v.caption)) await tg('sendMessage', { chat_id: chatId, text });
       }
-      await tg('sendMessage', { chat_id: chatId, text: decisionText(item), parse_mode: 'HTML', reply_markup: keyboard(item.slug) });
+      const ver = versionOf(manifest, item.slug) ?? '00000000';
+      await tg('sendMessage', { chat_id: chatId, text: decisionText(item), parse_mode: 'HTML', reply_markup: keyboard(item.slug, ver) });
     } catch (e) {
       console.error(`❌ ${item.slug}: ${(e as Error).message}`);
       continue;
@@ -116,6 +124,7 @@ if (mode === 'send') {
   };
   const index = () => readJson<Record<string, string>>(INDEX, {});
   const onRework = (slug: string) => saveJson(SENT, readJson<string[]>(SENT, []).filter((s) => s !== slug));
+  const manifestNow = () => readJson<ManifestEntry[]>('out/manifest.json', []);
 
   let offset = readJson<number>(OFFSET, 0);
   console.log(`👂 Tinglanmoqda${mock ? ' (mock)' : ''}... To'xtatish: Ctrl+C`);
@@ -144,6 +153,7 @@ if (mode === 'send') {
           },
           setStatus,
           onRework,
+          currentVersion: (slug) => versionOf(manifestNow(), slug),
           answer: (id, text) => tg('answerCallbackQuery', { callback_query_id: id, text }),
           markMessage: (q, text) =>
             q.message

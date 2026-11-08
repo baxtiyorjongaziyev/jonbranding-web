@@ -4,7 +4,7 @@
  * Natija: out/<slug>-<til>.mp4
  */
 import './lib/env';
-import { renameSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, type CaseDoc } from './lib/case-data';
 import { renderCase } from './lib/render';
@@ -54,6 +54,12 @@ if (status === 'draft') {
     process.exit(1);
   }
   renameSync(tmp, final);
+  // Yangi video — yangi preview kerak: "yuborilgan" ro'yxatidan chiqariladi (eski tugmalar esa versiya bilan eskiradi).
+  const sentFile = 'out/review-sent.json';
+  if (existsSync(sentFile)) {
+    const sent = JSON.parse(readFileSync(sentFile, 'utf8')) as string[];
+    writeFileSync(sentFile, JSON.stringify(sent.filter((x) => x !== slug), null, 2));
+  }
   console.log(`Tayyor: ${final}`);
 } else {
   console.log(`Tayyor: ${renderCase(doc, lang)}`);
