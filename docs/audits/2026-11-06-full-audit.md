@@ -104,6 +104,10 @@ Keyin `docs/KOCHISH.md`dagi sinov ro'yxatidan o'tish (test lid → amoCRM + Tele
 
 ### P0-3. Next.js 16.3.8 — critical zaiflik va "Dependabot tuzog'i"
 
+> **2026-11-08 yangilanish:** egasi Dependabot PR #395 (`next@16.4.5`) ni `main`ga qo'shdi va Free tarifda 16.4.5'da
+> qolishga qaror qildi. Bu PR'da `next` aniq `16.4.5` (`^`siz), Dependabot'dagi `>=16.4.0` cheklovi olib tashlandi.
+> Deploydan oldingi CPU tekshiruvi — `docs/KOCHISH.md`. Quyidagi matn qaror oldidagi holat.
+
 **Dalil:** `npm audit` → `next 16.0.0–16.4.0`: 2 ta critical RCE va 1 ta high DoS
 ([GHSA-2464-fhr4-w9xw](https://github.com/advisories/GHSA-2464-fhr4-w9xw),
 [GHSA-673q-mjm6-r5xr](https://github.com/advisories/GHSA-673q-mjm6-r5xr),

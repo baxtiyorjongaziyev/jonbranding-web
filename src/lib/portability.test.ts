@@ -34,9 +34,10 @@ describe('hosting portability', () => {
     expect(existsSync('src/middleware.ts')).toBe(true);
   });
 
-  // Free tarifda Next 16.4.x Worker'ni 10 ms CPU limitidan oshiradi (500). `^` bilan
-  // `npm install` yoki Dependabot jimgina yangi versiyani olib kelib production'ni
-  // yiqitardi. Yangilash — Workers Paid'dan keyin, ongli qaror bilan (docs/KOCHISH.md).
+  // Free tarifda 10 ms CPU limiti bor; Next 16.4.1 uni oshirib 500 bergan. 2026-11-08 dan
+  // egasi qarori bilan 16.4.5 (xavfsizlik tuzatishlari). `^` bilan `npm install` jimgina
+  // yangi versiyani olib kelardi — har yangilash deploydan oldin CPU tekshiruvi bilan
+  // (docs/KOCHISH.md).
   it("next aniq versiyada mahkamlangan (^ yoki ~ yo'q)", () => {
     const pkg = JSON.parse(read('package.json'));
     expect(pkg.dependencies.next).toMatch(/^\d+\.\d+\.\d+$/);

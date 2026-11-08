@@ -5,7 +5,12 @@ ko'chirildi. Shu tajriba asosida hujjat: keyingi ko'chish soatlarda, tunda emas.
 
 ## Muhim holat (2026-11-05)
 - Vercel Hobby: "Fast Origin Transfer" limiti oshgani uchun **2026-12-04 gacha** pauza. Qaytsangiz ham Cloudflare'ni oldida qoldiring (trafik kamayadi).
-- Cloudflare **Free** tarif (10 ms CPU, `limits.cpu_ms` mumkin emas). **Next 16.4.1 Worker'ni CPU chegarasidan oshiradi (500)** — Next `16.3.8`da qoladi. Shu sabab `npm audit` Next bo'yicha critical (RCE/DoS) ko'rsatadi; to'liq yechim — Workers Paid ($5/oy) yoki Vercel'ga qaytgach yangilash.
+- Cloudflare **Free** tarif (10 ms CPU, `limits.cpu_ms` mumkin emas). **Next 16.4.1 Worker'ni CPU chegarasidan oshirgan (500).**
+  2026-11-08: egasi qarori bilan Next **16.4.5**'ga o'tildi (critical RCE/DoS zaifliklari yopildi), tarif Free'ligicha.
+  `package.json`da aniq versiya (`^`siz) — har yangilash ongli. **Deploydan oldin CPU'ni tekshiring:**
+  `npx wrangler versions upload` → preview URL'da bosh sahifa, `/narxlar`, `/portfolio`, `/api/submit-form` ni bir necha marta oching;
+  Cloudflare dashboard → Workers → `jonbranding-web` → Logs/Metrics'da `Exceeded CPU` yoki 500 bo'lmasa — `versions deploy`.
+  500 bo'lsa: production'ni eski versiyada qoldiring (`versions deploy <eski-id>@100%`) va Workers Paid ($5/oy) yoki `16.3.8`ga qaytish haqida qaror qiling.
 - Production versiyasini `npx wrangler versions deploy <id>@100% --name jonbranding-web --message "..." -y` bilan almashtirish/qaytarish mumkin; yangi build'ni avval `npx wrangler versions upload` (preview URL) bilan sinang.
 - `open-next.config.ts`dagi static-assets keshi sinaldi, foydasi isbotlanmadi va Sanity kontentini muzlatadi — yoqilmagan.
 

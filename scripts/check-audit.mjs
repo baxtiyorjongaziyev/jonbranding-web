@@ -7,7 +7,13 @@ const ALLOWLIST = new Map([
   ['GHSA-vfj7-8cjw-p6xm', 'braces: no upstream fix yet'],
 ]);
 
-const audit = JSON.parse(fs.readFileSync(process.argv[2] ?? 'npm-audit.json', 'utf8'));
+let raw = fs.readFileSync(process.argv[2] ?? 'npm-audit.json');
+if (raw[0] === 0xff && raw[1] === 0xfe) {
+  raw = raw.subarray(2).toString('utf16le');
+} else {
+  raw = raw.toString('utf8').replace(/^\uFEFF/, '');
+}
+const audit = JSON.parse(raw);
 const advisories = new Map();
 for (const vuln of Object.values(audit.vulnerabilities ?? {})) {
   for (const via of vuln.via) {
