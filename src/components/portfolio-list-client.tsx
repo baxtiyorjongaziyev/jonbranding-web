@@ -95,7 +95,7 @@ function SpotlightCard({ children, className = '', ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
-      className={`relative overflow-hidden rounded-[2.25rem] border border-[#E5E7EB] bg-white transition-all duration-500 hover:border-[#2554FF]/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-xl ${className}`}
+      className={`relative overflow-hidden rounded-[2.25rem] border border-[#E5E7EB] bg-white transition duration-500 hover:border-[#2554FF]/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-xl ${className}`}
       {...props}
     >
       {isFocused && (
@@ -230,7 +230,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                           </div>
                         )}
                         <Link href={`/${lang}/portfolio/${filteredProjects[0].slug}`}>
-                          <Button className="w-full bg-[#2554FF] hover:bg-[#1C46E6] text-white rounded-2xl py-4 font-bold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[#2554FF]/25">
+                          <Button className="w-full bg-[#2554FF] hover:bg-[#1C46E6] text-white rounded-2xl py-4 font-bold text-sm tracking-wide transition duration-300 hover:shadow-lg hover:shadow-[#2554FF]/25">
                             {dictionary.viewCase}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
@@ -275,7 +275,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                             <p className="mt-2 text-sm text-[#4B5563] line-clamp-2 leading-relaxed">{project.description}</p>
                           </div>
                           <Link href={`/${lang}/portfolio/${project.slug}`} className="block">
-                            <Button className="w-full bg-[#F8F9FB] hover:bg-[#2554FF] text-[#0A0B0E] hover:text-white border border-[#E5E7EB] hover:border-[#2554FF] rounded-xl transition-all duration-300 text-xs font-bold tracking-wide">
+                            <Button className="w-full bg-[#F8F9FB] hover:bg-[#2554FF] text-[#0A0B0E] hover:text-white border border-[#E5E7EB] hover:border-[#2554FF] rounded-xl transition duration-300 text-xs font-bold tracking-wide">
                               {dictionary.viewCase}
                               <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                             </Button>

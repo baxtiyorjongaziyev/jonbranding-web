@@ -190,7 +190,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           <Dialog.Close asChild>
             <button
               aria-label={dictionary?.buttons?.close || 'Yopish'}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center text-sm transition-all duration-200 hover:bg-black/5 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] cursor-pointer"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center text-sm transition duration-200 hover:bg-black/5 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] cursor-pointer"
               style={{ border: '1px solid var(--at-line)', color: 'var(--at-muted)' }}
             >
               ✕
@@ -273,7 +273,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={dictionary?.fields?.name?.placeholder || 'Aziz Abduhakimov'}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: '1px solid var(--at-line)',
                       background: 'var(--at-bg)',
@@ -302,7 +302,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     placeholder={dictionary?.fields?.phone?.placeholder || '+998 (__) ___-__-__'}
                     aria-invalid={Boolean(phoneErr)}
                     aria-describedby={phoneErr ? 'at-modal-phone-error' : undefined}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: `1px solid ${phoneErr ? 'var(--at-red)' : 'var(--at-line)'}`,
                       background: 'var(--at-bg)',
@@ -333,7 +333,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     placeholder={dictionary?.fields?.telegram?.placeholder || '@username'}
                     aria-invalid={Boolean(telegramErr)}
                     aria-describedby={telegramErr ? 'at-modal-telegram-error' : undefined}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: `1px solid ${telegramErr ? 'var(--at-red)' : 'var(--at-line)'}`,
                       background: 'var(--at-bg)',

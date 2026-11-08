@@ -18,7 +18,7 @@ export default function AtFinalCta({ onOpen, lang = 'uz' }: Props) {
           <strong className="text-white font-semibold">{l.bodyStrong}</strong>
         </p>
         <div className="flex flex-wrap gap-4 justify-center mb-14">
-          <button onClick={onOpen} className="inline-flex items-center gap-2 font-semibold rounded-full px-8 py-4 text-base bg-[#2554FF] hover:bg-[#1C46E6] text-white shadow-[0_18px_40px_-10px_rgba(37,84,255,0.45)] transition-all hover:-translate-y-0.5">
+          <button onClick={onOpen} className="inline-flex items-center gap-2 font-semibold rounded-full px-8 py-4 text-base bg-[#2554FF] hover:bg-[#1C46E6] text-white shadow-[0_18px_40px_-10px_rgba(37,84,255,0.45)] transition hover:-translate-y-0.5">
             {l.cta}
           </button>
         </div>

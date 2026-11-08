@@ -230,7 +230,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
     <>
       <div
         className={cn(
-          'fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block',
+          'fixed bottom-24 right-6 z-50 transition duration-500 md:bottom-6 hidden md:block',
           isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100',
         )}
       >

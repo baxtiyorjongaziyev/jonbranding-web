@@ -24,7 +24,7 @@ const Section: FC<{ id?: string; children: ReactNode; className?: string }> = ({
 );
 
 const btnBase =
-  'inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99]';
+  'inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99]';
 
 /**
  * Birinchi ekrandagi ishlar (konversiya auditi, K-9): mehmon narxni ko'rgan joyda

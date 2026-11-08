@@ -167,7 +167,7 @@ export const BrandStrategyForm: FC<{
   };
 
   const inputCls =
-    'w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus-visible:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600/20';
+    'w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus-visible:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600/20';
 
   if (done) {
     return (
@@ -267,7 +267,7 @@ export const BrandStrategyForm: FC<{
 
           <button
             type="submit"
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-black py-4 text-sm font-semibold text-white transition-all hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-black py-4 text-sm font-semibold text-white transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             Keyingi bosqichga o‘tish
             <ArrowRight className="h-4 w-4" />
@@ -357,7 +357,7 @@ export const BrandStrategyForm: FC<{
               type="submit"
               disabled={sending}
               aria-busy={sending}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black py-4 text-sm font-semibold text-white transition-all hover:bg-neutral-800 disabled:opacity-60"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black py-4 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-60"
             >
               {sending ? 'Yuborilmoqda…' : 'Brand Strategy bo‘yicha uchrashuv belgilash'}
             </button>

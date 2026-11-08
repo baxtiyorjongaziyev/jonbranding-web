@@ -39,7 +39,7 @@ export const DeliverablesSection: FC = () => {
           {DELIVERABLES.map((d) => (
             <article
               key={d.num}
-              className="flex flex-col rounded-3xl border border-neutral-200/90 bg-white p-6 sm:p-7 shadow-sm transition-all hover:border-neutral-300 hover:shadow-md"
+              className="flex flex-col rounded-3xl border border-neutral-200/90 bg-white p-6 sm:p-7 shadow-sm transition hover:border-neutral-300 hover:shadow-md"
             >
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-[12px] font-bold text-blue-700" style={mono}>

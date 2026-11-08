@@ -247,10 +247,10 @@ export default function ReviewsClient({ testimonials, lang, dictionary }: Props)
                               }}
                             >
                               <div
-                                className="h-full transition-all duration-100 ease-out"
+                                className="h-full w-full origin-left transition-transform duration-100 ease-out"
                                 style={{
                                   background: 'var(--accent)',
-                                  width: `${active && duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+                                  transform: `scaleX(${active && duration > 0 ? Math.min(currentTime / duration, 1) : 0})`,
                                 }}
                               />
                             </div>

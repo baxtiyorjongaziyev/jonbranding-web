@@ -130,7 +130,7 @@ const PickTwoSelector: FC<PickTwoSelectorProps> = ({
                     }}
                     onClick={() => !isDisabled && handleSelect(key)}
                     className={cn(
-                      "text-center p-8 rounded-2xl shadow-sm transition-all duration-300 relative cursor-pointer transform hover:-translate-y-1 outline-none focus:ring-2 focus:ring-primary/40",
+                      "text-center p-8 rounded-2xl shadow-sm transition duration-300 relative cursor-pointer transform hover:-translate-y-1 outline-none focus:ring-2 focus:ring-primary/40",
                       isSelected ? 'bg-primary text-primary-foreground ring-2 ring-primary/50 shadow-lg' : 'bg-secondary hover:shadow-md',
                       isDisabled && 'opacity-50 cursor-not-allowed bg-gray-100 hover:translate-y-0 focus:ring-0'
                     )}

@@ -394,7 +394,7 @@ export default function LeadModal({
                       <label
                         key={opt.id}
                         className={cn(
-                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-3 text-xs sm:text-sm font-bold transition-all duration-200 select-none text-center',
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-3 text-xs sm:text-sm font-bold transition duration-200 select-none text-center',
                           checked
                             ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
                             : 'border-neutral-200 bg-neutral-50/70 text-neutral-800 hover:border-neutral-300 hover:bg-neutral-100'
@@ -435,7 +435,7 @@ export default function LeadModal({
                       <label
                         key={opt.id}
                         className={cn(
-                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition-all duration-200 select-none text-center',
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition duration-200 select-none text-center',
                           checked
                             ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
                             : 'border-neutral-200 bg-neutral-50/70 text-neutral-600 hover:border-neutral-300 hover:bg-neutral-100'
@@ -476,7 +476,7 @@ export default function LeadModal({
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60 transition-all hover:bg-neutral-800"
+                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60 transition hover:bg-neutral-800"
               >
                 {sending ? t.sending : flow.submit}
               </button>

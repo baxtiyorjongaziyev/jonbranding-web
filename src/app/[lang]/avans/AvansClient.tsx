@@ -90,7 +90,7 @@ export default function AvansClient() {
                 value={salary || ''} 
                 onChange={e => setSalary(Number(e.target.value))} 
                 step="100000" min="0" 
-                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
+                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
               />
               <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 font-medium pointer-events-none">UZS</span>
             </div>
@@ -103,7 +103,7 @@ export default function AvansClient() {
                 id="totalDays" type="number" 
                 value={totalDays || ''} onChange={e => setTotalDays(Number(e.target.value))} 
                 min="1" max="31" 
-                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-lg font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15 text-center" 
+                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-lg font-bold outline-none transition focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15 text-center" 
               />
             </div>
             <div className="space-y-2">
@@ -112,7 +112,7 @@ export default function AvansClient() {
                 id="workedDays" type="number" 
                 value={workedDays || ''} onChange={e => handleWorkedDays(Number(e.target.value))} 
                 min="0" max={totalDays}
-                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-lg font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15 text-center" 
+                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-3.5 text-lg font-bold outline-none transition focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15 text-center" 
               />
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function AvansClient() {
                 id="requested" type="number" 
                 value={requested || ''} onChange={e => setRequested(Number(e.target.value))}
                 step="50000" min="0" 
-                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition-all focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
+                className="w-full bg-white/50 dark:bg-black/30 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-xl font-bold outline-none transition focus:border-[#F59E0B] focus:ring-4 focus:ring-[#F59E0B]/15" 
               />
               <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 font-medium pointer-events-none">UZS</span>
             </div>
@@ -174,7 +174,7 @@ export default function AvansClient() {
         {/* Status */}
         {requested > 0 && maxSafe > 0 && (
           <div 
-            className={`transition-all duration-500 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border rounded-[2rem] p-6 sm:p-8
+            className={`transition duration-500 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border rounded-[2rem] p-6 sm:p-8
               ${isDanger ? 'border-[#EF4444]/40 shadow-[0_0_50px_-10px_rgba(239,68,68,0.25)] scale-[1.01]' : 
                 isWarning ? 'border-[#F59E0B]/40 shadow-[0_0_40px_-10px_rgba(245,158,11,0.15)]' : 
                 'border-slate-200/80 dark:border-white/10 shadow-sm'}
@@ -191,13 +191,16 @@ export default function AvansClient() {
             </div>
 
             <div className="w-full h-3 bg-black/5 dark:bg-white/10 rounded-full overflow-hidden p-0.5">
-              <div 
-                className="h-full rounded-full transition-all duration-700 ease-out" 
-                style={{ 
-                  width: `${Math.min(pct, 100)}%`, 
-                  backgroundColor: colorClass 
-                }}
-              ></div>
+              {/* Kenglik emas, transform animatsiya qilinadi (qoida 3): ichki trek o'ng uchini dumaloq kesadi. */}
+              <div className="h-full w-full overflow-hidden rounded-full">
+                <div
+                  className="h-full w-full rounded-full transition-transform duration-700 ease-out"
+                  style={{
+                    transform: `translateX(-${100 - Math.max(0, Math.min(pct, 100))}%)`,
+                    backgroundColor: colorClass,
+                  }}
+                />
+              </div>
             </div>
 
             <div className="mt-4 font-medium text-[15px]">
