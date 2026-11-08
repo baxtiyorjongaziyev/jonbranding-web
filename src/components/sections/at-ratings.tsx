@@ -97,7 +97,7 @@ const AtRatings: FC<Props> = ({ lang = 'uz' }) => {
             <h2 style={{
               fontSize: 'clamp(30px, 3.8vw, 52px)',
               lineHeight: 1.0,
-              letterSpacing: '-0.035em',
+              letterSpacing: '-0.045em',
               fontWeight: 800,
               margin: '16px 0 36px',
               color: 'var(--at-ink)',
