@@ -440,9 +440,9 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
             onClick={closeLightbox}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              exit={{ scale: 0.95, opacity: 0, y: 12 }}
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
               className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-[9/16] overflow-hidden rounded-[20px] border border-white/10 bg-[#070b13] shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col justify-end"
               onClick={(e) => e.stopPropagation()}
