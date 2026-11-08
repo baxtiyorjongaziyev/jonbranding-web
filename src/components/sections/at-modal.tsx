@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
 import { HoneypotField } from '@/components/ui/honeypot-field';
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import {
   isValidPhone,
   isValidTelegramUsername,
@@ -80,10 +81,6 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
     const gaClientId = getGaClientId();
     const pageLocation = typeof window !== 'undefined' ? window.location.href : undefined;
     const pagePath = typeof window !== 'undefined' ? window.location.pathname : undefined;
-    const referrer = typeof document !== 'undefined' ? document.referrer || undefined : undefined;
-    const searchParams = typeof window !== 'undefined'
-      ? new URLSearchParams(window.location.search)
-      : null;
 
     trackEvent({
       action: 'lead_form_submitted',
@@ -101,6 +98,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name.trim() || 'Mijoz',
           phone: normalizedPhone,
           telegram: hasTelegram ? telegramUsername : undefined,
@@ -113,15 +111,9 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           pageLocation,
           ctaSource: 'at_modal',
           pagePath,
-          referrer,
           section: 'lead_modal',
           offerType: 'brand_audit',
           ctaLabel: dictionary?.buttons?.submit || 'Bepul Brand Audit olish',
-          utmSource: searchParams?.get('utm_source') || undefined,
-          utmMedium: searchParams?.get('utm_medium') || undefined,
-          utmCampaign: searchParams?.get('utm_campaign') || undefined,
-          utmContent: searchParams?.get('utm_content') || undefined,
-          utmTerm: searchParams?.get('utm_term') || undefined,
           companyWebsite: honeypot,
           promoCode: typeof window !== 'undefined'
             ? (localStorage.getItem('promoCode') || '').replace(/"/g, '')
@@ -198,7 +190,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
           <Dialog.Close asChild>
             <button
               aria-label={dictionary?.buttons?.close || 'Yopish'}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center text-sm transition-all duration-200 hover:bg-black/5 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] cursor-pointer"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full grid place-items-center text-sm transition duration-200 hover:bg-black/5 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--at-accent)] cursor-pointer"
               style={{ border: '1px solid var(--at-line)', color: 'var(--at-muted)' }}
             >
               ✕
@@ -281,7 +273,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={dictionary?.fields?.name?.placeholder || 'Aziz Abduhakimov'}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: '1px solid var(--at-line)',
                       background: 'var(--at-bg)',
@@ -310,7 +302,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     placeholder={dictionary?.fields?.phone?.placeholder || '+998 (__) ___-__-__'}
                     aria-invalid={Boolean(phoneErr)}
                     aria-describedby={phoneErr ? 'at-modal-phone-error' : undefined}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: `1px solid ${phoneErr ? 'var(--at-red)' : 'var(--at-line)'}`,
                       background: 'var(--at-bg)',
@@ -341,7 +333,7 @@ const AtModal: FC<Props> = ({ open, onClose, lang = 'uz', dictionary }) => {
                     placeholder={dictionary?.fields?.telegram?.placeholder || '@username'}
                     aria-invalid={Boolean(telegramErr)}
                     aria-describedby={telegramErr ? 'at-modal-telegram-error' : undefined}
-                    className="rounded-xl px-4 py-3.5 text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
+                    className="rounded-xl px-4 py-3.5 text-sm transition duration-200 outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600"
                     style={{
                       border: `1px solid ${telegramErr ? 'var(--at-red)' : 'var(--at-line)'}`,
                       background: 'var(--at-bg)',

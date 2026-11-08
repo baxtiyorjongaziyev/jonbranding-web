@@ -18,7 +18,7 @@ export const PACKAGING_PAGE: ServicePageContent = {
     lead: 'Mahsulotingiz qanchalik sifatli bo‘lmasin, xaridor avval uning qadog‘iga qarab baholaydi. Javonda raqobatchilardan ajralib turadigan, texnik chizmasi (dieline) va 3D renderlari bilan to‘liq qadoq tizimi.',
     format: 'Raqobat tahlili → javon ergonomikasi → 3D vizualizatsiya → dieline chizma → bosmaga tayyor fayl',
     note: 'Xaridor javon oldida 3–5 soniya to‘xtaydi. Biz shu soniyalarda mahsulotingizni tanlashga undaydigan vizual yechim qilamiz.',
-    primaryCta: 'Qadoq bo‘yicha konsultatsiya',
+    primaryCta: 'Qadoq bo‘yicha maslahat',
   },
 
   problem: {

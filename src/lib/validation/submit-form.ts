@@ -45,6 +45,8 @@ export const submitFormSchema = z
     utmCampaign: z.string().max(200).optional(),
     utmContent: z.string().max(200).optional(),
     utmTerm: z.string().max(200).optional(),
+    /** Mehmon saytga birinchi kirgan sahifa (`src/lib/lead-attribution.ts`). */
+    landingPage: z.string().max(300).optional(),
     // Tracking & cookie parametrlari
     fbp: z.string().max(200).optional(),
     fbc: z.string().max(200).optional(),

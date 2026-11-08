@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { OishaOrb, type OishaOrbState } from '@/components/ui/oisha-orb';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { isOishaWebUserId } from '@/lib/oisha';
 import uz from '@/locales/uz.json';
 import ru from '@/locales/ru.json';
 import en from '@/locales/en.json';
@@ -92,7 +93,8 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
   useEffect(() => {
     let storedId = sessionUserIdRef.current;
     try { storedId = localStorage.getItem('oisha_user_id') || storedId; } catch {}
-    if (!storedId) {
+    // Proxy faqat `web_<UUID>`ni qabul qiladi — eski yoki buzilgan ID bo'lsa yangisi olinadi.
+    if (!isOishaWebUserId(storedId)) {
       storedId = createOishaUserId();
       try { localStorage.setItem('oisha_user_id', storedId); } catch {}
     }
@@ -228,7 +230,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
     <>
       <div
         className={cn(
-          'fixed bottom-24 right-6 z-50 transition-all duration-500 md:bottom-6 hidden md:block',
+          'fixed bottom-24 right-6 z-50 transition duration-500 md:bottom-6 hidden md:block',
           isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100',
         )}
       >

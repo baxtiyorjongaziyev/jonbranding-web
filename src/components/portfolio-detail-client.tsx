@@ -61,7 +61,7 @@ function SpotlightCard({ children, className = '', ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
-      className={`relative overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white transition-all duration-500 hover:border-blue-500/30 hover:shadow-xl shadow-sm ${className}`}
+      className={`relative overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white transition duration-500 hover:border-blue-500/30 hover:shadow-xl shadow-sm ${className}`}
       {...props}
     >
       {isFocused && (
@@ -144,7 +144,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
           <Button
             asChild
             variant="ghost"
-            className="rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0A0B0E] hover:text-[#0A0B0E] px-6 h-12 flex items-center gap-2 group transition-all duration-300"
+            className="rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0A0B0E] hover:text-[#0A0B0E] px-6 h-12 flex items-center gap-2 group transition duration-300"
           >
             <Link href={`/${lang}/portfolio`}>
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -524,7 +524,7 @@ export default function PortfolioDetailClient({ project, lang, dictionary }: Por
             <Button
               onClick={triggerLeadModal}
               size="lg"
-              className="h-16 px-12 bg-[#2554FF] hover:bg-blue-600 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-500/30 hover:scale-[1.03] transition-all duration-300"
+              className="h-16 px-12 bg-[#2554FF] hover:bg-blue-600 text-white font-black text-lg rounded-full shadow-2xl shadow-blue-500/30 hover:scale-[1.03] transition duration-300"
             >
               {getSalesFlow(lang).cta}
             </Button>

@@ -122,7 +122,7 @@ export async function POST(request: Request) {
         'lead alert',
       ),
       () => sendToAmoCrm(leadData).catch(async (error: unknown) => {
-        console.error('AmoCRM lead error:', error);
+        logger.error('AmoCRM lead error', error);
         const queued = await queueFailedAmoCrmLead(leadData, error);
         const reason = describeAmoCrmError(error);
 
@@ -199,7 +199,7 @@ export async function POST(request: Request) {
       },
     });
   } catch (error: unknown) {
-    console.error('Submit form error:', error);
+    logger.error('Submit form error', error);
     return NextResponse.json(
       { ok: false, error: 'Internal server error' },
       { status: 500 }

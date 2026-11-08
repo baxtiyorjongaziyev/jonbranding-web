@@ -12,6 +12,7 @@ import ClientLogos from '@/components/sections/client-logos';
 import AtManifesto from '@/components/sections/at-manifesto';
 import AtServices from '@/components/sections/at-services';
 import AtPatentCta from '@/components/sections/at-patent-cta';
+import AtPriceStrip from '@/components/sections/at-price-strip';
 
 // ── Skeleton placeholder ──────────────────────────────────────────────────────
 import SectionSkeleton from '@/components/ui/section-skeleton';
@@ -73,14 +74,17 @@ const HomeComponent: FC<{
   testimonials?: any[];
   portfolioProjects?: any[];
 }> = ({ lang, dictionary, comparisons = [], testimonials = [], portfolioProjects = [] }) => {
+  // Bosh sahifadagi barcha tugmalar bitta taklifga olib boradi — "20 daqiqalik bepul
+  // maslahat" (konversiya auditi, K-3). Avval "Maslahatga yozilish" tugmasi
+  // "Ariza qoldirish" (loyiha) formasini ochardi.
   const open = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'project' } })
+      new CustomEvent('openContactModal', { detail: { section: 'homepage', source: 'homepage', intent: 'consultation' } })
     );
   }, []);
   const openCallback = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent('openContactModal', { detail: { section: 'homepage_hero', source: 'homepage', intent: 'project', via: 'oisha' } })
+      new CustomEvent('openContactModal', { detail: { section: 'homepage_hero', source: 'homepage', intent: 'consultation', via: 'oisha' } })
     );
   }, []);
   const openConsultation = useCallback(() => {
@@ -108,7 +112,8 @@ const HomeComponent: FC<{
         style={{
           background: 'var(--at-bg)',
           color: 'var(--at-ink)',
-          fontFamily: 'var(--font-hanken, "Hanken Grotesk", sans-serif)',
+          // Hanken'da kirill/xitoy harflari yo'q: generik zaxirasiz ular serif'ga tushardi.
+          fontFamily: 'var(--font-hanken), "Hanken Grotesk", Aptos, "Segoe UI", sans-serif',
           WebkitFontSmoothing: 'antialiased',
         }}
       >
@@ -117,6 +122,7 @@ const HomeComponent: FC<{
       <ClientLogos title={dictionary.trustedBy.eyebrow} pauseLabel={dictionary.trustedBy.pause} resumeLabel={dictionary.trustedBy.resume} />
       <AtManifesto lang={lang} />
       <AtServices onOpen={open} lang={lang} dictionary={dictionary.atelier} />
+      <AtPriceStrip lang={lang} dictionary={dictionary.priceStrip} />
       <AtPatentCta lang={lang} dictionary={dictionary.patentCta} />
 
       {/* ── Below-the-fold (lazy) ── */}

@@ -50,7 +50,7 @@ export const PrimaryBtn: FC<{
   <button
     type="button"
     onClick={onClick}
-    className={`inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99] ${
+    className={`inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99] ${
       dark
         ? 'bg-white text-black hover:bg-neutral-200 focus-visible:ring-offset-black'
         : 'bg-black text-white hover:bg-neutral-800'
@@ -69,7 +69,7 @@ export const SecondaryBtn: FC<{
   <button
     type="button"
     onClick={onClick}
-    className={`inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99] ${
+    className={`inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99] ${
       dark
         ? 'border-white/30 text-white hover:bg-white/10 focus-visible:ring-offset-black'
         : 'border-neutral-300 text-neutral-900 hover:bg-neutral-50'

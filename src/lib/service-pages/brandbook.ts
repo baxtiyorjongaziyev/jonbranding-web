@@ -18,7 +18,7 @@ export const BRANDBOOK_PAGE: ServicePageContent = {
     lead: 'Yangi dizayner kelsa ham, bosmaxona o‘zgarsa ham brendingiz buzilmaydi. Logotip, ranglar, shriftlar, maketlar va muloqot ohangi (Tone of Voice) yagona 60+ sahifalik hujjatda.',
     format: 'Standartlar tahlili → qoidalar tizimi → taqiqlangan holatlar → 60+ sahifali PDF Brandbook',
     note: 'Brendbuk — kompaniya mulki. U brendingizni xodimlarning subyektiv didiga emas, rasmiy qoidalarga bog‘lab qo‘yadi.',
-    primaryCta: 'Brendbuk bo‘yicha konsultatsiya',
+    primaryCta: 'Brendbuk bo‘yicha maslahat',
   },
 
   problem: {

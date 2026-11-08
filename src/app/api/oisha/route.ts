@@ -2,7 +2,7 @@ import { NextResponse, after } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { logger } from '@/lib/logger';
-import { containsContact } from '@/lib/oisha';
+import { containsContact, isOishaWebUserId } from '@/lib/oisha';
 
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
@@ -72,24 +72,14 @@ async function offlineReply(userId: string, text: string, lang: Locale) {
     );
 }
 
-const normalizeUserId = (value: string | null) => {
-    if (!value || !/^[a-zA-Z0-9_-]{3,80}$/.test(value)) {
-        return null;
-    }
-    return encodeURIComponent(value);
-};
-
-const isValidUserId = (value: unknown): value is string =>
-    typeof value === 'string' && /^[a-zA-Z0-9_-]{3,80}$/.test(value);
-
 export async function GET(request: Request) {
     const ip = getClientIp(request);
     if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const { searchParams } = new URL(request.url);
-    const userId = normalizeUserId(searchParams.get('user_id'));
-    if (!userId) {
+    const userId = searchParams.get('user_id');
+    if (!isOishaWebUserId(userId)) {
         return NextResponse.json({ error: 'valid user_id required' }, { status: 400 });
     }
     const { url, secret } = oishaConfig();
@@ -120,7 +110,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'invalid json' }, { status: 400 });
     }
     const { user_id, text } = body;
-    if (!isValidUserId(user_id) || typeof text !== 'string' || !text.trim()) {
+    if (!isOishaWebUserId(user_id) || typeof text !== 'string' || !text.trim()) {
         return NextResponse.json({ error: 'valid user_id and text required' }, { status: 400 });
     }
     const lang: Locale = LOCALES.includes(body.lang as Locale) ? (body.lang as Locale) : 'uz';

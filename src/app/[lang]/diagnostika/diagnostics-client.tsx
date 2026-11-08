@@ -31,8 +31,9 @@ import {
   normalizePhone,
   normalizeTelegramUsername,
 } from '@/lib/lead-contact';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
-const TELEGRAM_URL = 'https://t.me/jonbranding';
+const TELEGRAM_URL = TELEGRAM_CONTACT_URL;
 
 type DiagnosticsDictionary = {
   ui: Record<string, string>;

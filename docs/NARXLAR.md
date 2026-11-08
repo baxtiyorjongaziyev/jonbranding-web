@@ -4,7 +4,7 @@
 > Gemini, Codex, Antigravity — kim ishlashidan qat'i nazar, narx yoki sotuv matniga
 > tegishdan oldin shu faylni o'qisin.
 >
-> **Oxirgi yangilanish:** 2026-10-11
+> **Oxirgi yangilanish:** 2026-11-07
 
 ---
 
@@ -107,18 +107,25 @@ Kafolat — biznes majburiyati, uni faqat egasi (Baxtiyorjon) belgilaydi.
 
 ## 6. Sahifa tuzilishi
 
-`§ 01` dan `§ 10` gacha raqamlangan bo'limlar:
+2026-11-07 dan (konversiya auditi, K-5) tartib shunday — eng foydali taklif (paket) va
+eng kuchli e'tiroz javobi ("nega arzon dizayner emas") yuqorida:
 
 1. Hero — "Narxlarimiz ochiq, hamma uchun birdek"; darhol 4 narx yo‘li va barcha xizmat/paketga havolalar
-2. JTBD — mijoz qaysi azobdan qutuladi, qaysi natijaga keladi
-3. Xizmatlar kirish
-4. **Har xizmatga bitta to'liq ekran** (`min-h-[100svh]`) — lead, deliverables, benefit, audience, proof
-5. Jarayon + to'lov
-6. Narxga ta'sir qiluvchi omillar
-7. Paketlar (tejaladigan summa ko'rsatilgan holda)
-8. Ijtimoiy isbot — keyslar, logotiplar, mijoz fikrlari
-9. Nega arzon dizayner emas
-10. FAQ → CTA
+2. **Paketlar** (`#packages`) — tejaladigan summa ko'rsatilgan holda
+3. **Nega arzon dizayner emas** + kafolatlar
+4. **Xizmatlar — yig'iladigan ro'yxat.** Har xizmat bitta qator (nom, narx, muddat);
+   bosilganda lead, foyda, kimga, tarkib, dalil, keyslar va xizmatga bog'langan tugma ochiladi.
+   Qator `id="service-{id}"`: `/narxlar#service-logo` havolasi shu qatorni ochib beradi
+5. JTBD — mijoz qaysi azobdan qutuladi, qaysi natijaga keladi
+6. Ijtimoiy isbot — logotiplar, mijoz fikrlari
+7. Jarayon + to'lov
+8. Narxga ta'sir qiluvchi omillar
+9. FAQ
+10. Suhbat (CTA)
+
+**Tugmalar:** umumiy "Ariza qoldirish" yo'q. Har xizmat tugmasi o'z matni bilan
+(`Service.cta`, masalan "Logotip bo‘yicha maslahat"), paketlarda `ui.packages.cta`.
+Hammasi maslahat formasini ochadi, xizmat oldindan belgilangan bo'ladi.
 
 ---
 
