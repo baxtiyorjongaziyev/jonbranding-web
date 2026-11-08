@@ -4,6 +4,7 @@ import CorporateClient from './corporate-client';
 import ServiceLanding from '@/components/service-landing/service-landing';
 import { VISUAL_IDENTITY_PAGE } from '@/lib/service-pages/visual-identity';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
+import { fetchServiceWorks } from '@/lib/service-pages/works';
 import { pageTitle } from '@/lib/seo';
 
 type Props = {
@@ -24,8 +25,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const { lang } = await props.params;
-  const dictionary = await getDictionary(lang as Locale);
-  
+  const [dictionary, works] = await Promise.all([
+    getDictionary(lang as Locale),
+    lang === 'uz' ? fetchServiceWorks(VISUAL_IDENTITY_PAGE.serviceKey, lang) : Promise.resolve([]),
+  ]);
+
   return (
     <>
       <ServiceJsonLd
@@ -37,7 +41,7 @@ export default async function Page(props: Props) {
       />
       {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
       {lang === 'uz' ? (
-        <ServiceLanding content={VISUAL_IDENTITY_PAGE} />
+        <ServiceLanding content={VISUAL_IDENTITY_PAGE} works={works} />
       ) : (
         <CorporateClient lang={lang as Locale} translations={dictionary.corporateStylePage} />
       )}

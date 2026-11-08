@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { FC, ReactNode, useRef, useState } from 'react';
 import { ArrowDown, Check, Minus } from 'lucide-react';
 import { HoneypotField } from '@/components/ui/honeypot-field';
@@ -419,6 +420,7 @@ const ExpertForm: FC<{ type: CheckType; setType: (t: CheckType) => void; phoneRe
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: f.name.trim().length >= 2 ? f.name.trim() : 'Mijoz',
           phone: normalizedPhone,
           role: service,

@@ -13,6 +13,7 @@ import { locales, defaultLocale } from '@/lib/i18n/locale';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
 import OishaPhoneSync from '@/components/layout/oisha-callback-script';
+import LeadAttributionCapture from '@/components/layout/lead-attribution-capture';
 
 
 const BASE_URL = 'https://www.jonbranding.uz';
@@ -152,7 +153,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
-        <meta name="robots" content="index, follow" />
         <Script
           id="json-ld-professional-service"
           type="application/ld+json"
@@ -258,6 +258,7 @@ export default async function LocalizedLayout({ children, params }: Props) {
         />
       </head>
       <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
+        <LeadAttributionCapture />
         <a href="#main-content" className="skip-link">
           {lang === 'uz' ? "Asosiy kontentga o'tish" : 'Skip to main content'}
         </a>
@@ -271,7 +272,6 @@ export default async function LocalizedLayout({ children, params }: Props) {
 
         
         <MainLayout
-          leadMagnetDictionary={(dictionary as any).leadMagnetPopup}
           headerDictionary={dictionary.header}
           pwaDictionary={(dictionary as any).pwa}
           lang={lang}
@@ -290,25 +290,26 @@ export default async function LocalizedLayout({ children, params }: Props) {
 if(document.cookie.includes('cookie_consent_accepted=true')){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');ym(91628105,'init',{webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true})}
           `}
         </Script>
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/91628105" style={{ position: 'absolute', left: '-9999px' }} alt="" />
-          </div>
-        </noscript>
+        {/* Yandex <noscript> pikseli yo'q: skript rozilikni tekshiradi, JS'siz mehmon esa rozilik bera olmaydi. */}
         </MainLayout>
         {/* Oisha "Sizga qo'ng'iroq qilamiz" vidjeti + call tracking. Hydration'dan
             keyin yuklanadi: vidjet qo'shgan DOM React tomonidan o'chirilmasin. Layout sahifa almashganda
             qayta chizilmaydi. Rang — brend Cobalt (#1B4DFF); vidjet faqat uz/ru tillarini
             qo'llaydi. O'ng pastda Oisha AI chat bor, shuning uchun tugma chapda. */}
-        <Script
-          id="oisha-callback-widget"
-          strategy="afterInteractive"
-          src="https://oisha.jonbranding.uz/api/callback-widget.js"
-          data-color="#2554FF"
-          data-lang={lang === 'uz' ? 'uz' : 'ru'}
-          data-call-tracking="1"
-          data-position="left"
-        />
+        {/* Vidjet faqat uz/ru tillarini biladi: en/zh mehmonga ruscha forma ochilardi.
+            U yerda skript yuklanmaydi va `data-oisha-callback` tugmalar o'z tilidagi sayt
+            formasini ochadi (client-enhancements zaxira yo'li; konversiya auditi, K-3). */}
+        {(lang === 'uz' || lang === 'ru') && (
+          <Script
+            id="oisha-callback-widget"
+            strategy="afterInteractive"
+            src="https://oisha.jonbranding.uz/api/callback-widget.js"
+            data-color="#2554FF"
+            data-lang={lang}
+            data-call-tracking="1"
+            data-position="left"
+          />
+        )}
         <Suspense fallback={null}>
           <OishaPhoneSync />
         </Suspense>

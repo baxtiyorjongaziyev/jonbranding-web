@@ -14,6 +14,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'brand-strategy',
+        cta: 'Strategy consultation',
         name: "Brand strategy",
         price: '48 000 000',
         lead: 'We work out the place your brand should hold in the market. Who you serve, what sets you apart and what you say — brought into one strategic system.',
@@ -32,6 +33,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'naming',
+        cta: 'Naming consultation',
         name: "Naming",
         price: '10 000 000',
         duration: '10 days',
@@ -57,6 +59,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'logo',
+        cta: 'Logo consultation',
         name: "Logo",
         price: '8 000 000',
         duration: '7 days',
@@ -73,6 +76,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'visual-identity',
+        cta: 'Visual identity consultation',
         name: "Visual identity",
         price: '18 000 000',
         duration: '10 days',
@@ -89,6 +93,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'brandbook',
+        cta: 'Brandbook consultation',
         name: "Brandbook — usage rules",
         price: '24 000 000',
         duration: '7 days',
@@ -112,6 +117,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'packaging',
+        cta: 'Packaging consultation',
         name: "Packaging design (1 product variant)",
         price: '12 000 000',
         duration: '7 days',
@@ -128,6 +134,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'packaging-extra',
+        cta: 'Packaging consultation',
         name: "Each additional product variant",
         price: 'from 4 000 000',
         duration: '+3 days',
@@ -149,6 +156,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
     items: [
       {
         id: 'trademark-search',
+        cta: 'Trademark consultation',
         name: 'Trademark search',
         price: '880 000',
         duration: '2 days',
@@ -166,6 +174,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-standard',
+        cta: 'Trademark consultation',
         name: 'Trademark (standard)',
         price: '5 000 000',
         duration: '7 months',
@@ -181,6 +190,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       },
       {
         id: 'trademark-express',
+        cta: 'Trademark consultation',
         name: 'Trademark (expedited)',
         price: '7 000 000',
         duration: '20–40 days',
@@ -336,7 +346,7 @@ export const en: SalesContent = {
       sub: 'You do not need everything at once. Take what you need now — each service is a complete piece of work that ends with finished files in your hands.',
       note: 'Prices are for the service. State fees are paid separately.',
       showcase: 'Pages from our brandbooks', cases: 'Our work in this service',
-      price: 'Price', duration: 'Timing', cta: 'Send a request',
+      price: 'Price', duration: 'Timing', audience: 'Who it is for', details: 'Details',
       deliverables: 'What you get', benefit: 'What it does for you',
     },
     process: { pre: 'How we', hi: 'work', paymentTitle: 'Payment stages' },
@@ -345,7 +355,7 @@ export const en: SalesContent = {
       pre: 'Need several? A package is', hi: 'cheaper',
       sub: 'Taken as a package it costs less than buying the services separately, and everything is built as one system.',
       separate: { pre: 'Bought separately', mid: '— you save', suf: '' },
-      cta: 'Send a request',
+      cta: 'Package consultation',
       note: 'Timing covers the design work. The trademark certificate is issued separately, on the official schedule.',
     },
     trust: { pre: 'They have worked', hi: 'with us' },
@@ -368,6 +378,9 @@ export const en: SalesContent = {
       phone: 'Phone *',
       phonePlaceholder: '+998 90 123 45 67',
       service: 'Service',
+      servicesLabel: 'Which services do you need?',
+      multiSelectHint: 'Multiple options allowed',
+      selectedPrefix: 'Selected',
       submit: 'Send',
       sending: 'Sending…',
       phoneError: 'Please enter a valid phone number',

@@ -52,11 +52,11 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           {error.digest && <p className="text-xs text-gray-400 font-mono">Error ID: {error.digest}</p>}
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <Button onClick={retry} variant="default" className="rounded-full px-8 py-6 bg-dark-blue hover:bg-blue-900 transition-all flex items-center gap-2">
+          <Button onClick={retry} variant="default" className="rounded-full px-8 py-6 bg-dark-blue hover:bg-blue-900 transition flex items-center gap-2">
             <RefreshCcw className="h-4 w-4" />
             {t.retry}
           </Button>
-          <Button variant="outline" className="rounded-full px-8 py-6 border-gray-200 text-gray-700 hover:bg-gray-50 transition-all flex items-center gap-2" asChild>
+          <Button variant="outline" className="rounded-full px-8 py-6 border-gray-200 text-gray-700 hover:bg-gray-50 transition flex items-center gap-2" asChild>
             <Link href={`/${lang}`}>
               <Home className="h-4 w-4" />
               {t.home}

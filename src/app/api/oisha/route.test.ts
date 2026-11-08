@@ -13,6 +13,9 @@ vi.mock('next/server', async (importOriginal) => ({
   after: (task: () => unknown) => task(),
 }));
 
+// Vidjet beradigan haqiqiy format: `web_` + crypto.randomUUID().
+const WEB_USER = 'web_3f2b8c1e-9a4d-4e6f-8b2a-1c5d7e9f0a3b';
+
 const defaultFetch = async () => new Response(JSON.stringify({ ok: true }), { status: 200 });
 const fetchMock = vi.fn<typeof fetch>(defaultFetch);
 
@@ -39,16 +42,43 @@ describe('Oisha service authentication', () => {
   });
 
   it('authenticates chat messages at the backend service boundary', async () => {
-    const response = await send({ user_id: 'web_auth_test', text: 'Salom' });
+    const response = await send({ user_id: WEB_USER, text: 'Salom' });
     expect(response.status).toBe(200);
     expect((await response.json()).response).toBe('authenticated');
   });
 
   it('authenticates chat history at the same backend boundary', async () => {
     const { GET } = await import('./route');
-    const response = await GET(new Request('http://localhost/api/oisha?user_id=web_auth_test'));
+    const response = await GET(new Request(`http://localhost/api/oisha?user_id=${WEB_USER}`));
     expect(response.status).toBe(200);
     expect((await response.json()).history).toEqual([]);
+  });
+});
+
+// Proxy so'rovga secret qo'shadi. Vidjet bermaydigan ID (masalan, Telegram
+// foydalanuvchisining raqamli ID'si) backend'ga yetib bormasligi kerak — aks
+// holda begona odamning tarixini o'qish yoki uning nomidan yozish mumkin bo'ladi.
+describe('Oisha proxy accepts only widget-issued IDs', () => {
+  const foreignIds = ['150074828', 'web_abc', 'tg_150074828', `${WEB_USER}x`, 'WEB_3F2B8C1E-9A4D-4E6F-8B2A-1C5D7E9F0A3B'];
+
+  beforeEach(() => {
+    process.env.OISHA_API_URL = 'https://oisha.example';
+    process.env.OISHA_SECRET_KEY = 'test-service-key';
+  });
+
+  it.each(foreignIds)('does not read history for %s', async (userId) => {
+    const { GET } = await import('./route');
+    const response = await GET(
+      new Request(`http://localhost/api/oisha?user_id=${encodeURIComponent(userId)}`),
+    );
+    expect(response.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it.each(foreignIds)('does not send a message as %s', async (userId) => {
+    const response = await send({ user_id: userId, text: 'Salom' });
+    expect(response.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
 afterEach(() => {
@@ -76,7 +106,7 @@ function telegramText(): string {
 
 describe('POST /api/oisha while the assistant is offline', () => {
   it('asks for a phone or Telegram instead of promising a callback it cannot make', async () => {
-    const res = await send({ user_id: 'web_abc', text: 'Logo narxi qancha?' });
+    const res = await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
     expect(res.status).toBe(200);
     expect((await res.json()).response).toBe(uz.oishaWidget.offlineAskContact);
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -84,18 +114,18 @@ describe('POST /api/oisha while the assistant is offline', () => {
   });
 
   it('confirms the callback once the visitor has left a phone number', async () => {
-    const res = await send({ user_id: 'web_abc', text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
+    const res = await send({ user_id: WEB_USER, text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
     expect((await res.json()).response).toBe(uz.oishaWidget.offlineThanks);
     expect(telegramText()).not.toContain("kontakt hali yo'q");
   });
 
   it('answers in the visitor language', async () => {
-    const res = await send({ user_id: 'web_abc', text: 'Сколько стоит логотип?', lang: 'ru' });
+    const res = await send({ user_id: WEB_USER, text: 'Сколько стоит логотип?', lang: 'ru' });
     expect((await res.json()).response).toBe(ru.oishaWidget.offlineAskContact);
   });
 
   it('escapes HTML so Telegram does not reject the message', async () => {
-    await send({ user_id: 'web_abc', text: '<b>salom</b> & rahmat' });
+    await send({ user_id: WEB_USER, text: '<b>salom</b> & rahmat' });
     expect(telegramText()).toContain('&lt;b&gt;salom&lt;/b&gt; &amp; rahmat');
   });
 

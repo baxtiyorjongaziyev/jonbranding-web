@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import OishaWidget from './oisha-widget';
+import OishaWidget, { createOishaUserId } from './oisha-widget';
+import { isOishaWebUserId } from '@/lib/oisha';
 
 vi.mock('@/hooks/use-toast', () => ({ useToast: () => ({ toast: vi.fn() }) }));
 
@@ -51,5 +52,24 @@ describe('OishaWidget proactive message', () => {
       (call) => (call as unknown as [string, RequestInit?])[1]?.method === 'POST',
     );
     expect(posts).toHaveLength(0);
+  });
+});
+
+describe('OishaWidget user ID', () => {
+  afterEach(() => {
+    try { localStorage.clear(); } catch {}
+  });
+
+  it('issues IDs the /api/oisha proxy accepts', () => {
+    expect(isOishaWebUserId(createOishaUserId())).toBe(true);
+  });
+
+  it('replaces a stored ID the proxy would reject instead of failing every message', async () => {
+    localStorage.setItem('oisha_user_id', 'legacy_123');
+    render(<OishaWidget lang="uz" />);
+    await act(async () => {});
+    const stored = localStorage.getItem('oisha_user_id');
+    expect(stored).not.toBe('legacy_123');
+    expect(isOishaWebUserId(stored)).toBe(true);
   });
 });

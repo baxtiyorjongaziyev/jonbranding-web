@@ -35,13 +35,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   }
 
-  const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}pricing/sotuvchi-kartochka`;
+  // Sahifa matni hozircha faqat o'zbekcha: boshqa tillar uz versiyaga canonical
+  // va noindex (aks holda ru/en/zh URL'lar o'zbekcha matnning dublikati bo'ladi).
+  const isUz = lang === 'uz';
+  const canonicalUrl = 'https://www.jonbranding.uz/pricing/sotuvchi-kartochka';
 
   return {
     metadataBase: new URL('https://www.jonbranding.uz'),
     title: t.title,
     description: t.description,
     keywords: ["sotuvchi rasm", "uzum kartochka dizayn", "wildberries dizayn", "marketpleyslar uchun dizayn", "branding uz", "logo", "neyming"],
+    robots: { index: isUz, follow: true },
     openGraph: {
       title: t.title,
       description: t.description,
@@ -59,12 +63,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'uz': `https://www.jonbranding.uz/pricing/sotuvchi-kartochka`,
-        'ru': `https://www.jonbranding.uz/ru/pricing/sotuvchi-kartochka`,
-        'en': `https://www.jonbranding.uz/en/pricing/sotuvchi-kartochka`,
-        'zh': `https://www.jonbranding.uz/zh/pricing/sotuvchi-kartochka`,
-      },
     },
   };
 }

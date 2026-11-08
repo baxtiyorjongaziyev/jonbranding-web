@@ -1,11 +1,12 @@
 'use client';
 
 import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Check, ChevronDown, X } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { ServiceLeadForm } from './service-lead-form';
-import type { ServicePageContent } from './types';
+import type { ServicePageContent, ServiceWork } from './types';
 
 const mono = { fontFamily: 'var(--font-mono), "JetBrains Mono", monospace', letterSpacing: '0.12em' } as const;
 const h2Style = { fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.03em', lineHeight: 1.1 } as const;
@@ -23,14 +24,43 @@ const Section: FC<{ id?: string; children: ReactNode; className?: string }> = ({
 );
 
 const btnBase =
-  'inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99]';
+  'inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:scale-[0.99]';
+
+/**
+ * Birinchi ekrandagi ishlar (konversiya auditi, K-9): mehmon narxni ko'rgan joyda
+ * shu xizmat bo'yicha qilingan ishni ham ko'radi. Mobilda uchta kichik kartochka,
+ * desktopda bitta katta va ikkita kichik.
+ */
+const HeroWorks: FC<{ works: ServiceWork[] }> = ({ works }) => (
+  <figure className="mt-12 lg:mt-0" data-service-hero-works="">
+    <figcaption className="mb-3 text-[11px] uppercase text-neutral-400" style={mono}>Ishlarimizdan</figcaption>
+    <ul className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-2">
+      {works.map((work, i) => (
+        <li key={work.slug} className={i === 0 ? 'lg:col-span-2' : undefined}>
+          <Link href={`/portfolio/${work.slug}`} className="group block">
+            <span className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-neutral-100 sm:rounded-2xl">
+              <Image
+                src={work.coverImage}
+                alt={[work.client, work.categoryLabel].filter(Boolean).join(' — ')}
+                fill
+                sizes={i === 0 ? '(max-width: 1024px) 33vw, 40vw' : '(max-width: 1024px) 33vw, 20vw'}
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              />
+            </span>
+            <span className="mt-1.5 block truncate text-xs text-neutral-500">{work.client}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </figure>
+);
 
 /**
  * Xizmat sahifasi — `/brand-strategy` bilan bir xil tuzilish:
  * hero → muammo → xizmat nima → tarkib → dalil → jarayon → kimga mos →
  * kafolatlar → keyingi xizmatlar → FAQ → ariza.
  */
-export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactNode }> = ({ content: c, children }) => {
+export const ServiceLanding: FC<{ content: ServicePageContent; works?: ServiceWork[]; children?: ReactNode }> = ({ content: c, works = [], children }) => {
   const priceText = `${c.price} so‘m${c.priceFrom ? 'dan' : ''}`;
   const formRef = useRef<HTMLDivElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
@@ -52,41 +82,44 @@ export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactN
     <div className="bg-white text-neutral-950">
       {/* 1. HERO */}
       <section className="px-5 pb-16 pt-28 sm:px-8 md:pb-24 md:pt-36">
-        <div className="mx-auto max-w-5xl">
-          <Eyebrow>{c.hero.eyebrow}</Eyebrow>
-          <h1 className="max-w-[20ch] font-bold tracking-tight" style={{ fontSize: 'clamp(34px, 5.2vw, 62px)', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
-            {c.hero.title}
-          </h1>
-          <p className="mt-6 max-w-[58ch] text-neutral-600" style={{ fontSize: 18, lineHeight: 1.65 }}>
-            {c.hero.lead}
-          </p>
+        <div className={`mx-auto ${works.length ? 'grid max-w-6xl lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14' : 'max-w-5xl'}`}>
+          <div>
+            <Eyebrow>{c.hero.eyebrow}</Eyebrow>
+            <h1 className="max-w-[20ch] font-bold tracking-tight" style={{ fontSize: 'clamp(34px, 5.2vw, 62px)', letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+              {c.hero.title}
+            </h1>
+            <p className="mt-6 max-w-[58ch] text-neutral-600" style={{ fontSize: 18, lineHeight: 1.65 }}>
+              {c.hero.lead}
+            </p>
 
-          <dl className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-4 border-t border-neutral-200 pt-6">
-            <div>
-              <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Narxi</dt>
-              <dd className="mt-1 text-3xl font-bold tracking-tight">{priceText}</dd>
-            </div>
-            {c.duration ? (
+            <dl className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-4 border-t border-neutral-200 pt-6">
               <div>
-                <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Muddat</dt>
-                <dd className="mt-1 text-3xl font-bold tracking-tight">{c.duration}</dd>
+                <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Narxi</dt>
+                <dd className="mt-1 text-3xl font-bold tracking-tight">{priceText}</dd>
               </div>
-            ) : null}
-            <div>
-              <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Formati</dt>
-              <dd className="mt-1 text-base font-semibold text-neutral-800">{c.hero.format}</dd>
-            </div>
-          </dl>
+              {c.duration ? (
+                <div>
+                  <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Muddat</dt>
+                  <dd className="mt-1 text-3xl font-bold tracking-tight">{c.duration}</dd>
+                </div>
+              ) : null}
+              <div>
+                <dt className="text-[11px] uppercase text-neutral-400" style={mono}>Formati</dt>
+                <dd className="mt-1 text-base font-semibold text-neutral-800">{c.hero.format}</dd>
+              </div>
+            </dl>
 
-          <div className="mt-9 flex flex-col gap-3.5 sm:flex-row">
-            <button type="button" onClick={() => toForm('hero')} className={`${btnBase} bg-black text-white hover:bg-neutral-800`}>
-              {c.hero.primaryCta}
-            </button>
-            <button type="button" onClick={toContent} className={`${btnBase} border border-neutral-300 text-neutral-900 hover:bg-neutral-50`}>
-              Xizmat tarkibini ko‘rish
-            </button>
+            <div className="mt-9 flex flex-col gap-3.5 sm:flex-row">
+              <button type="button" onClick={() => toForm('hero')} className={`${btnBase} bg-black text-white hover:bg-neutral-800`}>
+                {c.hero.primaryCta}
+              </button>
+              <button type="button" onClick={toContent} className={`${btnBase} border border-neutral-300 text-neutral-900 hover:bg-neutral-50`}>
+                Xizmat tarkibini ko‘rish
+              </button>
+            </div>
+            {c.hero.note ? <p className="mt-6 max-w-[58ch] text-xs leading-relaxed text-neutral-500">{c.hero.note}</p> : null}
           </div>
-          {c.hero.note ? <p className="mt-6 max-w-[58ch] text-xs leading-relaxed text-neutral-500">{c.hero.note}</p> : null}
+          {works.length ? <HeroWorks works={works} /> : null}
         </div>
       </section>
 
@@ -189,6 +222,10 @@ export const ServiceLanding: FC<{ content: ServicePageContent; children?: ReactN
                 ))}
               </div>
             ) : null}
+            {/* Sharhlardan keyin keyingi qadam: hero tugmasidan keyin ~7 000 px tugmasiz edi (K-9). */}
+            <button type="button" onClick={() => toForm('proof')} className={`${btnBase} mt-12 bg-white text-black hover:bg-neutral-200`} data-service-proof-cta="">
+              {c.hero.primaryCta}
+            </button>
           </div>
         </section>
       ) : null}

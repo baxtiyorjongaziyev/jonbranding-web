@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useForm, useWatch, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,6 +23,7 @@ import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/ana
 import { getDictionary } from '@/lib/dictionaries';
 import Magnetic from '@/components/ui/magnetic';
 import { Turnstile } from '@marsidev/react-turnstile';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -179,6 +181,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           ...data,
           turnstileToken,
           packageSummary,
@@ -272,7 +275,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="fixed bottom-0 top-auto left-0 translate-x-0 w-full max-w-full h-[92dvh] max-h-[92dvh] rounded-t-[2.5rem] rounded-b-none border-none p-0 overflow-hidden shadow-2xl transition-all duration-300 sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-[95vw] sm:max-w-[1000px] sm:h-[620px] sm:max-h-[85vh] sm:rounded-3xl [&>button:last-child]:hidden">
+      <DialogContent className="fixed bottom-0 top-auto left-0 translate-x-0 w-full max-w-full h-[92dvh] max-h-[92dvh] rounded-t-[2.5rem] rounded-b-none border-none p-0 overflow-hidden shadow-2xl transition duration-300 sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:w-[95vw] sm:max-w-[1000px] sm:h-[620px] sm:max-h-[85vh] sm:rounded-3xl [&>button:last-child]:hidden">
         <DialogDescription className="sr-only">
           {translations?.srDescription || 'Brand audit contact form'}
         </DialogDescription>
@@ -329,7 +332,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
             <div className="relative z-10 mt-6 sm:mt-12 flex flex-col gap-4 sm:gap-6 hidden sm:flex">
               <div className="flex gap-4">
-                <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all group">
+                <a href={TELEGRAM_CONTACT_URL} target="_blank" rel="noopener noreferrer" aria-label={translations?.telegramLinkLabel || 'Telegram'} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition group">
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
@@ -402,7 +405,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input
                                             placeholder={translations?.fields?.name?.placeholder || 'Ismingiz'}
-                                            className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
+                                            className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white transition duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                             aria-invalid={fieldState.invalid ? "true" : "false"}
                                             autoComplete="name"
                                             {...field}
@@ -425,7 +428,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                                         <PhoneCall className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
                                         <Input 
                                           placeholder={translations?.fields?.phone?.placeholder || '+998'} 
-                                          className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
+                                          className={`pl-12 rounded-xl h-12 bg-gray-50/50 focus:bg-white font-mono transition duration-300 focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-600 ${fieldState.invalid ? 'border-red-500 focus-visible:ring-red-500' : 'border-gray-200'}`}
                                           value={field.value}
                                           aria-invalid={fieldState.invalid ? "true" : "false"}
                                           autoComplete="tel"
@@ -457,7 +460,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
                             />
                           </div>
 
-                          <Button type="submit" disabled={isSubmitting} className="w-full h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold group shadow-xl shadow-blue-600/20 active:scale-[0.97] transition-all duration-150">
+                          <Button type="submit" disabled={isSubmitting} className="w-full h-11 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold group shadow-xl shadow-blue-600/20 active:scale-[0.97] transition duration-150">
                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : (
                               <span className="flex items-center justify-center gap-2">
                                 {translations?.buttons?.submit || 'Yuborish'}
@@ -504,7 +507,7 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
                     <div className="flex flex-col gap-4 w-full max-w-sm">
                       <Button asChild className="h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-100 group">
-                        <a href="https://t.me/jonbranding" target="_blank" rel="noopener noreferrer">
+                        <a href={TELEGRAM_CONTACT_URL} target="_blank" rel="noopener noreferrer">
                           {translations?.successStep?.telegramButton || 'Open Telegram'}
                           <ExternalLink className="ml-2 w-4 h-4 opacity-70 group-hover:opacity-100" />
                         </a>

@@ -281,8 +281,8 @@ const StyleTestPage: FC = () => {
             </div>
             <div className="h-1 w-full bg-foreground/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
+                className="h-full w-full bg-primary rounded-full transition-transform duration-300"
+                style={{ transform: `translateX(-${100 - Math.max(0, Math.min(progress, 100))}%)` }}
               />
             </div>
           </div>
@@ -296,7 +296,7 @@ const StyleTestPage: FC = () => {
               <button
                 key={i}
                 onClick={() => handleAnswer(option.type)}
-                className="text-left w-full p-5 sm:p-6 rounded-2xl border-2 border-foreground/10 hover:border-primary hover:bg-primary/5 active:scale-[0.98] transition-all text-base sm:text-lg font-medium text-foreground"
+                className="text-left w-full p-5 sm:p-6 rounded-2xl border-2 border-foreground/10 hover:border-primary hover:bg-primary/5 active:scale-[0.98] transition text-base sm:text-lg font-medium text-foreground"
               >
                 {option.text}
               </button>

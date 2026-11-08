@@ -18,6 +18,14 @@ export type ServiceQuote = {
   image?: string;
 };
 
+/** Birinchi ekrandagi ish namunasi — portfolio'dagi tasdiqlangan keys. */
+export type ServiceWork = {
+  slug: string;
+  client: string;
+  categoryLabel: string;
+  coverImage: string;
+};
+
 export type ServicePageContent = {
   /** Analytics va CRM manbasi, masalan `naming_page`. */
   source: string;

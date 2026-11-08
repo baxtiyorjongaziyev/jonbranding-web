@@ -64,7 +64,7 @@ export function MobileMenu({
           <button
             aria-label={dictionary.open_menu}
             className={cn(
-              'flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+              'flex h-11 w-11 items-center justify-center rounded-full border transition duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
               useDarkHeaderText
                 ? 'border-black/15 bg-white/60 text-foreground hover:bg-black/5 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-white'
                 : 'border-white/20 bg-white/10 text-white hover:bg-white/18 backdrop-blur-sm focus-visible:ring-primary focus-visible:ring-offset-[#0a0d14]'
@@ -92,7 +92,7 @@ export function MobileMenu({
             </SheetTitle>
             <button
               onClick={() => onOpenChange(false)}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#DDE0E6] bg-[#FFFFFF] text-[#4A4845] transition-all duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#DDE0E6] bg-[#FFFFFF] text-[#4A4845] transition duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={dictionary.close_menu}
             >
               <X className="h-4.5 w-4.5" />
@@ -121,7 +121,7 @@ export function MobileMenu({
                         onLinkClick(service.title);
                         onOpenChange(false);
                       }}
-                      className="group flex items-center justify-between rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 py-3.5 transition-all duration-200 hover:border-[#0E1015]/30 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      className="group flex items-center justify-between rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 py-3.5 transition duration-200 hover:border-[#0E1015]/30 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       <span className="text-[15px] font-medium text-[#0E1015]">
                         {service.title}
@@ -145,7 +145,7 @@ export function MobileMenu({
                       onLinkClick(item.label);
                       onOpenChange(false);
                     }}
-                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-[#0E1015]/85 transition-all duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="flex h-12 items-center rounded-2xl px-4 text-[17px] font-semibold text-[#0E1015]/85 transition duration-200 hover:bg-[#EAECF0] hover:text-[#0E1015] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {item.label}
                   </Link>
@@ -165,7 +165,7 @@ export function MobileMenu({
                   data-oisha-phone-text="0"
                   href="tel:+998792000097"
                   onClick={() => trackContactClick('phone', 'mobile_menu')}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition-all duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-green-600/10 text-green-700">
                     <Phone className="h-4 w-4" />
@@ -181,7 +181,7 @@ export function MobileMenu({
                     onOpenChange(false);
                     window.dispatchEvent(new CustomEvent('openPwaInstallPrompt'));
                   }}
-                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition-all duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex h-14 items-center gap-4 rounded-2xl border border-[#DDE0E6] bg-[#F4F5F7] px-4 transition duration-200 hover:bg-[#EAECF0] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2554FF]/10 text-[#2554FF]">
                     <Download className="h-4 w-4" />
@@ -206,7 +206,7 @@ export function MobileMenu({
                   onContactClick();
                   onOpenChange(false);
                 }}
-                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-[#2554FF] px-5 py-4 text-white shadow-lg shadow-[#2554FF]/25 transition-all duration-300 hover:bg-[#1D4ED8] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
+                className="group relative flex w-full items-center justify-between overflow-hidden rounded-2xl bg-[#2554FF] px-5 py-4 text-white shadow-lg shadow-[#2554FF]/25 transition duration-300 hover:bg-[#1D4ED8] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF]"
               >
                 <div className="flex flex-col">
                   <span className="text-[15px] font-bold">{dictionary.free_consultation}</span>

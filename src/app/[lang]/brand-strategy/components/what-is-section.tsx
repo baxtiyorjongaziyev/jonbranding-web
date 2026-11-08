@@ -47,7 +47,7 @@ export const WhatIsSection: FC = () => {
           return (
             <div
               key={card.q}
-              className="flex flex-col rounded-3xl border border-neutral-200 bg-white p-7 sm:p-9 transition-all hover:border-neutral-300 hover:shadow-md"
+              className="flex flex-col rounded-3xl border border-neutral-200 bg-white p-7 sm:p-9 transition hover:border-neutral-300 hover:shadow-md"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
                 <Icon className="h-6 w-6" />

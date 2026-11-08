@@ -20,7 +20,7 @@ export const LOGO_PAGE: ServicePageContent = {
     lead: logo.lead + ' 3 ta konsepsiyadan tanlaysiz, tanlanganini oxirigacha sayqallaymiz va barcha formatlarda topshiramiz.',
     format: '3 ta konsepsiya → tanlov → sayqal → fayllar',
     note: 'Logotip — ko‘rinish emas, vosita. U peshlavhada, Instagram avatarida, qadoqda va vizitkada birdek aniq o‘qilishi kerak.',
-    primaryCta: 'Logotip bo‘yicha konsultatsiya',
+    primaryCta: 'Logotip bo‘yicha maslahat',
   },
 
   problem: {

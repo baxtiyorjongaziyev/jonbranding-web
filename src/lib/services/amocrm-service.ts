@@ -105,7 +105,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
   try {
     accessToken = await getValidAccessToken();
   } catch (error) {
-    console.error('Firestore token fetch failed, falling back to static env token:', error);
+    logger.error('Firestore token fetch failed, falling back to static env token', error);
     accessToken = parseAmoCrmAccessToken(process.env.AMOCRM_ACCESS_TOKEN);
   }
 
@@ -138,6 +138,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
     data.offerType ? `Offer: ${data.offerType}` : '',
     data.ctaLabel ? `CTA matni: ${data.ctaLabel}` : '',
     data.referrer ? `Referrer: ${data.referrer}` : '',
+    data.landingPage ? `Kirish sahifasi: ${data.landingPage}` : '',
     data.utmSource ? `UTM source: ${data.utmSource}` : '',
     data.utmMedium ? `UTM medium: ${data.utmMedium}` : '',
     data.utmCampaign ? `UTM campaign: ${data.utmCampaign}` : '',
@@ -195,7 +196,7 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
         body: leadBody,
       });
     } catch (refreshError) {
-      console.error('Failed to refresh AmoCRM token on 401:', refreshError);
+      logger.error('Failed to refresh AmoCRM token on 401', refreshError);
     }
   }
 
@@ -241,10 +242,10 @@ export async function sendToAmoCrm(data: LeadData): Promise<AmoCrmLeadResult> {
     })
       .then((noteResponse) => {
         if (!noteResponse.ok) {
-          console.error('AmoCRM note HTTP error:', { leadId, status: noteResponse.status });
+          logger.error('AmoCRM note HTTP error', { leadId, status: noteResponse.status });
         }
       })
-      .catch((error) => console.error('AmoCRM note error:', error));
+      .catch((error) => logger.error('AmoCRM note error', error));
   }
 
   return { ok: true, leadId, contactId, merged: createdLead?.merged === true };
