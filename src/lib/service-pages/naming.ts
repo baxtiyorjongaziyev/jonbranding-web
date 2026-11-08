@@ -24,7 +24,7 @@ export const NAMING_PAGE: ServicePageContent = {
     lead: 'Biznesingiz uchun nom topamiz, nega aynan shu nomligini asoslab beramiz va uni domen, ijtimoiy tarmoq hamda patent bazasi bo‘yicha oldindan tekshiramiz.',
     format: 'Brif → tahlil → nom variantlari → tekshiruv',
     note: 'Nom — brendning yagona o‘zgarmaydigan qismi. Logo yangilanadi, qadoq o‘zgaradi, nom esa yillar davomida qoladi.',
-    primaryCta: 'Neyming bo‘yicha konsultatsiya',
+    primaryCta: 'Neyming bo‘yicha maslahat',
   },
 
   problem: {

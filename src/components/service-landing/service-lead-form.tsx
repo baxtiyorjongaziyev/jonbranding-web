@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import React, { FC, useRef, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { HoneypotField } from '@/components/ui/honeypot-field';
@@ -55,6 +56,7 @@ export const ServiceLeadForm: FC<{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name.trim(),
           phone: normalizePhone(phone),
           role: serviceName,
@@ -93,7 +95,7 @@ export const ServiceLeadForm: FC<{
   };
 
   const inputCls =
-    'w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus-visible:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600/20';
+    'w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus-visible:border-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600/20';
 
   if (done) {
     return (
@@ -114,7 +116,7 @@ export const ServiceLeadForm: FC<{
       <p className="text-[11px] uppercase text-neutral-400" style={mono}>
         {serviceName} · {price} so‘m{content.priceFrom ? 'dan' : ''}
       </p>
-      <p className="mt-2 text-lg font-bold">Bepul konsultatsiyaga yoziling</p>
+      <p className="mt-2 text-lg font-bold">Bepul maslahatga yoziling</p>
       <form onSubmit={handleSubmit} onChange={onStart} className="mt-6 space-y-3" noValidate>
         <HoneypotField value={honeypot} onChange={setHoneypot} />
         <div>
@@ -142,7 +144,7 @@ export const ServiceLeadForm: FC<{
           disabled={sending}
           className="inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-black px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 disabled:opacity-60"
         >
-          {sending ? 'Yuborilmoqda…' : 'Ariza qoldirish'}
+          {sending ? 'Yuborilmoqda…' : 'Maslahatga yozilish'}
           {!sending ? <ArrowRight className="h-4 w-4" /> : null}
         </button>
         <p className="text-center text-[11px] text-neutral-400">Majburiyatsiz. 20 daqiqalik suhbat.</p>

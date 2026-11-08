@@ -24,7 +24,7 @@ const staticRoutes = [
   '/terms',
   '/portfolio',
   '/online-brief',
-  '/pricing/sotuvchi-kartochka',
+  '/otzivlar',
   '/narxlar',
   '/xizmatlar',
   '/xizmatlar/neyming',
@@ -178,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Faqat o'zbekcha tarjimasi bor sahifalar.
-  const uzOnlyPages = ['/expert-tekshiruv', '/brand-strategy'].map((route) => ({
+  const uzOnlyPages = ['/expert-tekshiruv', '/brand-strategy', '/pricing/sotuvchi-kartochka'].map((route) => ({
     url: localizedUrl('uz', route),
     changeFrequency: 'weekly' as const,
     priority: 0.8,

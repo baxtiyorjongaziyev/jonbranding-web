@@ -122,7 +122,7 @@ function CaseImageRotator({
                 key={i}
                 type="button"
                 onClick={() => setCurrentIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition duration-300 ${
                   i === currentIndex ? 'w-6 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
                 }`}
                 aria-label={`Slide ${i + 1}`}
@@ -217,7 +217,7 @@ export default function CredentialsClient({ cases, quotes, logos, sales, copy, l
             {logos.map((brand) => (
               <div
                 key={brand.name}
-                className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl bg-white p-4 sm:p-5 shadow-xs border border-black/[0.08] transition-all duration-300 hover:shadow-lg hover:scale-[1.03]"
+                className="group flex h-24 sm:h-28 items-center justify-center rounded-2xl bg-white p-4 sm:p-5 shadow-xs border border-black/[0.08] transition duration-300 hover:shadow-lg hover:scale-[1.03]"
               >
                 <Image
                   src={brand.logo}
@@ -297,7 +297,7 @@ export default function CredentialsClient({ cases, quotes, logos, sales, copy, l
           {namingNames.map((item) => (
             <div
               key={item.name}
-              className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5 transition-all duration-300 hover:border-white/30 hover:bg-white/[0.08]"
+              className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5 transition duration-300 hover:border-white/30 hover:bg-white/[0.08]"
             >
               <p
                 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white group-hover:text-blue-400 transition-colors"

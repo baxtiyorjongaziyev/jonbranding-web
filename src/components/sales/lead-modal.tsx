@@ -1,11 +1,13 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Check } from 'lucide-react';
+import { Check, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { HoneypotField } from '@/components/ui/honeypot-field';
-import { generateEventId, getGaClientId, trackEvent, trackLead } from '@/lib/analytics';
+import { generateEventId, getGaClientId, trackContactClick, trackEvent, trackLead } from '@/lib/analytics';
+import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 import { isValidPhone, normalizePhone } from '@/lib/lead-contact';
 import { getSalesContent } from '@/lib/sales-content';
 import { getSalesFlow } from '@/lib/sales-flow';
@@ -265,6 +267,7 @@ export default function LeadModal({
         signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: name || 'Mijoz',
           phone: normalizedPhone,
           role: intent === 'consultation' ? `${flow.consultation} — ${finalServiceString}` : finalServiceString,
@@ -326,7 +329,21 @@ export default function LeadModal({
           </Dialog.Close>
 
           {done ? (
-            <button onClick={onClose} className="w-full rounded-full bg-black text-white font-semibold py-4 text-sm">{t.close}</button>
+            // Ariza yuborilgandan keyin darhol qilinadigan qadam: kutishni xohlamagan
+            // mijoz Telegram'da yozadi (konversiya auditi, K-7).
+            <div className="flex flex-col gap-3">
+              <a
+                href={TELEGRAM_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackContactClick('telegram', `${source}_lead_done`)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#2554FF] hover:bg-[#1D4ED8] text-white font-semibold py-4 text-sm transition-colors"
+              >
+                <Send className="h-4 w-4" aria-hidden="true" />
+                {flow.doneTelegram}
+              </a>
+              <button onClick={onClose} className="flex w-full items-center justify-center rounded-full border border-neutral-200 text-black font-semibold py-4 text-sm hover:bg-neutral-50 transition-colors">{t.close}</button>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <HoneypotField value={honeypot} onChange={setHoneypot} />
@@ -362,10 +379,10 @@ export default function LeadModal({
               <div className="flex flex-col gap-2 pt-1">
                 <div className="flex items-center justify-between">
                   <label id="tariflar-service-label" className="text-sm font-medium text-neutral-700">
-                    {lang === 'uz' ? 'Qaysi xizmatlar kerak?' : t.service}
+                    {t.servicesLabel}
                   </label>
                   <span className="text-[11px] text-neutral-400">
-                    {lang === 'uz' ? 'Bir nechtasini tanlash mumkin' : 'Multiple options allowed'}
+                    {t.multiSelectHint}
                   </span>
                 </div>
 
@@ -377,7 +394,7 @@ export default function LeadModal({
                       <label
                         key={opt.id}
                         className={cn(
-                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-3 text-xs sm:text-sm font-bold transition-all duration-200 select-none text-center',
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-3 text-xs sm:text-sm font-bold transition duration-200 select-none text-center',
                           checked
                             ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
                             : 'border-neutral-200 bg-neutral-50/70 text-neutral-800 hover:border-neutral-300 hover:bg-neutral-100'
@@ -407,7 +424,7 @@ export default function LeadModal({
                 <div className="grid grid-cols-2 gap-2 mt-1">
                   {isPresetCustom && (
                     <div className="col-span-2 flex items-center justify-between rounded-xl border border-black/80 bg-neutral-900 px-3.5 py-2.5 text-xs font-semibold text-white">
-                      <span className="truncate">Tanlangan: {presetService}</span>
+                      <span className="truncate">{t.selectedPrefix}: {presetService}</span>
                       <Check className="h-4 w-4 text-[#2ccc5a]" />
                     </div>
                   )}
@@ -418,7 +435,7 @@ export default function LeadModal({
                       <label
                         key={opt.id}
                         className={cn(
-                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition-all duration-200 select-none text-center',
+                          'relative flex cursor-pointer items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-medium transition duration-200 select-none text-center',
                           checked
                             ? 'border-black bg-black text-white shadow-sm ring-1 ring-black'
                             : 'border-neutral-200 bg-neutral-50/70 text-neutral-600 hover:border-neutral-300 hover:bg-neutral-100'
@@ -459,7 +476,7 @@ export default function LeadModal({
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60 transition-all hover:bg-neutral-800"
+                className="flex w-full items-center justify-center rounded-full bg-black text-white font-semibold py-4 text-sm text-center disabled:opacity-60 transition hover:bg-neutral-800"
               >
                 {sending ? t.sending : flow.submit}
               </button>

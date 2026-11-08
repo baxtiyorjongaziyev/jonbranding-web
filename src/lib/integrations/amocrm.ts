@@ -207,7 +207,7 @@ async function doRefresh(): Promise<TokenData> {
   } catch (refreshErr) {
     const envToken = getEnvAccessToken();
     if (envToken) {
-      console.warn('OAuth refresh failed, falling back to static AMOCRM_ACCESS_TOKEN from env:', refreshErr);
+      logger.warn('OAuth refresh failed, falling back to static AMOCRM_ACCESS_TOKEN from env', refreshErr);
       const fallback: TokenData = {
         access_token: envToken,
         refresh_token: refreshToken || '',
@@ -217,7 +217,7 @@ async function doRefresh(): Promise<TokenData> {
       return fallback;
     }
     if (current?.access_token && current.expires_at > Date.now()) {
-      console.warn('OAuth refresh failed, using still-valid stored token until', new Date(current.expires_at).toISOString());
+      logger.warn('OAuth refresh failed, using still-valid stored token', { until: new Date(current.expires_at).toISOString() });
       return current;
     }
     throw refreshErr;

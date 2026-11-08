@@ -86,7 +86,7 @@ const getAvatarImageUrl = (url?: string) => {
 
 const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Testimonial; labels: { play: string }; onPlay: () => void }) => {
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30">
+    <div className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30">
       <CardContent className="p-0 h-full flex flex-col">
         <div className="relative aspect-[9/16] overflow-hidden bg-[linear-gradient(135deg,#070b12,#122055_55%,#07323a)] flex-grow">
           <button
@@ -107,7 +107,7 @@ const VideoTestimonialCard = ({ testimonial, labels, onPlay }: { testimonial: Te
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
             
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-110 group-hover:bg-brand-blue border border-white/30">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] transition duration-500 group-hover:scale-110 group-hover:bg-brand-blue border border-white/30">
                 <PlayCircle className="h-8 w-8 ml-1" aria-hidden="true" />
               </span>
             </div>
@@ -157,7 +157,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
   };
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative">
+    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative">
       {isPlaying && <div className="absolute -top-20 -right-20 w-48 h-48 bg-brand-blue/10 rounded-full blur-3xl animate-pulse pointer-events-none" />}
       <audio ref={audioRef} src={testimonial.audioUrl} preload="none" onEnded={() => setIsPlaying(false)} />
       <div className="flex flex-grow flex-col justify-between relative z-10">
@@ -173,7 +173,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
             onClick={toggleAudio}
             aria-label={isPlaying ? labels.pause : labels.play}
             className={cn(
-              'mt-8 flex w-full items-center justify-between gap-3 rounded-2xl px-5 py-4 text-[13px] uppercase tracking-widest font-black transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue active:scale-[0.98]',
+              'mt-8 flex w-full items-center justify-between gap-3 rounded-2xl px-5 py-4 text-[13px] uppercase tracking-widest font-black transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue active:scale-[0.98]',
               isPlaying
                 ? 'bg-brand-blue text-white shadow-[0_10px_30px_rgba(37,99,235,0.3)] scale-[1.02]'
                 : 'bg-slate-50 text-slate-700 hover:bg-brand-blue hover:text-white border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-[0_10px_25px_rgba(37,99,235,0.25)]',
@@ -214,7 +214,7 @@ const AudioTestimonialCard = ({ testimonial, labels }: { testimonial: Testimonia
 
 const TextTestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative group">
+    <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-brand-line/50 bg-white p-7 shadow-[0_10px_40px_rgba(15,23,42,0.04)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] hover:border-brand-blue/30 relative group">
       <div className="absolute -top-10 -right-10 text-[120px] font-serif leading-none text-slate-50 opacity-50 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">"</div>
       <div className="flex flex-grow flex-col justify-between relative z-10">
         <div>
@@ -469,7 +469,7 @@ const TestimonialsClient = ({ testimonials, dictionary, lang }: { testimonials: 
                 type="button"
                 onClick={closeLightbox}
                 aria-label={lang === 'uz' ? 'Yopish' : 'Close'}
-                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/70 border border-white/10 text-white backdrop-blur-md transition-all hover:bg-slate-950/90 active:scale-95"
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/70 border border-white/10 text-white backdrop-blur-md transition hover:bg-slate-950/90 active:scale-95"
               >
                 <X className="h-5 w-5" />
               </button>

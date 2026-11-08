@@ -33,7 +33,50 @@ interface PortfolioListClientProps {
     naming: string;
     viewCase: string;
     resultsTitle: string;
+    ctaTitle: string;
+    ctaText: string;
+    ctaButton: string;
   };
+}
+
+/** Kamida shuncha keys ko'rsatilganda CTA chiqadi — bitta-ikkita keysli filtrda ortiqcha. */
+const CTA_MIN_PROJECTS = 6;
+/**
+ * Grid ichidagi CTA shuncha grid kartasidan keyin qo'yiladi: desktop'da 3 ustunli 3 to'liq qator.
+ * Birinchi keys (spotlight) grid'dan tashqarida, alohida qatorda — u hisobga kirmaydi, aks holda
+ * CTA uchinchi qatorni yarim qoldirardi.
+ */
+const CTA_AFTER = 9;
+
+// Portfolio ko'rayotgan mehmon eng "issiq" — unga keyingi qadamni taklif qilamiz
+// (docs/audits/2026-11-07-konversiya-audit.md, K-6).
+function PortfolioCta({ title, text, button, position }: { title: string; text: string; button: string; position: 'grid' | 'end' }) {
+  const open = () => {
+    window.dispatchEvent(
+      new CustomEvent('openContactModal', {
+        detail: { section: `portfolio_list_${position}`, source: 'portfolio_list', intent: 'consultation' },
+      }),
+    );
+  };
+  return (
+    <div
+      data-portfolio-cta={position}
+      className="flex flex-col gap-5 rounded-2xl bg-[#0A0B0E] p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8"
+    >
+      <div className="max-w-xl">
+        <p className="text-lg font-black leading-tight sm:text-xl">{title}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">{text}</p>
+      </div>
+      <button
+        type="button"
+        onClick={open}
+        className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-[#2554FF] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+      >
+        {button}
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </button>
+    </div>
+  );
 }
 
 function SpotlightCard({ children, className = '', ...props }: any) {
@@ -56,7 +99,7 @@ function SpotlightCard({ children, className = '', ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
-      className={`relative overflow-hidden rounded-[2.25rem] border border-[#E5E7EB] bg-white transition-all duration-500 hover:border-[#2554FF]/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-xl ${className}`}
+      className={`relative overflow-hidden rounded-[2.25rem] border border-[#E5E7EB] bg-white transition duration-500 hover:border-[#2554FF]/40 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.06)] hover:shadow-xl ${className}`}
       {...props}
     >
       {isFocused && (
@@ -191,7 +234,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                           </div>
                         )}
                         <Link href={`/${lang}/portfolio/${filteredProjects[0].slug}`}>
-                          <Button className="w-full bg-[#2554FF] hover:bg-[#1C46E6] text-white rounded-2xl py-4 font-bold text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[#2554FF]/25">
+                          <Button className="w-full bg-[#2554FF] hover:bg-[#1C46E6] text-white rounded-2xl py-4 font-bold text-sm tracking-wide transition duration-300 hover:shadow-lg hover:shadow-[#2554FF]/25">
                             {dictionary.viewCase}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
@@ -205,9 +248,9 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
               {filteredProjects.length > 1 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredProjects.slice(1).map((project, index) => (
+                    <React.Fragment key={project._id}>
                     <motion.div
                       layout
-                      key={project._id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
@@ -236,7 +279,7 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                             <p className="mt-2 text-sm text-[#4B5563] line-clamp-2 leading-relaxed">{project.description}</p>
                           </div>
                           <Link href={`/${lang}/portfolio/${project.slug}`} className="block">
-                            <Button className="w-full bg-[#F8F9FB] hover:bg-[#2554FF] text-[#0A0B0E] hover:text-white border border-[#E5E7EB] hover:border-[#2554FF] rounded-xl transition-all duration-300 text-xs font-bold tracking-wide">
+                            <Button className="w-full bg-[#F8F9FB] hover:bg-[#2554FF] text-[#0A0B0E] hover:text-white border border-[#E5E7EB] hover:border-[#2554FF] rounded-xl transition duration-300 text-xs font-bold tracking-wide">
                               {dictionary.viewCase}
                               <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                             </Button>
@@ -244,8 +287,18 @@ export default function PortfolioListClient({ projects, lang, dictionary }: Port
                         </div>
                       </SpotlightCard>
                     </motion.div>
+                    {index + 1 === CTA_AFTER && filteredProjects.length - 1 > CTA_AFTER && (
+                      <div className="sm:col-span-2 lg:col-span-3">
+                        <PortfolioCta title={dictionary.ctaTitle} text={dictionary.ctaText} button={dictionary.ctaButton} position="grid" />
+                      </div>
+                    )}
+                    </React.Fragment>
                   ))}
                 </div>
+              )}
+
+              {filteredProjects.length >= CTA_MIN_PROJECTS && (
+                <PortfolioCta title={dictionary.ctaTitle} text={dictionary.ctaText} button={dictionary.ctaButton} position="end" />
               )}
             </div>
           )}

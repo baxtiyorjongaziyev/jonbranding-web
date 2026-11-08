@@ -1,6 +1,12 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
+import type { ReactNode } from 'react';
 import { getSalesContent } from '@/lib/sales-content';
 import { getSalesFlow } from '@/lib/sales-flow';
+
+type LinkProps = { href: string; className?: string; children: ReactNode };
+
+// Sahifa ichida oddiy <a>: brauzer `hashchange` chiqaradi va /narxlar tanlangan xizmat qatorini ochadi.
+const PlainLink = ({ href, className, children }: LinkProps) => <a href={href} className={className}>{children}</a>;
 
 export default function PriceOverview({ lang, local = false }: { lang: string; local?: boolean }) {
   const content = getSalesContent(lang);
@@ -12,7 +18,9 @@ export default function PriceOverview({ lang, local = false }: { lang: string; l
     { label: flow.packagingPath, item: services.find((item) => item.id === 'packaging')!, anchor: 'service-packaging' },
     { label: flow.newPath, item: content.packages[2], anchor: 'packages' },
   ];
-  const href = (anchor: string) => `${local ? '' : `/${lang}/narxlar`}#${anchor}`;
+  const base = local ? '' : `/${lang}/narxlar`;
+  const href = (anchor: string) => `${base}#${anchor}`;
+  const Link = local ? PlainLink : NextLink;
   return (
     <section aria-label={flow.choose} className="mx-auto max-w-5xl px-5 py-12 text-left sm:px-8">
       <h2 className="mb-6 text-2xl font-bold tracking-tight text-neutral-900">{flow.choose}</h2>

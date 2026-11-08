@@ -9,7 +9,6 @@ const ClientEnhancements = dynamic(() => import('@/components/layout/client-enha
 });
 
 type ClientEnhancementsLoaderProps = {
-  leadMagnetDictionary?: any;
   headerDictionary?: any;
   pwaDictionary?: any;
   lang?: string;

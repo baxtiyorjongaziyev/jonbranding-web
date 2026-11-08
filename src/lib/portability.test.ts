@@ -34,6 +34,15 @@ describe('hosting portability', () => {
     expect(existsSync('src/middleware.ts')).toBe(true);
   });
 
+  // Free tarifda 10 ms CPU limiti bor; Next 16.4.1 uni oshirib 500 bergan. 2026-11-08 dan
+  // egasi qarori bilan 16.4.5 (xavfsizlik tuzatishlari). `^` bilan `npm install` jimgina
+  // yangi versiyani olib kelardi — har yangilash deploydan oldin CPU tekshiruvi bilan
+  // (docs/KOCHISH.md).
+  it("next aniq versiyada mahkamlangan (^ yoki ~ yo'q)", () => {
+    const pkg = JSON.parse(read('package.json'));
+    expect(pkg.dependencies.next).toMatch(/^\d+\.\d+\.\d+$/);
+  });
+
   it('wrangler.jsonc: rasm binding, domenlar va worker nomi', () => {
     const w = read('wrangler.jsonc');
     expect(w).toContain('"IMAGES"');

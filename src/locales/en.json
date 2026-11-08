@@ -752,8 +752,8 @@
     "magnets": [
       {
         "id": "pdf",
-        "title": "Free PDF Checklist",
-        "subtitle": "7 biggest branding mistakes",
+        "title": "Branding checklist: 7 common mistakes",
+        "subtitle": "Tick the items — in 2 minutes you’ll see which mistakes your brand has.",
         "description": "Learn which mistakes to avoid and get a practical guide to analyzing your brand.",
         "cta": "View Checklist",
         "href": "/{lang}/checklist"
@@ -1919,7 +1919,7 @@
     "hero_title_end": "in one system.",
     "hero_description": "From business cards to packaging, from Instagram to banners, your brand looks consistent and credible. ",
     "hero_description_bold": "We define the need first, then build one practical visual system.",
-    "hero_primary_cta": "Discuss the project",
+    "hero_primary_cta": "Free 20-minute consultation",
     "hero_secondary_cta": "View our work",
     "services_title": "A visual identity\nthat works.",
     "services_lede": "Logo, identity, brandbook and packaging. We choose the services you need; naming and trademark registration can be added separately.",
@@ -2560,14 +2560,17 @@
   },
   "salesFlow": {
     "consultation": "Free 20-minute consultation",
+    "portfolioCtaTitle": "Want this kind of result for your business?",
+    "portfolioCtaText": "In 20 minutes we’ll look at your situation and tell you which service you need. Free.",
     "cta": "Book a consultation",
     "prices": "Services and prices",
     "team": "Contact the team",
     "privacy": "Your number is used only to contact you.",
     "consultationDesc": "Discuss your needs and choose a suitable service. Our team will contact you to arrange a time.",
     "projectDesc": "Our team will contact you about your chosen service. Scope, price and timeline are agreed before work starts.",
-    "submit": "Request a call",
-    "done": "Your request was received. Our team will contact you to arrange a conversation.",
+    "submit": "Book a consultation",
+    "done": "Your request was received. We will call you to arrange a time. Don’t want to wait? Message us on Telegram now.",
+    "doneTelegram": "Message on Telegram",
     "manifest": {
       "label": "— Approach",
       "sub": "New business or rebranding: understand the need before designing.",
@@ -2584,7 +2587,7 @@
       "headingEm": "to ready files.",
       "subtitle": "Scope, timeline and deliverables are agreed in the contract.",
       "exampleLabel": "Stage outcome",
-      "cta": "Discuss your project",
+      "cta": "Free 20-minute consultation",
       "note": "50% at contract · 50% at delivery",
       "steps": [
         {
@@ -2711,5 +2714,10 @@
     "identityPath": "A consistent identity",
     "packagingPath": "Product packaging",
     "newPath": "For a new business"
+  },
+  "priceStrip": {
+    "eyebrow": "Open pricing",
+    "title": "Price and timeline known upfront",
+    "link": "All prices and packages"
   }
 }
