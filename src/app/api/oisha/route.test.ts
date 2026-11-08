@@ -13,14 +13,43 @@ vi.mock('next/server', async (importOriginal) => ({
   after: (task: () => unknown) => task(),
 }));
 
-const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true }), { status: 200 }));
+const defaultFetch = async () => new Response(JSON.stringify({ ok: true }), { status: 200 });
+const fetchMock = vi.fn<typeof fetch>(defaultFetch);
 
 beforeEach(() => {
+  fetchMock.mockReset();
+  fetchMock.mockImplementation(defaultFetch);
   delete process.env.OISHA_API_URL;
   delete process.env.OISHA_SECRET_KEY;
   process.env.TELEGRAM_BOT_TOKEN = 'bot-token';
   process.env.TELEGRAM_CHAT_ID = '-100';
   vi.stubGlobal('fetch', fetchMock);
+});
+
+describe('Oisha service authentication', () => {
+  beforeEach(() => {
+    process.env.OISHA_API_URL = 'https://oisha.example';
+    process.env.OISHA_SECRET_KEY = 'test-service-key';
+    fetchMock.mockImplementation(async (_url, init) => {
+      if (new Headers(init?.headers).get('authorization') !== 'Bearer test-service-key') {
+        return new Response(JSON.stringify({ detail: 'Unauthorized' }), { status: 401 });
+      }
+      return new Response(JSON.stringify({ response: 'authenticated', history: [] }), { status: 200 });
+    });
+  });
+
+  it('authenticates chat messages at the backend service boundary', async () => {
+    const response = await send({ user_id: 'web_auth_test', text: 'Salom' });
+    expect(response.status).toBe(200);
+    expect((await response.json()).response).toBe('authenticated');
+  });
+
+  it('authenticates chat history at the same backend boundary', async () => {
+    const { GET } = await import('./route');
+    const response = await GET(new Request('http://localhost/api/oisha?user_id=web_auth_test'));
+    expect(response.status).toBe(200);
+    expect((await response.json()).history).toEqual([]);
+  });
 });
 afterEach(() => {
   delete process.env.TELEGRAM_BOT_TOKEN;

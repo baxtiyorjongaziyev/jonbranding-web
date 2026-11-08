@@ -99,7 +99,7 @@ export async function GET(request: Request) {
     try {
         const res = await fetch(
             `${url}/api/chat/history/${userId}`,
-            { headers: { 'X-Secret-Key': secret }, signal: AbortSignal.timeout(10_000) }
+            { headers: { 'X-Secret-Key': secret, Authorization: `Bearer ${secret}` }, signal: AbortSignal.timeout(10_000) }
         );
         const data = await res.json();
         return NextResponse.json(data, { status: res.ok ? 200 : res.status });
@@ -136,6 +136,7 @@ export async function POST(request: Request) {
             headers: {
                 'Content-Type': 'application/json',
                 'X-Secret-Key': secret,
+                Authorization: `Bearer ${secret}`,
             },
             body: JSON.stringify({ user_id, text: cleanText }),
             signal: AbortSignal.timeout(10_000),

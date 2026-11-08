@@ -27,8 +27,8 @@ export function Eyebrow({ children, light }: { children: React.ReactNode; light?
   return (
     <motion.p
       variants={rise}
-      className="text-[10px] font-medium uppercase sm:text-[11px]"
-      style={{ ...mono, letterSpacing: '0.18em', color: light ? 'rgba(255,255,255,.5)' : 'rgba(11,11,12,.45)' }}
+      className="text-xs font-semibold uppercase tracking-[0.2em] sm:text-sm"
+      style={{ ...mono, color: light ? 'rgba(255,255,255,.65)' : 'rgba(11,11,12,.6)' }}
     >
       {children}
     </motion.p>
@@ -98,9 +98,12 @@ export function Deck({
   setModalOpen,
   presetService,
   source = 'credentials',
+  lang = 'uz',
 }: {
   slides: DeckSlide[];
   source?: string;
+  /** Ariza oynasi shu tilda ochiladi. */
+  lang?: string;
   modalOpen: boolean;
   setModalOpen: (open: boolean) => void;
   presetService: string;
@@ -213,11 +216,11 @@ export function Deck({
           .cred-slide { --cred-pt: 0.875rem; --cred-pb: 3.25rem; }
         }
 
-        .cred-display-lg { font-size: clamp(1.75rem, 4.2vw + 0.4rem, 4rem); }
-        .cred-display-xl { font-size: clamp(2rem, 5.6vw + 0.5rem, 5.75rem); }
+        .cred-display-lg { font-size: clamp(2.1rem, 4.8vw + 0.4rem, 4.5rem); }
+        .cred-display-xl { font-size: clamp(2.5rem, 6.2vw + 0.5rem, 6rem); }
         @media (max-height: 560px) {
-          .cred-display-lg { font-size: clamp(1.35rem, 3.6vh + 0.5rem, 2.35rem); }
-          .cred-display-xl { font-size: clamp(1.5rem, 4.6vh + 0.5rem, 3rem); }
+          .cred-display-lg { font-size: clamp(1.5rem, 4vh + 0.5rem, 2.6rem); }
+          .cred-display-xl { font-size: clamp(1.75rem, 5vh + 0.5rem, 3.2rem); }
         }
 
         /* Uzun ro'yxatli slaydlar kichik ekranda zichroq bo'ladi. */
@@ -225,9 +228,9 @@ export function Deck({
           .cred-row { padding-top: 0.7rem; padding-bottom: 0.7rem; }
         }
 
-        /* Mono yorliqlar telefonda 10px da juda mayda — biroz kattalashtiramiz. */
+        /* Kichik ekranda shriftlarni mutanosib saqlash */
         @media (max-width: 480px) {
-          .cred-slide [class*="text-[10px]"] { font-size: 11px; }
+          .cred-slide [class*="text-[10px]"] { font-size: 12px; }
         }
 
         /* Nusxa ekranda ko'rinmaydi, lekin joylashuvi hisoblanadi —
@@ -333,21 +336,21 @@ export function Deck({
         style={{ backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', maskImage: 'linear-gradient(to top, #000 55%, transparent)', WebkitMaskImage: 'linear-gradient(to top, #000 55%, transparent)' }}
       />
       <div className="cred-chrome pointer-events-none absolute inset-x-0 bottom-0 z-30 px-5 pb-5 sm:px-8 sm:pb-6">
-        <div className="pointer-events-auto mx-auto flex max-w-6xl items-center justify-between gap-4">
+        <div className="pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-4">
           <span
-            className="rounded-full px-3 py-1.5 text-[10px] uppercase backdrop-blur-sm"
-            style={{ ...mono, ...nums, letterSpacing: '0.14em', background: 'rgba(11,11,12,.55)', color: 'rgba(255,255,255,.75)' }}
+            className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider backdrop-blur-md sm:text-sm"
+            style={{ ...mono, ...nums, background: 'rgba(11,11,12,.7)', color: 'rgba(255,255,255,.9)', border: '1px solid rgba(255,255,255,.1)' }}
           >
             {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')} — {current.label}
           </span>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={() => setPrinting(true)}
               disabled={printing}
-              className="rounded-full px-3.5 py-2 text-[10px] uppercase backdrop-blur-sm transition-opacity hover:opacity-75"
-              style={{ ...mono, letterSpacing: '0.12em', background: 'rgba(11,11,12,.55)', color: 'rgba(255,255,255,.75)' }}
+              className="rounded-full px-4 py-2.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-md transition-opacity hover:opacity-85"
+              style={{ ...mono, background: 'rgba(11,11,12,.7)', color: 'rgba(255,255,255,.9)', border: '1px solid rgba(255,255,255,.1)' }}
             >
               PDF{printing ? ' ···' : ''}
             </button>
@@ -356,8 +359,8 @@ export function Deck({
               onClick={() => go(index - 1)}
               disabled={index === 0}
               aria-label="Oldingi slayd"
-              className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-opacity hover:opacity-75 disabled:opacity-25"
-              style={{ background: 'rgba(11,11,12,.55)', color: '#fff' }}
+              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full backdrop-blur-md transition-opacity hover:opacity-85 disabled:opacity-25 text-base sm:text-lg"
+              style={{ background: 'rgba(11,11,12,.7)', color: '#fff', border: '1px solid rgba(255,255,255,.1)' }}
             >
               ←
             </button>
@@ -366,8 +369,8 @@ export function Deck({
               onClick={() => go(index + 1)}
               disabled={index === total - 1}
               aria-label="Keyingi slayd"
-              className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-opacity hover:opacity-75 disabled:opacity-25"
-              style={{ background: 'rgba(11,11,12,.55)', color: '#fff' }}
+              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full backdrop-blur-md transition-opacity hover:opacity-85 disabled:opacity-25 text-base sm:text-lg"
+              style={{ background: 'rgba(11,11,12,.7)', color: '#fff', border: '1px solid rgba(255,255,255,.1)' }}
             >
               →
             </button>
@@ -380,6 +383,7 @@ export function Deck({
         onClose={() => setModalOpen(false)}
         presetService={presetService}
         source={source}
+        lang={lang}
       />
     </div>
   );

@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useScroll, useMotionValueEvent, motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, Phone, Send, Sparkles, Home } from 'lucide-react';
+import { MessageSquare, Phone, Send } from 'lucide-react';
+import { OishaOrb } from '@/components/ui/oisha-orb';
 import { cn } from '@/lib/utils';
 import { trackContactClick, trackEvent } from '@/lib/analytics';
 
@@ -19,11 +20,6 @@ interface MobileNavBarProps {
     consultation_short?: string;
   };
 }
-
-const NAV_SPRING = { type: 'spring', stiffness: 420, damping: 36, mass: 0.8 };
-
-const iconBtn =
-  'press-effect flex min-w-0 flex-1 flex-col items-center justify-center gap-1.5 rounded-[14px] py-2.5 text-white/40 transition-colors duration-150 active:bg-white/[0.06] hover:bg-white/[0.04] hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 
 export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
   // Panel scroll paytida yashirinmaydi: mobilda Oisha formasining doim ko'rinadigan
@@ -47,7 +43,7 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
     telegram: dictionary?.telegram || dictionary?.contact_by_telegram || 'Telegram',
     consultation: dictionary?.consultation || dictionary?.free_consultation || 'Brand Audit',
     consultationShort: dictionary?.consultation_short || (lang === 'uz' ? 'Audit' : 'Audit'),
-    ai: dictionary?.ai || 'AI',
+    ai: dictionary?.ai || 'Oisha AI',
   };
 
   const openConsultation = () => {
@@ -145,12 +141,10 @@ export default function MobileNavBar({ lang, dictionary }: MobileNavBarProps) {
               type="button"
               onClick={toggleOisha}
               aria-label={labels.ai}
-              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-300 transition-colors duration-150 hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
+              className="mobile-press flex flex-1 flex-col items-center justify-center gap-1 py-3 text-slate-300 transition-colors duration-150 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:bg-white/5"
             >
               <div className="relative flex h-6 w-6 items-center justify-center">
-                <Sparkles className="h-[18px] w-[18px] text-indigo-400" aria-hidden="true" />
-                {/* Live indicator dot */}
-                <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-indigo-400 ring-1 ring-[#070b14]" />
+                <OishaOrb size="sm" decorative />
               </div>
               <span className="text-[10px] font-bold leading-none tracking-wide">{labels.ai}</span>
             </button>

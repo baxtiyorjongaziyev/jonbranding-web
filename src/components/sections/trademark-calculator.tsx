@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { Download, Loader2, Lock, Minus, Plus } from 'lucide-react';
-import { downloadEstimateImage, type EstimateSection } from '@/lib/patent-estimate-image';
+import { Download, Loader2, Lock, Minus, Plus, Send } from 'lucide-react';
+import { downloadEstimateImage, shareEstimateImage, type EstimateImageData, type EstimateSection } from '@/lib/patent-estimate-image';
 import { useToast } from '@/hooks/use-toast';
 import { event as gtagEvent } from '@/lib/analytics/gtag';
 import { motion } from 'framer-motion';
@@ -266,7 +266,7 @@ export default function TrademarkCalculator({
     }
   };
 
-  const handleDownload = () => {
+  const buildEstimate = (): EstimateImageData => {
     const t = translations ?? {};
     const cur = t.currency ?? 'UZS';
     const opt = (list: any[] | undefined, i: number, fb: string) => list?.[i]?.label || fb;
@@ -298,7 +298,7 @@ export default function TrademarkCalculator({
       watchFields.isYuridik ? opt(t.personTypeOptions, 1, 'Yuridik') : opt(t.personTypeOptions, 0, 'Jismoniy'),
       watchFields.speed === 'tez' ? opt(t.speedOptions, 1, 'Tez') : opt(t.speedOptions, 0, 'Oddiy'),
     ];
-    downloadEstimateImage({
+    return {
       title: t.imageTitle ?? 'Patent hisob-kitobi',
       client: watchFields.name ? `${t.imageClientLabel ?? 'Mijoz'}: ${watchFields.name}` : '',
       brand: watchFields.brand ? `${t.imageBrandLabel ?? 'Brend'}: ${watchFields.brand}` : '',
@@ -309,8 +309,11 @@ export default function TrademarkCalculator({
       sections,
       footer: `${t.imageFooter ?? ''} ${t.importantNoteBHM?.replace('{bhm}', BHM.toLocaleString('fr-FR')) ?? ''}`.trim(),
       fileName: `patent-${(watchFields.brand || 'hisob').replace(/[\s/\\:*?"<>|]+/g, '-').toLowerCase()}.png`,
-    });
+    };
   };
+
+  const handleDownload = () => downloadEstimateImage(buildEstimate());
+  const handleShare = () => shareEstimateImage(buildEstimate());
 
   const resetForm = () => {
     setSuccess(false);
@@ -403,7 +406,10 @@ export default function TrademarkCalculator({
                   <>
                     <FormField control={form.control} name="brand" render={({ field }) => ( <FormItem><FormLabel>{translations?.managerBrandLabel ?? 'Brend nomi'}</FormLabel><FormControl><Input placeholder={translations?.brandNamePlaceholder ?? ''} {...field} /></FormControl></FormItem> )} />
                     <FormField control={form.control} name="name" render={({ field }) => ( <FormItem><FormLabel>{translations?.managerClientLabel ?? 'Mijoz ismi'}</FormLabel><FormControl><Input {...field} /></FormControl></FormItem> )} />
-                    <Button type="button" className="w-full text-base py-6" onClick={handleDownload}>
+                    <Button type="button" className="w-full text-base py-6" onClick={handleShare}>
+                      <Send className="mr-2 h-4 w-4" /> {translations?.shareImageButton ?? 'Mijozga yuborish'}
+                    </Button>
+                    <Button type="button" variant="outline" className="w-full" onClick={handleDownload}>
                       <Download className="mr-2 h-4 w-4" /> {translations?.downloadImageButton ?? 'Rasm qilib yuklab olish'}
                     </Button>
                   </>

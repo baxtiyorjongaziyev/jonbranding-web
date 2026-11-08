@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { NextRequest } from 'next/server';
 import { unstable_doesMiddlewareMatch } from 'next/experimental/testing/server';
-import { proxy, config } from './proxy';
+import { middleware as proxy, config } from './middleware';
 
 function requestFor(url: string) {
   return new NextRequest(new Request(url, { headers: { 'accept-language': 'uz' } }));

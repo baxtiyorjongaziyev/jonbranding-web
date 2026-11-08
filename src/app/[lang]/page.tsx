@@ -80,6 +80,7 @@ export default async function Page(props: Props) {
   const homeDictionary = {
     trustedBy: { eyebrow: dictionary.trustedBy.eyebrow, pause: dictionary.trustedBy.pause, resume: dictionary.trustedBy.resume },
     atelier: dictionary.atelier,
+    patentCta: dictionary.patentCta,
     beforeAfter: dictionary.beforeAfter,
     processVideo: dictionary.processVideo,
     founder: dictionary.founder,

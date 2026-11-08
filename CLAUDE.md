@@ -40,6 +40,12 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
    - `Instrument Serif` kursivida sun'iy qalinlashuv (faux/synthetic bold) taqiqlanadi.
    - O'zgarishlardan keyin `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) va `npm run verify:fast` tekshirilishi shart.
 
+## Hosting
+
+Production — **Cloudflare Workers** (Vercel 2026-11-05'dan to'xtatilgan, `402`). Deploy: `npx wrangler deploy`.
+**Ko'chish/deploy'dan oldin `docs/KOCHISH.md` ni o'qing** (secret'lar, DNS tartibi, tuzoqlar). `src/lib/portability.test.ts` qo'riqchisi
+`firebase-admin` static import, `proxy.ts` va `@libsql/client` (non-web)ni taqiqlaydi.
+
 ## Muhim ogohlantirishlar
 - `git push` → HTTP 403 (local proxy bloklaydi). MCP `mcp__github__push_files` ishlatish
 - `src/locales/uz.json` 74KB — to'liq o'qima, `grep` ishlat
@@ -59,6 +65,17 @@ Eski manzillar `/tariflar` va `/presentation` 308 bilan yo'naltiriladi.
 
 **Tegishdan oldin `docs/NARXLAR.md` ni o'qing** — barcha narxlar, paket tarkibi,
 kafolatlar va egasining uslub talablari o'sha yerda.
+
+## Agentlik raqamlari
+
+Yil (2018-yil 27-noyabrdan), tajriba, mijoz (600+) va loyiha (1200+) soni — faqat
+`src/lib/company-facts.ts` dan. Lug'atda `{{years}}`, `{{clients}}`, `{{projects}}`, `{{founded}}`.
+**Batafsil: `docs/FAKTLAR.md`.**
+
+## Keys nomlari
+
+Format: `{Brend} — {ish turi}` (masalan `Rash Milk — qadoq dizayni`), kod `src/lib/case-naming.ts`.
+**Batafsil: `docs/KEYS-NOMLARI.md`.**
 
 ## Arxitektura qarorlari (sessiya xotirasi)
 Kelajakdagi sessiyalar kontekstni qayta so'ramasligi uchun asosiy qarorlar:

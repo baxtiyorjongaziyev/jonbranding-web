@@ -8,9 +8,13 @@ type Props = {
   path: string;
   name: string;
   description: string;
+  /** Sahifada ko'rinadigan savol-javoblar — FAQPage sifatida beriladi (AEO). */
+  faqs?: { q: string; a: string }[];
+  /** Savol-javoblar tili; xizmat sahifalari hozircha faqat o'zbekcha. */
+  faqLang?: Locale;
 };
 
-export default function ServiceJsonLd({ lang, path, name, description }: Props) {
+export default function ServiceJsonLd({ lang, path, name, description, faqs, faqLang = 'uz' }: Props) {
   const url = getLocalizedAbsoluteUrl(SITE_URL, lang, path);
   const homeLabel =
     lang === 'uz' ? 'Bosh sahifa' :
@@ -63,6 +67,21 @@ export default function ServiceJsonLd({ lang, path, name, description }: Props) 
           },
         ],
       },
+      ...(faqs?.length
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': `${url}#faq`,
+              inLanguage: faqLang,
+              about: { '@id': `${url}#service` },
+              mainEntity: faqs.map((f) => ({
+                '@type': 'Question',
+                name: f.q,
+                acceptedAnswer: { '@type': 'Answer', text: f.a },
+              })),
+            },
+          ]
+        : []),
     ],
   };
 

@@ -165,6 +165,17 @@ export default function PatentClient() {
           <motion.p variants={rise} className="mt-8 text-[13px] leading-relaxed" style={{ color: 'rgba(255,255,255,.5)' }}>
             Narxga davlat bojlari kirmaydi — ular alohida to‘lanadi. Tekshiruv: 880 000 so‘m (1 sinf), har qo‘shimcha sinf +440 000 so‘m.
           </motion.p>
+          <motion.div variants={rise} className="cred-no-print mt-6">
+            <a
+              href="/patent-menejer"
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors hover:bg-[#1D4ED8]"
+              style={{ background: '#2554FF', color: '#fff' }}
+            >
+              Davlat boji bilan aniq hisob — kalkulyator ↗
+            </a>
+          </motion.div>
         </Slide>
       ),
     },

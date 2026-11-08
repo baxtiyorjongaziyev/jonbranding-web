@@ -23,6 +23,8 @@
     "packaging_design_desc": "吸引人的设计，使您的产品在货架上脱颖而出。",
     "patent": "商标注册",
     "patent_desc": "将您的品牌名称注册为商标。",
+    "patent_calculator": "商标费用计算器",
+    "patent_calculator_desc": "30秒免费计算商标注册费用。",
     "packaging_design_simple": "在货架上销售产品的吸引人的包装设计。",
     "services_and_prices": "服务与价格",
     "services_and_prices_desc": "构建您自己的服务包并立即获取价格。",
@@ -50,7 +52,7 @@
   },
   "homeSeo": {
     "title": "标志与企业形象设计 — Jon.Branding | 塔什干",
-    "description": "标志、品牌手册与包装设计。服务150多个品牌，拥有6年经验，为企业打造统一且可信的品牌形象。",
+    "description": "标志、品牌手册与包装设计。服务{{clients}}客户，拥有{{years}}年经验，为企业打造统一且可信的品牌形象。",
     "keywords": [
       "塔什干标志设计",
       "企业形象设计",
@@ -555,9 +557,9 @@
     "clients": "满意的客户",
     "recommend": "客户推荐我们",
     "detail": "Jon.Branding 团队不仅仅是设计师。我们汇集了**市场营销和心理学**领域的专家。每个项目都经过三阶段质量控制。",
-    "projects_val": "1000+",
+    "projects_val": "{{projects}}",
     "experience_val": "9+",
-    "clients_val": "500+",
+    "clients_val": "{{clients}}",
     "recommend_val": "90%"
   },
   "trustedBy": {
@@ -568,11 +570,11 @@
     "subtitle": "我们帮助品牌看起来更有价值、更清晰、更易于被选择。",
     "metrics": [
       {
-        "value": "150+",
+        "value": "{{projects}}",
         "label": "项目"
       },
       {
-        "value": "9年",
+        "value": "{{years}}年",
         "label": "经验"
       },
       {
@@ -661,7 +663,7 @@
     "points": [
       {
         "icon": "Medal",
-        "text": "150+ 个品牌和视觉项目"
+        "text": "{{projects}} 个品牌和视觉项目"
       },
       {
         "icon": "Globe",
@@ -1187,7 +1189,36 @@
     "calculator_cta_button": "前往专利计算器"
   },
   "patentCalculatorPage": {
-    "seoTitle": "免费商标费用计算器 | Jon.Branding",
+    "faq": {
+      "title": "常见问题",
+      "items": [
+        {
+          "q": "注册商标需要多少钱？",
+          "a": "查询费用为 {check} 苏姆（1 个类别，每增加一个类别 {addon}）。注册费用：普通程序 {standard} 苏姆，加急程序 {express} 苏姆。国家规费不包含在内，需另行支付。上方计算器可按类别数量计算准确金额。"
+        },
+        {
+          "q": "专利和商标是一回事吗？",
+          "a": "人们说品牌“专利”时，通常指注册名称或标志，正式称为“商标”。发明专利是另一套程序。本计算器估算的是商标（品牌名称和标志）的保护费用。"
+        },
+        {
+          "q": "多久能拿到证书？",
+          "a": "普通程序约 {standardDuration}，加急程序 {expressDuration}。在我们为客户取得的 {count} 份证书中，最快的用时 {fastest} 天。"
+        },
+        {
+          "q": "价格包含国家规费吗？",
+          "a": "不包含。国家规费按司法部收费标准另行支付。计算器会将其计入预估总额，我们的服务费单独列出。"
+        },
+        {
+          "q": "什么是类别？我需要几个？",
+          "a": "商标在您从国际尼斯分类 45 个类别中选定的类别内受保护：例如服装为第 25 类，咖啡馆和餐厅为第 43 类。需要几个类别，我们会在查询时根据您的业务一起确定。"
+        },
+        {
+          "q": "证书有效期多少年？",
+          "a": "自申请提交之日起 10 年，之后可再续展 10 年。"
+        }
+      ]
+    },
+    "seoTitle": "专利费用计算器：乌兹别克斯坦商标注册 | Jon.Branding",
     "seoDescription": "30秒内计算商标注册费用。国家费用+服务费—精确数字。",
     "metadata": {
       "title": "商标注册计算器",
@@ -1259,6 +1290,7 @@
       "managerClientLabel": "客户姓名（可选）",
       "managerBrandLabel": "品牌名称（可选）",
       "downloadImageButton": "下载为图片",
+      "shareImageButton": "发送给客户",
       "imageTitle": "商标注册 — 费用估算",
       "imageClientLabel": "客户",
       "imageBrandLabel": "品牌",
@@ -1547,6 +1579,12 @@
     "title": "Jon.Branding | 专业品牌设计机构",
     "description": "为您的企业提供命名、标志设计和品牌手册 — Jon.Branding。"
   },
+  "patentCta": {
+    "eyebrow": "商标 · 免费计算器",
+    "title": "您的品牌受保护了吗？",
+    "sub": "在别人抢先注册您的名称之前，30秒了解商标注册费用。",
+    "button": "计算费用"
+  },
   "atelier": {
     "nav": [
       {
@@ -1612,7 +1650,7 @@
       {
         "n": "240",
         "s": "+",
-        "l": "已完成诊断 · 2019—2026"
+        "l": "已完成诊断 · {{founded}}—2026"
       },
       {
         "n": "3.2",
@@ -1856,10 +1894,10 @@
       },
       {
         "q": "如何付款以及是否有保证？",
-        "a": "付款方式：Payme、Click或银行转账。全面诊断费用：50%预付，50%在演示时支付。法人实体将签订合同。保证：如果报告中未发现任何有益建议 — 我们将100%退款。6年来零案例。"
+        "a": "付款方式：Payme、Click或银行转账。全面诊断费用：50%预付，50%在演示时支付。法人实体将签订合同。保证：如果报告中未发现任何有益建议 — 我们将100%退款。7年多来零案例。"
       }
     ],
-    "hero_eyebrow": "中亚 · 品牌工作室 · 成立于 2019 年",
+    "hero_eyebrow": "中亚 · 品牌工作室 · 成立于 {{founded}} 年",
     "hero_pill": "新套餐现已推出",
     "hero_title": "您的品牌\n实际上\n正在损失多少？",
     "hero_title_alt": "正在损失多少？",
@@ -1963,7 +2001,7 @@
     "footer_ask": "您已浏览至页面底部——\n有疑问吗？",
     "footer_write_tg": "在 Telegram 上留言 →",
     "footer_call_phone": "致电",
-    "footer_about": "中亚品牌工作室。自 2019 年以来，我们致力于在客户心中留下深刻的业务印象。",
+    "footer_about": "中亚品牌工作室。自 {{founded}} 年以来，我们致力于在客户心中留下深刻的业务印象。",
     "footer_pages_title": "页面",
     "footer_contact_title": "联系方式",
     "footer_office_title": "办公室",

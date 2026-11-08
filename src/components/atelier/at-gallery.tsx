@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { portfolioYear } from '@/lib/portfolio-presentation';
+import { CASE_CATEGORY_LABELS, caseBrandName, caseCategoryLabel } from '@/lib/case-naming';
 
 export interface ATGalleryProject {
   _id: string;
@@ -30,46 +31,7 @@ export interface ATGalleryProps {
 
 const TILE_CLASSES = ['t-1', 't-2', 't-3', 't-4', 't-5'];
 
-const CATEGORY_LABELS: Record<string, Record<string, string>> = {
-  uz: {
-    'brand-strategy': 'Brend-strategiya',
-    'logo-design': 'Logotip dizayni',
-    brandbook: 'Brendbuk',
-    'corporate-style': 'Firma uslubi',
-    packaging: 'Qadoq dizayni',
-    naming: 'Neyming',
-  },
-  ru: {
-    'brand-strategy': 'Бренд-стратегия',
-    'logo-design': 'Дизайн логотипа',
-    brandbook: 'Брендбук',
-    'corporate-style': 'Фирменный стиль',
-    packaging: 'Дизайн упаковки',
-    naming: 'Нeyming',
-  },
-  en: {
-    'brand-strategy': 'Brand Strategy',
-    'logo-design': 'Logo Design',
-    brandbook: 'Brandbook',
-    'corporate-style': 'Corporate Style',
-    packaging: 'Packaging Design',
-    naming: 'Naming',
-  },
-  zh: {
-    'brand-strategy': '品牌战略',
-    'logo-design': '标志设计',
-    brandbook: '品牌手册',
-    'corporate-style': '企业风格',
-    packaging: '包装设计',
-    naming: '命名',
-  },
-};
-
-function getCategoryLabel(category: string | undefined, lang: string): string {
-  if (!category) return '';
-  const labels = CATEGORY_LABELS[lang] || CATEGORY_LABELS.uz;
-  return labels[category] || category;
-}
+const getCategoryLabel = caseCategoryLabel;
 
 function getFirstResult(project: ATGalleryProject): string {
   if (project.results && project.results.length > 0) {
@@ -86,7 +48,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
     .map((p, i) => ({
       cls: TILE_CLASSES[i % TILE_CLASSES.length],
       img: p.coverImage,
-      name: p.title.split(':')[0],
+      name: caseBrandName(p.title),
       yr: portfolioYear(p.publishedAt),
       city: p.city || '',
       cat: getCategoryLabel(p.category, lang),
@@ -97,7 +59,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
 
   const filters = [
     { id: 'all', l: dictionary.gallery_filters.all },
-    ...Object.keys(CATEGORY_LABELS.uz)
+    ...Object.keys(CASE_CATEGORY_LABELS.uz)
       .filter((category) => items.some((item) => item.category === category))
       .map((category) => ({ id: category, l: dictionary.gallery_filters[category] })),
   ];
@@ -150,7 +112,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
             >
               <div
                 className="body"
-                style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}
+                style={{ overflow: 'hidden' }}
               >
                 <Image
                   src={t.img}
@@ -167,7 +129,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      'linear-gradient(to bottom, rgba(5,7,15,0.5) 0%, transparent 30%, transparent 60%, rgba(5,7,15,0.7) 100%)',
+                      'linear-gradient(to bottom, rgba(5,7,15,0.45) 0%, transparent 30%)',
                   }}
                 />
               </div>

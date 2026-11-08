@@ -1,11 +1,12 @@
 'use client';
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { Bot, Loader2, Send, Sparkles, X } from 'lucide-react';
+import { Loader2, Send, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { OishaOrb, type OishaOrbState } from '@/components/ui/oisha-orb';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import uz from '@/locales/uz.json';
@@ -40,14 +41,32 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
   const [messages, setMessages] = useState<OishaMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isTalking, setIsTalking] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [proactiveMsg, setProactiveMsg] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const sessionUserIdRef = useRef<string | null>(null);
+  const talkingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { toast } = useToast();
 
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
   const translations = widgetTranslations[safeLang];
+
+  const triggerTalking = useCallback(() => {
+    if (talkingTimeoutRef.current) clearTimeout(talkingTimeoutRef.current);
+    setIsTalking(true);
+    talkingTimeoutRef.current = setTimeout(() => {
+      setIsTalking(false);
+    }, 1800);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (talkingTimeoutRef.current) clearTimeout(talkingTimeoutRef.current);
+    };
+  }, []);
+
+  const orbState: OishaOrbState = isLoading ? 'thinking' : isTalking ? 'talking' : 'idle';
 
   const fetchHistory = useCallback(async (uid: string) => {
     try {
@@ -127,12 +146,13 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
     if (!proactiveMsg) return;
     const text = proactiveMsg;
     setProactiveMsg(null);
+    triggerTalking();
     setMessages((prev) =>
       prev.some((message) => message.role === 'model' && message.text === text)
         ? prev
         : [...prev, { id: `proactive-${Date.now()}`, text, role: 'model', timestamp: new Date().toISOString() }],
     );
-  }, [proactiveMsg]);
+  }, [proactiveMsg, triggerTalking]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
@@ -160,6 +180,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
 
       const data = await res.json();
       if (data && data.response) {
+        triggerTalking();
         setMessages((prev) => [
           ...prev,
           {
@@ -172,6 +193,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
       } else {
         // Fallback for asynchronous/queued routing
         setTimeout(() => {
+          triggerTalking();
           setMessages((prev) => {
             const lastMsg = prev[prev.length - 1];
             if (lastMsg && lastMsg.role === 'user') {
@@ -212,12 +234,12 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-2xl flex items-center justify-center hover:bg-blue-700 transition-all ring-4 ring-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="group relative w-14 h-14 rounded-full p-0 shadow-[0_14px_34px_-8px_rgba(37,84,255,0.65)] flex items-center justify-center transition-transform duration-300 hover:scale-105 active:scale-95 ring-2 ring-white/25 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           aria-label={translations.openButtonAriaLabel}
           aria-expanded={isOpen}
           aria-controls="oisha-chat-window"
         >
-          <Sparkles className="w-8 h-8 animate-pulse" />
+          <OishaOrb size="lg" state={orbState} decorative className="w-full h-full" />
         </button>
       </div>
 
@@ -236,22 +258,20 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
             } : undefined}
             className="fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] right-3 z-[60] w-[calc(100%_-_1.5rem)] sm:right-6 sm:bottom-6 sm:w-[400px] h-[600px] max-h-[85dvh]"
           >
-            <Card className="h-full flex flex-col shadow-2xl rounded-3xl overflow-hidden border-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/5">
-              <CardHeader className="shrink-0 p-4 border-b flex flex-row items-center justify-between bg-blue-600 text-white">
+            <Card className="h-full flex flex-col shadow-2xl rounded-3xl overflow-hidden border-0 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl ring-1 ring-black/10 dark:ring-white/10">
+              <CardHeader className="shrink-0 p-4 border-b border-black/5 flex flex-row items-center justify-between bg-[#0A0B0E] text-white">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                    <Bot className="w-6 h-6" />
-                  </div>
+                  <OishaOrb size="md" state={orbState} label={translations.title} className="w-10 h-10 shrink-0" />
                   <div>
                     <CardTitle className="text-sm font-bold text-white">{translations.title}</CardTitle>
-                    <p className="text-[10px] opacity-80 uppercase tracking-widest">
+                    <p className="text-[10px] text-white/70 uppercase tracking-widest">
                       {translations.subtitle}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-blue-600"
+                  className="p-1.5 hover:bg-white/10 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0B0E]"
                   aria-label={translations.closeButtonAriaLabel}
                   aria-expanded={isOpen}
                   aria-controls="oisha-chat-window"
@@ -276,7 +296,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
                             'max-w-[85%] p-3 rounded-2xl text-sm shadow-sm',
                             msg.role === 'model'
                               ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-tl-none'
-                              : 'bg-blue-600 text-white rounded-tr-none',
+                              : 'bg-[#2554FF] text-white rounded-tr-none',
                           )}
                         >
                           {msg.text}
@@ -306,7 +326,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
                   <button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}
-                    className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
+                    className="p-3 bg-[#2554FF] text-white rounded-xl hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
                     aria-label={translations.sendButtonAriaLabel}
                   >
                     <Send className="w-5 h-5" />

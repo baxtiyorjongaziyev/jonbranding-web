@@ -1,5 +1,104 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-07 | GitHub Repositoriyani Ideal Darajaga Keltirish (Antigravity)
+- **Foydalanuvchi talabi:**
+  - "github ideal darajaga keltir"
+- **Bajarilgan ishlar va arxitektura yaxshilanishlari:**
+  1. **Git daraxti va sinxronizatsiya:**
+     - Lokal `main` tarmog'i `origin/main` bilan to'liq tenglashtirildi (`git pull --ff-only`).
+     - Dependabot xavfsizlik yangilanishi (PR #395) `--squash` orqali muvaffaqiyatli birlashtirildi (`next@16.4.5` va `qs@6.17.1`).
+  2. **Xavfsizlik va npm audit:**
+     - `next@16.4.5` yangilanishi orqali `GHSA-2464-fhr4-w9xw`, `GHSA-p3m5-59mp-jv5r`, `GHSA-673q-mjm6-r5xr` kritik va yuqori darajadagi zaifliklari to'liq yopildi.
+     - `npm audit --audit-level=high --omit=dev`: 0 high, 0 critical, 0 blocking.
+     - `scripts/check-audit.mjs` skripti har qanday platforma (Windows UTF-16 LE, Linux UTF-8, macOS) fayl kodirovkalarini avtomatik taniy oladigan va BOM xatolarini to'g'rilaydigan qilib yaxshilandi.
+  3. **GitHub Metama'lumotlari (`gh repo edit`):**
+     - Homepage URL: `https://jonbranding.uz` ga to'g'rilandi (eski vercel.app olib tashlandi).
+     - Tavsif: "⚡ Jon.Branding — Markaziy Osiyo brend-agentligi uchun premium Sales Machine platformasi (Next.js 16, React 19, TypeScript, Tailwind, Sanity CMS & Cloudflare Workers)".
+     - Mavzular (Topics): `nextjs`, `react`, `typescript`, `tailwind`, `sanity-cms`, `branding`, `sales-machine`, `marketing`, `uzbekistan`, `tashkent`, `cloudflare-workers`, `vitest`.
+     - `delete-branch-on-merge` yoqildi (birlashtirilgan feature branchlar avtomatik tozalanadi).
+  4. **Standart Hujjatlar:**
+     - `LICENSE`: Jon Branding rasmiy xususiy mulk (proprietary) litsenziya fayli yaratildi.
+     - `README.md`: Jon Branding editorial uslubida, jonli GitHub Actions badge'lari (`CI`, `CodeQL`, `Security Audit`, `Lighthouse 100/100`), to'liq Mermaid tizim arxitekturasi diagrammasi, imkoniyatlar tahlili, o'rnatish va sifat nazorati bo'yicha mukammal holatga keltirildi.
+     - `CONTRIBUTING.md`: Standart port 9002, Conventional Commits, branch konvensiyasi, Uzbek-first qoidasi, 60-30-10 dizayn tokenlari va sifat nazorati bosqichlari bilan to'liq qayta yozildi.
+     - `CODE_OF_CONDUCT.md`: Chala qolgan matn o'rniga to'liq Contributor Covenant v2.1 kiritildi.
+     - `SECURITY.md`: Qo'llab-quvvatlanadigan versiyalar va zaifliklarni xavfsiz bildirish protokoli yangilandi.
+     - `.github/ISSUE_TEMPLATE/feature_request.yml`: Yangi g'oyalar va takliflar uchun maxsus YAML forma qo'shildi.
+     - `.github/pull_request_template.md`: Sifat va verifikatsiya tekshiruvlari ro'yxati yangilandi.
+  5. **CI/CD va Kod Tozaligi:**
+     - `.github/workflows/deploy-cloudflare.yml`: Node.js versiyasi `22` (LTS) ga muvofiqlashtirildi.
+     - `src/lib/integrations/firebase.ts`: Ishlatilmayotgan ESLint disable direktivasi tozalandi (linter 0 warning, 0 error).
+     - `.gitignore`: `npm-audit.json` kiritildi.
+- **Verifikatsiya:**
+  - `npm run verify:fast`: 74 ta test fayli, 470/470 ta test yashil, 1336 ta lug'at kaliti sinxron (58.2s).
+  - `npm run typecheck`: 0 xato (Strict mode).
+  - `npm run lint`: 0 xato, 0 ogohlantirish.
+  - `npm run build`: 165 ta statik va dinamik sahifalar 100% xatosiz build bo'ldi.
+  - `node scripts/check-audit.mjs`: Blocking 0 ta, xavfsizlik darajasi ideal.
+
+
+## 2026-11-04 | /credentials: neyming kartochkalari registri va ishlatilmayotgan nav maydonlari (OpenCode)
+
+- **Sabab:** 2026-11-03 dagi commitdan keyin ikki kichik nuqson topildi.
+  1. Neyming kartochkalari `proof.items` dan olinganligi uchun `SAVOD` o'rniga `Savod` chiqardi — eski dizayn katta harfda edi.
+  2. `nav.services` va `nav.quote` hech qayerda ishlatilmasdi (xizmat slaydi `group.title`, fikr slaydi `quote.company` ishlatadi).
+- **Tuzatish:**
+  - Nom kartochkasiga `uppercase` klassi qo'shildi — manba bitta bo'lib qoladi, ko'rinish eskisidek.
+  - `nav.services` va `nav.quote` `types.ts` va 4 ta til faylidan olib tashlandi.
+- **Tekshiruv:** `npm run typecheck` 0 xato, `npm run verify:fast` 464/464, `npm run build` 165 sahifa.
+
+## 2026-11-03 | /credentials taqdimoti 4 tilli qilindi, raqam va nomlar yagona manbaga ulandi (OpenCode)
+
+- **Foydalanuvchi talabi:**
+  - `/credentials` sahifasini o'rganib chiqish va topilgan 3 ta muammoni tuzatish: i18n yo'qligi, qattiq yozilgan "9 yil", neyming ro'yxatining ikki joyda takrorlanishi.
+- **Bajarilgan ishlar:**
+  1. **Yangi `src/lib/credentials-content/` moduli (`types.ts`, `uz.ts`, `ru.ts`, `en.ts`, `zh.ts`, `index.ts`):**
+     - Slayd sarlavhalari, eyebrow, CTA va neyming sohalari 4 tilga chiqarildi.
+     - `getCredentialsCopy(lang)` — noma'lum til uchun o'zbekcha fallback.
+  2. **Server-side til tanlash (`src/app/[lang]/credentials/page.tsx`):**
+     - `getSalesContent(safeLang)` va `getCredentialsCopy(safeLang)` serverda chaqiriladi.
+     - Client'ga faqat kerakli qism (`serviceGroups`, `packages`, `guarantees`, `jobs`, `processSteps`, valyuta/to'lov matnlari) uzatiladi — 4 tilli modul client bundle'ga tushmaydi.
+     - Metadata (title/description) ham tilga moslashdi.
+     - `Deck`ga `lang` prop qo'shildi, `LeadModal` endi tanlangan tilda ochiladi.
+  3. **Raqamlar yagona manbadan:**
+     - Muqovadagi qattiq yozilgan `9` o'rniga `yearsLabel()` (`src/lib/company-facts.ts`) — bugun `7+`, 27-noyabrdan avtomatik `8+`.
+  4. **Neyming ro'yxati bitta manbada:**
+     - `credentials-client.tsx` dagi 19 ta hardcode kartochka olib tashlandi.
+     - Nomlar `sales-content/uz.ts` dagi naming `proof.items` dan, sohalar `credentials-content` dagi `naming.fields` dan olinadi.
+     - Tasdiqlangan ro'yxatga moslashtirildi: `Naf` → `Enros` (4 ta sales-content faylida).
+  5. **Lead modal i18n:**
+     - `parseInitialServices` endi `notSure` qiymatini to'liq moslashtiradi va xitoycha `不确定/咨询` variantlarini taniydi.
+  6. **Testlar:**
+     - `src/lib/credentials-content.test.ts`: 4 tilda naming field kalitlari bir xil, har bir field mavjud nomga ishora qiladi, har bir tasdiqlangan nomning sohasi bor.
+- **Tekshiruv:**
+  - `npm run typecheck` — 0 xato
+  - `npm run verify:fast` — 73 fayl, 464/464 test yashil
+  - `npm run build` — 165 sahifa, 0 xato
+  - Runtime: `/ru/credentials` ruscha ochiladi, o'zbekcha matn qolmagan; muqovada `7+` ko'rinadi.
+- **Eslatma:** "100% patentdan o'tadi" da'vosi o'zgartirilmadi — hozircha egasi tasdiqlagan matn. Kelgusida `docs/FAKTLAR.md` bilan tekshirish tavsiya etiladi.
+
+## 2026-10-31 | Oisha AI Assistant Belgisi FoxUI Orb Dizayniga To'liq O'tkazildi (Antigravity)
+- **Foydalanuvchi talabi:**
+  - `https://foxui.dev/design-system/orb/ oisha belgisini shu dizaynda qilib ber.`
+- **Bajarilgan ishlar va arxitektura:**
+  1. **Yangi FoxUI Orb Komponenti Yaratildi (`src/components/ui/oisha-orb.tsx`):**
+     - Siri-dan ilhomlangan abstrakt shar yuzi: to'q yadro, uchta harakatlanuvchi rang toʻlqini (`.fx-orb__wave`), shishasimon yaltiroq qoplama va ichki Siri lentalari (`.fx-orb__lines` 2D canvas, sinus * chetga soʻnish toʻlqinlari).
+     - Holatlar (`data-state`): `idle` (sekin nafas), `thinking` (to'lqinlar tezlashadi va buraladi), `talking` (amplituda oshib gapirish effekti), `handoff` (bir martalik chaqnash).
+     - O'lchamlar (`data-size`): `sm` (22px), `md` (36px), `lg` (56px), `xl` (112px).
+     - Maxsus rang tizimi: brend rangi `#2554FF` va toifa ranglari (`coral`, `pink`, `blue`, `green`, `yellow`, `purple`) oklch hisoblash bilan.
+     - Xavfsizlik va a11y: `prefers-reduced-motion` qo'llab-quvvatlandi, SSR/jsdom canvas context xatolari xavfsiz boshqarildi, `role="img"`, `aria-label` va `aria-hidden` to'liq kiritildi.
+  2. **Globals CSS ga FoxUI Orb Uslublari Qo'shildi (`src/app/globals.css`):**
+     - `.fx-orb`, `.fx-orb__wave`, `.fx-orb__lines`, keyframelar (`fx-orb-breath`, `fx-orb-spin`, `fx-orb-talk`, `fx-orb-flash`), `clip-path: circle(50%)` va GPU kompozitsiyasi.
+  3. **OishaWidget Integratsiyasi (`src/components/oisha-widget.tsx`):**
+     - Suzuvchi ochish tugmasidagi eski `<Sparkles />` o'rniga `OishaOrb` (size `lg`) ulandi.
+     - Chat oynasining tepa sarlavhasidagi `<Bot />` o'rniga `OishaOrb` (size `md`) ulandi.
+     - Holat dinamik bog'landi: Oisha o'ylaganda (`isLoading`) -> `thinking`, javob berganda yoki yangi xabar kelganda -> `talking`, qolgan vaqtda -> `idle`.
+  4. **Mobil Navigatsiya Integratsiyasi (`src/components/layout/mobile-nav-bar.tsx`):**
+     - Mobil pastki panelidagi AI tugmasiga `OishaOrb` (size `sm`) o'rnatildi.
+  5. **Testlar va Sifat Nazorati:**
+     - `src/components/oisha-widget.test.tsx` yangilandi va kengaytirildi.
+     - `npm run verify:fast`: 69 test fayli, 448/448 test 100% yashil o'tdi.
+     - `npm run build`: 165 ta statik sahifa 0 xato bilan to'liq muvaffaqiyatli qurildi.
+
 ## 2026-10-18 | Senior/Staff Codebase Detox & Refaktoring: O'lik Kodlar, 31 ta Skript, Monolitlar va Papkalar Tartibga Keltirildi (Antigravity)
 - **Foydalanuvchi murojaati:**
   - "githubdagi kodlar tartibi senior dasturchini ishiga o'xshaydimi? shavqatsiz tanqid qilib ber" va to'liq detox rejasini tasdiqlash ("Ha").
@@ -2534,3 +2633,40 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Release method: commit and push origin/main, existing Vercel Git integration. Rollback baseline: prior production SHA 559e9b2e / deployment 9TJmdcsSyERkDEERLShVwQkWoi4J. Live read-back pending after build.
 - Post-deploy verified: b8a852aa is live; Vercel QETG7AbKXssgUcv2EdGB5bEcAVU1 and GitHub production deployment 7112923968 report success (2026-10-16 11:54 Asia/Tashkent). Owner Chrome on www.jonbranding.uz has updated footer, zero mailto links, and document-end O/pill center deltas x -0.002px / y 0.071px; remaining 0.571px is fractional rounding. Screenshot saved. GitHub typecheck/lint/test/build checks passed; Chromium E2E was still in progress at this read-back. This post-release evidence is local documentation; released code is committed and pushed.
 - Final CI read-back: Chromium E2E also passed. Production screenshot is stored outside the repo in the task visualization directory as footer-production-b8a852aa.png.
+
+
+## 2026-10-17 | Rash Milk / Miro sirok portfolio video (Codex)
+- Owner requested an actual Instagram Reels 9:16 case video. Confirmed scope: packaging concept, adaptation to four flavors, print-ready handoff. Rash Milk/Miro logos were client-supplied; no logo authorship claimed.
+- Created six-scene Uzbek montage from six verified original local artwork files. Added direct packaging-service CTA. Original package colors, lettering and logos preserved; no fabricated business outcomes or physical production claims.
+- Final local file: C:/Users/baxti/.codex/visualizations/2026/10/16/01a14509-f2fd-7561-a53a-3d6fd418ef8f/rashmilk-miro-case/renders/Rash-Milk-Miro-Sirok-Keys.mp4
+- Verified: H.264, 1080x1920, 30 fps, 30.000 seconds, 900 frames, 13487615 bytes, silent. Full video decoded without errors. HyperFrames runtime/layout/motion checks passed; 24/24 contrast checks passed. Final caption reviewed in a fresh snapshot after copy correction.
+- Supporting brief, storyboard, editable scenes and DELIVERY-QA.json reside in the same output project. Website application source and production CMS were not edited or published; no commit/push. Website build/test suite is not a validation of this standalone media artifact; focused video checks were used.
+
+## 2026-10-19 | Taqdimot (/credentials) Sahifasida Nomlash (Neyming) Ishlari Qo'shildi, Katta Shriftlar Joriy Qilindi va Uzun Sarlavhalar Qisqartirildi (Antigravity)
+- **Foydalanuvchi talabi:**
+  1. "Presentation sahifamizda nom bo'yicha qilgan ishlarimiz ham bo'lsin."
+  2. "Keyin kichik yozuvlar bo'lmasin ma'lumotlar katta katta bo'lsin."
+  3. "Dizayn bo'yciah qilgan ishlarimizni bazilarini sarlavhasi juda uzun bo'lib ketgan"
+- **Kiritilgan O'zgarishlar va Yechimlar:**
+  1. **Taqdimotda Neyming (Nom Bo'yicha Qilgan Ishlarimiz) Alohida Slaydi Yaratildi:**
+     - `src/app/[lang]/credentials/credentials-client.tsx` da maxsus `neyming` slaydi qo'shildi: *"Bozorga kiritgan va patentlangan nomlarimiz"*.
+     - Jon Branding tomonidan ishlab chiqilgan 19 ta real, tasdiqlangan brend nomlari (Savod, Shirona, Fidda, Revo, Petron, Zayyan, Geonest, Rutera, Sofmir, Arfadel, Enros, Belif, Unvan, Parfino, Estem, Mercato, Melamus, Polentra, Viton) o'z sohalari bilan kartochkalarda ko'rgazmali tarzda joylashtirildi.
+     - 100% patent kafolati (IMA bazasi), domenlar (.uz / .com) va 10 kunlik muddat ko'rsatkichlari katta raqamlarda bo'rttirib berildi.
+     - `src/app/[lang]/credentials/page.tsx` da keyslar saralashida Neyming yetakchi loyihalari (Savod, Shirona, Enros, Geonest) flagman qilib belgilandi va takrorlanishlar (deduplication) olib tashlandi.
+  2. **Katta Shriftlar va Yirik Taqdimot Standarti (No Small Text):**
+     - Slaydlardagi mayda `text-[10px]`, `text-[9px]`, `text-xs` yozuvlar butunlay bartaraf etildi.
+     - `deck.tsx` da Display clamp kattalashtirildi: `cred-display-lg` (2.1rem-4.5rem), `cred-display-xl` (2.5rem-6rem).
+     - `Eyebrow` yorliqlari `text-xs sm:text-sm font-semibold tracking-[0.2em]` ga oshirildi.
+     - Muqovadagi raqamlar `text-5xl sm:text-7xl` ga, matnlar `text-lg sm:text-2xl` ga ko'tarildi.
+     - Mijoz logotiplari panjarasi 2-5 ustunli, yirik va qulay kartochkalarga aylantirildi (`h-24 sm:h-28`, logotiplar `max-h-16`).
+     - Keyslar, xizmat narxlari (`text-2xl sm:text-4xl`), natijalar (`text-4xl sm:text-6xl`), paketlar va kafolatlardagi barcha asosiy matnlar 18px-24px+ o'lchamga o'tkazildi.
+     - Pastki boshqaruv paneli (slayd indeksi, PDF tugmasi, strelkalar) kattalashtirildi.
+  3. **Dizayn Ishlaridagi Uzun va Buzilgan Sarlavhalar Tozalandi:**
+     - `src/lib/portfolio-presentation.ts` da `cleanPortfolioTitle` funksiyasi joriy etildi.
+     - Sanity'dagi tabrik matnlari (masalan, Yasiradagi 170+ belgili post matni), uzun tushuntirishlar ("SAT tayyorloviga ixtisoslashgan online platforma uchun ishlab chiqilgan logo dizayn"), emojilar (🧈) va qo'shimchalar tozalab, ixcham brend nomlariga (`Yasira`, `Feel It`, `Enros`, `Geonest Engineering`, `Sarmilk`, `Shirona Café & Bakery`, `SAVOD`, `Rash Milk`, `Boyarin`, `Petron Polymer`, `Zayyan`) keltirildi.
+     - Sanity loyihalari uchun tushib qolgan `categoryLabel` avtomatik ravishda `Firma uslubi`, `Brendbuk`, `Qadoq dizayni`, `Neyming` sifatida to'ldirildi.
+  4. **Testlar va Tekshiruv:**
+     - `src/lib/portfolio-presentation.test.ts` da yangi tozalash va kategoriya testlari yozildi.
+     - `npm run verify:fast`: 69 ta test fayli, 447/447 ta test 100% yashil o'tdi.
+     - `npm run build`: Barcha 165 ta sahifa 0 xato bilan muvaffaqiyatli build bo'ldi.
+

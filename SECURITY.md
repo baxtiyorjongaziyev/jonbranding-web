@@ -2,26 +2,33 @@
 
 ## Supported Versions
 
-Only the latest version of Jon Branding Web is supported for security updates.
+We actively provide security updates and patches for the production platform.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.1.x   | :white_check_mark: |
-| < 1.1.0 | :x:                |
+| Version | Status | Node.js | Next.js |
+| ------- | ------ | ------- | ------- |
+| 1.1.x (Current) | :white_check_mark: Supported | >= 22.x | 16.x |
+| < 1.1.0 | :x: End of Life | - | - |
 
 ## Reporting a Vulnerability
 
-We take the security of our website seriously. If you believe you have found a security vulnerability, please report it to us by following these steps:
+We take the security of our platform, user privacy, and client data with utmost seriousness. If you discover a security vulnerability or potential threat, please report it privately:
 
-1. **Email us**: Send an email to `security@jonbranding.uz` with a detailed description of the vulnerability.
-2. **Provide Details**: Include steps to reproduce the issue, the impact, and any potential fixes if known.
-3. **Wait for Response**: We will acknowledge your report within 48 hours and provide a timeline for a fix.
+1. **Email us**: Send an email to `security@jonbranding.uz` with the subject `[Security Vulnerability Report]`.
+2. **Provide Details**:
+   - Detailed description of the vulnerability.
+   - Exact steps or proof-of-concept (PoC) to reproduce the issue.
+   - Affected URLs, endpoints, or components.
+   - Potential impact on users, CRM data, or server infrastructure.
+3. **Wait for Response**:
+   - Our security team will acknowledge receipt of your report within 24-48 hours.
+   - We will provide updates on verification and timeline for resolution.
 
-Please do **not** open a public GitHub issue for security vulnerabilities.
+> [!IMPORTANT]
+> Please do **NOT** open public GitHub issues or discussions for security vulnerabilities.
 
 ## Our Commitment
 
-We promise to:
-- Investigate all reports promptly.
-- Not take legal action against researchers who follow this policy.
-- Provide credit to researchers who help us secure our systems (with their permission).
+- We will investigate and address all valid reports promptly.
+- We adhere to responsible disclosure principles.
+- Researchers acting in good faith who follow this policy will not face legal action.
+- Credit will be attributed in release notes upon request once the vulnerability has been patched.

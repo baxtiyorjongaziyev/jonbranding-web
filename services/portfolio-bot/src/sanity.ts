@@ -115,13 +115,15 @@ export async function createPortfolioDocument(
     afterAsset = await uploadImageFile(rest[0].path, rest[0].mime);
   }
 
-  const slug = slugify(parsed.title);
+  // Keys nomlari standarti (docs/KEYS-NOMLARI.md): "{Brend} — {ish turi}", slug = brend.
+  const brand = cleanBrandName(parsed.client || parsed.title);
+  const slug = slugify(brand);
 
   const payload: PortfolioPayload = {
     _type: 'portfolio',
-    title: parsed.title,
+    title: caseTitle(brand, parsed.category),
     slug: { _type: 'slug', current: slug },
-    client: parsed.client,
+    client: brand,
     category: parsed.category,
     tags: parsed.tags,
     description: parsed.description,
@@ -333,4 +335,23 @@ export async function getAllPortfolioSlugsAndTitles(): Promise<{ slug: string; t
     console.error('[sanity] Failed to fetch all portfolio slugs:', err);
     return [];
   }
+}
+
+const CASE_SERVICE_UZ: Record<string, string> = {
+  'brand-strategy': 'brend-strategiya',
+  'logo-design': 'logotip dizayni',
+  brandbook: 'brendbuk',
+  'corporate-style': 'firma uslubi',
+  packaging: 'qadoq dizayni',
+  naming: 'neyming',
+};
+
+/** Brend nomidan yuridik shaklni (MChJ, ООО, LLC...) olib tashlaydi. */
+export function cleanBrandName(name: string): string {
+  return name.replace(/(^|\s)(MChJ|XK|AJ|OOO|ООО|LLC|Ltd|Inc)\.?(?=\s|$)/gi, '').replace(/["«»“”]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+export function caseTitle(brand: string, category: string): string {
+  const service = CASE_SERVICE_UZ[category];
+  return service ? `${brand} — ${service}` : brand;
 }

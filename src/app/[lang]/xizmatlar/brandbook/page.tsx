@@ -33,6 +33,7 @@ export default async function Page(props: Props) {
         path="/xizmatlar/brandbook"
         name={dictionary.header.brandbook}
         description={dictionary.brandbookPage.metadata.description}
+        faqs={lang === 'uz' ? BRANDBOOK_PAGE.faqs : undefined}
       />
       {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
       {lang === 'uz' ? (
