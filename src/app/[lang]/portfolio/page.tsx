@@ -135,6 +135,9 @@ export default async function PortfolioPage(props: Props) {
             naming: safeLang === 'uz' ? 'Neyming' : safeLang === 'ru' ? 'Нейминг' : safeLang === 'zh' ? '命名' : 'Naming',
             viewCase: safeLang === 'uz' ? 'Keysni ko\'rish' : safeLang === 'ru' ? 'Смотреть кейс' : safeLang === 'zh' ? '查看案例' : 'View Case Study',
             resultsTitle: safeLang === 'uz' ? 'Natijalar' : safeLang === 'ru' ? 'Результаты' : safeLang === 'zh' ? '业绩成果' : 'Results',
+            ctaTitle: dictionary.salesFlow.portfolioCtaTitle,
+            ctaText: dictionary.salesFlow.portfolioCtaText,
+            ctaButton: dictionary.salesFlow.consultation,
           }}
         />
       </div>

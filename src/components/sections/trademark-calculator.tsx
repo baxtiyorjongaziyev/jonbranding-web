@@ -1,5 +1,6 @@
 'use client';
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import React, { useMemo, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -229,6 +230,7 @@ export default function TrademarkCalculator({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
             fullName: data.name,
             phone: data.phone,
             packageSummary: telegramMessage,

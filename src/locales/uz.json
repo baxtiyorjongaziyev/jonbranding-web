@@ -754,10 +754,10 @@
     "magnets": [
       {
         "id": "pdf",
-        "title": "Secret Blueprint (PDF)",
-        "subtitle": "Raqobatchilarni 'Nokaut' qilish",
-        "description": "Bozordagi 90% bizneslar yo'l qo'yadigan va millionlab so'm zarar keltiradigan 7 ta shafqatsiz xato.",
-        "cta": "Blueprintni Yuklash",
+        "title": "Brending chek-listi: 7 ta keng tarqalgan xato",
+        "subtitle": "Belgilab chiqing — brendingizda qaysi xatolar borligini 2 daqiqada bilasiz.",
+        "description": "Bizneslar ko‘p yo‘l qo‘yadigan va pulga tushadigan 7 ta xato. 2 daqiqada tekshirib chiqasiz.",
+        "cta": "Chek-listni ochish",
         "href": "/{lang}/checklist"
       },
       {
@@ -2102,7 +2102,7 @@
     "hero_title_end": "bitta uslubda.",
     "hero_description": "Vizitkadan qadoqqacha, Instagramdan bannergacha brendingiz bir xil va ishonarli ko'rinadi. ",
     "hero_description_bold": "Avval ehtiyojingizni aniqlaymiz, keyin bitta ishlaydigan vizual tizim quramiz.",
-    "hero_primary_cta": "Loyihani muhokama qilish",
+    "hero_primary_cta": "20 daqiqalik bepul maslahat",
     "hero_secondary_cta": "Ishlarni ko'rish",
     "services_title": "Biznesingiz uchun\nyagona ko'rinish.",
     "services_lede": "Logotip, firma uslubi, brendbuk va qadoq. Kerakli xizmatlarni tanlaymiz; neyming va tovar belgisini ro‘yxatdan o‘tkazish alohida qo‘shilishi mumkin.",
@@ -2574,14 +2574,17 @@
   },
   "salesFlow": {
     "consultation": "20 daqiqalik bepul maslahat",
+    "portfolioCtaTitle": "Biznesingizga ham shunday ko‘rinish kerakmi?",
+    "portfolioCtaText": "20 daqiqada vaziyatingizni ko‘rib chiqamiz va qaysi xizmat kerakligini aytamiz. Bepul.",
     "cta": "Maslahatga yozilish",
     "prices": "Xizmatlar va narxlar",
     "team": "Jamoa bilan bog‘lanish",
     "privacy": "Raqamingiz faqat siz bilan bog‘lanish uchun ishlatiladi.",
     "consultationDesc": "Ehtiyojingizni muhokama qilamiz va mos xizmatni tanlashga yordam beramiz. Jamoamiz telefon orqali suhbat vaqtini kelishadi.",
     "projectDesc": "Tanlangan xizmat va ehtiyojingiz bo‘yicha jamoamiz siz bilan bog‘lanadi. Hajm, narx va muddat ish boshlanishidan oldin kelishiladi.",
-    "submit": "Bog‘lanishni so‘rash",
-    "done": "Arizangiz qabul qilindi. Jamoamiz suhbat vaqtini kelishish uchun bog‘lanadi.",
+    "submit": "Maslahatga yozilish",
+    "done": "Arizangiz qabul qilindi. Jamoamiz telefon orqali bog‘lanib, suhbat vaqtini kelishadi. Kutishni xohlamasangiz, hoziroq Telegram’da yozing.",
+    "doneTelegram": "Telegram’da yozish",
     "manifest": {
       "label": "— Yondashuv",
       "sub": "Yangi biznes yoki rebrending: avval ehtiyoj, keyin dizayn.",
@@ -2598,7 +2601,7 @@
       "headingEm": "tayyor faylgacha.",
       "subtitle": "Hajm, muddat va topshiriladigan materiallar shartnomada kelishiladi.",
       "exampleLabel": "Topshiriladigan natija",
-      "cta": "Loyihani muhokama qilish",
+      "cta": "20 daqiqalik bepul maslahat",
       "note": "50% shartnomada · 50% topshirilganda",
       "steps": [
         {
@@ -2725,5 +2728,10 @@
     "identityPath": "Firma uslubini tartibga solish",
     "packagingPath": "Mahsulot qadoqlari",
     "newPath": "Yangi biznes uchun"
+  },
+  "priceStrip": {
+    "eyebrow": "Narxlar ochiq",
+    "title": "Narx va muddat oldindan ma’lum",
+    "link": "Barcha narxlar va paketlar"
   }
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { getLeadAttribution } from '@/lib/lead-attribution';
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getLocalizedPath, type Locale } from '@/lib/i18n/locale'
@@ -77,6 +78,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getLeadAttribution(),
           fullName: contact.fullName,
           phone: contact.phone,
           source: 'navigator_diagnostic',
@@ -134,7 +136,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
               <button
                 key={p.id}
                 onClick={() => togglePain(p.id)}
-                className={`p-4 rounded-xl border text-left transition-all ${
+                className={`p-4 rounded-xl border text-left transition ${
                   selectedPains.includes(p.id) 
                     ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' 
                     : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
@@ -177,7 +179,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
                   setSelectedResult(r.id)
                   setStep('QUESTIONS')
                 }}
-                className={`p-4 rounded-xl border text-left transition-all ${
+                className={`p-4 rounded-xl border text-left transition ${
                   selectedResult === r.id
                     ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600' 
                     : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
@@ -212,7 +214,7 @@ export function DiagnosticFlow({ lang, errors }: DiagnosticFlowProps) {
               <button
                 key={opt.value}
                 onClick={() => handleAnswer(opt.value)}
-                className="p-4 rounded-xl border border-slate-200 hover:border-[#2554FF]/30 hover:bg-blue-50 hover:text-[#2554FF] text-left font-medium text-[#0A0B0E] transition-all"
+                className="p-4 rounded-xl border border-slate-200 hover:border-[#2554FF]/30 hover:bg-blue-50 hover:text-[#2554FF] text-left font-medium text-[#0A0B0E] transition"
               >
                 {opt.label}
               </button>

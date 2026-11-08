@@ -783,7 +783,10 @@ body[data-callback-open="true"] [data-oisha-callback-host] {
     inset 0 -1px 1px rgba(255, 255, 255, 0.15) !important;
   position: relative;
   isolation: isolate;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* `all` emas: scroll'da max-width/padding o'zgaradi — layout animatsiyasi taqiqlangan (qoida 3). */
+  transition-property: background-color, border-color, box-shadow, border-radius;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-glass-header.dark-glass {

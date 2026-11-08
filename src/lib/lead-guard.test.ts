@@ -46,6 +46,18 @@ describe('lead-guard', () => {
       expect(checkOrigin(mockRequest({ origin: 'https://jonbranding.uz' })).trusted).toBe(true);
     });
 
+    it.each(['https://patent.jonbranding.uz', 'https://staging.jonbranding.uz'])(
+      'trusts the Cloudflare subdomain %s',
+      (origin) => {
+        expect(checkOrigin(mockRequest({ origin })).trusted).toBe(true);
+      },
+    );
+
+    it('does not trust look-alike hosts', () => {
+      expect(checkOrigin(mockRequest({ origin: 'https://patent.jonbranding.uz.evil.test' })).trusted).toBe(false);
+      expect(checkOrigin(mockRequest({ origin: 'https://evil-jonbranding.uz' })).trusted).toBe(false);
+    });
+
     it('trusts Vercel preview deployments', () => {
       const check = checkOrigin(mockRequest({ origin: 'https://jb-abc123.vercel.app' }));
       expect(check.trusted).toBe(true);

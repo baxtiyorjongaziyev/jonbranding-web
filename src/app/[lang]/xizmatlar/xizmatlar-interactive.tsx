@@ -114,14 +114,14 @@ export function XizmatlarHero({ lang }: { lang: string; dictionary?: any }) {
               <Link
                 key={service.id}
                 href={href}
-                className="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#2554FF]/40 hover:shadow-xl transition-all duration-300 relative"
+                className="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#2554FF]/40 hover:shadow-xl transition duration-300 relative"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-[family-name:var(--font-mono)] uppercase tracking-wider text-slate-500">
                       {service.duration || 'Jon.Branding'}
                     </span>
-                    <span className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] group-hover:text-white transition-all">
+                    <span className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-[#2554FF] group-hover:border-[#2554FF] group-hover:text-white transition">
                       <ArrowUpRight className="w-4 h-4" />
                     </span>
                   </div>

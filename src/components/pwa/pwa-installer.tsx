@@ -84,38 +84,20 @@ export default function PwaInstaller({ lang = 'uz', dictionary, installRequest }
     if (!isMobileDevice) return;
     setIsIos(isIosDevice);
 
-    // Check if dismissed recently (3 days)
-    let dismissedAt: string | null = null;
-    try {
-      dismissedAt = localStorage.getItem('jb_pwa_dismissed');
-    } catch {}
-    const isDismissedRecently = dismissedAt && Date.now() - parseInt(dismissedAt, 10) < 3 * 24 * 60 * 60 * 1000;
-    let promptTimer: ReturnType<typeof setTimeout> | undefined;
-    const clearPromptTimer = () => {
-      if (promptTimer !== undefined) clearTimeout(promptTimer);
-    };
-    const schedulePrompt = () => {
-      clearPromptTimer();
-      if (isDismissedRecently) return;
-      promptTimer = setTimeout(() => {
-        setShowPrompt(true);
-        trackEvent({ action: 'pwa_prompt_shown', category: 'PWA', label: 'automatic' });
-      }, 6000);
-    };
+    // Taklif avtomatik chiqmaydi: agentlik saytini "ilova qilib o'rnatish" birinchi
+    // soniyalarda asosiy CTA'ni yopib qo'yardi (docs/audits/2026-11-07-konversiya-audit.md, K-1).
+    // Faqat menyudagi "Ilovani o'rnatish" orqali ochiladi.
 
     // 3. Listen for Android / Chrome beforeinstallprompt
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
-
-      schedulePrompt();
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     // 4. Listen for app installed
     const handleAppInstalled = () => {
-      clearPromptTimer();
       setShowPrompt(false);
       setDeferredPrompt(null);
       setIsStandalone(true);
@@ -129,18 +111,14 @@ export default function PwaInstaller({ lang = 'uz', dictionary, installRequest }
 
     // 5. Custom trigger from menu or buttons
     const handleCustomTrigger = () => {
-      clearPromptTimer();
       setShowPrompt(true);
       if (isIosDevice && !isStandaloneMode) {
         setShowManualGuide(true);
       }
     };
     if (!externallyTriggered) window.addEventListener('openPwaInstallPrompt', handleCustomTrigger);
-    // Safari does not emit beforeinstallprompt; offer its home-screen guide.
-    if (isIosDevice) schedulePrompt();
 
     return () => {
-      clearPromptTimer();
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
       window.removeEventListener('openPwaInstallPrompt', handleCustomTrigger);

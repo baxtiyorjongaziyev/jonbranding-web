@@ -10,24 +10,28 @@ type Choice = 'true' | 'false';
 
 const copy = {
   uz: {
+    short: "Analitika cookie'larini yoqamizmi?",
     text: "Saytni yaxshilash va reklama samaradorligini o'lchash uchun analitika cookie'laridan (Google, Yandex, Meta, Clarity, Hotjar) foydalanamiz. Ular faqat roziligingiz bilan yoqiladi.",
     accept: 'Qabul qilish',
     reject: 'Rad etish',
     more: 'Batafsil',
   },
   ru: {
+    short: 'Включить аналитические cookie?',
     text: 'Мы используем аналитические cookie (Google, Яндекс, Meta, Clarity, Hotjar), чтобы улучшать сайт и измерять рекламу. Они включаются только с вашего согласия.',
     accept: 'Принять',
     reject: 'Отклонить',
     more: 'Подробнее',
   },
   en: {
+    short: 'Allow analytics cookies?',
     text: 'We use analytics cookies (Google, Yandex, Meta, Clarity, Hotjar) to improve the site and measure advertising. They are enabled only with your consent.',
     accept: 'Accept',
     reject: 'Reject',
     more: 'Learn more',
   },
   zh: {
+    short: '允许使用分析 Cookie 吗？',
     text: '我们使用分析 Cookie（Google、Yandex、Meta、Clarity、Hotjar）来改进网站并衡量广告效果。仅在您同意后启用。',
     accept: '接受',
     reject: '拒绝',
@@ -82,31 +86,34 @@ const CookieConsentBanner: FC = () => {
 
   if (!open) return null;
 
+  // Mobilda: bitta ixcham qator, pastki tez-harakat panelining USTIDA — CTA va panelni
+  // yopmaydi (docs/audits/2026-11-07-konversiya-audit.md, K-1). Desktop'da avvalgi karta.
   return (
     <div
       role="dialog"
       aria-live="polite"
       aria-label="Cookie"
-      className="fixed inset-x-4 bottom-4 sm:inset-x-auto sm:left-6 sm:bottom-6 z-[60] sm:max-w-md rounded-2xl border border-black/10 bg-white p-4 sm:p-5 text-[#0A0B0E] shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
+      className="fixed inset-x-3 bottom-[calc(100px+env(safe-area-inset-bottom,0px))] sm:inset-x-auto sm:left-6 sm:bottom-6 z-[45] sm:max-w-md flex items-center gap-2 sm:block rounded-2xl border border-black/10 bg-white px-3 py-2 sm:p-5 text-[#0A0B0E] shadow-[0_12px_32px_rgba(0,0,0,0.14)] sm:shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
     >
-      <p className="text-xs sm:text-sm leading-relaxed text-[#4B5563]">
-        {t.text}{' '}
+      <p className="flex-1 text-xs sm:text-sm leading-snug sm:leading-relaxed text-[#4B5563]">
+        <span className="sm:hidden">{t.short}</span>
+        <span className="hidden sm:inline">{t.text}</span>{' '}
         <a href={privacyHref} className="underline underline-offset-2 font-medium text-[#0A0B0E] hover:text-[#2554FF] transition-colors">
           {t.more}
         </a>
       </p>
-      <div className="mt-3 flex flex-wrap justify-end gap-2">
+      <div className="flex shrink-0 gap-1.5 sm:mt-3 sm:flex-wrap sm:justify-end sm:gap-2">
         <button
           type="button"
           onClick={() => choose('false')}
-          className="rounded-full border border-black/15 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold hover:bg-black/5 min-h-[40px] text-[#0A0B0E] transition-colors"
+          className="rounded-full border border-black/15 px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold hover:bg-black/5 min-h-[40px] text-[#0A0B0E] transition-colors"
         >
           {t.reject}
         </button>
         <button
           type="button"
           onClick={() => choose('true')}
-          className="rounded-full bg-[#2554FF] hover:bg-[#1D4ED8] px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold !text-white transition-colors min-h-[40px]"
+          className="rounded-full bg-[#2554FF] hover:bg-[#1D4ED8] px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold !text-white transition-colors min-h-[40px]"
         >
           {t.accept}
         </button>

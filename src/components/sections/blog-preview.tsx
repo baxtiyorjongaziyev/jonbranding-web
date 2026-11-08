@@ -59,7 +59,7 @@ export default function BlogPreview({ lang, dictionary, posts = [] }: BlogPrevie
                 href={getLocalizedPath(lang as Locale, `/blog/${slug}`)}
                 className="group block"
               >
-              <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line/60 bg-white/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-brand-line/60 bg-white/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="relative h-48 w-full overflow-hidden flex-shrink-0">
                   <Image
                     src={blogCardImages[index % blogCardImages.length]}
@@ -94,7 +94,7 @@ export default function BlogPreview({ lang, dictionary, posts = [] }: BlogPrevie
         <div className="mt-10 flex justify-center">
           <Link
             href={getLocalizedPath(lang as Locale, '/blog')}
-            className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white px-7 py-3 text-sm font-semibold text-brand-ink shadow-sm transition-all duration-200 hover:border-brand-blue hover:text-brand-blue hover:shadow-md"
+            className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white px-7 py-3 text-sm font-semibold text-brand-ink shadow-sm transition duration-200 hover:border-brand-blue hover:text-brand-blue hover:shadow-md"
           >
             {t.viewAll}
             <ArrowRight className="h-4 w-4" />

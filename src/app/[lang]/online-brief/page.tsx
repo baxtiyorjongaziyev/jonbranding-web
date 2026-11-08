@@ -76,7 +76,7 @@ const OnlineBriefWelcomePage: FC = () => {
                 <Button
                   onClick={() => router.push(`/${lang}/online-brief/wizard`)}
                   size="lg"
-                  className="rounded-full h-14 px-8 text-base font-bold bg-[#0B0F17] text-white hover:bg-[#1a2333] transition-all flex items-center justify-center gap-2 group shadow-lg"
+                  className="rounded-full h-14 px-8 text-base font-bold bg-[#0B0F17] text-white hover:bg-[#1a2333] transition flex items-center justify-center gap-2 group shadow-lg"
                 >
                   {welcome.startButton}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -85,7 +85,7 @@ const OnlineBriefWelcomePage: FC = () => {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="rounded-full h-14 px-8 text-base font-bold border-[#cbd5e1] text-gray-700 hover:bg-gray-50 transition-all flex items-center justify-center"
+                  className="rounded-full h-14 px-8 text-base font-bold border-[#cbd5e1] text-gray-700 hover:bg-gray-50 transition flex items-center justify-center"
                 >
                   <Link href={`/${lang}`}>{translations.buttons.backToHome}</Link>
                 </Button>

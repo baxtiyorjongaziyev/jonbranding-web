@@ -40,19 +40,25 @@ describe('mobile PWA install offers', () => {
     expect(screen.queryByText('Jon.Branding Ilovasi')).not.toBeInTheDocument();
   });
 
-  it('offers installation on Android after the browser install event', () => {
+  // Avtomatik taklif birinchi soniyalarda asosiy CTA'ni yopardi (konversiya auditi, K-1).
+  it('never shows the offer on its own on Android, only when requested from the menu', () => {
     device('Mozilla/5.0 (Linux; Android 14) Chrome/130 Mobile');
     render(<PwaInstaller />);
     expect(installEvent().defaultPrevented).toBe(true);
-    act(() => { vi.advanceTimersByTime(6000); });
+    act(() => { vi.advanceTimersByTime(60_000); });
+    expect(screen.queryByText('Jon.Branding Ilovasi')).not.toBeInTheDocument();
+    act(() => { window.dispatchEvent(new Event('openPwaInstallPrompt')); });
     expect(screen.getByRole('button', { name: "O'rnatish" })).toBeInTheDocument();
   });
 
-  it('offers the iPhone home-screen flow without a browser install event', () => {
+  it('never shows the iPhone home-screen guide on its own, only when requested', () => {
     device('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)');
     render(<PwaInstaller />);
-    act(() => { vi.advanceTimersByTime(6000); });
-    expect(screen.getByRole('button', { name: "O'rnatish" })).toBeInTheDocument();
+    act(() => { vi.advanceTimersByTime(60_000); });
+    expect(screen.queryByText('Jon.Branding Ilovasi')).not.toBeInTheDocument();
+    act(() => { window.dispatchEvent(new Event('openPwaInstallPrompt')); });
+    expect(screen.getByText('Jon.Branding Ilovasi')).toBeInTheDocument();
+    expect(screen.getAllByText(/Bosh ekranga qo'shish/).length).toBeGreaterThan(0);
   });
 
   it('keeps the offer hidden in an installed mobile app', () => {

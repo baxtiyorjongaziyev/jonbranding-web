@@ -13,10 +13,6 @@ const OishaWidget = dynamic(() => import('@/components/oisha-widget'), {
   ssr: false,
 });
 
-const LeadMagnetPopup = dynamic(() => import('@/components/ui/lead-magnet-popup'), {
-  ssr: false,
-});
-
 const CookieConsentBanner = dynamic(() => import('@/components/cookie-consent-banner'), {
   ssr: false,
 });
@@ -78,7 +74,6 @@ function AnalyticsTracker() {
 }
 
 type ClientEnhancementsProps = {
-  leadMagnetDictionary?: any;
   headerDictionary?: any;
   pwaDictionary?: any;
   lang?: string;
@@ -87,7 +82,6 @@ type ClientEnhancementsProps = {
 };
 
 export default function ClientEnhancements({
-  leadMagnetDictionary,
   headerDictionary,
   pwaDictionary,
   lang: langProp,
@@ -202,7 +196,6 @@ export default function ClientEnhancements({
       {enhancementsReady && !isDeck && <CookieConsentBanner />}
       {enhancementsReady && !isDeck && <OishaWidget lang={lang} chatRequest={chatRequest} />}
       {enhancementsReady && !isDeck && <ProactiveTrigger lang={lang} />}
-      {enhancementsReady && !isDeck && leadMagnetDictionary?.roleSelection && <LeadMagnetPopup dictionary={leadMagnetDictionary} />}
 
     </>
   );

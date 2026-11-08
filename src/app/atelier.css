@@ -104,10 +104,12 @@ html[data-theme="dark"] body:has(.atelier-home) {
   color: var(--muted);
 }
 .atelier-theme .eb .dot {
- width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2.4s ease-in-out infinite; }
+ width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: at-dot-pulse 2.4s ease-in-out infinite; }
 .atelier-theme .eb .ix {
  color: var(--ink); font-weight: 500; }
-@keyframes pulse {
+/* Nomi `pulse` emas: keyframes global, Tailwind'ning `animate-pulse`ini (faqat opacity) bosib ketib,
+   bosh sahifa skeletonlarini 1.35 marta kattalashtirar va mobilda gorizontal toshish berardi. */
+@keyframes at-dot-pulse {
  0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(1.35); } }/* hairlines */.atelier-theme .rule {
  height: 1px; background: var(--line); }
 .atelier-theme .rule-thick {
@@ -204,7 +206,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   color: var(--green);
 }
 .atelier-theme .masthead .live::before {
- content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.6s ease-in-out infinite; }
+ content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: at-dot-pulse 1.6s ease-in-out infinite; }
 @media (max-width: 720px) {
   .atelier-theme .masthead-left .hide-m, .atelier-theme .masthead-right .hide-m {
  display: none;   }
@@ -1297,7 +1299,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
   display: inline-flex; gap: 10px; align-items: center;
 }
 .atelier-theme .calc-eb .dot {
- width: 6px; height: 6px; border-radius: 50%; background: #E0744A; animation: pulse 1.8s ease-in-out infinite; }
+ width: 6px; height: 6px; border-radius: 50%; background: #E0744A; animation: at-dot-pulse 1.8s ease-in-out infinite; }
 .atelier-theme .calc-form {
 
   background: rgba(244,241,232,.04);
@@ -2067,7 +2069,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .feat-img .tag .live::before {
 
   content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4FB07A;
-  animation: pulse 1.8s ease-in-out infinite;
+  animation: at-dot-pulse 1.8s ease-in-out infinite;
 }
 .atelier-theme .feat-body {
 
@@ -2664,7 +2666,7 @@ html[data-theme="dark"] body:has(.atelier-home) {
 .atelier-theme .final-eb::before {
 
   content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4FB07A;
-  animation: pulse 1.6s ease-in-out infinite;
+  animation: at-dot-pulse 1.6s ease-in-out infinite;
 }
 .atelier-theme .final h2 {
 

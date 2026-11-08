@@ -19,7 +19,7 @@ const ChecklistItem: FC<{
   onCheckedChange: (checked: boolean) => void;
 }> = ({ item, isChecked, onCheckedChange }) => {
   return (
-    <Card className={cn("transition-all duration-300", isChecked ? 'bg-green-50 border-green-200' : 'bg-white')}>
+    <Card className={cn("transition duration-300", isChecked ? 'bg-green-50 border-green-200' : 'bg-white')}>
       <CardContent className="p-6">
         <div className="flex items-start gap-4">
           <Checkbox
@@ -150,7 +150,7 @@ const ChecklistPage: FC = () => {
             </div>
 
             {progressPercentage > 0 && result && (
-                 <Card className={cn("mt-12 p-8 text-center transition-all duration-500", result.bgColor)}>
+                 <Card className={cn("mt-12 p-8 text-center transition duration-500", result.bgColor)}>
                     <result.Icon className={cn("w-16 h-16 mx-auto mb-4", result.color)} />
                     <h3 className="text-2xl font-bold text-dark-blue">{result.title}</h3>
                     <p className="text-gray-700 mt-2">{result.description}</p>

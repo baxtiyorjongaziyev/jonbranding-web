@@ -232,7 +232,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                       type="button"
                       key={item.id}
                       onClick={() => setSphere(item.id as any)}
-                      className={`cursor-pointer p-6 rounded-2xl border text-left w-full transition-all duration-300 flex flex-col justify-between min-h-[180px] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                      className={`cursor-pointer p-6 rounded-2xl border text-left w-full transition duration-300 flex flex-col justify-between min-h-[180px] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                         sphere === item.id
                           ? 'border-[#0B0F17] bg-[#EFEEEC] shadow-md ring-1 ring-[#0B0F17]'
                           : 'border-[#cbd5e1] hover:border-gray-400 bg-white shadow-sm'
@@ -267,7 +267,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                         type="button"
                         key={style.id}
                         onClick={() => toggleStyle(style.title)}
-                        className={`cursor-pointer rounded-2xl p-4 border text-left w-full transition-all duration-300 relative select-none min-h-[140px] flex flex-col justify-between active:scale-[0.97] bg-gradient-to-br focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${style.gradient} ${
+                        className={`cursor-pointer rounded-2xl p-4 border text-left w-full transition duration-300 relative select-none min-h-[140px] flex flex-col justify-between active:scale-[0.97] bg-gradient-to-br focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${style.gradient} ${
                           isSelected ? 'shadow-lg ring-2 ring-[#0B0F17]' : 'opacity-85 hover:opacity-100'
                         }`}
                       >
@@ -360,7 +360,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                             key={item.id}
                             type="button"
                             onClick={() => toggleGender(item.label)}
-                            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-bold transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                            className={`flex-1 py-2.5 px-3 rounded-full text-xs font-bold transition border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               genders.includes(item.label)
                                 ? 'bg-[#0B0F17] text-white border-[#0B0F17]'
                                 : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
@@ -388,7 +388,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                             key={label}
                             type="button"
                             onClick={() => toggleAge(label)}
-                            className={`py-2 px-3 rounded-full text-[11px] font-bold transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                            className={`py-2 px-3 rounded-full text-[11px] font-bold transition border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               ages.includes(label)
                                 ? 'bg-[#0B0F17] text-white border-[#0B0F17]'
                                 : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
@@ -422,7 +422,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                             type="button"
                             key={motive.id}
                             onClick={() => toggleMotive(motive.label)}
-                            className={`cursor-pointer p-3 rounded-xl border text-left w-full text-xs flex justify-between items-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                            className={`cursor-pointer p-3 rounded-xl border text-left w-full text-xs flex justify-between items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                               isSelected
                                 ? 'bg-[#0B0F17]/5 border-[#0B0F17] font-bold'
                                 : 'bg-white border-[#cbd5e1] hover:border-gray-400'
@@ -529,7 +529,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                               key={service.id}
                               type="button"
                               onClick={() => toggleService(service.label)}
-                              className={`py-2 px-3 rounded-xl text-left w-full text-[11px] font-semibold transition-all border flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+                              className={`py-2 px-3 rounded-xl text-left w-full text-[11px] font-semibold transition border flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0F17] focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
                                 isSelected
                                   ? 'bg-[#0B0F17]/5 border-[#0B0F17] text-[#0B0F17] font-bold'
                                   : 'bg-white border-[#cbd5e1] text-gray-600 hover:border-gray-400'
@@ -562,7 +562,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                 onClick={nextStep}
                 disabled={!isStepValid}
                 size="lg"
-                className="rounded-full h-12 px-6 text-sm font-bold bg-[#0B0F17] hover:bg-[#1a2333] transition-all flex items-center gap-2 shadow-lg"
+                className="rounded-full h-12 px-6 text-sm font-bold bg-[#0B0F17] hover:bg-[#1a2333] transition flex items-center gap-2 shadow-lg"
               >
                 {buttons.next}
                 <ArrowRight className="w-4 h-4" />
@@ -572,7 +572,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
                 onClick={handleFinish}
                 disabled={!isStepValid}
                 size="lg"
-                className="rounded-full h-12 px-8 text-sm font-bold bg-[#EF5121] hover:bg-[#ff673d] text-white transition-all flex items-center gap-2 shadow-lg animate-pulse"
+                className="rounded-full h-12 px-8 text-sm font-bold bg-[#EF5121] hover:bg-[#ff673d] text-white transition flex items-center gap-2 shadow-lg animate-pulse"
               >
                 <CheckCircle className="w-4 h-4" />
                 {buttons.submit}

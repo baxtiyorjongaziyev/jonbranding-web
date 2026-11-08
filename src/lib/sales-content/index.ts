@@ -57,6 +57,13 @@ export const SERVICE_CATEGORIES: Partial<Record<ServiceId, string[]>> = {
   'packaging-extra': ['packaging'],
 };
 
+const CATEGORIES_BY_SERVICE = new Map<string, string[]>(Object.entries(SERVICE_CATEGORIES));
+
+/** Xizmatga mos portfolio kategoriyalari; mosi bo'lmasa bo'sh ro'yxat (masalan patent). */
+export function serviceCategories(serviceId: string): string[] {
+  return CATEGORIES_BY_SERVICE.get(serviceId) ?? [];
+}
+
 export const ALL_SERVICES = uz.serviceGroups.flatMap((group) =>
   group.items.map((item) => ({ ...item, group: group.title }))
 );
