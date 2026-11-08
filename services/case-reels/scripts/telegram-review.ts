@@ -11,6 +11,7 @@ import './lib/env';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import type { ManifestEntry } from './lib/batch';
+import { inOut } from './lib/paths';
 import { sanity } from './lib/sanity';
 import {
   decisionText, fullCaptionChunks, handleCallback, keyboard, mockTelegram, readyItems, shortId, telegramApi, variantText,
@@ -43,7 +44,7 @@ if (mode === 'send') {
   const manifest = readJson<ManifestEntry[]>('out/manifest.json', []);
   const sent = new Set(readJson<string[]>(SENT, []));
   const index = readJson<Record<string, string>>(INDEX, {});
-  const items = readyItems(manifest, (f) => readJson<CaptionFile>(f, { lang: '?', text: '', hashtags: [] })).filter(
+  const items = readyItems(manifest, (f) => readJson<CaptionFile>(inOut(f), { lang: '?', text: '', hashtags: [] })).filter(
     (i) => !sent.has(i.slug),
   );
 
@@ -65,7 +66,7 @@ if (mode === 'send') {
     try {
       // Har bir til alohida: egasi tasdiqlashdan oldin barcha variantlarni ko'radi.
       for (const v of item.variants) {
-        await sendVideo(v.video, variantText(item.slug, v.caption));
+        await sendVideo(inOut(v.video), variantText(item.slug, v.caption));
         // Video izohi 1024 belgi bilan cheklangan — to'liq matn alohida xabar(lar)da.
         for (const text of fullCaptionChunks(item.slug, v.caption)) await tg('sendMessage', { chat_id: chatId, text });
       }
@@ -139,7 +140,7 @@ if (mode === 'send') {
           ownerId,
           resolve: (id) => {
             const idx = index();
-            return Object.hasOwn(idx, id) ? idx[id] : undefined;
+            return new Map(Object.entries(idx)).get(id);
           },
           setStatus,
           onRework,

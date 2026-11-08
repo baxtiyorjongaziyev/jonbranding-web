@@ -60,12 +60,14 @@ const CTA = 75;
 const hasBeforeAfter = (p: CaseReelProps) => Boolean(p.beforeImage && p.afterImage);
 const galleryOf = (p: CaseReelProps) => p.gallery.slice(0, MAX_GALLERY);
 
+// Kvalifikatsiya minimumi 7 s × 30 fps — qisqa keys ham quality gate'dan o'tadi.
+const MIN_FRAMES = 210;
+
 export const caseReelDuration = (p: CaseReelProps): number =>
-  HOOK +
-  (hasBeforeAfter(p) ? BEFORE_AFTER : 0) +
-  galleryOf(p).length * GALLERY_ITEM +
-  (p.result ? RESULT : 0) +
-  CTA;
+  Math.max(
+    MIN_FRAMES,
+    HOOK + (hasBeforeAfter(p) ? BEFORE_AFTER : 0) + galleryOf(p).length * GALLERY_ITEM + (p.result ? RESULT : 0) + CTA,
+  );
 
 /** Pastdan ozgina ko'tarilib, xiralikdan chiqadi. */
 const Rise: FC<{ delay?: number; children: ReactNode; style?: CSSProperties }> = ({

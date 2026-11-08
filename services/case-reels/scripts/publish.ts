@@ -17,6 +17,7 @@ import './lib/env';
 import { createReadStream, existsSync, readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import type { ManifestEntry } from './lib/batch';
+import { inOut } from './lib/paths';
 import { graphApi, igCaption, mockGraph, publishReel, slotKey } from './lib/meta';
 import { sanity } from './lib/sanity';
 import type { CaptionFile } from './lib/telegram';
@@ -28,7 +29,15 @@ const mock = process.env.MOCK_META === 'true';
 const manifest: ManifestEntry[] = existsSync('out/manifest.json') ? JSON.parse(readFileSync('out/manifest.json', 'utf8')) : [];
 const assetsFor = (slug: string) => {
   const e = manifest.find((m) => m.slug === slug && m.lang === lang && m.gate.ok && !m.error && m.file && m.captionFile);
-  return e && existsSync(e.file!) && existsSync(e.captionFile!) ? { file: e.file!, captionFile: e.captionFile! } : null;
+  if (!e) return null;
+  try {
+    const file = inOut(e.file!);
+    const captionFile = inOut(e.captionFile!);
+    return existsSync(file) && existsSync(captionFile) ? { file, captionFile } : null;
+  } catch {
+    console.warn(`↷ ${slug}: manifest yo'li out/ tashqarisida — o'tkazib yuborildi`);
+    return null;
+  }
 };
 
 if (mock) {
@@ -121,6 +130,8 @@ if (!picked) {
   process.exit(0);
 }
 
+const chosen = picked;
+
 type Stage = 'pre' | 'attempted' | 'published';
 let stage = 'pre' as Stage; // callback'lar ichida o'zgaradi
 let mediaId: string | null = null;
@@ -133,17 +144,17 @@ const publishedPatch = (id: string, url: string) => ({
 let videoUrl = '';
 
 try {
-  const cap = JSON.parse(readFileSync(picked.captionFile, 'utf8')) as CaptionFile;
+  const cap = JSON.parse(readFileSync(chosen.captionFile, 'utf8')) as CaptionFile;
   const caption = igCaption(cap.text, cap.hashtags);
   // Instagram videoni ommaviy URL'dan oladi — Sanity CDN'ga yuklanadi.
-  const asset = await db.assets.upload('file', createReadStream(picked.file), { filename: basename(picked.file), contentType: 'video/mp4' });
+  const asset = await db.assets.upload('file', createReadStream(chosen.file), { filename: basename(chosen.file), contentType: 'video/mp4' });
   videoUrl = asset.url;
 
   const { permalink } = await publishReel(asset.url, caption, {
     graph: graphApi(metaToken),
     igUserId,
     sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
-    stillClaimed: async () => (await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: picked!._id })) === 'scheduled',
+    stillClaimed: async () => (await db.fetch<string | null>(`*[_id == $id][0].reel.status`, { id: chosen._id })) === 'scheduled',
     onPublishAttempt: () => {
       stage = 'attempted';
     },
@@ -151,43 +162,44 @@ try {
       // Avval xotirada: Sanity yozuvi muvaffaqiyatsiz bo'lsa ham post chiqqani unutilmaydi.
       stage = 'published';
       mediaId = id;
-      await db.patch(picked!._id).set(publishedPatch(id, asset.url)).commit();
+      await db.patch(chosen._id).set(publishedPatch(id, asset.url)).commit();
     },
   });
-  if (permalink) await db.patch(picked._id).set({ 'reel.postUrl': permalink }).commit().catch(() => {});
-  console.log(`✅ ${picked.slug} chiqarildi: ${permalink ?? `media ${mediaId} (havola keyinroq)`}`);
+  if (permalink) await db.patch(chosen._id).set({ 'reel.postUrl': permalink }).commit().catch(() => {});
+  console.log(`✅ ${chosen.slug} chiqarildi: ${permalink ?? `media ${mediaId} (havola keyinroq)`}`);
 } catch (e) {
   const msg = (e as Error).message;
   if ((stage as Stage) === 'published') {
     // Post Instagram'da BOR — hech qachon navbatga qaytarilmaydi. Yozuv qayta urinib ko'riladi, slot band qoladi.
     for (let i = 0; i < 3; i++) {
       try {
-        await db.patch(picked._id).set(publishedPatch(mediaId!, videoUrl)).commit();
-        console.error(`⚠️  ${picked.slug}: chiqarildi (media ${mediaId}), Sanity yozuvi qayta urinishda saqlandi.`);
+        if (mediaId === null) break;
+        await db.patch(chosen._id).set(publishedPatch(mediaId, videoUrl)).commit();
+        console.error(`⚠️  ${chosen.slug}: chiqarildi (media ${mediaId}), Sanity yozuvi qayta urinishda saqlandi.`);
         process.exit(0);
       } catch {
         await new Promise((r) => setTimeout(r, 2000 * 2 ** i));
       }
     }
-    console.error(`🚨 ${picked.slug}: Instagram'da CHIQDI (media ${mediaId}), lekin Sanity'ga yozilmadi. Holat "scheduled" qoldi — qo'lda published qiling.`);
+    console.error(`🚨 ${chosen.slug}: Instagram'da CHIQDI (media ${mediaId}), lekin Sanity'ga yozilmadi. Holat "scheduled" qoldi — qo'lda published qiling.`);
     process.exit(1);
   }
   if ((stage as Stage) === 'attempted') {
     // Natija noaniq (media_publish javobi kelmadi): takroriy post xavfi — keys ham, slot ham band qoladi.
-    await db.patch(picked._id).set({ 'reel.note': `Natija noaniq: ${msg} — Instagram'ni tekshiring` }).commit().catch(() => {});
-    console.error(`🚨 ${picked.slug}: media_publish natijasi noaniq (${msg}). Instagram'ni tekshiring; keys "scheduled" qoldi.`);
+    await db.patch(chosen._id).set({ 'reel.note': `Natija noaniq: ${msg} — Instagram'ni tekshiring` }).commit().catch(() => {});
+    console.error(`🚨 ${chosen.slug}: media_publish natijasi noaniq (${msg}). Instagram'ni tekshiring; keys "scheduled" qoldi.`);
     process.exit(1);
   }
   // Chiqarilmagani aniq: keys navbatga qaytadi (faqat hali biz band qilgan revision bo'lsa), slot bo'shatiladi.
   try {
-    const cur = await db.fetch<{ _rev: string; status?: string } | null>(`*[_id == $id][0]{ _rev, "status": reel.status }`, { id: picked._id });
+    const cur = await db.fetch<{ _rev: string; status?: string } | null>(`*[_id == $id][0]{ _rev, "status": reel.status }`, { id: chosen._id });
     if (cur?.status === 'scheduled') {
-      await db.patch(picked._id).ifRevisionId(cur._rev).set({ 'reel.status': 'approved', 'reel.note': `Chiqarishda xato: ${msg}` }).commit();
+      await db.patch(chosen._id).ifRevisionId(cur._rev).set({ 'reel.status': 'approved', 'reel.note': `Chiqarishda xato: ${msg}` }).commit();
     }
   } catch (e2) {
-    console.error(`⚠️  ${picked.slug}: holatni approved ga qaytarib bo'lmadi (${(e2 as Error).message}) — Studio'da "scheduled" ni qo'lda "approved" qiling. Instagram'ga hech narsa chiqmagan.`);
+    console.error(`⚠️  ${chosen.slug}: holatni approved ga qaytarib bo'lmadi (${(e2 as Error).message}) — Studio'da "scheduled" ni qo'lda "approved" qiling. Instagram'ga hech narsa chiqmagan.`);
   }
   await releaseSlot();
-  console.error(`❌ ${picked.slug}: ${msg}`);
+  console.error(`❌ ${chosen.slug}: ${msg}`);
   process.exit(1);
 }
