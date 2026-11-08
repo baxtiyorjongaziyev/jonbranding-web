@@ -44,7 +44,16 @@ const saveJson = (file: string, data: unknown) => writeFileSync(file, JSON.strin
 const versionOf = (manifest: ManifestEntry[], slug: string): string | undefined => {
   const files = manifest.filter((e) => e.slug === slug && e.file && e.gate.ok && !e.error).map((e) => e.file!);
   if (!files.length) return undefined;
-  return itemVersion(files.map((f) => (existsSync(f) ? readFileSync(f) : Buffer.alloc(0))));
+  return itemVersion(
+    files.map((f) => {
+      try {
+        const safe = inOut(f);
+        return existsSync(safe) ? readFileSync(safe) : Buffer.alloc(0);
+      } catch {
+        return Buffer.alloc(0); // out/ tashqarisidagi yo'l — versiyaga kirmaydi
+      }
+    }),
+  );
 };
 
 if (mode === 'send') {
