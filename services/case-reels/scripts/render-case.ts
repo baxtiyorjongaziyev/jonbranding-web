@@ -4,6 +4,7 @@
  * Natija: out/<slug>-<til>.mp4
  */
 import './lib/env';
+import { renameSync, unlinkSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, type CaseDoc } from './lib/case-data';
 import { renderCase } from './lib/render';
@@ -40,4 +41,20 @@ if (status === 'draft' && !process.argv.includes('--force')) {
   process.exit(1);
 }
 
-console.log(`Tayyor: ${renderCase(doc, lang)}`);
+// Draft ustiga qayta render: avval vaqtinchalik faylga yoziladi. Render tugagach holat yana tekshiriladi:
+// egasi bu orada tasdiqlagan bo'lsa, ko'rib chiqilgan eski fayl o'zgarmaydi va yangi fayl tashlanadi.
+const final = `out/${slug}-${lang}.mp4`;
+if (status === 'draft') {
+  const tmp = `out/${slug}-${lang}.rendering.mp4`;
+  renderCase(doc, lang, tmp);
+  const now = await sanity.withConfig({ useCdn: false }).fetch<string | null>(`*[_id == $id][0].reel.status`, { id: doc._id });
+  if (now === 'approved' || now === 'scheduled' || now === 'published') {
+    unlinkSync(tmp);
+    console.error(`⛔ ${slug}: render davomida holat ${now} bo'ldi — ko'rib chiqilgan fayl saqlandi, yangi render tashlandi.`);
+    process.exit(1);
+  }
+  renameSync(tmp, final);
+  console.log(`Tayyor: ${final}`);
+} else {
+  console.log(`Tayyor: ${renderCase(doc, lang)}`);
+}
