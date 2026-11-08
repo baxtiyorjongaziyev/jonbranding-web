@@ -1199,6 +1199,10 @@
           "a": "Tekshiruv — {check} so‘m (1 sinf, har qo‘shimcha sinf {addon}). Ro‘yxatdan o‘tkazish: oddiy tartibda {standard} so‘m, tezkor tartibda {express} so‘m. Davlat bojlari bu narxga kirmaydi va alohida to‘lanadi. Aniq summani yuqoridagi kalkulyator sinflar soni bo‘yicha hisoblaydi."
         },
         {
+          "q": "Patent va tovar belgisi bir narsami?",
+          "a": "Odatda ‘patent’ deb brend nomi yoki logotipni ro‘yxatdan o‘tkazish nazarda tutiladi — rasmiy atamasi ‘tovar belgisi’. Ixtiro uchun patent esa boshqa jarayon. Bu kalkulyator tovar belgisi, ya’ni brend nomi va logotip himoyasi narxini hisoblaydi."
+        },
+        {
           "q": "Guvohnoma qancha vaqtda chiqadi?",
           "a": "Oddiy tartibda taxminan {standardDuration}, tezkor tartibda {expressDuration}. Mijozlarimizga olib bergan {count} ta guvohnoma ichida eng tezi {fastest} kunda chiqqan."
         },
@@ -1216,8 +1220,8 @@
         }
       ]
     },
-    "seoTitle": "Patent Narxi Hisoblagich — Bepul va Tez | Jon.Branding",
-    "seoDescription": "Tovar belgisini roʻyxatdan oʻtkazish narxini 30 soniyada hisoblang. Davlat boji + xizmat haqi — aniq raqamlar.",
+    "seoTitle": "Patent kalkulyatori: tovar belgisi narxi — bepul | Jon.Branding",
+    "seoDescription": "Patent kalkulyatori: O‘zbekistonda tovar belgisini ro‘yxatdan o‘tkazish narxini 30 soniyada hisoblang. Davlat boji va xizmat haqi alohida ko‘rsatiladi, yashirin to‘lovlarsiz.",
     "metadata": {
       "title": "Patent Kalkulyatori",
       "description": "Tovar belgisini ro'yxatdan o'tkazish xarajatlarini hisoblang."
@@ -1225,7 +1229,7 @@
     "title": "Patent Kalkulyatori",
     "subtitle": "Brendingizni yuridik himoya qilish xarajatlarini darhol hisoblang.",
     "landing": {
-      "title": "Tovar Belgingiz Narxini 30 Soniyada Biling",
+      "title": "Patent kalkulyatori: tovar belgisi narxini 30 soniyada biling",
       "subtitle": "Brendingizni raqobatchilardan himoya qiling. Davlat boji va xizmat haqini aniq hisoblang — yashirin to'lovlarsiz.",
       "trustSpeed": "30 soniyada natija",
       "trustAccuracy": "Davlat boji bo'yicha aniq hisob",
