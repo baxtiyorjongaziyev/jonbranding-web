@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { ManifestEntry } from './batch';
 import {
-  callbackData, decisionText, fullCaptionChunks, handleCallback, keyboard, mockTelegram, parseCallback, readyItems, shortId, variantText,
+  callbackData, decisionText, fullCaptionChunks, handleCallback, itemVersion, keyboard, mockTelegram, parseCallback, readyItems, shortId, variantText,
   type CallbackQuery, type ReviewDeps,
 } from './telegram';
 
@@ -10,6 +10,8 @@ const entry = (slug: string, lang: 'uz' | 'ru', over: Partial<ManifestEntry> = {
   slug, lang, file: `out/${slug}-${lang}.mp4`, captionFile: `out/${slug}-${lang}.caption.json`, gate: ok, ...over,
 });
 const caption = (file: string) => ({ lang: file.includes('-ru.') ? 'ru' : 'uz', text: 'Matn <b>', hashtags: ['#a'], needsReview: [] });
+
+const VER = '0a1b2c3d';
 
 describe('readyItems', () => {
   it('keeps only cases whose every language passed', () => {
@@ -24,15 +26,15 @@ describe('readyItems', () => {
 });
 
 describe('callback data', () => {
-  it('round-trips via a compact id', () => expect(parseCallback(callbackData('ok', 'den-aroma'))).toEqual({ action: 'ok', id: shortId('den-aroma') }));
+  it('round-trips via a compact id', () => expect(parseCallback(callbackData('ok', 'den-aroma', VER))).toEqual({ action: 'ok', id: shortId('den-aroma'), ver: VER }));
   it('stays within 64 bytes for 96-char slugs', () => {
-    for (const a of ['ok', 'redo', 'skip'] as const) expect(Buffer.byteLength(callbackData(a, 'x'.repeat(96)))).toBeLessThanOrEqual(64);
+    for (const a of ['ok', 'redo', 'skip'] as const) expect(Buffer.byteLength(callbackData(a, 'x'.repeat(96), VER))).toBeLessThanOrEqual(64);
   });
   it('rejects foreign data', () => {
     expect(parseCallback('hack:ok:x')).toBeNull();
     expect(parseCallback(undefined)).toBeNull();
   });
-  it('keyboard has three buttons', () => expect(keyboard('a').inline_keyboard[0]).toHaveLength(3));
+  it('keyboard has three buttons', () => expect(keyboard('a', VER).inline_keyboard[0]).toHaveLength(3));
 });
 
 describe('preview texts', () => {
@@ -58,11 +60,22 @@ describe('preview texts', () => {
   });
 });
 
+describe('preview version binding', () => {
+  it('itemVersion changes when a video changes', () => {
+    expect(itemVersion([Buffer.from('a')])).not.toBe(itemVersion([Buffer.from('b')]));
+    expect(itemVersion([Buffer.from('a')])).toBe(itemVersion([Buffer.from('a')]));
+  });
+  it('callbacks without a version are rejected as stale, not ignored', () => {
+    expect(parseCallback('rv:ok:' + shortId('den'))).toEqual({ action: 'ok', id: shortId('den'), ver: undefined });
+  });
+});
+
 describe('handleCallback', () => {
-  const q = (fromId: number, data = callbackData('ok', 'den')): CallbackQuery => ({ id: 'q1', from: { id: fromId }, data, message: { chat: { id: -1 }, message_id: 5 } });
+  const q = (fromId: number, data = callbackData('ok', 'den', VER)): CallbackQuery => ({ id: 'q1', from: { id: fromId }, data, message: { chat: { id: -1 }, message_id: 5 } });
   const deps = (over: Partial<ReviewDeps> = {}) => ({
     ownerId: 42,
     resolve: vi.fn((id: string) => (id === shortId('den') ? 'den' : undefined)),
+    currentVersion: vi.fn(() => VER),
     setStatus: vi.fn(async () => 'changed' as const),
     onRework: vi.fn(),
     answer: vi.fn(async () => {}),
@@ -83,14 +96,14 @@ describe('handleCallback', () => {
     ['skip', 'rejected'],
   ] as const)('%s → %s', async (action, status) => {
     const d = deps();
-    expect(await handleCallback(q(42, callbackData(action, 'den')), d)).toBe('applied');
+    expect(await handleCallback(q(42, callbackData(action, 'den', VER)), d)).toBe('applied');
     expect(d.setStatus).toHaveBeenCalledWith('den', status, expect.stringContaining('Telegram'));
     expect(d.markMessage).toHaveBeenCalled();
   });
 
   it('redo re-opens the case for a new preview', async () => {
     const d = deps();
-    await handleCallback(q(42, callbackData('redo', 'den')), d);
+    await handleCallback(q(42, callbackData('redo', 'den', VER)), d);
     expect(d.onRework).toHaveBeenCalledWith('den');
   });
 
@@ -100,9 +113,15 @@ describe('handleCallback', () => {
     expect(d.markMessage).not.toHaveBeenCalled();
   });
 
+  it('old preview after a video replacement is stale and changes nothing', async () => {
+    const d = deps();
+    d.currentVersion = vi.fn(() => 'ffffffff');
+    expect(await handleCallback(q(42), d)).toBe('stale');
+    expect(d.setStatus).not.toHaveBeenCalled();
+  });
   it('unknown id changes nothing', async () => {
     const d = deps();
-    expect(await handleCallback(q(42, callbackData('ok', 'other')), d)).toBe('unknown');
+    expect(await handleCallback(q(42, callbackData('ok', 'other', VER)), d)).toBe('unknown');
     expect(d.setStatus).not.toHaveBeenCalled();
   });
 

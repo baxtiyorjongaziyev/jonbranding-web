@@ -63,7 +63,7 @@ describe('runBatch', () => {
     const d = deps([doc('a')]);
     await runBatch({ dryRun: false, langs: ['uz'] }, d);
     expect(d.writeJson).toHaveBeenCalledWith('out/manifest.json', [
-      { slug: 'a', lang: 'uz', file: 'out/a-uz.mp4', captionFile: 'out/a-uz.caption.json', gate: { ok: true, reasons: [] } },
+      { slug: 'a', lang: 'uz', file: 'out/a-uz.mp4', captionFile: 'out/a-uz.caption.json', gate: { ok: true, reasons: [] }, renderedAt: expect.any(String) },
     ]);
   });
 

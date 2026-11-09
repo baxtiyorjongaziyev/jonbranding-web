@@ -12,6 +12,8 @@ export type ManifestEntry = {
   captionFile: string | null;
   gate: GateResult;
   error?: string;
+  /** Video oxirgi render qilingan vaqt: Telegram preview versiyasi shundan olinadi (video almashsa o'zgaradi). */
+  renderedAt?: string;
 };
 
 export type BatchOptions = { dryRun: boolean; langs: ReelLang[]; limit?: number };
@@ -62,6 +64,7 @@ export async function runBatch(opts: BatchOptions, deps: BatchDeps): Promise<Man
       const entry: ManifestEntry = { slug: doc.slug, lang, file: null, captionFile: null, gate: { ok: false, reasons: [] } };
       try {
         entry.file = await deps.render(doc, lang);
+        entry.renderedAt = new Date().toISOString();
         entry.gate = await deps.gate(entry.file);
         if (entry.gate.ok) {
           entry.captionFile = `out/${doc.slug}-${lang}.caption.json`;
