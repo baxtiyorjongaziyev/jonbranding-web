@@ -40,20 +40,13 @@ const INDEX = 'out/review-index.json'; // qisqa ID → slug
 const OFFSET = 'out/review-offset.json';
 const saveJson = (file: string, data: unknown) => writeFileSync(file, JSON.stringify(data, null, 2));
 
-/** Slug videolarining versiyasi: send va tugma tekshiruvi bir xil manifest tartibidan o'qiydi. */
+/**
+ * Slug videolarining versiyasi: manifestdagi fayl va render vaqtidan (fayl o'qilmaydi).
+ * Videoni faqat batch va render-case yozadi va ikkalasi ham `renderedAt` ni yangilaydi.
+ */
 const versionOf = (manifest: ManifestEntry[], slug: string): string | undefined => {
-  const files = manifest.flatMap((e) => (e.slug === slug && e.file && e.gate.ok && !e.error ? [e.file] : []));
-  if (!files.length) return undefined;
-  return itemVersion(
-    files.map((f) => {
-      try {
-        const safe = inOut(f);
-        return existsSync(safe) ? readFileSync(safe) : Buffer.alloc(0);
-      } catch {
-        return Buffer.alloc(0); // out/ tashqarisidagi yo'l — versiyaga kirmaydi
-      }
-    }),
-  );
+  const parts = manifest.flatMap((e) => (e.slug === slug && e.file && e.gate.ok && !e.error ? [`${e.file}|${e.renderedAt ?? ''}`] : []));
+  return parts.length ? itemVersion(parts.map((x) => Buffer.from(x))) : undefined;
 };
 
 if (mode === 'send') {

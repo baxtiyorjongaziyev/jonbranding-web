@@ -54,6 +54,13 @@ if (status === 'draft') {
     process.exit(1);
   }
   renameSync(tmp, final);
+  // Manifestda render vaqti yangilanadi: Telegram preview versiyasi shundan olinadi, eski tugmalar eskiradi.
+  const manifestFile = 'out/manifest.json';
+  if (existsSync(manifestFile)) {
+    const entries = JSON.parse(readFileSync(manifestFile, 'utf8')) as { slug: string; lang: string | null; renderedAt?: string }[];
+    for (const e of entries) if (e.slug === slug && e.lang === lang) e.renderedAt = new Date().toISOString();
+    writeFileSync(manifestFile, JSON.stringify(entries, null, 2));
+  }
   // Yangi video — yangi preview kerak: "yuborilgan" ro'yxatidan chiqariladi (eski tugmalar esa versiya bilan eskiradi).
   const sentFile = 'out/review-sent.json';
   if (existsSync(sentFile)) {
