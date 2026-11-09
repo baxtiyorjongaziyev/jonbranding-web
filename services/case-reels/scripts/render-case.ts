@@ -4,7 +4,7 @@
  * Natija: out/<slug>-<til>.mp4
  */
 import './lib/env';
-import { renameSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, type CaseDoc } from './lib/case-data';
 import { renderCase } from './lib/render';
@@ -54,6 +54,19 @@ if (status === 'draft') {
     process.exit(1);
   }
   renameSync(tmp, final);
+  // Manifestda render vaqti yangilanadi: Telegram preview versiyasi shundan olinadi, eski tugmalar eskiradi.
+  const manifestFile = 'out/manifest.json';
+  if (existsSync(manifestFile)) {
+    const entries = JSON.parse(readFileSync(manifestFile, 'utf8')) as { slug: string; lang: string | null; renderedAt?: string }[];
+    for (const e of entries) if (e.slug === slug && e.lang === lang) e.renderedAt = new Date().toISOString();
+    writeFileSync(manifestFile, JSON.stringify(entries, null, 2));
+  }
+  // Yangi video — yangi preview kerak: "yuborilgan" ro'yxatidan chiqariladi (eski tugmalar esa versiya bilan eskiradi).
+  const sentFile = 'out/review-sent.json';
+  if (existsSync(sentFile)) {
+    const sent = JSON.parse(readFileSync(sentFile, 'utf8')) as string[];
+    writeFileSync(sentFile, JSON.stringify(sent.filter((x) => x !== slug), null, 2));
+  }
   console.log(`Tayyor: ${final}`);
 } else {
   console.log(`Tayyor: ${renderCase(doc, lang)}`);
