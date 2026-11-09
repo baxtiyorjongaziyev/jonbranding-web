@@ -1,5 +1,10 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-09 | Haftalik SEO: logotip va brendbuk sahifalari (ru/en/zh)
+- GSC (2026-10): «заказать логотип в ташкенте» 38.5, «разработка брендбука ташкент цена» 42.0 o'rinda.
+- `/xizmatlar/logo-dizayni` va `/brandbook` ru/en/zh versiyalariga narx, muddat, tarkib va FAQ bloki (`LocalizedServiceFacts`) hamda FAQPage JSON-LD qo'shildi. Narx/muddat `sales-content` dan, metadata'da `{price}`/`{duration}` shablon.
+- Metadata (4 til) tijoriy so'rovga moslab yangilandi.
+
 ## 2026-11-07 | GitHub Repositoriyani Ideal Darajaga Keltirish (Antigravity)
 - **Foydalanuvchi talabi:**
   - "github ideal darajaga keltir"

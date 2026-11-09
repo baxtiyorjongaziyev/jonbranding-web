@@ -6,6 +6,8 @@ import { BRANDBOOK_PAGE } from '@/lib/service-pages/brandbook';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { fetchServiceWorks } from '@/lib/service-pages/works';
 import { pageTitle } from '@/lib/seo';
+import { fillServiceTokens } from '@/lib/service-pages/localized-facts';
+import LocalizedServiceFacts, { buildServiceFaqs } from '@/components/service-landing/localized-service-facts';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -15,11 +17,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.brandbookPage?.metadata;
+  const currency = dictionary.serviceFacts?.currency ?? '';
+  const fill = (v: string) => fillServiceTokens(v, lang, 'brandbook', currency);
 
   return {
-    title: pageTitle(metadata?.title || "Brendbuk Yaratish | Professional Brend Qo'llanmasi"),
-    description: metadata?.description || "Brendingiz izchilligini ta'minlovchi professional brendbuklar yaratamiz.",
-    keywords: metadata?.keywords || "brandbook, brendbuk, gaydlayn, brend qo'llanmasi, aydentika",
+    title: pageTitle(metadata?.title ? fill(metadata.title) : "Brendbuk ishlab chiqish | Brend qo'llanmasi"),
+    description: metadata?.description ? fill(metadata.description) : "Brend izchilligini ta'minlovchi brendbuk: logotip qoidalari, ranglar, shriftlar va maketlar.",
+    keywords: metadata?.keywords ? fill(metadata.keywords) : "brandbook, brendbuk, gaydlayn, brend qo'llanmasi, aydentika",
   };
 }
 
@@ -30,20 +34,32 @@ export default async function Page(props: Props) {
     lang === 'uz' ? fetchServiceWorks(BRANDBOOK_PAGE.serviceKey, lang) : Promise.resolve([]),
   ]);
 
+  const fill = (v: string) => fillServiceTokens(v, lang, 'brandbook', dictionary.serviceFacts?.currency ?? '');
+  const facts = dictionary.brandbookPage.facts;
+  const labels = dictionary.serviceFacts;
+  const isUz = lang === 'uz';
+  const localizedFaqs = !isUz && facts && labels ? buildServiceFaqs(lang as Locale, 'brandbook', facts, labels) : undefined;
+
   return (
     <>
       <ServiceJsonLd
         lang={lang as Locale}
         path="/xizmatlar/brandbook"
         name={dictionary.header.brandbook}
-        description={dictionary.brandbookPage.metadata.description}
-        faqs={lang === 'uz' ? BRANDBOOK_PAGE.faqs : undefined}
+        description={fill(dictionary.brandbookPage.metadata.description)}
+        faqs={isUz ? BRANDBOOK_PAGE.faqs : localizedFaqs}
+        faqLang={lang as Locale}
       />
-      {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
-      {lang === 'uz' ? (
+      {/* Uzbek-first: batafsil sahifa avval o'zbekchada. */}
+      {isUz ? (
         <ServiceLanding content={BRANDBOOK_PAGE} works={works} />
       ) : (
-        <BrandbookClient lang={lang as Locale} translations={dictionary.brandbookPage} />
+        <>
+          <BrandbookClient lang={lang as Locale} translations={dictionary.brandbookPage} />
+          {facts && labels && (
+            <LocalizedServiceFacts lang={lang as Locale} serviceId="brandbook" copy={facts} labels={labels} />
+          )}
+        </>
       )}
     </>
   );
