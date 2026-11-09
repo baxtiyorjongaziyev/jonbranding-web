@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { FC, ReactNode } from 'react';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { pageTitle } from '@/lib/seo';
+import { fillServiceTokens } from '@/lib/service-pages/localized-facts';
 
 type Props = {
   children: ReactNode;
@@ -12,11 +13,14 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dict = await getDictionary(lang as Locale);
-  const t = dict.brandbookPage?.metadata || { 
+  const raw = dict.brandbookPage?.metadata || { 
     title: "Brandbook Development", 
     description: "Rules for your brand identity",
     keywords: "brandbook, guideline"
   };
+  const currency = dict.serviceFacts?.currency ?? '';
+  const fill = (v?: string) => (v ? fillServiceTokens(v, lang, 'brandbook', currency) : v);
+  const t = { title: fill(raw.title) as string, description: fill(raw.description) as string, keywords: fill(raw.keywords) };
 
   const canonicalUrl = `https://www.jonbranding.uz/${lang === 'uz' ? '' : lang + '/'}xizmatlar/brandbook`;
 

@@ -140,9 +140,31 @@
   },
   "brandbookPage": {
     "metadata": {
-      "title": "Brendbuk yaratish",
-      "description": "Brendbuk — bu brendingiz konstitutsiyasi. Biz brend yaxlitligini ta'minlaydigan kompleks brendbuklar yaratamiz, marketing xarajatlarini tejaymiz.",
-      "keywords": "brandbook, gaydlayn, firma uslubi, brend dizayni, logotipdan foydalanish qoidalari, brending agentligi"
+      "title": "Brendbuk ishlab chiqish Toshkentda — {price} {currency}, {duration}",
+      "description": "Toshkentda brendbuk: {price} {currency}, muddat — {duration}. 60+ betlik PDF: logotip qoidalari, ranglar, shriftlar, maketlar va tone of voice. Shartnoma asosida.",
+      "keywords": "brendbuk narxi toshkent, brendbuk ishlab chiqish, brendbuk nima, brend qo'llanmasi"
+    },
+    "facts": {
+      "title": "Toshkentda brendbuk: narxi, muddati va tarkibi",
+      "intro": "Jon.Branding'da brendbuk {price} {currency} turadi, muddati — {duration}. Brendbuk — brend qoidalari bitta hujjatda: yangi dizayner kelsa ham tizim buzilmaydi.",
+      "faqs": [
+        {
+          "q": "Toshkentda brendbuk ishlab chiqish qancha turadi?",
+          "a": "Jon.Branding'da brendbuk {price} {currency} turadi, muddati — {duration}. Aniq muddat va hajm shartnomada yoziladi."
+        },
+        {
+          "q": "Narxga nimalar kiradi?",
+          "a": "{includes}."
+        },
+        {
+          "q": "Brendbuk nima — oddiy so'z bilan?",
+          "a": "Brendbuk — brend qoidalari yozilgan hujjat: logotipni qanday ishlatish, qaysi ranglar va shriftlar, mijoz bilan qanday gaplashish. Shu sababli har bir yangi dizayner yoki pudratchi bir xil uslubda ishlaydi."
+        },
+        {
+          "q": "Brendbuk logotip va firma uslubidan nimasi bilan farq qiladi?",
+          "a": "Logotip — bitta belgi. Firma uslubi — ranglar, shriftlar va maketlar. Brendbuk esa shularni qanday qo'llash qoidalarini bitta hujjatga jamlaydi."
+        }
+      ]
     },
     "title": "Nega 90% bizneslar brendingda xato qilib, millionlab so'm yo'qotadi?",
     "subtitle": "Brendbuk - bu faqat logotiplar hujjati emas, balki brendingiz izchilligi va yaxlitligini saqlaydigan konstitutsiya.",
@@ -1092,8 +1114,31 @@
   },
   "logoDesignPage": {
     "metadata": {
-      "title": "Logotip dizayni",
-      "description": "Biznesingiz mohiyatini aks ettiruvchi, strategik va esda qolarli logotip."
+      "title": "Toshkentda logotip buyurtma qilish — {price} {currency}, {duration}",
+      "description": "Toshkentda logotip dizayni: {price} {currency}, muddat — {duration}. 3 ta konsepsiya, barcha fayl formatlari va qo'llash qoidalari. Shartnoma asosida, to'lov ikki bosqichda.",
+      "keywords": "logotip buyurtma qilish toshkent, logotip dizayni toshkent, logotip narxi, logotip ishlab chiqish"
+    },
+    "facts": {
+      "title": "Toshkentda logotip: narxi, muddati va tarkibi",
+      "intro": "Jon.Branding'da logotip {price} {currency} turadi, muddati — {duration}. 3 ta yo'nalish ko'rsatamiz, siz bittasini tanlaysiz, biz uni oxirigacha sayqallab, barcha fayllarni topshiramiz.",
+      "faqs": [
+        {
+          "q": "Toshkentda logotip buyurtma qilish qancha turadi?",
+          "a": "Jon.Branding'da logotip {price} {currency} turadi, muddati — {duration}. Aniq muddat va hajm shartnomada yoziladi."
+        },
+        {
+          "q": "Narxga nimalar kiradi?",
+          "a": "{includes}."
+        },
+        {
+          "q": "Ish qanday boradi?",
+          "a": "Avval brif va tahlil, keyin 3 ta konsepsiya, tanlangan yo'nalishni sayqallash va fayllarni topshirish. Siz tasdiqlamaguningizcha keyingi bosqichga o'tilmaydi. To'lov ikki bosqichda: 50% shartnomada, 50% topshirilganda."
+        },
+        {
+          "q": "Logotipni tovar belgisi sifatida ro'yxatdan o'tkazish kerakmi?",
+          "a": "Bu alohida xizmat: avval belgi band emasligini tekshiramiz, keyin ariza topshiramiz. Logotip narxiga kirmaydi."
+        }
+      ]
     },
     "title": "Logotip dizayni",
     "subtitle": "Shunchaki chiroyli rasm emas — brendingizning yuzini belgilaydigan strategik belgi.",
@@ -2733,5 +2778,13 @@
     "eyebrow": "Narxlar ochiq",
     "title": "Narx va muddat oldindan ma’lum",
     "link": "Barcha narxlar va paketlar"
+  },
+  "serviceFacts": {
+    "currency": "so'm",
+    "price": "Narxi",
+    "duration": "Muddati",
+    "includes": "Narxga nimalar kiradi",
+    "faqTitle": "Savol-javob",
+    "pricesLink": "Barcha narxlar va paketlar"
   }
 }

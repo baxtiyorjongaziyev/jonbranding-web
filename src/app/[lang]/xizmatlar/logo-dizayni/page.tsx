@@ -6,6 +6,8 @@ import { LOGO_PAGE } from '@/lib/service-pages/logo';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { fetchServiceWorks } from '@/lib/service-pages/works';
 import { pageTitle } from '@/lib/seo';
+import { fillServiceTokens } from '@/lib/service-pages/localized-facts';
+import LocalizedServiceFacts, { buildServiceFaqs } from '@/components/service-landing/localized-service-facts';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -15,11 +17,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.logoDesignPage?.metadata;
+  const currency = dictionary.serviceFacts?.currency ?? '';
+  const fill = (v: string) => fillServiceTokens(v, lang, 'logo', currency);
 
   return {
-    title: pageTitle(metadata?.title || "Logotip Dizayni | Professional Logo Yaratish"),
-    description: metadata?.description || "Biznesingiz uchun unikal va natijador logotiplar yaratamiz.",
-    keywords: metadata?.keywords || "logo dizayn, logotip yaratish, brending, aydentika",
+    title: pageTitle(metadata?.title ? fill(metadata.title) : 'Logotip dizayni | Toshkentda logotip buyurtma qilish'),
+    description: metadata?.description ? fill(metadata.description) : "Biznesingiz uchun strategik logotip: 3 ta konsepsiya, barcha fayl formatlari va qo'llash qoidalari.",
+    keywords: metadata?.keywords ? fill(metadata.keywords) : 'logo dizayn, logotip buyurtma qilish, brending, aydentika',
   };
 }
 
@@ -30,20 +34,32 @@ export default async function Page(props: Props) {
     lang === 'uz' ? fetchServiceWorks(LOGO_PAGE.serviceKey, lang) : Promise.resolve([]),
   ]);
 
+  const fill = (v: string) => fillServiceTokens(v, lang, 'logo', dictionary.serviceFacts?.currency ?? '');
+  const facts = dictionary.logoDesignPage.facts;
+  const labels = dictionary.serviceFacts;
+  const isUz = lang === 'uz';
+  const localizedFaqs = !isUz && facts && labels ? buildServiceFaqs(lang as Locale, 'logo', facts, labels) : undefined;
+
   return (
     <>
       <ServiceJsonLd
         lang={lang as Locale}
         path="/xizmatlar/logo-dizayni"
         name={dictionary.header.logo_design}
-        description={dictionary.logoDesignPage.metadata.description}
-        faqs={lang === 'uz' ? LOGO_PAGE.faqs : undefined}
+        description={fill(dictionary.logoDesignPage.metadata.description)}
+        faqs={isUz ? LOGO_PAGE.faqs : localizedFaqs}
+        faqLang={lang as Locale}
       />
       {/* Uzbek-first: batafsil sahifa avval o'zbekchada. */}
-      {lang === 'uz' ? (
+      {isUz ? (
         <ServiceLanding content={LOGO_PAGE} works={works} />
       ) : (
-        <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />
+        <>
+          <LogoClient lang={lang as Locale} translations={dictionary.logoDesignPage} />
+          {facts && labels && (
+            <LocalizedServiceFacts lang={lang as Locale} serviceId="logo" copy={facts} labels={labels} />
+          )}
+        </>
       )}
     </>
   );
