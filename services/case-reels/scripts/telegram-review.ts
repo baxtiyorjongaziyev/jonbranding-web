@@ -42,7 +42,7 @@ const saveJson = (file: string, data: unknown) => writeFileSync(file, JSON.strin
 
 /** Slug videolarining versiyasi: send va tugma tekshiruvi bir xil manifest tartibidan o'qiydi. */
 const versionOf = (manifest: ManifestEntry[], slug: string): string | undefined => {
-  const files = manifest.filter((e) => e.slug === slug && e.file && e.gate.ok && !e.error).map((e) => e.file!);
+  const files = manifest.flatMap((e) => (e.slug === slug && e.file && e.gate.ok && !e.error ? [e.file] : []));
   if (!files.length) return undefined;
   return itemVersion(
     files.map((f) => {
