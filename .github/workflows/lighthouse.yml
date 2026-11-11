@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - main
+    # Faqat sayt kodi/aktivlari o'zgarganda (hujjat/SEO-matn pushlarida emas).
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.js'
+      - 'tsconfig*.json'
+      - 'tailwind.config.ts'
+      - 'postcss.config.mjs'
+      - '.lighthouserc.json'
+      - '.github/workflows/lighthouse.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

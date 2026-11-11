@@ -4,9 +4,15 @@ on:
   pull_request:
     branches:
       - main
+    types: [opened, synchronize, reopened, ready_for_review]
   schedule:
     - cron: '0 4 * * 1'
   workflow_dispatch:
+
+# Ketma-ket pushlarda eski run'ni to'xtatadi (kvota tejash).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -14,6 +20,8 @@ permissions:
 jobs:
   npm-audit:
     name: npm audit
+    # Draft PR'da o'tkazib yuboriladi; ready_for_review'da qayta ishlaydi.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
