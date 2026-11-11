@@ -1,7 +1,7 @@
 name: CI - JonBranding-Web
 
-# Kvota tejash (2026-11): bitta job, draft PR'da o'tkazib yuboriladi, faqat
-# kod/konfig o'zgarganda ishlaydi. Oldingi 3 job (checks + build + gate) o'rniga
+# Kvota tejash (2026-11): bitta job, draft PR'da o'tkazib yuboriladi, main push'da
+# faqat kod/konfig o'zgarganda ishlaydi. Oldingi 3 job (checks + build + gate) o'rniga
 # bitta job: npm ci bir marta, gate job yo'q.
 #
 # Majburiy (branch protection) tekshiruv nomi "Typecheck, lint, test, build" —
@@ -30,20 +30,8 @@ on:
   pull_request:
     branches: [ main, master ]
     types: [ opened, synchronize, reopened, ready_for_review ]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'tests/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'next.config.js'
-      - 'tsconfig*.json'
-      - 'vitest.config.ts'
-      - 'playwright.config.ts'
-      - 'eslint.config.mjs'
-      - 'postcss.config.mjs'
-      - 'tailwind.config.ts'
-      - '.github/workflows/test.yml'
+    # PR'da paths filtri yo'q: aks holda hujjat-only PR'da majburiy tekshiruv
+    # yaratilmaydi va merge bloklanadi. Draft PR'lar baribir o'tkazib yuboriladi.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
