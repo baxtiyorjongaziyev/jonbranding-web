@@ -160,6 +160,15 @@ describe('POST /api/oisha bot defenses', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it('still alerts a contact follow-up after the IP alert was throttled', async () => {
+    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    await send({ user_id: WEB_USER, text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
+    const telegramCalls = fetchMock.mock.calls.filter(([url]) =>
+      String(url).includes('api.telegram.org'),
+    );
+    expect(telegramCalls).toHaveLength(2);
+  });
+
   it('sends at most one Telegram alert per IP within the window', async () => {
     await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
     await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });

@@ -49,6 +49,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const sessionUserIdRef = useRef<string | null>(null);
   const turnstileTokenRef = useRef<string | null>(null);
+  const [turnstileReady, setTurnstileReady] = useState(false);
   const turnstileRef = useRef<TurnstileInstance | null>(null);
   const honeypotRef = useRef<string>('');
   const talkingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -162,6 +163,8 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !userId || isLoading) return;
+    // Token tayyor bo'lmasa yubormaymiz — input saqlanadi, xabar yo'qolmaydi.
+    if (!turnstileTokenRef.current) return;
 
     const userText = inputValue.trim();
     const newUserMsg: OishaMessage = {
@@ -178,6 +181,7 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
     // Turnstile token bir martalik: har xabardan keyin qayta olinadi.
     const turnstileToken = turnstileTokenRef.current;
     turnstileTokenRef.current = null;
+    setTurnstileReady(false);
     turnstileRef.current?.reset();
 
     try {
@@ -351,17 +355,29 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
                     aria-label={translations.placeholder}
                     className="h-11 md:h-10 min-w-0 text-base md:text-sm rounded-xl border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
                   />
-                  <div className="hidden">
+                  {/* Invisible: foydalanuvchi ko'rmaydi, lekin token avtomatik olinadi. */}
+                  <div className="absolute w-0 h-0 overflow-hidden">
                     <Turnstile
                       ref={turnstileRef}
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
-                      onSuccess={(token) => { turnstileTokenRef.current = token; }}
-                      onExpire={() => { turnstileTokenRef.current = null; }}
+                      options={{ size: 'invisible' }}
+                      onSuccess={(token) => {
+                        turnstileTokenRef.current = token;
+                        setTurnstileReady(true);
+                      }}
+                      onExpire={() => {
+                        turnstileTokenRef.current = null;
+                        setTurnstileReady(false);
+                      }}
+                      onError={() => {
+                        turnstileTokenRef.current = null;
+                        setTurnstileReady(false);
+                      }}
                     />
                   </div>
                   <button
                     onClick={handleSendMessage}
-                    disabled={isLoading || !inputValue.trim()}
+                    disabled={isLoading || !inputValue.trim() || !turnstileReady}
                     className="p-3 bg-[#2554FF] text-white rounded-xl hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1"
                     aria-label={translations.sendButtonAriaLabel}
                   >

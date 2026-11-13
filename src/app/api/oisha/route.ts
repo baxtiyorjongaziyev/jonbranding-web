@@ -70,8 +70,9 @@ async function sendOishaFallbackToTelegram(userId: string, text: string, lang: L
 async function offlineReply(userId: string, text: string, lang: Locale, ip: string) {
     const hasContact = containsContact(text);
     // Telegram'ga yuborish javobni kechiktirmasin. Bir IP'dan ko'p xabar bo'lsa
-    // alert'lar oralig'i cheklanadi.
-    if (shouldSendOishaAlert(ip)) {
+    // alert'lar oralig'i cheklanadi, lekin kontakt (telefon/Telegram) bor xabar
+    // doim yuboriladi — aks holda mehmonning aloqa ma'lumoti yo'qoladi.
+    if (hasContact || shouldSendOishaAlert(ip)) {
         after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
     }
     const widget = (await getDictionary(lang)).oishaWidget;
