@@ -3,10 +3,16 @@ import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { logger } from '@/lib/logger';
 import { containsContact, isOishaWebUserId } from '@/lib/oisha';
+import { guardLeadRequest } from '@/lib/lead-guard';
+import { shouldSendOishaAlert } from '@/lib/oisha-alert-throttle';
 
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
 const MAX_TEXT_LENGTH = 1500;
+// Bot "e" kabi bo'sh xabarlarni yuboradi — bu uzunlikdan kichik matnni rad etadi.
+const MIN_TEXT_LENGTH = 2;
+// Yangi suhbat boshlash va xabar yuborish uchun IP bo'yicha qattiqroq limit.
+const POST_LIMIT_PER_MIN = 10;
 // Backend yiqilgan bo'lsa har xabarda timeout kutmaslik uchun shu muddat
 // davomida to'g'ridan-to'g'ri offline javob beriladi.
 const BACKEND_COOLDOWN_MS = 60_000;
@@ -61,10 +67,13 @@ async function sendOishaFallbackToTelegram(userId: string, text: string, lang: L
     }
 }
 
-async function offlineReply(userId: string, text: string, lang: Locale) {
+async function offlineReply(userId: string, text: string, lang: Locale, ip: string) {
     const hasContact = containsContact(text);
-    // Telegram'ga yuborish javobni kechiktirmasin.
-    after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
+    // Telegram'ga yuborish javobni kechiktirmasin. Bir IP'dan ko'p xabar bo'lsa
+    // alert'lar oralig'i cheklanadi.
+    if (shouldSendOishaAlert(ip)) {
+        after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
+    }
     const widget = (await getDictionary(lang)).oishaWidget;
     return NextResponse.json(
         { response: hasContact ? widget.offlineThanks : widget.offlineAskContact },
@@ -100,7 +109,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const ip = getClientIp(request);
-    if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
+    if (!(await rateLimit(`oisha-post:${ip}`, POST_LIMIT_PER_MIN, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     let body: { user_id?: unknown; text?: unknown; lang?: unknown };
@@ -109,16 +118,30 @@ export async function POST(request: Request) {
     } catch {
         return NextResponse.json({ error: 'invalid json' }, { status: 400 });
     }
+
+    // Honeypot + Turnstile + origin (lead-guard). Honeypot to'ldirilgan bo'lsa
+    // bot muvaffaqiyat ko'radi, lekin hech narsa yuborilmaydi.
+    const guard = await guardLeadRequest(request, body, ip, 'oisha');
+    if (guard.action === 'drop') {
+        return NextResponse.json({ response: '' }, { status: 200 });
+    }
+    if (guard.action === 'reject') {
+        return NextResponse.json({ error: 'verification failed' }, { status: 403 });
+    }
+
     const { user_id, text } = body;
     if (!isOishaWebUserId(user_id) || typeof text !== 'string' || !text.trim()) {
         return NextResponse.json({ error: 'valid user_id and text required' }, { status: 400 });
     }
-    const lang: Locale = LOCALES.includes(body.lang as Locale) ? (body.lang as Locale) : 'uz';
     const cleanText = text.trim().slice(0, MAX_TEXT_LENGTH);
+    if (cleanText.length < MIN_TEXT_LENGTH) {
+        return NextResponse.json({ error: 'text too short' }, { status: 400 });
+    }
+    const lang: Locale = LOCALES.includes(body.lang as Locale) ? (body.lang as Locale) : 'uz';
 
     const { url, secret } = oishaConfig();
     if (!url || !secret || Date.now() < backendDownUntil) {
-        return offlineReply(user_id, cleanText, lang);
+        return offlineReply(user_id, cleanText, lang, ip);
     }
     try {
         const res = await fetch(`${url}/api/chat/send`, {
@@ -139,6 +162,6 @@ export async function POST(request: Request) {
         logger.error('Oisha backend unavailable, using offline reply', {
             reason: err instanceof Error ? err.message : String(err),
         });
-        return offlineReply(user_id, cleanText, lang);
+        return offlineReply(user_id, cleanText, lang, ip);
     }
 }

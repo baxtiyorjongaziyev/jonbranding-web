@@ -1,6 +1,7 @@
 'use client';
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { Loader2, Send, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -47,6 +48,9 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
   const [proactiveMsg, setProactiveMsg] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const sessionUserIdRef = useRef<string | null>(null);
+  const turnstileTokenRef = useRef<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
+  const honeypotRef = useRef<string>('');
   const talkingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { toast } = useToast();
 
@@ -171,11 +175,23 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
     setInputValue('');
     setIsLoading(true);
 
+    // Turnstile token bir martalik: har xabardan keyin qayta olinadi.
+    const turnstileToken = turnstileTokenRef.current;
+    turnstileTokenRef.current = null;
+    turnstileRef.current?.reset();
+
     try {
       const res = await fetch(OISHA_PROXY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, text: userText, lang: safeLang }),
+        body: JSON.stringify({
+          user_id: userId,
+          text: userText,
+          lang: safeLang,
+          turnstileToken,
+          // Honeypot: odam ko'rmaydi, bot to'ldiradi.
+          companyWebsite: honeypotRef.current,
+        }),
       });
 
       if (!res.ok) throw new Error('API Error');
@@ -317,6 +333,16 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
 
               <CardFooter className="shrink-0 p-4 border-t bg-zinc-50/50 dark:bg-zinc-900/50">
                 <div className="flex w-full gap-2">
+                  {/* Honeypot: ko'rinmas, odam to'ldirmaydi. */}
+                  <input
+                    type="text"
+                    name="companyWebsite"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    onChange={(e) => { honeypotRef.current = e.target.value; }}
+                    style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }}
+                  />
                   <Input
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
@@ -325,6 +351,14 @@ const OishaWidget: FC<{ lang: string; chatRequest?: number }> = ({ lang, chatReq
                     aria-label={translations.placeholder}
                     className="h-11 md:h-10 min-w-0 text-base md:text-sm rounded-xl border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800"
                   />
+                  <div className="hidden">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                      onSuccess={(token) => { turnstileTokenRef.current = token; }}
+                      onExpire={() => { turnstileTokenRef.current = null; }}
+                    />
+                  </div>
                   <button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputValue.trim()}

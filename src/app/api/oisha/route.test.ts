@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import uz from '@/locales/uz.json';
 import ru from '@/locales/ru.json';
+import { resetOishaAlertThrottle } from '@/lib/oisha-alert-throttle';
 
 vi.mock('@/lib/rate-limit', () => ({
   rateLimit: vi.fn(async () => true),
@@ -84,6 +85,8 @@ describe('Oisha proxy accepts only widget-issued IDs', () => {
 afterEach(() => {
   delete process.env.TELEGRAM_BOT_TOKEN;
   delete process.env.TELEGRAM_CHAT_ID;
+  delete process.env.TURNSTILE_SECRET_KEY;
+  resetOishaAlertThrottle();
   vi.unstubAllGlobals();
   vi.clearAllMocks();
 });
@@ -133,5 +136,36 @@ describe('POST /api/oisha while the assistant is offline', () => {
     const res = await send('{not json');
     expect(res.status).toBe(400);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('POST /api/oisha bot defenses', () => {
+  it('drops a message when the honeypot is filled, without alerting', async () => {
+    const res = await send({ user_id: WEB_USER, text: 'Salom', companyWebsite: 'spam.example' });
+    expect(res.status).toBe(200);
+    expect((await res.json()).response).toBe('');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('rejects single-character messages like the "e" flood', async () => {
+    const res = await send({ user_id: WEB_USER, text: 'e' });
+    expect(res.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('rejects with 403 when Turnstile is configured and the token is missing', async () => {
+    process.env.TURNSTILE_SECRET_KEY = 'secret';
+    const res = await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    expect(res.status).toBe(403);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('sends at most one Telegram alert per IP within the window', async () => {
+    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    const telegramCalls = fetchMock.mock.calls.filter(([url]) =>
+      String(url).includes('api.telegram.org'),
+    );
+    expect(telegramCalls).toHaveLength(1);
   });
 });
