@@ -29,6 +29,9 @@ export const ATQuotes: FC<ATQuotesProps> = ({
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   useEffect(() => {
+    // A pre-rendered list is the deployed CMS snapshot; do not start SSR again
+    // just to request the same testimonials on a Free Worker.
+    if (testimonialsProp) return;
     let cached: string | null = null;
     try { cached = sessionStorage.getItem(`testimonials_${lang}`); } catch { /* Storage can be unavailable in an installed browser. */ }
     if (cached) {
@@ -48,7 +51,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
         }
       })
       .catch(() => {});
-  }, [lang]);
+  }, [lang, testimonialsProp]);
 
   const list =
     testimonialsProp && testimonialsProp.length > 0
@@ -405,7 +408,7 @@ export const ATQuotes: FC<ATQuotesProps> = ({
                       color: playingAudio === t.audioUrl ? '#FFF' : 'var(--ink)',
                       border: '1px solid var(--line)',
                       cursor: 'pointer',
-                      transition: 'all 0.3s',
+                      transition: 'opacity 0.3s, transform 0.3s, background-color 0.3s',
                       boxShadow:
                         playingAudio === t.audioUrl ? '0 8px 24px rgba(37, 84, 255, 0.25)' : 'none',
                     }}

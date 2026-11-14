@@ -107,7 +107,7 @@ export const ATGallery: FC<ATGalleryProps> = ({ dictionary, onOpen, lang, projec
           {tiles.map((t, i) => (
             <Link
               key={t.slug}
-              href={`/${lang}/portfolio/${t.slug}`}
+              href={`${lang === 'uz' ? '' : `/${lang}`}/portfolio/${t.slug}`}
               className={`gal-tile ${t.cls}`}
             >
               <div

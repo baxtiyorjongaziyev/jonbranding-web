@@ -42,7 +42,7 @@ function getFallback(lang: string): Testimonial[] {
 export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
   const fallback = getFallback(lang);
   try {
-    const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: 30 } });
+    const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: false } });
     if (data && data.length > 0) {
       const sanityNames = new Set(data.map((t) => t.name.toLowerCase().trim()));
       return [

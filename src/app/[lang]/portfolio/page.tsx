@@ -5,7 +5,7 @@ import { getDictionary, Locale } from '@/lib/dictionaries';
 import PortfolioListClient from '@/components/portfolio-list-client';
 import { getPageAlternates } from '@/lib/seo';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 type Props = {
   params: Promise<{ lang: string }>;

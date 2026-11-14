@@ -41,19 +41,25 @@ const CertificateCard: FC<{ cert: PatentCertificate }> = ({ cert }) => {
         </p>
         <p style={{ fontSize: '2.2cqw', fontWeight: 700, marginTop: '2.6cqw' }}>№ {cert.number}</p>
 
-        <div className="relative flex w-full flex-1 items-center justify-center" style={{ margin: '3cqw 0' }}>
+        <div className="relative flex w-full flex-1 items-center justify-center" style={{ margin: '2.5cqw 0' }}>
           {cert.logo ? (
-            <div className="relative h-full w-[74%]" style={{ maxHeight: '44cqw' }}>
+            <div className="relative" style={{ width: '74%', height: '36cqw' }}>
               <Image
                 src={cert.logo}
                 alt={`${cert.brand} — ro‘yxatdan o‘tgan tovar belgisi`}
                 fill
-                sizes="(max-width: 640px) 60vw, 640px"
+                unoptimized
+                priority
+                sizes="(max-width: 640px) 60vw, 400px"
                 className="object-contain"
                 style={{ borderRadius: '2cqw' }}
               />
             </div>
-          ) : null}
+          ) : (
+            <div className="flex items-center justify-center text-neutral-400 font-mono" style={{ height: '36cqw', fontSize: '2.5cqw' }}>
+              {cert.brand}
+            </div>
+          )}
         </div>
 
         <dl className="grid w-full text-left" style={{ gridTemplateColumns: '1fr 1.15fr', rowGap: '2.2cqw', columnGap: '3cqw', fontSize: '2.1cqw' }}>

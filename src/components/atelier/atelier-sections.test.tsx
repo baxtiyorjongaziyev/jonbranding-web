@@ -10,8 +10,16 @@ describe('homepage testimonials in restricted browser storage', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new DOMException('Blocked', 'SecurityError'); });
     const fetch = vi.fn().mockResolvedValue({ json: async () => ({ testimonials: [] }) });
     vi.stubGlobal('fetch', fetch);
-    render(<ATQuotes lang="uz" dictionary={{ quotes_title: 'Mijoz fikrlari' }} testimonials={[]} />);
+    render(<ATQuotes lang="uz" dictionary={{ quotes_title: 'Mijoz fikrlari' }} />);
     expect(screen.getByText('Mijoz fikrlari')).toBeInTheDocument();
     await waitFor(() => expect(fetch).toHaveBeenCalledWith('/api/testimonials?lang=uz'));
+  });
+  it('uses the supplied CMS snapshot without requesting the Worker', () => {
+    vi.stubGlobal('IntersectionObserver', class { observe() {} unobserve() {} disconnect() {} });
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    render(<ATQuotes lang="uz" dictionary={{ quotes_title: 'Mijoz fikrlari' }} testimonials={[]} />);
+    expect(screen.getByText('Mijoz fikrlari')).toBeInTheDocument();
+    expect(fetch).not.toHaveBeenCalled();
   });
 });
