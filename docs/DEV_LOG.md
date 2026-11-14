@@ -2698,3 +2698,10 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   - Test va smoke yangilandi (`src/lib/website-edge-guard.test.ts`, `scripts/website-security-smoke.cjs` — `blocked scanner RU chat user_id`): `vitest` 3 fayl `109/109`, `npm run typecheck` exit `0`.
   - Yangi Cloudflare Worker deploy: version `27dd7659-ef13-441c-9abf-ab25c42676d0` (100%, deployment ID `2ab8436d-b3e4-4b99-a17a-500794db6bda`, rollback `58c56de7-d732-4fe0-91d5-3f40982e57dd`). Preview va live smoke (`https://jonbranding.uz`): `PASS: 28 checks; no successful lead submission`.
 - **Status:** Cloudflare edge + runtime himoyasi jonli muhitda ishlamoqda; kod o'zgarishlari esa boshqa agentlarning tugallanmagan fayllari bilan birga lokal ishchi katalogda qolmoqda (commit/push qilinmadi).
+
+## 2026-11-14 | Cloudflare `ratelimits` binding'lari, `TELEGRAM_ERROR_CHAT_ID` va `.env.example` sinxronizatsiyasi
+- **Sabab:** `0d65b1e8` commitida `src/lib/oisha-edge-guard.ts` va `src/lib/website-edge-guard.ts` ishlatadigan `JB_*_LIMIT`, `OISHA_CHAT_*` va `TELEGRAM_ERROR_CHAT_ID` identifikatorlari `.env.example` va `wrangler.jsonc` bilan sinxronlanmagani sabab `src/lib/env-example.test.ts` yiqilardi.
+- **Yechim:**
+  - `JB_API_LIMIT`, `JB_CONTACT_LIMIT`, `JB_FORM_LIMIT`, `JB_LOGIN_LIMIT`, `JB_PAGE_LIMIT`, `OISHA_CHAT_BURST`, `OISHA_CHAT_MINUTE` Cloudflare Worker native `ratelimits` binding'lari ekani aniqlanib, `wrangler.jsonc` dagi `ratelimits` massivida e'lon qilindi va `.env.example` da izohli placeholder sifatida hujjatlandi.
+  - `TELEGRAM_ERROR_CHAT_ID` ixtiyoriy environment o'zgaruvchisi sifatida `.env.example` ga kiritildi hamda `/api/report-error` va uning testlari bilan moslashtirildi.
+  - `src/lib/env-example.test.ts` ga koddagi `JB_*_LIMIT` va `OISHA_CHAT_*` binding'lari `wrangler.jsonc` da e'lon qilinganini tekshiruvchi test qo'shildi.
