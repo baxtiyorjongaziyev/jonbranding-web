@@ -2675,3 +2675,26 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
      - `npm run verify:fast`: 69 ta test fayli, 447/447 ta test 100% yashil o'tdi.
      - `npm run build`: Barcha 165 ta sahifa 0 xato bilan muvaffaqiyatli build bo'ldi.
 
+
+## 2026-11-14 — Scanner / Oisha chat spam bloklandi (Antigravity)
+- **Sabab:** Live Cloudflare Worker tail (`task-70`, `task-79`) va GraphQL tahlili `213.230.125.2` (headless `Chrome/131.0.0.0`, Acunetix/Invicti skaner) saytga dastlabki tashrifda `__Host-jb-intake` cookie (`"cookie": true`) va `web_1a7ae654-dac2-41a0-aedf-b31564803674` ID sini saqlab olib, `"e"` kabi 1 belgili spam xabarlar bilan `/api/oisha` orqali Telegram ogohlantirish chiqargani hamda GET marshrutlarga (`?companyWebsite=...`, SSTI/NoSQL/sleep payloadlar) fuzzing yuborib SSR `500` va Worker `exceededCpu` (`503`) / `exceededResources` (2026-11-13T17:00:00Z da `3217`, 2026-11-14T06:00:00Z da `1215`) chaqirganini ko'rsatdi.
+- **Kiritilgan o'zgarishlar (lokal, git commit/push qilinmagan):**
+  - `src/lib/oisha-input.ts`: `isChatProbe` 2 belgidan kam matn (`trimmed.length < 2`), `/^(?:testing|555-666-0606)$/i`, kamida 2 ta `[\p{L}\p{N}]` belgisiz matn va Acunetix SSTI/arifmetik payloadlarni rad etadigan qilindi.
+  - `src/lib/intake-validation.ts`: `isScannerInput` ga Acunetix SSTI/NoSQL/arifmetik signaturalari qo'shildi va `validChatMessage` eksport qilindi.
+  - `src/lib/oisha-edge-guard.ts` & `src/app/api/oisha/route.ts`: `web_1a7ae654-dac2-41a0-aedf-b31564803674` (`blockedOishaUsers` / `BLOCKED_OISHA_USER_IDS`) uchun `403 Forbidden` qo'shildi (`GET` va `POST`).
+  - `src/lib/website-edge-guard.ts`: `blockedScannerIps` (`213.230.125.2` -> `403 scanner_blocked`), `isScannerQuery(url)` + `companyWebsite` GET query bloki (`400 invalid_query`), cookie qayta yozilishidan oldin `blockedScannerUserIds` bloki (`403 scanner_blocked`) va `POST /api/oisha` da `validChatMessage` + `safeIntakeObject` tekshiruvi (`400 invalid_chat_message`) qo'shildi.
+  - Testlar va smoke: `src/lib/oisha-edge-guard.test.ts`, `src/app/api/oisha/route.test.ts`, `src/lib/website-edge-guard.test.ts`, `scripts/website-security-smoke.cjs` (3 ta negativ check qo'shildi, jami 27 check).
+- **Tekshiruvlar:**
+  - `npx vitest run src/lib/website-edge-guard.test.ts src/lib/oisha-edge-guard.test.ts src/app/api/oisha/route.test.ts` -> 3 ta fayl, `109/109` test o'tdi.
+  - `npm run verify:fast` -> 79 ta fayl, `590/590` test o'tdi, 1336 i18n kalit sinxron.
+  - `npm run typecheck` -> exit `0`.
+- **Cloudflare Worker deploy & Live isbot:**
+  - Skoped deploy (`scripts/website-security-deploy.cjs`, asos `74bf6d3b-acba-4a72-a6e2-d4f56804e117`): version `58c56de7-d732-4fe0-91d5-3f40982e57dd` (100%), deployment ID `5262f529-a780-402b-821d-8c1ef2de3745`, rollback baseline `1843995f-2015-486c-8131-e9e7e62110cd`.
+  - Smoke (`scripts/website-security-smoke.cjs` preview & live `https://jonbranding.uz`): `PASS: 27 checks; no successful lead submission` (`output/website-security-deploy/preview-smoke.json`, `live-smoke.json`).
+  - Live Worker tail (`task-157`): `213.230.125.2` dan kelgan 4 ta so'rov (`/ru?_rsc=...`, `/privacy?_rsc=...`, `/narxlar?_rsc=...`) `status: 403`, `outcome: "ok"` bilan edge'da bloklandi.
+- **Qo'shimcha blok (`2026-11-14`, RU sessiya):**
+  - `12:13:46+05:00` da kelgan RU alert (`web_fc166ee6-a3c9-44c6-b3e7-39a64e61a867`, `Xabar: e`) birinchi deploy (`12:18:17+05:00`, `58c56de7-d732-4fe0-91d5-3f40982e57dd`) dan 4 daqiqa 31 soniya oldin kelgani aniqlandi.
+  - `web_fc166ee6-a3c9-44c6-b3e7-39a64e61a867` ID si `src/lib/website-edge-guard.ts`, `src/lib/oisha-edge-guard.ts` va `src/app/api/oisha/route.ts` ga qo'shildi; `guardWebsiteRequest` boshida `__Host-jb-intake` cookie nonce (`web_${intakeNonce}`) tekshiruvi qo'shilib, IP almashganda yoki body `user_id` boshqa bo'lganda ham `403 scanner_blocked` qaytaradigan qilindi.
+  - Test va smoke yangilandi (`src/lib/website-edge-guard.test.ts`, `scripts/website-security-smoke.cjs` — `blocked scanner RU chat user_id`): `vitest` 3 fayl `109/109`, `npm run typecheck` exit `0`.
+  - Yangi Cloudflare Worker deploy: version `27dd7659-ef13-441c-9abf-ab25c42676d0` (100%, deployment ID `2ab8436d-b3e4-4b99-a17a-500794db6bda`, rollback `58c56de7-d732-4fe0-91d5-3f40982e57dd`). Preview va live smoke (`https://jonbranding.uz`): `PASS: 28 checks; no successful lead submission`.
+- **Status:** Cloudflare edge + runtime himoyasi jonli muhitda ishlamoqda; kod o'zgarishlari esa boshqa agentlarning tugallanmagan fayllari bilan birga lokal ishchi katalogda qolmoqda (commit/push qilinmadi).
