@@ -4,7 +4,15 @@
   "main": ".open-next/worker.js",
   "workers_dev": true,
   "vars": { "TRUSTED_PROXY": "cloudflare" },
-  "images": { "binding": "IMAGES" },
+  "ratelimits": [
+    { "name": "OISHA_CHAT_BURST", "namespace_id": "2026111401", "simple": { "limit": 5, "period": 10 } },
+    { "name": "OISHA_CHAT_MINUTE", "namespace_id": "2026111402", "simple": { "limit": 30, "period": 60 } },
+    { "name": "JB_API_LIMIT", "namespace_id": "2026111403", "simple": { "limit": 120, "period": 60 } },
+    { "name": "JB_FORM_LIMIT", "namespace_id": "2026111404", "simple": { "limit": 5, "period": 60 } },
+    { "name": "JB_CONTACT_LIMIT", "namespace_id": "2026111405", "simple": { "limit": 2, "period": 60 } },
+    { "name": "JB_LOGIN_LIMIT", "namespace_id": "2026111406", "simple": { "limit": 5, "period": 60 } },
+    { "name": "JB_PAGE_LIMIT", "namespace_id": "2026111407", "simple": { "limit": 120, "period": 60 } }
+  ],
   "compatibility_date": "2026-05-10",
   "compatibility_flags": [
     "nodejs_compat",
@@ -12,8 +20,17 @@
   ],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
   },
+  "images": {
+    "binding": "IMAGES"
+  },
+  "keep_vars": true,
+  "minify": true,
+  "upload_source_maps": false,
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",

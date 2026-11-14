@@ -33,7 +33,8 @@ ${originalName}.fetch = async function(request, env, ctx) {
   const assetPath = new URL(request.url).pathname;
   ${!legacyOrigin ? `
   if (['GET','HEAD'].includes(request.method) && (assetPath === '/jamoa' || /\\.(?:html|ico|svg|png|jpe?g|webp|avif|woff2?|css|js|mp4|pdf|txt|xml)$/.test(assetPath) || assetPath.startsWith('/_next/static/'))) {
-    const asset = await env.ASSETS.fetch(request);
+    const assetRequest = assetPath === '/jamoa' ? new Request(new URL('/jamoa.html', request.url), request) : request;
+    const asset = await env.ASSETS.fetch(assetRequest);
     if (asset.status !== 404) return __jbRuntime.secureWebsiteResponse(request, await __jbRuntime.attachIntakeSession(request, asset, env));
   }
   ` : ''}

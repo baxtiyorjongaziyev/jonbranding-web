@@ -11,18 +11,22 @@ const bodySchema = z.object({
   userInfo: z.string().max(1000).optional(),
 });
 
+export function isIgnoredErrorReport(message: string, stack?: string): boolean {
+    const trimmedMessage = message.trim();
+    if (!trimmedMessage) return true;
+    if (/ResizeObserver loop|^Script error\.?$|Telegram API Error|Non-Error promise rejection/i.test(trimmedMessage)) {
+        return true;
+    }
+    if (stack && /^https?:\/\/[^/\s]+\/?:0:0$/i.test(stack.trim())) {
+        return true;
+    }
+    return false;
+}
+
 export async function POST(request: Request) {
     const ip = getClientIp(request);
     if (!(await rateLimit(`report-error:${ip}`, 10, 60_000))) {
         return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 });
-    }
-
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
-
-    if (!botToken || !chatId) {
-        logger.error("Server Configuration Error: Telegram token or chat ID is missing in environment variables for error reporting.");
-        return NextResponse.json({ ok: false, error: "Serverda Telegram sozlamalari mavjud emas." }, { status: 500 });
     }
 
     try {
@@ -33,8 +37,21 @@ export async function POST(request: Request) {
         }
         const { message, stack, pathname, userInfo } = parsed.data;
 
-        if (!message) {
+        if (!message.trim()) {
             return NextResponse.json({ ok: false, error: 'Invalid request' }, { status: 400 });
+        }
+
+        if (isIgnoredErrorReport(message, stack)) {
+            return NextResponse.json({ ok: true, reported: false });
+        }
+
+        const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
+        const salesChatId = process.env.TELEGRAM_CHAT_ID?.trim();
+        const chatId = (process.env.TELEGRAM_ERROR_CHAT_ID || process.env.TELEGRAM_ADMIN_CHAT_ID)?.trim();
+
+        if (!botToken || !chatId || chatId === salesChatId) {
+            logger.warn("Client error logged locally; separate admin Telegram chat is not configured.", { pathname, message });
+            return NextResponse.json({ ok: true, reported: false });
         }
 
         // HTML + escape: Markdown'da stack trace'dagi `_` va `*` xabarni buzardi.

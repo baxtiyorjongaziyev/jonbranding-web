@@ -41,4 +41,13 @@ describe('.env.example', () => {
     const filled = Array.from(readFileSync('.env.example', 'utf8').matchAll(/^([A-Z][A-Z0-9_]*)=(.+)$/gm), (match) => match[1]);
     expect(filled.filter((name) => /SECRET|TOKEN|KEY|PASSWORD|SESSION|HASH|JSON/.test(name))).toEqual([]);
   });
+
+  it('declares Cloudflare rate-limit bindings in wrangler.jsonc', () => {
+    const wrangler = JSON.parse(readFileSync('wrangler.jsonc', 'utf8')) as {
+      ratelimits?: Array<{ name?: string }>;
+    };
+    const declared = new Set((wrangler.ratelimits ?? []).map((item) => item.name).filter(Boolean));
+    const usedBindings = usedInCode().filter((name) => /^(?:JB_[A-Z0-9_]+_LIMIT|OISHA_CHAT_[A-Z0-9_]+)$/.test(name));
+    expect(usedBindings.filter((name) => !declared.has(name))).toEqual([]);
+  });
 });
