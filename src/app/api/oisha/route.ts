@@ -5,6 +5,8 @@ import { logger } from '@/lib/logger';
 import { containsContact } from '@/lib/oisha';
 import { getOishaSession } from '@/lib/oisha-session';
 import { isChatProbe, readChatBody } from '@/lib/oisha-input';
+import { guardLeadRequest } from '@/lib/lead-guard';
+import { shouldSendOishaAlert } from '@/lib/oisha-alert-throttle';
 
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
@@ -63,10 +65,14 @@ async function sendOishaFallbackToTelegram(userId: string, text: string, lang: L
     }
 }
 
-async function offlineReply(userId: string, text: string, lang: Locale) {
+async function offlineReply(userId: string, text: string, lang: Locale, ip: string) {
     const hasContact = containsContact(text);
-    // Telegram'ga yuborish javobni kechiktirmasin.
-    after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
+    // Telegram'ga yuborish javobni kechiktirmasin. Bir IP'dan ko'p xabar bo'lsa
+    // alert'lar oralig'i cheklanadi, lekin kontakt (telefon/Telegram) bor xabar
+    // doim yuboriladi — aks holda mehmonning aloqa ma'lumoti yo'qoladi.
+    if (hasContact || shouldSendOishaAlert(ip)) {
+        after(() => sendOishaFallbackToTelegram(userId, text, lang, hasContact));
+    }
     const widget = (await getDictionary(lang)).oishaWidget;
     return NextResponse.json(
         { response: hasContact ? widget.offlineThanks : widget.offlineAskContact },
@@ -141,6 +147,16 @@ export async function POST(request: Request) {
     } catch (error) {
         return NextResponse.json({ error: 'invalid request body' }, { status: error instanceof RangeError ? 413 : 400 });
     }
+    // Honeypot + Turnstile + origin (lead-guard). Honeypot to'ldirilgan bo'lsa
+    // bot muvaffaqiyat ko'radi, lekin hech narsa yuborilmaydi.
+    const guard = await guardLeadRequest(request, body, ip, 'oisha');
+    if (guard.action === 'drop') {
+        return NextResponse.json({ response: '' }, { status: 200 });
+    }
+    if (guard.action === 'reject') {
+        return NextResponse.json({ error: 'verification failed' }, { status: 403 });
+    }
+
     const { user_id, text } = body;
     if (typeof user_id === 'string' && BLOCKED_OISHA_USER_IDS.has(user_id)) {
         return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
@@ -160,7 +176,7 @@ export async function POST(request: Request) {
     const { url, secret } = oishaConfig();
     const session = getOishaSession(request, secret);
     if (!url || !secret || Date.now() < backendDownUntil) {
-        return session.attach(await offlineReply(session.userId, cleanText, lang));
+        return session.attach(await offlineReply(session.userId, cleanText, lang, ip));
     }
     try {
         const res = await fetch(`${url}/api/chat/send`, {
@@ -181,6 +197,6 @@ export async function POST(request: Request) {
         logger.error('Oisha backend unavailable, using offline reply', {
             reason: err instanceof Error ? err.message : String(err),
         });
-        return session.attach(await offlineReply(session.userId, cleanText, lang));
+        return session.attach(await offlineReply(session.userId, cleanText, lang, ip));
     }
 }
