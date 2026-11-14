@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { readChatBody } from '@/lib/oisha-input';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 import { submitFormSchema } from '@/lib/validation/submit-form';
 import { guardLeadRequest } from '@/lib/lead-guard';
@@ -45,7 +46,9 @@ export async function POST(request: Request) {
     const botToken = cleanSecret(process.env.TELEGRAM_BOT_TOKEN);
     const chatId = cleanSecret(process.env.TELEGRAM_CHAT_ID);
 
-    const body = await request.json();
+    let body: unknown;
+    try { body = await readChatBody(request, 16_384); }
+    catch (error) { return NextResponse.json({ ok: false, error: 'invalid_body' }, { status: error instanceof RangeError ? 413 : 400 }); }
 
     const guard = await guardLeadRequest(request, body, ip, 'submit-form');
     if (guard.action === 'drop') {
@@ -53,8 +56,8 @@ export async function POST(request: Request) {
         ok: true,
         eventId: `lead_${Date.now()}_${Math.random().toString(16).slice(2)}`,
         integrations: {
-          telegram: true,
-          amoCrm: true,
+          telegram: false,
+          amoCrm: false,
           amoCrmQueued: false,
           analytics: false,
           analyticsDelivery: null,

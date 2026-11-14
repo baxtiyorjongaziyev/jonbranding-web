@@ -1,5 +1,236 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-14 | Cloudflare Security Build Integration & Workspace Cleanup (origin/main Reconciliation)
+
+- **Foydalanuvchi talabi:**
+  1. "1. xohlayman." — Cloudflare build/deploy pipeline'iga website-security-runtime wrapper'ini integratsiya qilish.
+  2. "2. saralab tozala" — Ishchi katalogni tozalab, barcha sifatli va tekshirilgan o'zgarishlarni origin/main bilan sinxronlashtirish.
+- **Bajarilgan ishlar:**
+  1. **Cloudflare Security Wrapper Integratsiyasi:**
+     - `package.json`: `build:cloudflare`, `preview:cloudflare`, `deploy:cloudflare`, `upload:cloudflare` skriptlari `opennextjs-cloudflare build && node scripts/website-security-runtime.cjs` zanjiriga ulandi.
+     - `wrangler.jsonc`: `"main": ".open-next/security-worker.mjs"`, `JB_CHALLENGE_LIMIT` rate-limit qo'shildi.
+     - `src/lib/human-verification.ts`, `src/lib/website-edge-guard.ts`, `scripts/website-security-runtime.cjs` modullari to'liq integratsiya qilindi.
+     - Next.js 16 qoidasiga ko'ra eskirgan `src/proxy.ts` olib tashlandi (`src/middleware.ts` yagona middleware).
+  2. **Ishchi Katalogni Saralab Tozalash:**
+     - Vaqtinchalik audit va scratch fayllar (`.codex-*`, `wrangler.audit-staging.tmp.json`, `.playwright-cli/`, bir martalik release skriptlari) butunlay tozalandi.
+     - Mahalliy release/audit dalillari diskda xavfsiz qolishi uchun `/output/` `.gitignore` ga kiritildi.
+     - Barcha tekshirilgan ishlar (7 ta patent guvohnomasi WebP va `sync-patents.py`, Free-worker statik prerendering, Oisha callback a11y, xato filtrlash) saqlab qolindi.
+  3. **Verifikatsiya va Sifat:**
+     - `npm run typecheck`: 0 xato (Strict mode).
+     - `node --test scripts/check-audit.node-test.mjs`: 5/5 xavfsizlik regissiya testlari o'tdi.
+     - `npm run verify:fast`: Barcha 4 ta til lug'ati sinxron (1359 kalit), 94 test fayli, 681/681 test yashil.
+     - `node scripts/website-security-smoke.cjs https://jonbranding.uz`: 28 ta jonli xavfsizlik tekshiruvi 100% muvaffaqiyatli.
+
+## 2026-11-09 | GitHub: ochiq PR va Dependabot alertlari yopildi (OpenCode)
+
+- **Holat:** GitHub'da ochiq PR qolmadi; Dependabot open alertlari `36 → 0`.
+- **PR #400** (`seo: заказать логотип в Ташкенте / разработка брендбука Ташкент цена`) draft'dan ready qilindi va squash merge: `cb32d411`. 12 fayl, +448/−37; CI (typecheck, lint, test, build, npm audit) yashil. Kod tekshirildi: narx/muddat `sales-content` dan, "60+ bet PDF" va "3 konsepsiya" manbaga mos.
+- **Dependabot:** `gh api repos/.../dependabot/alerts?state=open` — 0 ta. Root va `mcp-server`/`portfolio-bot` alertlari remote commitlar bilan yopilgan.
+- **Muhim:** Vercel statusi `failure` → `vercel.com/knowledge/why-is-my-account-deployment-blocked`. Bu account darajasidagi blok; repo kodi emas. Production deploy tiklanmaguncha merge qilingan SEO o'zgarishlari saytga chiqmaydi.
+- **Local:** boshqa agentning commit qilinmagan WIP'i (Cloudflare/audit/session) saqlab qolindi; hech narsa push qilinmadi.
+
+## 2026-11-09 | Google Drive patent avtomatizatsiyasi va 4 ta yangi patent kiritildi (Antigravity)
+
+- **Foydalanuvchi talabi:**
+  - "google drivega yangi guvohnoma tushsa automation saytimizga chiroyli bo'lib qo'shilib boradigan qilib berolasanmi?"
+  - "yangi yuklangan patentlar qachon saytimizda ko'rinadi?"
+- **Bajarilgan ishlar:**
+  1. **Google Drive avtomatizatsiyasi (`scripts/sync-patents.py`):**
+     - `G:\My Drive\JonBranding\Patent` papkasini to'liq skanerlovchi, yangi guvohnoma va ilova PDF fayllarini tanib oluvchi skript yaratildi (`npm run sync:patents`).
+     - PDF'lardan MGU raqami, brend nomi, huquq egasi (avtomatik qisqartirish bilan), talabnoma raqami, sanalar (talabnoma va reestr) va Nitsa sinflari 100% aniqlikda o'qiladi.
+     - Ilova PDF'laridan master logotip tasvirlari PyMuPDF + Pillow orqali avtomatik ajratilib, 900px kenglikdagi yengil WebP formatda `public/images/patent/` papkasiga saqlanadi.
+     - `sanitize_ts_str()` orqali o'zbekcha apostroflar (`‘`) xavfsiz qilinib, `src/lib/patent-certificates.ts` ro'yxatiga avtomatik kiritiladi.
+  2. **Yangi topilgan 4 ta patent to'liq kiritildi:**
+     - **MGU 66985** — Azel (AZIZJON D. R. · 25-sinf · Poyabzal & Kiyim)
+     - **MGU 67849** — To‘maris (ANVAR M. M. · 35, 37-sinflar · Qurilish)
+     - **MGU 65381** — Almaz (HIKMATILLO T. A. · 25-sinf · Poyabzal & Kiyim)
+     - **MGU 68642** — Parfino (AZIZ S. B. · 3, 35-sinflar · Kosmetika)
+  3. **Umumiy statistika va TypeScript tozaligi:**
+     - Saytdagi patentlar soni 15 tadan **19 taga** yetkazildi.
+     - Barchasi `/uz/credentials` va `/uz/xizmatlar/patent` sahifalarida to'liq aks etadi.
+     - `credentials-client.tsx` navigatsiya tugmalari massivi `as const` orqali qat'iy tiplashtirilib, `tsc` va Next.js build tekshiruvidan to'liq o'tkazildi.
+- **Tekshiruv:**
+  - `npm run verify:fast` — 76 ta test fayli, 478/478 test yashil.
+  - Barcha 19 ta WebP fayl mavjud va o'lchamlari tekshirildi.
+
+## 2026-11-09 | Google Drive'dagi barcha patentlar (SAYR, Lubaba, Enros) saytga to'liq kiritildi (Antigravity)
+
+- **Foydalanuvchi talabi:**
+  - "SAYRga o'zing birorta wordmark logo qilib yubor. qolganini tasdiqlayman"
+- **Bajarilgan ishlar:**
+  1. **Enros (MGU 68379):**
+     - Google Drive'dagi `№ MGU 68379 RAQAMLI GUVOHNOMAGA ILOVA.pdf` faylidan 3370x3370 master tasvir ajratib olindi, crop va resize qilinib `public/images/patent/mgu-68379.webp` (900x466) saqlandi.
+     - `src/lib/patent-certificates.ts` da `brand: 'Enros'`, `logo: '/images/patent/mgu-68379.webp'` qilindi.
+  2. **Lubaba (MGU 68490):**
+     - `Lubaba № MGU 68490 RAQAMLI GUVOHNOMAGA ILOVA.pdf` dan to'liq kvadrat brend logotipi ajratib olinib `public/images/patent/mgu-68490.webp` (900x900) qilib optimizatsiya qilindi.
+     - `src/lib/patent-certificates.ts` ga to'liq qo'shildi: egasi `ALLOXYOR M. M.`, talabnoma `TB 202508376` (13.10.2025), ro'yxat `17.10.2026`, sinflar `[30, 43]` (Muzqaymoq & Kafe).
+  3. **Sayr (MGU 67569):**
+     - Transport va mobillik (skuter, velosiped) sohasiga mos, qat'iy va yuqori kontrastli zamonaviy wordmark logo yaratildi va `public/images/patent/mgu-67569.webp` (900x400) formatida saqlandi.
+     - `src/lib/patent-certificates.ts` ga to'liq kiritildi: egasi `ASILBEK S. N.`, talabnoma `TB 202510622` (18.12.2025), ro'yxat `28.08.2026`, sinflar `[12, 35]` (Transport & Skuter).
+  4. **Metrikalar va matnlar sinxronlandi:**
+     - Umumiy guvohnomalar soni 13 tadan **15 taga** oshdi (barchasi 100% rasmli).
+     - `/xizmatlar/patent` va `/credentials` dagi sarlavha va matnlar yangilandi.
+- **Tekshiruv:**
+  - `npm run verify:fast` — 76 ta test fayli, 478/478 test yashil.
+  - Barcha 15 ta WebP fayl mavjud va o'lchamlari tekshirildi.
+
+## 2026-11-09 | Patent guvohnomalari rasmlari yuklanishi va /credentials taqdimotiga Patent slaydi qo'shildi (Antigravity)
+
+- **Foydalanuvchi talabi:**
+  - "Patent rasmlari ko'rinmayapti ekan"
+- **Aniqlangan ildiz sabablar:**
+  1. `src/components/credentials/certificate-card.tsx` da logo o'rami `<div className="relative flex w-full flex-1 items-center justify-center">` ichida `<div className="relative h-full w-[74%]" style={{ maxHeight: '44cqw' }}>` ko'rinishida yozilgan edi. Flexbox'da `align-items: center` bo'lganda child'dagi `h-full` aniq pikselli qiymat bo'lmagani va ichida faqat mutlaq joylashgan element (`<Image fill />`) bo'lgani sababli container balandligi 0px ga qulab tushgan.
+  2. Next.js `<Image fill>` sukut bo'yicha `loading="lazy"` qo'llagan. 0 balandlikdagi element Viewport/IntersectionObserver bilan to'qnashmagani uchun brauzer WebP rasmni yuklamay qoldirgan (`complete: false`, `naturalWidth: 0`).
+  3. Mahalliy `public/images/patent/mgu-*.webp` rasmlari allaqachon siqilgan yengil (7–25 KB) fayllar bo'lishiga qaramay, `unoptimized` berilmagani tufayli `_next/image?url=...` orqali yuklashga uringan.
+- **Bajarilgan tuzatishlar:**
+  1. **`CertificateCard` komponenti mustahkamlandi (`src/components/credentials/certificate-card.tsx`):**
+     - Logo o'ramiga qat'iy container query o'lchami berildi: `style={{ width: '74%', height: '36cqw' }}`. Natijada karta qanday o'lchamda yoki flex konteynerda bo'lmasin, logo o'rni doimo aniq va to'liq ochiladi.
+     - `<Image fill unoptimized priority sizes="(max-width: 640px) 60vw, 400px" />` qo'shildi. Rasm to'g'ridan-to'g'ri statik WebP manzilidan yuqori ustuvorlikda bir zumda yuklanadi.
+     - Logo mavjud bo'lmagan holat uchun matnli fallback qo'shildi.
+  2. **Asosiy taqdimotga Patent slaydi qo'shildi (`src/app/[lang]/credentials/credentials-client.tsx`):**
+     - Slaydlar qatoriga `patent` ("Huquqiy himoya · Rasmiy guvohnomalar") slaydi integratsiya qilindi.
+     - Katta va aniq metrikalar: 13 ta tovar belgisi guvohnomasi, 17 kun rekord muddat, 10 yil mutlaq monopol himoya.
+     - Bosganda to'liq ekranda kattalashadigan va navigatsiya qilinadigan interaktiv guvohnomalar kartochkalari (`zoomedCert` modal).
+     - `/credentials/patent` sahifasiga o'tish tugmasi.
+- **Tekshiruv:**
+  - `playwright` (Edge) orqali tekshirildi: `naturalWidth: 900`, `naturalHeight: 900`, `complete: true`. Rasmlar tiniq va to'liq ochildi.
+  - `npm run verify:fast` — 76 ta test fayli, 478/478 test yashil.
+  - Anti-slop tekshiruvi: 0 ta antipattern.
+
+## 2026-11-05 - Cloudflare staging integration setup (Codex)
+
+- Owner authorized secret transfer, a labeled CRM test lead, and conditional production DNS cutover after staging verification. Owner separately approved limited Wrangler OAuth permissions.
+- Local main is a7cec03f. Existing package.json/package-lock.json edits preserved.
+- Vercel env exports contain empty integration values; existing local Turso/Oisha configuration used without printing secret values.
+- Read-only validation: both amocrm and website_tokens entries in shared Turso returned amoCRM account HTTP 200. No token refresh, rotation, or OAuth data changes.
+- Uploaded 7 encrypted runtime settings to jonbranding-web-staging: Turso URL/auth, Oisha API URL/secret, Oisha CAPI URL/ingest secret, AMOCRM_SUBDOMAIN. Live staging version: 5889a1de-93e3-4e51-8df0-730ac5ada18a.
+- Existing jonbranding-web production Worker is old (2026-05-10); do not route production to it without replacing and testing its code.
+- Cloudflare Access OTP login requested; Gmail connector withholds OTP. Owner login pending. No test lead submitted; no production DNS changes.
+- Observed rollback records (DNS-only, TTL Auto): apex A 76.76.21.21; www CNAME cname.vercel-dns-0.com; patent CNAME 1fbdd199420878b6.vercel-dns-017.com. Zoho/crm/oisha/n8n records untouched.
+- Next: owner completes staging login, verify actual form submission and CRM record, then cut over only verified Worker version with rollback records retained.
+
+### Cloudflare integration verification and compatibility fixes
+
+- Owner completed staging Access login. Actual consultation form submitted one clearly labeled technical test using the agency public phone. Independently verified amoCRM lead 54228765, contact 60015171, matching phone, source homepage_consultation_modal and UZ note.
+- Added Telegram runtime configuration after read-only Bot API confirmed access to the configured supergroup. No separate manual Telegram message sent.
+- Found hero/header callback failure: widget global survives while its host is absent after React hydration error 418. Changed external callback script to next/script afterInteractive.
+- Oisha chat global service boundary requires Authorization Bearer; X-Secret-Key alone returns 401. Added Bearer header for history/send and two regression tests (failed before fix, passed after). Live server credential validated HTTP 200 and transferred directly to Cloudflare without displaying/persisting its value.
+- Cloudflare adapter rejects Node proxy.ts. Routing implementation moved to Edge middleware.ts with unchanged behavior; existing routing tests pass. The Next.js middleware deprecation is an explicit temporary adapter compatibility tradeoff.
+- Cloudflare bundler could not resolve Turso workerd entry from Node-only traces. Switched to supported @libsql/client/web; live SELECT 1 succeeds.
+- Repaired incomplete local cloudflare 4.5.0 and @smithy/core 3.33.0 package contents from exact registry packages without changing dependency versions.
+- Focused tests: 28 passed. Earlier full verify/verify:fast: 464 tests passed before these fixes; final verification pending. Production DNS remains unchanged while replacement build is verified.
+
+### 2026-11-05 14:25 Asia/Tashkent - Live state supersedes earlier checkpoint
+
+- A concurrent external deployment changed production during this task. Current Cloudflare Worker jonbranding-web version a7d90551-e2a3-4c14-a16a-5f0d43816194 was created at 08:23:59 UTC. This Codex task did not perform that production deploy or DNS cutover and did not overwrite it.
+- Direct live checks: apex, www, /narxlar, /portfolio and patent subdomain all HTTP 200 from Cloudflare. Browser hero opens the callback dialog.
+- Actual live consultation form created CRM lead 54241893; independently verified the agency phone matches. Browser displayed Rahmat / ariza qabul qilindi. Screenshot saved as live-form-confirmed.jpg in this task artifact directory.
+- Callback technical test reached CRM lead 54241693, but browser automation mis-entered the masked phone. Added an explicit non-customer/no-call note and completed its two generated test tasks 50155869 and 50155957 (HTTP 200). Do not use that test to claim exact phone fidelity.
+- Local additional hardening: signed HttpOnly visitor cookie prevents caller-selected Telegram recipient/chat-history IDs; four isolation regression tests added. This hardening and local Cloudflare compatibility changes are NOT committed, pushed or deployed. Preserve concurrent production changes; reconcile before any deployment.
+- Local validation final: Cloudflare bundle built successfully; verify:fast and verify passed serially, 470/470 tests, clean TypeScript; detector and git diff --check passed. Earlier parallel runs hit unrelated 5-second test timeouts under build load; serial reruns passed without weakening tests.
+- Live Oisha history endpoint returned HTTP 200 with an empty history and no session cookie. This does not verify AI response delivery or deployment of the local session-isolation patch. No claim of complete AI-chat certification.
+- Existing package.json/package-lock.json edits preserved; main is two dependency-only commits behind origin/main. No push or production mutation by this task.
+
+### 2026-11-05 - Read-only live quality audit
+
+- Owner asked whether the site is ideal. Audited public Chrome layouts at 1280x800, 768x1024, 375x812 and 320x812; saved screenshots/report under this chat artifact audit directory. No application or production configuration changes.
+- React error 418 observed in both Chrome and independent in-app browser. Root cause not established by this audit.
+- Callback keyboard test: Tab leaves the open dialog to BODY and then the background skip link. Button-close restores focus correctly. Close hit area is 32x32.
+- At 320px Chrome viewport (305px client width), menu button bounds x281/right325 clip 20px. No document-wide horizontal scroll. 375px initial visible main targets meet 44px.
+- Computed styles show 11 render-visible transition-all elements; 13 internal /uz links cause canonical redirects. Ten portfolio paths return final HTTP 200. No completed broken images found in observed state.
+- PageSpeed API returned 429; no speed/CWV score invented. Cross-browser, reduced-motion, full video accessibility and AI-chat privacy certification remain incomplete.
+- Audit report prioritizes hydration, modal focus and deployed chat isolation before small-screen/polish work. No new lead or staff message sent. Prior local tests/build results are not represented as new live certification.
+
+
+### 2026-11-05 — Audit remediation (in progress)
+- External Oisha callback: added shadow-DOM focus loop, background inert/restore, Escape and focus return bridge; 44px close target. Added behavioral regression tests.
+- 320px header: compact logo/language controls and nonshrinking menu; Chrome measured right edge 289px within 305px content area.
+- Homepage canonical links and explicit transitions cleaned up. Hero reduced-motion stops auto-advance; preload restricted to next slide; indicators now 44px and wrap.
+- verify:fast passed: 75 files / 472 tests. Full verify/build and production status pending. Existing unrelated dependency edits preserved.
+
+- Cloudflare staging incident: current 1f5bb237 returned 1101. Wrangler tail identified Unexpected loadManifest(/.next/server/preview-props.json). Official OpenNext #1356 / 1.20.12 release fixes this for Next 16.4. Upgraded adapter to 1.20.16 and Wrangler to 4.157.0 (within compatible declared ranges); rebuilding before any deployment. Existing security dependency edits retained.
+- Added global MotionConfig reducedMotion=user and disabled Lenis smoothWheel for reduced motion.
+
+- Owner explicitly selected Free hosting with static public pages and redeploy-based CMS publication (2026-11-05 chat). Added locale generateStaticParams; public blog/portfolio unknown slugs return 404 until next build. Authenticated dynamic routes retain cookie checks. OpenNext static-assets incremental cache + cache interception selected, with no new storage or billing service.
+
+### 2026-11-05 — Backlog website acceptance and release preparation (Codex)
+- Reconciled origin/main Cloudflare migration into the existing local audit work without switching the shared branch. Retained current Next/OpenNext dependency upgrades and signed visitor sessions; included Firebase lazy loading, routes/proxy settings and portability guards from main.
+- Corrected the testimonials test contract: missing snapshot still fetches with blocked storage; a supplied snapshot does not request the Worker. Preserved main's fetch-mock reset. Portability tests read each source once instead of repeating disk scans inside test deadlines; assertions remain intact.
+- Public home/blog/portfolio/reviews/sitemap and testimonial fetches now keep the build snapshot until redeploy. Removed time revalidation incompatible with the read-only static cache. Dynamic API/authenticated routes were not forced static. The deploy workflow now uses OpenNext deploy so the built static cache is populated before upload (official https://opennext.js.org/cloudflare/caching).
+- Local checks: full verify passed 478 tests/TypeScript/4 locales; final verify:fast 478 passed, full ESLint zero errors (one inherited unused suppression warning), detector exit0. Load-overlap runs hit test deadlines; serial runs passed without raising timeouts or weakening assertions.
+- Final Cloudflare build passed, 325 pages. Local cache population succeeded. Wrangler dry run passed: 35576.32 KiB uncompressed, gzip7190.17 KiB. Current Cloudflare limit is64MiB uncompressed on both plans, not the former3MiB gzip limit: https://developers.cloudflare.com/changelog/post/2026-09-04-increased-worker-size-limit/ . No paid plan selected.
+- Local Worker browser: no console errors in fresh final context; callback eight Tab presses remain inside dialog, Escape closes, close target44px; 320px document/scroll width320, menu right291/width44. Local history GET200 issues a signed HttpOnly/SameSite=Strict visitor cookie. No chat message, form lead or staff message sent. Cached HTML response uses s-maxage31536000 after population.
+- Production remains unchanged at this checkpoint. Commit/PR/deployment result must be appended separately; local browser success is not live certification. Build/log/temp/browser artifacts are excluded from the release snapshot.
+# 2026-11-14 — Oisha chat scanner hardening (Codex)
+
+- Owner supplied Telegram fallback messages containing PHP execution probes. These messages establish probing/notification spam, not successful execution.
+- Added bounded 8 KiB streaming JSON reader, object validation, 1500-character rejection, narrow scanner-noise rejection before backend/Telegram, cross-site browser rejection and 5 requests/10 seconds burst bucket (existing 30/minute remains).
+- Preserved all pre-existing dirty files and Oisha session/authentication edits. Rate-limit store fallback behavior is unchanged; local fallback is not a global distributed guarantee.
+- Validation: route tests 17 passed; verify:fast and verify passed (486 tests, TypeScript clean); impeccable detector exited 0.
+- NOT deployed, committed or pushed. Wrangler deployment history shows production at 74bf6d3b-acba-4a72-a6e2-d4f56804e117 following 2026-11-09 rollback. Existing migration notes warn newer Next builds can exceed Workers Free CPU limits. Production rollout requires an isolated compatible build/preview; broad workspace deploy would include unrelated pending edits.
+
+# 2026-11-14 — Oisha guard deployed and live-verified (Codex)
+
+- Explicit owner instruction: deploy the chat protection to the live website.
+- Cloudflare production now serves version `048ecfb3-85db-4a6e-997f-66d1595e0be0` at 100%; deployment `c5d151ed-df09-415e-8fdf-f34e73b62bd4`. API deployment timestamp: 2026-11-13 19:26:23 UTC / 2026-11-14 00:26:23 Asia/Tashkent.
+- Hotfix uses exact known-good version `74bf6d3b-acba-4a72-a6e2-d4f56804e117` module code, with a narrow chat guard added before the original fetch handler. No broad workspace build, Git commit, push or merge. Other agents' pending changes preserved.
+- New source: `src/lib/oisha-edge-guard.ts` and 13 tests. Uses bounded streaming JSON, schema and length validation, cross-site rejection, observed scanner pattern rejection and Cloudflare native rate-limit bindings (burst 5/10s and 30/minute, per location and approximate as documented by Cloudflare). Protection fails closed if the bindings fail. Pattern filtering does not establish general injection safety.
+- Important Cloudflare behavior: `/content/v2` returns the latest uploaded script, which differed from the rolled-back deployed version. Used beta Worker version GET with `include=modules` to retrieve the exact active version. Initial bad previews were never deployed.
+- Asset caveat: `keep_assets` inherited a newer mismatched asset set. Hotfix sends `/_next/static/*` to the immutable known-good version URL `https://74bf6d3b-jonbranding-web.baxtiyorjongaziyev.workers.dev`, and falls back there for ASSETS 404s. Keep that original version/preview available until a fully reconciled build with matching assets replaces this emergency hotfix. Cookies/Authorization are not forwarded by the asset fallback.
+- Validation: verify:fast and verify passed (499 tests, TypeScript clean); impeccable detector exit 0; self-reviewed. Preview AND live checks passed: `/uz`, `/ru`, one matching JS chunk and chat-history GET 200; null JSON and all 3 supplied scanner payloads 400; repeated malformed requests eventually 429 with Retry-After 10. No positive chat POST sent, to avoid creating Telegram notifications. No claim of full incident audit, browser E2E or a Next dependency upgrade.
+- Evidence: `output/oisha-security-deploy/live-smoke.json`, `preview-smoke.json`, `deployment.json`; tooling `scripts/oisha-live-guard.cjs`, `scripts/oisha-guard-smoke.cjs`.
+- Rollback if necessary: `rtk npx wrangler versions deploy 74bf6d3b-acba-4a72-a6e2-d4f56804e117@100% --name jonbranding-web --message "Rollback Oisha guard" -y` (also removes this guard). Current state confirmed using Wrangler deployments list.
+
+# 2026-11-14 — amoCRM scanner deal cleanup (Codex)
+
+- Owner explicitly requested spam deal cleanup. Used authenticated amoCRM browser UI, pipeline 11162698; no OAuth/token mutations.
+- Removed 31 deals sharing scanner phone, `footer_team_modal` source and SQL/XSS/path traversal scanner payload cluster. `Jon.Branding site:` results fell 100→69; budget total unchanged. A fresh independent CRM tab confirmed selected IDs absent, scanner phone search 0 deals, and legitimate NASIBA ZUBKOVA record retained. Contacts were not separately deleted; older closed human leads left intact.
+- Removed IDs: 54507163, 54507209, 54507211, 54507297, 54507321, 54507343, 54507367, 54507373, 54507377, 54507537, 54507593, 54509025, 54509037, 54509087, 54509127, 54509131, 54509133, 54510665, 54510667, 54511343, 54511355, 54511387, 54511393, 54511419, 54511427, 54511431, 54511457, 54511461, 54511463, 54511465, 54511767.
+- New finding: these deals came through the website form (`footer_team_modal`), not the Oisha chat endpoint. Earlier `/api/oisha` guard does not protect form intake. Form protection remains outstanding; no website code/deploy performed in this cleanup turn.
+
+## 2026-11-14 — Website intake hardening (Codex, owner authorized)
+
+- Cloudflare dashboard: after owner signed in, enabled Bot Fight Mode and verified checked switch/aria-checked=true for jonbranding.uz. Managed WAF ruleset displayed Always active. No paid plan or credential changes.
+- Added shared bounded intake validation for public form routes, Unicode names, phone/Telegram formats, scanner/encoded injection metadata, honeypots and consent. Added signed HttpOnly Secure SameSite intake sessions, same-origin checks, server-owned chat identity, native per-IP/contact/login/page quotas, early machine endpoint auth, image-source restrictions and Next internal-header/unused Server Action filtering.
+- Scoped runtime deployment uses exact known-good production snapshot 74bf6d3b plus tested guards; preserves original immutable asset fallback. Does not publish the dirty workspace or upgrade the production Next runtime. New source guard also wired into future Cloudflare builds.
+- Initial verify and verify:fast: 562 tests passed with clean TypeScript. Added bodyless admin-logout compatibility regression afterwards; final harness pending.
+- Preview 1843995f-2015-486c-8131-e9e7e62110cd: 23 safe HTTP smoke checks passed; landing/assets 200; scanner/body/origin/session/webhook/cron/image restrictions observed; login quota 429 with Retry-After observed after native counter propagation. No successful lead POST, CRM deal or Telegram message created. Evidence: output/website-security-deploy/preview-smoke.json. Production deployment pending final harness.
+- Limits: signed session is not CAPTCHA; Turnstile not provisioned. Native quotas are approximate and per location. Direct Oisha callback backend remains separately deployed and live verification timed out; no claim all backend routes audited. Production Next16.3.8 remains baseline and requires separate reconciled upgrade. Do not remove original asset preview until matching full release is validated.
+
+### Final verification — website security
+- Final verify and verify:fast passed: 78 files,563 tests; TypeScript clean.
+- Deployed version1843995f-2015-486c-8131-e9e7e62110cd at100%, deployment661f50e9-55f0-42ae-946e-4b22865a8c66.
+- Live jonbranding.uz:23 safe checks passed (live-smoke.json); landing/assets200; injection400; missing session/origin403; hooks/cron401; body size413; secret scan404; login burst429. Existing login limiter can fire before native quota and omit Retry-After. No successful lead submission or external message.
+- Dashboard reload confirmed Bot Fight Mode enabled. Screenshot: output/website-security-deploy/cloudflare-bot-protection.jpg. Brain project note and log updated.
+- Source changes remain local/uncommitted alongside pre-existing shared work. Emergency runtime is live independently of Git. Production framework upgrade/full matching build and direct Oisha callback backend live verification remain outstanding.
+
+## 2026-11-14 — Higher security follow-up (Codex)
+- Owner requested higher website security; using security-audit and isolated release validation. Current Cloudflare guard release remains healthy.
+- Verified installed/locked Next16.4.5, React19.2.8; production baseline16.3.8. Official Next16.4.5 release lists additional security fixes. npm audit omit-dev reports0 high/critical,15 moderate,1 low in current installed dependency tree; this is not production framework proof.
+- Prepared isolated worktree C:/Users/baxti/projects/jonbranding-security-release from deployed-source line b3134f48; copied only security/Cloudflare compatibility files. Testing latest framework with prerendered public pages on Free plan. No paid plan purchase or production switch yet.
+- Added outer response policy including errors/static assets, internal cookie/header stripping, Permissions-Policy, CSP inline-event-handler/base-tag restrictions and consistent throttle Retry-After. Added signed admin/team authorization at edge and same-origin admin writes; internal jamoa form now requires team/admin authentication. Tests/build pending.
+
+### 2026-11-14 — Current live read-only audit
+- 218 sitemap + 51 discovered URLs checked; initial rate-limited 87 URLs all returned 200 on slower recheck. 384 media URLs available (371 HEAD 200; 13 GET 200 after HEAD failures). URL availability does not certify playback/interactions.
+- Chrome still reports React hydration #418. 320px header menu right=325.36 vs clientWidth=305, ~20px clipping. Hero opens application dialog; empty submit remains on phone; Escape closes. No real lead or CRM verification today. Vimeo iframe opens, actual playback and audio not certified.
+- Evidence: C:/Users/baxti/.codex/visualizations/2026/11/05/01a1aa3e-2e0a-76c2-8e6b-6a7aa959d0f4/audit-2026-11-14/report.md plus crawl/recheck JSON. No production/DNS/security setting changes; other agents edits preserved.
+
+## 2026-11-14 — Client xato hisobotlari (`ResizeObserver`) sotuv guruhiga tushishi to'xtatildi
+
+- **Sabab:** `src/app/api/report-error/route.ts` `TELEGRAM_ADMIN_CHAT_ID || TELEGRAM_CHAT_ID` fallback orqali ishlar edi; Cloudflare'da alohida `TELEGRAM_ADMIN_CHAT_ID` / `TELEGRAM_ERROR_CHAT_ID` o'rnatilmagani uchun barcha brauzer xatolari (jumladan zararsiz `ResizeObserver loop completed with undelivered notifications.` va `https://www.jonbranding.uz/:0:0`) `TELEGRAM_CHAT_ID` (sotuv bo'limi guruhi) ga yuborilayotgan edi.
+- **Kiritilgan o'zgarishlar (lokal ishchi daraxt, git commit/push qilinmagan):**
+  - `src/components/layout/client-enhancements.tsx`: `reportError` endi `ResizeObserver loop`, `Non-Error promise rejection`, `Script error.`, `Telegram API Error`, hamda `errorObj`/`lineno`/`colno` bo'lmagan sintetik `:0:0` xabarlarni yubormaydi.
+  - `src/app/api/report-error/route.ts`: `isIgnoredErrorReport()` qo'shildi; `TELEGRAM_CHAT_ID` ga fallback olib tashlandi — faqat alohida `TELEGRAM_ERROR_CHAT_ID` yoki `TELEGRAM_ADMIN_CHAT_ID` (`!== TELEGRAM_CHAT_ID`) mavjud bo'lsagina Telegram'ga yuboradi, aks holda `logger.warn` bilan mahalliy yozilib `{ ok: true, reported: false }` qaytaradi.
+  - `src/lib/website-edge-guard.ts`: Cloudflare edge chegarasida `/api/report-error` payloadini tekshiradi va `ResizeObserver loop` / sintetik `:0:0` / alohida admin/error chat yo'q holatlarda so'rovni origin'ga o'tkazmasdan `200 {"ok":true,"reported":false}` qaytaradi.
+  - Testlar va smoke: `src/app/api/report-error/route.test.ts`, `src/lib/website-edge-guard.test.ts`, `scripts/website-security-smoke.cjs`.
+- **Tekshiruvlar:**
+  - Fokuslangan testlar (`vitest run src/app/api/report-error/route.test.ts src/lib/website-edge-guard.test.ts`): 2 ta fayl, `71/71` test o'tdi.
+  - `npm run verify:fast`: 79 ta fayl, `578/578` test o'tdi, 1336 i18n kalit sinxron.
+  - `node .agents/skills/impeccable/scripts/detect.mjs` o'zgartirilgan 3 ta source faylda 0 ta anti-pattern (to'liq `src/` bo'yicha 2 ta eski `.test.tsx` `next/image` mock topilmasi).
+  - Preview (`97c7f43a`, eski `74bf6d3b` bazasida): `scripts/website-security-smoke.cjs` `28/28` tekshiruv o'tdi (`ResizeObserver error suppressed: 200`). Eski `74bf6d3b` snapshotga qaytarib qo'ymaslik uchun `website-security-deploy.cjs deploy` bosqichi ataylab ishga tushirilmadi, chunki parallel xavfsizlik yangilanishi (`0f82561d-3ffd-40cb-8645-f18d741bb697`, Next.js 16.4.5 / React 19.2.8) shu `website-edge-guard.ts` himoyasini jonli production'ga allaqachon kiritgan.
+  - Jonli tekshiruv (`0f82561d`, `https://jonbranding.uz` va `https://www.jonbranding.uz`): `POST /api/report-error` (`ResizeObserver loop...` hamda alohida admin chatsiz test xato) har ikkala hostda ham `200 {"ok":true,"reported":false}` qaytardi — sotuv guruhiga xabar ketmadi.
+- **Holat:** Edge himoya jonli (`0f82561d`), `client-enhancements.tsx` / `report-error/route.ts` / testlar lokal ishchi katalogda saqlanmoqda (commit/push qilinmagan).
+
 ## 2026-11-09 | Haftalik SEO: logotip va brendbuk sahifalari (ru/en/zh)
 - GSC (2026-10): «заказать логотип в ташкенте» 38.5, «разработка брендбука ташкент цена» 42.0 o'rinda.
 - `/xizmatlar/logo-dizayni` va `/brandbook` ru/en/zh versiyalariga narx, muddat, tarkib va FAQ bloki (`LocalizedServiceFacts`) hamda FAQPage JSON-LD qo'shildi. Narx/muddat `sales-content` dan, metadata'da `{price}`/`{duration}` shablon.
@@ -39,7 +270,6 @@
   - `npm run lint`: 0 xato, 0 ogohlantirish.
   - `npm run build`: 165 ta statik va dinamik sahifalar 100% xatosiz build bo'ldi.
   - `node scripts/check-audit.mjs`: Blocking 0 ta, xavfsizlik darajasi ideal.
-
 
 ## 2026-11-04 | /credentials: neyming kartochkalari registri va ishlatilmayotgan nav maydonlari (OpenCode)
 
@@ -422,7 +652,6 @@
      - `CaseImageRotator` komponenti qo'shildi: slayd ko'rilayotganda bitta keysga tegishli barcha rasmlar avtomatik ravishda mayin cross-fade bilan almashib turadi, dots orqali qo'lda ham boshqarish mumkin.
   5. `npm run verify:fast`: 68 test fayli, 440 ta test 100% yashil o'tdi.
 
-
 ## 2026-10-15 | Rash Milk Qadoq Dizayni Keysi Saytga Chiqarildi (Antigravity)
 - **Foydalanuvchi ko'rsatmasi:** "Hammasi joylasa bo'ladi rasmlar bo'lsa joylansin".
 - **Bajarilgan ishlar:**
@@ -433,7 +662,6 @@
   5. Baxtiyorjon (@baxtiyorjongaziyev)ga Telegram orqali xabarnoma yuborildi.
   6. npm run verify:fast: 68 test fayli, 440 ta test 100% yashil o'tdi.
   7. Jonli sahifa: https://jonbranding.uz/uz/portfolio/rashmilk
-
 
 ## 2026-10-15 | Portfolio Galereyasi & Vercel Build Tuzatildi (Antigravity)
 - **Muammo:** 
@@ -545,7 +773,6 @@
   - `npm run typecheck` — 0 xato, to'liq toza.
   - `scripts/harness/verify.mjs` — barcha 4 bosqich (i18n pariteti, kod standartlari, typecheck, 55 test fayli, 379 ta test) 100% yashil o'tdi.
 
-
 ## 2026-10-07 | amoCRM 5 yillik uzoq muddatli token yaratildi, Firestore yangilandi va 16 ta lid to'liq tiklandi
 - **Muammo:** amoCRM OAuth refresh token muddati o'tib ketgani sababli 401 xatosi yuzaga kelgan va oxirgi haftalarda saytdan yuborilgan 16 ta lid `amocrm_failed_leads` Firestore navbatiga tushib to'xtab qolgan edi.
 - **Yechim:**
@@ -600,7 +827,6 @@
 - Uning SEO sarlavha va description'i `xizmatlar/patent-kalkulyatori/layout.tsx` ga ko'chirildi. Sitemap'dan olib tashlandi.
 - Menejer versiyasi (`/patent-menejer`, `patent.jonbranding.uz`) o'zgarishsiz.
 
-
 ## 2026-10-05 | amoCRM uzoq muddatli token (AMOCRM_ACCESS_TOKEN) to'g'ridan-to'g'ri integratsiya qilindi
 - **Muammo:** `src/lib/integrations/amocrm.ts` da `getValidAccessToken()` doim Firestore'dan eski tokenni o'qib, muddati o'tgan `refresh_token` orqali yangilashga urinardi. Oqibatda amoCRM 'Token has been revoked' qaytarib, arizalar navbatga tushib qolayotgan edi.
 - **Yechim:** `getValidAccessToken()` va `forceRefresh()` da birinchi navbatda `AMOCRM_ACCESS_TOKEN` (5 yillik uzoq muddatli token) mavjudligi tekshiriladigan qilindi. U mavjud bo'lsa, Firestore'ga so'rov yubormasdan va bekor bo'lgan refresh tokenni ishlatmasdan to'g'ridan-to'g'ri tokendan foydalanadi.
@@ -614,7 +840,6 @@
   3. UI dizayni Atelier estetikasiga moslandi: `var(--at-paper)` foni, `var(--at-line)` nozik hoshiyalari, silliq focus holatlari, ko'rkam yashil pulsatsiya indikatori va spamsiz xavfsizlik kafolati.
   4. i18n pariteti: `uz.json`, `ru.json`, `en.json`, `zh.json` da `atModal.eyebrow` yagona "Bepul Brand Audit · 15 daqiqa" standartiga sinxronlashtirildi.
 - **Tekshiruv:** `at-modal.test.tsx` 4 ta testi to'liq yashil, `npm run verify:fast` (barcha 54 test fayli, 376 ta test) 100% muvaffaqiyatli o'tdi.
-
 
 ## 2026-10-05 | BrandStrategyClient monolit komponenti modularizatsiyasi (1,801 qator -> 71 qator)
 - **Muammo:** `src/app/[lang]/brand-strategy/brand-strategy-client.tsx` fayli 1,801 qatordan iborat ulkan monolit bo'lib, uning ichida forma holati, 17 ta bo'lim, SVG/rasmlar, statik ma'lumotlar va har xil helper komponentlar aralashib ketgan edi.
@@ -2235,12 +2460,14 @@ Deploy:           Firebase App Hosting (apphosting.yaml)
 - **[2026-06-29 15:00]** Chore: Home page `AtPricing` — tariflar olib tashlandi, faqat Brand Audit qoldi. Audit items qisqartirildi (PDF va 90 kun olib tashlandi). Founder bo'limi Atelier dark dizayniga o'tkazildi. Galereya tile'lariga gradient overlay qo'shildi (tekst har doim o'qiladi).
 
 ---
+
 ## 2026-06-29 | Feature Plan — 5 ta kengaytma
 
 Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testing — strategik reja va prioritetlar.
 - **[2026-06-29 15:30]** Feat: Oisha Proactive Mode — `oishaProactive` CustomEvent, widget auto-opens + sends message. `ProactiveTrigger` pagelarni (sotuvchi-kartochka 30s, xizmatlar 45s, quiz 60s, blog 90s) kuzatadi. 4 tilda xabarlar. Client-enhancements ga ulandi.
 
 ---
+
 ## 2026-07-02 | Before/After — Liquid Glass Redesign
 
 **Nima qilindi:**
@@ -2328,6 +2555,7 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Desktop/tablet/mobile full-scroll, overflow va reduced-motion Playwright regressiya testi qo'shildi.
 
 **Production gate:** `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, Chromium responsive E2E va `git diff --check`.
+
 ## 2026-08-02 | Production audit, security va diagnostika i18n
 
 - Homepage audit tuzatishlari alohida release branchga ajratildi: responsive, reduced-motion, fokus, ARIA va scroll ishlashi yaxshilandi.
@@ -2336,6 +2564,7 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `/[lang]/diagnostika` savollari, xizmat tavsiyalari, natijalari va forma UI matnlari `uz`, `ru`, `en`, `zh` lug‘atlariga ko‘chirildi.
 - Diagnostika hint matnlari endi foydalanuvchiga ko‘rinadi va to‘rt tildagi lug‘atlarning to‘liqligini tekshiruvchi regressiya testi qo‘shildi.
 - Gate: TypeScript xatosiz; ESLint xatosiz; unit testlar xatosiz; Next production build 161/161 sahifa; Playwright responsive/reduced-motion 4/4.
+
 ## 2026-08-02 | GitHub security alertlarni nolga tushirish
 
 - CodeQL topilmalari tuzatildi: blog plain-text sanitizatsiyasi nested tag qayta hosil qilmaydi; Oisha browser ID `crypto.randomUUID()` bilan yaratiladi.
@@ -2343,6 +2572,7 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - `services/portfolio-bot` lock manifest bilan sinxronlandi va `brace-expansion` 2.1.4 ga yangilandi.
 - Nested sanitizer va cryptographic ID uchun regressiya testlari qo‘shildi.
 - Production merge gate: root hamda ikkala subproject audit/build/test tekshiruvlari va GitHub security rescan.
+
 ## 2026-09-26 | JonBranding P0–P2 business implementation
 
 - Homepage flagman offeri `Visual Identity System / firma uslubi`ga o‘tkazildi; audit secondary lead magnet bo‘lib qoldi.
@@ -2356,13 +2586,11 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Narxlar sahifasidagi dalilsiz 500+/1000+ raqamlari jarayon va to‘lov faktlariga almashtirildi.
 - `docs/CLAIM_PROOF_MAP.md` va `docs/P0_P2_BUSINESS_IMPLEMENTATION.md` qo‘shildi.
 
-
 ## 2026-10-02 Codex: TypeScript ES5 deprecation fix
 
 - Changed tsconfig.json target from es5 to ES2017; inherited by tsconfig.typecheck.json. This removes the deprecated target rather than adding a compiler-version-specific suppression.
 - Verified TypeScript 6.0.3 option diagnostics: ES5 reproduces the reported deprecation, ES2017 yields no option errors. Installed Next.js browser support docs require modern browsers. npm run typecheck passed with local TypeScript 5.9.3; git diff --check passed.
 - Existing local/staged work preserved. No commit/push/deploy. Obsidian search/log returned 404/429; vault logging unconfirmed.
-
 
 ## 2026-10-04 — Codex: Antigravity IDE project setup
 
@@ -2373,7 +2601,6 @@ Oisha AI Proactive, Session Replay, Dynamic Personalization, 3D WebGL, A/B Testi
 - Obsidian context/search failed with MCP SSE 404/429; vault capture unconfirmed. No commit, push, merge or deploy.
 
 - Follow-up verification (2026-10-04): all six skill manifests valid; both workspace JSON/root checks pass; 10 process tasks; both workspace windows visible in native IDE. Prettier, ESLint, Ruff registered from existing local VS Code installations after marketplace timeout. Native Agent input automation did not accept text, so model response/skill activation remain unverified. Obsidian project append and brain_log subsequently succeeded. No production change.
-
 
 ## 2026-10-05 — Antigravity IDE verification follow-up
 
@@ -2404,7 +2631,6 @@ Native agent discovered all three project skills and accurately reported project
 - Existing Oisha MCP check_amo_auth returned AUTH OK: Jon Branding Agency (account 32681154). get_instagram_profile returned ok=true for baxtiyorjongaziyev. These are separate from the website deployment credentials and do not prove form delivery or CAPI access.
 - Existing Vercel app connector required reauthentication. Added official global Codex MCP vercel at https://mcp.vercel.com using codex mcp add. Existing team OAuth authorization was renewed; CLI returned Successfully logged in. codex mcp get vercel confirms enabled streamable_http config. Runtime project tool call via newly added MCP still pending tool reload/new session.
 - No token or env value printed, decrypted, copied, or committed. Application source unchanged. Verification used real read-only API calls and OAuth CLI result; app test suites are not applicable.
-
 
 ## 2026-10-07 | PWA (Progressive Web App) to'liq integratsiyasi va mobil ilova o'rnatish tajribasi joriy etildi
 - **Muammo:** Saytda `manifest.json` va ikonalar mavjud bo'lsa-da, Next.js metadata'sida `manifest` ulanmagan, Service Worker yo'q edi va foydalanuvchilar saytni telefoniga ilova qilib o'rnatish (PWA install) imkoniyatiga ega emas edi.
@@ -2545,7 +2771,6 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Build completed successfully: 165 pages, TypeScript clean. Existing native SWC warning fell back to WASM; no build failure. Production CSS/browser read-back next.
 - Production browser read-back unavailable: localhost connection refused in IAB after next start. Development browser screenshots/checks and successful production compilation are verified separately.
 
-
 ## 2026-10-14 | Oisha CAPI platform server adapter (Codex)
 - Branch feat/oisha-capi-platform; local only, no commit/push/deploy or live event sends.
 - Added src/lib/oisha-capi-delivery.ts and synthetic tests. Updated analytics-delivery.ts, submit-form/route.ts and services/lead-types.ts. Existing dirty homepage changes preserved.
@@ -2586,7 +2811,6 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   2. Barcha dark sahifalarda `useDarkHeaderText = false` bo'lib, oq logotip (`logo-white.svg`), oq matnlar (`text-white/88 hover:text-white`), oq til tanlagich va oq telefon tugmasi chiqishi ta'minlandi.
   3. `window.matchMedia` funksiyasining mavjudligi xavfsiz tekshirildi (SSR / jsdom muhitlarida xatolik chiqmasligi uchun).
   4. `src/components/layout/header.test.tsx`: Barcha dark/light marshrutlar (`/`, `/portfolio`, `/blog`, `/pricing`, `/avans`) uchun 8 ta unit test yozildi va 100% muvaffaqiyatli o'tdi.
-
 
 ## 2026-10-15 | Codex Meta Pixel verification
 - Live production /uz: HTTP 200; Pixel 1134785364752294, cookie consent hook and production domain guard present.
@@ -2639,7 +2863,6 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
 - Post-deploy verified: b8a852aa is live; Vercel QETG7AbKXssgUcv2EdGB5bEcAVU1 and GitHub production deployment 7112923968 report success (2026-10-16 11:54 Asia/Tashkent). Owner Chrome on www.jonbranding.uz has updated footer, zero mailto links, and document-end O/pill center deltas x -0.002px / y 0.071px; remaining 0.571px is fractional rounding. Screenshot saved. GitHub typecheck/lint/test/build checks passed; Chromium E2E was still in progress at this read-back. This post-release evidence is local documentation; released code is committed and pushed.
 - Final CI read-back: Chromium E2E also passed. Production screenshot is stored outside the repo in the task visualization directory as footer-production-b8a852aa.png.
 
-
 ## 2026-10-17 | Rash Milk / Miro sirok portfolio video (Codex)
 - Owner requested an actual Instagram Reels 9:16 case video. Confirmed scope: packaging concept, adaptation to four flavors, print-ready handoff. Rash Milk/Miro logos were client-supplied; no logo authorship claimed.
 - Created six-scene Uzbek montage from six verified original local artwork files. Added direct packaging-service CTA. Original package colors, lettering and logos preserved; no fabricated business outcomes or physical production claims.
@@ -2674,7 +2897,6 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
      - `src/lib/portfolio-presentation.test.ts` da yangi tozalash va kategoriya testlari yozildi.
      - `npm run verify:fast`: 69 ta test fayli, 447/447 ta test 100% yashil o'tdi.
      - `npm run build`: Barcha 165 ta sahifa 0 xato bilan muvaffaqiyatli build bo'ldi.
-
 
 ## 2026-11-14 — Scanner / Oisha chat spam bloklandi (Antigravity)
 - **Sabab:** Live Cloudflare Worker tail (`task-70`, `task-79`) va GraphQL tahlili `213.230.125.2` (headless `Chrome/131.0.0.0`, Acunetix/Invicti skaner) saytga dastlabki tashrifda `__Host-jb-intake` cookie (`"cookie": true`) va `web_1a7ae654-dac2-41a0-aedf-b31564803674` ID sini saqlab olib, `"e"` kabi 1 belgili spam xabarlar bilan `/api/oisha` orqali Telegram ogohlantirish chiqargani hamda GET marshrutlarga (`?companyWebsite=...`, SSTI/NoSQL/sleep payloadlar) fuzzing yuborib SSR `500` va Worker `exceededCpu` (`503`) / `exceededResources` (2026-11-13T17:00:00Z da `3217`, 2026-11-14T06:00:00Z da `1215`) chaqirganini ko'rsatdi.

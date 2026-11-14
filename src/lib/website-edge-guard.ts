@@ -2,18 +2,21 @@ import { readChatBody } from './oisha-input';
 import { canonicalText, intakePhone, intakeTelegram, isScannerInput, safeIntakeObject, validChatMessage, validIntakeName } from './intake-validation';
 import { validIntakeSession } from './intake-session';
 import { verifiedWebsiteRole } from './website-admin-session';
+import { humanConfiguration, humanVerificationRequired, validHumanSession, verifyHumanChallenge } from './human-verification';
 
 type EdgeLimiter = { limit(input: { key: string }): Promise<{ success: boolean }> };
 export type WebsiteGuardEnv = {
   OISHA_SECRET_KEY?: string; CRON_SECRET?: string; AMOCRM_CRON_SECRET?: string;
   ADMIN_SECRET?: string; SALES_TEAM_SECRET?: string;
+  TURNSTILE_SECRET_KEY?: string; TURNSTILE_SITE_KEY?: string; TURNSTILE_ENFORCE?: string;
+  JB_CHALLENGE_LIMIT?: EdgeLimiter;
   AMOCRM_WEBHOOK_SECRET?: string; TELEGRAM_WEBHOOK_SECRET?: string; VIMEO_WEBHOOK_SECRET?: string;
   TELEGRAM_CHAT_ID?: string; TELEGRAM_ADMIN_CHAT_ID?: string; TELEGRAM_ERROR_CHAT_ID?: string;
   JB_API_LIMIT: EdgeLimiter; JB_FORM_LIMIT: EdgeLimiter; JB_CONTACT_LIMIT: EdgeLimiter;
   JB_LOGIN_LIMIT: EdgeLimiter; JB_PAGE_LIMIT: EdgeLimiter;
 };
 
-const browserPosts = new Set(['/api/submit-form', '/api/diagnostics', '/api/navigator-lead', '/api/affiliate/register', '/api/affiliate/validate-code', '/api/report-error', '/api/oisha', '/api/admin/login', '/api/admin/logout']);
+const browserPosts = new Set(['/api/submit-form', '/api/diagnostics', '/api/navigator-lead', '/api/affiliate/register', '/api/affiliate/validate-code', '/api/report-error', '/api/oisha', '/api/admin/login', '/api/admin/logout', '/api/security/verify']);
 const leadPosts = new Set(['/api/submit-form', '/api/diagnostics', '/api/navigator-lead', '/api/affiliate/register']);
 const cronRoutes = new Set(['/api/content-agent', '/api/blog-agent', '/api/portfolio-sync', '/api/reviews-sync', '/api/cron/lead-retry']);
 const serviceRoutes = new Set(['/api/amocrm-health', '/api/amocrm-refresh', '/api/amocrm-process-calls']);
@@ -133,7 +136,7 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
     }
     return request;
   }
-  if (!knownRoutes.has(path) && !/^\/api\/admin\/payouts\/[a-zA-Z0-9_-]{1,80}\/mark-paid$/.test(path)) return denied(404, 'not_found');
+  if (!knownRoutes.has(path) && path !== '/api/security/challenge' && !/^\/api\/admin\/payouts\/[a-zA-Z0-9_-]{1,80}\/mark-paid$/.test(path)) return denied(404, 'not_found');
   if (!['GET', 'HEAD', 'POST', 'OPTIONS'].includes(request.method)) return denied(405, 'method_not_allowed');
 
   const tokenAuth = bearer(request, [env.OISHA_SECRET_KEY]);
@@ -155,6 +158,9 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
   const allowed = await quota(env.JB_API_LIMIT, `api:${ip}`);
   if (allowed === null) return denied(503, 'protection_unavailable', '10');
   if (!allowed) return denied(429, 'rate_limited', '60');
+
+  if (path === '/api/security/challenge') return request.method === 'GET' ? humanConfiguration(request, env) : denied(405, 'method_not_allowed');
+  if (path === '/api/security/verify' && request.method !== 'POST') return denied(405, 'method_not_allowed');
 
   if (path === '/api/oisha' && ['GET', 'HEAD'].includes(request.method)) {
     if (!tokenAuth && !(await validIntakeSession(request, env, Date.now(), 0))) return denied(403, 'reload_required');
@@ -190,6 +196,14 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
   if (path === '/api/affiliate/validate-code' && (typeof data.code !== 'string' || !/^[\p{L}\p{N}_-]{1,40}$/u.test(data.code))) return denied(400, 'invalid_code');
   if (path === '/api/report-error' && (typeof data.message !== 'string' || !data.message.trim() || data.message.length > 2000)) return denied(400, 'invalid_error_report');
   if (!tokenAuth && !(await validIntakeSession(request, env))) return denied(403, 'reload_required');
+
+  if (path === '/api/security/verify') {
+    const challengeAllowed = await quota(env.JB_CHALLENGE_LIMIT, `challenge:${ip}`);
+    if (challengeAllowed === null) return denied(503, 'verification_unavailable', '10');
+    if (!challengeAllowed) return denied(429, 'rate_limited', '60');
+    return verifyHumanChallenge(request, data, env);
+  }
+  if (!tokenAuth && (leadPosts.has(path) || path === '/api/oisha') && humanVerificationRequired(env) && !(await validHumanSession(request, env))) return denied(403, 'human_verification_required');
 
   if (leadPosts.has(path) || path === '/api/report-error' || path === '/api/admin/login') {
     const limit = path === '/api/admin/login' ? env.JB_LOGIN_LIMIT : env.JB_FORM_LIMIT;

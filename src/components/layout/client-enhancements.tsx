@@ -132,7 +132,11 @@ export default function ClientEnhancements({
 
   const reportError = useCallback((error: ErrorEvent) => {
     const { message, filename, lineno, colno, error: errorObj } = error;
-    if (!message || message.includes('Telegram API Error') || message === 'Script error.' || (filename && !filename.includes(window.location.origin))) return;
+    if (!message || message === 'Script error.') return;
+    if (message.startsWith('ResizeObserver loop')) return;
+    if (message.startsWith('Non-Error promise rejection captured')) return;
+    if (!errorObj && !lineno && !colno) return;
+    if (message.includes('Telegram API Error') || (filename && !filename.includes(window.location.origin))) return;
 
     fetch('/api/report-error', {
       method: 'POST',

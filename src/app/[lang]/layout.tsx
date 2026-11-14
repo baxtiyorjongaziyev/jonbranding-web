@@ -19,6 +19,12 @@ import LeadAttributionCapture from '@/components/layout/lead-attribution-capture
 const BASE_URL = 'https://www.jonbranding.uz';
 const OG_IMAGE_URL = '/images/cms/og-image.jpeg';
 
+// Pre-render public locale routes instead of spending Free Worker CPU on SSR.
+// Do not force-static: authenticated child routes must retain their cookie checks.
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],

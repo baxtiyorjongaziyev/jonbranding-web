@@ -179,7 +179,7 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
         >
           <Link
             href={getLocalizedPath('/')}
-            className="flex items-center shrink-0"
+            className="flex min-w-0 items-center shrink [&_img]:max-[360px]:h-5"
             aria-label="Jon Branding - Bosh sahifa"
           >
             <Logo isWhite={!useDarkHeaderText} />

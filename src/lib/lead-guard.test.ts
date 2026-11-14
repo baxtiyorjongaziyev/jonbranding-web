@@ -58,9 +58,9 @@ describe('lead-guard', () => {
       expect(checkOrigin(mockRequest({ origin: 'https://evil-jonbranding.uz' })).trusted).toBe(false);
     });
 
-    it('trusts Vercel preview deployments', () => {
+    it('does not trust arbitrary Vercel preview tenants', () => {
       const check = checkOrigin(mockRequest({ origin: 'https://jb-abc123.vercel.app' }));
-      expect(check.trusted).toBe(true);
+      expect(check.trusted).toBe(false);
     });
 
     it('falls back to referer when origin is absent', () => {
@@ -100,7 +100,7 @@ describe('lead-guard', () => {
       vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
         ok: true,
         status: 200,
-        json: async () => ({ success: true }),
+        json: async () => ({ success: true, hostname: 'jonbranding.uz' }),
       }));
       expect((await verifyTurnstile('good-token')).ok).toBe(true);
     });
@@ -117,7 +117,7 @@ describe('lead-guard', () => {
       expect(result.reason).toBe('invalid-input-response');
     });
 
-    it('fails open on a 5xx siteverify response', async () => {
+    it('fails closed on a 5xx siteverify response', async () => {
       process.env.TURNSTILE_SECRET_KEY = 'secret';
       vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
         ok: false,
@@ -125,16 +125,16 @@ describe('lead-guard', () => {
         json: async () => { throw new Error('not json'); },
       }));
       const result = await verifyTurnstile('token');
-      expect(result.ok).toBe(true);
-      expect(result.skipped).toBe(true);
+      expect(result.ok).toBe(false);
+      expect(result.skipped).toBe(false);
     });
 
-    it('lets the lead through when Cloudflare is unreachable', async () => {
+    it('rejects unverified leads when Cloudflare is unreachable', async () => {
       process.env.TURNSTILE_SECRET_KEY = 'secret';
       vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network down')));
       const result = await verifyTurnstile('token');
-      expect(result.ok).toBe(true);
-      expect(result.skipped).toBe(true);
+      expect(result.ok).toBe(false);
+      expect(result.skipped).toBe(false);
     });
   });
 
@@ -156,14 +156,14 @@ describe('lead-guard', () => {
       expect(verdict).toEqual({ action: 'allow' });
     });
 
-    it('allows an untrusted origin through but does not drop it', async () => {
+    it('rejects an untrusted origin', async () => {
       const verdict = await guardLeadRequest(
         mockRequest({ origin: 'https://spam.test' }),
         { fullName: 'Sardor' },
         '1.2.3.4',
         'test',
       );
-      expect(verdict).toEqual({ action: 'allow' });
+      expect(verdict).toEqual({ action: 'reject', reason: 'untrusted-origin' });
     });
 
     it('rejects when Turnstile is configured and the token is absent', async () => {

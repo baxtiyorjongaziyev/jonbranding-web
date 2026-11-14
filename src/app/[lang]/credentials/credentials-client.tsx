@@ -3,6 +3,8 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
+import CertificateCard from '@/components/credentials/certificate-card';
+import { PATENT_CERTIFICATES, certificateDays } from '@/lib/patent-certificates';
 import { Deck, type DeckSlide, Display, Eyebrow, INK, mono, nums, rise, serif, Slide, stagger } from '@/components/credentials/deck';
 import { clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
 import type { CredentialsCopy } from '@/lib/credentials-content';
@@ -146,6 +148,11 @@ function CaseImageRotator({
 export default function CredentialsClient({ cases, quotes, logos, sales, copy, lang }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [presetService, setPresetService] = useState(sales.notSure);
+  const [zoomedCert, setZoomedCert] = useState<number | null>(null);
+  const [certSwipeX, setCertSwipeX] = useState<number | null>(null);
+
+  const patentWithLogo = PATENT_CERTIFICATES.filter((cert) => cert.logo);
+  const fastestDays = Math.min(...PATENT_CERTIFICATES.map(certificateDays));
   const openModal = useCallback((service: string) => {
     setPresetService(service);
     setModalOpen(true);
@@ -374,6 +381,108 @@ export default function CredentialsClient({ cases, quotes, logos, sales, copy, l
         </div>
       ),
     });
+  });
+
+  slides.push({
+    id: 'patent',
+    label: lang === 'ru' ? 'Патент' : lang === 'en' ? 'Patent' : lang === 'zh' ? '专利' : 'Patent',
+    render: () => (
+      <Slide bg={INK}>
+        <Eyebrow light>
+          {lang === 'ru'
+            ? 'Юридическая защита · Свидетельства'
+            : lang === 'en'
+            ? 'Legal Protection · Official Certificates'
+            : lang === 'zh'
+            ? '法律保护 · 官方证书'
+            : 'Huquqiy himoya · Rasmiy guvohnomalar'}
+        </Eyebrow>
+        <Display light>
+          {lang === 'ru'
+            ? `${PATENT_CERTIFICATES.length} брендов — официально защищены`
+            : lang === 'en'
+            ? `${PATENT_CERTIFICATES.length} Brands — Officially Protected`
+            : lang === 'zh'
+            ? `${PATENT_CERTIFICATES.length} 个品牌 — 获得正式法律保护`
+            : `${PATENT_CERTIFICATES.length} ta brend — rasman davlat himoyasida`}
+        </Display>
+        <motion.p
+          variants={rise}
+          className="mt-6 max-w-3xl text-lg sm:text-2xl font-light leading-relaxed text-white/75"
+        >
+          {lang === 'ru'
+            ? 'Получили свидетельства на товарные знаки в Агентстве интеллектуальной собственности Минюста.'
+            : lang === 'en'
+            ? 'Trademark certificates obtained from the Ministry of Justice Intellectual Property Center.'
+            : lang === 'zh'
+            ? '已从司法部知识产权中心取得商标注册证书。'
+            : 'Adliya vazirligi Intellektual mulk markazidan tovar belgisi guvohnomalarini olib berganmiz.'}
+        </motion.p>
+
+        {/* Katta faktlar */}
+        <motion.div variants={rise} className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
+          {[
+            [
+              `${PATENT_CERTIFICATES.length} ta`,
+              lang === 'ru' ? 'Свидетельств получено' : lang === 'en' ? 'Certificates granted' : 'Guvohnoma olib berildi',
+            ],
+            [
+              `${fastestDays} kun`,
+              lang === 'ru' ? 'Самый быстрый рекорд' : lang === 'en' ? 'Fastest registration' : 'Eng tezkor natija',
+            ],
+            [
+              '10 yil',
+              lang === 'ru' ? 'Законная монопольная защита' : lang === 'en' ? 'Exclusive state monopoly' : 'Mutlaq monopol himoya',
+            ],
+          ].map(([val, lbl]) => (
+            <div key={lbl} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+              <p className="text-3xl sm:text-5xl font-normal text-white" style={{ ...serif, ...nums }}>
+                {val}
+              </p>
+              <p className="mt-2 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white/50" style={mono}>
+                {lbl}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Guvohnomalar kartochkalari — bosganda kattalashadi */}
+        <motion.div
+          variants={rise}
+          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
+        >
+          {patentWithLogo.slice(0, 4).map((cert, i) => (
+            <button
+              key={cert.number}
+              type="button"
+              onClick={() => setZoomedCert(i)}
+              aria-label={`${cert.brand} guvohnomasini kattalashtirish`}
+              className="block cursor-zoom-in text-left transition-transform duration-300 hover:-translate-y-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-2xl"
+            >
+              <CertificateCard cert={cert} />
+            </button>
+          ))}
+        </motion.div>
+
+        <motion.div variants={rise} className="cred-no-print mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href={`/${lang}/credentials/patent`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm sm:text-base font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: '#2554FF' }}
+          >
+            {lang === 'ru'
+              ? 'Все свидетельства и презентация по патенту ↗'
+              : lang === 'en'
+              ? 'All certificates & patent presentation ↗'
+              : lang === 'zh'
+              ? '全部证书与专利报告 ↗'
+              : 'Barcha 15 ta guvohnoma va patent taqdimoti ↗'}
+          </a>
+        </motion.div>
+      </Slide>
+    ),
   });
 
   sales.serviceGroups.forEach((group) => {
@@ -615,12 +724,60 @@ export default function CredentialsClient({ cases, quotes, logos, sales, copy, l
   });
 
   return (
-    <Deck
-      slides={slides}
-      modalOpen={modalOpen}
-      setModalOpen={setModalOpen}
-      presetService={presetService}
-      lang={lang}
-    />
+    <>
+      <Deck
+        slides={slides}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        presetService={presetService}
+        lang={lang}
+      />
+      {zoomedCert !== null ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${patentWithLogo[zoomedCert].brand} ma’lumotnomasi`}
+          onClick={() => setZoomedCert(null)}
+          className="cred-no-print fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center p-4"
+          style={{ background: 'rgba(11,11,12,.88)', backdropFilter: 'blur(8px)' }}
+        >
+          <div
+            className="w-full"
+            style={{ maxWidth: 'min(92vw, calc((100svh - 5.5rem) / 1.414))', marginBottom: '3.5rem' }}
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={(event) => setCertSwipeX(event.touches[0].clientX)}
+            onTouchEnd={(event) => {
+              if (certSwipeX === null) return;
+              const dx = event.changedTouches[0].clientX - certSwipeX;
+              setCertSwipeX(null);
+              if (Math.abs(dx) < 50) return;
+              setZoomedCert((z) => (z === null ? z : (z + (dx < 0 ? 1 : -1) + patentWithLogo.length) % patentWithLogo.length));
+            }}
+          >
+            <CertificateCard cert={patentWithLogo[zoomedCert]} />
+          </div>
+          <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3" onClick={(event) => event.stopPropagation()}>
+            {([
+              ['←', -1, 'Oldingi guvohnoma'],
+              ['→', 1, 'Keyingi guvohnoma'],
+            ] as const).map(([arrow, step, label], i) => (
+              <button
+                key={label}
+                type="button"
+                aria-label={label}
+                onClick={() => setZoomedCert((z) => (z === null ? z : (z + step + patentWithLogo.length) % patentWithLogo.length))}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-base transition-colors hover:bg-white/25"
+                style={{ background: 'rgba(255,255,255,.14)', color: '#fff', order: i * 2 }}
+              >
+                {arrow}
+              </button>
+            ))}
+            <span className="text-xs uppercase font-mono tracking-widest text-white/70" style={{ ...nums, order: 1 }}>
+              {zoomedCert + 1} / {patentWithLogo.length}
+            </span>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }

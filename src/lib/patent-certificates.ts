@@ -36,7 +36,13 @@ export const PATENT_CERTIFICATES: PatentCertificate[] = [
   { number: 'MGU 66245', brand: 'Zayyan', owner: 'SHERZOD J. D.', application: 'TB 202510178', filed: '2025-12-05', registered: '2026-07-06', classes: [35], industry: 'Onlayn savdo', logo: '/images/patent/mgu-66245.webp' },
   { number: 'MGU 67303', brand: 'Nurion', owner: 'BURXONXO‘JA A. B.', application: 'TB 202600527', filed: '2026-01-22', registered: '2026-08-19', classes: [3, 5, 35], industry: 'Kosmetika', logo: '/images/patent/mgu-67303.webp' },
   { number: 'MGU 67304', brand: 'Qomus', owner: 'BURXONXO‘JA A. B.', application: 'TB 202600530', filed: '2026-01-22', registered: '2026-08-19', classes: [3, 5, 35], industry: 'Kosmetika', logo: '/images/patent/mgu-67304.webp' },
-  { number: 'MGU 68379', brand: '—', owner: 'ODILJON H. O.', application: 'TB 202602310', filed: '2026-03-13', registered: '2026-10-12', classes: [35], industry: 'Savdo', logo: null },
+    { number: 'MGU 68379', brand: 'Enros', owner: 'ODILJON H. O.', application: 'TB 202602310', filed: '2026-03-13', registered: '2026-10-12', classes: [35], industry: 'Savdo & Servis', logo: '/images/patent/mgu-68379.webp' },
+  { number: 'MGU 67569', brand: 'Sayr', owner: 'ASILBEK S. N.', application: 'TB 202510622', filed: '2025-12-18', registered: '2026-08-28', classes: [12, 35], industry: 'Transport & Skuter', logo: '/images/patent/mgu-67569.webp' },
+  { number: 'MGU 68490', brand: 'Lubaba', owner: 'ALLOXYOR M. M.', application: 'TB 202508376', filed: '2025-10-13', registered: '2026-10-17', classes: [30, 43], industry: 'Muzqaymoq & Kafe', logo: '/images/patent/mgu-68490.webp' },
+  { number: 'MGU 66985', brand: 'Azel', owner: 'AZIZJON D. R.', application: 'TB 202509208', filed: '2025-11-06', registered: '2026-08-05', classes: [25], industry: 'Poyabzal & Kiyim', logo: '/images/patent/mgu-66985.webp' },
+  { number: 'MGU 67849', brand: 'To‘maris', owner: 'ANVAR M. M.', application: 'TB 202601142', filed: '2026-02-11', registered: '2026-09-16', classes: [35, 37], industry: 'Qurilish', logo: '/images/patent/mgu-67849.webp' },
+  { number: 'MGU 65381', brand: 'Almaz', owner: 'HIKMATILLO T. A.', application: 'TB 202603420', filed: '2026-04-16', registered: '2026-05-20', classes: [25], industry: 'Poyabzal & Kiyim', logo: '/images/patent/mgu-65381.webp' },
+  { number: 'MGU 68642', brand: 'Parfino', owner: 'AZIZ S. B.', application: 'TB 202602569', filed: '2026-03-24', registered: '2026-10-23', classes: [3, 35], industry: 'Kosmetika', logo: '/images/patent/mgu-68642.webp' },
 ];
 
 /** Talabnomadan reestrgacha o'tgan kunlar. */

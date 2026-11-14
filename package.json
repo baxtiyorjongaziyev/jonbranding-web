@@ -6,11 +6,11 @@
     "dev": "next dev --webpack -p 9002 -H 0.0.0.0",
     "dev:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 next dev --webpack -p 9002 -H 0.0.0.0",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build --webpack",
-    "build:cloudflare": "opennextjs-cloudflare build",
-    "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "build:cloudflare": "opennextjs-cloudflare build && node scripts/website-security-runtime.cjs",
+    "preview:cloudflare": "npm run build:cloudflare && opennextjs-cloudflare preview",
+    "deploy:cloudflare": "npm run build:cloudflare && opennextjs-cloudflare deploy",
     "deploy:vercel": "npx vercel --prod",
-    "upload:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "upload:cloudflare": "npm run build:cloudflare && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "node .next/standalone/server.js",
     "start:turbo": "cross-env NODE_OPTIONS=--max-old-space-size=8192 UV_THREADPOOL_SIZE=16 node --max-semi-space-size=64 .next/standalone/server.js",
@@ -24,7 +24,8 @@
     "mock:lead": "node scripts/harness/mock-lead.mjs",
     "portfolio:sync": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --once",
     "portfolio:watch": "C:/Users/baxti/playground/oisha-os/.venv/Scripts/python.exe scripts/portfolio_drive_automation.py --watch",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync:patents": "python scripts/sync-patents.py"
   },
   "engines": {
     "node": ">=20.0.0"

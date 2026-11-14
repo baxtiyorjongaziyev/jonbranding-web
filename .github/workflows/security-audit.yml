@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify security gate fails closed
+        run: node --test scripts/check-audit.node-test.mjs
+
       - name: Audit production dependencies
         run: |
           npm audit --audit-level=high --omit=dev --json > npm-audit.json || true

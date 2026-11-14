@@ -10,10 +10,11 @@ const bindings = [
   { name: 'JB_CONTACT_LIMIT', type: 'ratelimit', namespace_id: '2026111405', simple: { limit: 2, period: 60 } },
   { name: 'JB_LOGIN_LIMIT', type: 'ratelimit', namespace_id: '2026111406', simple: { limit: 5, period: 60 } },
   { name: 'JB_PAGE_LIMIT', type: 'ratelimit', namespace_id: '2026111407', simple: { limit: 120, period: 60 } },
+  { name: 'JB_CHALLENGE_LIMIT', type: 'ratelimit', namespace_id: '2026111408', simple: { limit: 10, period: 60 } },
 ];
 
 function runtimeSource() {
-  const modules = ['oisha-input', 'intake-validation', 'intake-session', 'website-admin-session', 'website-response-security', 'website-edge-guard', 'oisha-edge-guard'];
+  const modules = ['oisha-input', 'intake-validation', 'intake-session', 'human-verification', 'website-admin-session', 'website-response-security', 'website-edge-guard', 'oisha-edge-guard'];
   const code = modules.map(name => ts.transpileModule(fs.readFileSync(path.join(__dirname, `../src/lib/${name}.ts`), 'utf8'), {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
   }).outputText.replace(/^import .*;\r?\n/gm, '').replace(/^export /gm, '')).join('\n');

@@ -22,7 +22,7 @@ import {
   getPostData,
 } from '@/lib/blog-posts';
 
-export const revalidate = 300;
+export const revalidate = false;
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
@@ -310,3 +310,4 @@ export default async function BlogPostPage(props: Props) {
     </div>
   );
 }
+export const dynamicParams = false;

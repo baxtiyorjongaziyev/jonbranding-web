@@ -1,11 +1,7 @@
-// npm audit gate: fail on high/critical advisories, except allowlisted ones
-// that have no patched release upstream. Remove entries once a fix ships.
+// Fail closed: an unavailable/malformed audit must never look like a clean scan.
 import fs from 'node:fs';
 
-const ALLOWLIST = new Map([
-  // braces <=3.0.3 stack-exhaustion DoS; no patched version (via sanity/chokidar/micromatch)
-  ['GHSA-vfj7-8cjw-p6xm', 'braces: no upstream fix yet'],
-]);
+const ALLOWLIST = new Map();
 
 let raw = fs.readFileSync(process.argv[2] ?? 'npm-audit.json');
 if (raw[0] === 0xff && raw[1] === 0xfe) {
@@ -14,6 +10,10 @@ if (raw[0] === 0xff && raw[1] === 0xfe) {
   raw = raw.toString('utf8').replace(/^\uFEFF/, '');
 }
 const audit = JSON.parse(raw);
+if (audit.error || audit.auditReportVersion !== 2 || !audit.vulnerabilities || typeof audit.vulnerabilities !== 'object'
+  || !audit.metadata?.vulnerabilities || ['high', 'critical', 'total'].some(key => !Number.isInteger(audit.metadata.vulnerabilities[key]) || audit.metadata.vulnerabilities[key] < 0)) {
+  throw new Error('npm audit did not return a complete report; security gate cannot pass.');
+}
 const advisories = new Map();
 for (const vuln of Object.values(audit.vulnerabilities ?? {})) {
   for (const via of vuln.via) {
@@ -35,7 +35,8 @@ lines.push('', '### Allowlisted', ...(ignored.length ? ignored.map((a) => `- ${a
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n'));
 console.log(lines.join('\n'));
 
-if (blocking.length) {
+const totalsHighOrCritical = (audit.metadata?.vulnerabilities?.high ?? 0) + (audit.metadata?.vulnerabilities?.critical ?? 0);
+if (blocking.length || totalsHighOrCritical > 0) {
   console.error('High/critical advisories found. Review npm-audit.json and Dependabot alerts.');
   process.exit(1);
 }

@@ -4,7 +4,7 @@ import { fetchTestimonials } from '@/lib/data/testimonials';
 import ReviewsClient from './reviews-client';
 import { getPageAlternates } from '@/lib/seo';
 
-export const revalidate = 60; // Revalidate reviews cache every 60 seconds
+export const revalidate = false;
 
 type Props = {
   params: Promise<{ lang: string }>;

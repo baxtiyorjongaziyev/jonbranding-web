@@ -122,3 +122,6 @@ telegram_web_screen.png
 publish_lessons.py
 published_academy_articles.json
 npm-audit.json
+
+# local release/audit artifacts
+/output/

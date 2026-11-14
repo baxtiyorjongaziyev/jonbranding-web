@@ -2,6 +2,7 @@
 import { getSalesFlow } from '@/lib/sales-flow';
 import { type FC, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useReducedMotion } from 'framer-motion';
 import { FOUNDED_YEAR, clientsLabel, projectsLabel, yearsLabel } from '@/lib/company-facts';
 
 interface PortfolioImage {
@@ -120,6 +121,7 @@ const DEFAULT_IMAGES: PortfolioImage[] = [
 const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictionary }) => {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   const fallback = translations[(lang as Lang) in translations ? (lang as Lang) : 'uz'];
   const l = {
@@ -141,23 +143,24 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
 
   // Auto-advance portfolio showcase every 3.8s
   useEffect(() => {
-    if (pool.length <= 1 || isPaused) return;
+    if (pool.length <= 1 || isPaused || reducedMotion) return;
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % pool.length);
     }, 3800);
     return () => clearInterval(timer);
-  }, [pool.length, isPaused]);
+  }, [pool.length, isPaused, reducedMotion]);
 
-  // Preload all pool images into memory for instant sharp display
+  // Warm only the next slide; downloading every full-size image delays mobile LCP.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    pool.forEach((item) => {
+    if (reducedMotion || isPaused) return;
+    [pool[(index + 1) % pool.length]].forEach((item) => {
       if (item?.src) {
         const img = new window.Image();
         img.src = item.src;
       }
     });
-  }, [pool]);
+  }, [pool, index, reducedMotion, isPaused]);
 
   const activeItem = pool[index % pool.length] || DEFAULT_IMAGES[0];
 
@@ -210,7 +213,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
               </button>
               <button
                 onClick={() =>
-                  document.getElementById('ishlar')?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById('ishlar')?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' })
                 }
                 className="inline-flex items-center justify-center gap-2 border border-slate-200 hover:border-slate-400 rounded-full px-8 py-4 text-sm font-semibold text-slate-800 hover:text-black transition-colors bg-white shadow-sm"
               >
@@ -272,7 +275,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                   quality={85}
                   sizes="(max-width: 768px) 100vw, (max-width: 1400px) 50vw, 1000px"
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
-                  priority
+                  priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
 
@@ -306,7 +309,7 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
             </a>
 
             {/* Slide switcher indicators (44px vertical touch target per WCAG 2.5.8) */}
-            <div className="flex items-center gap-0.5" aria-label="Keyslar slayderi">
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-0.5" aria-label="Keyslar slayderi">
               {pool.map((item, dotIdx) => {
                 const isActive = index % pool.length === dotIdx;
                 return (
@@ -314,15 +317,15 @@ const AtHero: FC<Props> = ({ onOpen, lang = 'uz', portfolioImages = [], dictiona
                     key={item.src + dotIdx}
                     type="button"
                     onClick={(e) => { e.preventDefault(); setIndex(dotIdx); }}
-                    className="group/dot flex min-h-[44px] min-w-[24px] items-center justify-center px-1 focus-visible:outline-none"
+                    className="group/dot flex min-h-[44px] min-w-[44px] items-center justify-center px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2554FF] rounded-full"
                     aria-label={`${item.name} keysiga o'tish`}
                     aria-current={isActive ? 'true' : undefined}
                   >
                     <span
-                      className={`h-2 rounded-full transition-[width,background-color] duration-300 ${
+                      className={`h-2 w-2 rounded-full transition-[transform,background-color] duration-300 ${
                         isActive
-                          ? 'w-7 bg-[#2554FF]'
-                          : 'w-2 bg-slate-300 group-hover/dot:bg-slate-400'
+                          ? 'scale-x-[3.5] bg-[#2554FF]'
+                          : 'bg-slate-300 group-hover/dot:bg-slate-400'
                       }`}
                     />
                   </button>

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { validIntakeName, intakePhone, intakeTelegram } from '@/lib/intake-validation';
 import {
   isValidPhone,
   isValidTelegramUsername,
@@ -18,7 +19,7 @@ const optionalTelegramSchema = z.preprocess((value) => {
 
 export const submitFormSchema = z
   .object({
-    fullName: z.string().min(2, 'Name is too short').max(100),
+    fullName: z.string().trim().min(2, 'Name is too short').max(100).refine(validIntakeName, 'Invalid name'),
     phone: optionalPhoneSchema,
     telegram: optionalTelegramSchema,
     role: z.string().max(200).optional(),
@@ -56,6 +57,8 @@ export const submitFormSchema = z
     promoCode: z.string().max(40).optional(),
   })
   .superRefine((data, context) => {
+    if (data.phone && !intakePhone(data.phone)) context.addIssue({ code: 'custom', message: 'Invalid phone', path: ['phone'] });
+    if (data.telegram && !intakeTelegram(data.telegram)) context.addIssue({ code: 'custom', message: 'Invalid Telegram username', path: ['telegram'] });
     if (!data.phone && !data.telegram) {
       context.addIssue({
         code: 'custom',

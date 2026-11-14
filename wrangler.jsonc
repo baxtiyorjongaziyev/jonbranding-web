@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "jonbranding-web",
-  "main": ".open-next/worker.js",
+  "main": ".open-next/security-worker.mjs",
   "workers_dev": true,
   "vars": { "TRUSTED_PROXY": "cloudflare" },
   "ratelimits": [
@@ -11,7 +11,8 @@
     { "name": "JB_FORM_LIMIT", "namespace_id": "2026111404", "simple": { "limit": 5, "period": 60 } },
     { "name": "JB_CONTACT_LIMIT", "namespace_id": "2026111405", "simple": { "limit": 2, "period": 60 } },
     { "name": "JB_LOGIN_LIMIT", "namespace_id": "2026111406", "simple": { "limit": 5, "period": 60 } },
-    { "name": "JB_PAGE_LIMIT", "namespace_id": "2026111407", "simple": { "limit": 120, "period": 60 } }
+    { "name": "JB_PAGE_LIMIT", "namespace_id": "2026111407", "simple": { "limit": 120, "period": 60 } },
+    { "name": "JB_CHALLENGE_LIMIT", "namespace_id": "2026111408", "simple": { "limit": 10, "period": 60 } }
   ],
   "compatibility_date": "2026-05-10",
   "compatibility_flags": [

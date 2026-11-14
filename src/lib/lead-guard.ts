@@ -1,14 +1,14 @@
 import { logger } from '@/lib/logger';
+import { safeIntakeObject, validIntakeName, intakePhone, intakeTelegram } from '@/lib/intake-validation';
+import { validHumanSession } from '@/lib/human-verification';
 
 /**
  * Bot himoyasi lead endpointlari uchun. Uch qatlam:
  *   1. Honeypot — yashirin maydon. Odam uni ko'rmaydi, bot to'ldiradi.
  *   2. Turnstile — kalitlar sozlanganda avtomat yoqiladi, aks holda o'tkazib
  *      yuboriladi. Shu sabab kalitsiz ham sayt ishlashda davom etadi.
- *   3. Origin — begona saytdan kelgan so'rovni belgilaydi.
- *
- * Origin faqat *belgilaydi*, bloklamaydi: ba'zi maxfiylik kengaytmalari
- * sarlavhani olib tashlaydi va haqiqiy mijozni yo'qotish spamdan qimmatroq.
+ *   3. Origin — begona saytdan kelgan so'rovni rad etadi.
+ * Cloudflare edge additionally requires a signed intake session for browser submissions.
  */
 
 export const HONEYPOT_FIELD = 'companyWebsite';
@@ -35,8 +35,7 @@ function hostFromUrl(value: string | null) {
 function isAllowedHost(host: string) {
   if (!host) return false;
   if (ALLOWED_ORIGIN_HOSTS.includes(host)) return true;
-  // Vercel preview deploylari: <project>-<hash>-<scope>.vercel.app
-  return host.endsWith('.vercel.app');
+  return host === 'patent.jonbranding.uz';
 }
 
 /**
@@ -81,8 +80,8 @@ export async function verifyTurnstile(token: unknown, ip?: string): Promise<Turn
   const secret = String(process.env.TURNSTILE_SECRET_KEY || '').trim();
   if (!secret) return { ok: true, skipped: true };
 
-  const candidate = String(token || '').trim();
-  if (!candidate) return { ok: false, skipped: false, reason: 'missing-token' };
+  const candidate = typeof token === 'string' ? token.trim() : '';
+  if (!candidate || candidate.length > 2048) return { ok: false, skipped: false, reason: 'missing-token' };
 
   try {
     const form = new URLSearchParams({ secret, response: candidate });
@@ -92,19 +91,19 @@ export async function verifyTurnstile(token: unknown, ip?: string): Promise<Turn
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: form,
+      signal: AbortSignal.timeout(5000),
     });
     const result: any = await response.json().catch(() => null);
 
-    if (result?.success === true) return { ok: true, skipped: false };
+    if (response.ok && result?.success === true && typeof result.hostname === 'string'
+      && ALLOWED_ORIGIN_HOSTS.concat('patent.jonbranding.uz').includes(result.hostname.toLowerCase())) return { ok: true, skipped: false };
 
-    // 5xx yoki buzuq JSON — bu tokenning yaroqsizligi emas, Cloudflare'ning
-    // yiqilgani. fetch bunda reject qilmaydi, shuning uchun catch'ga tushmaydi.
-    // Haqiqiy leadni yo'qotmaslik uchun bu holatda ham o'tkazib yuboramiz.
+    // Verification outages cannot establish that the caller is human.
     if (!response.ok || result === null) {
-      logger.error('Turnstile siteverify unavailable; allowing lead through', {
+      logger.error('Turnstile siteverify unavailable; rejecting unverified lead', {
         status: response.status,
       });
-      return { ok: true, skipped: true, reason: `verify-unavailable-http-${response.status}` };
+      return { ok: false, skipped: false, reason: 'verify-unavailable' };
     }
 
     return {
@@ -115,11 +114,10 @@ export async function verifyTurnstile(token: unknown, ip?: string): Promise<Turn
         : `http-${response.status}`,
     };
   } catch (error) {
-    // Turnstile ishlamay qolsa haqiqiy leadni yo'qotmaymiz — o'tkazib yuboramiz.
-    logger.error('Turnstile verification failed; allowing lead through', {
+    logger.error('Turnstile verification failed; rejecting unverified lead', {
       error: error instanceof Error ? error.message : String(error),
     });
-    return { ok: true, skipped: true, reason: 'verify-unavailable' };
+    return { ok: false, skipped: false, reason: 'verify-unavailable' };
   }
 }
 
@@ -145,6 +143,11 @@ export async function guardLeadRequest(
     logger.warn(`Lead blocked by honeypot (${context})`, { ip });
     return { action: 'drop', reason: 'honeypot' };
   }
+  if (!safeIntakeObject(body) || !validIntakeName(body.fullName)) {
+    return { action: 'reject', reason: 'invalid-input' };
+  }
+  if (body.phone && !intakePhone(body.phone)) return { action: 'reject', reason: 'invalid-phone' };
+  if (body.telegram && !intakeTelegram(body.telegram)) return { action: 'reject', reason: 'invalid-telegram' };
 
   const origin = checkOrigin(request);
   if (!origin.trusted) {
@@ -153,8 +156,10 @@ export async function guardLeadRequest(
       host: origin.host || null,
       missing: origin.missing,
     });
+    if (!origin.missing) return { action: 'reject', reason: 'untrusted-origin' };
   }
 
+  if (await validHumanSession(request, { OISHA_SECRET_KEY: process.env.OISHA_SECRET_KEY })) return { action: 'allow' };
   const turnstile = await verifyTurnstile(
     (body as Record<string, unknown> | null)?.turnstileToken,
     ip,

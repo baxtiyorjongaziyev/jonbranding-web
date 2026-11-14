@@ -8,7 +8,7 @@ import { presentPortfolioProject } from '@/lib/portfolio-presentation';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
 import { getPageAlternates, pageTitle, ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
 
-export const revalidate = 60;
+export const revalidate = false;
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
@@ -133,3 +133,4 @@ export default async function PortfolioDetailPage(props: Props) {
     </>
   );
 }
+export const dynamicParams = false;

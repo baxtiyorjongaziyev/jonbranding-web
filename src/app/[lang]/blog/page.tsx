@@ -12,7 +12,7 @@ import {
 import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 import { getSortedPostsData } from '@/lib/blog-posts';
 
-export const revalidate = 300;
+export const revalidate = false;
 
 type Props = { params: Promise<{ lang: string }> };
 
