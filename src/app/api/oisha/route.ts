@@ -2,17 +2,15 @@ import { NextResponse, after } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { getDictionary, type Locale } from '@/lib/dictionaries';
 import { logger } from '@/lib/logger';
-import { containsContact, isOishaWebUserId } from '@/lib/oisha';
+import { containsContact } from '@/lib/oisha';
+import { getOishaSession } from '@/lib/oisha-session';
+import { isChatProbe, readChatBody } from '@/lib/oisha-input';
 import { guardLeadRequest } from '@/lib/lead-guard';
 import { shouldSendOishaAlert } from '@/lib/oisha-alert-throttle';
 
 const LOCALES: readonly Locale[] = ['uz', 'ru', 'en', 'zh'];
 // Telegram xabari 4096 belgidan oshsa rad etiladi.
 const MAX_TEXT_LENGTH = 1500;
-// Bot "e" kabi bo'sh xabarlarni yuboradi — bu uzunlikdan kichik matnni rad etadi.
-const MIN_TEXT_LENGTH = 2;
-// Yangi suhbat boshlash va xabar yuborish uchun IP bo'yicha qattiqroq limit.
-const POST_LIMIT_PER_MIN = 10;
 // Backend yiqilgan bo'lsa har xabarda timeout kutmaslik uchun shu muddat
 // davomida to'g'ridan-to'g'ri offline javob beriladi.
 const BACKEND_COOLDOWN_MS = 60_000;
@@ -82,27 +80,46 @@ async function offlineReply(userId: string, text: string, lang: Locale, ip: stri
     );
 }
 
+const normalizeUserId = (value: string | null) => {
+    if (!value || !/^[a-zA-Z0-9_-]{3,80}$/.test(value)) {
+        return null;
+    }
+    return encodeURIComponent(value);
+};
+
+const isValidUserId = (value: unknown): value is string =>
+    typeof value === 'string' && /^[a-zA-Z0-9_-]{3,80}$/.test(value);
+
+const BLOCKED_OISHA_USER_IDS = new Set([
+    'web_1a7ae654-dac2-41a0-aedf-b31564803674',
+    'web_fc166ee6-a3c9-44c6-b3e7-39a64e61a867',
+]);
+
 export async function GET(request: Request) {
     const ip = getClientIp(request);
     if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('user_id');
-    if (!isOishaWebUserId(userId)) {
+    const requestedUserId = searchParams.get('user_id');
+    if (requestedUserId && BLOCKED_OISHA_USER_IDS.has(requestedUserId)) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+    if (!normalizeUserId(requestedUserId)) {
         return NextResponse.json({ error: 'valid user_id required' }, { status: 400 });
     }
     const { url, secret } = oishaConfig();
+    const session = getOishaSession(request, secret);
     if (!url || !secret) {
         return NextResponse.json({ history: [] }, { status: 200 });
     }
     try {
         const res = await fetch(
-            `${url}/api/chat/history/${userId}`,
+            `${url}/api/chat/history/${session.userId}`,
             { headers: { 'X-Secret-Key': secret, Authorization: `Bearer ${secret}` }, signal: AbortSignal.timeout(10_000) }
         );
         const data = await res.json();
-        return NextResponse.json(data, { status: res.ok ? 200 : res.status });
+        return session.attach(NextResponse.json(data, { status: res.ok ? 200 : res.status }));
     } catch {
         return NextResponse.json({ history: [] }, { status: 200 });
     }
@@ -110,16 +127,26 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const ip = getClientIp(request);
-    if (!(await rateLimit(`oisha-post:${ip}`, POST_LIMIT_PER_MIN, 60_000))) {
+    if (request.headers.get('sec-fetch-site') === 'cross-site') {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+    if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
+        return NextResponse.json({ error: 'JSON required' }, { status: 415 });
+    }
+    if (!(await rateLimit(`oisha:burst:${ip}`, 5, 10_000))) {
+        return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': '10' } });
+    }
+    if (!(await rateLimit(`oisha:${ip}`, 30, 60_000))) {
         return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
     }
     let body: { user_id?: unknown; text?: unknown; lang?: unknown };
     try {
-        body = await request.json();
-    } catch {
-        return NextResponse.json({ error: 'invalid json' }, { status: 400 });
+        const parsed = await readChatBody(request);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new SyntaxError('invalid object');
+        body = parsed;
+    } catch (error) {
+        return NextResponse.json({ error: 'invalid request body' }, { status: error instanceof RangeError ? 413 : 400 });
     }
-
     // Honeypot + Turnstile + origin (lead-guard). Honeypot to'ldirilgan bo'lsa
     // bot muvaffaqiyat ko'radi, lekin hech narsa yuborilmaydi.
     const guard = await guardLeadRequest(request, body, ip, 'oisha');
@@ -131,18 +158,25 @@ export async function POST(request: Request) {
     }
 
     const { user_id, text } = body;
-    if (!isOishaWebUserId(user_id) || typeof text !== 'string' || !text.trim()) {
+    if (typeof user_id === 'string' && BLOCKED_OISHA_USER_IDS.has(user_id)) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+    if (!isValidUserId(user_id) || typeof text !== 'string' || !text.trim()) {
         return NextResponse.json({ error: 'valid user_id and text required' }, { status: 400 });
     }
-    const cleanText = text.trim().slice(0, MAX_TEXT_LENGTH);
-    if (cleanText.length < MIN_TEXT_LENGTH) {
-        return NextResponse.json({ error: 'text too short' }, { status: 400 });
-    }
     const lang: Locale = LOCALES.includes(body.lang as Locale) ? (body.lang as Locale) : 'uz';
+    const cleanText = text.trim().slice(0, MAX_TEXT_LENGTH);
+    if (text.length > MAX_TEXT_LENGTH) {
+        return NextResponse.json({ error: 'text too long' }, { status: 413 });
+    }
+    if (isChatProbe(cleanText)) {
+        return NextResponse.json({ error: 'Invalid chat message' }, { status: 400 });
+    }
 
     const { url, secret } = oishaConfig();
+    const session = getOishaSession(request, secret);
     if (!url || !secret || Date.now() < backendDownUntil) {
-        return offlineReply(user_id, cleanText, lang, ip);
+        return session.attach(await offlineReply(session.userId, cleanText, lang, ip));
     }
     try {
         const res = await fetch(`${url}/api/chat/send`, {
@@ -152,17 +186,17 @@ export async function POST(request: Request) {
                 'X-Secret-Key': secret,
                 Authorization: `Bearer ${secret}`,
             },
-            body: JSON.stringify({ user_id, text: cleanText }),
+            body: JSON.stringify({ user_id: session.userId, text: cleanText }),
             signal: AbortSignal.timeout(10_000),
         });
         if (res.status >= 500) throw new Error(`Oisha backend ${res.status}`);
         const data = await res.json();
-        return NextResponse.json(data, { status: res.ok ? 200 : res.status });
+        return session.attach(NextResponse.json(data, { status: res.ok ? 200 : res.status }));
     } catch (err) {
         backendDownUntil = Date.now() + BACKEND_COOLDOWN_MS;
         logger.error('Oisha backend unavailable, using offline reply', {
             reason: err instanceof Error ? err.message : String(err),
         });
-        return offlineReply(user_id, cleanText, lang, ip);
+        return session.attach(await offlineReply(session.userId, cleanText, lang, ip));
     }
 }

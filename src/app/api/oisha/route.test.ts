@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import uz from '@/locales/uz.json';
 import ru from '@/locales/ru.json';
+import { rateLimit } from '@/lib/rate-limit';
 import { resetOishaAlertThrottle } from '@/lib/oisha-alert-throttle';
 
 vi.mock('@/lib/rate-limit', () => ({
@@ -13,9 +14,6 @@ vi.mock('next/server', async (importOriginal) => ({
   ...(await importOriginal<typeof import('next/server')>()),
   after: (task: () => unknown) => task(),
 }));
-
-// Vidjet beradigan haqiqiy format: `web_` + crypto.randomUUID().
-const WEB_USER = 'web_3f2b8c1e-9a4d-4e6f-8b2a-1c5d7e9f0a3b';
 
 const defaultFetch = async () => new Response(JSON.stringify({ ok: true }), { status: 200 });
 const fetchMock = vi.fn<typeof fetch>(defaultFetch);
@@ -43,43 +41,30 @@ describe('Oisha service authentication', () => {
   });
 
   it('authenticates chat messages at the backend service boundary', async () => {
-    const response = await send({ user_id: WEB_USER, text: 'Salom' });
+    const response = await send({ user_id: 'web_auth_test', text: 'Salom' });
     expect(response.status).toBe(200);
     expect((await response.json()).response).toBe('authenticated');
   });
 
   it('authenticates chat history at the same backend boundary', async () => {
     const { GET } = await import('./route');
-    const response = await GET(new Request(`http://localhost/api/oisha?user_id=${WEB_USER}`));
+    const response = await GET(new Request('http://localhost/api/oisha?user_id=web_auth_test'));
     expect(response.status).toBe(200);
     expect((await response.json()).history).toEqual([]);
   });
-});
 
-// Proxy so'rovga secret qo'shadi. Vidjet bermaydigan ID (masalan, Telegram
-// foydalanuvchisining raqamli ID'si) backend'ga yetib bormasligi kerak — aks
-// holda begona odamning tarixini o'qish yoki uning nomidan yozish mumkin bo'ladi.
-describe('Oisha proxy accepts only widget-issued IDs', () => {
-  const foreignIds = ['150074828', 'web_abc', 'tg_150074828', `${WEB_USER}x`, 'WEB_3F2B8C1E-9A4D-4E6F-8B2A-1C5D7E9F0A3B'];
-
-  beforeEach(() => {
-    process.env.OISHA_API_URL = 'https://oisha.example';
-    process.env.OISHA_SECRET_KEY = 'test-service-key';
+  it('never forwards a caller-selected Telegram recipient to the backend', async () => {
+    await send({ user_id: '123456789', text: 'Salom' });
+    const [, init] = fetchMock.mock.calls[0];
+    const body = JSON.parse(String(init?.body));
+    expect(body.user_id).toMatch(/^web_[0-9a-f-]{36}$/);
+    expect(body.user_id).not.toBe('123456789');
   });
 
-  it.each(foreignIds)('does not read history for %s', async (userId) => {
+  it('never reads history for the caller-selected identity', async () => {
     const { GET } = await import('./route');
-    const response = await GET(
-      new Request(`http://localhost/api/oisha?user_id=${encodeURIComponent(userId)}`),
-    );
-    expect(response.status).toBe(400);
-    expect(fetchMock).not.toHaveBeenCalled();
-  });
-
-  it.each(foreignIds)('does not send a message as %s', async (userId) => {
-    const response = await send({ user_id: userId, text: 'Salom' });
-    expect(response.status).toBe(400);
-    expect(fetchMock).not.toHaveBeenCalled();
+    await GET(new Request('https://example.com/api/oisha?user_id=123456789'));
+    expect(String(fetchMock.mock.calls[0][0])).toMatch(/\/api\/chat\/history\/web_[0-9a-f-]{36}$/);
   });
 });
 afterEach(() => {
@@ -108,8 +93,39 @@ function telegramText(): string {
 }
 
 describe('POST /api/oisha while the assistant is offline', () => {
+  it.each(["';print(md5(31337));$a='", '";print(md5(31337));$a="', '${@print(md5(31337))}', 'e', 'Testing', '1}dfb{{98991*97996}}xca'])('rejects scanner payload %s before any external call', async (text) => {
+    const res = await send({ user_id: 'web_abc', text });
+    expect(res.status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('blocks the known abusive scanner user_id on GET and POST', async () => {
+    const { GET } = await import('./route');
+    expect((await GET(new Request('http://localhost/api/oisha?user_id=web_1a7ae654-dac2-41a0-aedf-b31564803674'))).status).toBe(403);
+    expect((await send({ user_id: 'web_1a7ae654-dac2-41a0-aedf-b31564803674', text: 'Salom' })).status).toBe(403);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it.each([null, [], 42])('rejects invalid object %s', async (body) => {
+    expect((await send(body)).status).toBe(400);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('rejects oversized streams without Content-Length', async () => {
+    expect((await send({ user_id: 'web_abc', text: 'a'.repeat(9000) })).status).toBe(413);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('stops bursts before forwarding and returns retry guidance', async () => {
+    vi.mocked(rateLimit).mockResolvedValueOnce(false);
+    const res = await send({ user_id: 'web_abc', text: 'Salom' });
+    expect(res.status).toBe(429);
+    expect(res.headers.get('retry-after')).toBe('10');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it('asks for a phone or Telegram instead of promising a callback it cannot make', async () => {
-    const res = await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    const res = await send({ user_id: 'web_abc', text: 'Logo narxi qancha?' });
     expect(res.status).toBe(200);
     expect((await res.json()).response).toBe(uz.oishaWidget.offlineAskContact);
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -117,18 +133,18 @@ describe('POST /api/oisha while the assistant is offline', () => {
   });
 
   it('confirms the callback once the visitor has left a phone number', async () => {
-    const res = await send({ user_id: WEB_USER, text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
+    const res = await send({ user_id: 'web_abc', text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
     expect((await res.json()).response).toBe(uz.oishaWidget.offlineThanks);
     expect(telegramText()).not.toContain("kontakt hali yo'q");
   });
 
   it('answers in the visitor language', async () => {
-    const res = await send({ user_id: WEB_USER, text: 'Сколько стоит логотип?', lang: 'ru' });
+    const res = await send({ user_id: 'web_abc', text: 'Сколько стоит логотип?', lang: 'ru' });
     expect((await res.json()).response).toBe(ru.oishaWidget.offlineAskContact);
   });
 
   it('escapes HTML so Telegram does not reject the message', async () => {
-    await send({ user_id: WEB_USER, text: '<b>salom</b> & rahmat' });
+    await send({ user_id: 'web_abc', text: '<b>salom</b> & rahmat' });
     expect(telegramText()).toContain('&lt;b&gt;salom&lt;/b&gt; &amp; rahmat');
   });
 
@@ -140,41 +156,32 @@ describe('POST /api/oisha while the assistant is offline', () => {
 });
 
 describe('POST /api/oisha bot defenses', () => {
+  const telegramCalls = () =>
+    fetchMock.mock.calls.filter(([url]) => String(url).includes('api.telegram.org'));
+
   it('drops a message when the honeypot is filled, without alerting', async () => {
-    const res = await send({ user_id: WEB_USER, text: 'Salom', companyWebsite: 'spam.example' });
+    const res = await send({ user_id: 'web_bot_honeypot', text: 'Salom', companyWebsite: 'spam.example' });
     expect(res.status).toBe(200);
     expect((await res.json()).response).toBe('');
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('rejects single-character messages like the "e" flood', async () => {
-    const res = await send({ user_id: WEB_USER, text: 'e' });
-    expect(res.status).toBe(400);
-    expect(fetchMock).not.toHaveBeenCalled();
-  });
-
   it('rejects with 403 when Turnstile is configured and the token is missing', async () => {
     process.env.TURNSTILE_SECRET_KEY = 'secret';
-    const res = await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
+    const res = await send({ user_id: 'web_bot_turnstile', text: 'Logo narxi qancha?' });
     expect(res.status).toBe(403);
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('still alerts a contact follow-up after the IP alert was throttled', async () => {
-    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
-    await send({ user_id: WEB_USER, text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
-    const telegramCalls = fetchMock.mock.calls.filter(([url]) =>
-      String(url).includes('api.telegram.org'),
-    );
-    expect(telegramCalls).toHaveLength(2);
+  it('sends at most one Telegram alert per IP within the window', async () => {
+    await send({ user_id: 'web_bot_throttle', text: 'Logo narxi qancha?' });
+    await send({ user_id: 'web_bot_throttle', text: 'Narxi qancha bo‘ladi?' });
+    expect(telegramCalls()).toHaveLength(1);
   });
 
-  it('sends at most one Telegram alert per IP within the window', async () => {
-    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
-    await send({ user_id: WEB_USER, text: 'Logo narxi qancha?' });
-    const telegramCalls = fetchMock.mock.calls.filter(([url]) =>
-      String(url).includes('api.telegram.org'),
-    );
-    expect(telegramCalls).toHaveLength(1);
+  it('still alerts a contact follow-up after the IP alert was throttled', async () => {
+    await send({ user_id: 'web_bot_contact', text: 'Logo narxi qancha?' });
+    await send({ user_id: 'web_bot_contact', text: 'Qo‘ng‘iroq qiling: +998 90 123 45 67' });
+    expect(telegramCalls()).toHaveLength(2);
   });
 });
