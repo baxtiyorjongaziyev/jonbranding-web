@@ -143,7 +143,7 @@ export async function guardLeadRequest(
     logger.warn(`Lead blocked by honeypot (${context})`, { ip });
     return { action: 'drop', reason: 'honeypot' };
   }
-  if (!safeIntakeObject(body) || !validIntakeName(body.fullName)) {
+  if (context !== 'oisha' && (!safeIntakeObject(body) || !validIntakeName(body.fullName))) {
     return { action: 'reject', reason: 'invalid-input' };
   }
   if (body.phone && !intakePhone(body.phone)) return { action: 'reject', reason: 'invalid-phone' };
