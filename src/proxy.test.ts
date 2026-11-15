@@ -87,6 +87,13 @@ describe('proxy locale redirect', () => {
     expect(new URL(proxy(request).headers.get('location')!).pathname).toBe('/en/narxlar');
   });
 
+  it.each(['/feed.xml', '/llms.txt'])(
+    'serves SEO asset %s without locale rewriting',
+    (url) => {
+      expect(unstable_doesMiddlewareMatch({ config, nextConfig: {}, url })).toBe(false);
+    },
+  );
+
   it('excludes apple-touch-icon.png in config matcher pattern', () => {
     const pattern = new RegExp('^' + config.matcher[0] + '$');
     expect(pattern.test('/apple-touch-icon.png')).toBe(false);

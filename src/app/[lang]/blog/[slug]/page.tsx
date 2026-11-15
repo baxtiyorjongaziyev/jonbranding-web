@@ -10,6 +10,7 @@ import { safeJsonStringify } from '@/lib/security';
 import {
   defaultLocale,
   getLocalizedAbsoluteUrl,
+  getLocalizedPath,
   locales,
 } from '@/lib/i18n/locale';
 import {
@@ -21,6 +22,8 @@ import {
   getAllPostSlugs,
   getPostData,
 } from '@/lib/blog-posts';
+import { BlogPostCta } from '@/components/blog/blog-post-cta';
+import { PreferredSourcesCard } from '@/components/blog/preferred-sources-card';
 
 export const revalidate = false;
 
@@ -292,6 +295,16 @@ export default async function BlogPostPage(props: Props) {
           </aside>
         )}
 
+        <BlogPostCta
+          lang={safeLang}
+          slug={slug}
+          title={post.title}
+          keywords={post.keywords}
+          copy={dictionary.blogPost}
+        />
+
+        <PreferredSourcesCard lang={safeLang} copy={dictionary.blog} />
+
         <aside className="mt-14 border-t border-slate-200 pt-8" aria-labelledby="related-services">
           <h2 id="related-services" className="text-xl font-bold text-[#0A0B0E]">
             {dictionary.answerHub.title}
@@ -299,7 +312,7 @@ export default async function BlogPostPage(props: Props) {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {dictionary.answerHub.items.slice(0, 4).map((item: { question: string; href: string }) => (
               <li key={item.href}>
-                <Link href={`/${safeLang}${item.href}`} className="text-sm text-[#2554FF] underline underline-offset-4 hover:opacity-80">
+                <Link href={getLocalizedPath(safeLang, item.href)} className="text-sm text-[#2554FF] underline underline-offset-4 hover:opacity-80">
                   {item.question}
                 </Link>
               </li>

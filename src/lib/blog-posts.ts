@@ -3,8 +3,20 @@ import path from 'node:path';
 import { load as loadYaml } from 'js-yaml';
 import { Marked } from 'marked';
 import type { BlogPost } from '@/lib/types';
+import bundledMarkdownIndex from './blog-markdown-index.json';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
+type BundledMarkdownSummary = {
+  slug: string;
+  title: string;
+  date: string;
+  author: string;
+  description: string;
+  image: string;
+  imageHint: string;
+  source: 'markdown';
+};
+const fallbackMarkdownIndex = bundledMarkdownIndex as Record<string, BundledMarkdownSummary[]>;
 const markdown = new Marked({ async: true });
 
 markdown.use({
@@ -79,6 +91,11 @@ function processFiles(fileNames: string[], directory: string) {
 }
 
 export function getSortedPostsData(lang = 'uz') {
+  // Cloudflare Workers edge isolates do not expose local src/posts files via fs.
+  if (!fs.existsSync(postsDirectory)) {
+    return fallbackMarkdownIndex[lang] ?? [];
+  }
+
   const langDirectory = path.join(postsDirectory, lang);
   if (!fs.existsSync(langDirectory)) return [];
 
@@ -112,7 +129,11 @@ export async function getPostData(
 }
 
 export function getAllPostSlugs(): Array<{ slug: string; lang: string }> {
-  if (!fs.existsSync(postsDirectory)) return [];
+  if (!fs.existsSync(postsDirectory)) {
+    return Object.entries(fallbackMarkdownIndex).flatMap(([lang, posts]) =>
+      posts.map((post) => ({ lang, slug: post.slug })),
+    );
+  }
 
   return fs
     .readdirSync(postsDirectory, { withFileTypes: true })

@@ -103,14 +103,17 @@ export async function GET(req: NextRequest) {
 
   try {
     const topics = [
-      "The importance of naming in branding",
-      "How a strong logo increases sales",
-      "Rebranding: When is it time to change?",
-      "Packaging design that sells",
-      "Corporate identity for startups"
+      'Toshkentda logotip dizayni qanday mezonlar asosida yaratiladi?',
+      'Firma uslubi yaratish: logotip va korporativ uslubning farqi nima?',
+      'Brendbuk nima va u biznesga qachon kerak bo‘ladi?',
+      'O‘zbekistonda qadoq dizayni: mahsulotni javonda ajratuvchi omillar',
+      'Rebranding qachon kerak: biznes o‘sishida brendni yangilash belgilari',
+      'Tovar belgisini ro‘yxatdan o‘tkazish va patentlash bosqichlari',
+      'Neyming agentligi bilan brend nomi tanlash: huquqiy tekshiruv ahamiyati',
+      'Startaplar uchun korporativ identifikatsiya: nimadan boshlash kerak?',
     ];
-    // Pick a random topic for today
-    const topic = topics[Math.floor(Math.random() * topics.length)];
+    const requestedTopic = req.nextUrl.searchParams.get('topic')?.trim().slice(0, 160);
+    const topic = requestedTopic || topics[Math.floor(Math.random() * topics.length)];
     
     const languages = ['uz', 'ru', 'en', 'zh'];
     const results = [];

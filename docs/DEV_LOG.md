@@ -1,5 +1,34 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-15 | Google Preferred Sources, Entity Graph SEO, RSS `/feed.xml` va Blog Konversiya Tizimi
+- **Foydalanuvchi talabi:**
+  - `https://www.google.com/preferences/source?q=amaan.uz` tahlilidan so‘ng `jonbranding.uz` uchun reja tuzish va to‘liq amalga oshirish ("Hammasi uchun reja tuz va amalga oshir").
+- **Reja:**
+  - `docs/superpowers/plans/2026-11-15-seo-preferred-sources-and-blog-conversion.md`
+- **Bajarilgan ishlar:**
+  1. **Unified Schema.org Entity Graph (`src/lib/seo.ts`, `src/app/[lang]/layout.tsx`, `src/lib/seo.test.ts`):**
+     - `getSiteEntityGraph(locale)` boyitildi (`postalCode: '100000'`, `geo` `41.2995, 69.2401`, `openingHoursSpecification` `Mon-Sat 09:00-20:00`, `TELEGRAM_CHANNEL_URL`, mahalliylashtirilgan `founder.jobTitle`).
+     - `[lang]/layout.tsx` dagi 3 ta ajralgan JSON-LD skripti bitta `json-ld-site-entity-graph` (`ORGANIZATION_ID`, `FOUNDER_ID`, `WEBSITE_ID`) grafga birlashtirildi va `<link rel="alternate" type="application/rss+xml" ... href="${BASE_URL}/feed.xml" />` qo‘shildi.
+  2. **Ko‘p tilli RSS 2.0 Feed va Middleware (`src/lib/blog-feed.ts`, `src/app/feed.xml/route.ts`, `src/middleware.ts`, `src/lib/blog-feed.test.ts`, `src/proxy.test.ts`):**
+     - Markdown maqolalari va chop etilgan Sanity postlarini (`!(_id in path("drafts.**"))`) birlashtiruvchi `/feed.xml` (va `?lang=uz|ru|en|zh` filtri bilan) RSS 2.0 endpoint yaratildi.
+     - `src/middleware.ts` dagi `config.matcher` ga `/feed.xml` va `/llms.txt` istisno sifatida qo‘shildi (boshqa tillar yo‘naltirishiga tushmasligi uchun).
+  3. **Google Preferred Sources va CSP (`src/components/blog/preferred-sources-card.tsx`, `src/app/[lang]/blog/page.tsx`, `src/app/[lang]/blog/[slug]/page.tsx`, `next.config.js`, `src/app/content-security-policy.test.ts`):**
+     - `next.config.js` CSP (`script-src`, `img-src`, `connect-src`, `frame-src`) tarkibiga `https://news.google.com` qo‘shildi.
+     - `PreferredSourcesCard` (`publisher.js` + `google-add-preferred-source-btn` + `https://www.google.com/preferences/source?q=jonbranding.uz` fallback + `/feed.xml?lang=` RSS tugmasi) blog ro‘yxati va maqola sahifalariga joylandi.
+  4. **Intent-Aware Blog Konversiya CTA va i18n (`src/lib/blog-cta.ts`, `src/components/blog/blog-post-cta.tsx`, `src/lib/blog-cta.test.ts`, `src/components/blog/blog-widgets.test.tsx`, `src/locales/*.json`):**
+     - Maqola mavzusi/kategoriyasiga qarab `patent`, `packaging`, `naming`, `brandbook`, `branding` klasterlariga mos CTA (`BlogPostCta` -> `openContactModal` va tegishli xizmat sahifasi) hamda `related-services` uchun `getLocalizedPath` yo‘lga qo‘yildi.
+     - 4 ta tilda (`uz`, `ru`, `en`, `zh`) Uzbek-first qoidasi asosida `blog.*` va `blogPost.*` kalitlari sinxronlashtirildi.
+  5. **AI Discovery va Haftalik Draft Cron (`public/llms.txt`, `vercel.json`, `src/app/api/blog-agent/route.ts`, `src/lib/seo-assets.test.ts`):**
+     - `public/llms.txt` dagi eskirgan raqamlar `docs/FAKTLAR.md` dagi rasmiy faktlar (`2018`, `600+`, `1200+`) bilan almashtirildi; `/blog`, `/feed.xml` va `zh` tili qo‘shildi.
+     - `vercel.json` ga haftalik cron (`"path": "/api/blog-agent"`, `"schedule": "0 3 * * 1"`) qo‘shildi; `blog-agent` mavzulari kengaytirildi (`drafts.${randomUUID()}` Human-in-the-Loop qoidasi saqlangan holda).
+  6. **Cloudflare Workers Runtime Moslashuvi va Upstream Sinxronizatsiya (`package.json`, `src/lib/blog-posts.ts`, `src/lib/blog-markdown-index.json`, `src/lib/lead-guard.ts`, `scripts/website-security-deploy.cjs`):**
+     - `@opennextjs/cloudflare` `1.20.17` (`@opennextjs/aws@4.1.16`) ga yangilandi (`workerd` da `.next/server/preview-props.json` manifest xatosini bartaraf etish uchun).
+     - `workerd` V8 izolyatida `fs` orqali `src/posts` o‘qilmagani sababli `src/lib/blog-markdown-index.json` (`97` ta post: `uz: 25`, `ru: 24`, `en: 24`, `zh: 24`) generatsiya qilinib `src/lib/blog-posts.ts` fallback va `src/lib/blog-feed.test.ts` disk-paritet testi qo‘shildi.
+     - `origin/main` birlashuvidan keyingi `src/lib/lead-guard.ts` TypeScript toraytirish (`fields`) va `scripts/website-security-deploy.cjs` ESLint (`mod`) tuzatishlari kiritildi.
+- **Tekshiruv va Deploy:**
+  - `npm run upload:cloudflare` (`326/326` statik sahifa) -> Cloudflare Workers `jonbranding-web` versiya `b2990206-9555-46f6-a174-e0ed9ff3ddf5` `100%` trafik bilan production'ga chiqarildi.
+  - Jonli `https://www.jonbranding.uz` tekshiruvi: `/`, `/blog`, `/blog/brend-strategiyasi-muvaffaqiyat-poydevori`, `/feed.xml` (`50` ta maqola), `/feed.xml?lang=uz` (`25` ta), `/llms.txt`, `/api/comparisons`, `/api/testimonials` `200`, `node scripts/website-security-smoke.cjs live` (`JB_SECURITY_UPGRADE=1`) -> `PASS: 38 checks`.
+
 ## 2026-11-14 | Cloudflare Security Build Integration & Workspace Cleanup (origin/main Reconciliation)
 
 - **Foydalanuvchi talabi:**

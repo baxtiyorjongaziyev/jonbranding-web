@@ -40,10 +40,10 @@ async function main() {
     const settings = JSON.parse(fs.readFileSync(path.join(root, 'settings.json')));
     const names = new Set(bindings.map(binding => binding.name));
     const form = new FormData();
-    for (const module of source.modules) {
-      let content = Buffer.from(module.content_base64, 'base64');
-      if (module.name === 'worker.js') content = Buffer.from(patchSnapshot(content.toString(), 'https://74bf6d3b-jonbranding-web.baxtiyorjongaziyev.workers.dev'));
-      form.append(module.name, new Blob([content], { type: module.content_type }), module.name);
+    for (const mod of source.modules) {
+      let content = Buffer.from(mod.content_base64, 'base64');
+      if (mod.name === 'worker.js') content = Buffer.from(patchSnapshot(content.toString(), 'https://74bf6d3b-jonbranding-web.baxtiyorjongaziyev.workers.dev'));
+      form.append(mod.name, new Blob([content], { type: mod.content_type }), mod.name);
     }
     const metadata = {
       main_module: 'worker.js', compatibility_date: source.compatibility_date, compatibility_flags: source.compatibility_flags,

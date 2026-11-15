@@ -10,6 +10,7 @@ import Footer from '@/components/layout/footer';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { safeJsonStringify } from '@/lib/security';
 import { locales, defaultLocale } from '@/lib/i18n/locale';
+import { getSiteEntityGraph } from '@/lib/seo';
 import MainLayout from '@/components/layout/main-layout';
 import { getAnalyticsLoaderScript } from '@/lib/analytics/loader-script';
 import OishaPhoneSync from '@/components/layout/oisha-callback-script';
@@ -159,109 +160,21 @@ export default async function LocalizedLayout({ children, params }: Props) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="JonBranding" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Jon.Branding Blog"
+          href={`${BASE_URL}/feed.xml`}
+        />
         <Script
-          id="json-ld-professional-service"
+          id="json-ld-site-entity-graph"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: safeJsonStringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "Jon.Branding",
-              "alternateName": "JonBranding Agency",
-              "image": "https://www.jonbranding.uz/icon.svg",
-              "logo": "https://www.jonbranding.uz/icon.svg",
-              "url": "https://www.jonbranding.uz",
-              "telephone": "+998792000097",
-              "priceRange": "$$$",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Tashkent, Uzbekistan",
-                "addressLocality": "Tashkent",
-                "addressRegion": "Toshkent",
-                "postalCode": "100000",
-                "addressCountry": "UZ"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 41.2995,
-                "longitude": 69.2401
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday"
-                ],
-                "opens": "09:00",
-                "closes": "20:00"
-              },
-              "sameAs": [
-                "https://www.instagram.com/jon.branding/",
-                "https://t.me/jonbranding",
-                "https://facebook.com/jonbranding"
-              ],
-              "service": [
-                {
-                  "@type": "Service",
-                  "name": "Neyming (Naming)",
-                  "description": "Professional brand naming services."
-                },
-                {
-                  "@type": "Service",
-                  "name": "Logotip Dizayni (Logo Design)",
-                  "description": "Custom logo creation and identity design."
-                },
-                {
-                  "@type": "Service",
-                  "name": "Brend Strategiyasi (Branding Strategy)",
-                  "description": "Comprehensive market analysis and strategy."
-                }
-              ]
-            })
+            __html: safeJsonStringify(getSiteEntityGraph(lang)),
           }}
         />
         {/* FAQPage bu yerda yo'q: savollar faqat FAQ ko'rinadigan sahifalarda (bosh sahifa) beriladi.
             AggregateRating olib tashlandi: o'z saytidagi o'z-o'ziga reyting Google qoidalariga zid. */}
-        <Script
-          id="json-ld-person"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: safeJsonStringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Baxtiyorjon Gaziyev",
-              "alternateName": "Baxtiyorjon Gaziyev",
-              "jobTitle": lang === 'uz' ? 'Brending Mutaxassisi, Asoschi' : lang === 'ru' ? 'Специалист по брендингу, Основатель' : 'Branding Specialist, Founder',
-              "url": "https://www.jonbranding.uz",
-              "sameAs": [
-                "https://www.instagram.com/jon.branding/",
-                "https://t.me/jonbranding",
-                "https://facebook.com/jonbranding"
-              ],
-              "knowsAbout": ["Branding", "Naming", "Logo Design", "Packaging Design", "Brand Strategy"],
-              "affiliation": {
-                "@type": "Organization",
-                "name": "Jon.Branding"
-              }
-            })
-          }}
-        />
-        <Script
-          id="json-ld-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: safeJsonStringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Jon.Branding",
-              "url": "https://www.jonbranding.uz",
-            })
-          }}
-        />
       </head>
       <body className={`${hankenGrotesk.variable} font-body bg-brand-paper antialiased`} suppressHydrationWarning>
         <LeadAttributionCapture />

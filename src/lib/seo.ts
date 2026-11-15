@@ -3,6 +3,7 @@ import {
   getLocalizedAbsoluteUrl,
   type Locale,
 } from '@/lib/i18n/locale';
+import { TELEGRAM_CHANNEL_URL } from '@/lib/contacts';
 
 export const SITE_URL = 'https://www.jonbranding.uz';
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
@@ -75,6 +76,13 @@ const serviceNames: Record<Locale, [string, string, string]> = {
   zh: ['标志与企业形象', '品牌手册', '包装设计'],
 };
 
+const founderJobTitles: Record<Locale, string> = {
+  uz: 'Brending mutaxassisi, asoschi',
+  ru: 'Специалист по брендингу, основатель',
+  en: 'Founder and branding specialist',
+  zh: '品牌专家兼创始人',
+};
+
 export function getSiteEntityGraph(locale: Locale) {
   const [identity, brandbook, packaging] = serviceNames[locale];
 
@@ -95,7 +103,26 @@ export function getSiteEntityGraph(locale: Locale) {
           '@type': 'PostalAddress',
           addressLocality: 'Tashkent',
           addressRegion: 'Toshkent',
+          postalCode: '100000',
           addressCountry: 'UZ',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 41.2995,
+          longitude: 69.2401,
+        },
+        openingHoursSpecification: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+          opens: '09:00',
+          closes: '20:00',
         },
         areaServed: [
           { '@type': 'Country', name: 'Uzbekistan' },
@@ -104,7 +131,7 @@ export function getSiteEntityGraph(locale: Locale) {
         founder: { '@id': FOUNDER_ID },
         sameAs: [
           'https://www.instagram.com/jon.branding/',
-          'https://t.me/JonBranding',
+          TELEGRAM_CHANNEL_URL,
           'https://www.linkedin.com/in/baxtiyorjongaziyev/',
         ],
         hasOfferCatalog: {
@@ -142,7 +169,7 @@ export function getSiteEntityGraph(locale: Locale) {
         '@type': 'Person',
         '@id': FOUNDER_ID,
         name: 'Baxtiyorjon Gaziyev',
-        jobTitle: 'Founder and branding specialist',
+        jobTitle: founderJobTitles[locale],
         url: getLocalizedAbsoluteUrl(SITE_URL, locale, '/haqimizda'),
         worksFor: { '@id': ORGANIZATION_ID },
         knowsAbout: [
@@ -153,7 +180,11 @@ export function getSiteEntityGraph(locale: Locale) {
           'Naming',
           'Trademark registration',
         ],
-        sameAs: ['https://www.linkedin.com/in/baxtiyorjongaziyev/'],
+        sameAs: [
+          'https://www.linkedin.com/in/baxtiyorjongaziyev/',
+          'https://www.instagram.com/jon.branding/',
+          TELEGRAM_CHANNEL_URL,
+        ],
       },
       {
         '@type': 'WebSite',

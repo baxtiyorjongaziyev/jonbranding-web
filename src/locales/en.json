@@ -896,13 +896,27 @@
     "title": "Blog",
     "subtitle": "News in the world of branding and marketing.",
     "readMore": "Read more",
-    "viewAll": "All articles"
+    "viewAll": "All articles",
+    "preferredTitle": "Make us a Preferred Source on Google",
+    "preferredDesc": "Select Jon.Branding in Google Search Preferences so our branding, naming, and trademark protection articles surface faster for you.",
+    "preferredAction": "Add on Google",
+    "rssLabel": "RSS Feed"
   },
   "blogPost": {
     "author": "Author",
     "ctaTitle": "Did you like the article?",
     "ctaDesc": "Get a professional solution for your business.",
-    "ctaButton": "Free Consultation"
+    "ctaButton": "Free Consultation",
+    "ctaSecondaryPatent": "Calculate patent cost",
+    "ctaSecondaryPackaging": "Packaging design service",
+    "ctaSecondaryNaming": "Brand naming service",
+    "ctaSecondaryBrandbook": "Explore brandbook deliverables",
+    "ctaSecondaryBranding": "Free brand diagnostics",
+    "ctaServicePatent": "Trademark registration",
+    "ctaServicePackaging": "Packaging design",
+    "ctaServiceNaming": "Naming",
+    "ctaServiceBrandbook": "Brandbook",
+    "ctaServiceBranding": "Branding consultation"
   },
   "quiz": {
     "metadata": {

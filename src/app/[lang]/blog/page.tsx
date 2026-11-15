@@ -11,6 +11,7 @@ import {
 } from '@/lib/i18n/locale';
 import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 import { getSortedPostsData } from '@/lib/blog-posts';
+import { PreferredSourcesCard } from '@/components/blog/preferred-sources-card';
 
 export const revalidate = false;
 
@@ -193,6 +194,8 @@ export default async function BlogPage(props: Props) {
             ))}
           </div>
         )}
+
+        <PreferredSourcesCard lang={safeLang} copy={dictionary.blog} />
       </div>
     </div>
   );

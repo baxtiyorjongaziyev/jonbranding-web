@@ -84,6 +84,13 @@ describe('Content-Security-Policy', () => {
     expect(allows(csp.get('connect-src'), 'https://oisha.jonbranding.uz/api/call-tracking/config')).toBe(true);
   });
 
+  it('allows Google Preferred Sources publisher script and endpoints', async () => {
+    const csp = await readCsp();
+    expect(allows(csp.get('script-src'), 'https://news.google.com/swg/js/v1/publisher.js')).toBe(true);
+    expect(allows(csp.get('connect-src'), 'https://news.google.com/swg/api/v1')).toBe(true);
+    expect(allows(csp.get('frame-src'), 'https://news.google.com/swg/ui')).toBe(true);
+  });
+
   it('keeps unsafe-eval out of non-development builds and blocks plugins', async () => {
     const csp = await readCsp();
     expect(csp.get('script-src')).not.toContain("'unsafe-eval'");

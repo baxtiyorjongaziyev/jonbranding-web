@@ -896,13 +896,27 @@
     "title": "Наш Блог",
     "subtitle": "Последние новости, советы и аналитические статьи из мира брендинга, маркетинга и дизайна. Помогаем вашему бизнесу расти.",
     "readMore": "Читать далее",
-    "viewAll": "Все статьи"
+    "viewAll": "Все статьи",
+    "preferredTitle": "Добавьте нас в предпочитаемые источники Google",
+    "preferredDesc": "Отметьте Jon.Branding в Google, чтобы статьи по брендингу, неймингу и защите товарных знаков чаще появлялись в вашей ленте поиска.",
+    "preferredAction": "Добавить в Google",
+    "rssLabel": "RSS-лента"
   },
   "blogPost": {
     "author": "Автор",
     "ctaTitle": "Статья была полезной?",
     "ctaDesc": "Теперь пришло время перейти от теории к практике. Выведите свой бренд на новый уровень вместе с нами.",
-    "ctaButton": "Получить бесплатную консультацию"
+    "ctaButton": "Получить бесплатную консультацию",
+    "ctaSecondaryPatent": "Рассчитать стоимость патента",
+    "ctaSecondaryPackaging": "Услуга дизайна упаковки",
+    "ctaSecondaryNaming": "Услуга нейминга",
+    "ctaSecondaryBrandbook": "Посмотреть состав брендбука",
+    "ctaSecondaryBranding": "Бесплатная диагностика бренда",
+    "ctaServicePatent": "Регистрация товарного знака",
+    "ctaServicePackaging": "Дизайн упаковки",
+    "ctaServiceNaming": "Нейминг",
+    "ctaServiceBrandbook": "Брендбук",
+    "ctaServiceBranding": "Консультация по брендингу"
   },
   "quiz": {
     "metadata": {
