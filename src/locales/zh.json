@@ -904,13 +904,27 @@
     "title": "我们的博客",
     "subtitle": "来自品牌塑造、市场营销和设计世界的最新消息、技巧和分析文章。我们帮助您的业务成长。",
     "readMore": "阅读更多",
-    "viewAll": "所有文章"
+    "viewAll": "所有文章",
+    "preferredTitle": "在 Google 中将我们设为首选来源",
+    "preferredDesc": "在 Google 搜索偏好中关注 Jon.Branding，以便更快获取品牌塑造、命名和商标保护的实用文章。",
+    "preferredAction": "添加到 Google",
+    "rssLabel": "RSS 订阅"
   },
   "blogPost": {
     "author": "作者",
     "ctaTitle": "这篇文章有用吗？",
     "ctaDesc": "现在是时候从理论转向实践了。与我们一起将您的品牌提升到一个新的水平。",
-    "ctaButton": "获得免费咨询"
+    "ctaButton": "获得免费咨询",
+    "ctaSecondaryPatent": "计算商标专利费用",
+    "ctaSecondaryPackaging": "包装设计服务",
+    "ctaSecondaryNaming": "品牌命名服务",
+    "ctaSecondaryBrandbook": "查看品牌手册内容",
+    "ctaSecondaryBranding": "免费品牌诊断",
+    "ctaServicePatent": "商标注册",
+    "ctaServicePackaging": "包装设计",
+    "ctaServiceNaming": "品牌命名",
+    "ctaServiceBrandbook": "品牌手册",
+    "ctaServiceBranding": "品牌咨询"
   },
   "quiz": {
     "metadata": {

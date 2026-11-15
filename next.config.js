@@ -19,13 +19,14 @@ const cspDirectives = {
     "'self'",
     "'unsafe-inline'",
     ...(isDev ? ["'unsafe-eval'"] : []),
-    // GTM, GA4, Google Ads
+    // GTM, GA4, Google Ads, Preferred Sources
     'https://*.googletagmanager.com',
     'https://www.google-analytics.com',
     'https://www.googleadservices.com',
     'https://googleads.g.doubleclick.net',
     'https://pagead2.googlesyndication.com',
     'https://www.google.com',
+    'https://news.google.com',
     // Meta Pixel
     'https://connect.facebook.net',
     // Yandex Metrika
@@ -71,6 +72,7 @@ const cspDirectives = {
     'https://pagead2.googlesyndication.com',
     'https://www.google.com',
     'https://www.google.co.uz',
+    'https://news.google.com',
     'https://www.facebook.com',
     'https://mc.yandex.ru',
     'https://mc.yandex.com',
@@ -94,6 +96,7 @@ const cspDirectives = {
     'https://www.googleadservices.com',
     'https://pagead2.googlesyndication.com',
     'https://www.google.com',
+    'https://news.google.com',
     'https://www.facebook.com',
     'https://mc.yandex.ru',
     'https://mc.yandex.com',
@@ -121,6 +124,7 @@ const cspDirectives = {
     "'self'",
     'https://player.vimeo.com',
     'https://www.google.com',
+    'https://news.google.com',
     'https://challenges.cloudflare.com',
     // /jamoa ichki sahifasidagi Airtable moliya formasi.
     'https://airtable.com',

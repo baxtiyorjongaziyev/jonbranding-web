@@ -906,13 +906,27 @@
     "title": "Blog",
     "subtitle": "Brending va marketing olamidagi yangiliklar.",
     "readMore": "Batafsil",
-    "viewAll": "Barcha maqolalar"
+    "viewAll": "Barcha maqolalar",
+    "preferredTitle": "Google’da bizni ishonchli manba qiling",
+    "preferredDesc": "Brending, neyming va tovar belgisini himoyalash bo‘yicha maqolalarimiz Google qidiruvida tezroq chiqishi uchun Jon.Branding’ni afzal manba sifatida belgilang.",
+    "preferredAction": "Google’da afzal manba qilish",
+    "rssLabel": "RSS tasmasi"
   },
   "blogPost": {
     "author": "Muallif",
     "ctaTitle": "Maqola yoqdimi?",
     "ctaDesc": "Biznesingiz uchun professional yechim oling.",
-    "ctaButton": "Bepul konsultatsiya"
+    "ctaButton": "Bepul konsultatsiya",
+    "ctaSecondaryPatent": "Patent narxini hisoblash",
+    "ctaSecondaryPackaging": "Qadoq dizayni xizmati",
+    "ctaSecondaryNaming": "Neyming xizmati",
+    "ctaSecondaryBrandbook": "Brendbuk tarkibini ko‘rish",
+    "ctaSecondaryBranding": "Bepul brend diagnostikasi",
+    "ctaServicePatent": "Tovar belgisini patentlash",
+    "ctaServicePackaging": "Qadoq dizayni",
+    "ctaServiceNaming": "Neyming",
+    "ctaServiceBrandbook": "Brendbuk",
+    "ctaServiceBranding": "Brending maslahati"
   },
   "quiz": {
     "metadata": {

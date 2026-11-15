@@ -146,8 +146,9 @@ export async function guardLeadRequest(
   if (context !== 'oisha' && (!safeIntakeObject(body) || !validIntakeName(body.fullName))) {
     return { action: 'reject', reason: 'invalid-input' };
   }
-  if (body.phone && !intakePhone(body.phone)) return { action: 'reject', reason: 'invalid-phone' };
-  if (body.telegram && !intakeTelegram(body.telegram)) return { action: 'reject', reason: 'invalid-telegram' };
+  const fields = (body && typeof body === 'object' ? body : {}) as Record<string, unknown>;
+  if (fields.phone && !intakePhone(fields.phone)) return { action: 'reject', reason: 'invalid-phone' };
+  if (fields.telegram && !intakeTelegram(fields.telegram)) return { action: 'reject', reason: 'invalid-telegram' };
 
   const origin = checkOrigin(request);
   if (!origin.trusted) {

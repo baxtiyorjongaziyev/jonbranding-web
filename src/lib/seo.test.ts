@@ -42,12 +42,33 @@ describe('SEO entity and AI referral helpers', () => {
     const graph = getSiteEntityGraph('uz')['@graph'];
     const organization = graph.find((node) => node['@id'] === ORGANIZATION_ID);
     const founder = graph.find((node) => node['@id'] === FOUNDER_ID);
+    const website = graph.find((node) => node['@type'] === 'WebSite');
 
     expect(organization).toEqual(
-      expect.objectContaining({ founder: { '@id': FOUNDER_ID } }),
+      expect.objectContaining({
+        founder: { '@id': FOUNDER_ID },
+        geo: expect.objectContaining({
+          '@type': 'GeoCoordinates',
+          latitude: 41.2995,
+          longitude: 69.2401,
+        }),
+        openingHoursSpecification: expect.objectContaining({
+          '@type': 'OpeningHoursSpecification',
+          opens: '09:00',
+          closes: '20:00',
+        }),
+      }),
     );
     expect(founder).toEqual(
-      expect.objectContaining({ worksFor: { '@id': ORGANIZATION_ID } }),
+      expect.objectContaining({
+        worksFor: { '@id': ORGANIZATION_ID },
+        jobTitle: 'Brending mutaxassisi, asoschi',
+      }),
+    );
+    expect(website).toEqual(
+      expect.objectContaining({
+        publisher: { '@id': ORGANIZATION_ID },
+      }),
     );
   });
 });
