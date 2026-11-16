@@ -72,6 +72,7 @@ Cloudflare Worker secret'larini O'QIB bo'lmaydi — qiymatlarni parol menejerida
 | Hero tugmasi formani ochmaydi | Oisha skripti hydration'dan oldin DOM'ga qo'shilgan | `next/script` `afterInteractive` |
 | Apex boshqa saytga o'tadi | Cloudflare Redirect Rule | Rules'dan o'chirish |
 | `www` brauzerda `NXDOMAIN`, serverda OK | Provayder DNS keshi (10–30 daq) | `ipconfig /flushdns`, kuting |
+| Butun sayt `429`, "temporarily rate limited" (Error 1027) | Free tarif: kuniga 100 000 Worker so'rovi tugagan (2026-11-14: `run_worker_first: true` har bir statik faylni ham hisobga qo'shgan) | 00:00 UTC'da o'zi tiklanadi; darhol — Workers Paid. `run_worker_first`da `!/_next/static/*` qolsin |
 | `workers.dev` 404 | Qisman trigger yangilanishida o'chadi | `"workers_dev": true` |
 
 ## Qo'lda bajariladigan (Claude/agent qila olmaydi)
