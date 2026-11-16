@@ -6,6 +6,8 @@ import { PACKAGING_PAGE } from '@/lib/service-pages/packaging';
 import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { fetchServiceWorks } from '@/lib/service-pages/works';
 import { pageTitle } from '@/lib/seo';
+import { fillServiceTokens } from '@/lib/service-pages/localized-facts';
+import LocalizedServiceFacts, { buildServiceFaqs } from '@/components/service-landing/localized-service-facts';
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -15,11 +17,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const dictionary = await getDictionary(lang as Locale);
   const metadata = dictionary.packagingPage?.metadata;
+  const currency = dictionary.serviceFacts?.currency ?? '';
+  const fill = (v: string) => fillServiceTokens(v, lang, 'packaging', currency);
 
   return {
-    title: pageTitle(metadata?.title || "Qadoq Dizayni | Professional Mahsulot Dizayni"),
-    description: metadata?.description || "Mahsulotingizni javonda ajratib turadigan professional qadoq dizaynlari yaratamiz.",
-    keywords: metadata?.keywords || "qadoq dizayn, qadoqlash, mahsulot dizayni, brending, packaging design",
+    title: pageTitle(metadata?.title ? fill(metadata.title) : "Qadoq Dizayni | Professional Mahsulot Dizayni"),
+    description: metadata?.description ? fill(metadata.description) : "Mahsulotingizni javonda ajratib turadigan professional qadoq dizaynlari yaratamiz.",
+    keywords: metadata?.keywords ? fill(metadata.keywords) : "qadoq dizayn, qadoqlash, mahsulot dizayni, brending, packaging design",
   };
 }
 
@@ -30,20 +34,32 @@ export default async function Page(props: Props) {
     lang === 'uz' ? fetchServiceWorks(PACKAGING_PAGE.serviceKey, lang) : Promise.resolve([]),
   ]);
 
+  const fillPage = (v: string) => fillServiceTokens(v, lang, 'packaging', dictionary.serviceFacts?.currency ?? '');
+  const facts = dictionary.packagingPage.facts;
+  const labels = dictionary.serviceFacts;
+  const isUz = lang === 'uz';
+  const localizedFaqs = !isUz && facts && labels ? buildServiceFaqs(lang as Locale, 'packaging', facts, labels) : undefined;
+
   return (
     <>
       <ServiceJsonLd
         lang={lang as Locale}
         path="/xizmatlar/qadoq-dizayni"
         name={dictionary.header.packaging_design}
-        description={dictionary.packagingPage.metadata.description}
-        faqs={lang === 'uz' ? PACKAGING_PAGE.faqs : undefined}
+        description={fillPage(dictionary.packagingPage.metadata.description)}
+        faqs={isUz ? PACKAGING_PAGE.faqs : localizedFaqs}
+        faqLang={lang as Locale}
       />
       {/* Uzbek-first: zamonaviy ServiceLanding sahifasi */}
-      {lang === 'uz' ? (
+      {isUz ? (
         <ServiceLanding content={PACKAGING_PAGE} works={works} />
       ) : (
-        <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />
+        <>
+          <PackagingClient lang={lang as Locale} translations={dictionary.packagingPage} />
+          {facts && labels && (
+            <LocalizedServiceFacts lang={lang as Locale} serviceId="packaging" copy={facts} labels={labels} />
+          )}
+        </>
       )}
     </>
   );

@@ -9,7 +9,7 @@ const DICTS = { uz, ru, en, zh } as const;
 
 describe('xizmat sahifalari: narx manbadan, qo‘lda yozilmaydi', () => {
   for (const [lang, dict] of Object.entries(DICTS)) {
-    for (const [page, id] of [['logoDesignPage', 'logo'], ['brandbookPage', 'brandbook']] as const) {
+    for (const [page, id] of [['logoDesignPage', 'logo'], ['brandbookPage', 'brandbook'], ['corporateStylePage', 'visual-identity'], ['packagingPage', 'packaging']] as const) {
       it(`${lang}/${page}: shablonlar to‘liq to‘ldiriladi`, () => {
         const p = (dict as any)[page];
         const currency = (dict as any).serviceFacts.currency;

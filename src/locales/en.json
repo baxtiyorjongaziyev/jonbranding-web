@@ -1081,8 +1081,31 @@
   },
   "corporateStylePage": {
     "metadata": {
-      "title": "Corporate Style and Brandbook | Branding Agency in Tashkent",
-      "description": "We don't just create pretty pictures; we develop a systemic visual style that works for your brand and brings results."
+      "title": "Brand Identity Design in Tashkent — {price} {currency}, {duration}",
+      "description": "Visual identity in Tashkent: {price} {currency}, timeline — {duration}. Colour palette, type system, graphic elements and 10+ applications. Contract-based work.",
+      "keywords": "brand identity tashkent, visual identity price uzbekistan, corporate identity design, order brand identity"
+    },
+    "facts": {
+      "title": "Brand identity in Tashkent: price, timeline and what is included",
+      "intro": "A visual identity at Jon.Branding costs {price} {currency} and takes {duration}. A logo is one mark; an identity makes your brand recognisable everywhere, from a business card to a banner and social media.",
+      "faqs": [
+        {
+          "q": "How much does a brand identity cost in Tashkent?",
+          "a": "A visual identity at Jon.Branding costs {price} {currency} and takes {duration}. The exact timeline and scope are written into the contract."
+        },
+        {
+          "q": "What is included in the price?",
+          "a": "{includes}."
+        },
+        {
+          "q": "How is a visual identity different from a logo?",
+          "a": "A logo is a single mark. A visual identity is colours, typography, graphic elements and photo style: a system of rules that makes the brand look the same on any medium."
+        },
+        {
+          "q": "How is a visual identity different from a brandbook?",
+          "a": "The identity is the visual system itself (colours, fonts, layouts). A brandbook puts the rules for using it into one document."
+        }
+      ]
     },
     "title": "Corporate Style Development",
     "subtitle": "One of the main elements of a brand is its visual component, translating ideas and values into images.",
@@ -1392,8 +1415,31 @@
   },
   "packagingPage": {
     "metadata": {
-      "title": "Packaging Design Services in Uzbekistan",
-      "description": "We don't just create pretty packaging; we create a marketing tool that sells."
+      "title": "Packaging Design in Tashkent — {price} {currency}, {duration}",
+      "description": "Packaging design in Tashkent: {price} {currency} per product variant, timeline — {duration}. Dieline, 3D visualisation and print-ready files. Contract-based work.",
+      "keywords": "packaging design tashkent, packaging design price uzbekistan, order packaging design, dieline design"
+    },
+    "facts": {
+      "title": "Packaging design in Tashkent: price, timeline and what is included",
+      "intro": "Packaging design at Jon.Branding (one product variant) costs {price} {currency} and takes {duration}. You get packaging that accounts for how it reads on the shelf, plus print-ready files.",
+      "faqs": [
+        {
+          "q": "How much does packaging design cost in Tashkent?",
+          "a": "Packaging design at Jon.Branding (one product variant) costs {price} {currency} and takes {duration}. Additional product variants are priced separately; see the pricing page."
+        },
+        {
+          "q": "What is included in the price?",
+          "a": "{includes}."
+        },
+        {
+          "q": "What is a dieline?",
+          "a": "A dieline is the technical flat drawing of a package with its fold and cut lines. The printer builds the package from it, so the design is drawn to fit it exactly."
+        },
+        {
+          "q": "What if I need packaging for several products?",
+          "a": "The price is for one product variant. Several variants are developed within one system, and each additional variant is priced separately."
+        }
+      ]
     },
     "title": "Packaging Design Development",
     "subtitle": "In high competition, packaging is often the main marketing tool.",

@@ -1091,8 +1091,31 @@
   },
   "corporateStylePage": {
     "metadata": {
-      "title": "Firma uslubi",
-      "description": "Brendingizni barcha platformalarda yagona va professional ko'rsatadigan vizual tizim."
+      "title": "Firma uslubi ishlab chiqish Toshkentda — {price} {currency}, {duration}",
+      "description": "Toshkentda firma uslubi: {price} {currency}, muddat — {duration}. Rang palitrasi, shriftlar, grafik elementlar va 10+ tashuvchi maketi. Shartnoma asosida.",
+      "keywords": "firma uslubi narxi toshkent, firma uslubi buyurtma, korporativ uslub ishlab chiqish, firma uslubi nima"
+    },
+    "facts": {
+      "title": "Toshkentda firma uslubi: narxi, muddati va tarkibi",
+      "intro": "Jon.Branding'da firma uslubi {price} {currency} turadi, muddati — {duration}. Logotip — bitta belgi, firma uslubi esa brend vizitkadan tortib banner va ijtimoiy tarmoqqacha bir xil taniladigan qiladigan tizim.",
+      "faqs": [
+        {
+          "q": "Toshkentda firma uslubini buyurtma qilish qancha turadi?",
+          "a": "Jon.Branding'da firma uslubi {price} {currency} turadi, muddati — {duration}. Aniq muddat va hajm shartnomada yoziladi."
+        },
+        {
+          "q": "Narxga nimalar kiradi?",
+          "a": "{includes}."
+        },
+        {
+          "q": "Firma uslubi logotipdan nimasi bilan farq qiladi?",
+          "a": "Logotip — bitta belgi. Firma uslubi — ranglar, shriftlar, grafik elementlar va foto uslubi: brend har qanday materialda bir xil ko'rinishi uchun qoidalar tizimi."
+        },
+        {
+          "q": "Firma uslubi brendbukdan nimasi bilan farq qiladi?",
+          "a": "Firma uslubi — vizual tizimning o'zi (ranglar, shriftlar, maketlar). Brendbuk esa shu tizimni qo'llash qoidalarini bitta hujjatga jamlaydi."
+        }
+      ]
     },
     "title": "Firma uslubi (Korporativ uslub)",
     "subtitle": "Har bir element brendingizni mustahkamlaydigan va mijozlar ongida qoladigan yagona vizual tizim.",
@@ -1571,8 +1594,31 @@
   },
   "packagingPage": {
     "metadata": {
-      "title": "Qadoq dizayni",
-      "description": "Mahsulotni javonda ajratib turadigan, sotuvchi qadoq dizayni."
+      "title": "Qadoq dizayni Toshkentda — {price} {currency}, {duration}",
+      "description": "Toshkentda qadoq dizayni: {price} {currency} (1 mahsulot turi), muddat — {duration}. Dieline, 3D vizualizatsiya va tipografiyaga tayyor fayllar.",
+      "keywords": "qadoq dizayni narxi toshkent, qadoq dizayni buyurtma, qadoq dizayn agentligi, dieline"
+    },
+    "facts": {
+      "title": "Toshkentda qadoq dizayni: narxi, muddati va tarkibi",
+      "intro": "Jon.Branding'da qadoq dizayni (1 mahsulot turi uchun) {price} {currency} turadi, muddati — {duration}. Natija — javondagi ko'rinishi hisobga olingan va tipografiyaga topshirishga tayyor fayllar.",
+      "faqs": [
+        {
+          "q": "Toshkentda qadoq dizayni qancha turadi?",
+          "a": "Jon.Branding'da qadoq dizayni (1 mahsulot turi) {price} {currency} turadi, muddati — {duration}. Qo'shimcha mahsulot turlari alohida baholanadi — narxlar sahifasiga qarang."
+        },
+        {
+          "q": "Narxga nimalar kiradi?",
+          "a": "{includes}."
+        },
+        {
+          "q": "Dieline nima?",
+          "a": "Dieline — qadoqning ochilgan holdagi texnik chizmasi: bukish va kesish chiziqlari ko'rsatilgan. Tipografiya shu chizma bo'yicha qadoqni tayyorlaydi, shuning uchun dizayn aynan unga moslab chiziladi."
+        },
+        {
+          "q": "Bir nechta mahsulot uchun qadoq kerak bo'lsa nima qilish kerak?",
+          "a": "Narx bitta mahsulot turi uchun berilgan. Bir nechta tur bo'lsa, ular bir xil tizimda ishlab chiqiladi va qo'shimcha turlar alohida baholanadi."
+        }
+      ]
     },
     "title": "Qadoq dizayni",
     "subtitle": "Yaxshi qadoq — sotuvchidir. U mahsulotingizni javonda darhol ajratib turadi va xarid qilishga undaydi.",
