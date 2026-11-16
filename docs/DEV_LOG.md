@@ -2956,3 +2956,7 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   - `JB_API_LIMIT`, `JB_CONTACT_LIMIT`, `JB_FORM_LIMIT`, `JB_LOGIN_LIMIT`, `JB_PAGE_LIMIT`, `OISHA_CHAT_BURST`, `OISHA_CHAT_MINUTE` Cloudflare Worker native `ratelimits` binding'lari ekani aniqlanib, `wrangler.jsonc` dagi `ratelimits` massivida e'lon qilindi va `.env.example` da izohli placeholder sifatida hujjatlandi.
   - `TELEGRAM_ERROR_CHAT_ID` ixtiyoriy environment o'zgaruvchisi sifatida `.env.example` ga kiritildi hamda `/api/report-error` va uning testlari bilan moslashtirildi.
   - `src/lib/env-example.test.ts` ga koddagi `JB_*_LIMIT` va `OISHA_CHAT_*` binding'lari `wrangler.jsonc` da e'lon qilinganini tekshiruvchi test qo'shildi.
+
+## 2026-11-16 | SEO (haftalik): firma uslubi va qadoq dizayni — ru/en/zh narx, muddat, FAQ
+- **Sabab:** GSC (`docs/seo/gsc-2026-10.md`): «заказать фирменный стиль» (40.5-o'rin), «дизайн упаковки ташкент» (18.5-o'rin). Ru/en/zh sahifalarida narx, muddat va FAQ yo'q edi.
+- **Yechim:** `corporateStylePage` va `packagingPage` ga `facts` + `{price}`/`{duration}` shablonli metadata (4 til); `LocalizedServiceFacts` va FAQPage JSON-LD `/xizmatlar/firmenniy-stil` va `/xizmatlar/qadoq-dizayni` da. Narx faqat `sales-content` dan. Test: `localized-facts.test.ts` kengaytirildi.
