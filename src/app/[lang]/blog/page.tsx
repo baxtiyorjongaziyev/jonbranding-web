@@ -60,7 +60,7 @@ export default async function BlogPage(props: Props) {
   const { lang } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const postsQuery = `*[_type == "post" && language == $lang] | order(publishedAt desc) {
+  const postsQuery = `*[_type == "post" && !(_id in path("drafts.**")) && language == $lang] | order(publishedAt desc) {
     title,
     "slug": slug.current,
     description,

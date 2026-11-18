@@ -13,6 +13,7 @@ import {
   locales,
 } from '@/lib/i18n/locale';
 import { ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
+import { getSalesFlow } from '@/lib/sales-flow';
 
 export const revalidate = 3600;
 
@@ -91,16 +92,27 @@ export default async function Page(props: Props) {
 
   const safeLang = locales.includes(lang as Locale) ? (lang as Locale) : 'uz';
   const canonical = getLocalizedAbsoluteUrl(SITE_URL, safeLang);
+  const visibleFaqs = [
+    ...dictionary.answerHub.items.map((item: { question: string; answer: string }) => ({
+      q: item.question,
+      a: item.answer,
+    })),
+    ...(getSalesFlow(safeLang)?.faq?.faqs ?? []),
+  ];
+  const dedupedFaqs = Array.from(
+    new Map(visibleFaqs.map((item) => [item.q.trim().toLowerCase(), item])).values(),
+  );
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     '@id': `${canonical}#branding-answers`,
-    mainEntity: dictionary.answerHub.items.map((item: { question: string; answer: string }) => ({
+    inLanguage: safeLang,
+    mainEntity: dedupedFaqs.map((item) => ({
       '@type': 'Question',
-      name: item.question,
+      name: item.q,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.answer,
+        text: item.a,
       },
     })),
   };
