@@ -1,5 +1,45 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-18 | Universal Hosting Portability & Automated Migration Engine (Vercel ⇄ Cloudflare ⇄ Docker/VPS)
+- **Foydalanuvchi talabi:**
+  - Saytni ertaga boshqa hostingga (Vercel, Docker/VPS, Coolify, Railway) ko'chirganda barcha sozlamalar, secretlar va avtomatizatsiyalarning avtomatik ko'chib o'tishini ta'minlash.
+- **Bajarilgan ishlar:**
+  1. **Universal Migration CLI (`scripts/hosting-migration.mjs`):**
+     - `npm run migration:check` — Pre-flight tekshiruv: `.env.example` dagi 94 ta parametr bo'yicha production tayyorligini baholash.
+     - `npm run migration:sync <target>` — Bitta buyruq bilan barcha secretlarni maqsadli hostingga (Vercel CLI orqali Vercel'ga, Wrangler orqali Cloudflare'ga yoki Docker/Coolify uchun `.env.production` ga) avtomatik yuklash.
+     - `npm run migration:smoke` — Yangi hostingda barcha 30+ yo'llar, xavfsizlik va API larni avtomatik testlash.
+  2. **Universal Cron Runner (`.github/workflows/cron-cloudflare.yml`):**
+     - Cron tizimi hostingdan to'liq ajratildi: domen (`https://www.jonbranding.uz`) orqali har qanday hostingda uzluksiz ishlaydi.
+  3. **Multi-Target Deploy Adapterlari (`docker-compose.yml`, `package.json`):**
+     - `deploy:docker` buyrug'i va `docker-compose.yml` qo'shildi (Next.js 16 standalone rejimida VPS/Coolify ga 1 buyruqda ko'chish).
+  4. **To'liq qo'llanma (`docs/KOCHISH_AUTOMATION.md`):**
+     - 4 qadamli avtomatlashtirilgan ko'chish algoritmi hujjatlashtirildi.
+- **Tekshiruv:**
+  - `npm run verify:fast` (101 ta test fayli, 719 ta test 100% yashil).
+  - `node scripts/hosting-migration.mjs check` muvaffaqiyatli ishga tushdi.
+
+## 2026-11-18 | Cloudflare Workers Free Optimizatsiyasi: Hybrid KV + Regional + DO Kesh, Sanity Image Loader va `/api/revalidate`
+- **Foydalanuvchi talabi:**
+  - Saytni Cloudflare Workers Free muhitida ideal ishlashga moslash (1-variant: CLI orqali Workers KV + SQLite Durable Objects kesh, `revalidate: 3600` + `/api/revalidate`, bepul limitlar doirasida maksimal tezlik va barqarorlik).
+- **Bajarilgan ishlar:**
+  1. **Cloudflare KV Namespace va 3 qatlamli Hybrid Incremental Cache (`src/lib/cloudflare/hybrid-incremental-cache.ts`, `open-next.config.ts`, `wrangler.jsonc`):**
+     - Cloudflare akkauntda `NEXT_INC_CACHE_KV` (`id: 0a7d482a34b6451b873d08e439bce65b`) KV namespace yaratildi.
+     - `HybridKvStaticIncrementalCache`: o‘qishda avval `NEXT_INC_CACHE_KV`, topilmasa build-vaqtidagi `.open-next/assets/cdn-cgi/_next_cache` static assetlardan foydalanadi (deploy’da **0 KV write**, 1 000 write/kun Free limitini tejaydi); yangilangan sahifalarni 14 kunlik TTL bilan KV’ga yozadi.
+     - `open-next.config.ts` da `withRegionalCache(..., { mode: 'long-lived', defaultLongLivedTtlSec: 3600 })`, `queueCache(doQueue, { regionalCacheTtlSec: 10 })`, `doShardedTagCache({ baseShardSize: 2, regionalCache: true, regionalCacheTtlSec: 60 })` va `enableCacheInterception: true` yoqildi.
+     - `wrangler.jsonc` ga KV binding, SQLite Durable Objects (`DOQueueHandler`, `DOShardedTagCache` + `migrations v1`) qo‘shildi hamda `run_worker_first` statik media/font/asset yo‘llarini (`/images/*`, `/logos/*`, `/videos/*`, `/audio/*`, `/assets/*`, `/fonts/*`, `/icon*`, `/sw.js` va h.k.) Worker chaqiruvlarisiz to‘g‘ridan-to‘g‘ri Assets’dan beradigan qilib kengaytirildi (`/jamoa*` va HTML sahifalar Worker himoyasida qoldi).
+  2. **Edge Cache & Security Headers (`public/_headers`, `scripts/website-security-runtime.cjs`, `src/lib/website-edge-guard.ts`):**
+     - `public/_headers` qo‘shildi (`/_next/static/*`, `/fonts/*` immutable 1 yil; `/images/*`, `/logos/*`, `/videos/*` 30 kun; `/sw.js` `no-cache`).
+     - `scripts/website-security-runtime.cjs` build oxirida `.open-next/cache` ni `.open-next/assets/cdn-cgi/_next_cache` ga sinxronlaydi va build-vaqt `previewModeId` ni xavfsizlik runtime’iga uzatadi.
+     - `src/lib/website-edge-guard.ts` tashqi soxta `x-prerender-revalidate` headerlarini bloklashda davom etgan holda, faqat `WORKER_SELF_REFERENCE` (`DOQueueHandler`) ichki ISR revalidatsiya so‘rovlari va `/api/revalidate` secret endpointini ruxsat beradi; `/cdn-cgi/_next_cache/*` tashqaridan `404` qaytaradi.
+  3. **Custom Sanity Image Loader (`src/lib/image-loader.ts`, `next.config.js`):**
+     - Barcha `https://cdn.sanity.io/images/...` rasmlari `/_next/image` (Cloudflare Images 5 000/oy Free kvotasi) o‘rniga to‘g‘ridan-to‘g‘ri Sanity CDN (`?auto=format&fit=max&w=&q=`) orqali yuklanadigan qilindi; mahalliy rasmlar `/_next/image` chegarasida qoldi.
+  4. **Sanity ISR (`revalidate = 3600`), On-Demand `/api/revalidate` va Portfolio 404 Tuzatishi:**
+     - `src/sanity/lib/client.ts` da `sanityFetch` va `SANITY_TAGS` joriy etildi; `portfolio.ts`, `comparisons.ts`, `testimonials.ts`, `brands.ts`, `blog/*`, `sitemap.ts`, `feed.xml/route.ts` ularga o‘tkazildi (`portfolio` va `blog/[slug]` da React `cache()` bilan dublikat so‘rovlar olib tashlandi).
+     - CMS sahifalarida (`page.tsx`, `portfolio`, `portfolio/[slug]`, `otzivlar`, `blog`, `blog/[slug]`, `narxlar`, `credentials`, `xizmatlar/*`, `sitemap.ts`) `revalidate = 3600` qo‘yildi; `portfolio/[slug]` dagi qattiq 8 ta slug + `dynamicParams = false` xatosi (`shirona`, `rashmilk` va b. Sanity keyslari 404 bo‘lishi) `fetchAllPortfolioSlugs()` va dinamik fallback bilan bartaraf etildi (`422` ta statik/ISR sahifa).
+     - `src/lib/revalidate-sanity.ts` va `src/app/api/revalidate/route.ts` yaratildi hamda `portfolio-sync` va `reviews-sync` avtomatik tag invalidatsiyasiga ulandi; `.env.example` ga `REVALIDATE_SECRET` qo‘shildi.
+- **Tekshiruv:**
+  - `npm run typecheck`, `npm run verify:fast`, `npm run build:cloudflare`, `npx wrangler deploy --dry-run` hamda lokal `wrangler dev` (`workerd`) da `/api/revalidate` -> `STALE` -> `HIT` DO revalidatsiya sikli, `1 493` ta Sanity direct CDN rasm havolalari (`0` ta `/_next/image`), `/portfolio/shirona` (`200`), `/jamoa` (`401`), `/_next/static/*` kesh sarlavhalari tekshirildi.
+
 ## 2026-11-15 | Google Preferred Sources, Entity Graph SEO, RSS `/feed.xml` va Blog Konversiya Tizimi
 - **Foydalanuvchi talabi:**
   - `https://www.google.com/preferences/source?q=amaan.uz` tahlilidan so‘ng `jonbranding.uz` uchun reja tuzish va to‘liq amalga oshirish ("Hammasi uchun reja tuz va amalga oshir").

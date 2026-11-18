@@ -14,7 +14,7 @@ import {
 } from '@/lib/i18n/locale';
 import { ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ lang: string }>;

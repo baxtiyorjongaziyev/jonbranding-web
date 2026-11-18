@@ -1,12 +1,14 @@
-name: Cron — Cloudflare endpoints
+name: Cron — Universal production endpoints
 
-# vercel.json cron'lari Cloudflare Workers'da ishlamaydi (docs/KOCHISH.md).
-# CRON_SECRET GitHub secret'i va Worker'dagi CRON_SECRET bir xil bo'lishi kerak.
+# Hostingdan mustaqil universal cron tizimi (docs/KOCHISH.md).
+# Vercel, Cloudflare, Docker yoki VPS bo'lishidan qat'i nazar,
+# domen (https://www.jonbranding.uz) orqali fon vazifalarini uzluksiz ishga tushiradi.
+# CRON_SECRET GitHub secret'i va serverdagi CRON_SECRET bir xil bo'lishi kerak.
 on:
   schedule:
-    - cron: '0 1 * * *'   # content-agent
-    - cron: '0 4 * * *'   # lead-retry
-    - cron: '0 9 * * *'   # portfolio-telegram
+    - cron: '0 1 * * *'   # content-agent (01:00 UTC)
+    - cron: '0 4 * * *'   # lead-retry (04:00 UTC)
+    - cron: '0 9 * * *'   # portfolio-telegram (09:00 UTC)
   workflow_dispatch:
 
 jobs:
@@ -19,7 +21,7 @@ jobs:
           SCHEDULE: ${{ github.event.schedule }}
         run: |
           if [ -z "$CRON_SECRET" ]; then
-            echo "::notice::CRON_SECRET secret'i yo'q — cron chaqirilmadi (docs/KOCHISH.md)."
+            echo "::notice::CRON_SECRET secret'i yo'q — cron chaqirilmadi."
             exit 0
           fi
           case "$SCHEDULE" in

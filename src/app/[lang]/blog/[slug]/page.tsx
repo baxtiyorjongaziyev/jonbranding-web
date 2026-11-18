@@ -1,10 +1,11 @@
+import { cache } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import { safeJsonStringify } from '@/lib/security';
 import {
@@ -25,18 +26,31 @@ import {
 import { BlogPostCta } from '@/components/blog/blog-post-cta';
 import { PreferredSourcesCard } from '@/components/blog/preferred-sources-card';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
+const fetchSanityPost = cache(async (slug: string, lang: Locale) => {
+  const query = `*[_type == "post" && !(_id in path("drafts.**")) && slug.current == $slug && language == $lang][0] {
+    title, description, "image": image.asset->url, publishedAt,
+    "updatedAt": _updatedAt, content, author, keywords,
+    sources[]{title, url, publisher}
+  }`;
+  return sanityFetch<any | null>(query, { slug, lang }, { tags: [SANITY_TAGS.all, SANITY_TAGS.post] });
+});
+
 export async function generateStaticParams() {
-  const query = `*[_type == "post"] { "lang": language, "slug": slug.current }`;
+  const query = `*[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current)] { "lang": language, "slug": slug.current }`;
   const markdownSlugs = getAllPostSlugs();
   try {
-    const slugs = await client.fetch(query);
+    const slugs = await sanityFetch<Array<{ lang?: string; slug: string }>>(
+      query,
+      {},
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.post] },
+    );
     return Array.from(
       new Map(
-        [...markdownSlugs, ...slugs].map((item: any) => [
+        [...markdownSlugs, ...(slugs ?? [])].map((item) => [
           `${item.lang || 'uz'}:${item.slug}`,
           { lang: item.lang || 'uz', slug: item.slug },
         ]),
@@ -51,13 +65,9 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
-  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0] {
-    title, description, "image": image.asset->url, publishedAt,
-    "updatedAt": _updatedAt, author
-  }`;
   let post: any = null;
   try {
-    post = await client.fetch(query, { slug, lang: safeLang });
+    post = await fetchSanityPost(slug, safeLang);
   } catch (error) {
     console.error('[blog] Failed to fetch Sanity metadata:', error);
   }
@@ -78,9 +88,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     .map((item) => item.lang as Locale);
   let sanityLocales: Locale[] = [];
   try {
-    sanityLocales = await client.fetch<Locale[]>(
-      `*[_type == "post" && slug.current == $slug && language in $locales].language`,
+    sanityLocales = await sanityFetch<Locale[]>(
+      `*[_type == "post" && !(_id in path("drafts.**")) && slug.current == $slug && language in $locales].language`,
       { slug, locales },
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.post] },
     );
   } catch (error) {
     console.error('[blog] Failed to fetch translated locales:', error);
@@ -142,14 +153,9 @@ export default async function BlogPostPage(props: Props) {
   const { lang, slug } = await props.params;
   const safeLang = (['uz', 'ru', 'en', 'zh'].includes(lang) ? lang : 'uz') as Locale;
 
-  const query = `*[_type == "post" && slug.current == $slug && language == $lang][0] {
-    title, description, "image": image.asset->url, publishedAt,
-    "updatedAt": _updatedAt, content, author, keywords,
-    sources[]{title, url, publisher}
-  }`;
   let post: any = null;
   try {
-    post = await client.fetch(query, { slug, lang: safeLang });
+    post = await fetchSanityPost(slug, safeLang);
   } catch (error) {
     console.error('[blog] Failed to fetch Sanity post:', error);
   }
@@ -323,4 +329,3 @@ export default async function BlogPostPage(props: Props) {
     </div>
   );
 }
-export const dynamicParams = false;

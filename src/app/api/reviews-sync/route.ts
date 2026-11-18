@@ -3,6 +3,7 @@ import { createClient } from '@sanity/client';
 import { findFolderByName, listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parseReviewMetadata } from '@/lib/gemini';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+import { revalidateSanityContent } from '@/lib/revalidate-sanity';
 import { logger } from '@/lib/logger';
 
 // Initialize Sanity client with write access token
@@ -222,6 +223,10 @@ async function handleSync(request: NextRequest) {
           reason: folderError instanceof Error ? folderError.message : String(folderError),
         });
       }
+    }
+
+    if (results.some((item) => item.status === 'success')) {
+      revalidateSanityContent({ _type: 'testimonial' });
     }
 
     return NextResponse.json({

@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { staticBrands } from '@/lib/static-data';
 import type { Brand } from '@/lib/types';
 import { logger } from '@/lib/logger';
@@ -14,7 +14,7 @@ const QUERY = `
 
 export async function fetchBrands(): Promise<Brand[]> {
   try {
-    const data: Brand[] = await client.fetch(QUERY);
+    const data = await sanityFetch<Brand[]>(QUERY, {}, { tags: [SANITY_TAGS.all, SANITY_TAGS.brands] });
     if (data && data.length > 0) return data;
   } catch (e) {
     logger.error('Sanity brands fetch failed, using fallback:', e);

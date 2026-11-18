@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { FALLBACK_COMPARISONS, withFallbackComparisons } from '@/lib/comparison-fallbacks';
 
 export type Comparison = (typeof FALLBACK_COMPARISONS)[number];
@@ -17,8 +17,8 @@ const QUERY = `
 
 export async function fetchComparisons(): Promise<Comparison[]> {
   try {
-    const data = await client.fetch(QUERY);
-    const withImages = (data as Comparison[]).filter((item) => item.oldImg && item.newImg);
+    const data = await sanityFetch<Comparison[]>(QUERY, {}, { tags: [SANITY_TAGS.all, SANITY_TAGS.comparisons] });
+    const withImages = data.filter((item) => item.oldImg && item.newImg);
     return withFallbackComparisons(withImages);
   } catch {
     return withFallbackComparisons([]);

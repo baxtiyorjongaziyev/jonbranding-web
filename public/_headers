@@ -1,0 +1,55 @@
+# Cloudflare Workers Static Assets edge caching and security headers
+# https://developers.cloudflare.com/workers/static-assets/headers/
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+
+/logos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+/videos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+/audio/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+/assets/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+/llms.txt
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+  X-Content-Type-Options: nosniff
+
+/icon*
+  Cache-Control: public, max-age=604800
+  X-Content-Type-Options: nosniff
+
+/apple-touch-icon*
+  Cache-Control: public, max-age=604800
+  X-Content-Type-Options: nosniff
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+  X-Content-Type-Options: nosniff
+
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff

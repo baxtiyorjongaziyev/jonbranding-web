@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
 import { getDictionary, Locale } from '@/lib/dictionaries';
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { safeJsonStringify } from '@/lib/security';
 import {
   getLocalizedAbsoluteUrl,
@@ -13,7 +13,7 @@ import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 import { getSortedPostsData } from '@/lib/blog-posts';
 import { PreferredSourcesCard } from '@/components/blog/preferred-sources-card';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -72,7 +72,7 @@ export default async function BlogPage(props: Props) {
   
   let posts: any[] = [];
   try {
-    posts = await client.fetch(postsQuery, { lang: safeLang });
+    posts = await sanityFetch<any[]>(postsQuery, { lang: safeLang }, { tags: [SANITY_TAGS.all, SANITY_TAGS.post] });
   } catch (error) {
     console.error("Failed to fetch blog posts from Sanity:", error);
   }

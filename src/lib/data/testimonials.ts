@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
 import type { Testimonial } from '@/lib/types';
 import { logger } from '@/lib/logger';
@@ -42,7 +42,7 @@ function getFallback(lang: string): Testimonial[] {
 export async function fetchTestimonials(lang: string): Promise<Testimonial[]> {
   const fallback = getFallback(lang);
   try {
-    const data: Testimonial[] = await client.fetch(QUERY, { lang }, { next: { revalidate: false } });
+    const data = await sanityFetch<Testimonial[]>(QUERY, { lang }, { tags: [SANITY_TAGS.all, SANITY_TAGS.testimonials] });
     if (data && data.length > 0) {
       const sanityNames = new Set(data.map((t) => t.name.toLowerCase().trim()));
       return [

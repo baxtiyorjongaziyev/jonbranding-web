@@ -13,7 +13,7 @@ const sources = import.meta.glob<string>(['/src/**/*.{ts,tsx}', '!/src/**/*.test
 });
 
 /** Platforma o'zi beradigan o'zgaruvchilar — sozlanmaydi. */
-const PLATFORM = new Set(['NODE_ENV', 'NEXT_RUNTIME', 'VERCEL', 'VERCEL_ENV', 'CI']);
+const PLATFORM = new Set(['NODE_ENV', 'NEXT_RUNTIME', 'VERCEL', 'VERCEL_ENV', 'CI', 'OPEN_NEXT_BUILD_ID']);
 
 function usedInCode(): string[] {
   const names = new Set<string>();
