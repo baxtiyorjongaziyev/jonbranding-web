@@ -201,4 +201,46 @@ describe('website edge boundary', () => {
     expect((await guardWebsiteRequest(post('/api/oisha', { user_id: 'web_test_user', text: 'e', lang: 'uz' }, { cookie: signed }), env) as Response).status).toBe(400);
     expect((await guardWebsiteRequest(post('/api/oisha', { user_id: 'web_test_user', text: 'Testing', lang: 'uz' }, { cookie: signed }), env) as Response).status).toBe(400);
   });
+
+  it('protects /api/revalidate and permits only matching internal ISR revalidation requests', async () => {
+    const env: WebsiteGuardEnv = {
+      ...environment(),
+      REVALIDATE_SECRET: 'rev-secret-123',
+      prerenderRevalidateId: 'internal-preview-token-abc',
+    };
+
+    expect((await guardWebsiteRequest(new Request(host + '/cdn-cgi/_next_cache/test.cache'), env) as Response).status).toBe(404);
+    expect((await guardWebsiteRequest(post('/api/revalidate', { _type: 'post' }), env) as Response).status).toBe(401);
+    expect(await guardWebsiteRequest(post('/api/revalidate', { _type: 'post' }, { authorization: 'Bearer rev-secret-123' }), env)).toBeInstanceOf(Request);
+    expect(await guardWebsiteRequest(post('/api/revalidate', { _type: 'post' }, { 'x-sanity-webhook-secret': 'rev-secret-123' }), env)).toBeInstanceOf(Request);
+
+    // External requests must NEVER retain x-prerender-revalidate even if guessing the header value
+    const externalSpoof = await guardWebsiteRequest(
+      new Request(host + '/uz', {
+        method: 'HEAD',
+        headers: {
+          'cf-connecting-ip': '192.0.2.99',
+          'x-isr': '1',
+          'x-prerender-revalidate': 'internal-preview-token-abc',
+        },
+      }),
+      env,
+    );
+    expect(externalSpoof).toBeInstanceOf(Request);
+    expect((externalSpoof as Request).headers.get('x-prerender-revalidate')).toBeNull();
+
+    // Internal WORKER_SELF_REFERENCE revalidation (no cf-connecting-ip) keeps the verified token
+    const internalReq = await guardWebsiteRequest(
+      new Request(host + '/uz', {
+        method: 'HEAD',
+        headers: {
+          'x-isr': '1',
+          'x-prerender-revalidate': 'internal-preview-token-abc',
+        },
+      }),
+      env,
+    );
+    expect(internalReq).toBeInstanceOf(Request);
+    expect((internalReq as Request).headers.get('x-prerender-revalidate')).toBe('internal-preview-token-abc');
+  });
 });

@@ -4,7 +4,7 @@ import { fetchTestimonials } from '@/lib/data/testimonials';
 import ReviewsClient from './reviews-client';
 import { getPageAlternates } from '@/lib/seo';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ lang: string }>;

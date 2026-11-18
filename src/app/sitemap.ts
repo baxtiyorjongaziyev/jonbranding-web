@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { fetchPortfolioList } from '@/lib/data/portfolio';
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 import { getAllPostSlugs } from '@/lib/blog-posts';
 import {
   defaultLocale,
@@ -65,12 +65,16 @@ type SanityPostSitemapRecord = {
 async function getSanityBlogEntries(): Promise<MetadataRoute.Sitemap> {
   let posts: SanityPostSitemapRecord[] = [];
   try {
-    posts = await client.fetch(`*[_type == "post" && defined(slug.current)] {
+    posts = await sanityFetch<SanityPostSitemapRecord[]>(
+      `*[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current)] {
       "slug": slug.current,
       "lang": language,
       publishedAt,
       "updatedAt": _updatedAt
-    }`);
+    }`,
+      {},
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.post] },
+    );
   } catch (error) {
     console.error('[sitemap] Failed to fetch Sanity posts:', error);
     return [];
@@ -196,4 +200,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [...staticPages, ...uzOnlyPages, ...uniqueBlogEntries, ...(await getPortfolioEntries())];
 }
 
-export const revalidate = false;
+export const revalidate = 3600;

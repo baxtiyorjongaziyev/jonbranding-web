@@ -4,7 +4,7 @@ import { buildRssFeedXml, type BlogFeedItem } from '@/lib/blog-feed';
 import { locales, type Locale } from '@/lib/i18n/locale';
 import { SITE_URL } from '@/lib/seo';
 import { logger } from '@/lib/logger';
-import { client } from '@/sanity/lib/client';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
 
 type SanityFeedPost = {
   slug?: string;
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
   let sanityPosts: SanityFeedPost[] = [];
   try {
-    sanityPosts = await client.fetch<SanityFeedPost[]>(
+    sanityPosts = await sanityFetch<SanityFeedPost[]>(
       `*[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current) && language in $targetLocales] {
         "slug": slug.current,
         "lang": language,
@@ -47,6 +47,7 @@ export async function GET(request: NextRequest) {
         author
       }`,
       { targetLocales },
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.post] },
     );
   } catch (error) {
     logger.warn('[feed.xml] Failed to fetch Sanity posts; serving markdown posts only', {
@@ -78,7 +79,7 @@ export async function GET(request: NextRequest) {
     status: 200,
     headers: {
       'Content-Type': 'application/rss+xml; charset=utf-8',
-      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+      'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
     },
   });
 }

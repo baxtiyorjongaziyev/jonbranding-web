@@ -203,6 +203,8 @@ const nextConfig = {
     return config;
   },
   images: {
+    loader: 'custom',
+    loaderFile: './src/lib/image-loader.ts',
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85],
     minimumCacheTTL: 2592000,

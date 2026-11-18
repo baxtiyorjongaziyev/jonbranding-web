@@ -12,6 +12,12 @@ describe('SEO operational assets', () => {
     expect(llms).toContain('600+');
     expect(llms).toContain('1200+');
     expect(llms).toContain('2018');
+    expect(llms).toContain('https://www.jonbranding.uz/xizmatlar/patent');
+    expect(llms).toContain('https://www.jonbranding.uz/expert-tekshiruv');
+    expect(llms).toContain('8 000 000');
+    expect(llms).toContain('10 000 000');
+    expect(llms).toContain('20 000 000');
+    expect(llms).toContain('@baxtiyorjongaziyev');
     expect(llms).toContain('https://www.jonbranding.uz/feed.xml');
     expect(llms).toContain('https://www.jonbranding.uz/blog');
     expect(llms).toContain('https://www.jonbranding.uz/ru');

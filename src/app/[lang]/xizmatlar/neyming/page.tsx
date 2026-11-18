@@ -7,6 +7,8 @@ import ServiceJsonLd from '@/components/structured-data/service-json-ld';
 import { fetchServiceWorks } from '@/lib/service-pages/works';
 import { pageTitle } from '@/lib/seo';
 
+export const revalidate = 3600;
+
 type Props = {
   params: Promise<{ lang: string }>;
 };

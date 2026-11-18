@@ -1,30 +1,22 @@
 import { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { fetchPortfolioBySlug, findSupersedingSlug } from '@/lib/data/portfolio';
-import { getLocalizedAbsoluteUrl, getLocalizedPath } from '@/lib/i18n/locale';
+import { fetchAllPortfolioSlugs, fetchPortfolioBySlug, findSupersedingSlug } from '@/lib/data/portfolio';
+import { getLocalizedAbsoluteUrl, getLocalizedPath, locales } from '@/lib/i18n/locale';
 import { safeJsonStringify } from '@/lib/security';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { presentPortfolioProject } from '@/lib/portfolio-presentation';
 import PortfolioDetailClient from '@/components/portfolio-detail-client';
 import { getPageAlternates, pageTitle, ORGANIZATION_ID, SITE_URL } from '@/lib/seo';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ lang: string; slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const slugs = ['den-aroma', 'savod', 'fidda', 'boyarin', 'arfadel', 'beyaz', 'enros', 'diletta'];
-  const params: { lang: string; slug: string }[] = [];
-  
-  ['uz', 'ru', 'en', 'zh'].forEach((lang) => {
-    slugs.forEach((slug) => {
-      params.push({ lang, slug });
-    });
-  });
-  
-  return params;
+  const slugs = await fetchAllPortfolioSlugs();
+  return locales.flatMap((lang) => slugs.map((slug) => ({ lang, slug })));
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
@@ -133,4 +125,3 @@ export default async function PortfolioDetailPage(props: Props) {
     </>
   );
 }
-export const dynamicParams = false;

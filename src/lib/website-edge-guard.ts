@@ -4,9 +4,12 @@ import { validIntakeSession } from './intake-session';
 import { verifiedWebsiteRole } from './website-admin-session';
 import { humanConfiguration, humanVerificationRequired, validHumanSession, verifyHumanChallenge } from './human-verification';
 
+declare const JB_PRERENDER_REVALIDATE_ID: string | undefined;
+
 type EdgeLimiter = { limit(input: { key: string }): Promise<{ success: boolean }> };
 export type WebsiteGuardEnv = {
   OISHA_SECRET_KEY?: string; CRON_SECRET?: string; AMOCRM_CRON_SECRET?: string;
+  REVALIDATE_SECRET?: string; prerenderRevalidateId?: string;
   ADMIN_SECRET?: string; SALES_TEAM_SECRET?: string;
   TURNSTILE_SECRET_KEY?: string; TURNSTILE_SITE_KEY?: string; TURNSTILE_ENFORCE?: string;
   JB_CHALLENGE_LIMIT?: EdgeLimiter;
@@ -20,7 +23,7 @@ const browserPosts = new Set(['/api/submit-form', '/api/diagnostics', '/api/navi
 const leadPosts = new Set(['/api/submit-form', '/api/diagnostics', '/api/navigator-lead', '/api/affiliate/register']);
 const cronRoutes = new Set(['/api/content-agent', '/api/blog-agent', '/api/portfolio-sync', '/api/reviews-sync', '/api/cron/lead-retry']);
 const serviceRoutes = new Set(['/api/amocrm-health', '/api/amocrm-refresh', '/api/amocrm-process-calls']);
-const knownRoutes = new Set([...browserPosts, ...cronRoutes, ...serviceRoutes, '/api/comparisons', '/api/testimonials', '/api/amocrm-webhook', '/api/vimeo-webhook', '/api/portfolio-telegram', '/api/admin/retry-amocrm-leads', '/api/auth/instagram', '/api/auth/instagram/callback']);
+const knownRoutes = new Set([...browserPosts, ...cronRoutes, ...serviceRoutes, '/api/revalidate', '/api/comparisons', '/api/testimonials', '/api/amocrm-webhook', '/api/vimeo-webhook', '/api/portfolio-telegram', '/api/admin/retry-amocrm-leads', '/api/auth/instagram', '/api/auth/instagram/callback']);
 const publicHosts = new Set(['jonbranding.uz', 'www.jonbranding.uz', 'patent.jonbranding.uz']);
 const imageHosts = new Set(['cdn.sanity.io', 'cdn.prod.website-files.com', 'images.unsplash.com']);
 const blockedScannerIps = new Set(['213.230.125.2']);
@@ -112,20 +115,29 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
   if (/[\\\u0000]/.test(path) || /%2f|%5c|%00/i.test(url.pathname)) return denied(400, 'invalid_path');
   if (/(?:^|\/)\.(?:env|git|svn|hg)(?:[./]|$)|\.(?:php|asp|aspx|bak|sql)(?:\/|$)/i.test(path)) return denied(404, 'not_found');
   if (request.headers.has('next-action')) return denied(405, 'unsupported_action');
-  if (/^\/(?:_next_cache|\.open-next|\.next)(?:\/|$)/.test(path)) return denied(404, 'not_found');
+  if (/^\/(?:_next_cache|cdn-cgi\/_next_cache|\.open-next|\.next)(?:\/|$)/.test(path)) return denied(404, 'not_found');
   if (path.startsWith('/_next/static/') && path.endsWith('.map')) return denied(404, 'not_found');
   if (path === '/_next/image' && !imageRequest(url)) return denied(400, 'invalid_image_source');
   if (path !== '/_next/image' && url.search) {
     if (url.searchParams.has('companyWebsite') || isScannerQuery(url)) return denied(400, 'invalid_query');
     if (blockedScannerUserIds.has(url.searchParams.get('user_id') || '')) return denied(403, 'scanner_blocked');
   }
+  const expectedPreviewId = env.prerenderRevalidateId
+    || (typeof JB_PRERENDER_REVALIDATE_ID === 'string' ? JB_PRERENDER_REVALIDATE_ID : undefined);
+  const internalRevalidate =
+    !clientIp &&
+    (request.method === 'HEAD' || request.method === 'GET') &&
+    request.headers.get('x-isr') === '1' &&
+    Boolean(expectedPreviewId && matchesSecret(request.headers.get('x-prerender-revalidate'), expectedPreviewId));
   // Client-supplied Next internal headers must never override middleware/auth behavior.
   const cleanHeaders = new Headers(request.headers);
   for (const key of Array.from(cleanHeaders.keys())) {
+    if (key === 'x-prerender-revalidate' && internalRevalidate) continue;
     if (key.startsWith('x-middleware-') || key.startsWith('x-nextjs-') || key.startsWith('x-invoke-')
       || ['x-matched-path', 'x-now-route-matches', 'x-prerender-revalidate', 'x-prerender-revalidate-if-generated'].includes(key)) cleanHeaders.delete(key);
   }
   request = new Request(request, { headers: cleanHeaders });
+  if (internalRevalidate) return request;
   if ((path === '/jamoa' || path === '/jamoa.html') && !(await verifiedWebsiteRole(request, env, 'team'))) return denied(401, 'team_authentication_required');
   if (!path.startsWith('/api/')) {
     if (!['GET', 'HEAD'].includes(request.method)) return denied(405, 'method_not_allowed');
@@ -144,6 +156,9 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
     if (!(await verifiedWebsiteRole(request, env))) return denied(401, 'admin_authentication_required');
     if (request.method === 'POST' && !browserOrigin(request)) return denied(403, 'origin_rejected');
   }
+  if (path === '/api/revalidate'
+    && !bearer(request, [env.REVALIDATE_SECRET, env.CRON_SECRET, env.AMOCRM_CRON_SECRET])
+    && !matchesSecret(request.headers.get('x-sanity-webhook-secret') || request.headers.get('x-webhook-secret'), env.REVALIDATE_SECRET)) return denied(401, 'unauthorized');
   if ((cronRoutes.has(path) || (path === '/api/testimonials' && request.method === 'POST'))
     && !bearer(request, [env.CRON_SECRET, env.AMOCRM_CRON_SECRET])) return denied(401, 'unauthorized');
   if (serviceRoutes.has(path) && !bearer(request, [env.AMOCRM_CRON_SECRET])) return denied(401, 'unauthorized');

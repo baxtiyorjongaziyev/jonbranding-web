@@ -12,6 +12,8 @@ import type { CredCase, CredLogo, CredQuote } from './credentials-client';
 
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
+export const revalidate = 3600;
+
 /**
  * Sotuvchi uchun taqdimot sahifasi. Link bilan ochiq, lekin qidiruv tizimlari
  * indekslamaydi — narxlar ochiq turgani uchun sahifa faqat suhbat davomida beriladi.

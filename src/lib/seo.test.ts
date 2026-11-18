@@ -71,6 +71,30 @@ describe('SEO entity and AI referral helpers', () => {
       }),
     );
   });
+
+  it('includes foundingDate and full service catalog with naming, brand-strategy, and patent', () => {
+    const graph = getSiteEntityGraph('uz')['@graph'];
+    const organization = graph.find((node) => node['@id'] === ORGANIZATION_ID) as {
+      foundingDate?: string;
+      hasOfferCatalog?: { itemListElement?: Array<{ itemOffered?: { url?: string } }> };
+    };
+
+    expect(organization.foundingDate).toBe('2018-11-27');
+    const urls = organization.hasOfferCatalog?.itemListElement?.map((el) => el.itemOffered?.url);
+    expect(urls).toEqual(
+      expect.arrayContaining([
+        'https://www.jonbranding.uz/brand-strategy',
+        'https://www.jonbranding.uz/xizmatlar/neyming',
+        'https://www.jonbranding.uz/xizmatlar/logo-dizayni',
+        'https://www.jonbranding.uz/xizmatlar/firmenniy-stil',
+        'https://www.jonbranding.uz/xizmatlar/brandbook',
+        'https://www.jonbranding.uz/xizmatlar/qadoq-dizayni',
+        'https://www.jonbranding.uz/xizmatlar/patent',
+        'https://www.jonbranding.uz/xizmatlar/posm-materiallar',
+        'https://www.jonbranding.uz/xizmatlar/car-wrap-design',
+      ]),
+    );
+  });
 });
 
 describe('stripBrandSuffix', () => {

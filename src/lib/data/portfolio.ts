@@ -1,4 +1,6 @@
-import { client } from '@/sanity/lib/client';
+import { cache } from 'react';
+import { SANITY_TAGS, sanityFetch } from '@/sanity/lib/client';
+import { locales } from '@/lib/i18n/locale';
 import { getPortfolioFallback, PortfolioProject } from '@/lib/portfolio-fallbacks';
 import { logger } from '@/lib/logger';
 import { presentPortfolioProject } from '@/lib/portfolio-presentation';
@@ -69,14 +71,33 @@ export function supersedesFallback(
   );
 }
 
-async function fetchSanityPortfolioList(): Promise<PortfolioProject[]> {
+const fetchSanityPortfolioList = cache(async (): Promise<PortfolioProject[]> => {
   try {
-    const projects: PortfolioProject[] = (await client.fetch(LIST_QUERY)) ?? [];
-    return projects.map(presentPortfolioProject);
+    const projects = await sanityFetch<PortfolioProject[]>(
+      LIST_QUERY,
+      {},
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.portfolio] },
+    );
+    return (projects ?? []).map(presentPortfolioProject);
   } catch (e) {
     logger.error('Sanity portfolio fetch failed, using fallback:', e);
     return [];
   }
+});
+
+/** Collects every known Sanity and fallback portfolio slug so build-time SSG avoids 404 regressions. */
+export async function fetchAllPortfolioSlugs(): Promise<string[]> {
+  const sanity = await fetchSanityPortfolioList();
+  const fallbacks = locales.flatMap(
+    (lang) => ((getPortfolioFallback(lang) as PortfolioProject[] | null) ?? []),
+  );
+  return Array.from(
+    new Set(
+      [...sanity, ...fallbacks]
+        .map((project) => project?.slug?.trim())
+        .filter((slug): slug is string => Boolean(slug)),
+    ),
+  );
 }
 
 /** Fallback slug'i Sanity'dagi keys bilan almashtirilgan bo'lsa, yangi slug. */
@@ -121,11 +142,15 @@ export async function fetchPortfolioList(lang: string): Promise<PortfolioProject
 }
 
 
-export async function fetchPortfolioBySlug(slug: string): Promise<PortfolioProject | null> {
+export const fetchPortfolioBySlug = cache(async (slug: string): Promise<PortfolioProject | null> => {
   try {
-    const project = await client.fetch(SLUG_QUERY, { slug });
+    const project = await sanityFetch<PortfolioProject | null>(
+      SLUG_QUERY,
+      { slug },
+      { tags: [SANITY_TAGS.all, SANITY_TAGS.portfolio] },
+    );
     return project ? presentPortfolioProject(project) : null;
   } catch {
     return null;
   }
-}
+});

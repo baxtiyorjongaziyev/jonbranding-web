@@ -11,6 +11,8 @@ import type { ServiceCase, ServiceQuote } from './narxlar-client';
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
+export const revalidate = 3600;
+
 const TITLES: Record<Locale, string> = {
   uz: 'Narxlar — Baxtiyor Gaziyev',
   ru: 'Цены на брендинг — Бахтиёр Газиев',

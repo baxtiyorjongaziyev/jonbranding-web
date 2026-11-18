@@ -13,12 +13,31 @@ const bindings = [
   { name: 'JB_CHALLENGE_LIMIT', type: 'ratelimit', namespace_id: '2026111408', simple: { limit: 10, period: 60 } },
 ];
 
+function readPreviewModeId() {
+  try {
+    const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '../.next/prerender-manifest.json'), 'utf8'));
+    return typeof manifest?.preview?.previewModeId === 'string' ? manifest.preview.previewModeId : '';
+  } catch {
+    return '';
+  }
+}
+
+function copyBuildCacheToAssets() {
+  const sourceDir = path.join(__dirname, '../.open-next/cache');
+  const destDir = path.join(__dirname, '../.open-next/assets/cdn-cgi/_next_cache');
+  if (!fs.existsSync(sourceDir)) return false;
+  fs.mkdirSync(path.dirname(destDir), { recursive: true });
+  fs.cpSync(sourceDir, destDir, { recursive: true, force: true });
+  return true;
+}
+
 function runtimeSource() {
   const modules = ['oisha-input', 'intake-validation', 'intake-session', 'human-verification', 'website-admin-session', 'website-response-security', 'website-edge-guard', 'oisha-edge-guard'];
   const code = modules.map(name => ts.transpileModule(fs.readFileSync(path.join(__dirname, `../src/lib/${name}.ts`), 'utf8'), {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
   }).outputText.replace(/^import .*;\r?\n/gm, '').replace(/^export /gm, '')).join('\n');
-  return `(() => {\n${code}\nreturn {guardWebsiteRequest, guardOishaRequest, attachIntakeSession, secureWebsiteResponse};\n})()`;
+  const previewModeId = JSON.stringify(readPreviewModeId());
+  return `(() => {\nconst JB_PRERENDER_REVALIDATE_ID = ${previewModeId};\n${code}\nreturn {guardWebsiteRequest, guardOishaRequest, attachIntakeSession, secureWebsiteResponse};\n})()`;
 }
 
 function wrapperSource(originalName, legacyOrigin = '') {
@@ -49,13 +68,21 @@ ${originalName}.fetch = async function(request, env, ctx) {
   const assets = env.ASSETS;
   env = {...env, ASSETS: {async fetch(input, init) {const response = await assets.fetch(input, init); return response.status === 404 ? legacyAsset(new Request(input, init)) : response;}}};
   ` : ''}
+  const __isInternalRevalidate = checked.headers.get('x-isr') === '1' && checked.headers.has('x-prerender-revalidate');
   let response = await __jbOriginalFetch(request, env, ctx);
+  const __revalidated = __isInternalRevalidate ? response.headers.get('x-nextjs-cache') : null;
   response = await __jbRuntime.attachIntakeSession(request, response, env);
   if (new URL(request.url).pathname.startsWith('/api/')) {
     const headers = new Headers(response.headers); headers.set('Cache-Control', 'private, no-store'); headers.set('X-Content-Type-Options', 'nosniff');
     response = new Response(response.body, {status: response.status, statusText: response.statusText, headers});
   }
-  return __jbRuntime.secureWebsiteResponse(request, response);
+  let secured = __jbRuntime.secureWebsiteResponse(request, response);
+  if (__revalidated) {
+    const headers = new Headers(secured.headers);
+    headers.set('x-nextjs-cache', __revalidated);
+    secured = new Response(secured.body, {status: secured.status, statusText: secured.statusText, headers});
+  }
+  return secured;
 };
 `;
 }
@@ -67,7 +94,8 @@ function patchSnapshot(source, legacyOrigin) {
 
 module.exports = { bindings, runtimeSource, wrapperSource, patchSnapshot };
 if (require.main === module) {
+  const copiedCache = copyBuildCacheToAssets();
   const target = path.join(__dirname, '../.open-next/security-worker.mjs');
   fs.writeFileSync(target, `import original from './worker.js';\nexport * from './worker.js';\n${wrapperSource('original')}\nexport default original;\n`);
-  console.log('Built security-worker.mjs from tested source guards');
+  console.log(`Built security-worker.mjs from tested source guards${copiedCache ? ' and synced build cache into assets' : ''}`);
 }

@@ -9,6 +9,8 @@ import { pageTitle } from '@/lib/seo';
 import { fillServiceTokens } from '@/lib/service-pages/localized-facts';
 import LocalizedServiceFacts, { buildServiceFaqs } from '@/components/service-landing/localized-service-facts';
 
+export const revalidate = 3600;
+
 type Props = {
   params: Promise<{ lang: string }>;
 };

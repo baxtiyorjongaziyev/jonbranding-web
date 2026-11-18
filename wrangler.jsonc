@@ -22,10 +22,52 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
-    "run_worker_first": ["/*", "!/_next/static/*"],
+    "run_worker_first": [
+      "/*",
+      "!/_next/static/*",
+      "!/images/*",
+      "!/logos/*",
+      "!/videos/*",
+      "!/audio/*",
+      "!/assets/*",
+      "!/fonts/*",
+      "!/icon*",
+      "!/apple-touch-icon*",
+      "!/favicon.ico",
+      "!/manifest.json",
+      "!/llms.txt",
+      "!/sw.js"
+    ],
     "html_handling": "none",
     "not_found_handling": "none"
   },
+  "kv_namespaces": [
+    {
+      "binding": "NEXT_INC_CACHE_KV",
+      "id": "0a7d482a34b6451b873d08e439bce65b"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "NEXT_CACHE_DO_QUEUE",
+        "class_name": "DOQueueHandler"
+      },
+      {
+        "name": "NEXT_TAG_CACHE_DO_SHARDED",
+        "class_name": "DOShardedTagCache"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "DOQueueHandler",
+        "DOShardedTagCache"
+      ]
+    }
+  ],
   "images": {
     "binding": "IMAGES"
   },

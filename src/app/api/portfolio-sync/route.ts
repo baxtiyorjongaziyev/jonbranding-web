@@ -7,6 +7,7 @@ import { createClient } from '@sanity/client';
 import { listSubfolders, listFiles, downloadFileBuffer } from '@/lib/google-drive';
 import { parsePortfolioMetadata } from '@/lib/gemini';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
+import { revalidateSanityContent } from '@/lib/revalidate-sanity';
 import { scrapeTelegramPosts } from '@/lib/integrations/telegram';
 import { scrapeInstagramPosts } from '@/lib/integrations/instagram';
 
@@ -234,6 +235,10 @@ async function handleSync(request: NextRequest) {
           reason: folderError instanceof Error ? folderError.message : String(folderError),
         });
       }
+    }
+
+    if (results.some((item) => item.status === 'success')) {
+      revalidateSanityContent({ _type: 'portfolio' });
     }
 
     return NextResponse.json({
