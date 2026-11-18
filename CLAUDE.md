@@ -37,6 +37,7 @@ src/lib/static-data.ts           # staticBrands, staticTestimonials
 7. **Master Design & Anti-AI-Slop Qoidalari (.claude/skills/ va .agents/skills/)**:
    - Har qanday UI/UX yoki sahifa yaratish/tahrirlashda `design-taste-frontend`, `ui-craft`, `ui-craft-editorial`, `colorize`, `kinetic-typography` skill'lariga amal qilinadi.
    - **60-30-10 tizimi:** 60% fon oq `#FFFFFF`, 30% struktura to'q siyoh `#0A0B0E`, 10% elektr aksent `#2554FF` (hover `#1D4ED8`).
+   - **Rang qo'riqchisi:** `src/lib/palette.test.ts` — yangi begona hex rang CI'ni yiqitadi. Eski ranglar `palette-baseline.json`da muzlatilgan (faqat kichrayadi). Tozalagach: `UPDATE_PALETTE_BASELINE=1 npx vitest run src/lib/palette.test.ts`.
    - `Instrument Serif` kursivida sun'iy qalinlashuv (faux/synthetic bold) taqiqlanadi.
    - O'zgarishlardan keyin `npm run verify:fast` tekshirilishi shart. `node .agents/skills/impeccable/scripts/detect.mjs` (0 anti-pattern) — faqat skript mavjud bo'lsa: `.agents/` repoda yo'q (`.gitignore`), CI uni ishlata olmaydi.
 
