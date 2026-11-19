@@ -8,14 +8,29 @@ type Props = {
   path: string;
   name: string;
   description: string;
+  /** Rasmiy UZS narx (sales-content manbasidan) — Schema.org Offer uchun. */
+  priceValue?: number;
+  priceCurrency?: string;
+  /** Sahifada ko'rinadigan jarayon bosqichlari — HowTo sifatida beriladi (AEO). */
+  howToSteps?: { title: string; desc?: string }[];
   /** Sahifada ko'rinadigan savol-javoblar — FAQPage sifatida beriladi (AEO). */
   faqs?: { q: string; a: string }[];
-  /** Savol-javoblar tili; xizmat sahifalari hozircha faqat o'zbekcha. */
   faqLang?: Locale;
 };
 
-export default function ServiceJsonLd({ lang, path, name, description, faqs, faqLang = 'uz' }: Props) {
+export default function ServiceJsonLd({
+  lang,
+  path,
+  name,
+  description,
+  priceValue,
+  priceCurrency = 'UZS',
+  howToSteps,
+  faqs,
+  faqLang,
+}: Props) {
   const url = getLocalizedAbsoluteUrl(SITE_URL, lang, path);
+  const resolvedFaqLang = faqLang ?? lang;
   const homeLabel =
     lang === 'uz' ? 'Bosh sahifa' :
     lang === 'ru' ? 'Главная' :
@@ -42,6 +57,17 @@ export default function ServiceJsonLd({ lang, path, name, description, faqs, faq
           { '@type': 'Country', name: 'Uzbekistan' },
           { '@type': 'Place', name: 'Central Asia' },
         ],
+        ...(typeof priceValue === 'number' && priceValue > 0
+          ? {
+              offers: {
+                '@type': 'Offer',
+                price: String(priceValue),
+                priceCurrency,
+                availability: 'https://schema.org/InStock',
+                url,
+              },
+            }
+          : {}),
       },
       {
         '@type': 'BreadcrumbList',
@@ -67,12 +93,28 @@ export default function ServiceJsonLd({ lang, path, name, description, faqs, faq
           },
         ],
       },
+      ...(howToSteps?.length
+        ? [
+            {
+              '@type': 'HowTo',
+              '@id': `${url}#howto`,
+              name,
+              inLanguage: resolvedFaqLang,
+              step: howToSteps.map((step, index) => ({
+                '@type': 'HowToStep',
+                position: index + 1,
+                name: step.title,
+                ...(step.desc ? { text: step.desc } : {}),
+              })),
+            },
+          ]
+        : []),
       ...(faqs?.length
         ? [
             {
               '@type': 'FAQPage',
               '@id': `${url}#faq`,
-              inLanguage: faqLang,
+              inLanguage: resolvedFaqLang,
               about: { '@id': `${url}#service` },
               mainEntity: faqs.map((f) => ({
                 '@type': 'Question',

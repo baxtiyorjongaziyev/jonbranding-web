@@ -69,12 +69,94 @@ export function identifyAiReferrer(referrer: string): AiReferrer | null {
   }
 }
 
-const serviceNames: Record<Locale, [string, string, string]> = {
-  uz: ['Logotip va firma uslubi', 'Brendbuk', 'Qadoq dizayni'],
-  ru: ['Логотип и фирменный стиль', 'Брендбук', 'Дизайн упаковки'],
-  en: ['Logo and corporate identity', 'Brand guidelines', 'Packaging design'],
-  zh: ['标志与企业形象', '品牌手册', '包装设计'],
+type ServiceCatalogEntry = {
+  path: string;
+  names: Record<Locale, string>;
 };
+
+const SERVICE_CATALOG: readonly ServiceCatalogEntry[] = [
+  {
+    path: '/brand-strategy',
+    names: {
+      uz: 'Brend strategiyasi',
+      ru: 'Бренд-стратегия',
+      en: 'Brand strategy',
+      zh: '品牌战略',
+    },
+  },
+  {
+    path: '/xizmatlar/neyming',
+    names: {
+      uz: 'Neyming — brend nomi yaratish',
+      ru: 'Нейминг — разработка названия',
+      en: 'Brand naming',
+      zh: '品牌命名',
+    },
+  },
+  {
+    path: '/xizmatlar/logo-dizayni',
+    names: {
+      uz: 'Logotip dizayni',
+      ru: 'Разработка логотипа',
+      en: 'Logo design',
+      zh: '标志设计',
+    },
+  },
+  {
+    path: '/xizmatlar/firmenniy-stil',
+    names: {
+      uz: 'Firma uslubi',
+      ru: 'Фирменный стиль',
+      en: 'Corporate identity',
+      zh: '视觉识别系统',
+    },
+  },
+  {
+    path: '/xizmatlar/brandbook',
+    names: {
+      uz: 'Brendbuk yaratish',
+      ru: 'Разработка брендбука',
+      en: 'Brand guidelines',
+      zh: '品牌手册',
+    },
+  },
+  {
+    path: '/xizmatlar/qadoq-dizayni',
+    names: {
+      uz: 'Qadoq dizayni',
+      ru: 'Дизайн упаковки',
+      en: 'Packaging design',
+      zh: '包装设计',
+    },
+  },
+  {
+    path: '/xizmatlar/patent',
+    names: {
+      uz: 'Tovar belgisini ro‘yxatdan o‘tkazish (patent)',
+      ru: 'Регистрация товарного знака (патента)',
+      en: 'Trademark registration',
+      zh: '商标注册',
+    },
+  },
+  {
+    path: '/xizmatlar/posm-materiallar',
+    names: {
+      uz: 'POSM materiallar dizayni',
+      ru: 'Дизайн POSM-материалов',
+      en: 'POSM design',
+      zh: 'POSM 物料设计',
+    },
+  },
+  {
+    path: '/xizmatlar/car-wrap-design',
+    names: {
+      uz: 'Avtomobil brendlash (Car Wrap)',
+      ru: 'Брендирование автомобилей',
+      en: 'Car wrap design',
+      zh: '车身广告设计',
+    },
+  },
+];
 
 const founderJobTitles: Record<Locale, string> = {
   uz: 'Brending mutaxassisi, asoschi',
@@ -84,8 +166,6 @@ const founderJobTitles: Record<Locale, string> = {
 };
 
 export function getSiteEntityGraph(locale: Locale) {
-  const [identity, brandbook, packaging] = serviceNames[locale];
-
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -95,6 +175,7 @@ export function getSiteEntityGraph(locale: Locale) {
         name: 'Jon.Branding',
         alternateName: ['JonBranding', 'Jon Branding Agency'],
         url: SITE_URL,
+        foundingDate: '2018-11-27',
         logo: `${SITE_URL}/icon.svg`,
         image: `${SITE_URL}/images/cms/og-image.jpeg`,
         telephone: '+998792000097',
@@ -137,32 +218,14 @@ export function getSiteEntityGraph(locale: Locale) {
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Jon.Branding services',
-          itemListElement: [
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: identity,
-                url: getLocalizedAbsoluteUrl(SITE_URL, locale, '/xizmatlar/firmenniy-stil'),
-              },
+          itemListElement: SERVICE_CATALOG.map((service) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: service.names[locale],
+              url: getLocalizedAbsoluteUrl(SITE_URL, locale, service.path),
             },
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: brandbook,
-                url: getLocalizedAbsoluteUrl(SITE_URL, locale, '/xizmatlar/brandbook'),
-              },
-            },
-            {
-              '@type': 'Offer',
-              itemOffered: {
-                '@type': 'Service',
-                name: packaging,
-                url: getLocalizedAbsoluteUrl(SITE_URL, locale, '/xizmatlar/qadoq-dizayni'),
-              },
-            },
-          ],
+          })),
         },
       },
       {
