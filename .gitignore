@@ -37,6 +37,7 @@ yarn-error.log*
 !README.md
 !public/llms.txt
 !public/robots.txt
+!public/.well-known/security.txt
 !package.json
 !components.json
 !tsconfig.json
@@ -125,3 +126,8 @@ npm-audit.json
 
 # local release/audit artifacts
 /output/
+
+# Local backup archives (never commit)
+backups/
+*.json.gz
+*.json.gz.enc

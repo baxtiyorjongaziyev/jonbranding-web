@@ -58,6 +58,7 @@ describe('outer response security', () => {
     expect(response.headers.get('content-security-policy')).toContain("script-src-attr 'none'");
     expect(response.headers.get('content-security-policy')).toContain("base-uri 'none'");
     expect(response.headers.get('content-security-policy')).toContain('https://challenges.cloudflare.com');
+    expect(response.headers.get('permissions-policy')).toContain('microphone=()');
     expect(response.headers.get('permissions-policy')).toContain('geolocation=()');
   });
   it('also protects errors and original-handler throttling responses', () => {
@@ -65,5 +66,6 @@ describe('outer response security', () => {
     expect(response.headers.get('retry-after')).toBe('60');
     expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(response.headers.get('x-content-type-options')).toBe('nosniff');
+    expect(response.headers.get('content-security-policy')).toBe("default-src 'none'; frame-ancestors 'none'");
   });
 });

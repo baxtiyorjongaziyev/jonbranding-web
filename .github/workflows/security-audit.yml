@@ -35,7 +35,13 @@ jobs:
         run: npm ci
 
       - name: Verify security gate fails closed
-        run: node --test scripts/check-audit.node-test.mjs
+        run: |
+          node --test scripts/check-audit.node-test.mjs
+          node --test scripts/check-secrets.node-test.mjs
+          node --test scripts/backup-offsite.node-test.mjs
+
+      - name: Scan repository for committed secrets
+        run: node scripts/check-secrets.mjs
 
       - name: Audit production dependencies
         run: |

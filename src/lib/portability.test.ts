@@ -18,9 +18,11 @@ const read = (f: string) => readFileSync(f, 'utf8');
 
 describe('hosting portability', () => {
   it('firebase-admin faqat lazy require orqali yuklanadi (Workers eval)', () => {
-    const offenders = files.filter((f) =>
-      /^\s*import\s+(?!type\b)[^;]*from\s+['"](firebase-admin|@google-cloud\/firestore|firebase-functions)/m.test(read(f)),
-    );
+    const offenders = files.filter((f) => {
+      const content = read(f);
+      if (!/(?:firebase-admin|@google-cloud\/firestore|firebase-functions)/.test(content)) return false;
+      return /^\s*import\s+(?!type\b)[^;]*from\s+['"](firebase-admin|@google-cloud\/firestore|firebase-functions)/m.test(content);
+    });
     expect(offenders).toEqual([]);
   });
 

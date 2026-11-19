@@ -14,6 +14,8 @@
     "migration:check": "node scripts/hosting-migration.mjs check",
     "migration:sync": "node scripts/hosting-migration.mjs sync",
     "migration:smoke": "node scripts/website-security-smoke.cjs live",
+    "backup:offsite": "node scripts/backup-offsite.mjs",
+    "security:secrets": "node scripts/check-secrets.mjs",
     "upload:cloudflare": "npm run build:cloudflare && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "node .next/standalone/server.js",

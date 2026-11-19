@@ -1,5 +1,5 @@
 import { readChatBody } from './oisha-input';
-import { canonicalText, intakePhone, intakeTelegram, isScannerInput, safeIntakeObject, validChatMessage, validIntakeName } from './intake-validation';
+import { canonicalText, intakePhone, intakeTelegram, isMaliciousHeaderValue, isScannerInput, safeIntakeObject, validChatMessage, validIntakeName } from './intake-validation';
 import { validIntakeSession } from './intake-session';
 import { verifiedWebsiteRole } from './website-admin-session';
 import { humanConfiguration, humanVerificationRequired, validHumanSession, verifyHumanChallenge } from './human-verification';
@@ -28,6 +28,7 @@ const publicHosts = new Set(['jonbranding.uz', 'www.jonbranding.uz', 'patent.jon
 const imageHosts = new Set(['cdn.sanity.io', 'cdn.prod.website-files.com', 'images.unsplash.com']);
 const blockedScannerIps = new Set(['213.230.125.2']);
 const blockedScannerUserIds = new Set(['web_1a7ae654-dac2-41a0-aedf-b31564803674', 'web_fc166ee6-a3c9-44c6-b3e7-39a64e61a867']);
+const scannerUserAgentRe = /\b(?:sqlmap|nikto|acunetix|nessus|openvas|masscan|zgrab|nuclei|gobuster|dirbuster|ffuf|feroxbuster|wfuzz|wpscan|havij|commix|xsstrike|hydra|burpcollaborator|netsparker|appscan|metasploit)\b/i;
 
 function isScannerQuery(url: URL): boolean {
   for (const [key, value] of url.searchParams.entries()) {
@@ -105,15 +106,29 @@ function contactKey(body: Record<string, unknown>) {
 export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv): Promise<Request | Response> {
   const clientIp = request.headers.get('cf-connecting-ip')?.trim() || '';
   if (blockedScannerIps.has(clientIp)) return denied(403, 'scanner_blocked');
-  const intakeNonce = request.headers.get('cookie')?.match(/(?:^|;\s*)__Host-jb-intake=\d+\.([0-9a-f-]{36})\./)?.[1];
+  const userAgent = request.headers.get('user-agent') || '';
+  if (userAgent.length > 1024) return denied(400, 'invalid_header');
+  if (scannerUserAgentRe.test(userAgent)) return denied(403, 'scanner_blocked');
+  const cookieHeader = request.headers.get('cookie') || '';
+  if (cookieHeader.length > 8192) return denied(431, 'header_too_large');
+  for (const headerName of ['user-agent', 'referer', 'accept-language'] as const) {
+    const headerValue = request.headers.get(headerName);
+    if (headerValue && isMaliciousHeaderValue(headerValue)) return denied(403, 'scanner_blocked');
+  }
+  const intakeNonce = cookieHeader.match(/(?:^|;\s*)__Host-jb-intake=\d+\.([0-9a-f-]{36})\./)?.[1];
   if (intakeNonce && blockedScannerUserIds.has(`web_${intakeNonce}`)) return denied(403, 'scanner_blocked');
   const url = new URL(request.url);
   if (request.url.length > 8192) return denied(414, 'uri_too_long');
   let path: string;
   try { path = decodeURIComponent(url.pathname).replace(/\/+$/, '') || '/'; }
   catch { return denied(400, 'invalid_path'); }
-  if (/[\\\u0000]/.test(path) || /%2f|%5c|%00/i.test(url.pathname)) return denied(400, 'invalid_path');
-  if (/(?:^|\/)\.(?:env|git|svn|hg)(?:[./]|$)|\.(?:php|asp|aspx|bak|sql)(?:\/|$)/i.test(path)) return denied(404, 'not_found');
+  if (/[\\\u0000]/.test(path) || /(?:^|\/)\.\.(?:;|\/|$)/.test(path) || /%25?2e%25?2e|%2f|%5c|%00/i.test(url.pathname)) return denied(400, 'invalid_path');
+  if (/(?:^|\/)\.(?:env|git|svn|hg|htaccess|htpasswd|aws|ssh|ds_store|dockerenv|npmrc|yarnrc)(?:[./]|$)/i.test(path)
+    || /\.(?:php|phtml|phar|asp|aspx|jsp|cgi|bak|old|orig|sql|sqlite|ini|swp)(?:\/|$)/i.test(path)
+    || /^\/(?:etc\/(?:passwd|shadow|hosts|shells)|wp-admin|wp-content|wp-includes|wp-login|wp-config|xmlrpc\.php|phpmyadmin|pma|adminer|cgi-bin|actuator|telescope|vendor\/phpunit|debug\/vars)(?:\/|$)/i.test(path)
+    || /^\/(?:dockerfile|docker-compose(?:\.[^/]+)?|package(?:-lock)?\.json|tsconfig(?:\.[^/]+)?\.json|wrangler\.(?:toml|jsonc?)|next\.config\.[cm]?js|composer\.(?:json|lock)|web\.config|server-status|server-info)$/i.test(path)) {
+    return denied(404, 'not_found');
+  }
   if (request.headers.has('next-action')) return denied(405, 'unsupported_action');
   if (/^\/(?:_next_cache|cdn-cgi\/_next_cache|\.open-next|\.next)(?:\/|$)/.test(path)) return denied(404, 'not_found');
   if (path.startsWith('/_next/static/') && path.endsWith('.map')) return denied(404, 'not_found');
@@ -134,7 +149,10 @@ export async function guardWebsiteRequest(request: Request, env: WebsiteGuardEnv
   for (const key of Array.from(cleanHeaders.keys())) {
     if (key === 'x-prerender-revalidate' && internalRevalidate) continue;
     if (key.startsWith('x-middleware-') || key.startsWith('x-nextjs-') || key.startsWith('x-invoke-')
-      || ['x-matched-path', 'x-now-route-matches', 'x-prerender-revalidate', 'x-prerender-revalidate-if-generated'].includes(key)) cleanHeaders.delete(key);
+      || ['x-matched-path', 'x-now-route-matches', 'x-prerender-revalidate', 'x-prerender-revalidate-if-generated',
+        'x-forwarded-host', 'x-original-url', 'x-rewrite-url', 'x-http-method-override', 'x-method-override', 'x-http-method'].includes(key)) {
+      cleanHeaders.delete(key);
+    }
   }
   request = new Request(request, { headers: cleanHeaders });
   if (internalRevalidate) return request;

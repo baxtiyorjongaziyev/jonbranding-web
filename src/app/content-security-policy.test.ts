@@ -5,16 +5,21 @@ const require = createRequire(import.meta.url);
 
 type HeaderRule = { source: string; headers: { key: string; value: string }[] };
 
-async function readCsp(): Promise<Map<string, string[]>> {
+async function readSecurityHeaders(): Promise<Map<string, string>> {
   const nextConfig = require('../../next.config.js');
   const rules: HeaderRule[] = await nextConfig.headers();
-  const header = rules
-    .flatMap((rule) => rule.headers)
-    .find((item) => item.key === 'Content-Security-Policy');
-  if (!header) throw new Error('Content-Security-Policy header is missing');
+  const catchAll = rules.find((rule) => rule.source === '/(.*)');
+  if (!catchAll) throw new Error('Catch-all security header rule is missing');
+  return new Map(catchAll.headers.map((item) => [item.key, item.value]));
+}
+
+async function readCsp(): Promise<Map<string, string[]>> {
+  const headers = await readSecurityHeaders();
+  const value = headers.get('Content-Security-Policy');
+  if (!value) throw new Error('Content-Security-Policy header is missing');
 
   return new Map(
-    header.value
+    value
       .split(';')
       .map((part) => part.trim().split(/\s+/))
       .filter((tokens) => tokens[0])
@@ -95,6 +100,19 @@ describe('Content-Security-Policy', () => {
     const csp = await readCsp();
     expect(csp.get('script-src')).not.toContain("'unsafe-eval'");
     expect(csp.get('object-src')).toEqual(["'none'"]);
+    expect(csp.get('script-src-attr')).toEqual(["'none'"]);
+    expect(csp.get('base-uri')).toEqual(["'none'"]);
+    expect(csp.get('manifest-src')).toEqual(["'self'"]);
     expect(csp.get('frame-ancestors')).toEqual(["'self'"]);
+  });
+
+  it('sets hardened browser security headers on all routes', async () => {
+    const headers = await readSecurityHeaders();
+    const permissions = headers.get('Permissions-Policy') || '';
+    expect(permissions).toContain('camera=()');
+    expect(permissions).toContain('microphone=()');
+    expect(permissions).toContain('geolocation=()');
+    expect(headers.get('Cross-Origin-Opener-Policy')).toBe('same-origin-allow-popups');
+    expect(headers.get('X-XSS-Protection')).toBe('0');
   });
 });

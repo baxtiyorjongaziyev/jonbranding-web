@@ -1,0 +1,60 @@
+name: Daily Off-site Backup (Sanity & Encrypted Turso)
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Har tun 02:00 UTC (07:00 Toshkent)
+  workflow_dispatch:
+
+concurrency:
+  group: offsite-backup
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    name: Export and verify off-site backup
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Verify backup security controls
+        run: node --test scripts/backup-offsite.node-test.mjs
+
+      - name: Install database client when encrypted Turso backup is configured
+        env:
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+          BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
+        run: |
+          if [ -n "$TURSO_DATABASE_URL" ] && [ -n "$TURSO_AUTH_TOKEN" ] && [ -n "$BACKUP_ENCRYPTION_KEY" ]; then
+            npm ci --omit=dev --ignore-scripts
+          else
+            echo "Running in Sanity-only backup mode (Node 22 built-ins, Turso skipped without encryption key)."
+          fi
+
+      - name: Export off-site backup (--ci-public-safe)
+        env:
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+          BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: h6ymmj0v
+          NEXT_PUBLIC_SANITY_DATASET: production
+        run: node scripts/backup-offsite.mjs --ci-public-safe
+
+      - name: Upload off-site backup artifact (90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: jonbranding-offsite-backup-${{ github.run_number }}
+          path: |
+            backups/*.json.gz.enc
+            backups/*-sanity-public.json.gz
+            backups/latest.json
+          retention-days: 90
+          if-no-files-found: error

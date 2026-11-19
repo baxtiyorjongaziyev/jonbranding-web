@@ -1,5 +1,6 @@
 /** Apply at the outer boundary, including early rejections and cached/static responses. */
 export function secureWebsiteResponse(request: Request, response: Response): Response {
+  const url = new URL(request.url);
   const headers = new Headers(response.headers);
   for (const name of Array.from(headers.keys())) {
     if (name.startsWith('x-middleware-') || name.startsWith('x-nextjs-') || name === 'x-powered-by') headers.delete(name);
@@ -8,16 +9,18 @@ export function secureWebsiteResponse(request: Request, response: Response): Res
   headers.set('X-Frame-Options', 'SAMEORIGIN');
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-  headers.set('Permissions-Policy', 'camera=(), geolocation=(), payment=(), usb=(), serial=(), browsing-topics=()');
+  headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=(), browsing-topics=()');
   headers.set('X-XSS-Protection', '0');
-  if (new URL(request.url).protocol === 'https:') headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  if (url.protocol === 'https:') headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   const csp = headers.get('content-security-policy');
   if (csp) {
     // Keep required Next bootstrap/analytics scripts; prohibit inline event handlers and base-tag hijacking.
     const directives = csp.split(';').map(value => value.trim()).filter(value => value && !/^(?:script-src-attr|base-uri)\s/i.test(value));
     headers.set('Content-Security-Policy', [...directives, "script-src-attr 'none'", "base-uri 'none'"].join('; '));
+  } else if (url.pathname.startsWith('/api/') || response.status >= 400) {
+    headers.set('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'");
   }
-  if (new URL(request.url).pathname.startsWith('/api/') || response.status >= 400) {
+  if (url.pathname.startsWith('/api/') || response.status >= 400) {
     headers.set('Cache-Control', 'private, no-store');
     headers.set('CDN-Cache-Control', 'no-store');
   }

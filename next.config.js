@@ -137,9 +137,11 @@ const cspDirectives = {
   ],
   'worker-src': ["'self'", 'blob:'],
   'object-src': ["'none'"],
-  'base-uri': ["'self'"],
+  'script-src-attr': ["'none'"],
+  'base-uri': ["'none'"],
   'form-action': ["'self'"],
   'frame-ancestors': ["'self'"],
+  'manifest-src': ["'self'"],
 };
 
 const contentSecurityPolicy = [
@@ -248,7 +250,7 @@ const nextConfig = {
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '0'
           },
           {
             key: 'X-Frame-Options',
@@ -261,6 +263,14 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=(), browsing-topics=()'
           },
           {
             key: 'Content-Security-Policy',
