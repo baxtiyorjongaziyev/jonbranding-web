@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { isTursoConfigured, getTursoClient, executeTurso } from './turso';
+import { isTursoConfigured, executeTurso } from './turso';
 
 vi.mock('@libsql/client/web', () => {
   return {

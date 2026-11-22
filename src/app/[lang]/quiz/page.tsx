@@ -122,7 +122,7 @@ const QuizPage: FC = () => {
                 </div>
             </section>
         </div>
-    )
+    );
   }
 
   const currentQuestion = questions[step];

@@ -42,4 +42,10 @@ describe('repository blog posts', () => {
     expect(post?.htmlContent).toContain('<h2>');
     expect(post?.htmlContent).not.toContain('<script');
   });
+
+  it('rejects traversal paths and unsupported locales safely', async () => {
+    expect(getSortedPostsData('../app')).toEqual([]);
+    expect(await getPostData('uz', '../../package.json')).toBeNull();
+    expect(await getPostData('../', 'package')).toBeNull();
+  });
 });

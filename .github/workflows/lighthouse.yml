@@ -27,7 +27,8 @@ permissions:
 jobs:
   lighthouse:
     name: Lighthouse audit
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v7

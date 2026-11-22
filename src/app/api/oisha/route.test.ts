@@ -157,7 +157,13 @@ describe('POST /api/oisha while the assistant is offline', () => {
 
 describe('POST /api/oisha bot defenses', () => {
   const telegramCalls = () =>
-    fetchMock.mock.calls.filter(([url]) => String(url).includes('api.telegram.org'));
+    fetchMock.mock.calls.filter(([url]) => {
+      try {
+        return new URL(String(url)).hostname === 'api.telegram.org';
+      } catch {
+        return false;
+      }
+    });
 
   it('drops a message when the honeypot is filled, without alerting', async () => {
     const res = await send({ user_id: 'web_bot_honeypot', text: 'Salom', companyWebsite: 'spam.example' });

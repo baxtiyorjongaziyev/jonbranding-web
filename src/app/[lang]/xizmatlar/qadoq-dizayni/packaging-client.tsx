@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Search, Palette, Box } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import dynamic from 'next/dynamic';

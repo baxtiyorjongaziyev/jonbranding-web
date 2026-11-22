@@ -122,6 +122,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const rootDir = path.resolve(__dirname, "../../");
   const memoryPackDir = path.join(rootDir, "jonbranding_ai_memory_pack/jonbranding_ai_memory_pack");
+  const vaultRoot = path.resolve(rootDir, "obsidian-vault");
+
+  function resolveVaultNotePath(filename: string): string {
+    const resolved = path.resolve(vaultRoot, filename);
+    if (resolved !== vaultRoot && !resolved.startsWith(`${vaultRoot}${path.sep}`)) {
+      throw new Error("Invalid note filename: path traversal is not allowed.");
+    }
+    return resolved;
+  }
 
   switch (request.params.name) {
     case "get_master_context": {
@@ -176,12 +185,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case "search_obsidian": {
       const args = request.params.arguments as any;
-      const vaultPath = path.join(rootDir, "obsidian-vault");
-      if (!fs.existsSync(vaultPath)) fs.mkdirSync(vaultPath);
-      const files = fs.readdirSync(vaultPath).filter(f => f.endsWith('.md'));
+      fs.mkdirSync(vaultRoot, { recursive: true });
+      const files = fs.readdirSync(vaultRoot).filter(f => f.endsWith('.md'));
       let results = "";
       for (const file of files) {
-        const content = fs.readFileSync(path.join(vaultPath, file), "utf-8");
+        const content = fs.readFileSync(path.join(vaultRoot, file), "utf-8");
         if (content.toLowerCase().includes(args.keyword.toLowerCase())) {
           results += `- ${file}\n`;
         }
@@ -193,28 +201,42 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case "read_note": {
       const args = request.params.arguments as any;
-      const filePath = path.join(rootDir, "obsidian-vault", args.filename);
-      if (!fs.existsSync(filePath)) {
-        return { content: [{ type: "text", text: "Note not found." }], isError: true };
+      const filePath = resolveVaultNotePath(args.filename);
+      try {
+        const content = fs.readFileSync(filePath, "utf-8");
+        return { content: [{ type: "text", text: content }] };
+      } catch (error: any) {
+        if (error?.code === "ENOENT") {
+          return { content: [{ type: "text", text: "Note not found." }], isError: true };
+        }
+        throw error;
       }
-      const content = fs.readFileSync(filePath, "utf-8");
-      return { content: [{ type: "text", text: content }] };
     }
 
     case "create_note": {
       const args = request.params.arguments as any;
-      const filePath = path.join(rootDir, "obsidian-vault", args.filename);
+      const filePath = resolveVaultNotePath(args.filename);
       fs.writeFileSync(filePath, args.content);
       return { content: [{ type: "text", text: `Note ${args.filename} created successfully.` }] };
     }
 
     case "append_to_note": {
       const args = request.params.arguments as any;
-      const filePath = path.join(rootDir, "obsidian-vault", args.filename);
-      if (!fs.existsSync(filePath)) {
-        return { content: [{ type: "text", text: "Note not found." }], isError: true };
+      const filePath = resolveVaultNotePath(args.filename);
+      let fd: number;
+      try {
+        fd = fs.openSync(filePath, fs.constants.O_WRONLY | fs.constants.O_APPEND);
+      } catch (error: any) {
+        if (error?.code === "ENOENT") {
+          return { content: [{ type: "text", text: "Note not found." }], isError: true };
+        }
+        throw error;
       }
-      fs.appendFileSync(filePath, "\n" + args.content);
+      try {
+        fs.writeSync(fd, "\n" + args.content);
+      } finally {
+        fs.closeSync(fd);
+      }
       return { content: [{ type: "text", text: `Appended to ${args.filename} successfully.` }] };
     }
 

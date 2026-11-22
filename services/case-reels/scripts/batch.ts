@@ -6,7 +6,7 @@
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
 import './lib/env';
-import { closeSync, existsSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { closeSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
 import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';
 import { geminiGenerator, makeCaption } from './lib/caption';
@@ -37,17 +37,42 @@ const alive = (pid: number) => {
 };
 if (!opts.dryRun) {
   // Qulf egasining PID'i yoziladi: faqat egasi o'lgan bo'lsa (Ctrl+C, crash) qulf olib tashlanadi — yoshi muhim emas.
-  if (existsSync(LOCK)) {
-    const pid = Number(readFileSync(LOCK, 'utf8'));
-    if (!pid || !alive(pid)) unlinkSync(LOCK);
-  }
+  let fd: number | undefined;
   try {
-    const fd = openSync(LOCK, 'wx');
-    writeFileSync(fd, String(process.pid));
-    closeSync(fd);
-  } catch {
+    fd = openSync(LOCK, 'wx');
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException)?.code === 'EEXIST') {
+      let stale = false;
+      try {
+        const pid = Number(readFileSync(LOCK, 'utf8'));
+        stale = !pid || !alive(pid);
+      } catch (readErr) {
+        stale = (readErr as NodeJS.ErrnoException)?.code === 'ENOENT';
+      }
+      if (stale) {
+        try {
+          unlinkSync(LOCK);
+        } catch (unlinkErr) {
+          if ((unlinkErr as NodeJS.ErrnoException)?.code !== 'ENOENT') throw unlinkErr;
+        }
+        try {
+          fd = openSync(LOCK, 'wx');
+        } catch {
+          fd = undefined;
+        }
+      }
+    } else {
+      throw err;
+    }
+  }
+  if (fd === undefined) {
     console.error(`Boshqa batch ishlayapti (${LOCK}). Tugashini kuting.`);
     process.exit(1);
+  }
+  try {
+    writeFileSync(fd, String(process.pid));
+  } finally {
+    closeSync(fd);
   }
   // Faqat o'zimizning qulfni o'chiramiz.
   process.on('exit', () => {
@@ -79,8 +104,14 @@ await runBatch(opts, {
     mkdirSync('out', { recursive: true });
     writeFileSync(file, JSON.stringify(data, null, 2));
   },
-  readManifest: () =>
-    existsSync('out/manifest.json') ? (JSON.parse(readFileSync('out/manifest.json', 'utf8')) as ManifestEntry[]) : [],
+  readManifest: () => {
+    try {
+      return JSON.parse(readFileSync('out/manifest.json', 'utf8')) as ManifestEntry[];
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException)?.code === 'ENOENT') return [];
+      throw err;
+    }
+  },
   markDraft: async (doc) => {
     const renderedAt = new Date().toISOString();
     if (mockWrite || !writer) {

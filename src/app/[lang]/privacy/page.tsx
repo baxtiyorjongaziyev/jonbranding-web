@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/dictionaries';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 interface PrivacyPageProps {
@@ -33,7 +33,6 @@ export async function generateMetadata(props: PrivacyPageProps): Promise<Metadat
 
 const PrivacyPage = async ({ params }: PrivacyPageProps) => {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang as Locale);
 
   const content: Record<string, { intro: string; sections: { title: string; text: string }[] }> = {
     uz: {

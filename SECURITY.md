@@ -13,13 +13,14 @@ We actively provide security updates and patches for the production platform.
 
 We take the security of our platform, user privacy, and client data with utmost seriousness. If you discover a security vulnerability or potential threat, please report it privately:
 
-1. **Email us**: Send an email to `security@jonbranding.uz` with the subject `[Security Vulnerability Report]`.
-2. **Provide Details**:
+1. **GitHub Private Vulnerability Reporting (Preferred)**: Submit a private advisory directly at [GitHub Security Advisories](https://github.com/baxtiyorjongaziyev/jonbranding-web/security/advisories/new).
+2. **Email us**: Alternatively, send an email to `security@jonbranding.uz` with the subject `[Security Vulnerability Report]`.
+3. **Provide Details**:
    - Detailed description of the vulnerability.
    - Exact steps or proof-of-concept (PoC) to reproduce the issue.
    - Affected URLs, endpoints, or components.
    - Potential impact on users, CRM data, or server infrastructure.
-3. **Wait for Response**:
+4. **Wait for Response**:
    - Our security team will acknowledge receipt of your report within 24-48 hours.
    - We will provide updates on verification and timeline for resolution.
 

@@ -142,7 +142,6 @@ describe('POST /api/submit-form', () => {
   });
 
   it('creates a referral when promoCode matches an affiliate', async () => {
-    const { findAffiliateByPromoCode, createReferral } = await import('@/lib/affiliate/store');
     const storeMock = await import('@/lib/affiliate/store');
     vi.spyOn(storeMock, 'findAffiliateByPromoCode').mockResolvedValue({
       id: 'aff-1',

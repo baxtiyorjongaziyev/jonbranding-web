@@ -53,8 +53,14 @@ async function main() {
     };
     form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
     const result = await api(script + '/versions', { method: 'POST', body: form });
+    if (typeof result.id !== 'string' || !/^[0-9a-f-]{36}$/i.test(result.id)) {
+      throw new Error('Unexpected worker version ID format from Cloudflare API');
+    }
     save('upload.json', { id: result.id, metadata: result.metadata });
     const subdomain = JSON.parse(fs.readFileSync(path.join(root, 'subdomain.json'))).subdomain;
+    if (typeof subdomain !== 'string' || !/^[a-z0-9-]+$/i.test(subdomain)) {
+      throw new Error('Unexpected workers subdomain format');
+    }
     const url = `https://${result.id.slice(0, 8)}-jonbranding-web.${subdomain}.workers.dev`;
     fs.writeFileSync(path.join(root, 'preview-url.txt'), url);
     console.log(JSON.stringify({ version: result.id, preview: url })); return;

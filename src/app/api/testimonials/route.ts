@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  syncTelegramTestimonials, readCachedTestimonials, syncAndProcessMedia, processPostMedia
+  syncTelegramTestimonials, readCachedTestimonials, syncAndProcessMedia
 } from '@/lib/telegram-testimonials';
 import { staticTestimonials, staticTestimonialsRu, staticTestimonialsEn, staticTestimonialsZh } from '@/lib/static-data';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';

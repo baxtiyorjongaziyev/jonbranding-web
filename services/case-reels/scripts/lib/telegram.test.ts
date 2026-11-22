@@ -41,7 +41,14 @@ describe('preview texts', () => {
   it('truncates plain text before escaping, so no entity is split', () => {
     const t = variantText('a', { lang: 'uz', text: '&'.repeat(1500), hashtags: [] });
     expect(t).not.toMatch(/&(?!amp;)[a-z]*…/);
-    expect(t.replace(/&amp;/g, '&').replace(/<[^>]+>/g, '').length).toBeLessThanOrEqual(1024);
+    const plain = t
+      .replaceAll('<b>', '')
+      .replaceAll('</b>', '')
+      .replaceAll('<code>', '')
+      .replaceAll('</code>', '')
+      .replaceAll('&amp;', '&');
+    expect(plain).not.toMatch(/[<>]/);
+    expect(plain.length).toBeLessThanOrEqual(1024);
   });
   it('full caption is delivered in chunks without losing text', () => {
     const text = 'z'.repeat(9000);

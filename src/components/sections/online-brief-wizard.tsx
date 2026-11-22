@@ -2,7 +2,7 @@
 
 import { FC, useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Label } from '@/components/ui/label';
@@ -16,9 +16,7 @@ import {
   Check,
   CheckCircle,
   Sparkles,
-  HelpCircle,
   ShieldAlert,
-  Sliders,
   Users,
   Target,
   FileText
@@ -154,7 +152,7 @@ Kutilayotgan xizmatlar: ${resultObj.services}
     return <Skeleton className="h-[500px] w-full container max-w-4xl mx-auto rounded-3xl" />;
   }
 
-  const { steps: stepNames, step1, step2, step3, step4, step5, buttons, success } = translations;
+  const { steps: stepNames, step1, step2, step3, step4, step5, buttons } = translations;
 
   // Total progress percentage (20% per step)
   const progressValue = step * 20;

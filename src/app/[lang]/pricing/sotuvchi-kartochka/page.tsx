@@ -1,8 +1,6 @@
 
 'use client';
 
-import { Metadata } from 'next';
-import Link from 'next/link';
 import { Check, Send } from 'lucide-react';
 import Script from 'next/script';
 import React, { useState } from 'react';

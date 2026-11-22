@@ -4,7 +4,6 @@ import { getValidAccessToken } from '@/lib/amocrm-token';
 import { analyzeCallAudio } from '@/lib/gemini';
 import { safeCompare } from '@/lib/security';
 
-const TOKENS_DOC = 'amocrm/website_tokens';
 const subdomain = 'jonbrandingagency';
 
 function cleanSecret(value: string | undefined) {

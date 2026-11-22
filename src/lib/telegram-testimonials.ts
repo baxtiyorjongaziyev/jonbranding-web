@@ -62,7 +62,7 @@ function parseTestimonialFromPost(post: TelegramChannelPost): any | null {
     : [nameLine, ''];
 
   const quoteLines = lines.slice(1).filter((line) => getUrls(line).length === 0);
-  const quote = quoteLines.join(' ').replace(/^["""]|["""]$/g, '').trim();
+  const quote = quoteLines.join(' ').replace(/^["\u201c\u201d«»]|["\u201c\u201d«»]$/g, '').trim();
 
   if (!name) return null;
 
@@ -90,7 +90,6 @@ function parseTestimonialFromPost(post: TelegramChannelPost): any | null {
 }
 
 function getCachePath() {
-  const fs = require('fs');
   const path = require('path');
   return path.join(process.cwd(), CACHE_FILE);
 }
@@ -132,6 +131,7 @@ function readOffsetFile(): number {
 }
 
 function writeOffsetFile(offset: number): void {
+  if (!Number.isSafeInteger(offset) || offset < 0) return;
   try {
     const fs = require('fs');
     const path = require('path');
@@ -156,6 +156,9 @@ async function getTelegramFilePath(fileId: string): Promise<{ file_path: string;
 }
 
 async function downloadTelegramFile(filePath: string): Promise<Buffer | null> {
+  if (!filePath || filePath.includes('..') || filePath.startsWith('/') || /[?#\\]/.test(filePath)) {
+    return null;
+  }
   try {
     const res = await fetch(`https://api.telegram.org/file/bot${TG_BOT_TOKEN}/${filePath}`);
     if (!res.ok) return null;

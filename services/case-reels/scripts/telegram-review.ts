@@ -144,8 +144,15 @@ if (mode === 'send') {
       continue;
     }
     for (const u of updates) {
+      if (!Number.isSafeInteger(u.update_id) || u.update_id < 0) {
+        console.error(`⚠️ Noto'g'ri update_id o'tkazib yuborildi: ${String(u.update_id)}`);
+        continue;
+      }
       offset = u.update_id + 1;
-      if (!u.callback_query) continue;
+      if (!u.callback_query) {
+        writeFileSync(OFFSET, JSON.stringify(offset));
+        continue;
+      }
       try {
         const outcome = await handleCallback(u.callback_query, {
           ownerId,

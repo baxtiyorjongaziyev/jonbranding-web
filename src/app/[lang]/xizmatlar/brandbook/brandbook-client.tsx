@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Layers, Palette, PenTool, ClipboardCheck, Zap, Gem, Award } from 'lucide-react';
+import { Zap, Gem, Award } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import dynamic from 'next/dynamic';

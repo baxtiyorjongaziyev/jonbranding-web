@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getDictionary, Locale } from '@/lib/dictionaries';
+import type { Locale } from '@/lib/dictionaries';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
 
 interface TermsPageProps {
@@ -33,7 +33,6 @@ export async function generateMetadata(props: TermsPageProps): Promise<Metadata>
 
 const TermsPage = async ({ params }: TermsPageProps) => {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang as Locale);
 
   const content = {
     uz: {

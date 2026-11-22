@@ -1,6 +1,5 @@
 import { google, drive_v3 } from 'googleapis';
 import fs from 'fs';
-import path from 'path';
 
 export interface DriveImage {
   id: string;

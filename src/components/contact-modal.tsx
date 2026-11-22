@@ -1,27 +1,22 @@
 'use client';
 
 import { getLeadAttribution } from '@/lib/lead-attribution';
-import { FC, useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { FC, useState, useEffect, useMemo, useRef } from 'react';
 import { useForm, useWatch, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { HoneypotField } from '@/components/ui/honeypot-field';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Loader2, ArrowRight, ArrowLeft, MessageCircle, Mail, Phone, Instagram, Send, X, Globe, User, CheckCircle2, Linkedin, PhoneCall, Building2, Wallet, MapPin, Target, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
+import { Loader2, MessageCircle, Send, X, User, CheckCircle2, PhoneCall, Target, ShieldCheck, ExternalLink } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTelegram } from '@/hooks/use-telegram';
 import { generateEventId, getGaClientId, trackLead, trackEvent } from '@/lib/analytics';
 import { getDictionary } from '@/lib/dictionaries';
-import Magnetic from '@/components/ui/magnetic';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { TELEGRAM_CONTACT_URL } from '@/lib/contacts';
 
@@ -97,7 +92,6 @@ const ContactModal: FC<ContactModalProps> = ({ isOpen, onClose, packageSummary, 
 
   const quickContactLabel = translations?.quickContactLabel || fallback.quickContactLabel;
   const auditOfferStack: string[] = translations?.auditOfferStack || fallback.auditOfferStack;
-  const objectionCopy = translations?.objectionCopy || fallback.objectionCopy;
   const riskCopy = translations?.riskCopy || fallback.riskCopy;
 
   useEffect(() => {

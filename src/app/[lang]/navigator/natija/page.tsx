@@ -8,10 +8,7 @@ export const metadata: Metadata = {
   title: 'Sizning Natijangiz | Tez Natija 6 Navigator',
 }
 
-export default async function ResultPage(props: { searchParams: Promise<{ id?: string }> }) {
-  const searchParams = await props.searchParams
-  const leadId = searchParams.id
-
+export default async function ResultPage() {
   // For MVP, we will show a static result if ID is present or not, 
   // since we haven't wired up the full Supabase fetch logic yet.
   // In a real scenario, we'd fetch the lead by ID and calculate these dynamically.

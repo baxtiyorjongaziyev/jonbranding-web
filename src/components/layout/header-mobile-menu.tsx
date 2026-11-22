@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { getSalesFlow } from '@/lib/sales-flow';
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Phone, X, ChevronRight, ArrowUpRight, Sparkles, Download } from 'lucide-react';
+import { Menu, Phone, X, ChevronRight, ArrowUpRight, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { trackContactClick } from '@/lib/analytics';
 import LanguageSwitcher from '../language-switcher';

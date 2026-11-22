@@ -3,7 +3,11 @@ const fs = require('node:fs');
 const root = process.env.JB_SECURITY_EVIDENCE_DIR || 'output/website-security-deploy';
 const upgrade = process.env.JB_SECURITY_UPGRADE === '1';
 const live = process.argv[2] === 'live';
-const target = live ? 'https://jonbranding.uz' : fs.readFileSync(root + '/preview-url.txt', 'utf8').trim();
+const rawPreviewTarget = live ? 'https://jonbranding.uz' : fs.readFileSync(root + '/preview-url.txt', 'utf8').trim();
+if (!live && !/^https:\/\/[0-9a-f]{8}-jonbranding-web\.[a-z0-9-]+\.workers\.dev$/i.test(rawPreviewTarget)) {
+  throw new Error('Unexpected preview target URL in preview-url.txt');
+}
+const target = rawPreviewTarget;
 const results = [];
 const agent = 'JonBranding security verification';
 let cookie = '';

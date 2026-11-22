@@ -18,20 +18,24 @@ const shouldLog = (level: LogLevel): boolean => {
 const errorReplacer = (_key: string, value: unknown) =>
   value instanceof Error ? { name: value.name, message: value.message, stack: value.stack } : value;
 
+const sanitizeLogText = (value: string): string =>
+  value.replace(/[\r\n\u2028\u2029]/g, ' ');
+
 const serialize = (data: unknown): string => {
   try {
-    return JSON.stringify(data, errorReplacer);
+    return sanitizeLogText(JSON.stringify(data, errorReplacer));
   } catch {
-    return String(data);
+    return sanitizeLogText(String(data));
   }
 };
 
 const formatLog = (level: LogLevel, message: string, data?: unknown): string => {
   const timestamp = new Date().toISOString();
+  const safeMessage = sanitizeLogText(String(message));
   if (data !== undefined) {
-    return `[${timestamp}] ${level.toUpperCase()}: ${message} ${serialize(data)}`;
+    return sanitizeLogText(`[${timestamp}] ${level.toUpperCase()}: ${safeMessage} ${serialize(data)}`);
   }
-  return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
+  return sanitizeLogText(`[${timestamp}] ${level.toUpperCase()}: ${safeMessage}`);
 };
 
 export const logger = {

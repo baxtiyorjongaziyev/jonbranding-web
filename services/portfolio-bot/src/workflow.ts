@@ -29,7 +29,8 @@ import { parseDriveFolderWithOisha } from './oisha.js';
 const LOG_FILE = path.join(process.cwd(), 'workflow.log');
 
 function log(msg: string) {
-  const line = `[${new Date().toISOString()}] ${msg}`;
+  const safeMsg = String(msg).replace(/[\r\n\u2028\u2029]/g, ' ');
+  const line = `[${new Date().toISOString()}] ${safeMsg}`;
   console.log(line);
   fs.appendFileSync(LOG_FILE, line + '\n');
 }
@@ -77,6 +78,30 @@ function extensionFromContentType(contentType: string): string {
   return 'jpg';
 }
 
+const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
+
+function assertSafeRemoteImageUrl(rawUrl: string): URL {
+  const parsed = new URL(rawUrl);
+  if (parsed.protocol !== 'https:' || parsed.username || parsed.password) {
+    throw new Error(`Unsupported image URL protocol or credentials: ${parsed.protocol}`);
+  }
+  const host = parsed.hostname.toLowerCase().replace(/^\[|\]$/g, '');
+  if (
+    host === 'localhost' ||
+    host === '0.0.0.0' ||
+    host === '::1' ||
+    host.startsWith('127.') ||
+    host.startsWith('10.') ||
+    host.startsWith('192.168.') ||
+    host.startsWith('169.254.') ||
+    /^172\.(?:1[6-9]|2\d|3[01])\./.test(host) ||
+    /^(?:fc|fd|fe80:|::ffff:)/i.test(host)
+  ) {
+    throw new Error(`Private or loopback host rejected for image download: ${host}`);
+  }
+  return parsed;
+}
+
 async function downloadRemoteImages(
   urls: string[],
   source: string
@@ -89,10 +114,15 @@ async function downloadRemoteImages(
 
   try {
     for (let index = 0; index < uniqueUrls.length; index++) {
-      const url = uniqueUrls[index];
-      const response = await fetch(url);
+      const url = assertSafeRemoteImageUrl(uniqueUrls[index]);
+      const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
       if (!response.ok) {
-        throw new Error(`Image download failed (${response.status}) for ${url}`);
+        throw new Error(`Image download failed (${response.status}) for ${url.hostname}`);
+      }
+
+      const contentLength = Number(response.headers.get('content-length') || '0');
+      if (contentLength > MAX_IMAGE_BYTES) {
+        throw new Error(`Image exceeds max size limit (${contentLength} bytes)`);
       }
 
       const mime = response.headers.get('content-type')?.split(';')[0] || 'image/jpeg';
@@ -101,6 +131,9 @@ async function downloadRemoteImages(
       }
 
       const buffer = Buffer.from(await response.arrayBuffer());
+      if (buffer.byteLength > MAX_IMAGE_BYTES) {
+        throw new Error(`Downloaded image exceeds max size limit (${buffer.byteLength} bytes)`);
+      }
       const filename = `${source}-${index + 1}.${extensionFromContentType(mime)}`;
       const filePath = path.join(tmpDir, filename);
       fs.writeFileSync(filePath, buffer);

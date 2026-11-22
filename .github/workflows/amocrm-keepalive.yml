@@ -5,17 +5,35 @@ on:
     - cron: '0 3 1,15 * *'  # Har oyning 1 va 15 sanasi 03:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   keepalive:
     runs-on: ubuntu-latest
     steps:
       - name: Refresh AmoCRM token
+        env:
+          AMOCRM_CRON_SECRET: ${{ secrets.AMOCRM_CRON_SECRET }}
         run: |
-          response=$(curl -sL -w "\n%{http_code}" -X POST https://www.jonbranding.uz/api/amocrm-refresh \
-            -H "Authorization: Bearer ${{ secrets.AMOCRM_CRON_SECRET }}" \
-            --max-time 30)
+          if [ -z "$AMOCRM_CRON_SECRET" ]; then
+            echo "::notice::AMOCRM_CRON_SECRET secret'i yo'q — keepalive o'tkazib yuborildi."
+            exit 0
+          fi
+          call_refresh() {
+            curl -sL -w "\n%{http_code}" -X POST "$1" \
+              -H "Authorization: Bearer ${AMOCRM_CRON_SECRET}" \
+              --max-time 30
+          }
+          response=$(call_refresh "https://www.jonbranding.uz/api/amocrm-refresh")
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
+          if [ "$http_code" -eq 403 ]; then
+            echo "::notice::www.jonbranding.uz HTTP 403 qaytardi (Cloudflare challenge) — workers.dev orqali qayta urinilmoqda."
+            response=$(call_refresh "https://jonbranding-web.baxtiyorjongaziyev.workers.dev/api/amocrm-refresh")
+            http_code=$(echo "$response" | tail -n1)
+            body=$(echo "$response" | sed '$d')
+          fi
           echo "Response: $body (HTTP $http_code)"
           if [ "$http_code" -ne 200 ]; then
             echo "::error::AmoCRM token refresh or verification failed: HTTP $http_code - $body"

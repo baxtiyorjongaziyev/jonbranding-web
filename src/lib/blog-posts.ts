@@ -6,6 +6,22 @@ import type { BlogPost } from '@/lib/types';
 import bundledMarkdownIndex from './blog-markdown-index.json';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
+const postsRoot = path.resolve(postsDirectory);
+
+function resolveLangDirectory(lang: string): string | null {
+  switch (lang) {
+    case 'uz':
+      return path.resolve(postsRoot, 'uz');
+    case 'ru':
+      return path.resolve(postsRoot, 'ru');
+    case 'en':
+      return path.resolve(postsRoot, 'en');
+    case 'zh':
+      return path.resolve(postsRoot, 'zh');
+    default:
+      return null;
+  }
+}
 type BundledMarkdownSummary = {
   slug: string;
   title: string;
@@ -68,10 +84,17 @@ function parseMarkdownFile(fileContents: string): {
 }
 
 function processFiles(fileNames: string[], directory: string) {
+  const safeDir = path.resolve(directory);
   return fileNames
     .map((fileName) => {
+      if (path.basename(fileName) !== fileName || !fileName.endsWith('.md')) {
+        return null;
+      }
       const slug = fileName.replace(/\.md$/, '');
-      const fullPath = path.join(directory, fileName);
+      const fullPath = path.resolve(safeDir, fileName);
+      if (!fullPath.startsWith(`${safeDir}${path.sep}`)) {
+        return null;
+      }
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data } = parseMarkdownFile(fileContents);
 
@@ -86,31 +109,55 @@ function processFiles(fileNames: string[], directory: string) {
         source: 'markdown' as const,
       };
     })
-    .filter((post) => post.title && post.date)
+    .filter((post): post is NonNullable<typeof post> =>
+      Boolean(post && post.title && post.date),
+    )
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export function getSortedPostsData(lang = 'uz') {
+  const langDirectory = resolveLangDirectory(lang);
+  if (!langDirectory) return [];
+
   // Cloudflare Workers edge isolates do not expose local src/posts files via fs.
-  if (!fs.existsSync(postsDirectory)) {
+  if (!fs.existsSync(postsRoot)) {
     return fallbackMarkdownIndex[lang] ?? [];
   }
 
-  const langDirectory = path.join(postsDirectory, lang);
-  if (!fs.existsSync(langDirectory)) return [];
-
-  const fileNames = fs
-    .readdirSync(langDirectory)
-    .filter((fileName) => fileName.endsWith('.md'));
-  return processFiles(fileNames, langDirectory);
+  try {
+    const fileNames = fs
+      .readdirSync(langDirectory)
+      .filter((fileName) => fileName.endsWith('.md'));
+    return processFiles(fileNames, langDirectory);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException)?.code === 'ENOENT') return [];
+    throw error;
+  }
 }
 
 export async function getPostData(
   lang: string,
   slug: string,
 ): Promise<BlogPost | null> {
-  const fullPath = path.join(postsDirectory, lang, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) return null;
+  const langDirectory = resolveLangDirectory(lang);
+  if (!langDirectory) return null;
+  if (!/^[a-z0-9][a-z0-9._-]*$/i.test(slug) || slug.includes('..')) {
+    return null;
+  }
+
+  let files: string[];
+  try {
+    files = fs.readdirSync(langDirectory);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException)?.code === 'ENOENT') return null;
+    throw error;
+  }
+
+  const matchedFile = files.find((file) => file === `${slug}.md`);
+  if (!matchedFile) return null;
+
+  const fullPath = path.resolve(langDirectory, matchedFile);
+  if (!fullPath.startsWith(`${langDirectory}${path.sep}`)) return null;
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = parseMarkdownFile(fileContents);

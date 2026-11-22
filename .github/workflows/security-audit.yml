@@ -1,6 +1,9 @@
 name: Security Audit
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -22,7 +25,7 @@ jobs:
     name: npm audit
     # Draft PR'da o'tkazib yuboriladi; ready_for_review'da qayta ishlaydi.
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 

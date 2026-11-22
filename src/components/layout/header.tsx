@@ -52,12 +52,10 @@ const Header: FC<{ lang: string; dictionary: Dictionary }> = ({ lang = 'uz', dic
   const mainSiteOrigin = useMainSiteOrigin();
   const [visible, setVisible] = useState(true);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isSystemDark, setIsSystemDark] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
     setIsSystemDark(mql.matches);

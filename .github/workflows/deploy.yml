@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   notify:
     name: Notify via Telegram
@@ -16,6 +19,8 @@ jobs:
           BOT_TOKEN: ${{ secrets.OISHA_BOT_TOKEN }}
           # Shaxsiy Telegram chat_id ochiq repo'da turmasin — GitHub secret'da.
           CHAT_ID: ${{ secrets.DEPLOY_NOTIFY_CHAT_ID }}
+          COMMIT_SHA: ${{ github.sha }}
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           if [ -z "$BOT_TOKEN" ] || [ -z "$CHAT_ID" ]; then
             echo "::notice::DEPLOY_NOTIFY_CHAT_ID yoki OISHA_BOT_TOKEN secret'i yo'q — Telegram xabari yuborilmadi."
@@ -23,4 +28,4 @@ jobs:
           fi
           curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
             -d "chat_id=${CHAT_ID}" \
-            -d "text=🚀 jonbranding.uz%0ACommit: ${{ github.sha }}%0ABranch: ${{ github.ref_name }}" || true
+            -d "text=🚀 jonbranding.uz%0ACommit: ${COMMIT_SHA}%0ABranch: ${BRANCH_NAME}" || true

@@ -19,6 +19,7 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock ResizeObserver for Radix UI components in jsdom
 class MockResizeObserver {
+  constructor(_callback: ResizeObserverCallback) {}
   observe() {}
   unobserve() {}
   disconnect() {}

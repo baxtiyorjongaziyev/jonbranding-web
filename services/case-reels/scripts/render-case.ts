@@ -4,7 +4,7 @@
  * Natija: out/<slug>-<til>.mp4
  */
 import './lib/env';
-import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { closeSync, ftruncateSync, openSync, readFileSync, renameSync, unlinkSync, writeSync } from 'node:fs';
 import type { ReelLang } from '../src/CaseReel';
 import { CASE_FIELDS, type CaseDoc } from './lib/case-data';
 import { renderCase } from './lib/render';
@@ -41,6 +41,24 @@ if (status === 'draft' && !process.argv.includes('--force')) {
   process.exit(1);
 }
 
+function updateJsonIfExists<T>(file: string, transform: (data: T) => T): void {
+  let fd: number;
+  try {
+    fd = openSync(file, 'r+');
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException)?.code === 'ENOENT') return;
+    throw err;
+  }
+  try {
+    const current = JSON.parse(readFileSync(fd, 'utf8')) as T;
+    const next = Buffer.from(JSON.stringify(transform(current), null, 2), 'utf8');
+    ftruncateSync(fd, 0);
+    writeSync(fd, next, 0, next.length, 0);
+  } finally {
+    closeSync(fd);
+  }
+}
+
 // Draft ustiga qayta render: avval vaqtinchalik faylga yoziladi. Render tugagach holat yana tekshiriladi:
 // egasi bu orada tasdiqlagan bo'lsa, ko'rib chiqilgan eski fayl o'zgarmaydi va yangi fayl tashlanadi.
 const final = `out/${slug}-${lang}.mp4`;
@@ -55,18 +73,12 @@ if (status === 'draft') {
   }
   renameSync(tmp, final);
   // Manifestda render vaqti yangilanadi: Telegram preview versiyasi shundan olinadi, eski tugmalar eskiradi.
-  const manifestFile = 'out/manifest.json';
-  if (existsSync(manifestFile)) {
-    const entries = JSON.parse(readFileSync(manifestFile, 'utf8')) as { slug: string; lang: string | null; renderedAt?: string }[];
+  updateJsonIfExists<{ slug: string; lang: string | null; renderedAt?: string }[]>('out/manifest.json', (entries) => {
     for (const e of entries) if (e.slug === slug && e.lang === lang) e.renderedAt = new Date().toISOString();
-    writeFileSync(manifestFile, JSON.stringify(entries, null, 2));
-  }
+    return entries;
+  });
   // Yangi video — yangi preview kerak: "yuborilgan" ro'yxatidan chiqariladi (eski tugmalar esa versiya bilan eskiradi).
-  const sentFile = 'out/review-sent.json';
-  if (existsSync(sentFile)) {
-    const sent = JSON.parse(readFileSync(sentFile, 'utf8')) as string[];
-    writeFileSync(sentFile, JSON.stringify(sent.filter((x) => x !== slug), null, 2));
-  }
+  updateJsonIfExists<string[]>('out/review-sent.json', (sent) => sent.filter((x) => x !== slug));
   console.log(`Tayyor: ${final}`);
 } else {
   console.log(`Tayyor: ${renderCase(doc, lang)}`);

@@ -15,7 +15,6 @@ const SANITY_TOKEN = process.env.SANITY_TOKEN || '';
 
 const TG_CHANNELS = ['@JonBranding'];
 const IG_ACCOUNTS = ['jonbranding'];
-const IG_HASHTAGS = ['#jonbranding', '#brandinguz', '#logodesignuz'];
 
 const sanityClient = client.withConfig({
   token: SANITY_TOKEN,

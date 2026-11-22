@@ -35,3 +35,54 @@ updates:
         applies-to: security-updates
         patterns:
           - "*"
+
+  - package-ecosystem: npm
+    directory: /mcp-server
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:30"
+      timezone: Asia/Tashkent
+    open-pull-requests-limit: 0
+    labels:
+      - dependencies
+      - security
+    groups:
+      mcp-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: npm
+    directory: /services/case-reels
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:40"
+      timezone: Asia/Tashkent
+    open-pull-requests-limit: 0
+    labels:
+      - dependencies
+      - security
+    groups:
+      case-reels-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: npm
+    directory: /services/portfolio-bot
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:50"
+      timezone: Asia/Tashkent
+    open-pull-requests-limit: 0
+    labels:
+      - dependencies
+      - security
+    groups:
+      portfolio-bot-security:
+        applies-to: security-updates
+        patterns:
+          - "*"

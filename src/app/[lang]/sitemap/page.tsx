@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getDictionary, Locale } from '@/lib/dictionaries';
 import { getPageAlternates, pageTitle } from '@/lib/seo';
-import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, ImageIcon, Truck } from 'lucide-react';
+import { Home, List, PenSquare, Rss, Settings, Package, BrainCircuit, ScanText, Paintbrush, Fingerprint, Book, Truck } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
 

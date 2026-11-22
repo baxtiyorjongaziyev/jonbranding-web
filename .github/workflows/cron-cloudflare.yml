@@ -11,6 +11,9 @@ on:
     - cron: '0 9 * * *'   # portfolio-telegram (09:00 UTC)
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   call:
     runs-on: ubuntu-latest
@@ -30,4 +33,14 @@ jobs:
             "0 9 * * *") path=/api/portfolio-telegram ;;
             *) echo "Qo'lda ishga tushirildi — endpoint tanlanmagan."; exit 0 ;;
           esac
-          curl -fsS -H "Authorization: Bearer $CRON_SECRET" "https://www.jonbranding.uz$path"
+          status=$(curl -sS -o /tmp/cron-body.txt -w "%{http_code}" -H "Authorization: Bearer $CRON_SECRET" "https://www.jonbranding.uz$path")
+          if [ "$status" = "403" ]; then
+            echo "::notice::www.jonbranding.uz$path HTTP 403 qaytardi (Cloudflare challenge) — workers.dev orqali chaqirilmoqda."
+            status=$(curl -sS -o /tmp/cron-body.txt -w "%{http_code}" -H "Authorization: Bearer $CRON_SECRET" "https://jonbranding-web.baxtiyorjongaziyev.workers.dev$path")
+          fi
+          cat /tmp/cron-body.txt
+          echo ""
+          if [ "$status" -lt 200 ] || [ "$status" -ge 300 ]; then
+            echo "::error::Cron $path failed with HTTP $status"
+            exit 1
+          fi

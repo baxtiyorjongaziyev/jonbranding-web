@@ -5,7 +5,6 @@ import React, { useMemo, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { Download, Loader2, Lock, Minus, Plus, Send } from 'lucide-react';
@@ -16,7 +15,7 @@ import { motion } from 'framer-motion';
 import { Slider } from '@/components/ui/slider';
 import { HoneypotField } from '@/components/ui/honeypot-field';
 import { Checkbox } from '../ui/checkbox';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -59,7 +58,7 @@ const MASK = 'X XXX XXX';
 
 const formatPrice = (price: number, currency: string) => {
     return `${price.toLocaleString('fr-FR')} ${currency}`;
-}
+};
 
 export function calculateFees({
   isYuridik = false,
