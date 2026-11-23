@@ -1653,6 +1653,49 @@
       "title": "Xizmatlar va narxlar",
       "description": "Barcha xizmatlarimiz bilan tanishing va o'zingizga mos brending paketini yarating. Onlayn kalkulyatorimiz yordamida narxlarni darhol hisoblang."
     },
+    "seo": {
+      "title": "Brending Toshkentda — xizmatlar, narxlar va muddatlar",
+      "description": "Toshkentdagi brending agentligi: neyming, logotip, firma uslubi, brendbuk, qadoq dizayni va patent. Paketlar {fromPrice} {currency}dan. 3 ta yo‘nalish ko‘rsatamiz, to‘lov 50/50.",
+      "keywords": "brending Toshkent, brending agentligi Toshkent, brending buyurtma, brending narxi, brend yaratish, neyming, logotip, firma uslubi, brendbuk"
+    },
+    "overview": {
+      "title": "Toshkentda brending: nimalar kiradi, qancha turadi, necha kunda tayyor bo‘ladi",
+      "intro": "Brending — biznesingiz nomi, logotipi, firma uslubi va qo‘llash qoidalarini yagona tizimga keltirish. Jon.Branding Toshkentda brendni boshidan oxirigacha yaratadi: bitta jamoa, bitta shartnoma, aniq muddat. Brendni qismlarga bo‘lib ham buyurtma berish mumkin, paket bilan olsangiz arzonroq tushadi.",
+      "packagesTitle": "Brending paketlari",
+      "packagesFrom": "{price} {currency}dan",
+      "packagesDuration": "Muddat",
+      "packagesIncludes": "Tarkibi",
+      "packagesNote": "Paket muddati faqat dizayn ishlariga tegishli. Patent guvohnomasi alohida chiqadi: oddiy tartibda 7 oy, tezkor tartibda 20–40 kun.",
+      "processTitle": "Brending qanday bosqichlarda o‘tadi",
+      "faqTitle": "Brending bo‘yicha savollar",
+      "faqs": [
+        {
+          "q": "Toshkentda brending qancha turadi?",
+          "a": "Alohida xizmatlar narxi: logotip {logoPrice} {currency}, firma uslubi {identityPrice} {currency}, brendbuk {brandbookPrice} {currency}. Paketlar: {standardName} — {standardPrice} {currency}, {premiumName} — {premiumPrice} {currency}, {vipName} — {vipPrice} {currency}. Narx mahsulot turlari soni, patent sinflari va muddatga qarab o‘zgaradi."
+        },
+        {
+          "q": "Brending necha kunda tayyor bo‘ladi?",
+          "a": "Paket bo‘yicha dizayn ishlari: {standardName} — {standardDuration}, {premiumName} — {premiumDuration}, {vipName} — {vipDuration}. Patent guvohnomasi alohida: oddiy tartibda 7 oy, tezkor tartibda 20–40 kun."
+        },
+        {
+          "q": "Brending paketiga nimalar kiradi?",
+          "a": "{standardName}: {standardFeatures}. {premiumName}: {premiumFeatures}. {vipName}: {vipFeatures}."
+        },
+        {
+          "q": "Brending qanday bosqichlarda o‘tadi?",
+          "a": "{steps}. Siz tanlamaguningizcha keyingi bosqich boshlanmaydi."
+        },
+        {
+          "q": "To‘lovni qismlarga bo‘lish mumkinmi?",
+          "a": "Ha, to‘lov ikki bosqichda: shartnoma imzolanganda 50% va loyiha topshirilganda 50%."
+        },
+        {
+          "q": "Brendni alohida xizmatlar bilan buyurtma qilsa bo‘ladimi?",
+          "a": "Ha. Neyming, logotip, firma uslubi, brendbuk, qadoq dizayni va patent alohida sotiladi. Hammasi birga paketda olinsa, alohida narxlar yig‘indisidan arzon bo‘ladi."
+        }
+      ],
+      "pricesLink": "Barcha narxlar va paketlar"
+    },
     "packageBuilder": {
       "title": "Xizmatlar va narxlar",
       "subtitle": "Qaysi paket sizga eng ko‘p qiymat berishini tez anglang. Narx emas, natija va moslik bo‘yicha tanlang.",

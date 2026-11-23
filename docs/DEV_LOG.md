@@ -3044,3 +3044,8 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   - `services/case-reels/scripts/batch.ts`: lock fayli yagona `openSync(LOCK, constants.O_RDWR | constants.O_CREAT, 0o600)` fd orqali o'qilib/yozilib TOCTOU (`#105`–`#106`) bartaraf etildi.
   - `services/case-reels/scripts/telegram-review.ts`: `OFFSET` yozish yagona oqimga birlashtirildi (`#107`).
   - `.github/workflows/lighthouse.yml` (`treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18`) va `.github/workflows/link-check.yml` (`lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8`) 3rd-party action'lari commit SHA ga pin qilindi (`actions/unpinned-tag` #102–`#103`).
+
+## 2026-11-23 — SEO: «брендинг ташкент» (`/xizmatlar`)
+- GSC (`docs/seo/gsc-2026-10.md`): «брендинг ташкент» 46 ko'rsatish / 9.3 o'rin / 0 klik; «брендинг в ташкенте» 19.2; «брендинговое агентство ташкент» 10.4; «заказать брендинг» 23.9; «брендинг» 8.1.
+- `servicesPage.seo` (title/description/keywords, 4 til) va `servicesPage.overview` (kirish, paketlar, jarayon, FAQ) qo'shildi; narx/muddat/paket tarkibi/jarayon `sales-content`dan (`src/lib/service-pages/overview-facts.ts`).
+- `ServicesOverview` bloki va FAQPage/Service JSON-LD `/[lang]/xizmatlar` da. Test: `overview-facts.test.ts`.

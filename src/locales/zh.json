@@ -1478,6 +1478,49 @@
       "title": "品牌服务与价格 | 塔什干专业品牌设计机构",
       "description": "了解我们的全方位品牌服务：从 LOGO 设计到品牌策略. 使用在线计算器，即时获取乌兹别克斯坦市场最具竞争力的品牌全案报价."
     },
+    "seo": {
+      "title": "塔什干品牌设计：服务、价格与周期",
+      "description": "塔什干品牌代理公司：命名、标志、品牌识别、品牌手册、包装与商标注册。套餐 {fromPrice} {currency}起。先展示3个方向，付款50/50。",
+      "keywords": "塔什干品牌设计, 塔什干品牌代理, 乌兹别克斯坦品牌, 品牌设计价格, 命名, 标志设计, 品牌手册"
+    },
+    "overview": {
+      "title": "塔什干品牌设计：包含什么、价格多少、需要多久",
+      "intro": "品牌设计是把名称、标志、品牌识别和使用规范整合为一个系统。Jon.Branding 在塔什干从头到尾打造品牌：一个团队、一份合同、明确的期限。服务可单独购买，选套餐更划算。",
+      "packagesTitle": "品牌套餐",
+      "packagesFrom": "{price} {currency}起",
+      "packagesDuration": "周期",
+      "packagesIncludes": "包含",
+      "packagesNote": "套餐周期仅指设计工作。商标证书单独办理：普通流程7个月，加急流程20–40天。",
+      "processTitle": "品牌设计流程",
+      "faqTitle": "品牌设计常见问题",
+      "faqs": [
+        {
+          "q": "在塔什干做品牌设计多少钱？",
+          "a": "单项服务：标志 {logoPrice} {currency}，品牌识别 {identityPrice} {currency}，品牌手册 {brandbookPrice} {currency}。套餐：{standardName} — {standardPrice} {currency}，{premiumName} — {premiumPrice} {currency}，{vipName} — {vipPrice} {currency}。最终价格取决于产品类型数量、商标类别和工期。"
+        },
+        {
+          "q": "品牌设计需要多长时间？",
+          "a": "各套餐的设计周期：{standardName} — {standardDuration}，{premiumName} — {premiumDuration}，{vipName} — {vipDuration}。商标证书单独办理：普通流程7个月，加急流程20–40天。"
+        },
+        {
+          "q": "品牌套餐包含什么？",
+          "a": "{standardName}：{standardFeatures}。{premiumName}：{premiumFeatures}。{vipName}：{vipFeatures}。"
+        },
+        {
+          "q": "品牌设计分哪几个阶段？",
+          "a": "{steps}。在您确认之前，不会进入下一阶段。"
+        },
+        {
+          "q": "可以分期付款吗？",
+          "a": "可以，分两次付款：签订合同时 50%，交付项目时 50%。"
+        },
+        {
+          "q": "可以只购买单项服务吗？",
+          "a": "可以。命名、标志、品牌识别、品牌手册、包装设计和商标注册都可单独购买。购买完整套餐比单项价格之和更划算。"
+        }
+      ],
+      "pricesLink": "全部价格与套餐"
+    },
     "packageBuilder": {
       "title": "服务与价格",
       "subtitle": "了解我们的全方位服务，为您的企业定制专属品牌方案. 使用在线计算器即时获取精准报价。",

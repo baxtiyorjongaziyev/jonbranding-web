@@ -5,38 +5,25 @@ import { safeJsonStringify } from '@/lib/security';
 import Script from 'next/script';
 import AtMarquee from '@/components/sections/at-marquee';
 import AtManifesto from '@/components/sections/at-manifesto';
+import ServicesOverview from '@/components/service-landing/services-overview';
+import ServiceJsonLd from '@/components/structured-data/service-json-ld';
+import { buildOverviewFaqs, fillOverviewTokens } from '@/lib/service-pages/overview-facts';
 import { XizmatlarHero, XizmatlarServices, XizmatlarFinalCta } from './xizmatlar-interactive';
 
 const BASE_URL = 'https://www.jonbranding.uz';
 const VALID_LOCALES: Locale[] = ['uz', 'ru', 'en', 'zh'];
 
-const metaByLang: Record<Locale, { title: string; description: string; keywords: string }> = {
-  uz: {
-    title: 'Xizmatlar',
-    description: 'Jon.Branding xizmatlari: neyming, logotip, brend uslubi, brendbook, qadoq va raqamli brend yechimlari.',
-    keywords: 'xizmatlar, neyming, logo dizayni, brend uslubi, brendbook, qadoq dizayni, Jon Branding',
-  },
-  ru: {
-    title: 'Услуги',
-    description: 'Услуги Jon.Branding: нейминг, логотип, фирменный стиль, брендбук, упаковка и digital branding.',
-    keywords: 'услуги, нейминг, логотип, фирменный стиль, брендбук, упаковка, Jon Branding',
-  },
-  en: {
-    title: 'Services',
-    description: 'Jon.Branding services: naming, logo design, brand identity, brandbook, packaging and digital brand systems.',
-    keywords: 'services, naming, logo design, brand identity, brandbook, packaging, Jon Branding',
-  },
-  zh: {
-    title: '服务',
-    description: 'Jon.Branding 服务：命名、标志设计、品牌识别、品牌手册、包装与数字品牌系统。',
-    keywords: '服务, 命名, 标志设计, 品牌识别, 品牌手册, 包装, Jon Branding',
-  },
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
   const { lang } = await params;
   const safeLang = VALID_LOCALES.includes(lang) ? lang : 'uz';
-  const m = metaByLang[safeLang];
+  const dictionary = await getDictionary(safeLang);
+  const currency = dictionary.serviceFacts?.currency ?? '';
+  const seo = dictionary.servicesPage.seo;
+  const m = {
+    title: fillOverviewTokens(seo.title, safeLang, currency),
+    description: fillOverviewTokens(seo.description, safeLang, currency),
+    keywords: fillOverviewTokens(seo.keywords, safeLang, currency),
+  };
   return {
     title: m.title,
     description: m.description,
@@ -75,8 +62,20 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
     ],
   };
 
+  const currency = dictionary.serviceFacts?.currency ?? '';
+  const overview = dictionary.servicesPage.overview;
+  const seo = dictionary.servicesPage.seo;
+
   return (
     <div className="flex-grow">
+      <ServiceJsonLd
+        lang={safeLang}
+        path="/xizmatlar"
+        name={overview.title}
+        description={fillOverviewTokens(seo.description, safeLang, currency)}
+        faqs={buildOverviewFaqs(safeLang, overview, currency)}
+        faqLang={safeLang}
+      />
       <Script
         id="json-ld-breadcrumb-xizmatlar"
         type="application/ld+json"
@@ -86,6 +85,7 @@ const ServicesPage = async (props: { params: Promise<{ lang: Locale }> }) => {
       <AtMarquee lang={safeLang} />
       <AtManifesto lang={safeLang} />
       <XizmatlarServices lang={safeLang} />
+      <ServicesOverview lang={safeLang} copy={overview} currency={currency} />
       <XizmatlarFinalCta lang={safeLang} />
     </div>
   );
