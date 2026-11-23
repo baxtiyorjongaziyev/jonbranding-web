@@ -149,33 +149,31 @@ if (mode === 'send') {
         continue;
       }
       offset = u.update_id + 1;
-      if (!u.callback_query) {
-        writeFileSync(OFFSET, JSON.stringify(offset));
-        continue;
-      }
-      try {
-        const outcome = await handleCallback(u.callback_query, {
-          ownerId,
-          resolve: (id) => {
-            const idx = index();
-            return new Map(Object.entries(idx)).get(id);
-          },
-          setStatus,
-          onRework,
-          currentVersion: (slug) => versionOf(manifestNow(), slug),
-          answer: (id, text) => tg('answerCallbackQuery', { callback_query_id: id, text }),
-          markMessage: (q, text) =>
-            q.message
-              ? tg('editMessageReplyMarkup', {
-                  chat_id: q.message.chat.id,
-                  message_id: q.message.message_id,
-                  reply_markup: { inline_keyboard: [[{ text, callback_data: 'rv:done' }]] },
-                })
-              : Promise.resolve(),
-        });
-        console.log(`${outcome}: ${u.callback_query.data} (from ${u.callback_query.from.id})`);
-      } catch (e) {
-        console.error(`⚠️  ${u.callback_query.data}: ${(e as Error).message}`);
+      if (u.callback_query) {
+        try {
+          const outcome = await handleCallback(u.callback_query, {
+            ownerId,
+            resolve: (id) => {
+              const idx = index();
+              return new Map(Object.entries(idx)).get(id);
+            },
+            setStatus,
+            onRework,
+            currentVersion: (slug) => versionOf(manifestNow(), slug),
+            answer: (id, text) => tg('answerCallbackQuery', { callback_query_id: id, text }),
+            markMessage: (q, text) =>
+              q.message
+                ? tg('editMessageReplyMarkup', {
+                    chat_id: q.message.chat.id,
+                    message_id: q.message.message_id,
+                    reply_markup: { inline_keyboard: [[{ text, callback_data: 'rv:done' }]] },
+                  })
+                : Promise.resolve(),
+          });
+          console.log(`${outcome}: ${u.callback_query.data} (from ${u.callback_query.from.id})`);
+        } catch (e) {
+          console.error(`⚠️  ${u.callback_query.data}: ${(e as Error).message}`);
+        }
       }
       writeFileSync(OFFSET, JSON.stringify(offset));
     }

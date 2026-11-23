@@ -20,6 +20,7 @@ describe('lead contact normalization', () => {
   it('normalizes Telegram usernames and links', () => {
     expect(normalizeTelegramUsername('@Sardor')).toBe('Sardor');
     expect(normalizeTelegramUsername('https://t.me/Sardor?start=site')).toBe('Sardor');
+    expect(normalizeTelegramUsername(`user${'#'.repeat(5000)}`)).toBe('user');
     expect(isValidTelegramUsername('@Sardor')).toBe(true);
     expect(isValidTelegramUsername('@a!')).toBe(false);
   });

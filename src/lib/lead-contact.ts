@@ -29,11 +29,12 @@ export function isValidPhone(value: unknown) {
 }
 
 export function normalizeTelegramUsername(value: unknown) {
-  return String(value ?? '')
+  const cleaned = String(value ?? '')
     .trim()
     .replace(/^https?:\/\/(?:t\.me|telegram\.me)\//i, '')
-    .replace(/^@+/, '')
-    .replace(/[/?#].*$/, '');
+    .replace(/^@+/, '');
+  const cutIndex = cleaned.search(/[/?#]/);
+  return cutIndex === -1 ? cleaned : cleaned.slice(0, cutIndex);
 }
 
 export function isValidTelegramUsername(value: unknown) {
