@@ -3038,3 +3038,8 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   - `.github/workflows/dependency-review.yml` (`actions/dependency-review-action@v5`) qo'shildi; `.github/dependabot.yml` `/mcp-server`, `/services/case-reels`, `/services/portfolio-bot` paketlari bilan kengaytirildi; `SECURITY.md` ga GitHub Private Vulnerability Reporting havolasi qo'shildi.
   - GitHub API orqali `15862651` ruleset `"Protect main branch"` (`enforcement: "active"`, `deletion`, `non_fast_forward`, `required_status_checks`, `code_scanning`, admin bypass `RepositoryRole: 5`) faollashtirildi.
 - **Tekshiruvlar (lokal):** `npm run verify:fast` (103 fayl, 730/730 test), `npm run typecheck`, `npm run lint`, `services/case-reels` Vitest (6 fayl, 80/80 test), `node --test` xavfsizlik testlari (12/12) va `node scripts/check-secrets.mjs` (815 fayl, 0 sizish) barchasi o'tdi.
+
+## 2026-11-23 — SEO: «брендинг ташкент» (`/xizmatlar`)
+- GSC (`docs/seo/gsc-2026-10.md`): «брендинг ташкент» 46 ko'rsatish / 9.3 o'rin / 0 klik; «брендинг в ташкенте» 19.2; «брендинговое агентство ташкент» 10.4; «заказать брендинг» 23.9; «брендинг» 8.1.
+- `servicesPage.seo` (title/description/keywords, 4 til) va `servicesPage.overview` (kirish, paketlar, jarayon, FAQ) qo'shildi; narx/muddat/paket tarkibi/jarayon `sales-content`dan (`src/lib/service-pages/overview-facts.ts`).
+- `ServicesOverview` bloki va FAQPage/Service JSON-LD `/[lang]/xizmatlar` da. Test: `overview-facts.test.ts`.

@@ -1470,6 +1470,49 @@
       "title": "Services and Prices",
       "description": "Explore our services and build your package."
     },
+    "seo": {
+      "title": "Branding in Tashkent: Services, Prices and Timelines",
+      "description": "Branding agency in Tashkent: naming, logo, brand identity, brandbook, packaging and trademark registration. Packages from {fromPrice} {currency}. We show 3 directions, payment 50/50.",
+      "keywords": "branding agency Tashkent, branding Tashkent, order branding Uzbekistan, branding cost, brand identity Tashkent, naming, logo design, brandbook"
+    },
+    "overview": {
+      "title": "Branding in Tashkent: what is included, what it costs and how long it takes",
+      "intro": "Branding means bringing your name, logo, brand identity and usage rules into one system. Jon.Branding builds a brand in Tashkent from start to finish: one team, one contract, clear deadlines. Services can be ordered separately, and a package costs less.",
+      "packagesTitle": "Branding packages",
+      "packagesFrom": "from {price} {currency}",
+      "packagesDuration": "Timeline",
+      "packagesIncludes": "Includes",
+      "packagesNote": "A package timeline covers design work only. The trademark certificate is issued separately: 7 months by the standard route, 20–40 days by the express route.",
+      "processTitle": "How the branding process works",
+      "faqTitle": "Branding questions",
+      "faqs": [
+        {
+          "q": "How much does branding cost in Tashkent?",
+          "a": "Separate services: logo {logoPrice} {currency}, brand identity {identityPrice} {currency}, brandbook {brandbookPrice} {currency}. Packages: {standardName} — {standardPrice} {currency}, {premiumName} — {premiumPrice} {currency}, {vipName} — {vipPrice} {currency}. The final price depends on the number of product types, trademark classes and the deadline."
+        },
+        {
+          "q": "How long does branding take?",
+          "a": "Design work by package: {standardName} — {standardDuration}, {premiumName} — {premiumDuration}, {vipName} — {vipDuration}. The trademark certificate is separate: 7 months by the standard route, 20–40 days by the express route."
+        },
+        {
+          "q": "What does a branding package include?",
+          "a": "{standardName}: {standardFeatures}. {premiumName}: {premiumFeatures}. {vipName}: {vipFeatures}."
+        },
+        {
+          "q": "What are the stages of branding?",
+          "a": "{steps}. The next stage does not start until you approve the current one."
+        },
+        {
+          "q": "Can I pay in instalments?",
+          "a": "Yes, payment is in two stages: 50% when the contract is signed and 50% when the project is delivered."
+        },
+        {
+          "q": "Can I order only individual services?",
+          "a": "Yes. Naming, logo, brand identity, brandbook, packaging design and trademark registration are sold separately. A full package costs less than the separate prices added together."
+        }
+      ],
+      "pricesLink": "All prices and packages"
+    },
     "packageBuilder": {
       "title": "Services & Prices",
       "subtitle": "Build your package and get an instant price.",
