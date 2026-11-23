@@ -19,7 +19,7 @@ const errorReplacer = (_key: string, value: unknown) =>
   value instanceof Error ? { name: value.name, message: value.message, stack: value.stack } : value;
 
 const sanitizeLogText = (value: string): string =>
-  value.replace(/[\r\n\u2028\u2029]/g, ' ');
+  value.replace(/[\r\n]/g, '').replace(/[\u2028\u2029]/g, '');
 
 const serialize = (data: unknown): string => {
   try {

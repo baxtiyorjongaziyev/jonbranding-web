@@ -6,7 +6,7 @@
  *   SANITY_WRITE_TOKEN bo'lmasa yoki MOCK_SANITY_WRITE=true bo'lsa — yozilmaydi, logga chiqadi.
  */
 import './lib/env';
-import { closeSync, mkdirSync, openSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { CASE_FIELDS, toFacts, type CaseDoc } from './lib/case-data';
 import { parseArgs, runBatch, type ManifestEntry } from './lib/batch';
 import { geminiGenerator, makeCaption } from './lib/caption';
@@ -26,6 +26,7 @@ try {
 // Bir vaqtda faqat bitta batch: ikki jarayon bir keysning video/caption fayllarini bir-birining ustidan yozmasin
 // (egasi ko'rib tasdiqlagan versiya chiqariladigan fayl bilan bir xil qolishi shart).
 const LOCK = 'out/batch.lock';
+const LOCK_PID = `${LOCK}/pid`;
 mkdirSync('out', { recursive: true });
 const alive = (pid: number) => {
   try {
@@ -36,48 +37,39 @@ const alive = (pid: number) => {
   }
 };
 if (!opts.dryRun) {
-  // Qulf egasining PID'i yoziladi: faqat egasi o'lgan bo'lsa (Ctrl+C, crash) qulf olib tashlanadi — yoshi muhim emas.
-  let fd: number | undefined;
-  try {
-    fd = openSync(LOCK, 'wx');
-  } catch (err) {
-    if ((err as NodeJS.ErrnoException)?.code === 'EEXIST') {
-      let stale = false;
-      try {
-        const pid = Number(readFileSync(LOCK, 'utf8'));
-        stale = !pid || !alive(pid);
-      } catch (readErr) {
-        stale = (readErr as NodeJS.ErrnoException)?.code === 'ENOENT';
-      }
-      if (stale) {
-        try {
-          unlinkSync(LOCK);
-        } catch (unlinkErr) {
-          if ((unlinkErr as NodeJS.ErrnoException)?.code !== 'ENOENT') throw unlinkErr;
-        }
-        try {
-          fd = openSync(LOCK, 'wx');
-        } catch {
-          fd = undefined;
-        }
-      }
-    } else {
-      throw err;
+  // Qulf — atomik `mkdir` (EEXIST = band). PID qulf papkasi ichida saqlanadi, shuning uchun
+  // "fayl bor-yo'qligini tekshirib, keyin ochish" (TOCTOU) yo'q.
+  const acquireLock = () => {
+    try {
+      mkdirSync(LOCK);
+      return true;
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException)?.code !== 'EEXIST') throw err;
     }
-  }
-  if (fd === undefined) {
+    let pid = 0;
+    try {
+      pid = Number(readFileSync(LOCK_PID, 'utf8').trim());
+    } catch {
+      // pid fayli yo'q (eski fayl-qulf yoki yarim yozilgan) — eski qulf deb qaraladi.
+    }
+    if (pid && pid !== process.pid && alive(pid)) return false;
+    rmSync(LOCK, { recursive: true, force: true });
+    try {
+      mkdirSync(LOCK);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  if (!acquireLock()) {
     console.error(`Boshqa batch ishlayapti (${LOCK}). Tugashini kuting.`);
     process.exit(1);
   }
-  try {
-    writeFileSync(fd, String(process.pid));
-  } finally {
-    closeSync(fd);
-  }
+  writeFileSync(LOCK_PID, String(process.pid));
   // Faqat o'zimizning qulfni o'chiramiz.
   process.on('exit', () => {
     try {
-      if (Number(readFileSync(LOCK, 'utf8')) === process.pid) unlinkSync(LOCK);
+      if (Number(readFileSync(LOCK_PID, 'utf8')) === process.pid) rmSync(LOCK, { recursive: true, force: true });
     } catch {}
   });
   // Ctrl+C / SIGTERM'da 'exit' hodisasi chiqishi uchun.

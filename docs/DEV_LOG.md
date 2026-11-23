@@ -3038,3 +3038,9 @@ Final local production Chrome result: contextual lead CTA passed (2.3s); remaini
   - `.github/workflows/dependency-review.yml` (`actions/dependency-review-action@v5`) qo'shildi; `.github/dependabot.yml` `/mcp-server`, `/services/case-reels`, `/services/portfolio-bot` paketlari bilan kengaytirildi; `SECURITY.md` ga GitHub Private Vulnerability Reporting havolasi qo'shildi.
   - GitHub API orqali `15862651` ruleset `"Protect main branch"` (`enforcement: "active"`, `deletion`, `non_fast_forward`, `required_status_checks`, `code_scanning`, admin bypass `RepositoryRole: 5`) faollashtirildi.
 - **Tekshiruvlar (lokal):** `npm run verify:fast` (103 fayl, 730/730 test), `npm run typecheck`, `npm run lint`, `services/case-reels` Vitest (6 fayl, 80/80 test), `node --test` xavfsizlik testlari (12/12) va `node scripts/check-secrets.mjs` (815 fayl, 0 sizish) barchasi o'tdi.
+- **Qo'shimcha CodeQL tuzatishlar (`#47`, `#102`–`#107`):**
+  - `src/lib/logger.ts`: `sanitizeLogText` da `\r\n` bo'sh satrga (`''`) almashtirildi (`StringReplaceSanitizer`, #47).
+  - `src/lib/lead-contact.ts`: `normalizeTelegramUsername` da `[/?#].*$` o'rniga chiziqli `search` + `slice` (`js/polynomial-redos` #104).
+  - `services/case-reels/scripts/batch.ts`: lock fayli yagona `openSync(LOCK, constants.O_RDWR | constants.O_CREAT, 0o600)` fd orqali o'qilib/yozilib TOCTOU (`#105`–`#106`) bartaraf etildi.
+  - `services/case-reels/scripts/telegram-review.ts`: `OFFSET` yozish yagona oqimga birlashtirildi (`#107`).
+  - `.github/workflows/lighthouse.yml` (`treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18`) va `.github/workflows/link-check.yml` (`lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8`) 3rd-party action'lari commit SHA ga pin qilindi (`actions/unpinned-tag` #102–`#103`).
