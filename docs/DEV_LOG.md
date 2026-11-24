@@ -1,5 +1,12 @@
 # 📓 Dev Log — Jon Branding Web
 
+## 2026-11-24 | SEO: "patent markazi" so'rovi uchun patent sahifasi
+- **Foydalanuvchi talabi:** "patent markazi" deb qidirganda sayt yuqorida chiqishi.
+- **Bajarilgan ishlar:**
+  1. `/xizmatlar/patent` title va keywords "patent markazi" so'roviga moslandi (title qisqa, ibora oldinda).
+  2. Yangi FAQ "Patent markazi bilan qanday ishlaysiz?" — JON Branding xususiy agentlik, davlat markazi emasligi aniq yozildi (FAQ JSON-LD'ga ham tushadi).
+- **Tekshiruv:** `tsc --noEmit` toza, `vitest run src/lib` 508/508.
+
 ## 2026-11-18 | Universal Hosting Portability & Automated Migration Engine (Vercel ⇄ Cloudflare ⇄ Docker/VPS)
 - **Foydalanuvchi talabi:**
   - Saytni ertaga boshqa hostingga (Vercel, Docker/VPS, Coolify, Railway) ko'chirganda barcha sozlamalar, secretlar va avtomatizatsiyalarning avtomatik ko'chib o'tishini ta'minlash.

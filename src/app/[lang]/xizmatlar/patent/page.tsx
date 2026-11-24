@@ -16,7 +16,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { lang } = await props.params;
   const safeLang: Locale = (['uz', 'ru', 'en', 'zh'] as const).includes(lang as Locale) ? (lang as Locale) : 'uz';
   return {
-    title: pageTitle('Patent xizmati — tovar belgisini ro‘yxatdan o‘tkazish | Patent markazi bilan ishlash'),
+    title: pageTitle('Patent xizmati — patent markazida tovar belgisini ro‘yxatdan o‘tkazish'),
     description: DESCRIPTION,
     keywords: 'patent markazi, patent xizmati, patent olish, patent, tovar belgisi, intellektual mulk markazi, trademark, brendni ro‘yxatdan o‘tkazish, guvohnoma, Adliya vazirligi',
     alternates: await getPageAlternates(safeLang, '/xizmatlar/patent'),
