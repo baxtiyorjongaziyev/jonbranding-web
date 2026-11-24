@@ -141,6 +141,7 @@ export const PATENT_PAGE: ServicePageContent = {
     { q: 'Patent narxi qancha?', a: `Tekshiruv ${check.price} so‘m (1 sinf, har qo‘shimcha sinf ${check.addon?.price}). Ro‘yxatdan o‘tkazish: oddiy ${standard.price} so‘m, tezkor ${express.price} so‘m. Davlat bojlari narxga kirmaydi va alohida to‘lanadi.` },
     { q: 'Qancha vaqt oladi?', a: `Oddiy tartibda ~${standard.duration} (mijozlarimizda odatda 6,7–7,4 oy bo‘ldi). Tezkor tartibda ${express.duration}; eng tez natijamiz ${fastest} kun.` },
     FAQS.find((f) => f.q.startsWith('Patent chiqmay'))!,
+    { q: 'Patent markazi bilan qanday ishlaysiz?', a: 'Biz davlat idorasi emasmiz — JON Branding xususiy patent xizmati. Talabnomani Adliya vazirligiga topshiramiz, ekspertizani Intellektual mulk markazi (patent markazi) o‘tkazadi. Siz idorama-idora yurmaysiz: hujjat, sinflar va yozishmalarni boshidan oxirigacha biz yuritamiz.' },
     { q: 'Guvohnoma qancha muddat amal qiladi?', a: 'Talabnoma topshirilgan kundan boshlab 10 yil. Keyin yana 10 yilga uzaytirish mumkin.' },
     { q: 'Nomni ham, logotipni ham ro‘yxatdan o‘tkazish kerakmi?', a: 'Brendni qanday ishlatishingizga bog‘liq. Tekshiruvda nima va qaysi sinflarda ro‘yxatdan o‘tkazish kerakligini birga aniqlaymiz.' },
   ],
